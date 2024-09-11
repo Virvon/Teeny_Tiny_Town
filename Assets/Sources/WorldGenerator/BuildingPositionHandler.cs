@@ -1,28 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Sources.Services.Input;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Sources.WorldGenerator
 {
     public class BuildingPositionHandler : MonoBehaviour
     {
-        [SerializeField] private GameObject _buildingPrefab;
+        [SerializeField] private SelectFrame _selectFramePrefab;
+        [SerializeField] private Vector3 _selectFramePositionOffset;
+        [SerializeField] private float _raycastDistance;
+        [SerializeField] private LayerMask _layerMask;
 
-        public List<Tile> Tiles = new();
+        private IInputService _inputService;
+        private SelectFrame _selectFrame;
 
-        private GameObject _building;
-
-        public void Add(Tile tile)
+        [Inject]
+        private void Construct(IInputService inputService)
         {
-            tile.Soil.PointerMoved += OnPointerMoved;
+            _inputService = inputService;
+
+            _selectFrame = Instantiate(_selectFramePrefab);
+
+            _inputService.HandleMoved += OnHandleMoved;
         }
 
-        private void OnPointerMoved(Soil soil)
+        private void OnHandleMoved(Vector2 handlePosition)
         {
-            if (_building == null)
-                return;
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(handlePosition.x, handlePosition.y, 1));
 
-            _building.transform.position = soil.BuildingPoint.position;
-            _building.transform.parent = soil.transform;
+            if(Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Soil soil))
+            {
+                _selectFrame.transform.position = soil.BuildingPoint.position + _selectFramePositionOffset;
+                _selectFrame.gameObject.SetActive(true);
+            }
         }
     }
 }

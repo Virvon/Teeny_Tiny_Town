@@ -9,7 +9,6 @@ namespace Assets.Sources.WorldGenerator
         [SerializeField] private uint _length;
         [SerializeField] private uint _width;
         [SerializeField] private float _cellSize;
-        [SerializeField] private BuildingPositionHandler buildingPositionHandler;
 
         private void Awake()
         {
@@ -31,7 +30,6 @@ namespace Assets.Sources.WorldGenerator
         {
             Vector3 worldPosition = GridToWorldPosition(gridPosition);
             Tile tile = Instantiate(_tile, worldPosition, Quaternion.identity, transform);
-            buildingPositionHandler.Add(tile);
         }
 
         private Vector3 GridToWorldPosition(Vector3Int gridPosition)

@@ -8,20 +8,14 @@ public class GameInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        BineGameBootstrapperFactory();
-        BindGameStateMachine();
         BindSceneLoader();
         BindInputService();
+        BindGameStateMachine();
     }
 
     private void BindInputService()
     {
         Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
-    }
-
-    private void BineGameBootstrapperFactory()
-    {
-        Container.BindFactory<GameBootstrapper, GameBootstrapper.Factory>().FromComponentInNewPrefabResource(InfrastructureAssetPath.GameBootstraper);
     }
 
     private void BindSceneLoader()

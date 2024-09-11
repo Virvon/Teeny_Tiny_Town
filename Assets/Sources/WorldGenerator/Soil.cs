@@ -1,23 +1,11 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 
 namespace Assets.Sources.WorldGenerator
 {
-    public class Soil : MonoBehaviour, IPointerClickHandler, IPointerMoveHandler
+    public class Soil : MonoBehaviour
     {
-        public Transform BuildingPoint;
+        [SerializeField] private Transform _buildingPoint;
 
-        public event Action<Soil> PointerMoved;
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-
-        }
-
-        public void OnPointerMove(PointerEventData eventData)
-        {
-            PointerMoved?.Invoke(this);
-        }
+        public Transform BuildingPoint => _buildingPoint;
     }
 }

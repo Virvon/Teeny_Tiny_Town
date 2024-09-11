@@ -3,6 +3,6 @@
     public class InfrastructureAssetPath
     {
         public const string GameplayScene = "GameplayScene";
-        public const string GameBootstraper = "GameBootstrapper";
+        public const string BootstrapScene = "BootstrapScene";
     }
 }

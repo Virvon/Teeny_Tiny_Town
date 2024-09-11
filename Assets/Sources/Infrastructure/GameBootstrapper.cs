@@ -27,9 +27,5 @@ namespace Assets.Sources.Infrastructure
 
             DontDestroyOnLoad(this);
         }
-
-        public class Factory : PlaceholderFactory<GameBootstrapper>
-        {
-        }
     }
 }
