@@ -16,12 +16,6 @@ namespace Assets.Sources.WorldGenerator
             tile.Soil.PointerMoved += OnPointerMoved;
         }
 
-        private void Update()
-        {
-            if(Input.GetMouseButton(0) && _building == null)
-                _building = Instantiate(_buildingPrefab);
-        }
-
         private void OnPointerMoved(Soil soil)
         {
             if (_building == null)
