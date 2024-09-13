@@ -20,8 +20,8 @@ namespace Assets.Sources.Gameplay.WorldGenerator
         {
             Tile.Tile tile = GetRandomEmptyTile();
 
-            Building building = Instantiate(_buildingPrefab, tile.Ground.transform.position, Quaternion.identity, tile.transform);
-            building.Ground = tile.Ground;
+            Building building = Instantiate(_buildingPrefab, tile.GetComponent<GroundCreator>().Ground.transform.position, Quaternion.identity, tile.transform);
+            building.Ground = tile.GetComponent<GroundCreator>().Ground;
 
             _buildingPositionHandler.Set(building);
         }

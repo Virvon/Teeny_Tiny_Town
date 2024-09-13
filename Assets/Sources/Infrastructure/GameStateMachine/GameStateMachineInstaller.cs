@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using Assets.Sources.Services.StateMachine;
+using Zenject;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine
 {

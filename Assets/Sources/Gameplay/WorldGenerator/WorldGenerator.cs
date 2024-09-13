@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Sources.Gameplay.WorldGenerator
 {
@@ -53,6 +55,10 @@ namespace Assets.Sources.Gameplay.WorldGenerator
                 (int)(worldPosition.x / _cellSize),
                 (int)(worldPosition.y / _cellSize),
                 (int)(worldPosition.z / _cellSize));
+        }
+
+        public class Factory : PlaceholderFactory<string, UniTask<WorldGenerator>>
+        {
         }
     }
 }

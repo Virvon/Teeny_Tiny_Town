@@ -1,5 +1,5 @@
-using Assets.Sources.Infrastructure;
 using Assets.Sources.Infrastructure.GameStateMachine;
+using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.Input;
 using Assets.Sources.Services.SceneManagment;
 using Zenject;
@@ -11,6 +11,12 @@ public class GameInstaller : MonoInstaller
         BindSceneLoader();
         BindInputService();
         BindGameStateMachine();
+        BindAssetProvider();
+    }
+
+    private void BindAssetProvider()
+    {
+        Container.BindInterfacesAndSelfTo<AssetProvider>().AsSingle();
     }
 
     private void BindInputService()

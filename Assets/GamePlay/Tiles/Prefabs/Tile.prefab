@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7475605014300344821}
   - component: {fileID: -6689234198555655170}
+  - component: {fileID: 2720071092986690629}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -45,8 +46,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1378e254caecfe41b729f49cd736fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2720071092986690629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3953395526069856674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc070963d2cfad4409df47c6c9af165c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _groundPrefab: {fileID: 6801058146459471369, guid: b3a39fb58838add4d9d4c5d822410726, type: 3}
-  _soilPoint: {fileID: 1428660611589697284}
+  _groundPoint: {fileID: 1428660611589697284}
 --- !u!1001 &987952953783914064
 PrefabInstance:
   m_ObjectHideFlags: 0
