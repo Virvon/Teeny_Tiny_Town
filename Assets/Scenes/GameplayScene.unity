@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 443031747}
   - component: {fileID: 443031746}
   - component: {fileID: 443031748}
+  - component: {fileID: 443031749}
   m_Layer: 0
   m_Name: WorldGenerator
   m_TagString: Untagged
@@ -184,12 +185,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29950231680f6644fa618bfacbe33413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buildingPressedMoveHeight: 5
+  _sensitivity: 0
   _selectFramePrefab: {fileID: -5651809538956149125, guid: 3d612f05727028342ac259c0967669a5, type: 3}
   _selectFramePositionOffset: {x: 0, y: 0.25, z: 0}
   _raycastDistance: 100
   _layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &443031749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443031745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c2741e5826c4c40a2120935c5e139d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buildingPrefab: {fileID: 8723728113443134156, guid: 1f86c6f00b0e6514a82e2dfa5ad2a00c, type: 3}
+  _worldGenerator: {fileID: 443031746}
+  _buildingPositionHandler: {fileID: 443031748}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,13 +388,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42293462, y: 0, z: 0, w: 0.90616024}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
   m_LocalPosition: {x: 4.95, y: 14.43, z: -4.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50.04, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,8 +6,8 @@ namespace Assets.Sources.Services.Input
     public interface IInputService
     {
         event Action<Vector2> HandleMoved;
-        event Action HandlePressedMovePerformed;
-        event Action HandlePressedMoveStarted;
+        event Action<Vector2> HandlePressedMovePerformed;
+        event Action<Vector2> HandlePressedMoveStarted;
         event Action<Vector2> Pressed;
     }
 }

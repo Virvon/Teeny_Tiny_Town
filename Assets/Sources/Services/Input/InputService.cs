@@ -32,8 +32,8 @@ namespace Assets.Sources.Services.Input
             _inputActionsSheme.Disable();
         }
 
-        public event Action HandlePressedMoveStarted;
-        public event Action HandlePressedMovePerformed;
+        public event Action<Vector2> HandlePressedMoveStarted;
+        public event Action<Vector2> HandlePressedMovePerformed;
         public event Action<Vector2> Pressed;
         public event Action<Vector2> HandleMoved;
 
@@ -48,9 +48,9 @@ namespace Assets.Sources.Services.Input
             Pressed?.Invoke(_lastHandleMovePerformedPosition);
 
         private void OnHandlePressedMoveStarted(InputAction.CallbackContext obj) =>
-            HandlePressedMoveStarted?.Invoke();
+            HandlePressedMoveStarted?.Invoke(_lastHandleMovePerformedPosition);
 
         private void OnHandlePressedMovePerformed(InputAction.CallbackContext obj) =>
-            HandlePressedMovePerformed?.Invoke();
+            HandlePressedMovePerformed?.Invoke(_lastHandleMovePerformedPosition);
     }
 }

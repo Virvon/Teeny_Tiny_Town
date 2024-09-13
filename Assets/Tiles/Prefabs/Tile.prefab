@@ -97,9 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1378e254caecfe41b729f49cd736fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soil: {fileID: 6801058146459471369, guid: b3a39fb58838add4d9d4c5d822410726, type: 3}
+  _soilPrefab: {fileID: 6801058146459471369, guid: b3a39fb58838add4d9d4c5d822410726, type: 3}
   _soilPoint: {fileID: 2190568818109309268}
-  Soil: {fileID: 0}
 --- !u!1 &7834723920474278901
 GameObject:
   m_ObjectHideFlags: 0
