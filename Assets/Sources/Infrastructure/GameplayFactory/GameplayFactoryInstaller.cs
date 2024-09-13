@@ -1,6 +1,8 @@
-﻿using Assets.Sources.Gameplay.WorldGenerator;
+﻿using Assets.Sources.Gameplay.Tile;
+using Assets.Sources.Gameplay.WorldGenerator;
 using Assets.Sources.Services.AssetManagement;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.Infrastructure.GameplayFactory
@@ -17,6 +19,14 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
             Container
                 .BindFactory<string, UniTask<WorldGenerator>, WorldGenerator.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<WorldGenerator>>();
+
+            Container
+                .BindFactory<string, Vector3, Transform, UniTask<Tile>, Tile.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<Tile>>();
+
+            Container
+                .BindFactory<string, Vector3, Transform, UniTask<Building>, Building.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<Building>>();
         }
     }
 }

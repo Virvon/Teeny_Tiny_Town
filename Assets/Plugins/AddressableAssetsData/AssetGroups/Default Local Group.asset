@@ -27,6 +27,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3281d3e4b7ecc8469b81b7d355e33ec
+    m_Address: Tile
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1f86c6f00b0e6514a82e2dfa5ad2a00c
+    m_Address: Building
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}
   m_SchemaSet:

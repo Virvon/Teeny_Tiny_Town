@@ -1,5 +1,8 @@
 ﻿using Assets.Sources.Gameplay.Tile;
+using Assets.Sources.Infrastructure.GameplayFactory;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Sources.Gameplay.WorldGenerator
 {
@@ -9,18 +12,22 @@ namespace Assets.Sources.Gameplay.WorldGenerator
         [SerializeField] private WorldGenerator _worldGenerator;
         [SerializeField] private BuildingPositionHandler _buildingPositionHandler;
 
-        private void Start()
+        private IGameplayFactory _gameplayFactory;
+
+        [Inject]
+        private void Construct(IGameplayFactory gameplayFactory)
         {
-            Create();
+            _gameplayFactory = gameplayFactory;
 
             _buildingPositionHandler.BuildingCreated += OnBuildingCreated;
         }
 
-        private void Create()
+        public async UniTask Create()
         {
             Tile.Tile tile = GetRandomEmptyTile();
 
-            Building building = Instantiate(_buildingPrefab, tile.GetComponent<GroundCreator>().Ground.transform.position, Quaternion.identity, tile.transform);
+            Building building = await _gameplayFactory.CreateBuilding(tile.GetComponent<GroundCreator>().Ground.transform.position, tile.transform);
+
             building.Ground = tile.GetComponent<GroundCreator>().Ground;
 
             _buildingPositionHandler.Set(building);
@@ -31,9 +38,9 @@ namespace Assets.Sources.Gameplay.WorldGenerator
             return _worldGenerator.Tiles[Random.Range(0, _worldGenerator.Tiles.Count - 1)];
         }
 
-        private void OnBuildingCreated()
+        private async void OnBuildingCreated()
         {
-            Create();
+            await Create();
         }
     }
 }

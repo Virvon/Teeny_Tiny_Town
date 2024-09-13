@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Assets.Sources.Infrastructure.GameplayFactory;
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -12,32 +13,38 @@ namespace Assets.Sources.Gameplay.WorldGenerator
         [SerializeField] private uint _width;
         [SerializeField] private float _cellSize;
 
+        private IGameplayFactory _gameplayFactory;
         private List<Tile.Tile> _tiles;
 
         public IReadOnlyList<Tile.Tile> Tiles => _tiles;
 
-        private void Start()
+        [Inject]
+        private void Construct(IGameplayFactory gameplayFactory)
         {
-            _tiles = new();
+            _gameplayFactory = gameplayFactory;
 
-            Fill();
+            _tiles = new();
         }
 
-        private void Fill()
+        public async UniTask Fill()
         {
+            List<UniTask> tasks = new();
+
             for (int x = 0; x < _length; x++)
             {
                 for (int z = 0; z < _width; z++)
                 {
-                    Create(new Vector3Int(x, (int)transform.position.y, z));
+                    tasks.Add(Create(new Vector3Int(x, (int)transform.position.y, z)));
                 }
             }
+
+            await UniTask.WhenAll(tasks);
         }
 
-        private void Create(Vector3Int gridPosition)
+        private async UniTask Create(Vector3Int gridPosition)
         {
             Vector3 worldPosition = GridToWorldPosition(gridPosition);
-            Tile.Tile tile = Instantiate(_tile, worldPosition, Quaternion.identity, transform);
+            Tile.Tile tile = await _gameplayFactory.CreateTile(worldPosition, transform);
             _tiles.Add(tile);
         }
 
