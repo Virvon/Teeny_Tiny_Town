@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Assets.Sources.WorldGenerator
+namespace Assets.Sources.Gameplay.Tile
 {
-    public class Soil : MonoBehaviour
+    public class Ground : MonoBehaviour
     {
         [SerializeField] private Transform _buildingPoint;
 

@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
-namespace Assets.Sources.WorldGenerator
+namespace Assets.Sources.Gameplay.Tile
 {
     public class Building : MonoBehaviour
     {
-        public Soil Soil;
+        public Ground Ground;
 
         public void ResetPosition()
         {
-            transform.position = Soil.BuildingPoint.position;
+            transform.position = Ground.BuildingPoint.position;
         }
     }
 }

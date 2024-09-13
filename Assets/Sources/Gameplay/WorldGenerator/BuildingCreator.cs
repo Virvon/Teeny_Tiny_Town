@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Assets.Sources.Gameplay.Tile;
+using UnityEngine;
 
-namespace Assets.Sources.WorldGenerator
+namespace Assets.Sources.Gameplay.WorldGenerator
 {
     public class BuildingCreator : MonoBehaviour
     {
@@ -17,15 +18,15 @@ namespace Assets.Sources.WorldGenerator
 
         private void Create()
         {
-            Tile tile = GetRandomEmptyTile();
+            Tile.Tile tile = GetRandomEmptyTile();
 
-            Building building = Instantiate(_buildingPrefab, tile.Soil.transform.position, Quaternion.identity, tile.transform);
-            building.Soil = tile.Soil;
+            Building building = Instantiate(_buildingPrefab, tile.Ground.transform.position, Quaternion.identity, tile.transform);
+            building.Ground = tile.Ground;
 
             _buildingPositionHandler.Set(building);
         }
 
-        private Tile GetRandomEmptyTile()
+        private Tile.Tile GetRandomEmptyTile()
         {
             return _worldGenerator.Tiles[Random.Range(0, _worldGenerator.Tiles.Count - 1)];
         }

@@ -1,9 +1,10 @@
-﻿using Assets.Sources.Services.Input;
+﻿using Assets.Sources.Gameplay.Tile;
+using Assets.Sources.Services.Input;
 using System;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Sources.WorldGenerator
+namespace Assets.Sources.Gameplay.WorldGenerator
 {
     public class BuildingPositionHandler : MonoBehaviour
     {
@@ -17,7 +18,7 @@ namespace Assets.Sources.WorldGenerator
         private IInputService _inputService;
         private SelectFrame _selectFrame;
         private Building _building;
-        private Soil _handlePressedMoveStartSoil;
+        private Ground _handlePressedMoveStartGround;
         private bool _isBuildingPressed;
 
         private Vector3 buildingPosition;
@@ -43,7 +44,7 @@ namespace Assets.Sources.WorldGenerator
         public void Set(Building building)
         {
             _building = building;
-            _selectFrame.transform.position = _building.Soil.BuildingPoint.position + _selectFramePositionOffset;
+            _selectFrame.transform.position = _building.Ground.BuildingPoint.position + _selectFramePositionOffset;
             _selectFrame.gameObject.SetActive(true);
         }
 
@@ -54,22 +55,22 @@ namespace Assets.Sources.WorldGenerator
 
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(handlePosition.x, handlePosition.y, 1));
 
-            if(_isBuildingPressed)
+            if (_isBuildingPressed)
             {
                 Plane groundPlane = new Plane(Vector3.up, new Vector3(0, _buildingPressedMoveHeight, 0));
 
                 float distanceToPlane;
 
-                if(groundPlane.Raycast(ray, out distanceToPlane))
+                if (groundPlane.Raycast(ray, out distanceToPlane))
                 {
                     Vector3 worldPosition = ray.GetPoint(distanceToPlane);
 
                     _building.transform.position = new Vector3(worldPosition.x, _buildingPressedMoveHeight, worldPosition.z);
                 }
 
-                if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Soil soil))
+                if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Ground ground))
                 {
-                    _selectFrame.transform.position = soil.BuildingPoint.position + _selectFramePositionOffset;
+                    _selectFrame.transform.position = ground.BuildingPoint.position + _selectFramePositionOffset;
                     _selectFrame.gameObject.SetActive(true);
                 }
                 else
@@ -77,11 +78,11 @@ namespace Assets.Sources.WorldGenerator
             }
             else
             {
-                if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Soil soil))
+                if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Ground ground))
                 {
-                    _selectFrame.transform.position = soil.BuildingPoint.position + _selectFramePositionOffset;
+                    _selectFrame.transform.position = ground.BuildingPoint.position + _selectFramePositionOffset;
                     _selectFrame.gameObject.SetActive(true);
-                    _building.transform.position = soil.BuildingPoint.position;
+                    _building.transform.position = ground.BuildingPoint.position;
                 }
             }
         }
@@ -94,7 +95,7 @@ namespace Assets.Sources.WorldGenerator
             Gizmos.DrawLine(Vector3.zero, fromCamera);
             Gizmos.color = Color.green;
             Gizmos.DrawLine(Vector3.zero, result);
-            
+
         }
 
         private void OnPressed(Vector2 handlePosition)
@@ -103,17 +104,17 @@ namespace Assets.Sources.WorldGenerator
 
             if (_isBuildingPressed)
             {
-                if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Soil soil))
+                if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Ground ground))
                 {
                     _selectFrame.gameObject.SetActive(false);
-                    _building.transform.position = soil.BuildingPoint.position;
+                    _building.transform.position = ground.BuildingPoint.position;
                     _building = null;
                     BuildingCreated?.Invoke();
                 }
                 else
                 {
                     _building.ResetPosition();
-                    _selectFrame.transform.position = _building.Soil.BuildingPoint.position + _selectFramePositionOffset;
+                    _selectFrame.transform.position = _building.Ground.BuildingPoint.position + _selectFramePositionOffset;
                     _selectFrame.gameObject.SetActive(true);
                 }
 
@@ -121,7 +122,7 @@ namespace Assets.Sources.WorldGenerator
             }
             else
             {
-                if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Soil soil))
+                if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Ground ground))
                 {
                     _selectFrame.gameObject.SetActive(false);
                     _building = null;
@@ -134,10 +135,10 @@ namespace Assets.Sources.WorldGenerator
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(handlePosition.x, handlePosition.y, 1));
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Soil soil) && soil == _handlePressedMoveStartSoil)
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Ground ground) && ground == _handlePressedMoveStartGround)
             {
                 _isBuildingPressed = true;
-                _building.Soil = soil;
+                _building.Ground = ground;
             }
         }
 
@@ -145,9 +146,9 @@ namespace Assets.Sources.WorldGenerator
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(handlePosition.x, handlePosition.y, 1));
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Soil soil))
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Ground ground))
             {
-                _handlePressedMoveStartSoil = soil;
+                _handlePressedMoveStartGround = ground;
             }
         }
     }

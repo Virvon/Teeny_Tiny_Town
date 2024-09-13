@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Sources.WorldGenerator
+namespace Assets.Sources.Gameplay.WorldGenerator
 {
     public class WorldGenerator : MonoBehaviour
     {
-        [SerializeField] private Tile _tile;
+        [SerializeField] private Tile.Tile _tile;
         [SerializeField] private uint _length;
         [SerializeField] private uint _width;
         [SerializeField] private float _cellSize;
 
-        private List<Tile> _tiles;
+        private List<Tile.Tile> _tiles;
 
-        public IReadOnlyList<Tile> Tiles => _tiles;
+        public IReadOnlyList<Tile.Tile> Tiles => _tiles;
 
         private void Start()
         {
@@ -23,9 +23,9 @@ namespace Assets.Sources.WorldGenerator
 
         private void Fill()
         {
-            for(int x = 0; x < _length; x++)
+            for (int x = 0; x < _length; x++)
             {
-                for(int z = 0; z < _width; z++)
+                for (int z = 0; z < _width; z++)
                 {
                     Create(new Vector3Int(x, (int)transform.position.y, z));
                 }
@@ -35,7 +35,7 @@ namespace Assets.Sources.WorldGenerator
         private void Create(Vector3Int gridPosition)
         {
             Vector3 worldPosition = GridToWorldPosition(gridPosition);
-            Tile tile = Instantiate(_tile, worldPosition, Quaternion.identity, transform);
+            Tile.Tile tile = Instantiate(_tile, worldPosition, Quaternion.identity, transform);
             _tiles.Add(tile);
         }
 
