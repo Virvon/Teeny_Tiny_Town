@@ -18,12 +18,9 @@ namespace Assets.Sources.Gameplay.WorldGenerator
         private IInputService _inputService;
         private SelectFrame _selectFrame;
         private Building _building;
-        private Ground _handlePressedMoveStartGround;
+        private TileSelection _handlePressedMoveStartTileSelection;
         private bool _isBuildingPressed;
-
-        private Vector3 buildingPosition;
-        private Vector3 fromCamera;
-        private Vector3 result;
+        private Camera _camera;
 
 
         [Inject]
@@ -33,6 +30,8 @@ namespace Assets.Sources.Gameplay.WorldGenerator
 
             _selectFrame = Instantiate(_selectFramePrefab);
 
+            _camera = Camera.main;
+
             _inputService.HandleMoved += OnHandleMoved;
             _inputService.Pressed += OnPressed;
             _inputService.HandlePressedMoveStarted += OnHandlePressedMoveStarted;
@@ -41,10 +40,11 @@ namespace Assets.Sources.Gameplay.WorldGenerator
 
         public event Action BuildingCreated;
 
-        public void Set(Building building)
+        public void Set(Building building, TileSelection buildingTileSelection)
         {
             _building = building;
-            _selectFrame.transform.position = _building.Ground.BuildingPoint.position + _selectFramePositionOffset;
+            buildingTileSelection.Select(_selectFrame, _selectFramePositionOffset);
+
             _selectFrame.gameObject.SetActive(true);
         }
 
@@ -53,103 +53,85 @@ namespace Assets.Sources.Gameplay.WorldGenerator
             if (_building == null)
                 return;
 
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(handlePosition.x, handlePosition.y, 1));
+            if(CheckTileIntersection(handlePosition, out TileSelection tileSelection))
+            {
+                tileSelection.Select(_selectFrame, _selectFramePositionOffset);
+                _selectFrame.gameObject.SetActive(true);
+
+                if (_isBuildingPressed == false)
+                    tileSelection.PutBuilding(_building);
+            }
+            else if (_isBuildingPressed)
+            {
+                _selectFrame.gameObject.SetActive(false);
+            }
 
             if (_isBuildingPressed)
             {
+                Ray ray = GetRay(handlePosition);
                 Plane groundPlane = new Plane(Vector3.up, new Vector3(0, _buildingPressedMoveHeight, 0));
 
-                float distanceToPlane;
-
-                if (groundPlane.Raycast(ray, out distanceToPlane))
+                if (groundPlane.Raycast(ray, out float distanceToPlane))
                 {
                     Vector3 worldPosition = ray.GetPoint(distanceToPlane);
 
                     _building.transform.position = new Vector3(worldPosition.x, _buildingPressedMoveHeight, worldPosition.z);
                 }
-
-                if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Ground ground))
-                {
-                    _selectFrame.transform.position = ground.BuildingPoint.position + _selectFramePositionOffset;
-                    _selectFrame.gameObject.SetActive(true);
-                }
-                else
-                    _selectFrame.gameObject.SetActive(false);
             }
-            else
-            {
-                if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Ground ground))
-                {
-                    _selectFrame.transform.position = ground.BuildingPoint.position + _selectFramePositionOffset;
-                    _selectFrame.gameObject.SetActive(true);
-                    _building.transform.position = ground.BuildingPoint.position;
-                }
-            }
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(Vector3.zero, buildingPosition);
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(Vector3.zero, fromCamera);
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(Vector3.zero, result);
-
         }
 
         private void OnPressed(Vector2 handlePosition)
         {
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(handlePosition.x, handlePosition.y, 1));
+            if (_building == null)
+                return;
 
-            if (_isBuildingPressed)
+            if(CheckTileIntersection(handlePosition, out TileSelection tileSelection))
             {
-                if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Ground ground))
-                {
-                    _selectFrame.gameObject.SetActive(false);
-                    _building.transform.position = ground.BuildingPoint.position;
-                    _building = null;
-                    BuildingCreated?.Invoke();
-                }
-                else
-                {
-                    _building.ResetPosition();
-                    _selectFrame.transform.position = _building.Ground.BuildingPoint.position + _selectFramePositionOffset;
-                    _selectFrame.gameObject.SetActive(true);
-                }
+                _selectFrame.gameObject.SetActive(false);
+                tileSelection.PutBuilding(_building);
+                _building = null;
+                BuildingCreated?.Invoke();
+            }
+            else if (_isBuildingPressed)
+            {
+                _handlePressedMoveStartTileSelection.PutBuilding(_building);
+                _handlePressedMoveStartTileSelection.Select(_selectFrame, _selectFramePositionOffset);
+                _selectFrame.gameObject.SetActive(true);
+            }
 
-                _isBuildingPressed = false;
-            }
-            else
-            {
-                if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Ground ground))
-                {
-                    _selectFrame.gameObject.SetActive(false);
-                    _building = null;
-                    BuildingCreated?.Invoke();
-                }
-            }
+            _isBuildingPressed = false;
         }
 
         private void OnHandlePressedMovePerformed(Vector2 handlePosition)
         {
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(handlePosition.x, handlePosition.y, 1));
-
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Ground ground) && ground == _handlePressedMoveStartGround)
+            if(CheckTileIntersection(handlePosition, out TileSelection tileSelection) && tileSelection == _handlePressedMoveStartTileSelection)
             {
                 _isBuildingPressed = true;
-                _building.Ground = ground;
             }
         }
 
         private void OnHandlePressedMoveStarted(Vector2 handlePosition)
         {
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(handlePosition.x, handlePosition.y, 1));
-
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore) && hitInfo.transform.TryGetComponent(out Ground ground))
-            {
-                _handlePressedMoveStartGround = ground;
-            }
+            if (CheckTileIntersection(handlePosition, out TileSelection tileSelection))
+                _handlePressedMoveStartTileSelection = tileSelection;
         }
+
+        private bool CheckTileIntersection(Vector2 handlePosition, out TileSelection tileSelection)
+        {
+            tileSelection = null;
+
+            if(Physics.Raycast(GetRay(handlePosition), out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore)
+                && hitInfo.transform.TryGetComponent(out GroundCollider groundCollider))
+            {
+                tileSelection = groundCollider.TileSelection;
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private Ray GetRay(Vector2 handlePosition) =>
+            _camera.ScreenPointToRay(new Vector3(handlePosition.x, handlePosition.y, 1));
     }
 }

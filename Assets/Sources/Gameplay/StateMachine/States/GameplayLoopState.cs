@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Gameplay.WorldGenerator;
 using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.StateMachine.States
 {
@@ -17,7 +18,7 @@ namespace Assets.Sources.Gameplay.StateMachine.States
 
         public async UniTask Enter()
         {
-            await _worldGenerator.Fill();
+            await _worldGenerator.Generate();
             await _buildingCreator.Create();
         }
 

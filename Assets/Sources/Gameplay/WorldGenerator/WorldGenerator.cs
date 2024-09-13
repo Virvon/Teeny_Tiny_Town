@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using System.Linq;
 
 namespace Assets.Sources.Gameplay.WorldGenerator
 {
@@ -26,7 +27,13 @@ namespace Assets.Sources.Gameplay.WorldGenerator
             _tiles = new();
         }
 
-        public async UniTask Fill()
+        public async UniTask Generate()
+        {
+            await Fill();
+            InitTiles();
+        }
+
+        private async UniTask Fill()
         {
             List<UniTask> tasks = new();
 
@@ -34,26 +41,27 @@ namespace Assets.Sources.Gameplay.WorldGenerator
             {
                 for (int z = 0; z < _width; z++)
                 {
-                    tasks.Add(Create(new Vector3Int(x, (int)transform.position.y, z)));
+                    tasks.Add(Create(new Vector2Int(x, z)));
                 }
             }
 
             await UniTask.WhenAll(tasks);
         }
 
-        private async UniTask Create(Vector3Int gridPosition)
+        private async UniTask Create(Vector2Int gridPosition)
         {
             Vector3 worldPosition = GridToWorldPosition(gridPosition);
             Tile.Tile tile = await _gameplayFactory.CreateTile(worldPosition, transform);
+            tile.TileMerge.Init(gridPosition);
             _tiles.Add(tile);
         }
 
-        private Vector3 GridToWorldPosition(Vector3Int gridPosition)
+        private Vector3 GridToWorldPosition(Vector2Int gridPosition)
         {
             return new Vector3(
                 gridPosition.x * _cellSize,
-                gridPosition.y * _cellSize,
-                gridPosition.z * _cellSize);
+                transform.position.y,
+                gridPosition.y * _cellSize);
         }
 
         private Vector3Int WorldToGridPosition(Vector3 worldPosition)
@@ -62,6 +70,34 @@ namespace Assets.Sources.Gameplay.WorldGenerator
                 (int)(worldPosition.x / _cellSize),
                 (int)(worldPosition.y / _cellSize),
                 (int)(worldPosition.z / _cellSize));
+        }
+
+        private void InitTiles()
+        {
+            foreach(Tile.Tile tile in _tiles)
+            {
+                List<Tile.Tile> adjacentTiles = new();
+
+                Vector2Int tileGridPosition = tile.TileMerge.GridPosition;
+
+                for (int x = tileGridPosition.x - 1; x <= tileGridPosition.x + 1; x++)
+                {
+                    if (x < 0 || x >= _length || x == tileGridPosition.x )
+                        continue;
+
+                    adjacentTiles.Add(_tiles.Where(adjacentTile => adjacentTile.TileMerge.GridPosition == new Vector2Int(x, tileGridPosition.y)).First());
+                }
+
+                for (int y = tileGridPosition.y - 1; y <= tileGridPosition.y + 1; y++)
+                {
+                    if (y < 0 || y >= _width || y == tileGridPosition.y)
+                        continue;
+
+                    adjacentTiles.Add(_tiles.Where(adjacentTile => adjacentTile.TileMerge.GridPosition == new Vector2Int(tileGridPosition.x, y)).First());
+                }
+
+                tile.TileMerge.Init(adjacentTiles);
+            }
         }
 
         public class Factory : PlaceholderFactory<string, UniTask<WorldGenerator>>

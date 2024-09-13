@@ -28,9 +28,7 @@ namespace Assets.Sources.Gameplay.WorldGenerator
 
             Building building = await _gameplayFactory.CreateBuilding(tile.GetComponent<GroundCreator>().Ground.transform.position, tile.transform);
 
-            building.Ground = tile.GetComponent<GroundCreator>().Ground;
-
-            _buildingPositionHandler.Set(building);
+            _buildingPositionHandler.Set(building, tile.TileSelection);
         }
 
         private Tile.Tile GetRandomEmptyTile()
