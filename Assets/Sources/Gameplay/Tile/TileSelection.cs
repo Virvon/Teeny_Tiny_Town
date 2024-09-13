@@ -6,6 +6,7 @@ namespace Assets.Sources.Gameplay.Tile
     public class TileSelection : MonoBehaviour
     {
         [SerializeField] private GroundCreator _groundCreator;
+        [SerializeField] private TileMerge _tileMerge;
 
         public void Select(SelectFrame selectFrame, Vector3 selectFramePositionOffset)
         {
@@ -15,6 +16,11 @@ namespace Assets.Sources.Gameplay.Tile
         public void PutBuilding(Building building)
         {
             building.transform.position = _groundCreator.Ground.BuildingPoint.position;
+        }
+
+        public void SetBuilding(Building building)
+        {
+            _tileMerge.SetBuilding(building);
         }
     }
 }

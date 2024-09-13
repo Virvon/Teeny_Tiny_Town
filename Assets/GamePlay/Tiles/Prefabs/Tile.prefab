@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _groundCreator: {fileID: 2720071092986690629}
+  _tileMerge: {fileID: 6918564469716327545}
 --- !u!114 &6918564469716327545
 MonoBehaviour:
   m_ObjectHideFlags: 0

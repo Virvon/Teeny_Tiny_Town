@@ -2,6 +2,7 @@
 {
     public enum BuildingType
     {
+        Undefined,
         Bush,
     }
 }

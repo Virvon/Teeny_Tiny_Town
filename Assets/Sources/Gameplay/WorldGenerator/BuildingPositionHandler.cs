@@ -89,6 +89,7 @@ namespace Assets.Sources.Gameplay.WorldGenerator
             {
                 _selectFrame.gameObject.SetActive(false);
                 tileSelection.PutBuilding(_building);
+                tileSelection.SetBuilding(_building);
                 _building = null;
                 BuildingCreated?.Invoke();
             }
