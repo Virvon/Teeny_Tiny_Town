@@ -13,13 +13,22 @@ namespace Assets.Sources.Gameplay.WorldGenerator
         [SerializeField] private BuildingPositionHandler _buildingPositionHandler;
 
         private IGameplayFactory _gameplayFactory;
+        private World.World _world;
 
         [Inject]
-        private void Construct(IGameplayFactory gameplayFactory)
+        private void Construct(IGameplayFactory gameplayFactory, World.World world)
         {
             _gameplayFactory = gameplayFactory;
+            _world = world;
 
             _buildingPositionHandler.BuildingCreated += OnBuildingCreated;
+            _world.TileCleaned += OnTileCleaned;
+        }
+
+        private void OnDestroy()
+        {
+            _buildingPositionHandler.BuildingCreated -= OnBuildingCreated;
+            _world.TileCleaned -= OnTileCleaned;
         }
 
         public async UniTask Create()
@@ -28,17 +37,22 @@ namespace Assets.Sources.Gameplay.WorldGenerator
 
             Building building = await _gameplayFactory.CreateBuilding(tile.GetComponent<GroundCreator>().Ground.transform.position, tile.transform);
 
-            _buildingPositionHandler.Set(building, tile.TileSelection);
+            _buildingPositionHandler.Set(building, tile);
         }
 
         private Tile.Tile GetRandomEmptyTile()
         {
-            return _worldGenerator.Tiles[Random.Range(0, _worldGenerator.Tiles.Count - 1)];
+            return _worldGenerator.GetTile(_world.Tiles[Random.Range(0, _world.Tiles.Count - 1)].GridPosition);
         }
 
         private async void OnBuildingCreated()
         {
             await Create();
+        }
+
+        private void OnTileCleaned(Vector2Int gridPosition)
+        {
+            _worldGenerator.GetTile(gridPosition).Clean();
         }
     }
 }

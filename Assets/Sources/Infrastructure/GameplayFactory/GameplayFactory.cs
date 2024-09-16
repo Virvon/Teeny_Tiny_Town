@@ -3,6 +3,7 @@ using Assets.Sources.Gameplay.WorldGenerator;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
+using Tile = Assets.Sources.Gameplay.Tile.Tile;
 
 namespace Assets.Sources.Infrastructure.GameplayFactory
 {

@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Gameplay.StateMachine;
+using Assets.Sources.Gameplay.WorldGenerator.World;
 using Assets.Sources.Infrastructure.GameplayFactory;
 using Zenject;
 
@@ -11,6 +12,12 @@ namespace Assets.Sources.Gameplay
             BindGameplayBootstrapper();
             BindGameplayStateMachine();
             BindGameplayFactory();
+            BindWorld();
+        }
+
+        private void BindWorld()
+        {
+            Container.BindInterfacesAndSelfTo<World>().AsSingle();
         }
 
         private void BindGameplayFactory()

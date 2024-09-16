@@ -16,17 +16,19 @@ namespace Assets.Sources.Gameplay.WorldGenerator
         [SerializeField] private LayerMask _layerMask;
 
         private IInputService _inputService;
+        private World.World _world;
         private SelectFrame _selectFrame;
         private Building _building;
-        private TileSelection _handlePressedMoveStartTileSelection;
+        private Tile.Tile _handlePressedMoveStartTile;
         private bool _isBuildingPressed;
         private Camera _camera;
 
 
         [Inject]
-        private void Construct(IInputService inputService)
+        private void Construct(IInputService inputService, World.World world)
         {
             _inputService = inputService;
+            _world = world;
 
             _selectFrame = Instantiate(_selectFramePrefab);
 
@@ -40,10 +42,10 @@ namespace Assets.Sources.Gameplay.WorldGenerator
 
         public event Action BuildingCreated;
 
-        public void Set(Building building, TileSelection buildingTileSelection)
+        public void Set(Building building, Tile.Tile buildingTile)
         {
             _building = building;
-            buildingTileSelection.Select(_selectFrame, _selectFramePositionOffset);
+            buildingTile.Select(_selectFrame, _selectFramePositionOffset);
 
             _selectFrame.gameObject.SetActive(true);
         }
@@ -53,13 +55,13 @@ namespace Assets.Sources.Gameplay.WorldGenerator
             if (_building == null)
                 return;
 
-            if(CheckTileIntersection(handlePosition, out TileSelection tileSelection))
+            if(CheckTileIntersection(handlePosition, out Tile.Tile tile))
             {
-                tileSelection.Select(_selectFrame, _selectFramePositionOffset);
+                tile.Select(_selectFrame, _selectFramePositionOffset);
                 _selectFrame.gameObject.SetActive(true);
 
                 if (_isBuildingPressed == false)
-                    tileSelection.PutBuilding(_building);
+                    tile.PutBuilding(_building);
             }
             else if (_isBuildingPressed)
             {
@@ -85,18 +87,19 @@ namespace Assets.Sources.Gameplay.WorldGenerator
             if (_building == null)
                 return;
 
-            if(CheckTileIntersection(handlePosition, out TileSelection tileSelection))
+            if(CheckTileIntersection(handlePosition, out Tile.Tile tile))
             {
                 _selectFrame.gameObject.SetActive(false);
-                tileSelection.PutBuilding(_building);
-                tileSelection.SetBuilding(_building);
+                tile.PutBuilding(_building);
+                tile.SetBuilding(_building);
+                _world.Update(tile.GridPosition, _building.Type);
                 _building = null;
                 BuildingCreated?.Invoke();
             }
             else if (_isBuildingPressed)
             {
-                _handlePressedMoveStartTileSelection.PutBuilding(_building);
-                _handlePressedMoveStartTileSelection.Select(_selectFrame, _selectFramePositionOffset);
+                _handlePressedMoveStartTile.PutBuilding(_building);
+                _handlePressedMoveStartTile.Select(_selectFrame, _selectFramePositionOffset);
                 _selectFrame.gameObject.SetActive(true);
             }
 
@@ -105,7 +108,7 @@ namespace Assets.Sources.Gameplay.WorldGenerator
 
         private void OnHandlePressedMovePerformed(Vector2 handlePosition)
         {
-            if(CheckTileIntersection(handlePosition, out TileSelection tileSelection) && tileSelection == _handlePressedMoveStartTileSelection)
+            if(CheckTileIntersection(handlePosition, out Tile.Tile tile) && tile == _handlePressedMoveStartTile)
             {
                 _isBuildingPressed = true;
             }
@@ -113,18 +116,18 @@ namespace Assets.Sources.Gameplay.WorldGenerator
 
         private void OnHandlePressedMoveStarted(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out TileSelection tileSelection))
-                _handlePressedMoveStartTileSelection = tileSelection;
+            if (CheckTileIntersection(handlePosition, out Tile.Tile tile))
+                _handlePressedMoveStartTile = tile;
         }
 
-        private bool CheckTileIntersection(Vector2 handlePosition, out TileSelection tileSelection)
+        private bool CheckTileIntersection(Vector2 handlePosition, out Tile.Tile tile)
         {
-            tileSelection = null;
+            tile = null;
 
             if(Physics.Raycast(GetRay(handlePosition), out RaycastHit hitInfo, _raycastDistance, _layerMask, QueryTriggerInteraction.Ignore)
                 && hitInfo.transform.TryGetComponent(out GroundCollider groundCollider))
             {
-                tileSelection = groundCollider.TileSelection;
+                tile = groundCollider.Tile;
 
                 return true;
             }
