@@ -35,7 +35,7 @@ namespace Assets.Sources.Gameplay.WorldGenerator
         {
             Tile.Tile tile = GetRandomEmptyTile();
 
-            Building building = await _gameplayFactory.CreateBuilding(tile.GetComponent<GroundCreator>().Ground.transform.position, tile.transform);
+            Building building = await _gameplayFactory.CreateBuilding(BuildingType.Bush, tile.GetComponent<GroundCreator>().Ground.transform.position, tile.transform);
 
             _buildingPositionHandler.Set(building, tile);
         }

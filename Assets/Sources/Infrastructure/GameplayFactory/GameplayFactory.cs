@@ -1,5 +1,7 @@
 ﻿using Assets.Sources.Gameplay.Tile;
 using Assets.Sources.Gameplay.WorldGenerator;
+using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -13,13 +15,15 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
         private readonly WorldGenerator.Factory _worldGeneratorFactory;
         private readonly Tile.Factory _tileFactory;
         private readonly Building.Factory _buildingFactory;
+        private readonly IStaticDataService _staticDataService;
 
-        public GameplayFactory(DiContainer container, WorldGenerator.Factory worldGeneratorFactory, Tile.Factory tileFactory, Building.Factory buildingFactory)
+        public GameplayFactory(DiContainer container, WorldGenerator.Factory worldGeneratorFactory, Tile.Factory tileFactory, Building.Factory buildingFactory, IStaticDataService staticDataService)
         {
             _container = container;
             _worldGeneratorFactory = worldGeneratorFactory;
             _tileFactory = tileFactory;
             _buildingFactory = buildingFactory;
+            _staticDataService = staticDataService;
         }
 
         public async UniTask CreateWorldGenerator()
@@ -37,9 +41,10 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
             return tile;
         }
 
-        public async UniTask<Building> CreateBuilding(Vector3 position, Transform parent)
+        public async UniTask<Building> CreateBuilding(BuildingType type, Vector3 position, Transform parent)
         {
-            Building building = await _buildingFactory.Create(GameplayFactoryAssets.Building, position, parent);
+            MergeConfig mergeConfig = _staticDataService.GetMerge(type);
+            Building building = await _buildingFactory.Create(mergeConfig.AssetReference, position, parent);
 
             return building;
         }

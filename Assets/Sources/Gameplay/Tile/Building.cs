@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace Assets.Sources.Gameplay.Tile
@@ -10,7 +11,7 @@ namespace Assets.Sources.Gameplay.Tile
 
         public BuildingType Type => _type;
 
-        public class Factory : PlaceholderFactory<string, Vector3, Transform, UniTask<Building>>
+        public class Factory : PlaceholderFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<Building>>
         {
         }
     }

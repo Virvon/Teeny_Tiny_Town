@@ -1,9 +1,7 @@
 ﻿using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StateMachine;
+using Assets.Sources.Services.StaticDataService;
 using Cysharp.Threading.Tasks;
-using System;
-using System.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {
@@ -11,11 +9,13 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly IAssetProvider _assetProvider;
+        private readonly IStaticDataService _staticDataService;
 
-        public BootstrapState(GameStateMachine gameStateMachine, IAssetProvider assetProvider)
+        public BootstrapState(GameStateMachine gameStateMachine, IAssetProvider assetProvider, IStaticDataService staticDataService)
         {
             _gameStateMachine = gameStateMachine;
             _assetProvider = assetProvider;
+            _staticDataService = staticDataService;
         }
 
         public async UniTask Enter()
@@ -28,6 +28,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
         private async UniTask Initialize()
         {
             await _assetProvider.InitializeAsync();
+            await _staticDataService.InitializeAsync();
         }
 
         public UniTask Exit() =>

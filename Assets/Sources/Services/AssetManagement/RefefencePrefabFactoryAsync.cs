@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Assets.Sources.Services.AssetManagement
 {
-    public class RefefencePrefabFactoryAsync<TComponent> : IFactory<AssetReferenceGameObject, UniTask<TComponent>>
+    public class RefefencePrefabFactoryAsync<TComponent> : IFactory<AssetReferenceGameObject, UniTask<TComponent>>, IFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<TComponent>>
     {
         private readonly IAssetProvider _assetProvider;
         private readonly IInstantiator _instantiator;
@@ -20,6 +20,13 @@ namespace Assets.Sources.Services.AssetManagement
         {
             GameObject prefab = await _assetProvider.Load<GameObject>(assetReference);
             GameObject newObject = _instantiator.InstantiatePrefab(prefab);
+            return newObject.GetComponent<TComponent>();
+        }
+
+        public async UniTask<TComponent> Create(AssetReferenceGameObject assetReference, Vector3 position, Transform parent)
+        {
+            GameObject prefab = await _assetProvider.Load<GameObject>(assetReference);
+            GameObject newObject = _instantiator.InstantiatePrefab(prefab, position, Quaternion.identity, parent);
             return newObject.GetComponent<TComponent>();
         }
     }

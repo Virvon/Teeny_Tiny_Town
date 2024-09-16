@@ -6,7 +6,7 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
 {
     public interface IGameplayFactory
     {
-        UniTask<Building> CreateBuilding(Vector3 position, Transform parent);
+        UniTask<Building> CreateBuilding(BuildingType type, Vector3 position, Transform parent);
         UniTask<Tile> CreateTile(Vector3 position, Transform parent);
         UniTask CreateWorldGenerator();
     }
