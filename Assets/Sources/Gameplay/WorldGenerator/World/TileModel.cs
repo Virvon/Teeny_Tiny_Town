@@ -9,7 +9,6 @@ namespace Assets.Sources.Gameplay.WorldGenerator.World
         public readonly Vector2Int GridPosition;
 
         private List<TileModel> _adjacentTiles;
-        private BuildingType _buildingType;
 
         public TileModel(Vector2Int greedPosition)
         {
@@ -18,6 +17,8 @@ namespace Assets.Sources.Gameplay.WorldGenerator.World
             _adjacentTiles = new();
         }
 
+        public BuildingType BuildingType { get; private set; }
+
         public void AddAdjacentTile(TileModel adjacentTile)
         {
             _adjacentTiles.Add(adjacentTile);
@@ -25,7 +26,7 @@ namespace Assets.Sources.Gameplay.WorldGenerator.World
 
         public void ChangeBuilding(BuildingType buildingType)
         {
-            _buildingType = buildingType;
+            BuildingType = buildingType;
         }
 
         public int GetTilesChainCount(List<TileModel> countedTiles)
@@ -35,7 +36,7 @@ namespace Assets.Sources.Gameplay.WorldGenerator.World
 
             foreach (TileModel tile in _adjacentTiles)
             {
-                if (_buildingType == tile._buildingType && countedTiles.Contains(tile) == false)
+                if (BuildingType == tile.BuildingType && countedTiles.Contains(tile) == false)
                     tilesCountInChain += tile.GetTilesChainCount(countedTiles);
             }
 

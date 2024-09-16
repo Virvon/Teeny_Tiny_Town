@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Assets.Sources.Gameplay.Tile;
+using Assets.Sources.Services.StaticDataService;
 
 namespace Assets.Sources.Gameplay.WorldGenerator.World
 {
@@ -12,14 +13,18 @@ namespace Assets.Sources.Gameplay.WorldGenerator.World
         private const uint _width = 5;
         private const uint MinTilesCountToMerge = 3;
 
+        private readonly IStaticDataService _staticDataService;
+
         private List<TileModel> _tiles;
 
-        public World()
+        public World(IStaticDataService staticDataService)
         {
             _tiles = new();
+            _staticDataService = staticDataService;
         }
 
         public event Action<Vector2Int> TileCleaned;
+        public event Action<Vector2Int, BuildingType> TileBuildingUpdated;
 
         public IReadOnlyList<TileModel> Tiles => _tiles;
 
@@ -39,14 +44,17 @@ namespace Assets.Sources.Gameplay.WorldGenerator.World
 
             if(tile.GetTilesChainCount(countedTiles) >= MinTilesCountToMerge)
             {
+                BuildingType nextBuildingType = _staticDataService.GetMerge(tile.BuildingType).NextBuilding;
+
                 Clean(countedTiles);
-                UpgradeBuilding(tile);
+                UpgradeBuilding(tile, nextBuildingType);
             }
         }
 
-        private void UpgradeBuilding(TileModel tile)
+        private void UpgradeBuilding(TileModel tile, BuildingType buildingType)
         {
-
+            tile.ChangeBuilding(buildingType);
+            TileBuildingUpdated?.Invoke(tile.GridPosition, buildingType);
         }
 
         private void Clean(List<TileModel> tiles)

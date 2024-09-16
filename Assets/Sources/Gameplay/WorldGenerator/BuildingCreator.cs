@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Gameplay.Tile;
 using Assets.Sources.Infrastructure.GameplayFactory;
 using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -23,21 +24,27 @@ namespace Assets.Sources.Gameplay.WorldGenerator
 
             _buildingPositionHandler.BuildingCreated += OnBuildingCreated;
             _world.TileCleaned += OnTileCleaned;
+            _world.TileBuildingUpdated += OnTileBuildingUpdated;
         }
 
         private void OnDestroy()
         {
             _buildingPositionHandler.BuildingCreated -= OnBuildingCreated;
             _world.TileCleaned -= OnTileCleaned;
+            _world.TileBuildingUpdated -= OnTileBuildingUpdated;
         }
 
         public async UniTask Create()
         {
             Tile.Tile tile = GetRandomEmptyTile();
-
-            Building building = await _gameplayFactory.CreateBuilding(BuildingType.Bush, tile.GetComponent<GroundCreator>().Ground.transform.position, tile.transform);
+            Building building = await CreateBuilding(tile, BuildingType.Bush);
 
             _buildingPositionHandler.Set(building, tile);
+        }
+
+        private async Task<Building> CreateBuilding(Tile.Tile tile, BuildingType type)
+        {
+            return await _gameplayFactory.CreateBuilding(type, tile.GetComponent<GroundCreator>().Ground.transform.position, tile.transform);
         }
 
         private Tile.Tile GetRandomEmptyTile()
@@ -53,6 +60,17 @@ namespace Assets.Sources.Gameplay.WorldGenerator
         private void OnTileCleaned(Vector2Int gridPosition)
         {
             _worldGenerator.GetTile(gridPosition).Clean();
+        }
+
+        private async void OnTileBuildingUpdated(Vector2Int gridPosition, BuildingType buildingType)
+        {
+            Tile.Tile tile = _worldGenerator.GetTile(gridPosition);
+            Building building = await CreateBuilding(tile, buildingType);
+
+            tile.PutBuilding(building);
+            tile.SetBuilding(building);
+
+            _world.Update(tile.GridPosition, buildingType);
         }
     }
 }
