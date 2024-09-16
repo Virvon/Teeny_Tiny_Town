@@ -2,7 +2,7 @@
 {
     public class GameplayFactoryAssets
     {
-        public const string WorldGenerator = "WorldGenerator";
+        public const string WorldGenerator = "World";
         public const string Tile = "Tile";
     }
 }

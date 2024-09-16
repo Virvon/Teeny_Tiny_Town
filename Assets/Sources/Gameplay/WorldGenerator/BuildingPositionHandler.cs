@@ -16,7 +16,6 @@ namespace Assets.Sources.Gameplay.WorldGenerator
         [SerializeField] private LayerMask _layerMask;
 
         private IInputService _inputService;
-        private World.World _world;
         private SelectFrame _selectFrame;
         private Building _building;
         private Tile.Tile _handlePressedMoveStartTile;
@@ -25,10 +24,9 @@ namespace Assets.Sources.Gameplay.WorldGenerator
 
 
         [Inject]
-        private void Construct(IInputService inputService, World.World world)
+        private void Construct(IInputService inputService)
         {
             _inputService = inputService;
-            _world = world;
 
             _selectFrame = Instantiate(_selectFramePrefab);
 
@@ -40,7 +38,7 @@ namespace Assets.Sources.Gameplay.WorldGenerator
             _inputService.HandlePressedMovePerformed += OnHandlePressedMovePerformed;
         }
 
-        public event Action BuildingCreated;
+        public event Action<Vector2Int, BuildingType> BuildingCreated;
 
         public void Set(Building building, Tile.Tile buildingTile)
         {
@@ -53,7 +51,9 @@ namespace Assets.Sources.Gameplay.WorldGenerator
         private void OnHandleMoved(Vector2 handlePosition)
         {
             if (_building == null)
+            {
                 return;
+            }
 
             if(CheckTileIntersection(handlePosition, out Tile.Tile tile))
             {
@@ -92,9 +92,8 @@ namespace Assets.Sources.Gameplay.WorldGenerator
                 _selectFrame.gameObject.SetActive(false);
                 tile.PutBuilding(_building);
                 tile.SetBuilding(_building);
-                _world.Update(tile.GridPosition, _building.Type);
-                _building = null;
-                BuildingCreated?.Invoke();
+                
+                BuildingCreated?.Invoke(tile.GridPosition, _building.Type);
             }
             else if (_isBuildingPressed)
             {

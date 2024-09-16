@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4365406492730119258}
   - component: {fileID: 6368165746342944013}
   - component: {fileID: 704137410138497624}
-  - component: {fileID: 3912619407629329902}
+  - component: {fileID: 4197580972865624820}
   m_Layer: 0
-  m_Name: WorldGenerator
+  m_Name: World
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,8 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tile: {fileID: -6689234198555655170, guid: f3281d3e4b7ecc8469b81b7d355e33ec, type: 3}
-  _length: 5
-  _width: 5
   _cellSize: 3
 --- !u!114 &704137410138497624
 MonoBehaviour:
@@ -70,7 +68,7 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3912619407629329902
+--- !u!114 &4197580972865624820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,9 +77,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8454899544082395810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30c2741e5826c4c40a2120935c5e139d, type: 3}
+  m_Script: {fileID: 11500000, guid: 85247eea3fbe4864fa153be4af5d207e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildingPrefab: {fileID: 8723728113443134156, guid: 1f86c6f00b0e6514a82e2dfa5ad2a00c, type: 3}
-  _worldGenerator: {fileID: 6368165746342944013}
   _buildingPositionHandler: {fileID: 704137410138497624}
+  _worldGenerator: {fileID: 6368165746342944013}

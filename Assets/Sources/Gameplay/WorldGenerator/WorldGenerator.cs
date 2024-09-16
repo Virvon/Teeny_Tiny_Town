@@ -55,8 +55,6 @@ namespace Assets.Sources.Gameplay.WorldGenerator
             _tiles.Add(tile);
         }
 
-        
-
         private Vector3 GridToWorldPosition(Vector2Int gridPosition)
         {
             return new Vector3(

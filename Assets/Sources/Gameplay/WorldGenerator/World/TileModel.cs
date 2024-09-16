@@ -1,4 +1,6 @@
 ﻿using Assets.Sources.Gameplay.Tile;
+using Assets.Sources.Services.StaticDataService;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +10,14 @@ namespace Assets.Sources.Gameplay.WorldGenerator.World
     {
         public readonly Vector2Int GridPosition;
 
+        private readonly IStaticDataService _staticDataService;
+
         private List<TileModel> _adjacentTiles;
 
-        public TileModel(Vector2Int greedPosition)
+        public TileModel(Vector2Int greedPosition, IStaticDataService staticDataService)
         {
             GridPosition = greedPosition;
+            _staticDataService = staticDataService;
 
             _adjacentTiles = new();
         }
@@ -24,7 +29,7 @@ namespace Assets.Sources.Gameplay.WorldGenerator.World
             _adjacentTiles.Add(adjacentTile);
         }
 
-        public void ChangeBuilding(BuildingType buildingType)
+        public void PutBuilding(BuildingType buildingType)
         {
             BuildingType = buildingType;
         }
@@ -41,6 +46,16 @@ namespace Assets.Sources.Gameplay.WorldGenerator.World
             }
 
             return tilesCountInChain;
+        }
+
+        public void Clean()
+        {
+            BuildingType = BuildingType.Undefined;
+        }
+
+        public void UpdateBuilding()
+        {
+            BuildingType = _staticDataService.GetMerge(BuildingType).NextBuilding;
         }
     }
 }

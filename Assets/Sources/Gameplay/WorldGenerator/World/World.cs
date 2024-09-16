@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Assets.Sources.Gameplay.Tile;
+using Random = UnityEngine.Random;
 using Assets.Sources.Services.StaticDataService;
+using UnityEngine.InputSystem.Utilities;
+using Assets.Sources.Gameplay.WorldGenerator.Comand;
 
 namespace Assets.Sources.Gameplay.WorldGenerator.World
 {
@@ -23,47 +26,69 @@ namespace Assets.Sources.Gameplay.WorldGenerator.World
             _staticDataService = staticDataService;
         }
 
-        public event Action<Vector2Int> TileCleaned;
-        public event Action<Vector2Int, BuildingType> TileBuildingUpdated;
+        public event Action<List<Vector2Int>> TilesChanged;
 
         public IReadOnlyList<TileModel> Tiles => _tiles;
+        public BuildingModel BuildingToPlacing { get; private set; }
 
         public void Generate()
         {
             Fill();
             InitializeAdjacentTiles();
+            CreateBuildingToPlacing();
+        }
+
+        public void Work()
+        {
+            TilesChanged?.Invoke(GetGridPositions(_tiles));
         }
 
         public void Update(Vector2Int gridPosition, BuildingType buildingType)
         {
-            TileModel tile = GetTile(gridPosition);
+            bool chainCheakCompleted = false;
+            TileModel updatedTile = GetTile(gridPosition);
+            List<Vector2Int> changedTilePositions = new() { updatedTile.GridPosition };
 
-            tile.ChangeBuilding(buildingType);
+            updatedTile.PutBuilding(buildingType);
 
-            List<TileModel> countedTiles = new ();
-
-            if(tile.GetTilesChainCount(countedTiles) >= MinTilesCountToMerge)
+            while (chainCheakCompleted == false)
             {
-                BuildingType nextBuildingType = _staticDataService.GetMerge(tile.BuildingType).NextBuilding;
+                List<TileModel> countedTiles = new();
 
-                Clean(countedTiles);
-                UpgradeBuilding(tile, nextBuildingType);
+                if(updatedTile.GetTilesChainCount(countedTiles) >= MinTilesCountToMerge)
+                {
+                    countedTiles.Remove(updatedTile);
+                    changedTilePositions.AddRange(GetGridPositions(countedTiles));
+
+                    foreach (TileModel tileModel in countedTiles)
+                        tileModel.Clean();
+
+                    updatedTile.UpdateBuilding();
+                }
+                else
+                {
+                    chainCheakCompleted = true;
+                }
             }
+
+            CreateBuildingToPlacing();
+
+            TilesChanged?.Invoke(changedTilePositions);
         }
 
-        private void UpgradeBuilding(TileModel tile, BuildingType buildingType)
-        {
-            tile.ChangeBuilding(buildingType);
-            TileBuildingUpdated?.Invoke(tile.GridPosition, buildingType);
-        }
+        public TileModel GetTile(Vector2Int gridPosition) =>
+            _tiles.First(tile => tile.GridPosition == gridPosition);
 
-        private void Clean(List<TileModel> tiles)
+        public void Update(ReadOnlyArray<TileData> tileDatas, BuildingModel buildingToPlacing)
         {
-            foreach(TileModel tile in tiles)
+            foreach (TileData tileData in tileDatas)
             {
-                tile.ChangeBuilding(BuildingType.Undefined);
-                TileCleaned?.Invoke(tile.GridPosition);
+                GetTile(tileData.TileGridPosition).PutBuilding(tileData.BuildingType);
             }
+
+            BuildingToPlacing = buildingToPlacing;
+
+            TilesChanged?.Invoke(GetGridPositions(_tiles));
         }
 
         private void InitializeAdjacentTiles()
@@ -98,12 +123,28 @@ namespace Assets.Sources.Gameplay.WorldGenerator.World
             {
                 for (int z = 0; z < _width; z++)
                 {
-                    _tiles.Add(new TileModel(new Vector2Int(x, z)));
+                    _tiles.Add(new TileModel(new Vector2Int(x, z), _staticDataService));
                 }
             }
         }
 
-        private TileModel GetTile(Vector2Int gridPosition) => 
-            _tiles.First(tile => tile.GridPosition == gridPosition);
+        private void CreateBuildingToPlacing()
+        {
+            bool isPositionFree = false;
+
+            while(isPositionFree == false)
+            {
+                TileModel tile = _tiles[Random.Range(0, _tiles.Count)];
+
+                if(tile.BuildingType == BuildingType.Undefined)
+                {
+                    BuildingToPlacing = new BuildingModel(tile.GridPosition, BuildingType.Bush);
+                    isPositionFree = true;
+                }
+            }
+        }
+
+        private List<Vector2Int> GetGridPositions(List<TileModel> tiles) =>
+            tiles.Select(value => value.GridPosition).ToList();
     }
 }

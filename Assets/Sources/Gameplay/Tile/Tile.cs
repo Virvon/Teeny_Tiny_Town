@@ -10,6 +10,7 @@ namespace Assets.Sources.Gameplay.Tile
     public class Tile : MonoBehaviour
     {
         [SerializeField] private GroundCreator _groundCreator;
+        [SerializeField] private BuildingCreator _buildingCreator;
 
         private Building _building;
 
@@ -35,7 +36,21 @@ namespace Assets.Sources.Gameplay.Tile
             _building = building;
         }
 
-        public void Clean()
+        public async UniTask<Building> CreateBuilding(BuildingType type)
+        {
+            if (_building != null)
+                DestroyBuilding();
+
+            if (type != BuildingType.Undefined)
+            {
+                _building = await _buildingCreator.Create(type);
+                return _building;
+            }
+
+            return null;
+        }
+
+        private void DestroyBuilding()
         {
             Destroy(_building.gameObject);
             _building = null;

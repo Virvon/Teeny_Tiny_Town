@@ -9,13 +9,11 @@ namespace Assets.Sources.Gameplay.StateMachine.States
     public class GameplayLoopState : IState
     {
         private readonly WorldGenerator.WorldGenerator _worldGenerator;
-        private readonly BuildingCreator _buildingCreator;
         private readonly World _world;
 
-        public GameplayLoopState(WorldGenerator.WorldGenerator worldGenerator, BuildingCreator buildingCreator, World world)
+        public GameplayLoopState(WorldGenerator.WorldGenerator worldGenerator, World world)
         {
             _worldGenerator = worldGenerator;
-            _buildingCreator = buildingCreator;
             _world = world;
         }
 
@@ -23,7 +21,7 @@ namespace Assets.Sources.Gameplay.StateMachine.States
         {
             _world.Generate();
             await _worldGenerator.Generate();
-            await _buildingCreator.Create();
+            _world.Work();
         }
 
         public UniTask Exit()
