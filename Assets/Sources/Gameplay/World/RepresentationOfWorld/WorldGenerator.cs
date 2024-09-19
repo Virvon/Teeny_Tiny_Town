@@ -48,7 +48,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         {
             Vector3 worldPosition = GridToWorldPosition(gridPosition);
             Tiles.Tile tile = await _gameplayFactory.CreateTile(worldPosition, transform);
-            tile.Init(gridPosition);
+            await tile.Init(gridPosition, _world.GetTile(gridPosition).GroundType, _world.GetTile(gridPosition).GroundRotation);
             _tiles.Add(tile);
         }
 

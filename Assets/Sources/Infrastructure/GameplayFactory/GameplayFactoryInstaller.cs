@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
 using Assets.Sources.Services.AssetManagement;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -37,6 +38,10 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
             Container
                 .BindFactory<string, UniTask<UiCanvas>, UiCanvas.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<UiCanvas>>();
+
+            Container
+                .BindFactory<AssetReferenceGameObject, Vector3, float, Transform, UniTask<Ground>, Ground.Factory>()
+                .FromFactory<RefefencePrefabFactoryAsync<Ground>>();
         }
     }
 }

@@ -101,8 +101,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
                 if (updatedTile.GetTilesChainCount(countedTiles) >= MinTilesCountToMerge)
                 {
-                    Debug.Log(countedTiles.Count);
-
                     countedTiles.Remove(updatedTile);
                     changedTilePositions.AddRange(GetGridPositions(countedTiles));
 

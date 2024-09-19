@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.AssetManagement;
@@ -12,21 +13,36 @@ namespace Assets.Sources.Services.StaticDataService
         private readonly IAssetProvider _assetsProvider;
 
         private Dictionary<BuildingType, MergeConfig> _mergeConfigs;
+        private Dictionary<GroundType, GroundConfig> _groundConfigs;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
+
+        public GroundsConfig GroundsConfig { get; private set; }
 
         public async UniTask InitializeAsync()
         {
             List<UniTask> tasks = new List<UniTask>();
 
             tasks.Add(LoadMergeConfig());
+            tasks.Add(LoadGroundsConfig());
 
             await UniTask.WhenAll(tasks);
         }
 
         public MergeConfig GetMerge(BuildingType buildingType) =>
             _mergeConfigs.TryGetValue(buildingType, out MergeConfig config) ? config : null;
+
+        public GroundConfig GetGround(GroundType groundType) =>
+            _groundConfigs.TryGetValue(groundType, out GroundConfig config) ? config : null;
+
+        private async UniTask LoadGroundsConfig()
+        {
+            GroundsConfig[] groundsConfig = await GetConfigs<GroundsConfig>();
+
+            GroundsConfig = groundsConfig.First();
+            _groundConfigs = GroundsConfig.GroundConfigs.ToDictionary(value => value.Type, value => value);
+        }
 
         private async UniTask LoadMergeConfig()
         {

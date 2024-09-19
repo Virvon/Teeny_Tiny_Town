@@ -9,6 +9,7 @@ using UnityEngine;
 using Zenject;
 using Tile = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Tile;
 using Building = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Building;
+using Ground = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground;
 
 namespace Assets.Sources.Infrastructure.GameplayFactory
 {
@@ -21,9 +22,9 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
         private readonly IStaticDataService _staticDataService;
         private readonly SelectFrame.Factory _selectFrameFactory;
         private readonly UiCanvas.Factory _canvasFactory;
+        private readonly Ground.Factory _groundFactory;
 
-
-        public GameplayFactory(DiContainer container, WorldGenerator.Factory worldGeneratorFactory, Tile.Factory tileFactory, Building.Factory buildingFactory, IStaticDataService staticDataService, SelectFrame.Factory selectFrameFactory, UiCanvas.Factory canvasFactory)
+        public GameplayFactory(DiContainer container, WorldGenerator.Factory worldGeneratorFactory, Tile.Factory tileFactory, Building.Factory buildingFactory, IStaticDataService staticDataService, SelectFrame.Factory selectFrameFactory, UiCanvas.Factory canvasFactory, Ground.Factory groundFactory)
         {
             _container = container;
             _worldGeneratorFactory = worldGeneratorFactory;
@@ -32,9 +33,13 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
             _staticDataService = staticDataService;
             _selectFrameFactory = selectFrameFactory;
             _canvasFactory = canvasFactory;
+            _groundFactory = groundFactory;
         }
 
         public WorldGenerator WorldGenerator { get; private set; }
+
+        public async UniTask<Ground> CreateGround(GroundType type, Vector3 position, GroundRotation rotation, Transform parent) =>
+            await _groundFactory.Create(_staticDataService.GetGround(type).AssetReference, position, (int)rotation, parent);
 
         public async UniTask CreateCanvas()
         {
@@ -66,10 +71,10 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
             return tile;
         }
 
-        public async UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Building> CreateBuilding(BuildingType type, Vector3 position, Transform parent)
+        public async UniTask<Building> CreateBuilding(BuildingType type, Vector3 position, Transform parent)
         {
             MergeConfig mergeConfig = _staticDataService.GetMerge(type);
-            Gameplay.World.RepresentationOfWorld.Tiles.Building building = await _buildingFactory.Create(mergeConfig.AssetReference, position, parent);
+            Building building = await _buildingFactory.Create(mergeConfig.AssetReference, position, parent);
 
             building.Init(type);
 

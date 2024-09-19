@@ -6,6 +6,9 @@ namespace Assets.Sources.Services.StaticDataService
 {
     public interface IStaticDataService
     {
+        GroundsConfig GroundsConfig { get; }
+
+        GroundConfig GetGround(GroundType groundType);
         MergeConfig GetMerge(BuildingType buildingType);
         UniTask InitializeAsync();
     }

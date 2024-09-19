@@ -1,4 +1,6 @@
-﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
+﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
+using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -17,9 +19,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
         public BuildingType BuildingType => IsEmpty ? BuildingType.Undefined : _building.Type;
         public Transform BuildingPoint => _groundCreator.Ground.BuildingPoint;
 
-        public void Init(Vector2Int gridPosition)
+        public async UniTask Init(Vector2Int gridPosition, GroundType groundType, GroundRotation groundRotation)
         {
             GridPosition = gridPosition;
+            await _groundCreator.Create(groundType, groundRotation);
         }
 
         public Building TakeBuilding()
