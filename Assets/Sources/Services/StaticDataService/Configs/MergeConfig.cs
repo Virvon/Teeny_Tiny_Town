@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Gameplay.Tile;
+﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

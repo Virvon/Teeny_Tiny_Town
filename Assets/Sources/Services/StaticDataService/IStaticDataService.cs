@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Gameplay.Tile;
+﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
 

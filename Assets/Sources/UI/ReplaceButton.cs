@@ -1,22 +1,14 @@
-﻿using Assets.Sources.Gameplay.GameplayMover;
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Assets.Sources.UI
 {
-    public class UndoButton : MonoBehaviour
+    public class ReplaceButton : MonoBehaviour
     {
         [SerializeField] private Button _button;
 
-        private GameplayMover _gameplayMover;
-
-        [Inject]
-        private void Construct(GameplayMover gameplayMover)
-        {
-            _gameplayMover = gameplayMover;
-        }
+        public event Action Clicked;
 
         private void OnEnable()
         {
@@ -30,7 +22,7 @@ namespace Assets.Sources.UI
 
         private void OnButtonClicked()
         {
-            _gameplayMover.TryUndoCommand();
+            Clicked?.Invoke();
         }
     }
 }

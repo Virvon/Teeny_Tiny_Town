@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4365406492730119258}
   - component: {fileID: 6368165746342944013}
-  - component: {fileID: 704137410138497624}
-  - component: {fileID: 4197580972865624820}
+  - component: {fileID: 7573928167608953978}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -48,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tile: {fileID: -6689234198555655170, guid: f3281d3e4b7ecc8469b81b7d355e33ec, type: 3}
   _cellSize: 3
---- !u!114 &704137410138497624
+--- !u!114 &7573928167608953978
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,28 +56,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8454899544082395810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29950231680f6644fa618bfacbe33413, type: 3}
+  m_Script: {fileID: 11500000, guid: 90030ebc0055f5f46b5075e07dc233fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildingPressedMoveHeight: 5
-  _sensitivity: 0
-  _selectFramePrefab: {fileID: -5651809538956149125, guid: 3d612f05727028342ac259c0967669a5, type: 3}
-  _selectFramePositionOffset: {x: 0, y: 0.25, z: 0}
-  _raycastDistance: 100
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &4197580972865624820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8454899544082395810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85247eea3fbe4864fa153be4af5d207e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buildingPositionHandler: {fileID: 704137410138497624}
-  _worldGenerator: {fileID: 6368165746342944013}

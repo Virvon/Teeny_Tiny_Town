@@ -1,17 +1,14 @@
-﻿using Assets.Sources.Gameplay.WorldGenerator;
-using Assets.Sources.Gameplay.WorldGenerator.World;
-using Assets.Sources.Services.StateMachine;
+﻿using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets.Sources.Gameplay.StateMachine.States
 {
     public class GameplayLoopState : IState
     {
-        private readonly WorldGenerator.WorldGenerator _worldGenerator;
-        private readonly World _world;
+        private readonly World.RepresentationOfWorld.WorldGenerator _worldGenerator;
+        private readonly World.WorldInfrastructure.World _world;
 
-        public GameplayLoopState(WorldGenerator.WorldGenerator worldGenerator, World world)
+        public GameplayLoopState(World.RepresentationOfWorld.WorldGenerator worldGenerator, World.WorldInfrastructure.World world)
         {
             _worldGenerator = worldGenerator;
             _world = world;
