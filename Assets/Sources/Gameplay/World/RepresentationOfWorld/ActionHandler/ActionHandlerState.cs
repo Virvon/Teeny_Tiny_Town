@@ -38,7 +38,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
         }
 
-        protected bool CheckTileIntersection(Vector2 handlePosition, out Tile tile)
+        protected bool CheckTileIntersection(Vector2 handlePosition, out TileRepresentation tile)
         {
             tile = null;
 

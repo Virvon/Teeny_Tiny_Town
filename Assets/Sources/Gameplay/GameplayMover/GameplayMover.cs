@@ -12,8 +12,8 @@ namespace Assets.Sources.Gameplay.GameplayMover
         public GameplayMover(World.WorldInfrastructure.World world) =>
             _world = world;
 
-        public void PlaceNewBuilding(Vector2Int gridPosition, BuildingType type) =>
-            ExecuteCommand(new PlaceNewBuildingCommand(_world, gridPosition, type));
+        public void PlaceNewBuilding(Vector2Int gridPosition) =>
+            ExecuteCommand(new PlaceNewBuildingCommand(_world, gridPosition));
 
         public void RemoveBuilding(Vector2Int gridPosition) =>
             ExecuteCommand(new RemoveBuildingCommand(_world, gridPosition));

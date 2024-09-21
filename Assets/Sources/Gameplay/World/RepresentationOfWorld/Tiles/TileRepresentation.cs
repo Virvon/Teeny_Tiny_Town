@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 {
-    public class Tile : MonoBehaviour
+    public class TileRepresentation : MonoBehaviour
     {
         [SerializeField] private GroundCreator _groundCreator;
         [SerializeField] private BuildingCreator _buildingCreator;
@@ -19,10 +19,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
         public BuildingType BuildingType => IsEmpty ? BuildingType.Undefined : _building.Type;
         public Transform BuildingPoint => _groundCreator.Ground.BuildingPoint;
 
-        public async UniTask Init(Vector2Int gridPosition, GroundType groundType, GroundRotation groundRotation)
+        public void Init(Vector2Int gridPosition)
         {
             GridPosition = gridPosition;
-            await _groundCreator.Create(groundType, groundRotation);
         }
 
         public Building TakeBuilding()
@@ -40,13 +39,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
         public void LowerBuilding() =>
             PlaceBuildingToBuildingPoint(_building);
 
-        public void Replace(Building building)
-        {
-            if (IsEmpty)
-                PlaceBuildingToBuildingPoint(building);
-        }
-
-
         public void PlaceBuilding(Building building)
         {
             if (IsEmpty == false)
@@ -55,21 +47,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             _building = building;
 
             PlaceBuildingToBuildingPoint(building);
-
         }
 
-        public async UniTask<Building> CreateBuilding(BuildingType type)
+        public async UniTask Change(BuildingType buildingType, GroundType groundType, GroundRotation groundRotation)
         {
-            if (_building != null)
-                DestroyBuilding();
-
-            if (type != BuildingType.Undefined)
-            {
-                _building = await _buildingCreator.Create(type);
-                return _building;
-            }
-
-            return null;
+            await TryChangeBuilding(buildingType);
+            await _groundCreator.Create(groundType, groundRotation);
         }
 
         public void DestroyBuilding()
@@ -81,7 +64,19 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
         private void PlaceBuildingToBuildingPoint(Building building) =>
             building.transform.position = _groundCreator.Ground.BuildingPoint.position;
 
-        public class Factory : PlaceholderFactory<string, Vector3, Transform, UniTask<Tile>>
+        private async UniTask TryChangeBuilding(BuildingType targetBuildingType)
+        {
+            if (BuildingType != targetBuildingType)
+            {
+                if(IsEmpty == false)
+                    DestroyBuilding();
+
+                if (targetBuildingType != BuildingType.Undefined)
+                    _building = await _buildingCreator.Create(targetBuildingType);
+            }
+        }
+
+        public class Factory : PlaceholderFactory<string, Vector3, Transform, UniTask<TileRepresentation>>
         {
         }
     }

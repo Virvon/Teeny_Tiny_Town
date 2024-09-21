@@ -28,6 +28,7 @@ namespace Assets.Sources.Gameplay
         {
             await _gameplayFactory.CreateCanvas();
             await _gameplayFactory.CreateSelectFrame();
+            await _gameplayFactory.CreateBuildingMarker();
 
             _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<NewBuildingPlacePositionHandler>());
             _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<RemovedBuildingPositionHandler>());

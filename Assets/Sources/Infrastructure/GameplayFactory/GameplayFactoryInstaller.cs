@@ -24,8 +24,8 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
                 .FromFactory<KeyPrefabFactoryAsync<WorldGenerator>>();
 
             Container
-                .BindFactory<string, Vector3, Transform, UniTask<Tile>, Tile.Factory>()
-                .FromFactory<KeyPrefabFactoryAsync<Tile>>();
+                .BindFactory<string, Vector3, Transform, UniTask<TileRepresentation>, TileRepresentation.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<TileRepresentation>>();
 
             Container
                 .BindFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<Building>, Building.Factory>()
@@ -42,6 +42,10 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
             Container
                 .BindFactory<AssetReferenceGameObject, Vector3, float, Transform, UniTask<Ground>, Ground.Factory>()
                 .FromFactory<RefefencePrefabFactoryAsync<Ground>>();
+
+            Container
+                .BindFactory<string, UniTask<BuildingMarker>, BuildingMarker.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<BuildingMarker>>();
         }
     }
 }

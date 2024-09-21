@@ -7,7 +7,7 @@ using Assets.Sources.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
-using Tile = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Tile;
+using TileRepresentation = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.TileRepresentation;
 using Building = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Building;
 using Ground = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground;
 
@@ -17,14 +17,15 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
     {
         private readonly DiContainer _container;
         private readonly WorldGenerator.Factory _worldGeneratorFactory;
-        private readonly Tile.Factory _tileFactory;
+        private readonly TileRepresentation.Factory _tileFactory;
         private readonly Building.Factory _buildingFactory;
         private readonly IStaticDataService _staticDataService;
         private readonly SelectFrame.Factory _selectFrameFactory;
         private readonly UiCanvas.Factory _canvasFactory;
         private readonly Ground.Factory _groundFactory;
+        private readonly BuildingMarker.Factory _buildingMarkerFactory;
 
-        public GameplayFactory(DiContainer container, WorldGenerator.Factory worldGeneratorFactory, Tile.Factory tileFactory, Building.Factory buildingFactory, IStaticDataService staticDataService, SelectFrame.Factory selectFrameFactory, UiCanvas.Factory canvasFactory, Ground.Factory groundFactory)
+        public GameplayFactory(DiContainer container, WorldGenerator.Factory worldGeneratorFactory, TileRepresentation.Factory tileFactory, Building.Factory buildingFactory, IStaticDataService staticDataService, SelectFrame.Factory selectFrameFactory, UiCanvas.Factory canvasFactory, Ground.Factory groundFactory, BuildingMarker.Factory buildingMarkerFactory)
         {
             _container = container;
             _worldGeneratorFactory = worldGeneratorFactory;
@@ -34,9 +35,17 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
             _selectFrameFactory = selectFrameFactory;
             _canvasFactory = canvasFactory;
             _groundFactory = groundFactory;
+            _buildingMarkerFactory = buildingMarkerFactory;
         }
 
         public WorldGenerator WorldGenerator { get; private set; }
+
+        public async UniTask CreateBuildingMarker()
+        {
+            BuildingMarker marker = await _buildingMarkerFactory.Create(GameplayFactoryAssets.BuildingMarker);
+
+            _container.Bind<BuildingMarker>().FromInstance(marker).AsSingle();
+        }
 
         public async UniTask<Ground> CreateGround(GroundType type, Vector3 position, GroundRotation rotation, Transform parent) =>
             await _groundFactory.Create(_staticDataService.GetGround(type).AssetReference, position, (int)rotation, parent);
@@ -64,9 +73,9 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
             _container.Bind<BuildingCreator>().FromInstance(WorldGenerator.GetComponent<BuildingCreator>()).AsSingle();
         }
 
-        public async UniTask<Tile> CreateTile(Vector3 position, Transform parent)
+        public async UniTask<TileRepresentation> CreateTile(Vector3 position, Transform parent)
         {
-            Tile tile = await _tileFactory.Create(GameplayFactoryAssets.Tile, position, parent);
+            TileRepresentation tile = await _tileFactory.Create(GameplayFactoryAssets.Tile, position, parent);
 
             return tile;
         }

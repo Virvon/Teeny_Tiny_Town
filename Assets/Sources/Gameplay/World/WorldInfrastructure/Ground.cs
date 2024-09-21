@@ -9,24 +9,36 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
     {
         private readonly IStaticDataService _staticDataService;
 
-        private GroundRotation _rotation;
-
         public Ground(IStaticDataService staticDataService)
         {
             _staticDataService = staticDataService;
         }
 
         public GroundType Type { get; private set; }
-        public GroundRotation Rotation => _rotation;
+        public GroundRotation Rotation { get; private set; }
 
-        public void Change(Vector2Int gridPosition, List<Vector2Int> adjacentGridPosition)
+        public bool TryChange(Vector2Int gridPosition, List<Vector2Int> adjacentGridPosition)
         {
-            Type = _staticDataService.GroundsConfig.GetGroundType(gridPosition, adjacentGridPosition, out _rotation);
+            GroundType newGroundType = _staticDataService.GroundsConfig.GetGroundType(gridPosition, adjacentGridPosition, out GroundRotation newGroundRotation);
+
+            if (Type == newGroundType && Rotation == newGroundRotation)
+                return false;
+
+            Type = newGroundType;
+            Rotation = newGroundRotation;
+
+            return true;
         }
 
-        public void Change()
+        public void SetSoil()
         {
             Type = GroundType.Soil;
+        }
+
+        public void Change(GroundType type, GroundRotation rotation)
+        {
+            Type = type;
+            Rotation = rotation;
         }
     }
 }

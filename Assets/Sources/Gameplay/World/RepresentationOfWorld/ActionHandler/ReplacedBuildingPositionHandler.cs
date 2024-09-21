@@ -3,7 +3,7 @@ using Assets.Sources.Infrastructure.GameplayFactory;
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
-using Tile = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Tile;
+using TileRepresentation = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.TileRepresentation;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
@@ -16,7 +16,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         private SelectFrame _choosedPlaceSelectFrame;
         private bool _isBuildingChoosed;
-        private Tile _choosedToReplacingTile;
+        private TileRepresentation _choosedToReplacingTile;
 
         public ReplacedBuildingPositionHandler(SelectFrame selectFrame, LayerMask layerMask, SelectFrame.Factory selectFrameFactory) : base(selectFrame, layerMask)
         {
@@ -44,7 +44,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override void OnHandleMoved(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out Tile tile))
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile))
             {
                 if (_isBuildingChoosed && _choosedToReplacingTile != tile)
                 {
@@ -74,7 +74,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override void OnPressed(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out Tile tile))
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile))
             {
                 if (_isBuildingChoosed)
                 {
@@ -87,13 +87,13 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                     }
                     else
                     {
-                        Tiles.Building choosedToRaplaceBuilding = _choosedToReplacingTile.TakeBuilding();
-                        Tiles.Building targetPlacedBuilding = tile.TakeBuilding();
+                        //Tiles.Building choosedToRaplaceBuilding = _choosedToReplacingTile.TakeBuilding();
+                        //Tiles.Building targetPlacedBuilding = tile.TakeBuilding();
 
-                        tile.PlaceBuilding(choosedToRaplaceBuilding);
+                        //tile.PlaceBuilding(choosedToRaplaceBuilding);
 
-                        if (targetPlacedBuilding != null)
-                            _choosedToReplacingTile.PlaceBuilding(targetPlacedBuilding);
+                        //if (targetPlacedBuilding != null)
+                        //    _choosedToReplacingTile.PlaceBuilding(targetPlacedBuilding);
 
                         _choosedBuildingSelectFrame.Hide();
                         _choosedPlaceSelectFrame.Hide();

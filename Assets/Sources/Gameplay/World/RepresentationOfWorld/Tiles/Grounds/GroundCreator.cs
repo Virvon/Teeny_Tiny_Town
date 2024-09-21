@@ -22,6 +22,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds
 
         public async UniTask Create(GroundType groundType, GroundRotation rotation)
         {
+            if (Ground != null)
+                Destroy(Ground.gameObject);
+
             Ground = await _gameplayFactory.CreateGround(groundType, _groundPoint.position, rotation, transform);
         }
     }

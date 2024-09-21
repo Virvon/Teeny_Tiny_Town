@@ -21,7 +21,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override void OnHandleMoved(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out Tile tile) && tile.IsEmpty == false)
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty == false)
                 SelectFrame.Select(tile);
             else
                 SelectFrame.Hide();
@@ -29,9 +29,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override void OnPressed(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out Tile tile) && tile.IsEmpty == false)
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty == false)
             {
-                tile.DestroyBuilding();
                 SelectFrame.Hide();
 
                 Removed?.Invoke(tile.GridPosition);

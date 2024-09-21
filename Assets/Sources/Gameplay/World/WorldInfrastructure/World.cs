@@ -14,6 +14,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         private const uint _length = 5;
         private const uint _width = 5;
         private const uint MinTilesCountToMerge = 3;
+        private const uint MinTilesCountToBuildTrail = 3;
 
         private readonly IStaticDataService _staticDataService;
 
@@ -21,11 +22,12 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
         public World(IStaticDataService staticDataService)
         {
-            _tiles = new();
             _staticDataService = staticDataService;
+
+            _tiles = new();
         }
 
-        public event Action<List<Vector2Int>> TilesChanged;
+        public event Action<List<Tile>> TilesChanged;
 
         public IReadOnlyList<Tile> Tiles => _tiles;
         public Building BuildingForPlacing { get; private set; }
@@ -38,27 +40,27 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         }
 
         public void Work() =>
-            TilesChanged?.Invoke(GetGridPositions(_tiles));
+            TilesChanged?.Invoke(_tiles);
 
-        public void Update(Vector2Int gridPosition, BuildingType buildingType)
+        public void PlaceNewBuilding(Vector2Int gridPosition, BuildingType buildingType)
         {
-            List<Vector2Int> changedTilePositions = CheckChangedTilePositions(gridPosition, buildingType);
+            List<Tile> changedTiles = CheckChangedTiles(gridPosition, buildingType);
 
             AddNewBuilding();
 
-            TilesChanged?.Invoke(changedTilePositions);
+            TilesChanged?.Invoke(changedTiles);
         }
 
         public void ReplaceBuilding(Vector2Int fromBuildingGridPosition, BuildingType fromBuildingType, Vector2Int toBuildingGridPosition, BuildingType toBuildingType)
         {
-            List<Vector2Int> changedTilePositions = new();
+            List<Tile> changedTiles = new();
 
-            changedTilePositions.AddRange(CheckChangedTilePositions(toBuildingGridPosition, toBuildingType));
-            changedTilePositions.AddRange(CheckChangedTilePositions(fromBuildingGridPosition, fromBuildingType));
+            changedTiles = changedTiles.Union(CheckChangedTiles(fromBuildingGridPosition, toBuildingType)).ToList();
+            changedTiles = changedTiles.Union(CheckChangedTiles(toBuildingGridPosition, fromBuildingType)).ToList();
 
             AddNewBuilding();
 
-            TilesChanged?.Invoke(changedTilePositions);
+            TilesChanged?.Invoke(changedTiles);
         }
 
         public void RemoveBuilding(Vector2Int destroyBuildingGridPosition)
@@ -68,8 +70,13 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             if (tile.BuildingType == BuildingType.Undefined)
                 Debug.LogError("can not destroy empty building");
 
-            tile.Clean();
-            TilesChanged?.Invoke(new List<Vector2Int>() { destroyBuildingGridPosition });
+            tile.RemoveBuilding();
+
+            List<Tile> changedTiles = new() { tile };
+
+            changedTiles = changedTiles.Union(GetAllUpdatedByGroundTiles(changedTiles)).ToList();
+
+            TilesChanged?.Invoke(changedTiles);
         }
 
         public Tile GetTile(Vector2Int gridPosition) =>
@@ -78,36 +85,66 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         public void Update(ReadOnlyArray<TileData> tileDatas, Building buildingToPlacing)
         {
             foreach (TileData tileData in tileDatas)
-                GetTile(tileData.GridPosition).PutBuilding(tileData.BuildingType);
+            {
+                Tile tile = GetTile(tileData.GridPosition);
+
+                tile.PutBuilding(tileData.BuildingType);
+                tile.PutGround(tileData.GroundType, tileData.GroundRotation);
+            }
 
             BuildingForPlacing = buildingToPlacing;
 
-            TilesChanged?.Invoke(GetGridPositions(_tiles));
+            TilesChanged?.Invoke(_tiles);
         }
-        private List<Vector2Int> CheckChangedTilePositions(Vector2Int firstTileGridPosition, BuildingType firstTileBuildingType)
+
+        private List<Tile> CheckChangedTiles(Vector2Int firstTileGridPosition, BuildingType placedBuildingType)
         {
-            Tile updatedTile = GetTile(firstTileGridPosition);
+            Tile changedTile = GetTile(firstTileGridPosition);
+            changedTile.PutBuilding(placedBuildingType);
+
+            List<Tile> changedTiles = new () { changedTile };
+
+            changedTiles = changedTiles.Union(GetAllUpdatedByBuildingTiles(changedTile)).ToList();
+            changedTiles = changedTiles.Union(GetAllUpdatedByGroundTiles(changedTiles)).ToList();
+
+            return changedTiles;
+        }
+
+        private static List<Tile> GetAllUpdatedByGroundTiles(List<Tile> changedTiles)
+        {
+            List<Tile> countedTiles = new();
+            List<Tile> changedByGroundTiles = new();
+
+            foreach (Tile tile in changedTiles)
+                tile.ChangeGroudsInChain(countedTiles, changedByGroundTiles);
+
+            return changedByGroundTiles;
+        }
+
+        private List<Tile> GetAllUpdatedByBuildingTiles(Tile changedTile)
+        {
+            List<Tile> changedTiles = new() { changedTile };
+
+            if (changedTile.IsEmpty)
+                return changedTiles;
+
             bool chainCheakCompleted = false;
-            List<Vector2Int> changedTilePositions = new() { updatedTile.GridPosition };
-
-            updatedTile.PutBuilding(firstTileBuildingType);
-
-            if (updatedTile.BuildingType == BuildingType.Undefined)
-                return changedTilePositions;
 
             while (chainCheakCompleted == false)
             {
                 List<Tile> countedTiles = new();
 
-                if (updatedTile.GetTilesChainCount(countedTiles) >= MinTilesCountToMerge)
+                if (changedTile.GetBuildingsChainLength(countedTiles) >= MinTilesCountToMerge)
                 {
-                    countedTiles.Remove(updatedTile);
-                    changedTilePositions.AddRange(GetGridPositions(countedTiles));
+                    changedTiles.Union(countedTiles);
 
-                    foreach (Tile tileModel in countedTiles)
-                        tileModel.Clean();
+                    List<Tile> tilesForRemoveBuildings = countedTiles;
+                    tilesForRemoveBuildings.Remove(changedTile);
 
-                    updatedTile.UpdateBuilding();
+                    foreach (Tile tile in countedTiles)
+                        tile.RemoveBuilding();
+
+                    changedTile.UpdateBuilding();
                 }
                 else
                 {
@@ -115,9 +152,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                 }
             }
 
-            return changedTilePositions;
+            return changedTiles;
         }
-
 
         private void InitializeAdjacentTiles()
         {
@@ -136,7 +172,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             Tile adjacentTile = _tiles.FirstOrDefault(value => value.GridPosition == gridPosition);
 
             if (adjacentTile != null && tile != adjacentTile)
-                tile.AddAdjacentTile(adjacentTile);
+                tile.Init(adjacentTile);
         }
 
         private IEnumerable<int> GetLineNeighbors(int linePosition)
@@ -169,8 +205,5 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                 }
             }
         }
-
-        private List<Vector2Int> GetGridPositions(List<Tile> tiles) =>
-            tiles.Select(value => value.GridPosition).ToList();
     }
 }

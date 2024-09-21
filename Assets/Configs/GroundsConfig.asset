@@ -27,7 +27,8 @@ MonoBehaviour:
       m_SubObjectType: 
       m_EditorAssetChanged: 1
     ValidNeighborsGridPositions:
-    - GridPositions:
+    - Rotation: 0
+      GridPositions:
       - {x: 0, y: 1}
       - {x: 0, y: -1}
       - {x: 1, y: 0}
@@ -39,19 +40,23 @@ MonoBehaviour:
       m_SubObjectType: 
       m_EditorAssetChanged: 1
     ValidNeighborsGridPositions:
-    - GridPositions:
+    - Rotation: 90
+      GridPositions:
       - {x: 0, y: 1}
       - {x: 1, y: 0}
       - {x: 0, y: -1}
-    - GridPositions:
+    - Rotation: 180
+      GridPositions:
       - {x: 1, y: 0}
       - {x: 0, y: -1}
       - {x: -1, y: 0}
-    - GridPositions:
+    - Rotation: 270
+      GridPositions:
       - {x: 0, y: -1}
       - {x: -1, y: 0}
       - {x: 0, y: 1}
-    - GridPositions:
+    - Rotation: 0
+      GridPositions:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
       - {x: 1, y: 0}
@@ -62,13 +67,17 @@ MonoBehaviour:
       m_SubObjectType: 
       m_EditorAssetChanged: 1
     ValidNeighborsGridPositions:
-    - GridPositions:
+    - Rotation: 180
+      GridPositions:
       - {x: 0, y: 1}
-    - GridPositions:
+    - Rotation: 270
+      GridPositions:
       - {x: 1, y: 0}
-    - GridPositions:
+    - Rotation: 0
+      GridPositions:
       - {x: 0, y: -1}
-    - GridPositions:
+    - Rotation: 90
+      GridPositions:
       - {x: -1, y: 0}
   - Type: 4
     AssetReference:
@@ -77,10 +86,12 @@ MonoBehaviour:
       m_SubObjectType: 
       m_EditorAssetChanged: 1
     ValidNeighborsGridPositions:
-    - GridPositions:
+    - Rotation: 90
+      GridPositions:
       - {x: 0, y: 1}
       - {x: 0, y: -1}
-    - GridPositions:
+    - Rotation: 0
+      GridPositions:
       - {x: -1, y: 0}
       - {x: 1, y: 0}
   - Type: 5
@@ -90,15 +101,19 @@ MonoBehaviour:
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     ValidNeighborsGridPositions:
-    - GridPositions:
+    - Rotation: 90
+      GridPositions:
       - {x: 1, y: 0}
       - {x: 0, y: -1}
-    - GridPositions:
+    - Rotation: 180
+      GridPositions:
       - {x: 0, y: -1}
       - {x: -1, y: 0}
-    - GridPositions:
+    - Rotation: 270
+      GridPositions:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
-    - GridPositions:
+    - Rotation: 0
+      GridPositions:
       - {x: 0, y: 1}
       - {x: 1, y: 0}

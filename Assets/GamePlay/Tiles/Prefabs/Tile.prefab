@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3953395526069856674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1378e254caecfe41b729f49cd736fac, type: 3}
+  m_Script: {fileID: 11500000, guid: cf5aca0565bb24d418084f8b362c74d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _groundCreator: {fileID: 2720071092986690629}
@@ -61,7 +61,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc070963d2cfad4409df47c6c9af165c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundPrefab: {fileID: 6801058146459471369, guid: b3a39fb58838add4d9d4c5d822410726, type: 3}
   _groundPoint: {fileID: 1428660611589697284}
 --- !u!114 &2106835625279405661
 MonoBehaviour:

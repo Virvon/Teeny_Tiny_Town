@@ -1,9 +1,7 @@
-﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
-using Tile = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Tile;
-using Building = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Building;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
@@ -11,24 +9,22 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
     {
         private const float PressedBuildingHeight = 5;
 
-        private Building _buildingForPlacing;
-        private Tile _handlePressedMoveStartTile;
-        private bool _isBuildingPressed;
-        private Tile _lastSelectedTile;
+        public readonly BuildingMarker BuildingMarker;
 
-        public NewBuildingPlacePositionHandler(SelectFrame selectFrame, LayerMask layerMask) : base(selectFrame, layerMask)
+        private TileRepresentation _handlePressedMoveStartTile;
+        private bool _isBuildingPressed;
+
+        public NewBuildingPlacePositionHandler(SelectFrame selectFrame, LayerMask layerMask, BuildingMarker buildingMarker) : base(selectFrame, layerMask)
         {
+            BuildingMarker = buildingMarker;
         }
 
-        public event Action<Vector2Int, BuildingType> Placed;
+        public event Action<Vector2Int> Placed;
 
         public override UniTask Enter()
         {
-            if (_buildingForPlacing != null)
-                _buildingForPlacing.gameObject.SetActive(true);
-
-            if (_lastSelectedTile != null)
-                Select(_lastSelectedTile);
+            BuildingMarker.Show();
+            SelectFrame.SelectLast();
 
             return default;
         }
@@ -36,33 +32,25 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         public override UniTask Exit()
         {
             SelectFrame.Hide();
-            _buildingForPlacing.gameObject.SetActive(false);
+            BuildingMarker.Hide();
 
             return default;
         }
 
-        public void SetNewBuilding(Building building, Tile buildingTile)
+        public void StartPlacing(TileRepresentation startTile)
         {
-            if (_buildingForPlacing != null)
-                _buildingForPlacing.Destroy();
-
-            _buildingForPlacing = building;
-            Select(buildingTile);
-
-            SelectFrame.gameObject.SetActive(true);
+            BuildingMarker.Mark(startTile);
+            SelectFrame.Select(startTile);
         }
 
         public override void OnHandleMoved(Vector2 handlePosition)
         {
-            if (_buildingForPlacing == null)
-                return;
-
-            if (CheckTileIntersection(handlePosition, out Tile tile) && tile.IsEmpty)
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty)
             {
-                Select(tile);
+                SelectFrame.Select(tile);
 
                 if (_isBuildingPressed == false)
-                    tile.Replace(_buildingForPlacing);
+                    BuildingMarker.Mark(tile);
             }
             else if (_isBuildingPressed)
             {
@@ -78,27 +66,24 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 {
                     Vector3 worldPosition = ray.GetPoint(distanceToPlane);
 
-                    _buildingForPlacing.transform.position = new Vector3(worldPosition.x, PressedBuildingHeight, worldPosition.z);
+                    BuildingMarker.Replace(new Vector3(worldPosition.x, PressedBuildingHeight, worldPosition.z));
                 }
             }
         }
 
         public override void OnPressed(Vector2 handlePosition)
         {
-            if (_buildingForPlacing == null)
-                return;
-
-            if (CheckTileIntersection(handlePosition, out Tile tile) && tile.IsEmpty)
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty)
             {
-                tile.PlaceBuilding(_buildingForPlacing);
+                BuildingMarker.Mark(tile);
                 SelectFrame.Hide();
 
-                Placed?.Invoke(tile.GridPosition, _buildingForPlacing.Type);
+                Placed?.Invoke(tile.GridPosition);
             }
             else if (_isBuildingPressed)
             {
-                _handlePressedMoveStartTile.Replace(_buildingForPlacing);
-                Select(_handlePressedMoveStartTile);
+                BuildingMarker.Mark(_handlePressedMoveStartTile);
+                SelectFrame.Select(_handlePressedMoveStartTile);
             }
 
             _handlePressedMoveStartTile = null;
@@ -107,20 +92,14 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override void OnHandlePressedMovePerformed(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out Tile tile) && tile == _handlePressedMoveStartTile)
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile == _handlePressedMoveStartTile)
                 _isBuildingPressed = true;
         }
 
         public override void OnHandlePressedMoveStarted(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out Tile tile))
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile))
                 _handlePressedMoveStartTile = tile;
-        }
-
-        private void Select(Tile tile)
-        {
-            SelectFrame.Select(tile);
-            _lastSelectedTile = tile;
         }
     }
 }

@@ -4,7 +4,7 @@ using System;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Infrastructure.GameplayFactory;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
-using Tile = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Tile;
+using TileRepresentation = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.TileRepresentation;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 {
@@ -50,8 +50,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 
         WorldGenerator WorldGenerator => _gameplayFactory.WorldGenerator;
 
-        private void OnNewBuildingPlaced(Vector2Int gridPosition, BuildingType type) =>
-            _gameplayMover.PlaceNewBuilding(gridPosition, type);
+        private void OnNewBuildingPlaced(Vector2Int gridPosition) =>
+            _gameplayMover.PlaceNewBuilding(gridPosition);
 
         private void OnBuildingRemoved(Vector2Int gridPosition) =>
             _gameplayMover.RemoveBuilding(gridPosition);
@@ -63,15 +63,18 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
             BuildingType toBuildingType) =>
             _gameplayMover.ReplaceBuilding(fromGridPosition, fromBuildingType, toGridPosition, toBuildingType);
 
-        private async void OnTilesChanged(List<Vector2Int> tilesGridPosition)
+        private async void OnTilesChanged(List<Tile> tiles)
         {
-            foreach (Vector2Int gridPosition in tilesGridPosition)
-                await WorldGenerator.GetTile(gridPosition).CreateBuilding(_world.GetTile(gridPosition).BuildingType);
+            Debug.Log("updated tiles " + tiles.Count);
 
-            Tile tile = WorldGenerator.GetTile(_world.BuildingForPlacing.GridPosition);
-            Tiles.Building building = await _gameplayFactory.CreateBuilding(_world.BuildingForPlacing.Type, tile.BuildingPoint.position, tile.transform);
+            foreach (Tile tile in tiles)
+            {
+                TileRepresentation tileRepresentation = WorldGenerator.GetTile(tile.GridPosition);
+                await tileRepresentation.Change(tile.BuildingType, tile.Ground.Type, tile.Ground.Rotation);
+            }
 
-            _newBuildingPlacePositionHandler.SetNewBuilding(building, tile);
+            await _newBuildingPlacePositionHandler.BuildingMarker.TryUpdate(_world.BuildingForPlacing.Type);
+            _newBuildingPlacePositionHandler.StartPlacing(WorldGenerator.GetTile(_world.BuildingForPlacing.GridPosition));
 
             GameplayMoved?.Invoke();
         }

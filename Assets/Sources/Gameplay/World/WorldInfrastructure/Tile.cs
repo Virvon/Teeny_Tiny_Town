@@ -1,6 +1,5 @@
 ﻿using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,7 +11,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         public readonly Vector2Int GridPosition;
 
         private readonly IStaticDataService _staticDataService;
-        private readonly Ground _ground;
 
         private List<Tile> _adjacentTiles;
 
@@ -22,18 +20,17 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             _staticDataService = staticDataService;
 
             _adjacentTiles = new();
-            _ground = new(staticDataService);
+            Ground = new(staticDataService);
         }
 
+        public Ground Ground { get; private set; }
         public BuildingType BuildingType { get; private set; }
         public bool IsEmpty => BuildingType == BuildingType.Undefined;
-        public GroundType GroundType => _ground.Type;
-        public GroundRotation GroundRotation => _ground.Rotation;
 
-        public void AddAdjacentTile(Tile adjacentTile)
+        public void Init(Tile adjacentTile)
         {
             _adjacentTiles.Add(adjacentTile);
-            ChangeGround();
+            TryChangeGroundType();
         }
 
         public void PutBuilding(BuildingType buildingType)
@@ -41,23 +38,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             BuildingType = buildingType;
         }
 
-        public int GetTilesChainCount(List<Tile> countedTiles)
+        public void PutGround(GroundType type, GroundRotation rotation)
         {
-            int tilesCountInChain = 1;
-            countedTiles.Add(this);
-
-            foreach (Tile tile in _adjacentTiles)
-            {
-                if (BuildingType == tile.BuildingType && countedTiles.Contains(tile) == false)
-                    tilesCountInChain += tile.GetTilesChainCount(countedTiles);
-            }
-
-            return tilesCountInChain;
-        }
-
-        public void Clean()
-        {
-            BuildingType = BuildingType.Undefined;
+            Ground.Change(type, rotation);
         }
 
         public void UpdateBuilding()
@@ -65,20 +48,55 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             BuildingType = _staticDataService.GetMerge(BuildingType).NextBuilding;
         }
 
-        public void ChangeGroundChain(List<Tile> countedTiles)
+        public void RemoveBuilding()
         {
-            countedTiles.Add(this);
-
-            foreach(Tile tile in _adjacentTiles)
-            {
-                //if()
-            }
+            BuildingType = BuildingType.Undefined;
         }
 
-        private void ChangeGround()
+        public int GetBuildingsChainLength(List<Tile> countedTiles)
         {
-            List<Vector2Int> adjacentEmptyTileGridPositions = (_adjacentTiles.Where(tile => tile.IsEmpty).Select(tile => tile.GridPosition)).ToList();
-            _ground.Change(GridPosition, adjacentEmptyTileGridPositions);
+            int chainLength = 1;
+            countedTiles.Add(this);
+
+            foreach (Tile tile in _adjacentTiles)
+            {
+                if (BuildingType == tile.BuildingType && countedTiles.Contains(tile) == false)
+                    chainLength += tile.GetBuildingsChainLength(countedTiles);
+            }
+
+            return chainLength;
+        }
+
+        public List<Tile> ChangeGroudsInChain(List<Tile> countedTiles, List<Tile> changedTiles)
+        {
+            countedTiles.Add(this);
+            
+            if(TryChangeGroundType())
+                changedTiles.Add(this);
+
+            foreach (Tile tile in _adjacentTiles)
+            {
+                if (tile.IsEmpty && countedTiles.Contains(tile) == false)
+                    tile.ChangeGroudsInChain(countedTiles, changedTiles);
+            }
+
+            return changedTiles;
+        }
+
+        private bool TryChangeGroundType()
+        {
+            if (IsEmpty)
+            {
+                List<Vector2Int> adjacentEmptyTileGridPositions = (_adjacentTiles.Where(tile => tile.IsEmpty).Select(tile => tile.GridPosition)).ToList();
+
+                return Ground.TryChange(GridPosition, adjacentEmptyTileGridPositions);
+            }
+            else
+            {
+                Ground.SetSoil();
+
+                return true;
+            }    
         }
     }
 }

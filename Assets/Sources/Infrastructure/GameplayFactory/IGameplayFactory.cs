@@ -3,7 +3,7 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Tile = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Tile;
+using TileRepresentation = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.TileRepresentation;
 
 namespace Assets.Sources.Infrastructure.GameplayFactory
 {
@@ -12,10 +12,11 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
         WorldGenerator WorldGenerator { get; }
 
         UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Building> CreateBuilding(BuildingType type, Vector3 position, Transform parent);
+        UniTask CreateBuildingMarker();
         UniTask CreateCanvas();
         UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground> CreateGround(GroundType type, Vector3 position, GroundRotation rotation, Transform parent);
         UniTask CreateSelectFrame();
-        UniTask<Tile> CreateTile(Vector3 position, Transform parent);
+        UniTask<TileRepresentation> CreateTile(Vector3 position, Transform parent);
         UniTask CreateWorldGenerator();
     }
 }

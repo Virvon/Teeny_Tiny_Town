@@ -11,13 +11,13 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 {
     public class WorldGenerator : MonoBehaviour
     {
-        [SerializeField] private Tiles.Tile _tile;
+        [SerializeField] private Tiles.TileRepresentation _tile;
         [SerializeField] private float _cellSize;
 
         private IGameplayFactory _gameplayFactory;
         private WorldInfrastructure.World _world;
 
-        private List<Tiles.Tile> _tiles;
+        private List<Tiles.TileRepresentation> _tiles;
 
         [Inject]
         private void Construct(IGameplayFactory gameplayFactory, WorldInfrastructure.World world)
@@ -31,14 +31,14 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         public async UniTask Generate() =>
             await Fill();
 
-        public Tiles.Tile GetTile(Vector2Int gridPosition) =>
+        public Tiles.TileRepresentation GetTile(Vector2Int gridPosition) =>
             _tiles.First(tile => tile.GridPosition == gridPosition);
 
         private async UniTask Fill()
         {
             List<UniTask> tasks = new();
 
-            foreach (WorldInfrastructure.Tile tileModel in _world.Tiles)
+            foreach (Tile tileModel in _world.Tiles)
                 tasks.Add(Create(tileModel.GridPosition));
 
             await UniTask.WhenAll(tasks);
@@ -47,9 +47,13 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         private async UniTask Create(Vector2Int gridPosition)
         {
             Vector3 worldPosition = GridToWorldPosition(gridPosition);
-            Tiles.Tile tile = await _gameplayFactory.CreateTile(worldPosition, transform);
-            await tile.Init(gridPosition, _world.GetTile(gridPosition).GroundType, _world.GetTile(gridPosition).GroundRotation);
-            _tiles.Add(tile);
+            TileRepresentation tileRepresentation = await _gameplayFactory.CreateTile(worldPosition, transform);
+            Tile tile = _world.GetTile(gridPosition);
+
+            tileRepresentation.Init(gridPosition);
+            await tileRepresentation.Change(tile.BuildingType, tile.Ground.Type, tile.Ground.Rotation);
+
+            _tiles.Add(tileRepresentation);
         }
 
         private Vector3 GridToWorldPosition(Vector2Int gridPosition)
