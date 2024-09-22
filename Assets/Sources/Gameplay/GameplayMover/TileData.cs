@@ -8,10 +8,10 @@ namespace Assets.Sources.Gameplay.GameplayMover
     {
         public readonly Vector2Int GridPosition;
         public readonly BuildingType BuildingType;
-        public readonly GroundType GroundType;
+        public readonly RoadType GroundType;
         public readonly GroundRotation GroundRotation;
 
-        public TileData(Vector2Int tileGridPosition, BuildingType buildingType, GroundType groundType, GroundRotation groundRotation)
+        public TileData(Vector2Int tileGridPosition, BuildingType buildingType, RoadType groundType, GroundRotation groundRotation)
         {
             GridPosition = tileGridPosition;
             BuildingType = buildingType;

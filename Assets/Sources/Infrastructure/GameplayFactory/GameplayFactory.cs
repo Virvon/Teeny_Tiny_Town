@@ -47,8 +47,8 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
             _container.Bind<BuildingMarker>().FromInstance(marker).AsSingle();
         }
 
-        public async UniTask<Ground> CreateGround(GroundType type, Vector3 position, GroundRotation rotation, Transform parent) =>
-            await _groundFactory.Create(_staticDataService.GetGround(type).AssetReference, position, (int)rotation, parent);
+        public async UniTask<Ground> CreateGround(GroundType groundType, RoadType roadType, Vector3 position, GroundRotation rotation, Transform parent) =>
+            await _groundFactory.Create(_staticDataService.GetRoad(groundType, roadType).AssetReference, position, (int)rotation, parent);
 
         public async UniTask CreateCanvas()
         {
@@ -82,8 +82,9 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
 
         public async UniTask<Building> CreateBuilding(BuildingType type, Vector3 position, Transform parent)
         {
-            MergeConfig mergeConfig = _staticDataService.GetMerge(type);
-            Building building = await _buildingFactory.Create(mergeConfig.AssetReference, position, parent);
+            BuildingConfig buildingConfig = _staticDataService.GetBuilding(type);
+
+            Building building = await _buildingFactory.Create(buildingConfig.AssetReference, position, parent);
 
             building.Init(type);
 

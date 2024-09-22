@@ -8,8 +8,8 @@ namespace Assets.Sources.Services.StaticDataService
     {
         GroundsConfig GroundsConfig { get; }
 
-        GroundConfig GetGround(GroundType groundType);
-        MergeConfig GetMerge(BuildingType buildingType);
+        RoadConfig GetRoad(GroundType groundType, RoadType roadType);
+        BuildingConfig GetBuilding(BuildingType buildingType);
         UniTask InitializeAsync();
     }
 }

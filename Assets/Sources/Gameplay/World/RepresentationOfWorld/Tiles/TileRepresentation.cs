@@ -49,10 +49,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             PlaceBuildingToBuildingPoint(building);
         }
 
-        public async UniTask Change(BuildingType buildingType, GroundType groundType, GroundRotation groundRotation)
+        public async UniTask Change(BuildingType buildingType, GroundType groundType, RoadType roadType, GroundRotation groundRotation)
         {
             await TryChangeBuilding(buildingType);
-            await _groundCreator.Create(groundType, groundRotation);
+            await _groundCreator.Create(groundType, roadType, groundRotation);
         }
 
         public void DestroyBuilding()

@@ -11,13 +11,13 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 {
     public class WorldGenerator : MonoBehaviour
     {
-        [SerializeField] private Tiles.TileRepresentation _tile;
+        [SerializeField] private TileRepresentation _tile;
         [SerializeField] private float _cellSize;
 
         private IGameplayFactory _gameplayFactory;
         private WorldInfrastructure.World _world;
 
-        private List<Tiles.TileRepresentation> _tiles;
+        private List<TileRepresentation> _tiles;
 
         [Inject]
         private void Construct(IGameplayFactory gameplayFactory, WorldInfrastructure.World world)
@@ -31,7 +31,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         public async UniTask Generate() =>
             await Fill();
 
-        public Tiles.TileRepresentation GetTile(Vector2Int gridPosition) =>
+        public TileRepresentation GetTile(Vector2Int gridPosition) =>
             _tiles.First(tile => tile.GridPosition == gridPosition);
 
         private async UniTask Fill()
@@ -51,7 +51,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
             Tile tile = _world.GetTile(gridPosition);
 
             tileRepresentation.Init(gridPosition);
-            await tileRepresentation.Change(tile.BuildingType, tile.Ground.Type, tile.Ground.Rotation);
+            await tileRepresentation.Change(tile.BuildingType, tile.Ground.Type, tile.Ground.RoadType, tile.Ground.Rotation);
 
             _tiles.Add(tileRepresentation);
         }

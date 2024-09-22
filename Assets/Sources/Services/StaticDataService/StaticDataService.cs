@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Sources.Services.StaticDataService
 {
@@ -12,8 +12,8 @@ namespace Assets.Sources.Services.StaticDataService
     {
         private readonly IAssetProvider _assetsProvider;
 
-        private Dictionary<BuildingType, MergeConfig> _mergeConfigs;
-        private Dictionary<GroundType, GroundConfig> _groundConfigs;
+        private Dictionary<BuildingType, BuildingConfig> _buildingConfigs;
+        private Dictionary<GroundType, Dictionary<RoadType, RoadConfig>> _groundConfigs;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
@@ -24,31 +24,35 @@ namespace Assets.Sources.Services.StaticDataService
         {
             List<UniTask> tasks = new List<UniTask>();
 
-            tasks.Add(LoadMergeConfig());
+            tasks.Add(LoadBuildingConfigs());
             tasks.Add(LoadGroundsConfig());
 
             await UniTask.WhenAll(tasks);
         }
 
-        public MergeConfig GetMerge(BuildingType buildingType) =>
-            _mergeConfigs.TryGetValue(buildingType, out MergeConfig config) ? config : null;
+        public BuildingConfig GetBuilding(BuildingType buildingType) =>
+            _buildingConfigs.TryGetValue(buildingType, out BuildingConfig config) ? config : null;
 
-        public GroundConfig GetGround(GroundType groundType) =>
-            _groundConfigs.TryGetValue(groundType, out GroundConfig config) ? config : null;
+        public RoadConfig GetRoad(GroundType groundType, RoadType roadType)
+        {
+            return _groundConfigs.TryGetValue(
+                groundType, out Dictionary<RoadType, RoadConfig> roadConfigs) ? (roadConfigs.TryGetValue(
+                roadType, out RoadConfig config) ? config : null) : null;
+        }
 
         private async UniTask LoadGroundsConfig()
         {
             GroundsConfig[] groundsConfig = await GetConfigs<GroundsConfig>();
 
             GroundsConfig = groundsConfig.First();
-            _groundConfigs = GroundsConfig.GroundConfigs.ToDictionary(value => value.Type, value => value);
+            _groundConfigs = GroundsConfig.GroundConfigs.ToDictionary(value => value.Type, value => value.RoadConfigs.ToDictionary(value => value.Type, value => value));
         }
 
-        private async UniTask LoadMergeConfig()
+        private async UniTask LoadBuildingConfigs()
         {
-            MergeConfig[] mergeConfigs = await GetConfigs<MergeConfig>();
+            BuildingConfig[] mergeConfigs = await GetConfigs<BuildingConfig>();
 
-            _mergeConfigs = mergeConfigs.ToDictionary(value => value.BuildingType, value => value);
+            _buildingConfigs = mergeConfigs.ToDictionary(value => value.BuildingType, value => value);
         }
 
         private async UniTask<TConfig[]> GetConfigs<TConfig>()

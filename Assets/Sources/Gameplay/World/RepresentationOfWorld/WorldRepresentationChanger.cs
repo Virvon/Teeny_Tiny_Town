@@ -70,7 +70,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
             foreach (Tile tile in tiles)
             {
                 TileRepresentation tileRepresentation = WorldGenerator.GetTile(tile.GridPosition);
-                await tileRepresentation.Change(tile.BuildingType, tile.Ground.Type, tile.Ground.Rotation);
+                await tileRepresentation.Change(tile.BuildingType, tile.Ground.Type, tile.Ground.RoadType, tile.Ground.Rotation);
             }
 
             await _newBuildingPlacePositionHandler.BuildingMarker.TryUpdate(_world.BuildingForPlacing.Type);

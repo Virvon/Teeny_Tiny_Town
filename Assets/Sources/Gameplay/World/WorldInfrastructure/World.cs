@@ -14,7 +14,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         private const uint _length = 5;
         private const uint _width = 5;
         private const uint MinTilesCountToMerge = 3;
-        private const uint MinTilesCountToBuildTrail = 3;
 
         private readonly IStaticDataService _staticDataService;
 
@@ -74,7 +73,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
             List<Tile> changedTiles = new() { tile };
 
-            changedTiles = changedTiles.Union(GetAllUpdatedByGroundTiles(changedTiles)).ToList();
+            changedTiles = changedTiles.Union(GetAllChangedByGroundTiles(changedTiles)).ToList();
+            changedTiles = changedTiles.Union(GetAllUpdatedByRoadTiles(changedTiles)).ToList();
 
             TilesChanged?.Invoke(changedTiles);
         }
@@ -105,20 +105,32 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             List<Tile> changedTiles = new () { changedTile };
 
             changedTiles = changedTiles.Union(GetAllUpdatedByBuildingTiles(changedTile)).ToList();
-            changedTiles = changedTiles.Union(GetAllUpdatedByGroundTiles(changedTiles)).ToList();
+            changedTiles = changedTiles.Union(GetAllChangedByGroundTiles(changedTiles)).ToList();
+            changedTiles = changedTiles.Union(GetAllUpdatedByRoadTiles(changedTiles)).ToList();
 
             return changedTiles;
         }
 
-        private static List<Tile> GetAllUpdatedByGroundTiles(List<Tile> changedTiles)
+        private List<Tile> GetAllChangedByGroundTiles(List<Tile> changedByBuildingTiles)
         {
             List<Tile> countedTiles = new();
-            List<Tile> changedByGroundTiles = new();
+            List<Tile> changedTiles = new();
 
-            foreach (Tile tile in changedTiles)
-                tile.ChangeGroudsInChain(countedTiles, changedByGroundTiles);
+            foreach(Tile tile in changedByBuildingTiles)
+                tile.ChangeGroundsInChain(countedTiles, changedTiles);
 
-            return changedByGroundTiles;
+            return changedTiles;
+        }
+
+        private List<Tile> GetAllUpdatedByRoadTiles(List<Tile> changedByGroundTiles)
+        {
+            List<Tile> countedTiles = new();
+            List<Tile> changedTiles = new();
+
+            foreach (Tile tile in changedByGroundTiles)
+                tile.ChangeRoadsInChain(countedTiles, changedTiles);
+
+            return changedTiles;
         }
 
         private List<Tile> GetAllUpdatedByBuildingTiles(Tile changedTile)
@@ -164,6 +176,12 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
                 foreach (int positionY in GetLineNeighbors(tile.GridPosition.y))
                     TryAddNeighborTile(new Vector2Int(tile.GridPosition.x, positionY), tile);
+
+                foreach(int positionY in GetLineNeighbors(tile.GridPosition.y))
+                {
+                    foreach (int positionX in GetLineNeighbors(tile.GridPosition.x))
+                        TryAddAroundTile(new Vector2Int(positionX, positionY), tile);
+                }
             }
         }
 
@@ -172,7 +190,15 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             Tile adjacentTile = _tiles.FirstOrDefault(value => value.GridPosition == gridPosition);
 
             if (adjacentTile != null && tile != adjacentTile)
-                tile.Init(adjacentTile);
+                tile.AddAdjacentTile(adjacentTile);
+        }
+
+        private void TryAddAroundTile(Vector2Int gridPosition, Tile tile)
+        {
+            Tile aroundTile = _tiles.FirstOrDefault(value => value.GridPosition == gridPosition);
+
+            if (aroundTile != null && tile != aroundTile)
+                tile.AddAroundTile(aroundTile);
         }
 
         private IEnumerable<int> GetLineNeighbors(int linePosition)

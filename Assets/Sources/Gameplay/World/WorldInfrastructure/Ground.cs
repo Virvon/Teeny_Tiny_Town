@@ -15,30 +15,37 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         }
 
         public GroundType Type { get; private set; }
+        public RoadType RoadType { get; private set; }
         public GroundRotation Rotation { get; private set; }
 
-        public bool TryChange(Vector2Int gridPosition, List<Vector2Int> adjacentGridPosition)
+        public bool TryChange(Vector2Int gridPosition, List<Vector2Int> adjacentGridPosition, GroundType targetGroundType)
         {
-            GroundType newGroundType = _staticDataService.GroundsConfig.GetGroundType(gridPosition, adjacentGridPosition, out GroundRotation newGroundRotation);
+            RoadType newRoadType = _staticDataService.GroundsConfig.GetRoadType(gridPosition, adjacentGridPosition, targetGroundType, out GroundRotation rotation);
 
-            if (Type == newGroundType && Rotation == newGroundRotation)
+            if (RoadType == newRoadType && Type == targetGroundType && Rotation == rotation)
                 return false;
 
-            Type = newGroundType;
-            Rotation = newGroundRotation;
+            Type = targetGroundType;
+            RoadType = newRoadType;
+            Rotation = rotation;
 
             return true;
         }
 
-        public void SetSoil()
+        public void SetNonEmpty()
         {
-            Type = GroundType.Soil;
+            RoadType = RoadType.NonEmpty;
         }
 
-        public void Change(GroundType type, GroundRotation rotation)
+        public void ChangeRoadType(RoadType type, GroundRotation rotation)
+        {
+            RoadType = type;
+            Rotation = rotation;
+        }
+
+        public void ChangeGroundType(GroundType type)
         {
             Type = type;
-            Rotation = rotation;
         }
     }
 }

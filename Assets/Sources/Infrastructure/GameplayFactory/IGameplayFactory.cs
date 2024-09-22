@@ -14,7 +14,7 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
         UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Building> CreateBuilding(BuildingType type, Vector3 position, Transform parent);
         UniTask CreateBuildingMarker();
         UniTask CreateCanvas();
-        UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground> CreateGround(GroundType type, Vector3 position, GroundRotation rotation, Transform parent);
+        UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground> CreateGround(GroundType groundType, RoadType roadType, Vector3 position, GroundRotation rotation, Transform parent);
         UniTask CreateSelectFrame();
         UniTask<TileRepresentation> CreateTile(Vector3 position, Transform parent);
         UniTask CreateWorldGenerator();

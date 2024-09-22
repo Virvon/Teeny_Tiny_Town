@@ -37,22 +37,10 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a97d2c098f291194db87dac7c30b45e4
-    m_Address: MergeConfig
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 632be997c9720004a8142c6b45108b0e
     m_Address: Tree
     m_ReadOnly: 0
     m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: da0b5ba0aa1e3ab43b296ae11bed700b
-    m_Address: TreeMergeConfig
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3d612f05727028342ac259c0967669a5
     m_Address: SelectFrame
@@ -70,33 +58,33 @@ MonoBehaviour:
     m_SerializedLabels:
     - Configs
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b3a39fb58838add4d9d4c5d822410726
+  - m_GUID: 5d91f09438cd0c74082f55df2e00b431
     m_Address: Soil
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 790c02dd7b54b0243a452c55fde89c9a
-    m_Address: SoilCrossroad
+  - m_GUID: 9da9192ce99c9b844929012a80c2f0c0
+    m_Address: RoadTurnTrail
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e602546b2ec2b7a4894af53745ecdfff
-    m_Address: SoilTripleCrossroad
+  - m_GUID: d4265b664fb93054f8d569c53e637f9b
+    m_Address: RoadCrossroad
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: be3e4518f00d35e47be4d25c33284aca
-    m_Address: SoilTrail
+  - m_GUID: 3ee1e1a4bf6562549bbc0baaf9e37f10
+    m_Address: RoadTrail
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 656a18ac26e3fc0469d26dced720fbae
-    m_Address: SoilDeadlock
+  - m_GUID: 46d5b83091ef91843905a89ff7fcfa36
+    m_Address: RoadDeadlock
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 274896bb12d4e5f49824449cf06228de
-    m_Address: SoilTurnTrail
+  - m_GUID: 328232fecc65bd14a9e6ffda682acdbe
+    m_Address: RoadTripleCrossroad
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -104,6 +92,43 @@ MonoBehaviour:
     m_Address: BuildingMarker
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cee3afc67e1e72c468fee90898a6d679
+    m_Address: SoilCrossroad
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 22c217840d1f37049aa8fddba157324b
+    m_Address: SoilTripleCrossroad
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd41b115696fa45489a14a7fc6fe6151
+    m_Address: SoilDeadlock
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 75d5d54f24557a243812cf7377196c00
+    m_Address: SoilTrail
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bace00ccfac489340b8f24d89e628809
+    m_Address: SoilTurnTrail
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb1a1d86d6cf44744a80b7966ef6e17e
+    m_Address: TreeConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9af0f08189bd864b8a2ec9a8bee12ab
+    m_Address: BushConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}

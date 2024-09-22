@@ -14,106 +14,232 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GroundConfigs:
   - Type: 0
-    AssetReference:
-      m_AssetGUID: b3a39fb58838add4d9d4c5d822410726
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
-    ValidNeighborsGridPositions: []
+    RoadConfigs:
+    - Type: 0
+      AssetReference:
+        m_AssetGUID: 5d91f09438cd0c74082f55df2e00b431
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+      ValidNeighborsGridPositions: []
+    - Type: 0
+      AssetReference:
+        m_AssetGUID: 5d91f09438cd0c74082f55df2e00b431
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+      ValidNeighborsGridPositions:
+      - Rotation: 0
+        NormalizedGridPositions: []
+    - Type: 1
+      AssetReference:
+        m_AssetGUID: cee3afc67e1e72c468fee90898a6d679
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+      ValidNeighborsGridPositions:
+      - Rotation: 0
+        NormalizedGridPositions:
+        - {x: 1, y: 0}
+        - {x: -1, y: 0}
+        - {x: 0, y: 1}
+        - {x: 0, y: -1}
+    - Type: 2
+      AssetReference:
+        m_AssetGUID: 22c217840d1f37049aa8fddba157324b
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 1
+      ValidNeighborsGridPositions:
+      - Rotation: 0
+        NormalizedGridPositions:
+        - {x: -1, y: 0}
+        - {x: 0, y: 1}
+        - {x: 1, y: 0}
+      - Rotation: 90
+        NormalizedGridPositions:
+        - {x: 0, y: 1}
+        - {x: 1, y: 0}
+        - {x: 0, y: -1}
+      - Rotation: 180
+        NormalizedGridPositions:
+        - {x: 1, y: 0}
+        - {x: 0, y: -1}
+        - {x: -1, y: 0}
+      - Rotation: 270
+        NormalizedGridPositions:
+        - {x: 0, y: -1}
+        - {x: -1, y: 0}
+        - {x: 0, y: 1}
+    - Type: 3
+      AssetReference:
+        m_AssetGUID: bd41b115696fa45489a14a7fc6fe6151
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 1
+      ValidNeighborsGridPositions:
+      - Rotation: 180
+        NormalizedGridPositions:
+        - {x: 0, y: 1}
+      - Rotation: 270
+        NormalizedGridPositions:
+        - {x: 1, y: 0}
+      - Rotation: 0
+        NormalizedGridPositions:
+        - {x: 0, y: -1}
+      - Rotation: 90
+        NormalizedGridPositions:
+        - {x: -1, y: 0}
+    - Type: 4
+      AssetReference:
+        m_AssetGUID: 75d5d54f24557a243812cf7377196c00
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 1
+      ValidNeighborsGridPositions:
+      - Rotation: 90
+        NormalizedGridPositions:
+        - {x: 0, y: 1}
+        - {x: 0, y: -1}
+      - Rotation: 0
+        NormalizedGridPositions:
+        - {x: 1, y: 0}
+        - {x: -1, y: 0}
+    - Type: 5
+      AssetReference:
+        m_AssetGUID: bace00ccfac489340b8f24d89e628809
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+      ValidNeighborsGridPositions:
+      - Rotation: 0
+        NormalizedGridPositions:
+        - {x: 0, y: 1}
+        - {x: 1, y: 0}
+      - Rotation: 90
+        NormalizedGridPositions:
+        - {x: 1, y: 0}
+        - {x: 0, y: -1}
+      - Rotation: 180
+        NormalizedGridPositions:
+        - {x: 0, y: -1}
+        - {x: -1, y: 0}
+      - Rotation: 270
+        NormalizedGridPositions:
+        - {x: -1, y: 0}
+        - {x: 0, y: 1}
   - Type: 1
-    AssetReference:
-      m_AssetGUID: 790c02dd7b54b0243a452c55fde89c9a
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 1
-    ValidNeighborsGridPositions:
-    - Rotation: 0
-      GridPositions:
-      - {x: 0, y: 1}
-      - {x: 0, y: -1}
-      - {x: 1, y: 0}
-      - {x: -1, y: 0}
-  - Type: 2
-    AssetReference:
-      m_AssetGUID: e602546b2ec2b7a4894af53745ecdfff
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 1
-    ValidNeighborsGridPositions:
-    - Rotation: 90
-      GridPositions:
-      - {x: 0, y: 1}
-      - {x: 1, y: 0}
-      - {x: 0, y: -1}
-    - Rotation: 180
-      GridPositions:
-      - {x: 1, y: 0}
-      - {x: 0, y: -1}
-      - {x: -1, y: 0}
-    - Rotation: 270
-      GridPositions:
-      - {x: 0, y: -1}
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-    - Rotation: 0
-      GridPositions:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      - {x: 1, y: 0}
-  - Type: 3
-    AssetReference:
-      m_AssetGUID: 656a18ac26e3fc0469d26dced720fbae
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 1
-    ValidNeighborsGridPositions:
-    - Rotation: 180
-      GridPositions:
-      - {x: 0, y: 1}
-    - Rotation: 270
-      GridPositions:
-      - {x: 1, y: 0}
-    - Rotation: 0
-      GridPositions:
-      - {x: 0, y: -1}
-    - Rotation: 90
-      GridPositions:
-      - {x: -1, y: 0}
-  - Type: 4
-    AssetReference:
-      m_AssetGUID: be3e4518f00d35e47be4d25c33284aca
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 1
-    ValidNeighborsGridPositions:
-    - Rotation: 90
-      GridPositions:
-      - {x: 0, y: 1}
-      - {x: 0, y: -1}
-    - Rotation: 0
-      GridPositions:
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-  - Type: 5
-    AssetReference:
-      m_AssetGUID: 274896bb12d4e5f49824449cf06228de
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
-    ValidNeighborsGridPositions:
-    - Rotation: 90
-      GridPositions:
-      - {x: 1, y: 0}
-      - {x: 0, y: -1}
-    - Rotation: 180
-      GridPositions:
-      - {x: 0, y: -1}
-      - {x: -1, y: 0}
-    - Rotation: 270
-      GridPositions:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-    - Rotation: 0
-      GridPositions:
-      - {x: 0, y: 1}
-      - {x: 1, y: 0}
+    RoadConfigs:
+    - Type: 0
+      AssetReference:
+        m_AssetGUID: 9da9192ce99c9b844929012a80c2f0c0
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+      ValidNeighborsGridPositions: []
+    - Type: 1
+      AssetReference:
+        m_AssetGUID: 5d91f09438cd0c74082f55df2e00b431
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+      ValidNeighborsGridPositions:
+      - Rotation: 0
+        NormalizedGridPositions: []
+    - Type: 2
+      AssetReference:
+        m_AssetGUID: d4265b664fb93054f8d569c53e637f9b
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 1
+      ValidNeighborsGridPositions:
+      - Rotation: 0
+        NormalizedGridPositions:
+        - {x: 1, y: 0}
+        - {x: -1, y: 0}
+        - {x: 0, y: 1}
+        - {x: 0, y: -1}
+    - Type: 3
+      AssetReference:
+        m_AssetGUID: 328232fecc65bd14a9e6ffda682acdbe
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 1
+      ValidNeighborsGridPositions:
+      - Rotation: 0
+        NormalizedGridPositions:
+        - {x: -1, y: 0}
+        - {x: 0, y: 1}
+        - {x: 1, y: 0}
+      - Rotation: 90
+        NormalizedGridPositions:
+        - {x: 0, y: 1}
+        - {x: 1, y: 0}
+        - {x: 0, y: -1}
+      - Rotation: 180
+        NormalizedGridPositions:
+        - {x: 1, y: 0}
+        - {x: 0, y: -1}
+        - {x: -1, y: 0}
+      - Rotation: 270
+        NormalizedGridPositions:
+        - {x: 0, y: -1}
+        - {x: -1, y: 0}
+        - {x: 0, y: 1}
+    - Type: 4
+      AssetReference:
+        m_AssetGUID: 46d5b83091ef91843905a89ff7fcfa36
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 1
+      ValidNeighborsGridPositions:
+      - Rotation: 0
+        NormalizedGridPositions:
+        - {x: 0, y: 1}
+      - Rotation: 90
+        NormalizedGridPositions:
+        - {x: 1, y: 0}
+      - Rotation: 180
+        NormalizedGridPositions:
+        - {x: 0, y: -1}
+      - Rotation: 270
+        NormalizedGridPositions:
+        - {x: -1, y: 0}
+    - Type: 5
+      AssetReference:
+        m_AssetGUID: 3ee1e1a4bf6562549bbc0baaf9e37f10
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+      ValidNeighborsGridPositions:
+      - Rotation: 90
+        NormalizedGridPositions:
+        - {x: 0, y: 1}
+        - {x: 0, y: -1}
+      - Rotation: 0
+        NormalizedGridPositions:
+        - {x: 1, y: 0}
+        - {x: -1, y: 0}
+    - Type: 6
+      AssetReference:
+        m_AssetGUID: 9da9192ce99c9b844929012a80c2f0c0
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+      ValidNeighborsGridPositions:
+      - Rotation: 0
+        NormalizedGridPositions:
+        - {x: 0, y: 1}
+        - {x: 1, y: 0}
+      - Rotation: 90
+        NormalizedGridPositions:
+        - {x: 1, y: 0}
+        - {x: 0, y: -1}
+      - Rotation: 180
+        NormalizedGridPositions:
+        - {x: 0, y: -1}
+        - {x: -1, y: 0}
+      - Rotation: 270
+        NormalizedGridPositions:
+        - {x: -1, y: 0}
+        - {x: 0, y: 1}

@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6586673458856503487
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4884503492626429796, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4884503492626429796, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -6478536213147159724, guid: 18ea6ee45703f3046b0682902a9b0cb9, type: 3}
+    - target: {fileID: 4884503492626429796, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 18ea6ee45703f3046b0682902a9b0cb9, type: 3}
+    - target: {fileID: 5504444409076078282, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_Name
+      value: SoilTripleCrossroad
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568728752830322147, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568728752830322147, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568728752830322147, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568728752830322147, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568728752830322147, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568728752830322147, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568728752830322147, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568728752830322147, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568728752830322147, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568728752830322147, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7642782082288855429, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3392040664700520542, guid: 0132859dede8e3440b86c1079aca55b6, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5fb778b26faeba040b86eb9192b800d0, type: 3}
