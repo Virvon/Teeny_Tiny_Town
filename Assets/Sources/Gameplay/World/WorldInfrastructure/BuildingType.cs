@@ -5,5 +5,6 @@
         Undefined,
         Bush,
         Tree,
+        House,
     }
 }

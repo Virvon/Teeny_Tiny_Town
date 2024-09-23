@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.GameplayMover
@@ -11,6 +12,8 @@ namespace Assets.Sources.Gameplay.GameplayMover
 
         public GameplayMover(World.WorldInfrastructure.World world) =>
             _world = world;
+
+        public event Action GameplayMoved;
 
         public void PlaceNewBuilding(Vector2Int gridPosition) =>
             ExecuteCommand(new PlaceNewBuildingCommand(_world, gridPosition));
@@ -34,6 +37,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
         {
             _lastCommand = command;
             command.Change();
+            GameplayMoved?.Invoke();
         }
     }
 }

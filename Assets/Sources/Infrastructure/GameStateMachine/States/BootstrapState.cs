@@ -22,7 +22,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
         {
             await Initialize();
 
-            _gameStateMachine.Enter<GameLoopState>().Forget();
+            _gameStateMachine.Enter<LoadProgressState>().Forget();
         }
 
         private async UniTask Initialize()

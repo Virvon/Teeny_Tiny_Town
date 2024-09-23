@@ -53,7 +53,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
         public void UpdateBuilding()
         {
-            BuildingType = _staticDataService.GetBuilding(BuildingType).NextBuilding;
+            BuildingType = _staticDataService.GetBuilding<BuildingConfig>(BuildingType).NextBuilding;
             ChangeGroundType();
         }
 
@@ -130,7 +130,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         }
 
         private void ChangeGroundType() =>
-            Ground.ChangeGroundType(IsEmpty ? GroundType.Soil : _staticDataService.GetBuilding(BuildingType).GroundType);
+            Ground.ChangeGroundType(IsEmpty ? GroundType.Soil : _staticDataService.GetBuilding<BuildingConfig>(BuildingType).GroundType);
 
         private bool TryChangeRoad()
         {

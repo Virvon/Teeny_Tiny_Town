@@ -9,7 +9,8 @@ namespace Assets.Sources.Services.StaticDataService
         GroundsConfig GroundsConfig { get; }
 
         RoadConfig GetRoad(GroundType groundType, RoadType roadType);
-        BuildingConfig GetBuilding(BuildingType buildingType);
+        TBuilding GetBuilding<TBuilding>(BuildingType buildingType)
+            where TBuilding : BuildingConfig;
         UniTask InitializeAsync();
     }
 }

@@ -10,7 +10,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
     {
         public BuildingType Type { get; private set; }
 
-        public void Init(BuildingType type) =>
+        public virtual void Init(BuildingType type) =>
             Type = type;
 
         public void Destroy() =>

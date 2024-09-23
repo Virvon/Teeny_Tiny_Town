@@ -21,6 +21,12 @@ namespace Assets.Sources.Gameplay
             BindActionHandlerStateMachine();
             BindActionHandlerLayerMask();
             BindWorldRepresentationChanger();
+            BindMoveCounter();
+        }
+
+        private void BindMoveCounter()
+        {
+            Container.BindInterfacesAndSelfTo<MoveCounter>().AsSingle();
         }
 
         private void BindWorldRepresentationChanger()

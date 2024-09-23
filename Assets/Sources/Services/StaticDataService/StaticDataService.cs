@@ -30,8 +30,9 @@ namespace Assets.Sources.Services.StaticDataService
             await UniTask.WhenAll(tasks);
         }
 
-        public BuildingConfig GetBuilding(BuildingType buildingType) =>
-            _buildingConfigs.TryGetValue(buildingType, out BuildingConfig config) ? config : null;
+        public TBuilding GetBuilding<TBuilding>(BuildingType buildingType)
+            where TBuilding : BuildingConfig =>
+            _buildingConfigs.TryGetValue(buildingType, out BuildingConfig config) ? config as TBuilding : null;
 
         public RoadConfig GetRoad(GroundType groundType, RoadType roadType)
         {

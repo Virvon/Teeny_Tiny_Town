@@ -22,7 +22,7 @@ MonoBehaviour:
         m_SubObjectType: 
         m_EditorAssetChanged: 0
       ValidNeighborsGridPositions: []
-    - Type: 0
+    - Type: 1
       AssetReference:
         m_AssetGUID: 5d91f09438cd0c74082f55df2e00b431
         m_SubObjectName: 
@@ -31,7 +31,7 @@ MonoBehaviour:
       ValidNeighborsGridPositions:
       - Rotation: 0
         NormalizedGridPositions: []
-    - Type: 1
+    - Type: 2
       AssetReference:
         m_AssetGUID: cee3afc67e1e72c468fee90898a6d679
         m_SubObjectName: 
@@ -44,7 +44,7 @@ MonoBehaviour:
         - {x: -1, y: 0}
         - {x: 0, y: 1}
         - {x: 0, y: -1}
-    - Type: 2
+    - Type: 3
       AssetReference:
         m_AssetGUID: 22c217840d1f37049aa8fddba157324b
         m_SubObjectName: 
@@ -71,7 +71,7 @@ MonoBehaviour:
         - {x: 0, y: -1}
         - {x: -1, y: 0}
         - {x: 0, y: 1}
-    - Type: 3
+    - Type: 4
       AssetReference:
         m_AssetGUID: bd41b115696fa45489a14a7fc6fe6151
         m_SubObjectName: 
@@ -90,7 +90,7 @@ MonoBehaviour:
       - Rotation: 90
         NormalizedGridPositions:
         - {x: -1, y: 0}
-    - Type: 4
+    - Type: 5
       AssetReference:
         m_AssetGUID: 75d5d54f24557a243812cf7377196c00
         m_SubObjectName: 
@@ -105,7 +105,7 @@ MonoBehaviour:
         NormalizedGridPositions:
         - {x: 1, y: 0}
         - {x: -1, y: 0}
-    - Type: 5
+    - Type: 6
       AssetReference:
         m_AssetGUID: bace00ccfac489340b8f24d89e628809
         m_SubObjectName: 
@@ -132,10 +132,10 @@ MonoBehaviour:
     RoadConfigs:
     - Type: 0
       AssetReference:
-        m_AssetGUID: 9da9192ce99c9b844929012a80c2f0c0
+        m_AssetGUID: 37113d1c97d7f64419446845d53f54da
         m_SubObjectName: 
         m_SubObjectType: 
-        m_EditorAssetChanged: 0
+        m_EditorAssetChanged: 1
       ValidNeighborsGridPositions: []
     - Type: 1
       AssetReference:

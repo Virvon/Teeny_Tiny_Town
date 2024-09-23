@@ -82,7 +82,7 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
 
         public async UniTask<Building> CreateBuilding(BuildingType type, Vector3 position, Transform parent)
         {
-            BuildingConfig buildingConfig = _staticDataService.GetBuilding(type);
+            BuildingConfig buildingConfig = _staticDataService.GetBuilding<BuildingConfig>(type);
 
             Building building = await _buildingFactory.Create(buildingConfig.AssetReference, position, parent);
 

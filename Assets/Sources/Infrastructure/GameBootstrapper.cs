@@ -22,6 +22,7 @@ namespace Assets.Sources.Infrastructure
         {
             _gameStateMachine.RegisterState(_statesFactory.Create<BootstrapState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<GameLoopState>());
+            _gameStateMachine.RegisterState(_statesFactory.Create<LoadProgressState>());
 
             _gameStateMachine.Enter<BootstrapState>().Forget();
 
