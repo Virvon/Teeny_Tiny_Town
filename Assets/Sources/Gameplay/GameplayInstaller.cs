@@ -1,7 +1,9 @@
 ﻿using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
-using Assets.Sources.Infrastructure.GameplayFactory;
+using Assets.Sources.Infrastructure.Factories.GameplayFactory;
+using Assets.Sources.Infrastructure.Factories.UiFactory;
+using Assets.Sources.UI.Windows;
 using UnityEngine;
 using Zenject;
 
@@ -22,6 +24,18 @@ namespace Assets.Sources.Gameplay
             BindActionHandlerLayerMask();
             BindWorldRepresentationChanger();
             BindMoveCounter();
+            BindWindowsSwitcher();
+            BindUiFactory();
+        }
+
+        private void BindUiFactory()
+        {
+            UiFactoryInstaller.Install(Container);
+        }
+
+        private void BindWindowsSwitcher()
+        {
+            Container.BindInterfacesAndSelfTo<WindowsSwitcher>().AsSingle();
         }
 
         private void BindMoveCounter()

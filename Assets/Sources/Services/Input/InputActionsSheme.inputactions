@@ -2,7 +2,7 @@
     "name": "InputActionsSheme",
     "maps": [
         {
-            "name": "Input",
+            "name": "GameplayInput",
             "id": "fdde530e-b972-49b9-83b5-a918106ee15e",
             "actions": [
                 {
@@ -110,6 +110,74 @@
                     "action": "Press",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "GameplayWindowInput",
+            "id": "74df02b6-d5d6-409a-b9b2-1acdbf7f4155",
+            "actions": [
+                {
+                    "name": "UndoButtonPressed",
+                    "type": "Button",
+                    "id": "94887cc2-64aa-4951-914e-8d0a283f3301",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RemoveBuildingButtonPressed",
+                    "type": "Button",
+                    "id": "dd8cc7a5-5049-42ab-9cc2-5b2dcf306e5c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ReplaceBuildingButtonPressed",
+                    "type": "Button",
+                    "id": "df085374-e02b-4a7b-8203-3e68caa7ea7e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b6237c84-4f2b-4dca-ae21-3e9a67a57033",
+                    "path": "<Touchscreen>/touch0/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UndoButtonPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be247254-0c51-43e8-96ff-92465681d723",
+                    "path": "<Touchscreen>/touch1/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RemoveBuildingButtonPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76223388-43cc-4041-a3da-2592ac1b396e",
+                    "path": "<Touchscreen>/touch2/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReplaceBuildingButtonPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

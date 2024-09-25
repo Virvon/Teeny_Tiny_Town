@@ -1,7 +1,7 @@
 ﻿using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.StateMachine.States;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
-using Assets.Sources.Infrastructure.GameplayFactory;
+using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Services.StateMachine;
 using Zenject;
 
@@ -26,7 +26,6 @@ namespace Assets.Sources.Gameplay
 
         public async void Initialize()
         {
-            await _gameplayFactory.CreateCanvas();
             await _gameplayFactory.CreateSelectFrame();
             await _gameplayFactory.CreateBuildingMarker();
 

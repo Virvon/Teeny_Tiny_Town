@@ -5,7 +5,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using TileRepresentation = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.TileRepresentation;
 
-namespace Assets.Sources.Infrastructure.GameplayFactory
+namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
 {
     public interface IGameplayFactory
     {
@@ -13,7 +13,6 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
 
         UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Building> CreateBuilding(BuildingType type, Vector3 position, Transform parent);
         UniTask CreateBuildingMarker();
-        UniTask CreateCanvas();
         UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground> CreateGround(GroundType groundType, RoadType roadType, Vector3 position, GroundRotation rotation, Transform parent);
         UniTask CreateSelectFrame();
         UniTask<TileRepresentation> CreateTile(Vector3 position, Transform parent);

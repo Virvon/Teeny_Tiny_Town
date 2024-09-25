@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
-using Assets.Sources.Infrastructure.GameplayFactory;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using TileRepresentation = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.TileRepresentation;
+using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 {
@@ -65,8 +65,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 
         private async void OnTilesChanged(List<Tile> tiles)
         {
-            Debug.Log("updated tiles " + tiles.Count);
-
             foreach (Tile tile in tiles)
             {
                 TileRepresentation tileRepresentation = WorldGenerator.GetTile(tile.GridPosition);

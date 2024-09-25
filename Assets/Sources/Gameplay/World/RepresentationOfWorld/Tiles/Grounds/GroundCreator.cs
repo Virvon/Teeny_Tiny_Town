@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Infrastructure.GameplayFactory;
+﻿using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

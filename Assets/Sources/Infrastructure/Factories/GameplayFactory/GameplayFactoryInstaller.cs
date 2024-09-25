@@ -6,9 +6,8 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
-using UiCanvas = Assets.Sources.UI.UiCanvas;
 
-namespace Assets.Sources.Infrastructure.GameplayFactory
+namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
 {
     public class GameplayFactoryInstaller : Installer<GameplayFactoryInstaller>
     {
@@ -34,10 +33,6 @@ namespace Assets.Sources.Infrastructure.GameplayFactory
             Container
                 .BindFactory<string, UniTask<SelectFrame>, SelectFrame.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<SelectFrame>>();
-
-            Container
-                .BindFactory<string, UniTask<UiCanvas>, UiCanvas.Factory>()
-                .FromFactory<KeyPrefabFactoryAsync<UiCanvas>>();
 
             Container
                 .BindFactory<AssetReferenceGameObject, Vector3, float, Transform, UniTask<Ground>, Ground.Factory>()

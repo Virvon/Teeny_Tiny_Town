@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using Assets.Sources.Services.Input;
 using System;
 using UnityEngine;
 
@@ -7,11 +8,22 @@ namespace Assets.Sources.Gameplay.GameplayMover
     public class GameplayMover
     {
         private readonly World.WorldInfrastructure.World _world;
+        private readonly IInputService _inputService;
 
         private Command _lastCommand;
 
-        public GameplayMover(World.WorldInfrastructure.World world) =>
+        public GameplayMover(World.WorldInfrastructure.World world, IInputService inputService)
+        {
             _world = world;
+            _inputService = inputService;
+
+            _inputService.UndoButtonPressed += TryUndoCommand;
+        }
+
+        ~GameplayMover()
+        {
+            _inputService.UndoButtonPressed -= TryUndoCommand;
+        }
 
         public event Action GameplayMoved;
 

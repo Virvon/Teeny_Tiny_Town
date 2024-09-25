@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildingType: 3
   AssetReference:
-    m_AssetGUID: 
+    m_AssetGUID: 0762e6a6bfcb38d4b8157188b4620d0c
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  GroundType: 0
-  NextBuilding: 0
-  Payment: 0
+  GroundType: 1
+  NextBuilding: 3
+  Payment: 100

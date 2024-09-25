@@ -47,8 +47,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 87f7b9cbd7cc5a84ab93cff6da396048
-    m_Address: Canvas
+  - m_GUID: a6828b2b600f55744842859eb5e6e8f2
+    m_Address: ItemsWindow
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -134,6 +134,28 @@ MonoBehaviour:
     m_Address: Asphalt
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0762e6a6bfcb38d4b8157188b4620d0c
+    m_Address: House
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0087dc9c880f50b4ab2a4952b30de344
+    m_Address: HouseConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: afeb033472eeb9642bcf6c22ae1555e2
+    m_Address: GameplayWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1cc598c2945f62d45ab0693b48db8ecc
+    m_Address: Assets/Configs/WindowsConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}

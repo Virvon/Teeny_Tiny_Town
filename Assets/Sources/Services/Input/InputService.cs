@@ -14,20 +14,27 @@ namespace Assets.Sources.Services.Input
         public InputService()
         {
             _inputActionsSheme = new();
-            _inputActionsSheme.Enable();
 
-            _inputActionsSheme.Input.HandlePressedMove.performed += OnHandlePressedMoveStarted;
-            _inputActionsSheme.Input.HandlePressedMove.performed += OnHandlePressedMovePerformed;
-            _inputActionsSheme.Input.HandlePressedMove.canceled += OnHandlePressedMoveCancled;
-            _inputActionsSheme.Input.HandleMove.performed += OnHandleMovePerformed;
+            _inputActionsSheme.GameplayInput.Enable();
+            _inputActionsSheme.GameplayWindowInput.Enable();
+
+            _inputActionsSheme.GameplayInput.HandlePressedMove.performed += OnHandlePressedMoveStarted;
+            _inputActionsSheme.GameplayInput.HandlePressedMove.performed += OnHandlePressedMovePerformed;
+            _inputActionsSheme.GameplayInput.HandlePressedMove.canceled += OnHandlePressedMoveCancled;
+            _inputActionsSheme.GameplayInput.HandleMove.performed += OnHandleMovePerformed;
+
+            _inputActionsSheme.GameplayWindowInput.UndoButtonPressed.performed += ctx => UndoButtonPressed?.Invoke();
+            _inputActionsSheme.GameplayWindowInput.RemoveBuildingButtonPressed.performed += ctx => RemoveBuildingButtonPressed?.Invoke();
+            _inputActionsSheme.GameplayWindowInput.ReplaceBuildingButtonPressed.performed += ctx => ReplaceBuildingButtonPressed?.Invoke();
+
         }
 
         ~InputService()
         {
-            _inputActionsSheme.Input.HandlePressedMove.performed -= OnHandlePressedMoveStarted;
-            _inputActionsSheme.Input.HandlePressedMove.performed -= OnHandlePressedMovePerformed;
-            _inputActionsSheme.Input.HandlePressedMove.canceled -= OnHandlePressedMoveCancled;
-            _inputActionsSheme.Input.HandleMove.performed -= OnHandleMovePerformed;
+            _inputActionsSheme.GameplayInput.HandlePressedMove.performed -= OnHandlePressedMoveStarted;
+            _inputActionsSheme.GameplayInput.HandlePressedMove.performed -= OnHandlePressedMovePerformed;
+            _inputActionsSheme.GameplayInput.HandlePressedMove.canceled -= OnHandlePressedMoveCancled;
+            _inputActionsSheme.GameplayInput.HandleMove.performed -= OnHandleMovePerformed;
 
             _inputActionsSheme.Disable();
         }
@@ -37,6 +44,9 @@ namespace Assets.Sources.Services.Input
         public event Action<Vector2> Pressed;
         public event Action<Vector2> HandleMoved;
 
+        public event Action UndoButtonPressed;
+        public event Action RemoveBuildingButtonPressed;
+        public event Action ReplaceBuildingButtonPressed;
 
         private void OnHandleMovePerformed(InputAction.CallbackContext callbackContext)
         {

@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
+using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -14,6 +16,7 @@ namespace Assets.Sources.Services.StaticDataService
 
         private Dictionary<BuildingType, BuildingConfig> _buildingConfigs;
         private Dictionary<GroundType, Dictionary<RoadType, RoadConfig>> _groundConfigs;
+        private Dictionary<WindowType, WindowConfig> _windowConfigs;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
@@ -26,9 +29,15 @@ namespace Assets.Sources.Services.StaticDataService
 
             tasks.Add(LoadBuildingConfigs());
             tasks.Add(LoadGroundsConfig());
+            tasks.Add(LoadWindowsConfig());
 
             await UniTask.WhenAll(tasks);
         }
+
+        public WindowsConfig WindowsConfig { get; private set; }
+
+        public WindowConfig GetWindow(WindowType type) =>
+            _windowConfigs.TryGetValue(type, out WindowConfig config) ? config : null;
 
         public TBuilding GetBuilding<TBuilding>(BuildingType buildingType)
             where TBuilding : BuildingConfig =>
@@ -41,11 +50,19 @@ namespace Assets.Sources.Services.StaticDataService
                 roadType, out RoadConfig config) ? config : null) : null;
         }
 
+        private async UniTask LoadWindowsConfig()
+        {
+            WindowsConfig[] windowsConfigs = await GetConfigs<WindowsConfig>();
+            WindowsConfig = windowsConfigs.First();
+
+            _windowConfigs = WindowsConfig.Configs.ToDictionary(value => value.Type, value => value);
+        }
+
         private async UniTask LoadGroundsConfig()
         {
-            GroundsConfig[] groundsConfig = await GetConfigs<GroundsConfig>();
+            GroundsConfig[] groundsConfigs = await GetConfigs<GroundsConfig>();
 
-            GroundsConfig = groundsConfig.First();
+            GroundsConfig = groundsConfigs.First();
             _groundConfigs = GroundsConfig.GroundConfigs.ToDictionary(value => value.Type, value => value.RoadConfigs.ToDictionary(value => value.Type, value => value));
         }
 

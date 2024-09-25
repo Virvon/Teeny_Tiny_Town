@@ -26,7 +26,7 @@ namespace Assets.Sources.Services.Input
     ""name"": ""InputActionsSheme"",
     ""maps"": [
         {
-            ""name"": ""Input"",
+            ""name"": ""GameplayInput"",
             ""id"": ""fdde530e-b972-49b9-83b5-a918106ee15e"",
             ""actions"": [
                 {
@@ -136,15 +136,88 @@ namespace Assets.Sources.Services.Input
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""GameplayWindowInput"",
+            ""id"": ""74df02b6-d5d6-409a-b9b2-1acdbf7f4155"",
+            ""actions"": [
+                {
+                    ""name"": ""UndoButtonPressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""94887cc2-64aa-4951-914e-8d0a283f3301"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RemoveBuildingButtonPressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd8cc7a5-5049-42ab-9cc2-5b2dcf306e5c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReplaceBuildingButtonPressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""df085374-e02b-4a7b-8203-3e68caa7ea7e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b6237c84-4f2b-4dca-ae21-3e9a67a57033"",
+                    ""path"": ""<Touchscreen>/touch0/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UndoButtonPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be247254-0c51-43e8-96ff-92465681d723"",
+                    ""path"": ""<Touchscreen>/touch1/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RemoveBuildingButtonPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76223388-43cc-4041-a3da-2592ac1b396e"",
+                    ""path"": ""<Touchscreen>/touch2/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReplaceBuildingButtonPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
 }");
-            // Input
-            m_Input = asset.FindActionMap("Input", throwIfNotFound: true);
-            m_Input_HandlePressedMove = m_Input.FindAction("HandlePressedMove", throwIfNotFound: true);
-            m_Input_HandleMove = m_Input.FindAction("HandleMove", throwIfNotFound: true);
-            m_Input_Press = m_Input.FindAction("Press", throwIfNotFound: true);
+            // GameplayInput
+            m_GameplayInput = asset.FindActionMap("GameplayInput", throwIfNotFound: true);
+            m_GameplayInput_HandlePressedMove = m_GameplayInput.FindAction("HandlePressedMove", throwIfNotFound: true);
+            m_GameplayInput_HandleMove = m_GameplayInput.FindAction("HandleMove", throwIfNotFound: true);
+            m_GameplayInput_Press = m_GameplayInput.FindAction("Press", throwIfNotFound: true);
+            // GameplayWindowInput
+            m_GameplayWindowInput = asset.FindActionMap("GameplayWindowInput", throwIfNotFound: true);
+            m_GameplayWindowInput_UndoButtonPressed = m_GameplayWindowInput.FindAction("UndoButtonPressed", throwIfNotFound: true);
+            m_GameplayWindowInput_RemoveBuildingButtonPressed = m_GameplayWindowInput.FindAction("RemoveBuildingButtonPressed", throwIfNotFound: true);
+            m_GameplayWindowInput_ReplaceBuildingButtonPressed = m_GameplayWindowInput.FindAction("ReplaceBuildingButtonPressed", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -203,28 +276,28 @@ namespace Assets.Sources.Services.Input
             return asset.FindBinding(bindingMask, out action);
         }
 
-        // Input
-        private readonly InputActionMap m_Input;
-        private List<IInputActions> m_InputActionsCallbackInterfaces = new List<IInputActions>();
-        private readonly InputAction m_Input_HandlePressedMove;
-        private readonly InputAction m_Input_HandleMove;
-        private readonly InputAction m_Input_Press;
-        public struct InputActions
+        // GameplayInput
+        private readonly InputActionMap m_GameplayInput;
+        private List<IGameplayInputActions> m_GameplayInputActionsCallbackInterfaces = new List<IGameplayInputActions>();
+        private readonly InputAction m_GameplayInput_HandlePressedMove;
+        private readonly InputAction m_GameplayInput_HandleMove;
+        private readonly InputAction m_GameplayInput_Press;
+        public struct GameplayInputActions
         {
             private @InputActionsSheme m_Wrapper;
-            public InputActions(@InputActionsSheme wrapper) { m_Wrapper = wrapper; }
-            public InputAction @HandlePressedMove => m_Wrapper.m_Input_HandlePressedMove;
-            public InputAction @HandleMove => m_Wrapper.m_Input_HandleMove;
-            public InputAction @Press => m_Wrapper.m_Input_Press;
-            public InputActionMap Get() { return m_Wrapper.m_Input; }
+            public GameplayInputActions(@InputActionsSheme wrapper) { m_Wrapper = wrapper; }
+            public InputAction @HandlePressedMove => m_Wrapper.m_GameplayInput_HandlePressedMove;
+            public InputAction @HandleMove => m_Wrapper.m_GameplayInput_HandleMove;
+            public InputAction @Press => m_Wrapper.m_GameplayInput_Press;
+            public InputActionMap Get() { return m_Wrapper.m_GameplayInput; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(InputActions set) { return set.Get(); }
-            public void AddCallbacks(IInputActions instance)
+            public static implicit operator InputActionMap(GameplayInputActions set) { return set.Get(); }
+            public void AddCallbacks(IGameplayInputActions instance)
             {
-                if (instance == null || m_Wrapper.m_InputActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_InputActionsCallbackInterfaces.Add(instance);
+                if (instance == null || m_Wrapper.m_GameplayInputActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_GameplayInputActionsCallbackInterfaces.Add(instance);
                 @HandlePressedMove.started += instance.OnHandlePressedMove;
                 @HandlePressedMove.performed += instance.OnHandlePressedMove;
                 @HandlePressedMove.canceled += instance.OnHandlePressedMove;
@@ -236,7 +309,7 @@ namespace Assets.Sources.Services.Input
                 @Press.canceled += instance.OnPress;
             }
 
-            private void UnregisterCallbacks(IInputActions instance)
+            private void UnregisterCallbacks(IGameplayInputActions instance)
             {
                 @HandlePressedMove.started -= instance.OnHandlePressedMove;
                 @HandlePressedMove.performed -= instance.OnHandlePressedMove;
@@ -249,26 +322,94 @@ namespace Assets.Sources.Services.Input
                 @Press.canceled -= instance.OnPress;
             }
 
-            public void RemoveCallbacks(IInputActions instance)
+            public void RemoveCallbacks(IGameplayInputActions instance)
             {
-                if (m_Wrapper.m_InputActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_GameplayInputActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(IInputActions instance)
+            public void SetCallbacks(IGameplayInputActions instance)
             {
-                foreach (var item in m_Wrapper.m_InputActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_GameplayInputActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_InputActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_GameplayInputActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public InputActions @Input => new InputActions(this);
-        public interface IInputActions
+        public GameplayInputActions @GameplayInput => new GameplayInputActions(this);
+
+        // GameplayWindowInput
+        private readonly InputActionMap m_GameplayWindowInput;
+        private List<IGameplayWindowInputActions> m_GameplayWindowInputActionsCallbackInterfaces = new List<IGameplayWindowInputActions>();
+        private readonly InputAction m_GameplayWindowInput_UndoButtonPressed;
+        private readonly InputAction m_GameplayWindowInput_RemoveBuildingButtonPressed;
+        private readonly InputAction m_GameplayWindowInput_ReplaceBuildingButtonPressed;
+        public struct GameplayWindowInputActions
+        {
+            private @InputActionsSheme m_Wrapper;
+            public GameplayWindowInputActions(@InputActionsSheme wrapper) { m_Wrapper = wrapper; }
+            public InputAction @UndoButtonPressed => m_Wrapper.m_GameplayWindowInput_UndoButtonPressed;
+            public InputAction @RemoveBuildingButtonPressed => m_Wrapper.m_GameplayWindowInput_RemoveBuildingButtonPressed;
+            public InputAction @ReplaceBuildingButtonPressed => m_Wrapper.m_GameplayWindowInput_ReplaceBuildingButtonPressed;
+            public InputActionMap Get() { return m_Wrapper.m_GameplayWindowInput; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(GameplayWindowInputActions set) { return set.Get(); }
+            public void AddCallbacks(IGameplayWindowInputActions instance)
+            {
+                if (instance == null || m_Wrapper.m_GameplayWindowInputActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_GameplayWindowInputActionsCallbackInterfaces.Add(instance);
+                @UndoButtonPressed.started += instance.OnUndoButtonPressed;
+                @UndoButtonPressed.performed += instance.OnUndoButtonPressed;
+                @UndoButtonPressed.canceled += instance.OnUndoButtonPressed;
+                @RemoveBuildingButtonPressed.started += instance.OnRemoveBuildingButtonPressed;
+                @RemoveBuildingButtonPressed.performed += instance.OnRemoveBuildingButtonPressed;
+                @RemoveBuildingButtonPressed.canceled += instance.OnRemoveBuildingButtonPressed;
+                @ReplaceBuildingButtonPressed.started += instance.OnReplaceBuildingButtonPressed;
+                @ReplaceBuildingButtonPressed.performed += instance.OnReplaceBuildingButtonPressed;
+                @ReplaceBuildingButtonPressed.canceled += instance.OnReplaceBuildingButtonPressed;
+            }
+
+            private void UnregisterCallbacks(IGameplayWindowInputActions instance)
+            {
+                @UndoButtonPressed.started -= instance.OnUndoButtonPressed;
+                @UndoButtonPressed.performed -= instance.OnUndoButtonPressed;
+                @UndoButtonPressed.canceled -= instance.OnUndoButtonPressed;
+                @RemoveBuildingButtonPressed.started -= instance.OnRemoveBuildingButtonPressed;
+                @RemoveBuildingButtonPressed.performed -= instance.OnRemoveBuildingButtonPressed;
+                @RemoveBuildingButtonPressed.canceled -= instance.OnRemoveBuildingButtonPressed;
+                @ReplaceBuildingButtonPressed.started -= instance.OnReplaceBuildingButtonPressed;
+                @ReplaceBuildingButtonPressed.performed -= instance.OnReplaceBuildingButtonPressed;
+                @ReplaceBuildingButtonPressed.canceled -= instance.OnReplaceBuildingButtonPressed;
+            }
+
+            public void RemoveCallbacks(IGameplayWindowInputActions instance)
+            {
+                if (m_Wrapper.m_GameplayWindowInputActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IGameplayWindowInputActions instance)
+            {
+                foreach (var item in m_Wrapper.m_GameplayWindowInputActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_GameplayWindowInputActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public GameplayWindowInputActions @GameplayWindowInput => new GameplayWindowInputActions(this);
+        public interface IGameplayInputActions
         {
             void OnHandlePressedMove(InputAction.CallbackContext context);
             void OnHandleMove(InputAction.CallbackContext context);
             void OnPress(InputAction.CallbackContext context);
+        }
+        public interface IGameplayWindowInputActions
+        {
+            void OnUndoButtonPressed(InputAction.CallbackContext context);
+            void OnRemoveBuildingButtonPressed(InputAction.CallbackContext context);
+            void OnReplaceBuildingButtonPressed(InputAction.CallbackContext context);
         }
     }
 }

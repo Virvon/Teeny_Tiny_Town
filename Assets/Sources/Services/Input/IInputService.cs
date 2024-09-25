@@ -9,5 +9,8 @@ namespace Assets.Sources.Services.Input
         event Action<Vector2> HandlePressedMovePerformed;
         event Action<Vector2> HandlePressedMoveStarted;
         event Action<Vector2> Pressed;
+        event Action UndoButtonPressed;
+        event Action RemoveBuildingButtonPressed;
+        event Action ReplaceBuildingButtonPressed;
     }
 }
