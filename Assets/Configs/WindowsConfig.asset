@@ -25,3 +25,15 @@ MonoBehaviour:
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     Type: 1
+  - AssetReference:
+      m_AssetGUID: 2b6acc30a2b4eac4885d405d7a8947e9
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    Type: 2
+  - AssetReference:
+      m_AssetGUID: 2b6acc30a2b4eac4885d405d7a8947e9
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    Type: 3

@@ -3,6 +3,7 @@ using Assets.Sources.Gameplay.StateMachine.States;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Services.StateMachine;
+using Assets.Sources.UI.Windows;
 using Zenject;
 
 namespace Assets.Sources.Gameplay
@@ -14,14 +15,16 @@ namespace Assets.Sources.Gameplay
         private readonly IGameplayFactory _gameplayFactory;
         private readonly ActionHandlerStateMachine _actionHandlerStateMachine;
         private readonly ActionHandlerStatesFactory _actionHandlerStatesFactory;
+        private readonly WindowsSwitcher _windowsSwitcher;
 
-        public GameplayBootstrapper(GameplayStateMachine gameplayStateMachine, StatesFactory statesFactory, IGameplayFactory gameplayFactory, ActionHandlerStateMachine actionHandlerStateMachine, ActionHandlerStatesFactory actionHandlerStatesFactory)
+        public GameplayBootstrapper(GameplayStateMachine gameplayStateMachine, StatesFactory statesFactory, IGameplayFactory gameplayFactory, ActionHandlerStateMachine actionHandlerStateMachine, ActionHandlerStatesFactory actionHandlerStatesFactory, WindowsSwitcher windowsSwitcher)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _statesFactory = statesFactory;
             _gameplayFactory = gameplayFactory;
             _actionHandlerStateMachine = actionHandlerStateMachine;
             _actionHandlerStatesFactory = actionHandlerStatesFactory;
+            _windowsSwitcher = windowsSwitcher;
         }
 
         public async void Initialize()
@@ -38,8 +41,13 @@ namespace Assets.Sources.Gameplay
             await _gameplayFactory.CreateWorldGenerator();
 
             _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayLoopState>());
+            _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayBootstraptState>());
+            _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayStartState>());
+            _gameplayStateMachine.RegisterState(_statesFactory.Create<MapSelectionState>());
 
-            await _gameplayStateMachine.Enter<GameplayLoopState>();
+            await _windowsSwitcher.CreateWindows();
+
+            await _gameplayStateMachine.Enter<GameplayStartState>();
         }
     }
 }

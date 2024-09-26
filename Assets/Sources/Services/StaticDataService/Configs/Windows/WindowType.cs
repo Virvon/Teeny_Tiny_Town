@@ -4,5 +4,7 @@
     {
         GameplayWindow,
         ItemsWindow,
+        StartWindow,
+        MapSelectionWindow,
     }
 }

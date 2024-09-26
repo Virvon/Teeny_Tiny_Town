@@ -38,6 +38,8 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
         {
             Window window = await _windowFactory.Create(_staticDataService.GetWindow(type).AssetReference);
 
+            window.Hide();
+
             return window;
         }
     }

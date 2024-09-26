@@ -9,11 +9,6 @@ namespace Assets.Sources.UI.Windows
     {
         [SerializeField] private Canvas _canvas;
 
-        private void Start()
-        {
-            Hide();
-        }
-
         public void Open()
         {
             _canvas.enabled = true;

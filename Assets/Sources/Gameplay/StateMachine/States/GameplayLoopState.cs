@@ -24,7 +24,7 @@ namespace Assets.Sources.Gameplay.StateMachine.States
             _world.Generate();
             await _worldGenerator.Generate();
             _world.Work();
-            await _windowsSwithcer.CreateWindows();
+            
             _windowsSwithcer.Switch(WindowType.GameplayWindow);
         }
 

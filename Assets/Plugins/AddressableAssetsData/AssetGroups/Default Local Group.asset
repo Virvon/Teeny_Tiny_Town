@@ -168,6 +168,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - Configs
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b6acc30a2b4eac4885d405d7a8947e9
+    m_Address: StartWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}
   m_SchemaSet:

@@ -4,6 +4,7 @@ using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Sources.UI.Windows
 {
