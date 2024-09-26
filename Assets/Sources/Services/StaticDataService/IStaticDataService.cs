@@ -1,6 +1,8 @@
 ﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.StaticDataService.Configs;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
+using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Services.StaticDataService
@@ -10,6 +12,7 @@ namespace Assets.Sources.Services.StaticDataService
         GroundsConfig GroundsConfig { get; }
         WindowsConfig WindowsConfig { get; }
         StoreItemsConfig StoreItemsConfig { get; }
+        WorldsConfig WorldsConfig { get; }
 
         RoadConfig GetRoad(GroundType groundType, RoadType roadType);
         TBuilding GetBuilding<TBuilding>(BuildingType buildingType)

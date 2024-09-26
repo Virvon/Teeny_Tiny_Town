@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+﻿using Assets.Sources.Gameplay.World;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
 using Assets.Sources.Services.AssetManagement;
@@ -19,10 +20,6 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
                 .AsSingle();
 
             Container
-                .BindFactory<string, UniTask<WorldGenerator>, WorldGenerator.Factory>()
-                .FromFactory<KeyPrefabFactoryAsync<WorldGenerator>>();
-
-            Container
                 .BindFactory<string, Vector3, Transform, UniTask<TileRepresentation>, TileRepresentation.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<TileRepresentation>>();
 
@@ -41,6 +38,14 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             Container
                 .BindFactory<string, UniTask<BuildingMarker>, BuildingMarker.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<BuildingMarker>>();
+
+            Container
+                .BindFactory<string, UniTask<WorldsList>, WorldsList.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<WorldsList>>();
+
+            Container
+               .BindFactory<string, Vector3, Transform, UniTask<World>, World.Factory>()
+               .FromFactory<KeyPrefabFactoryAsync<World>>();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.StateMachine.States;
+using Assets.Sources.Gameplay.World;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Services.StateMachine;
@@ -31,6 +32,7 @@ namespace Assets.Sources.Gameplay
         {
             await _gameplayFactory.CreateSelectFrame();
             await _gameplayFactory.CreateBuildingMarker();
+            WorldsList worldsList = await _gameplayFactory.CreateWorldsList();
 
             _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<NewBuildingPlacePositionHandler>());
             _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<RemovedBuildingPositionHandler>());
@@ -38,14 +40,12 @@ namespace Assets.Sources.Gameplay
 
             _actionHandlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
 
-            await _gameplayFactory.CreateWorldGenerator();
-
             _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayLoopState>());
-            _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayBootstraptState>());
             _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayStartState>());
             _gameplayStateMachine.RegisterState(_statesFactory.Create<MapSelectionState>());
 
             await _windowsSwitcher.CreateWindows();
+            await worldsList.Create();
 
             await _gameplayStateMachine.Enter<GameplayStartState>();
         }

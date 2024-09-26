@@ -7,12 +7,12 @@ namespace Assets.Sources.Gameplay.GameplayMover
 {
     public class GameplayMover
     {
-        private readonly World.WorldInfrastructure.World _world;
+        private readonly WorldChanger _world;
         private readonly IInputService _inputService;
 
         private Command _lastCommand;
 
-        public GameplayMover(World.WorldInfrastructure.World world, IInputService inputService)
+        public GameplayMover(WorldChanger world, IInputService inputService)
         {
             _world = world;
             _inputService = inputService;

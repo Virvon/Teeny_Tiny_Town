@@ -15,12 +15,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         [SerializeField] private float _cellSize;
 
         private IGameplayFactory _gameplayFactory;
-        private WorldInfrastructure.World _world;
+        private WorldChanger _world;
 
         private List<TileRepresentation> _tiles;
 
         [Inject]
-        private void Construct(IGameplayFactory gameplayFactory, WorldInfrastructure.World world)
+        private void Construct(IGameplayFactory gameplayFactory, WorldChanger world)
         {
             _gameplayFactory = gameplayFactory;
             _world = world;
@@ -46,7 +46,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 
         private async UniTask Create(Vector2Int gridPosition)
         {
-            Vector3 worldPosition = GridToWorldPosition(gridPosition);
+            Vector3 worldPosition = GridToWorldPosition(gridPosition) + transform.position;
             TileRepresentation tileRepresentation = await _gameplayFactory.CreateTile(worldPosition, transform);
             Tile tile = _world.GetTile(gridPosition);
 

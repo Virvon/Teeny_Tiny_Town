@@ -3,27 +3,30 @@ using System.Collections.Generic;
 using System;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
-using TileRepresentation = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.TileRepresentation;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
+using Assets.Sources.Infrastructure.Factories.WorldFactory;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 {
     public class WorldRepresentationChanger
     {
-        private GameplayMover.GameplayMover _gameplayMover;
-        private WorldInfrastructure.World _world;
-        private NewBuildingPlacePositionHandler _newBuildingPlacePositionHandler;
-        private RemovedBuildingPositionHandler _removedBuildingPositionHandler;
-        private ReplacedBuildingPositionHandler _replacedBuildingPositionHandler;
-        private IGameplayFactory _gameplayFactory;
+        private readonly GameplayMover.GameplayMover _gameplayMover;
+        private readonly WorldChanger _world;
+        private readonly NewBuildingPlacePositionHandler _newBuildingPlacePositionHandler;
+        private readonly RemovedBuildingPositionHandler _removedBuildingPositionHandler;
+        private readonly ReplacedBuildingPositionHandler _replacedBuildingPositionHandler;
+        private readonly IGameplayFactory _gameplayFactory;
+        private readonly IWorldFactory _worldFactory;
 
         public WorldRepresentationChanger(
             GameplayMover.GameplayMover gameplayMover,
-            WorldInfrastructure.World world,
+            WorldChanger world,
             NewBuildingPlacePositionHandler newBuildingPlacePositionHandler,
             RemovedBuildingPositionHandler removedBuildingPositionHandler,
             ReplacedBuildingPositionHandler replacedBuildingPositionHandler,
-            IGameplayFactory gameplayFactory)
+            IGameplayFactory gameplayFactory,
+            IWorldFactory worldFactory)
         {
             _gameplayMover = gameplayMover;
             _world = world;
@@ -36,6 +39,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
             _newBuildingPlacePositionHandler.Placed += OnNewBuildingPlaced;
             _removedBuildingPositionHandler.Removed += OnBuildingRemoved;
             _replacedBuildingPositionHandler.Replaced += OnBuildingReplaced;
+            _worldFactory = worldFactory;
         }
 
         ~WorldRepresentationChanger()
@@ -48,7 +52,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 
         public event Action GameplayMoved;
 
-        WorldGenerator WorldGenerator => _gameplayFactory.WorldGenerator;
+        WorldGenerator WorldGenerator => _worldFactory.WorldGenerator;
 
         private void OnNewBuildingPlaced(Vector2Int gridPosition) =>
             _gameplayMover.PlaceNewBuilding(gridPosition);

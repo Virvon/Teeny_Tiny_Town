@@ -9,7 +9,7 @@ using Assets.Sources.Gameplay.GameplayMover;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 {
-    public class World
+    public class WorldChanger
     {
         private const uint _length = 5;
         private const uint _width = 5;
@@ -19,7 +19,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
         private List<Tile> _tiles;
 
-        public World(IStaticDataService staticDataService)
+        public WorldChanger(IStaticDataService staticDataService)
         {
             _staticDataService = staticDataService;
 

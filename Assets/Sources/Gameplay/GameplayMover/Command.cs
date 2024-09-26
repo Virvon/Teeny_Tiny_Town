@@ -7,10 +7,10 @@ namespace Assets.Sources.Gameplay.GameplayMover
     public abstract class Command
     {
         public readonly Building BuildingForPlacing;
-        protected readonly World.WorldInfrastructure.World World;
+        protected readonly World.WorldInfrastructure.WorldChanger World;
         private readonly TileData[] _tileDatas;
 
-        public Command(World.WorldInfrastructure.World world)
+        public Command(World.WorldInfrastructure.WorldChanger world)
         {
             World = world;
             BuildingForPlacing = World.BuildingForPlacing;

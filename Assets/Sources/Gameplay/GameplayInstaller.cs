@@ -18,11 +18,8 @@ namespace Assets.Sources.Gameplay
             BindGameplayBootstrapper();
             BindGameplayStateMachine();
             BindGameplayFactory();
-            BindWorld();
-            BindGameplayMover();
             BindActionHandlerStateMachine();
             BindActionHandlerLayerMask();
-            BindWorldRepresentationChanger();
             BindMoveCounter();
             BindWindowsSwitcher();
             BindUiFactory();
@@ -43,10 +40,7 @@ namespace Assets.Sources.Gameplay
             Container.BindInterfacesAndSelfTo<MoveCounter>().AsSingle();
         }
 
-        private void BindWorldRepresentationChanger()
-        {
-            Container.BindInterfacesAndSelfTo<WorldRepresentationChanger>().AsSingle();
-        }
+        
 
         private void BindActionHandlerLayerMask()
         {
@@ -58,15 +52,9 @@ namespace Assets.Sources.Gameplay
             ActionHandlerStateMachineInstaller.Install(Container);
         }
 
-        private void BindGameplayMover()
-        {
-            Container.BindInterfacesAndSelfTo<GameplayMover.GameplayMover>().AsSingle();
-        }
+        
 
-        private void BindWorld()
-        {
-            Container.BindInterfacesAndSelfTo<World.WorldInfrastructure.World>().AsSingle();
-        }
+        
 
         private void BindGameplayFactory()
         {

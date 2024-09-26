@@ -9,13 +9,11 @@ namespace Assets.Sources.Gameplay.StateMachine.States
     public class GameplayLoopState : IState
     {
         private readonly WorldGenerator _worldGenerator;
-        private readonly World.WorldInfrastructure.World _world;
+        private readonly World.WorldInfrastructure.WorldChanger _world;
         private readonly WindowsSwitcher _windowsSwithcer;
 
-        public GameplayLoopState(WorldGenerator worldGenerator, World.WorldInfrastructure.World world, WindowsSwitcher windowsSwithcer)
+        public GameplayLoopState(WindowsSwitcher windowsSwithcer)
         {
-            _worldGenerator = worldGenerator;
-            _world = world;
             _windowsSwithcer = windowsSwithcer;
         }
 

@@ -8,7 +8,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
         private readonly Vector2Int _placedBuildingGridPosition;
         private readonly BuildingType _placedBuildingType;
 
-        public PlaceNewBuildingCommand(World.WorldInfrastructure.World world, Vector2Int placedBuildingGridPosition)
+        public PlaceNewBuildingCommand(World.WorldInfrastructure.WorldChanger world, Vector2Int placedBuildingGridPosition)
             : base(world)
         {
             _placedBuildingGridPosition = placedBuildingGridPosition;

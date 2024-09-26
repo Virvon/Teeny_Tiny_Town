@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
+using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Services.StaticDataService
@@ -23,6 +26,7 @@ namespace Assets.Sources.Services.StaticDataService
         public GroundsConfig GroundsConfig { get; private set; }
         public StoreItemsConfig StoreItemsConfig { get; private set; }
         public WindowsConfig WindowsConfig { get; private set; }
+        public WorldsConfig WorldsConfig { get; private set; }
 
         public async UniTask InitializeAsync()
         {
@@ -32,6 +36,7 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadGroundsConfig());
             tasks.Add(LoadWindowsConfig());
             tasks.Add(LoadStoreItemsConfig());
+            tasks.Add(LoadWorldsConfig());
 
             await UniTask.WhenAll(tasks);
         }
@@ -52,6 +57,13 @@ namespace Assets.Sources.Services.StaticDataService
             return _groundConfigs.TryGetValue(
                 groundType, out Dictionary<RoadType, RoadConfig> roadConfigs) ? (roadConfigs.TryGetValue(
                 roadType, out RoadConfig config) ? config : null) : null;
+        }
+
+        private async UniTask LoadWorldsConfig()
+        {
+            WorldsConfig[] worldsConfigs = await GetConfigs<WorldsConfig>();
+
+            WorldsConfig = worldsConfigs.First();
         }
 
         private async UniTask LoadStoreItemsConfig()
