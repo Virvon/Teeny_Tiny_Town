@@ -1,6 +1,8 @@
-﻿using Assets.Sources.Services.AssetManagement;
+﻿using Assets.Sources.Gameplay.Store;
+using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.UI.Windows;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
@@ -18,6 +20,10 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<AssetReferenceGameObject, UniTask<Window>, Window.Factory>()
                 .FromFactory<RefefencePrefabFactoryAsync<Window>>();
+
+            Container
+                .BindFactory<AssetReferenceGameObject, Transform, UniTask<StoreItem>, StoreItem.Factory>()
+                .FromFactory<RefefencePrefabFactoryAsync<StoreItem>>();
         }
     }
 }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets.Sources.Services.StaticDataService
 {
@@ -17,11 +15,14 @@ namespace Assets.Sources.Services.StaticDataService
         private Dictionary<BuildingType, BuildingConfig> _buildingConfigs;
         private Dictionary<GroundType, Dictionary<RoadType, RoadConfig>> _groundConfigs;
         private Dictionary<WindowType, WindowConfig> _windowConfigs;
+        private Dictionary<BuildingType, StoreItemConfig> _storeItemsConfigs;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
 
         public GroundsConfig GroundsConfig { get; private set; }
+        public StoreItemsConfig StoreItemsConfig { get; private set; }
+        public WindowsConfig WindowsConfig { get; private set; }
 
         public async UniTask InitializeAsync()
         {
@@ -30,11 +31,14 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadBuildingConfigs());
             tasks.Add(LoadGroundsConfig());
             tasks.Add(LoadWindowsConfig());
+            tasks.Add(LoadStoreItemsConfig());
 
             await UniTask.WhenAll(tasks);
         }
 
-        public WindowsConfig WindowsConfig { get; private set; }
+        public StoreItemConfig GetStoreItem(BuildingType buildingType) =>
+            _storeItemsConfigs.TryGetValue(buildingType, out StoreItemConfig config) ? config : null;
+
 
         public WindowConfig GetWindow(WindowType type) =>
             _windowConfigs.TryGetValue(type, out WindowConfig config) ? config : null;
@@ -48,6 +52,15 @@ namespace Assets.Sources.Services.StaticDataService
             return _groundConfigs.TryGetValue(
                 groundType, out Dictionary<RoadType, RoadConfig> roadConfigs) ? (roadConfigs.TryGetValue(
                 roadType, out RoadConfig config) ? config : null) : null;
+        }
+
+        private async UniTask LoadStoreItemsConfig()
+        {
+            StoreItemsConfig[] storeItemsConfigs = await GetConfigs<StoreItemsConfig>();
+
+            StoreItemsConfig = storeItemsConfigs.First();
+
+            _storeItemsConfigs = StoreItemsConfig.Configs.ToDictionary(value => value.BuildingType, value => value);
         }
 
         private async UniTask LoadWindowsConfig()

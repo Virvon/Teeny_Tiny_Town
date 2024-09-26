@@ -35,7 +35,11 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
 
         private PlayerProgress CreateNewProgress()
         {
-            return new PlayerProgress();
+            PlayerProgress progress = new PlayerProgress();
+
+            progress.WorldWallet.Value = 3000;
+
+            return progress;
         }
     }
 }

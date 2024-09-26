@@ -5,7 +5,10 @@ using Zenject;
 
 namespace Assets.Sources.Services.AssetManagement
 {
-    public class RefefencePrefabFactoryAsync<TComponent> : IFactory<AssetReferenceGameObject, UniTask<TComponent>>, IFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<TComponent>>, IFactory<AssetReferenceGameObject, Vector3, float, Transform, UniTask<TComponent>>
+    public class RefefencePrefabFactoryAsync<TComponent> : IFactory<AssetReferenceGameObject, UniTask<TComponent>>,
+        IFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<TComponent>>,
+        IFactory<AssetReferenceGameObject, Vector3, float, Transform, UniTask<TComponent>>,
+        IFactory<AssetReferenceGameObject, Transform, UniTask<TComponent>>
     {
         private readonly IAssetProvider _assetProvider;
         private readonly IInstantiator _instantiator;
@@ -34,6 +37,13 @@ namespace Assets.Sources.Services.AssetManagement
         {
             GameObject prefab = await _assetProvider.Load<GameObject>(assetReference);
             GameObject newObject = _instantiator.InstantiatePrefab(prefab, position, Quaternion.Euler(0, rotationY, 0), parent);
+            return newObject.GetComponent<TComponent>();
+        }
+
+        public async UniTask<TComponent> Create(AssetReferenceGameObject assetReference, Transform parent)
+        {
+            GameObject prefab = await _assetProvider.Load<GameObject>(assetReference);
+            GameObject newObject = _instantiator.InstantiatePrefab(prefab, parent);
             return newObject.GetComponent<TComponent>();
         }
     }

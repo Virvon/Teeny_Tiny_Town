@@ -9,11 +9,13 @@ namespace Assets.Sources.Services.StaticDataService
     {
         GroundsConfig GroundsConfig { get; }
         WindowsConfig WindowsConfig { get; }
+        StoreItemsConfig StoreItemsConfig { get; }
 
         RoadConfig GetRoad(GroundType groundType, RoadType roadType);
         TBuilding GetBuilding<TBuilding>(BuildingType buildingType)
             where TBuilding : BuildingConfig;
         UniTask InitializeAsync();
         WindowConfig GetWindow(WindowType type);
+        StoreItemConfig GetStoreItem(BuildingType buildingType);
     }
 }

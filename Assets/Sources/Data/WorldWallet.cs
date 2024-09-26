@@ -15,5 +15,15 @@ namespace Assets.Sources.Data
 
             ValueChanged?.Invoke(Value);
         }
+
+        public bool TryGet(uint value)
+        {
+            if(value > Value)
+                return false;
+
+            Value -= value;
+
+            return true;
+        }
     }
 }
