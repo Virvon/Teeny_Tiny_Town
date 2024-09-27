@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.StateMachine.States;
+using Assets.Sources.Gameplay.World;
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
@@ -8,16 +9,19 @@ using Zenject;
 
 namespace Assets.Sources.UI.Windows
 {
-    public class StartWindow : Window
+    public class MapSelectionWindow : Window
     {
-        [SerializeField] private Button _mapSelectionButton;
+        [SerializeField] private Button _nextMapButton;
+        [SerializeField] private Button _previousMapButton;
         [SerializeField] private Button _continueButton;
 
+        private WorldsList _worldsList;
         private GameplayStateMachine _gameplayStateMachine;
 
         [Inject]
-        private void Construct(GameplayStateMachine gameplayStateMachine)
+        private void Construct(WorldsList worldsList, GameplayStateMachine gameplayStateMachine)
         {
+            _worldsList = worldsList;
             _gameplayStateMachine = gameplayStateMachine;
         }
 
@@ -25,7 +29,8 @@ namespace Assets.Sources.UI.Windows
         {
             base.Open();
 
-            _mapSelectionButton.onClick.AddListener(OnMapSelectionButtonClicked);
+            _nextMapButton.onClick.AddListener(OnNextMapButtonClicked);
+            _previousMapButton.onClick.AddListener(OnPreviousMapButtonClicked);
             _continueButton.onClick.AddListener(OnContinueButtonClicked);
         }
 
@@ -33,13 +38,19 @@ namespace Assets.Sources.UI.Windows
         {
             base.Hide();
 
-            _mapSelectionButton.onClick.RemoveListener(OnMapSelectionButtonClicked);
+            _nextMapButton.onClick.RemoveListener(OnNextMapButtonClicked);
+            _previousMapButton.onClick.AddListener(OnPreviousMapButtonClicked);
             _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
         }
 
-        private void OnMapSelectionButtonClicked()
+        private void OnPreviousMapButtonClicked()
         {
-            _gameplayStateMachine.Enter<MapSelectionState>().Forget();
+            _worldsList.ShowPreviousWorld();
+        }
+
+        private void OnNextMapButtonClicked()
+        {
+            _worldsList.ShowNextWorld();
         }
 
         private void OnContinueButtonClicked()

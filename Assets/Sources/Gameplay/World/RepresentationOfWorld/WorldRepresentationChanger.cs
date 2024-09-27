@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
-using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 
@@ -16,43 +15,45 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         private readonly NewBuildingPlacePositionHandler _newBuildingPlacePositionHandler;
         private readonly RemovedBuildingPositionHandler _removedBuildingPositionHandler;
         private readonly ReplacedBuildingPositionHandler _replacedBuildingPositionHandler;
-        private readonly IGameplayFactory _gameplayFactory;
         private readonly IWorldFactory _worldFactory;
+        private readonly BuildingMarker _buildingMarker;
 
         public WorldRepresentationChanger(
             GameplayMover.GameplayMover gameplayMover,
             WorldChanger world,
-            NewBuildingPlacePositionHandler newBuildingPlacePositionHandler,
-            RemovedBuildingPositionHandler removedBuildingPositionHandler,
-            ReplacedBuildingPositionHandler replacedBuildingPositionHandler,
-            IGameplayFactory gameplayFactory,
-            IWorldFactory worldFactory)
+            //NewBuildingPlacePositionHandler newBuildingPlacePositionHandler,
+            //RemovedBuildingPositionHandler removedBuildingPositionHandler,
+            //ReplacedBuildingPositionHandler replacedBuildingPositionHandler,
+            IWorldFactory worldFactory,
+            BuildingMarker buildingMarker)
         {
             _gameplayMover = gameplayMover;
             _world = world;
-            _newBuildingPlacePositionHandler = newBuildingPlacePositionHandler;
-            _removedBuildingPositionHandler = removedBuildingPositionHandler;
-            _replacedBuildingPositionHandler = replacedBuildingPositionHandler;
-            _gameplayFactory = gameplayFactory;
+            //_newBuildingPlacePositionHandler = newBuildingPlacePositionHandler;
+            //_removedBuildingPositionHandler = removedBuildingPositionHandler;
+            //_replacedBuildingPositionHandler = replacedBuildingPositionHandler;
 
             _world.TilesChanged += OnTilesChanged;
-            _newBuildingPlacePositionHandler.Placed += OnNewBuildingPlaced;
-            _removedBuildingPositionHandler.Removed += OnBuildingRemoved;
-            _replacedBuildingPositionHandler.Replaced += OnBuildingReplaced;
+            //_newBuildingPlacePositionHandler.Placed += OnNewBuildingPlaced;
+            //_removedBuildingPositionHandler.Removed += OnBuildingRemoved;
+            //_replacedBuildingPositionHandler.Replaced += OnBuildingReplaced;
             _worldFactory = worldFactory;
+            _buildingMarker = buildingMarker;
         }
 
         ~WorldRepresentationChanger()
         {
-            _newBuildingPlacePositionHandler.Placed -= OnNewBuildingPlaced;
+            //_newBuildingPlacePositionHandler.Placed -= OnNewBuildingPlaced;
             _world.TilesChanged += OnTilesChanged;
-            _removedBuildingPositionHandler.Removed -= OnBuildingRemoved;
-            _replacedBuildingPositionHandler.Replaced -= OnBuildingReplaced;
+            //_removedBuildingPositionHandler.Removed -= OnBuildingRemoved;
+            //_replacedBuildingPositionHandler.Replaced -= OnBuildingReplaced;
         }
 
         public event Action GameplayMoved;
 
-        WorldGenerator WorldGenerator => _worldFactory.WorldGenerator;
+        public TileRepresentation StartTile => WorldGenerator.GetTile(_world.BuildingForPlacing.GridPosition);
+
+        private WorldGenerator WorldGenerator => _worldFactory.WorldGenerator;
 
         private void OnNewBuildingPlaced(Vector2Int gridPosition) =>
             _gameplayMover.PlaceNewBuilding(gridPosition);
@@ -75,8 +76,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
                 await tileRepresentation.Change(tile.BuildingType, tile.Ground.Type, tile.Ground.RoadType, tile.Ground.Rotation);
             }
 
-            await _newBuildingPlacePositionHandler.BuildingMarker.TryUpdate(_world.BuildingForPlacing.Type);
-            _newBuildingPlacePositionHandler.StartPlacing(WorldGenerator.GetTile(_world.BuildingForPlacing.GridPosition));
+            //await _newBuildingPlacePositionHandler.BuildingMarker.TryUpdate(_world.BuildingForPlacing.Type);
+            //_newBuildingPlacePositionHandler.StartPlacing(WorldGenerator.GetTile(_world.BuildingForPlacing.GridPosition));
+
+            await _buildingMarker.TryUpdate(_world.BuildingForPlacing.Type);
 
             GameplayMoved?.Invoke();
         }

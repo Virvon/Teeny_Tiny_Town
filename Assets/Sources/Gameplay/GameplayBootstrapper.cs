@@ -13,41 +13,43 @@ namespace Assets.Sources.Gameplay
     {
         private readonly GameplayStateMachine _gameplayStateMachine;
         private readonly StatesFactory _statesFactory;
-        private readonly IGameplayFactory _gameplayFactory;
-        private readonly ActionHandlerStateMachine _actionHandlerStateMachine;
-        private readonly ActionHandlerStatesFactory _actionHandlerStatesFactory;
+        
         private readonly WindowsSwitcher _windowsSwitcher;
+        private readonly IGameplayFactory _gameplayFactory;
 
-        public GameplayBootstrapper(GameplayStateMachine gameplayStateMachine, StatesFactory statesFactory, IGameplayFactory gameplayFactory, ActionHandlerStateMachine actionHandlerStateMachine, ActionHandlerStatesFactory actionHandlerStatesFactory, WindowsSwitcher windowsSwitcher)
+        public GameplayBootstrapper(
+            GameplayStateMachine gameplayStateMachine,
+            StatesFactory statesFactory,
+            
+            WindowsSwitcher windowsSwitcher,
+            IGameplayFactory gameplayFactory)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _statesFactory = statesFactory;
-            _gameplayFactory = gameplayFactory;
-            _actionHandlerStateMachine = actionHandlerStateMachine;
-            _actionHandlerStatesFactory = actionHandlerStatesFactory;
+            
             _windowsSwitcher = windowsSwitcher;
+            _gameplayFactory = gameplayFactory;
         }
 
         public async void Initialize()
-        {
-            await _gameplayFactory.CreateSelectFrame();
-            await _gameplayFactory.CreateBuildingMarker();
+        {          
             WorldsList worldsList = await _gameplayFactory.CreateWorldsList();
 
-            _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<NewBuildingPlacePositionHandler>());
-            _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<RemovedBuildingPositionHandler>());
-            _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<ReplacedBuildingPositionHandler>());
-
-            _actionHandlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
-
-            _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayLoopState>());
-            _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayStartState>());
-            _gameplayStateMachine.RegisterState(_statesFactory.Create<MapSelectionState>());
+            RegisterGameplayStates();
 
             await _windowsSwitcher.CreateWindows();
             await worldsList.Create();
 
             await _gameplayStateMachine.Enter<GameplayStartState>();
         }
+
+        private void RegisterGameplayStates()
+        {
+            _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayLoopState>());
+            _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayStartState>());
+            _gameplayStateMachine.RegisterState(_statesFactory.Create<MapSelectionState>());
+        }
+
+        
     }
 }

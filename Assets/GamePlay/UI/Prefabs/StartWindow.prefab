@@ -616,6 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1568540163141648451}
   _mapSelectionButton: {fileID: 1413571894243195051}
+  _continueButton: {fileID: 8344539769557277674}
 --- !u!1 &1342314234666461040
 GameObject:
   m_ObjectHideFlags: 0
@@ -3112,7 +3113,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 75679dcbaafe3f7429234b413f06a980, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0b98c01f481519a47a5dfe1ef6adc565, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

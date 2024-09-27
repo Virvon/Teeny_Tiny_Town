@@ -1,4 +1,6 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
+using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using UnityEngine;
@@ -8,13 +10,42 @@ namespace Assets.Sources.Gameplay.World
 {
     public class WorldInstaller : MonoInstaller
     {
+        [SerializeField] private LayerMask _actionHandlerLayerMask;
+
+        public WorldStateMachine WorldStateMachine { get; private set; }
+
         public override void InstallBindings()
         {
             BindWorldBootstrapper();
             BindWorldChanger();
+            BindActionHandlerLayerMask();
+            BindActionHandlerStateMachine();
             BindWorldRepresentationChanger();
             BindWorldFactory();
             BindGameplayMover();
+            BindWorldStateMachine();
+            BindMoveCounter();
+        }
+
+        private void BindActionHandlerLayerMask()
+        {
+            Container.BindInstance(_actionHandlerLayerMask).AsSingle();
+        }
+
+        private void BindActionHandlerStateMachine()
+        {
+            ActionHandlerStateMachineInstaller.Install(Container);
+        }
+
+        private void BindMoveCounter()
+        {
+            Container.BindInterfacesAndSelfTo<MoveCounter>().AsSingle();
+        }
+
+        private void BindWorldStateMachine()
+        {
+            WorldStateMachineInstaller.Install(Container);
+            WorldStateMachine = Container.Resolve<WorldStateMachine>();
         }
 
         private void BindGameplayMover()

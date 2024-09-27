@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
+using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -11,15 +12,15 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
     {
         [SerializeField] private GroundCreator _groundCreator;
 
-        private IGameplayFactory _gameplayFactory;
+        private IWorldFactory _worldFactory;
 
         [Inject]
-        private void Construct(IGameplayFactory gameplayFactory) =>
-            _gameplayFactory = gameplayFactory;
+        private void Construct(IWorldFactory worldFactory) =>
+            _worldFactory = worldFactory;
 
         private Transform BuildingPoint => _groundCreator.Ground.BuildingPoint;
 
         public async UniTask<Building> Create(BuildingType buildingType) =>
-            await _gameplayFactory.CreateBuilding(buildingType, BuildingPoint.position, transform);
+            await _worldFactory.CreateBuilding(buildingType, BuildingPoint.position, transform);
     }
 }

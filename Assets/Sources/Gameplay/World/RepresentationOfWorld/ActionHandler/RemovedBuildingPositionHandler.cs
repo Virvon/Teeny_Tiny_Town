@@ -7,8 +7,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
     public class RemovedBuildingPositionHandler : ActionHandlerState
     {
-        public RemovedBuildingPositionHandler(SelectFrame selectFrame, LayerMask layerMask) : base(selectFrame, layerMask)
+        private readonly GameplayMover.GameplayMover _gameplayMover;
+
+        public RemovedBuildingPositionHandler(SelectFrame selectFrame, LayerMask layerMask, GameplayMover.GameplayMover gameplayMover) : base(selectFrame, layerMask)
         {
+            _gameplayMover = gameplayMover;
         }
 
         public event Action<Vector2Int> Removed;
@@ -34,6 +37,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 SelectFrame.Hide();
 
                 Removed?.Invoke(tile.GridPosition);
+                _gameplayMover.RemoveBuilding(tile.GridPosition);
             }
         }
     }

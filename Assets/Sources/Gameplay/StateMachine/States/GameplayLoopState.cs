@@ -1,29 +1,22 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+﻿using Assets.Sources.Gameplay.World;
 using Assets.Sources.Services.StateMachine;
-using Assets.Sources.Services.StaticDataService.Configs.Windows;
-using Assets.Sources.UI.Windows;
 using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.StateMachine.States
 {
     public class GameplayLoopState : IState
     {
-        private readonly WorldGenerator _worldGenerator;
-        private readonly World.WorldInfrastructure.WorldChanger _world;
-        private readonly WindowsSwitcher _windowsSwithcer;
+        private readonly WorldsList _worldsList;
 
-        public GameplayLoopState(WindowsSwitcher windowsSwithcer)
+        public GameplayLoopState(WorldsList worldsList)
         {
-            _windowsSwithcer = windowsSwithcer;
+            _worldsList = worldsList;
         }
 
-        public async UniTask Enter()
+        public UniTask Enter()
         {
-            _world.Generate();
-            await _worldGenerator.Generate();
-            _world.Work();
-            
-            _windowsSwithcer.Switch(WindowType.GameplayWindow);
+            _worldsList.StartCurrentWorld();
+            return default;
         }
 
         public UniTask Exit()

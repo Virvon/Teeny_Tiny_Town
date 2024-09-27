@@ -11,16 +11,11 @@ namespace Assets.Sources.Gameplay
 {
     public class GameplayInstaller : MonoInstaller
     {
-        [SerializeField] private LayerMask _actionHandlerLayerMask;
-
         public override void InstallBindings()
         {
             BindGameplayBootstrapper();
             BindGameplayStateMachine();
             BindGameplayFactory();
-            BindActionHandlerStateMachine();
-            BindActionHandlerLayerMask();
-            BindMoveCounter();
             BindWindowsSwitcher();
             BindUiFactory();
         }
@@ -33,28 +28,7 @@ namespace Assets.Sources.Gameplay
         private void BindWindowsSwitcher()
         {
             Container.BindInterfacesAndSelfTo<WindowsSwitcher>().AsSingle();
-        }
-
-        private void BindMoveCounter()
-        {
-            Container.BindInterfacesAndSelfTo<MoveCounter>().AsSingle();
-        }
-
-        
-
-        private void BindActionHandlerLayerMask()
-        {
-            Container.BindInstance(_actionHandlerLayerMask).AsSingle();
-        }
-
-        private void BindActionHandlerStateMachine()
-        {
-            ActionHandlerStateMachineInstaller.Install(Container);
-        }
-
-        
-
-        
+        }      
 
         private void BindGameplayFactory()
         {

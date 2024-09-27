@@ -15,8 +15,8 @@ namespace Assets.Sources.Services.Input
         {
             _inputActionsSheme = new();
 
-            _inputActionsSheme.GameplayInput.Enable();
-            _inputActionsSheme.GameplayWindowInput.Enable();
+            //_inputActionsSheme.GameplayInput.Enable();
+            //_inputActionsSheme.GameplayWindowInput.Enable();
 
             _inputActionsSheme.GameplayInput.HandlePressedMove.performed += OnHandlePressedMoveStarted;
             _inputActionsSheme.GameplayInput.HandlePressedMove.performed += OnHandlePressedMovePerformed;
@@ -47,6 +47,14 @@ namespace Assets.Sources.Services.Input
         public event Action UndoButtonPressed;
         public event Action RemoveBuildingButtonPressed;
         public event Action ReplaceBuildingButtonPressed;
+
+        public void SetEnabled(bool enabled)
+        {
+            if (enabled)
+                _inputActionsSheme.Enable();
+            else
+                _inputActionsSheme.Disable();
+        }
 
         private void OnHandleMovePerformed(InputAction.CallbackContext callbackContext)
         {

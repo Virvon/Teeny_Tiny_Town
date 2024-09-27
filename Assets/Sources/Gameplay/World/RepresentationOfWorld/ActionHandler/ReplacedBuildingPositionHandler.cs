@@ -11,6 +11,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
     {
         private readonly SelectFrame _choosedBuildingSelectFrame;
         private readonly SelectFrame.Factory _selectFrameFactory;
+        private readonly GameplayMover.GameplayMover _gameplayMover;
 
         private readonly Vector3 _choosedBuildingPositionOffset = new Vector3(0, 2, 0);
 
@@ -99,6 +100,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                         _choosedPlaceSelectFrame.Hide();
 
                         Replaced?.Invoke(_choosedToReplacingTile.GridPosition, _choosedToReplacingTile.BuildingType, tile.GridPosition, tile.BuildingType);
+                        _gameplayMover.ReplaceBuilding(_choosedToReplacingTile.GridPosition, _choosedToReplacingTile.BuildingType, tile.GridPosition, tile.BuildingType);
                     }
                 }
                 else if (tile.IsEmpty == false)

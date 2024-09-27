@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da19e42d25602bf49b92c9f0e8cc8e79, type: 3}
   m_Name: WorldsConfig
   m_EditorClassIdentifier: 
+  DistanceBetweenWorlds: 20
   Configs:
   - Length: 5
     Width: 5

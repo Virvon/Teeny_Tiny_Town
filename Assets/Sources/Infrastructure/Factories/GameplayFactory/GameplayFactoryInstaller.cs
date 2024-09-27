@@ -20,26 +20,6 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
                 .AsSingle();
 
             Container
-                .BindFactory<string, Vector3, Transform, UniTask<TileRepresentation>, TileRepresentation.Factory>()
-                .FromFactory<KeyPrefabFactoryAsync<TileRepresentation>>();
-
-            Container
-                .BindFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<Building>, Building.Factory>()
-                .FromFactory<RefefencePrefabFactoryAsync<Building>>();
-
-            Container
-                .BindFactory<string, UniTask<SelectFrame>, SelectFrame.Factory>()
-                .FromFactory<KeyPrefabFactoryAsync<SelectFrame>>();
-
-            Container
-                .BindFactory<AssetReferenceGameObject, Vector3, float, Transform, UniTask<Ground>, Ground.Factory>()
-                .FromFactory<RefefencePrefabFactoryAsync<Ground>>();
-
-            Container
-                .BindFactory<string, UniTask<BuildingMarker>, BuildingMarker.Factory>()
-                .FromFactory<KeyPrefabFactoryAsync<BuildingMarker>>();
-
-            Container
                 .BindFactory<string, UniTask<WorldsList>, WorldsList.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<WorldsList>>();
 

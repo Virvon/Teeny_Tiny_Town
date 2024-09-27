@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
+using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
@@ -9,13 +10,13 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 {
     public class BuildingMarker : MonoBehaviour
     {
-        private IGameplayFactory _gameplayFactory;
+        private IWorldFactory _worldFactory;
         private Building _building;
 
         [Inject]
-        private void Construct(IGameplayFactory gameplayFactory)
+        private void Construct(IWorldFactory worldFactory)
         {
-            _gameplayFactory = gameplayFactory;
+            _worldFactory = worldFactory;
         }
 
         public TileRepresentation MarkedTile { get; private set; }
@@ -52,7 +53,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             {
                 _building?.Destroy();
 
-                _building = await _gameplayFactory.CreateBuilding(targetBuildingType, transform.position, transform);
+                _building = await _worldFactory.CreateBuilding(targetBuildingType, transform.position, transform);
             }
         }
 

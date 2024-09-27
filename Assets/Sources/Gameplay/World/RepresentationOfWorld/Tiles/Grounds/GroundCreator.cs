@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Infrastructure.Factories.GameplayFactory;
+﻿using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -10,12 +10,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds
     {
         [SerializeField] private Transform _groundPoint;
 
-        private IGameplayFactory _gameplayFactory;
+        private IWorldFactory _worldFactory;
 
         [Inject]
-        private void Construct(IGameplayFactory gameplayFactory)
+        private void Construct(IWorldFactory worldFactory)
         {
-            _gameplayFactory = gameplayFactory;
+            _worldFactory = worldFactory;
         }
 
         public Ground Ground { get; private set; }
@@ -25,7 +25,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds
             if (Ground != null)
                 Destroy(Ground.gameObject);
 
-            Ground = await _gameplayFactory.CreateGround(groundType, roadType, _groundPoint.position, rotation, transform);
+            Ground = await _worldFactory.CreateGround(groundType, roadType, _groundPoint.position, rotation, transform);
         }
     }
 }

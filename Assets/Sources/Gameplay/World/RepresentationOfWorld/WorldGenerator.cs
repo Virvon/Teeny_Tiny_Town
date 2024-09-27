@@ -1,6 +1,6 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
-using Assets.Sources.Infrastructure.Factories.GameplayFactory;
+using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +14,15 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         [SerializeField] private TileRepresentation _tile;
         [SerializeField] private float _cellSize;
 
-        private IGameplayFactory _gameplayFactory;
+        private IWorldFactory _worldFactory;
         private WorldChanger _world;
 
         private List<TileRepresentation> _tiles;
 
         [Inject]
-        private void Construct(IGameplayFactory gameplayFactory, WorldChanger world)
+        private void Construct(IWorldFactory worldFactory, WorldChanger world)
         {
-            _gameplayFactory = gameplayFactory;
+            _worldFactory = worldFactory;
             _world = world;
 
             _tiles = new();
@@ -47,7 +47,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         private async UniTask Create(Vector2Int gridPosition)
         {
             Vector3 worldPosition = GridToWorldPosition(gridPosition) + transform.position;
-            TileRepresentation tileRepresentation = await _gameplayFactory.CreateTile(worldPosition, transform);
+            TileRepresentation tileRepresentation = await _worldFactory.CreateTileRepresentation(worldPosition, transform);
             Tile tile = _world.GetTile(gridPosition);
 
             tileRepresentation.Init(gridPosition);

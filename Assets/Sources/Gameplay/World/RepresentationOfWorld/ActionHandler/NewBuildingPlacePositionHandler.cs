@@ -9,21 +9,38 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
     {
         private const float PressedBuildingHeight = 5;
 
-        public readonly BuildingMarker BuildingMarker;
+        private readonly BuildingMarker _buildingMarker;
+        private readonly GameplayMover.GameplayMover _gameplayMover;
+        private readonly WorldRepresentationChanger _worldRepresentationChanger;
 
         private TileRepresentation _handlePressedMoveStartTile;
         private bool _isBuildingPressed;
 
-        public NewBuildingPlacePositionHandler(SelectFrame selectFrame, LayerMask layerMask, BuildingMarker buildingMarker) : base(selectFrame, layerMask)
+        public NewBuildingPlacePositionHandler(
+            SelectFrame selectFrame,
+            LayerMask layerMask,
+            BuildingMarker buildingMarker,
+            GameplayMover.GameplayMover gameplayMover,
+            WorldRepresentationChanger worldRepresentationChanger)
+            : base(selectFrame, layerMask)
         {
-            BuildingMarker = buildingMarker;
+            _buildingMarker = buildingMarker;
+            _gameplayMover = gameplayMover;
+            _worldRepresentationChanger = worldRepresentationChanger;
+
+            _worldRepresentationChanger.GameplayMoved += StartPlacing;
+        }
+
+        ~NewBuildingPlacePositionHandler()
+        {
+            _worldRepresentationChanger.GameplayMoved -= StartPlacing;
         }
 
         public event Action<Vector2Int> Placed;
 
         public override UniTask Enter()
         {
-            BuildingMarker.Show();
+            _buildingMarker.Show();
             SelectFrame.SelectLast();
 
             return default;
@@ -32,14 +49,16 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         public override UniTask Exit()
         {
             SelectFrame.Hide();
-            BuildingMarker.Hide();
+            _buildingMarker.Hide();
 
             return default;
         }
 
-        public void StartPlacing(TileRepresentation startTile)
+        public void StartPlacing()
         {
-            BuildingMarker.Mark(startTile);
+            TileRepresentation startTile = _worldRepresentationChanger.StartTile;
+
+            _buildingMarker.Mark(startTile);
             SelectFrame.Select(startTile);
         }
 
@@ -50,7 +69,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 SelectFrame.Select(tile);
 
                 if (_isBuildingPressed == false)
-                    BuildingMarker.Mark(tile);
+                    _buildingMarker.Mark(tile);
             }
             else if (_isBuildingPressed)
             {
@@ -66,7 +85,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 {
                     Vector3 worldPosition = ray.GetPoint(distanceToPlane);
 
-                    BuildingMarker.Replace(new Vector3(worldPosition.x, PressedBuildingHeight, worldPosition.z));
+                    _buildingMarker.Replace(new Vector3(worldPosition.x, PressedBuildingHeight, worldPosition.z));
                 }
             }
         }
@@ -75,14 +94,15 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty)
             {
-                BuildingMarker.Mark(tile);
+                _buildingMarker.Mark(tile);
                 SelectFrame.Hide();
 
                 Placed?.Invoke(tile.GridPosition);
+                _gameplayMover.PlaceNewBuilding(tile.GridPosition);
             }
             else if (_isBuildingPressed)
             {
-                BuildingMarker.Mark(_handlePressedMoveStartTile);
+                _buildingMarker.Mark(_handlePressedMoveStartTile);
                 SelectFrame.Select(_handlePressedMoveStartTile);
             }
 
