@@ -17,7 +17,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         private List<Tile> _adjacentTiles;
         private List<Tile> _aroundTiles;
 
-        public Tile(Vector2Int greedPosition, IStaticDataService staticDataService)
+        public Tile(Vector2Int greedPosition, IStaticDataService staticDataService, BuildingType buildingType)
         {
             GridPosition = greedPosition;
             _staticDataService = staticDataService;
@@ -25,6 +25,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             _adjacentTiles = new();
             _aroundTiles = new();
             Ground = new(staticDataService);
+
+            PutBuilding(buildingType);
         }
 
         public Ground Ground { get; private set; }

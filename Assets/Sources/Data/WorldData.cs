@@ -9,20 +9,9 @@ namespace Assets.Sources.Data
     {
         public List<TileData> Tiles;
 
-        public WorldData(uint length, uint width)
+        public WorldData(uint length, uint width, List<TileData> tiles)
         {
-            Tiles = new();
-
-            Create(length, width);
-        }
-
-        private void Create(uint length, uint width)
-        {
-            for (int x = 0; x < length; x++)
-            {
-                for (int z = 0; z < width; z++)
-                    Tiles.Add(new TileData(new Vector2Int(x, z)));
-            }
+            Tiles = tiles;
         }
     }
 }

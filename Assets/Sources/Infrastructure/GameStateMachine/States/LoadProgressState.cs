@@ -5,6 +5,8 @@ using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {
@@ -53,7 +55,13 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
             WorldData[] worldDatas = new WorldData[worldConfigs.Length];
 
             for(int i = 0; i < worldConfigs.Length; i++)
-                worldDatas[i] = new WorldData(worldConfigs[i].Length, worldConfigs[i].Width);
+            {
+                WorldConfig worldConfig = worldConfigs[i];
+
+                List<TileData> tileDatas = worldConfig.TileConfigs.Select(tileConfig => new TileData(tileConfig.GridPosition, tileConfig.BuildingType)).ToList();
+
+                worldDatas[i] = new WorldData(worldConfig.Length, worldConfig.Width, tileDatas);
+            }
 
             return worldDatas;
         }

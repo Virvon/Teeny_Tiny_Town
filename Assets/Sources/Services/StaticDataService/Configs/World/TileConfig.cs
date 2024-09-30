@@ -1,17 +1,18 @@
 ﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using System;
 using UnityEngine;
 
-namespace Assets.Sources.Data
+namespace Assets.Sources.Services.StaticDataService.Configs.World
 {
-    public class TileData
+    [Serializable]
+    public class TileConfig
     {
         public Vector2Int GridPosition;
         public BuildingType BuildingType;
 
-        public TileData(Vector2Int gridPosition, BuildingType buildingType)
+        public TileConfig(Vector2Int gridPosition)
         {
             GridPosition = gridPosition;
-            BuildingType = buildingType;
         }
     }
 }

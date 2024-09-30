@@ -16,5 +16,36 @@ MonoBehaviour:
   Configs:
   - Length: 4
     Width: 4
-  - Length: 7
-    Width: 7
+    TileConfigs:
+    - GridPosition: {x: 0, y: 0}
+      BuildingType: 1
+    - GridPosition: {x: 0, y: 1}
+      BuildingType: 0
+    - GridPosition: {x: 0, y: 2}
+      BuildingType: 0
+    - GridPosition: {x: 0, y: 3}
+      BuildingType: 0
+    - GridPosition: {x: 1, y: 0}
+      BuildingType: 1
+    - GridPosition: {x: 1, y: 1}
+      BuildingType: 0
+    - GridPosition: {x: 1, y: 2}
+      BuildingType: 0
+    - GridPosition: {x: 1, y: 3}
+      BuildingType: 0
+    - GridPosition: {x: 2, y: 0}
+      BuildingType: 0
+    - GridPosition: {x: 2, y: 1}
+      BuildingType: 1
+    - GridPosition: {x: 2, y: 2}
+      BuildingType: 0
+    - GridPosition: {x: 2, y: 3}
+      BuildingType: 0
+    - GridPosition: {x: 3, y: 0}
+      BuildingType: 2
+    - GridPosition: {x: 3, y: 1}
+      BuildingType: 0
+    - GridPosition: {x: 3, y: 2}
+      BuildingType: 1
+    - GridPosition: {x: 3, y: 3}
+      BuildingType: 0

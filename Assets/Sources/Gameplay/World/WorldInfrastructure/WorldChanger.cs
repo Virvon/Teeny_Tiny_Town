@@ -210,7 +210,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         private void Fill()
         {
             foreach(TileData tileData in _world.WorldData.Tiles)
-                _tiles.Add(new Tile(tileData.GridPosition, _staticDataService));
+                _tiles.Add(new Tile(tileData.GridPosition, _staticDataService, tileData.BuildingType));
         }
 
         private void AddNewBuilding()

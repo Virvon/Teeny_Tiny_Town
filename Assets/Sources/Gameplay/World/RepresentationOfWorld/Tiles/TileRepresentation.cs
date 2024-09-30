@@ -51,8 +51,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
         public async UniTask Change(BuildingType buildingType, GroundType groundType, RoadType roadType, GroundRotation groundRotation)
         {
-            await TryChangeBuilding(buildingType);
             await _groundCreator.Create(groundType, roadType, groundRotation);
+            await TryChangeBuilding(buildingType);
         }
 
         public void DestroyBuilding()
