@@ -2,6 +2,8 @@
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.StateMachine;
+using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
@@ -11,12 +13,14 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
         private readonly IPersistentProgressService _persistentProgressService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly GameStateMachine _gameStateMachine;
+        private readonly IStaticDataService _staticDataService;
 
-        public LoadProgressState(IPersistentProgressService persistentProgressService, ISaveLoadService saveLoadService, GameStateMachine gameStateMachine)
+        public LoadProgressState(IPersistentProgressService persistentProgressService, ISaveLoadService saveLoadService, GameStateMachine gameStateMachine, IStaticDataService staticDataService)
         {
             _persistentProgressService = persistentProgressService;
             _saveLoadService = saveLoadService;
             _gameStateMachine = gameStateMachine;
+            _staticDataService = staticDataService;
         }
 
         public UniTask Enter()
@@ -35,11 +39,23 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
 
         private PlayerProgress CreateNewProgress()
         {
-            PlayerProgress progress = new PlayerProgress();
+            PlayerProgress progress = new PlayerProgress(GetWorldDatas());
 
             progress.WorldWallet.Value = 3000;
 
             return progress;
+        }
+
+        private WorldData[] GetWorldDatas()
+        {
+            WorldConfig[] worldConfigs = _staticDataService.WorldsConfig.Configs;
+
+            WorldData[] worldDatas = new WorldData[worldConfigs.Length];
+
+            for(int i = 0; i < worldConfigs.Length; i++)
+                worldDatas[i] = new WorldData(worldConfigs[i].Length, worldConfigs[i].Width);
+
+            return worldDatas;
         }
     }
 }

@@ -21,18 +21,14 @@ namespace Assets.Sources.UI.Windows
             _gameplayStateMachine = gameplayStateMachine;
         }
 
-        public override void Open()
+        private void OnEnable()
         {
-            base.Open();
-
             _mapSelectionButton.onClick.AddListener(OnMapSelectionButtonClicked);
             _continueButton.onClick.AddListener(OnContinueButtonClicked);
         }
 
-        public override void Hide()
+        private void OnDisable()
         {
-            base.Hide();
-
             _mapSelectionButton.onClick.RemoveListener(OnMapSelectionButtonClicked);
             _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
         }

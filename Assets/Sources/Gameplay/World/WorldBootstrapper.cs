@@ -50,6 +50,7 @@ namespace Assets.Sources.Gameplay.World
             _worldChanger.Work();
 
             _worldStateMachine.RegisterState(_statesFactory.Create<ChangeWorldState>());
+            _worldStateMachine.RegisterState(_statesFactory.Create<ExitWorldState>());
         }
 
         private void RegisterActionHandlerStates()

@@ -37,7 +37,6 @@ namespace Assets.Sources.Gameplay
 
             RegisterGameplayStates();
 
-            await _windowsSwitcher.CreateWindows();
             await worldsList.Create();
 
             await _gameplayStateMachine.Enter<GameplayStartState>();

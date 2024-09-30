@@ -25,21 +25,17 @@ namespace Assets.Sources.UI.Windows
             _gameplayStateMachine = gameplayStateMachine;
         }
 
-        public override void Open()
+        private void OnEnable()
         {
-            base.Open();
-
             _nextMapButton.onClick.AddListener(OnNextMapButtonClicked);
             _previousMapButton.onClick.AddListener(OnPreviousMapButtonClicked);
             _continueButton.onClick.AddListener(OnContinueButtonClicked);
         }
 
-        public override void Hide()
+        private void OnDisable()
         {
-            base.Hide();
-
             _nextMapButton.onClick.RemoveListener(OnNextMapButtonClicked);
-            _previousMapButton.onClick.AddListener(OnPreviousMapButtonClicked);
+            _previousMapButton.onClick.RemoveListener(OnPreviousMapButtonClicked);
             _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
         }
 

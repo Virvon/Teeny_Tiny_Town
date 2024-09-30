@@ -4,33 +4,25 @@ using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Sources.UI.Windows
 {
     public class WindowsSwitcher
     {
-        private readonly IStaticDataService _staticDataService;
-        private readonly IUiFactory _uiFactory;
         private readonly Dictionary<WindowType, Window> _windows;
 
         private Window _currentWindow;
 
-        public WindowsSwitcher(IStaticDataService staticDataService, IUiFactory uiFactory)
+        public WindowsSwitcher()
         {
-            _staticDataService = staticDataService;
-            _uiFactory = uiFactory;
-
             _windows = new();
         }
 
-        public async UniTask CreateWindows()
+        public void RegisterWindow(WindowType type, Window window)
         {
-            foreach(WindowConfig windowConfig in _staticDataService.WindowsConfig.Configs)
-            {
-                Window window = await _uiFactory.CreateWindow(windowConfig.Type);
-                _windows.Add(windowConfig.Type, window);
-            }
+            _windows.Add(type, window);
         }
 
         public void Switch(WindowType windowTypy)
@@ -38,6 +30,14 @@ namespace Assets.Sources.UI.Windows
             _currentWindow?.Hide();
             _currentWindow = _windows[windowTypy];
             _currentWindow.Open();
+        }
+
+        public bool Contains(WindowType windowType) =>
+            _windows.Keys.Contains(windowType);
+
+        public void Remove(WindowType gameplayWindow)
+        {
+            _windows.Remove(gameplayWindow);
         }
     }
 }

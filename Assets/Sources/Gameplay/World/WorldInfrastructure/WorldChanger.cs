@@ -6,22 +6,22 @@ using Random = UnityEngine.Random;
 using Assets.Sources.Services.StaticDataService;
 using UnityEngine.InputSystem.Utilities;
 using Assets.Sources.Gameplay.GameplayMover;
+using Assets.Sources.Data;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 {
     public class WorldChanger
     {
-        private const uint _length = 5;
-        private const uint _width = 5;
         private const uint MinTilesCountToMerge = 3;
 
         private readonly IStaticDataService _staticDataService;
-
+        private World _world;
         private List<Tile> _tiles;
 
-        public WorldChanger(IStaticDataService staticDataService)
+        public WorldChanger(IStaticDataService staticDataService, World world)
         {
             _staticDataService = staticDataService;
+            _world = world;
 
             _tiles = new();
         }
@@ -82,9 +82,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         public Tile GetTile(Vector2Int gridPosition) =>
             _tiles.First(tile => tile.GridPosition == gridPosition);
 
-        public void Update(ReadOnlyArray<TileData> tileDatas, Building buildingToPlacing)
+        public void Update(ReadOnlyArray<TileInfrastructureData> tileDatas, Building buildingToPlacing)
         {
-            foreach (TileData tileData in tileDatas)
+            foreach (TileInfrastructureData tileData in tileDatas)
             {
                 Tile tile = GetTile(tileData.GridPosition);
 
@@ -209,11 +209,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
         private void Fill()
         {
-            for (int x = 0; x < _length; x++)
-            {
-                for (int z = 0; z < _width; z++)
-                    _tiles.Add(new Tile(new Vector2Int(x, z), _staticDataService));
-            }
+            foreach(TileData tileData in _world.WorldData.Tiles)
+                _tiles.Add(new Tile(tileData.GridPosition, _staticDataService));
         }
 
         private void AddNewBuilding()

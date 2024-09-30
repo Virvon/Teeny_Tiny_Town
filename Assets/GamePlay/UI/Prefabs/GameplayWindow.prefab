@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 1568540163141648451}
   - component: {fileID: 2244421405932116770}
   - component: {fileID: 2539942933464453976}
-  - component: {fileID: 7520084279647918818}
+  - component: {fileID: 4909781903856161703}
   m_Layer: 5
   m_Name: GameplayWindow
   m_TagString: Untagged
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7520084279647918818
+--- !u!114 &4909781903856161703
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,10 +266,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 563100173173134119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2607c874762ca54eaf63d2bb2b6ab9a, type: 3}
+  m_Script: {fileID: 11500000, guid: bb8fc3b09a08c534b83bfa7b46c5ac29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1568540163141648451}
+  _exitButton: {fileID: 9133772129675559181}
 --- !u!1 &825666121049312744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,6 +1779,7 @@ GameObject:
   - component: {fileID: 1384236747221187088}
   - component: {fileID: 615761300790740030}
   - component: {fileID: 9128661817010053534}
+  - component: {fileID: 9133772129675559181}
   m_Layer: 0
   m_Name: HideWindowButton
   m_TagString: Untagged
@@ -1919,6 +1921,50 @@ MonoBehaviour:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     m_Rotation: 0
+--- !u!114 &9133772129675559181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3750933991115426194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 9128661817010053534}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3889407023889652932
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,9 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+﻿using Assets.Sources.Data;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using UnityEngine;
 using Zenject;
@@ -11,6 +13,7 @@ namespace Assets.Sources.Gameplay.World
     public class WorldInstaller : MonoInstaller
     {
         [SerializeField] private LayerMask _actionHandlerLayerMask;
+        [SerializeField] private World _world;
 
         public WorldStateMachine WorldStateMachine { get; private set; }
 
@@ -25,6 +28,18 @@ namespace Assets.Sources.Gameplay.World
             BindGameplayMover();
             BindWorldStateMachine();
             BindMoveCounter();
+            BindUiFactory();
+            BindWorld();
+        }
+
+        private void BindWorld()
+        {
+            Container.BindInstance(_world).AsSingle();
+        }
+
+        private void BindUiFactory()
+        {
+            UiFactoryInstaller.Install(Container);
         }
 
         private void BindActionHandlerLayerMask()

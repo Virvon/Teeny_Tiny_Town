@@ -8,17 +8,17 @@ namespace Assets.Sources.Gameplay.GameplayMover
     {
         public readonly Building BuildingForPlacing;
         protected readonly World.WorldInfrastructure.WorldChanger World;
-        private readonly TileData[] _tileDatas;
+        private readonly TileInfrastructureData[] _tileDatas;
 
         public Command(World.WorldInfrastructure.WorldChanger world)
         {
             World = world;
             BuildingForPlacing = World.BuildingForPlacing;
-            _tileDatas = World.Tiles.Select(tile => new TileData(tile.GridPosition, tile.BuildingType, tile.Ground.RoadType, tile.Ground.Rotation)).ToArray();
+            _tileDatas = World.Tiles.Select(tile => new TileInfrastructureData(tile.GridPosition, tile.BuildingType, tile.Ground.RoadType, tile.Ground.Rotation)).ToArray();
         }
 
         public abstract void Change();
 
-        public ReadOnlyArray<TileData> TileDatas => _tileDatas;
+        public ReadOnlyArray<TileInfrastructureData> TileDatas => _tileDatas;
     }
 }

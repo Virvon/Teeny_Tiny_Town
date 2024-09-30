@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
@@ -14,12 +15,12 @@ namespace Assets.Sources.UI.Windows
             Hide();
         }
 
-        public virtual void Open()
+        public void Open()
         {
             _canvas.enabled = true;
         }
 
-        public virtual void Hide()
+        public void Hide()
         {
             _canvas.enabled = false;
         }

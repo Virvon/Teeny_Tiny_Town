@@ -6,10 +6,12 @@ namespace Assets.Sources.Data
     public class PlayerProgress
     {
         public WorldWallet WorldWallet;
+        public WorldData[] WorldDatas;
 
-        public PlayerProgress()
+        public PlayerProgress(WorldData[] worldDatas)
         {
             WorldWallet = new();
+            WorldDatas = worldDatas;
         }
     }
 }

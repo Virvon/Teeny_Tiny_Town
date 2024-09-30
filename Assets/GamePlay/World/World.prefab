@@ -47,6 +47,7 @@ MonoBehaviour:
   _actionHandlerLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  _world: {fileID: 5296909339762190094}
 --- !u!1 &5847459068844677991
 GameObject:
   m_ObjectHideFlags: 0
