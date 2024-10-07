@@ -1,6 +1,5 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Services.StaticDataService;
-using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
@@ -30,29 +29,28 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         public Ground Ground { get; private set; }
 
-        public override async UniTask PutBuilding(BuildingType buildingType)
-        {
-            BuildingType = buildingType;
+        public override async UniTask PutBuilding(BuildingType buildingType) =>
+            await TryUpdateBuildingsChain(buildingType);
 
-            GetAllUpdatedByBuildingTiles();
-            await TileRepresentation.TryChangeBuilding(BuildingType);
-        }
-
-        public override void RemoveBuilding()
+        public override async void RemoveBuilding()
         {
             base.RemoveBuilding();
+
+            Ground.SetEmpty(_aroundTiles);
+            ChangeGroundsInChain(new(), true);
+            await ChangeRoadsInChain(new());
         }
 
         public void ValidateRoadType() =>
             Ground.TryValidateRoad(_adjacentTiles, IsEmpty, GridPosition);
 
         public void ValidateGroundType() =>
-            Ground.TryUpdate(_aroundTiles, IsEmpty);
+            Ground.TryTakeAroundTilesGroundType(_aroundTiles, IsEmpty);
 
 
-        private void GetAllUpdatedByBuildingTiles()
+        private async UniTask TryUpdateBuildingsChain(BuildingType buildingType)
         {
-            List<RoadTile> changedTiles = new() { this };
+            await CreateBuilding(buildingType);
 
             if (IsEmpty)
                 return;
@@ -65,27 +63,36 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
                 if (GetBuildingsChainLength(countedTiles) >= MinTilesCountToMerge)
                 {
-                    changedTiles.Union(countedTiles);
-
                     List<RoadTile> tilesForRemoveBuildings = countedTiles;
                     tilesForRemoveBuildings.Remove(this);
 
                     foreach (Tile tile in countedTiles)
                         tile.RemoveBuilding();
 
-                    UpdateBuilding();
+                    await UpgradeBuilding();
                 }
                 else
                 {
                     chainCheakCompleted = true;
                 }
             }
+
+            
         }
 
-        private void UpdateBuilding()
+        private async UniTask UpgradeBuilding() =>
+            await CreateBuilding(StaticDataService.GetBuilding<BuildingConfig>(BuildingType).NextBuilding);
+
+        private async UniTask CreateBuilding(BuildingType type)
         {
-            BuildingType = StaticDataService.GetBuilding<BuildingConfig>(BuildingType).NextBuilding;
-            ChangeGroundType();
+            BuildingType = type;
+
+            if (Ground.TryUpdate(BuildingType))
+                ChangeGroundsInChain(new(), true);
+
+            await ChangeRoadsInChain(new());
+
+            await TileRepresentation.TryChangeBuilding(BuildingType);
         }
 
         public void AddAdjacentTile(RoadTile adjacentTile)
@@ -119,11 +126,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             InspectCount++;
 
             countedTiles.Add(this);
-            bool x = Ground.TryValidateRoad(_adjacentTiles, IsEmpty, GridPosition);
 
-            Debug.Log(GridPosition + " " + x + " " + Ground.RoadType);
-
-            if (x == false)
+            if (Ground.TryValidateRoad(_adjacentTiles, IsEmpty, GridPosition) == false)
                 return;
 
             foreach (RoadTile tile in _adjacentTiles)
@@ -131,16 +135,18 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
                 if (tile.IsEmpty && countedTiles.Contains(tile) == false)
                     await tile.ChangeRoadsInChain(countedTiles);
             }
+
+            await TileRepresentation.GroundCreator.Create(Ground.Type, Ground.RoadType, Ground.Rotation);
         }
 
        
-        public void ChangeGroundsInChain(List<RoadTile> countedTiles)
+        public void ChangeGroundsInChain(List<RoadTile> countedTiles, bool isSelfTile = false)
         {
             InspectCount++;
 
             countedTiles.Add(this);
 
-            if (Ground.TryUpdate(_aroundTiles, IsEmpty) == false)
+            if (Ground.TryTakeAroundTilesGroundType(_aroundTiles, IsEmpty) == false && isSelfTile == false)
                 return;
 
             foreach (RoadTile tile in _aroundTiles)
@@ -172,30 +178,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             }
         }
 
-        private bool TryChangeGroundType()
-        {
-            if (IsEmpty == false)
-                return false;
 
-            GroundType groundType = GroundType.Soil;
-
-            foreach (RoadTile tile in _aroundTiles)
-            {
-                if (tile.IsEmpty == false && (int)tile.Ground.Type > (int)groundType)
-                    groundType = tile.Ground.Type;
-            }
-
-            bool isChanged = groundType != Ground.Type;
-
-            Ground.ChangeGroundType(groundType);
-
-            return isChanged;
-        }
-
-
-        private void ChangeGroundType()
-        {
-            Ground.ChangeGroundType(IsEmpty ? GroundType.Soil : StaticDataService.GetGroundType(BuildingType));
-        }
+        //private bool TryChangeGroundType()
+        //{
+        //    Ground.ChangeGroundType(IsEmpty ? GroundType.Soil : StaticDataService.GetGroundType(BuildingType));
+        //}
     }
 }
