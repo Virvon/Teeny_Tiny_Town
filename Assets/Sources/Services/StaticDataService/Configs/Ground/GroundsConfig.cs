@@ -8,6 +8,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs
     public class GroundsConfig : ScriptableObject
     {
         public GroundConfig[] GroundConfigs;
+        public TestGroundConfig[] TestGroundConfigs;
 
         public RoadType GetRoadType(Vector2Int gridPosition, List<Vector2Int> adjacentGridPositions, GroundType groundType, out GroundRotation rotation)
         {

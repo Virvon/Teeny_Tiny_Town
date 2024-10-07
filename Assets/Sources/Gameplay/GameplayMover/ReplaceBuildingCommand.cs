@@ -10,7 +10,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
         private readonly Vector2Int _toBuildingGridPosition;
         private readonly BuildingType _toBuildingType;
 
-        public ReplaceBuildingCommand(World.WorldInfrastructure.WorldChanger world, Vector2Int fromBuildingGridPosition, BuildingType fromBuildingType, Vector2Int toBuildingGridPosition, BuildingType toBuildingType) : base(world)
+        public ReplaceBuildingCommand(WorldChanger world, Vector2Int fromBuildingGridPosition, BuildingType fromBuildingType, Vector2Int toBuildingGridPosition, BuildingType toBuildingType) : base(world)
         {
             _fromBuildingGridPosition = fromBuildingGridPosition;
             _fromBuildingType = fromBuildingType;
@@ -18,7 +18,9 @@ namespace Assets.Sources.Gameplay.GameplayMover
             _toBuildingType = toBuildingType;
         }
 
-        public override void Change() =>
-            World.ReplaceBuilding(_fromBuildingGridPosition, _fromBuildingType, _toBuildingGridPosition, _toBuildingType);
+        public override async void Change()
+        {
+            await WorldChanger.ReplaceBuilding(_fromBuildingGridPosition, _fromBuildingType, _toBuildingGridPosition, _toBuildingType);
+        }
     }
 }

@@ -10,7 +10,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         private const float PressedBuildingHeight = 5;
 
         private readonly BuildingMarker _buildingMarker;
-        private readonly GameplayMover.GameplayMover _gameplayMover;
         private readonly WorldRepresentationChanger _worldRepresentationChanger;
 
         private TileRepresentation _handlePressedMoveStartTile;
@@ -19,13 +18,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         public NewBuildingPlacePositionHandler(
             SelectFrame selectFrame,
             LayerMask layerMask,
-            BuildingMarker buildingMarker,
             GameplayMover.GameplayMover gameplayMover,
+            BuildingMarker buildingMarker,
             WorldRepresentationChanger worldRepresentationChanger)
-            : base(selectFrame, layerMask)
+            : base(selectFrame, layerMask, gameplayMover)
         {
             _buildingMarker = buildingMarker;
-            _gameplayMover = gameplayMover;
             _worldRepresentationChanger = worldRepresentationChanger;
 
             _worldRepresentationChanger.GameplayMoved += StartPlacing;
@@ -98,7 +96,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 SelectFrame.Hide();
 
                 Placed?.Invoke(tile.GridPosition);
-                _gameplayMover.PlaceNewBuilding(tile.GridPosition);
+                GameplayMover.PlaceNewBuilding(tile.GridPosition);
             }
             else if (_isBuildingPressed)
             {

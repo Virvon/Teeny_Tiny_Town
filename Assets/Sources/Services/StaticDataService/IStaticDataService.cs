@@ -20,5 +20,7 @@ namespace Assets.Sources.Services.StaticDataService
         UniTask InitializeAsync();
         WindowConfig GetWindow(WindowType type);
         StoreItemConfig GetStoreItem(BuildingType buildingType);
+        TestGroundConfig GetGround(TileType tileType);
+        GroundType GetGroundType(BuildingType buildingType);
     }
 }

@@ -2,6 +2,7 @@
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {

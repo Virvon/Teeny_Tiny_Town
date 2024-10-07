@@ -7,14 +7,13 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
     public class RemovedBuildingPositionHandler : ActionHandlerState
     {
-        private readonly GameplayMover.GameplayMover _gameplayMover;
-
-        public RemovedBuildingPositionHandler(SelectFrame selectFrame, LayerMask layerMask, GameplayMover.GameplayMover gameplayMover) : base(selectFrame, layerMask)
+        public RemovedBuildingPositionHandler(
+            SelectFrame selectFrame,
+            LayerMask layerMask,
+            GameplayMover.GameplayMover gameplayMover)
+            : base(selectFrame, layerMask, gameplayMover)
         {
-            _gameplayMover = gameplayMover;
         }
-
-        public event Action<Vector2Int> Removed;
 
         public override UniTask Enter() =>
             default;
@@ -36,8 +35,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             {
                 SelectFrame.Hide();
 
-                Removed?.Invoke(tile.GridPosition);
-                _gameplayMover.RemoveBuilding(tile.GridPosition);
+                GameplayMover.RemoveBuilding(tile.GridPosition);
             }
         }
     }

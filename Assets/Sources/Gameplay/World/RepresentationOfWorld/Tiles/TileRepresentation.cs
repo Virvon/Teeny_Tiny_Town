@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.StaticDataService.Configs;
+using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -18,6 +19,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
         public bool IsEmpty => _building == null;
         public BuildingType BuildingType => IsEmpty ? BuildingType.Undefined : _building.Type;
         public Transform BuildingPoint => _groundCreator.Ground.BuildingPoint;
+        public GroundCreator GroundCreator => _groundCreator;
 
         public void Init(Vector2Int gridPosition)
         {
@@ -49,12 +51,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             PlaceBuildingToBuildingPoint(building);
         }
 
-        public async UniTask Change(BuildingType buildingType, GroundType groundType, RoadType roadType, GroundRotation groundRotation)
-        {
-            await _groundCreator.Create(groundType, roadType, groundRotation);
-            await TryChangeBuilding(buildingType);
-        }
-
         public void DestroyBuilding()
         {
             Destroy(_building.gameObject);
@@ -64,7 +60,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
         private void PlaceBuildingToBuildingPoint(Building building) =>
             building.transform.position = _groundCreator.Ground.BuildingPoint.position;
 
-        private async UniTask TryChangeBuilding(BuildingType targetBuildingType)
+        public async UniTask TryChangeBuilding(BuildingType targetBuildingType)
         {
             if (BuildingType != targetBuildingType)
             {

@@ -5,6 +5,7 @@ using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -58,6 +59,11 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             TileRepresentation tile = await _tileRepresentationFactory.Create(GameplayFactoryAssets.Tile, position, parent);
 
             return tile;
+        }
+
+        public async UniTask<Ground> CreateGround(TileType tileType, Vector3 position, Transform parent)
+        {
+            return await _groundFactory.Create(_staticDataService.GetGround(tileType).AssetReference, position, 0, parent);
         }
 
         public async UniTask<Ground> CreateGround(GroundType groundType, RoadType roadType, Vector3 position, GroundRotation rotation, Transform parent)

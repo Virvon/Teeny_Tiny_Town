@@ -7,14 +7,14 @@ namespace Assets.Sources.Gameplay.GameplayMover
     public abstract class Command
     {
         public readonly Building BuildingForPlacing;
-        protected readonly WorldChanger World;
+        protected readonly WorldChanger WorldChanger;
         private readonly TileInfrastructureData[] _tileDatas;
 
-        public Command(World.WorldInfrastructure.WorldChanger world)
+        public Command(WorldChanger world)
         {
-            World = world;
-            BuildingForPlacing = World.BuildingForPlacing;
-            _tileDatas = World.Tiles.Select(tile => new TileInfrastructureData(tile.GridPosition, tile.BuildingType, tile.Ground.RoadType, tile.Ground.Rotation)).ToArray();
+            WorldChanger = world;
+            BuildingForPlacing = WorldChanger.BuildingForPlacing;
+            //_tileDatas = World.Tiles.Select(tile => new TileInfrastructureData(tile.GridPosition, tile.BuildingType, tile.Ground.RoadType, tile.Ground.Rotation)).ToArray();
         }
 
         public abstract void Change();

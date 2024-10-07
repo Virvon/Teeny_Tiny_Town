@@ -3,12 +3,13 @@ using System;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 {
     public class WorldRepresentationChanger
     {
-        private readonly WorldChanger _world;
+        private readonly WorldChanger _worldChanger;
         private readonly IWorldFactory _worldFactory;
         private readonly BuildingMarker _buildingMarker;
 
@@ -17,9 +18,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
             IWorldFactory worldFactory,
             BuildingMarker buildingMarker)
         {
-            _world = world;
+            _worldChanger = world;
 
-            _world.TilesChanged += OnTilesChanged;
+            _worldChanger.TilesChanged += OnTilesChanged;
 
             _worldFactory = worldFactory;
             _buildingMarker = buildingMarker;
@@ -27,24 +28,18 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 
         ~WorldRepresentationChanger()
         {
-            _world.TilesChanged -= OnTilesChanged;
+            _worldChanger.TilesChanged -= OnTilesChanged;
         }
 
         public event Action GameplayMoved;
 
-        public TileRepresentation StartTile => WorldGenerator.GetTile(_world.BuildingForPlacing.GridPosition);
+        public TileRepresentation StartTile => WorldGenerator.GetTile(_worldChanger.BuildingForPlacing.GridPosition);
 
         private WorldGenerator WorldGenerator => _worldFactory.WorldGenerator;
 
-        private async void OnTilesChanged(List<Tile> tiles)
+        private async void OnTilesChanged()
         {
-            foreach (Tile tile in tiles)
-            {
-                TileRepresentation tileRepresentation = WorldGenerator.GetTile(tile.GridPosition);
-                await tileRepresentation.Change(tile.BuildingType, tile.Ground.Type, tile.Ground.RoadType, tile.Ground.Rotation);
-            }
-
-            await _buildingMarker.TryUpdate(_world.BuildingForPlacing.Type);
+            await _buildingMarker.TryUpdate(_worldChanger.BuildingForPlacing.Type);
 
             GameplayMoved?.Invoke();
         }

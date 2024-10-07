@@ -4,18 +4,18 @@ using UnityEngine;
 using System.Linq;
 using Random = UnityEngine.Random;
 using Assets.Sources.Services.StaticDataService;
-using UnityEngine.InputSystem.Utilities;
-using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Data;
+using Cysharp.Threading.Tasks;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 {
     public class WorldChanger
     {
-        private const uint MinTilesCountToMerge = 3;
-
         private readonly IStaticDataService _staticDataService;
-        private World _world;
+        private readonly World _world;
+
         private List<Tile> _tiles;
 
         public WorldChanger(IStaticDataService staticDataService, World world)
@@ -26,40 +26,46 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             _tiles = new();
         }
 
-        public event Action<List<Tile>> TilesChanged;
+        public event Action TilesChanged;
 
-        public IReadOnlyList<Tile> Tiles => _tiles;
         public Building BuildingForPlacing { get; private set; }
+        public List<Tile> Tiles => _tiles;
 
-        public void Generate()
+        public event Action UpdatedInspect ;
+
+        public async UniTask Generate(ITileRepresentationCreatable tileRepresentationCreatable)
         {
-            Fill();
-            InitializeAdjacentTiles();
-            AddNewBuilding();
-        }
-
-        public void Work() =>
-            TilesChanged?.Invoke(_tiles);
-
-        public void PlaceNewBuilding(Vector2Int gridPosition, BuildingType buildingType)
-        {
-            List<Tile> changedTiles = CheckChangedTiles(gridPosition, buildingType);
-
+            await Fill(tileRepresentationCreatable);
             AddNewBuilding();
 
-            TilesChanged?.Invoke(changedTiles);
+            TilesChanged?.Invoke();
         }
 
-        public void ReplaceBuilding(Vector2Int fromBuildingGridPosition, BuildingType fromBuildingType, Vector2Int toBuildingGridPosition, BuildingType toBuildingType)
+        public async UniTask PlaceNewBuilding(Vector2Int gridPosition, BuildingType buildingType)
+        {
+            UpdatedInspect?.Invoke();
+
+            Tile changedTile = GetTile(gridPosition);
+            await changedTile.PutBuilding(buildingType);
+
+            AddNewBuilding();
+
+            TilesChanged?.Invoke();
+        }
+
+        public async UniTask ReplaceBuilding(Vector2Int fromBuildingGridPosition, BuildingType fromBuildingType, Vector2Int toBuildingGridPosition, BuildingType toBuildingType)
         {
             List<Tile> changedTiles = new();
 
-            changedTiles = changedTiles.Union(CheckChangedTiles(fromBuildingGridPosition, toBuildingType)).ToList();
-            changedTiles = changedTiles.Union(CheckChangedTiles(toBuildingGridPosition, fromBuildingType)).ToList();
+            Tile fromTile = GetTile(fromBuildingGridPosition);
+            await fromTile.PutBuilding(toBuildingType);
+
+            Tile toTile = GetTile(toBuildingGridPosition);
+            await toTile.PutBuilding(fromBuildingType);
 
             AddNewBuilding();
 
-            TilesChanged?.Invoke(changedTiles);
+            TilesChanged?.Invoke();
         }
 
         public void RemoveBuilding(Vector2Int destroyBuildingGridPosition)
@@ -73,103 +79,15 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
             List<Tile> changedTiles = new() { tile };
 
-            changedTiles = changedTiles.Union(GetAllChangedByGroundTiles(changedTiles)).ToList();
-            changedTiles = changedTiles.Union(GetAllUpdatedByRoadTiles(changedTiles)).ToList();
-
-            TilesChanged?.Invoke(changedTiles);
+            TilesChanged?.Invoke();
         }
 
         public Tile GetTile(Vector2Int gridPosition) =>
             _tiles.First(tile => tile.GridPosition == gridPosition);
 
-        public void Update(ReadOnlyArray<TileInfrastructureData> tileDatas, Building buildingToPlacing)
+        private void InitializeTiles(List<RoadTile> roadTiles)
         {
-            foreach (TileInfrastructureData tileData in tileDatas)
-            {
-                Tile tile = GetTile(tileData.GridPosition);
-
-                tile.PutBuilding(tileData.BuildingType);
-                tile.PutGround(tileData.GroundType, tileData.GroundRotation);
-            }
-
-            BuildingForPlacing = buildingToPlacing;
-
-            TilesChanged?.Invoke(_tiles);
-        }
-
-        private List<Tile> CheckChangedTiles(Vector2Int firstTileGridPosition, BuildingType placedBuildingType)
-        {
-            Tile changedTile = GetTile(firstTileGridPosition);
-            changedTile.PutBuilding(placedBuildingType);
-
-            List<Tile> changedTiles = new () { changedTile };
-
-            changedTiles = changedTiles.Union(GetAllUpdatedByBuildingTiles(changedTile)).ToList();
-            changedTiles = changedTiles.Union(GetAllChangedByGroundTiles(changedTiles)).ToList();
-            changedTiles = changedTiles.Union(GetAllUpdatedByRoadTiles(changedTiles)).ToList();
-
-            return changedTiles;
-        }
-
-        private List<Tile> GetAllChangedByGroundTiles(List<Tile> changedByBuildingTiles)
-        {
-            List<Tile> countedTiles = new();
-            List<Tile> changedTiles = new();
-
-            foreach(Tile tile in changedByBuildingTiles)
-                tile.ChangeGroundsInChain(countedTiles, changedTiles);
-
-            return changedTiles;
-        }
-
-        private List<Tile> GetAllUpdatedByRoadTiles(List<Tile> changedByGroundTiles)
-        {
-            List<Tile> countedTiles = new();
-            List<Tile> changedTiles = new();
-
-            foreach (Tile tile in changedByGroundTiles)
-                tile.ChangeRoadsInChain(countedTiles, changedTiles);
-
-            return changedTiles;
-        }
-
-        private List<Tile> GetAllUpdatedByBuildingTiles(Tile changedTile)
-        {
-            List<Tile> changedTiles = new() { changedTile };
-
-            if (changedTile.IsEmpty)
-                return changedTiles;
-
-            bool chainCheakCompleted = false;
-
-            while (chainCheakCompleted == false)
-            {
-                List<Tile> countedTiles = new();
-
-                if (changedTile.GetBuildingsChainLength(countedTiles) >= MinTilesCountToMerge)
-                {
-                    changedTiles.Union(countedTiles);
-
-                    List<Tile> tilesForRemoveBuildings = countedTiles;
-                    tilesForRemoveBuildings.Remove(changedTile);
-
-                    foreach (Tile tile in countedTiles)
-                        tile.RemoveBuilding();
-
-                    changedTile.UpdateBuilding();
-                }
-                else
-                {
-                    chainCheakCompleted = true;
-                }
-            }
-
-            return changedTiles;
-        }
-
-        private void InitializeAdjacentTiles()
-        {
-            foreach (Tile tile in _tiles)
+            foreach (RoadTile tile in roadTiles)
             {
                 foreach (int positionX in GetLineNeighbors(tile.GridPosition.x))
                     TryAddNeighborTile(new Vector2Int(positionX, tile.GridPosition.y), tile);
@@ -177,25 +95,31 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                 foreach (int positionY in GetLineNeighbors(tile.GridPosition.y))
                     TryAddNeighborTile(new Vector2Int(tile.GridPosition.x, positionY), tile);
 
-                foreach(int positionY in GetLineNeighbors(tile.GridPosition.y))
+                foreach (int positionY in GetLineNeighbors(tile.GridPosition.y))
                 {
                     foreach (int positionX in GetLineNeighbors(tile.GridPosition.x))
                         TryAddAroundTile(new Vector2Int(positionX, positionY), tile);
                 }
             }
+
+            foreach(RoadTile tile in roadTiles)
+                tile.ValidateGroundType();
+
+            foreach (RoadTile tile in roadTiles)
+                tile.ValidateRoadType();
         }
 
-        private void TryAddNeighborTile(Vector2Int gridPosition, Tile tile)
+        private void TryAddNeighborTile(Vector2Int gridPosition, RoadTile tile)
         {
-            Tile adjacentTile = _tiles.FirstOrDefault(value => value.GridPosition == gridPosition);
+            RoadTile adjacentTile = _tiles.FirstOrDefault(value => value.GridPosition == gridPosition) as RoadTile;
 
             if (adjacentTile != null && tile != adjacentTile)
                 tile.AddAdjacentTile(adjacentTile);
         }
 
-        private void TryAddAroundTile(Vector2Int gridPosition, Tile tile)
+        private void TryAddAroundTile(Vector2Int gridPosition, RoadTile tile)
         {
-            Tile aroundTile = _tiles.FirstOrDefault(value => value.GridPosition == gridPosition);
+            RoadTile aroundTile = _tiles.FirstOrDefault(value => value.GridPosition == gridPosition) as RoadTile;
 
             if (aroundTile != null && tile != aroundTile)
                 tile.AddAroundTile(aroundTile);
@@ -207,10 +131,40 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                 yield return i;
         }
 
-        private void Fill()
+        private async UniTask Fill(ITileRepresentationCreatable tileRepresentationCreatable)
         {
+            List<RoadTile> roadTiles = new();
+
             foreach(TileData tileData in _world.WorldData.Tiles)
-                _tiles.Add(new Tile(tileData.GridPosition, _staticDataService, tileData.BuildingType));
+            {
+                Tile tile;
+
+                switch (tileData.Type)
+                {
+                    case Services.StaticDataService.Configs.World.TileType.RoadGround:
+                        RoadTile roadTile = new RoadTile(tileData.Type, tileData.GridPosition,  _staticDataService, tileData.BuildingType);
+                        tile = roadTile;
+                        roadTiles.Add(roadTile);
+                        break;
+                    case Services.StaticDataService.Configs.World.TileType.TallGround:
+                        tile = new Tile(tileData.Type, tileData.GridPosition, _staticDataService, tileData.BuildingType);
+                        break;
+                    case Services.StaticDataService.Configs.World.TileType.WaterSurface:
+                        tile = new Tile(tileData.Type, tileData.GridPosition, _staticDataService, tileData.BuildingType);
+                        break;
+                    default:
+                        tile = null;
+                        Debug.LogError("tile can not be null");
+                        break;
+                }
+                             
+                _tiles.Add(tile);
+            }
+
+            InitializeTiles(roadTiles);
+
+            foreach(Tile tile in _tiles)
+                await tile.CreateRepresentation(tileRepresentationCreatable);
         }
 
         private void AddNewBuilding()

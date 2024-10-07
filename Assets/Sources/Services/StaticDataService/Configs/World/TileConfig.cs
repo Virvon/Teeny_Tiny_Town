@@ -7,6 +7,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
     [Serializable]
     public class TileConfig
     {
+        public TileType Type;
         public Vector2Int GridPosition;
         public BuildingType BuildingType;
 

@@ -9,7 +9,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Building
     {
         public BuildingType BuildingType;
         public AssetReferenceGameObject AssetReference;
-        public GroundType GroundType;
         public BuildingType NextBuilding;
     }
 }

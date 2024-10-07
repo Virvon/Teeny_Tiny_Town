@@ -5,7 +5,6 @@ using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StateMachine;
-using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.Gameplay.World
@@ -45,9 +44,8 @@ namespace Assets.Sources.Gameplay.World
 
             _actionHandlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
 
-            _worldChanger.Generate();
-            await worldGenerator.Generate();
-            _worldChanger.Work();
+            await _worldChanger.Generate(worldGenerator);
+            worldGenerator.TestInspect(_worldChanger);
 
             _worldStateMachine.RegisterState(_statesFactory.Create<ChangeWorldState>());
             _worldStateMachine.RegisterState(_statesFactory.Create<ExitWorldState>());

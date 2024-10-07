@@ -11,7 +11,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
     {
         private readonly SelectFrame _choosedBuildingSelectFrame;
         private readonly SelectFrame.Factory _selectFrameFactory;
-        private readonly GameplayMover.GameplayMover _gameplayMover;
 
         private readonly Vector3 _choosedBuildingPositionOffset = new Vector3(0, 2, 0);
 
@@ -19,13 +18,16 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         private bool _isBuildingChoosed;
         private TileRepresentation _choosedToReplacingTile;
 
-        public ReplacedBuildingPositionHandler(SelectFrame selectFrame, LayerMask layerMask, SelectFrame.Factory selectFrameFactory) : base(selectFrame, layerMask)
+        public ReplacedBuildingPositionHandler(
+            SelectFrame selectFrame,
+            LayerMask layerMask,
+            SelectFrame.Factory selectFrameFactory,
+            GameplayMover.GameplayMover gameplayMover)
+            : base(selectFrame, layerMask, gameplayMover)
         {
             _selectFrameFactory = selectFrameFactory;
             _choosedBuildingSelectFrame = SelectFrame;
         }
-
-        public event Action<Vector2Int, BuildingType, Vector2Int, BuildingType> Replaced;
 
         public override async UniTask Enter()
         {
@@ -88,19 +90,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                     }
                     else
                     {
-                        //Tiles.Building choosedToRaplaceBuilding = _choosedToReplacingTile.TakeBuilding();
-                        //Tiles.Building targetPlacedBuilding = tile.TakeBuilding();
-
-                        //tile.PlaceBuilding(choosedToRaplaceBuilding);
-
-                        //if (targetPlacedBuilding != null)
-                        //    _choosedToReplacingTile.PlaceBuilding(targetPlacedBuilding);
-
                         _choosedBuildingSelectFrame.Hide();
                         _choosedPlaceSelectFrame.Hide();
 
-                        Replaced?.Invoke(_choosedToReplacingTile.GridPosition, _choosedToReplacingTile.BuildingType, tile.GridPosition, tile.BuildingType);
-                        _gameplayMover.ReplaceBuilding(_choosedToReplacingTile.GridPosition, _choosedToReplacingTile.BuildingType, tile.GridPosition, tile.BuildingType);
+                        GameplayMover.ReplaceBuilding(_choosedToReplacingTile.GridPosition, _choosedToReplacingTile.BuildingType, tile.GridPosition, tile.BuildingType);
                     }
                 }
                 else if (tile.IsEmpty == false)

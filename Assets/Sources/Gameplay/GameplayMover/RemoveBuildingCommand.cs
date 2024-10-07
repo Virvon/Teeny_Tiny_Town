@@ -10,7 +10,9 @@ namespace Assets.Sources.Gameplay.GameplayMover
             : base(world) =>
             _removedBuildingGridPosition = removedBuildingGridPosition;
 
-        public override void Change() =>
-            World.RemoveBuilding(_removedBuildingGridPosition);
+        public override void Change()
+        {
+            WorldChanger.RemoveBuilding(_removedBuildingGridPosition);
+        }
     }
 }

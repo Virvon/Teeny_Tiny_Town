@@ -15,7 +15,9 @@ namespace Assets.Sources.Gameplay.GameplayMover
             _placedBuildingType = world.BuildingForPlacing.Type;
         }
 
-        public override void Change() =>
-            World.PlaceNewBuilding(_placedBuildingGridPosition, _placedBuildingType);
+        public override async void Change()
+        {
+            await WorldChanger.PlaceNewBuilding(_placedBuildingGridPosition, _placedBuildingType);
+        }
     }
 }

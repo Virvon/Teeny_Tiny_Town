@@ -19,6 +19,8 @@ namespace Assets.Sources.Services.StaticDataService
         private Dictionary<GroundType, Dictionary<RoadType, RoadConfig>> _groundConfigs;
         private Dictionary<WindowType, WindowConfig> _windowConfigs;
         private Dictionary<BuildingType, StoreItemConfig> _storeItemsConfigs;
+        private Dictionary<TileType, TestGroundConfig> _testGroundConfigs;
+        private Dictionary<BuildingType, GroundType> _roadGrounds;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
@@ -37,9 +39,16 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadWindowsConfig());
             tasks.Add(LoadStoreItemsConfig());
             tasks.Add(LoadWorldsConfig());
+            tasks.Add(LoadRoadGroundConfigs());
 
             await UniTask.WhenAll(tasks);
         }
+
+        public GroundType GetGroundType(BuildingType buildingType) =>
+            _roadGrounds.TryGetValue(buildingType, out GroundType type) ? type : default;
+
+        public TestGroundConfig GetGround(TileType tileType) =>
+            _testGroundConfigs.TryGetValue(tileType, out TestGroundConfig config) ? config : null;
 
         public StoreItemConfig GetStoreItem(BuildingType buildingType) =>
             _storeItemsConfigs.TryGetValue(buildingType, out StoreItemConfig config) ? config : null;
@@ -59,11 +68,19 @@ namespace Assets.Sources.Services.StaticDataService
                 roadType, out RoadConfig config) ? config : null) : null;
         }
 
+        private async UniTask LoadRoadGroundConfigs()
+        {
+            RoadGroundConfigs[] roadGroundConfigs = await GetConfigs<RoadGroundConfigs>();
+
+            _roadGrounds = roadGroundConfigs.First().Configs.ToDictionary(value => value.BuildingType, value => value.GroundType);
+        }
+
         private async UniTask LoadWorldsConfig()
         {
             WorldsConfig[] worldsConfigs = await GetConfigs<WorldsConfig>();
 
             WorldsConfig = worldsConfigs.First();
+
         }
 
         private async UniTask LoadStoreItemsConfig()
@@ -89,6 +106,7 @@ namespace Assets.Sources.Services.StaticDataService
 
             GroundsConfig = groundsConfigs.First();
             _groundConfigs = GroundsConfig.GroundConfigs.ToDictionary(value => value.Type, value => value.RoadConfigs.ToDictionary(value => value.Type, value => value));
+            _testGroundConfigs = GroundsConfig.TestGroundConfigs.ToDictionary(value => value.TileType, value => value);
         }
 
         private async UniTask LoadBuildingConfigs()

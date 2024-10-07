@@ -3,6 +3,7 @@ using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI.Windows;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.StateMachine.States
 {

@@ -41,7 +41,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
             if (_lastCommand == null)
                 return;
 
-            _world.Update(_lastCommand.TileDatas, _lastCommand.BuildingForPlacing);
+            //_world.Update(_lastCommand.TileDatas, _lastCommand.BuildingForPlacing);
             _lastCommand = null;
         }
 
