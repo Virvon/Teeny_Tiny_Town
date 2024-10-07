@@ -41,11 +41,17 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             await TileRepresentation.TryChangeBuilding(BuildingType);
         }
 
-        public virtual void RemoveBuilding()
+        public void Clean()
         {
+            if (BuildingType == BuildingType.Undefined)
+                return;
+
             BuildingType = BuildingType.Undefined;
             TileRepresentation.DestroyBuilding();
         }
+
+        public virtual void RemoveBuilding() =>
+            Clean();
 
         protected virtual async UniTask CreateGroundRepresentation()
         {

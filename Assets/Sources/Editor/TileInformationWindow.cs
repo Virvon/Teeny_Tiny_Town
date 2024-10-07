@@ -11,7 +11,7 @@ namespace Assets.Sources.Editor
     public class TileInformationWindow : EditorWindow
     {
         private WorldChanger _worldChanger;
-        private List<Tile> _tiles;
+        private IReadOnlyList<Tile> _tiles;
         private string _info ="info";
 
         [MenuItem("Window/Tiles information")]

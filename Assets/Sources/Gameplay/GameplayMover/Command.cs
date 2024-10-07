@@ -14,7 +14,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
         {
             WorldChanger = world;
             BuildingForPlacing = WorldChanger.BuildingForPlacing;
-            //_tileDatas = World.Tiles.Select(tile => new TileInfrastructureData(tile.GridPosition, tile.BuildingType, tile.Ground.RoadType, tile.Ground.Rotation)).ToArray();
+            _tileDatas = WorldChanger.Tiles.Select(tile => new TileInfrastructureData(tile.GridPosition, tile.BuildingType)).ToArray();
         }
 
         public abstract void Change();

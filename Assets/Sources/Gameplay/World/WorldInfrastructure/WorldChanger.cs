@@ -8,6 +8,8 @@ using Assets.Sources.Data;
 using Cysharp.Threading.Tasks;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
+using UnityEngine.InputSystem.Utilities;
+using Assets.Sources.Gameplay.GameplayMover;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 {
@@ -29,9 +31,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         public event Action TilesChanged;
 
         public Building BuildingForPlacing { get; private set; }
-        public List<Tile> Tiles => _tiles;
+        public IReadOnlyList<Tile> Tiles => _tiles;
 
-        public event Action UpdatedInspect ;
+        public event Action UpdatedInspect;
 
         public async UniTask Generate(ITileRepresentationCreatable tileRepresentationCreatable)
         {
@@ -49,6 +51,21 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             await changedTile.PutBuilding(buildingType);
 
             AddNewBuilding();
+
+            TilesChanged?.Invoke();
+        }
+
+        public async UniTask Update(ReadOnlyArray<TileInfrastructureData> tileDatas, Building buildingForPlacing)
+        {
+            foreach(TileInfrastructureData tileData in tileDatas)
+            {
+                Tile tile = GetTile(tileData.GridPosition);
+
+                tile.Clean();
+                await tile.PutBuilding(tileData.BuildingType);
+            }
+
+            BuildingForPlacing = buildingForPlacing;
 
             TilesChanged?.Invoke();
         }
