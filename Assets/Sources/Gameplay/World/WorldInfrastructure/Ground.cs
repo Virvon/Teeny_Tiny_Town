@@ -69,7 +69,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             TryTakeAroundTilesGroundType(aroundTiles, true);
         }
 
-        public bool TryValidateRoad(List<RoadTile> adjacentTiles, bool isEmpty, Vector2Int gridPosition)
+        public bool TryValidateRoad(IReadOnlyList<RoadTile> adjacentTiles, bool isEmpty, Vector2Int gridPosition)
         {
             if (isEmpty)
             {

@@ -10,6 +10,7 @@ using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
 using UnityEngine.InputSystem.Utilities;
 using Assets.Sources.Gameplay.GameplayMover;
+using Assets.Sources.Services.StaticDataService.Configs.World;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 {
@@ -102,35 +103,45 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         public Tile GetTile(Vector2Int gridPosition) =>
             _tiles.First(tile => tile.GridPosition == gridPosition);
 
-        private void InitializeTiles(List<RoadTile> roadTiles)
+        private void InitializeAroundTiles(List<RoadTile> roadTiles)
         {
             foreach (RoadTile tile in roadTiles)
             {
-                foreach (int positionX in GetLineNeighbors(tile.GridPosition.x))
-                    TryAddNeighborTile(new Vector2Int(positionX, tile.GridPosition.y), tile);
-
-                foreach (int positionY in GetLineNeighbors(tile.GridPosition.y))
-                    TryAddNeighborTile(new Vector2Int(tile.GridPosition.x, positionY), tile);
-
                 foreach (int positionY in GetLineNeighbors(tile.GridPosition.y))
                 {
                     foreach (int positionX in GetLineNeighbors(tile.GridPosition.x))
                         TryAddAroundTile(new Vector2Int(positionX, positionY), tile);
                 }
             }
+        }
 
-            foreach(RoadTile tile in roadTiles)
+        private void InitializeAdjacentTiles<TTile>(List<TTile> tiles)
+            where TTile : TallTile
+        {
+            foreach (TTile tile in tiles)
+            {
+                foreach (int positionX in GetLineNeighbors(tile.GridPosition.x))
+                    TryAddNeighborTile(new Vector2Int(positionX, tile.GridPosition.y), tile);
+
+                foreach (int positionY in GetLineNeighbors(tile.GridPosition.y))
+                    TryAddNeighborTile(new Vector2Int(tile.GridPosition.x, positionY), tile);
+            }
+        }
+
+        private void InitializeRoadTiles(List<RoadTile> roadTiles)
+        {
+            foreach (RoadTile tile in roadTiles)
                 tile.ValidateGroundType();
 
             foreach (RoadTile tile in roadTiles)
                 tile.ValidateRoadType();
         }
 
-        private void TryAddNeighborTile(Vector2Int gridPosition, RoadTile tile)
+        private void TryAddNeighborTile(Vector2Int gridPosition, TallTile tile)
         {
-            RoadTile adjacentTile = _tiles.FirstOrDefault(value => value.GridPosition == gridPosition) as RoadTile;
+            TallTile adjacentTile = _tiles.FirstOrDefault(value => value.GridPosition == gridPosition) as TallTile;
 
-            if (adjacentTile != null && tile != adjacentTile)
+            if (adjacentTile != null && tile != adjacentTile && tile.Type == adjacentTile.Type)
                 tile.AddAdjacentTile(adjacentTile);
         }
 
@@ -151,6 +162,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         private async UniTask Fill(ITileRepresentationCreatable tileRepresentationCreatable)
         {
             List<RoadTile> roadTiles = new();
+            List<TallTile> tallTiles = new();
 
             foreach(TileData tileData in _world.WorldData.Tiles)
             {
@@ -158,15 +170,17 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
                 switch (tileData.Type)
                 {
-                    case Services.StaticDataService.Configs.World.TileType.RoadGround:
-                        RoadTile roadTile = new RoadTile(tileData.Type, tileData.GridPosition,  _staticDataService, tileData.BuildingType);
+                    case TileType.RoadGround:
+                        RoadTile roadTile = new (tileData.Type, tileData.GridPosition,  _staticDataService, tileData.BuildingType);
                         tile = roadTile;
                         roadTiles.Add(roadTile);
                         break;
-                    case Services.StaticDataService.Configs.World.TileType.TallGround:
-                        tile = new Tile(tileData.Type, tileData.GridPosition, _staticDataService, tileData.BuildingType);
+                    case TileType.TallGround:
+                        TallTile tallTile = new (tileData.Type, tileData.GridPosition, _staticDataService, tileData.BuildingType);
+                        tile = tallTile;
+                        tallTiles.Add(tallTile);
                         break;
-                    case Services.StaticDataService.Configs.World.TileType.WaterSurface:
+                    case TileType.WaterSurface:
                         tile = new Tile(tileData.Type, tileData.GridPosition, _staticDataService, tileData.BuildingType);
                         break;
                     default:
@@ -178,7 +192,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                 _tiles.Add(tile);
             }
 
-            InitializeTiles(roadTiles);
+            InitializeAdjacentTiles(roadTiles);
+            InitializeAdjacentTiles(tallTiles);
+            InitializeAroundTiles(roadTiles);
+            InitializeRoadTiles(roadTiles);
 
             foreach(Tile tile in _tiles)
                 await tile.CreateRepresentation(tileRepresentationCreatable);
