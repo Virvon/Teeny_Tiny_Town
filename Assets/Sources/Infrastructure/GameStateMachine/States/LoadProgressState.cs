@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data;
+using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.StateMachine;
@@ -61,7 +62,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
 
                 List<TileData> tileDatas = worldConfig.TileConfigs.Select(tileConfig => new TileData(tileConfig.GridPosition, tileConfig.BuildingType, tileConfig.Type)).ToList();
 
-                worldDatas[i] = new WorldData(worldConfig.Length, worldConfig.Width, tileDatas);
+                worldDatas[i] = new WorldData(tileDatas, worldConfig.NextBuildingTypeForCreation, _staticDataService.AvailableForConstructionBuildingsConfig.StartingAvailableBuildingTypes.ToList());
             }
 
             return worldDatas;

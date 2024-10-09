@@ -171,12 +171,12 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                 switch (tileData.Type)
                 {
                     case TileType.RoadGround:
-                        RoadTile roadTile = new (tileData.Type, tileData.GridPosition,  _staticDataService, tileData.BuildingType);
+                        RoadTile roadTile = new (tileData.Type, tileData.GridPosition,  _staticDataService, tileData.BuildingType, _world.WorldData);
                         tile = roadTile;
                         roadTiles.Add(roadTile);
                         break;
                     case TileType.TallGround:
-                        TallTile tallTile = new (tileData.Type, tileData.GridPosition, _staticDataService, tileData.BuildingType);
+                        TallTile tallTile = new (tileData.Type, tileData.GridPosition, _staticDataService, tileData.BuildingType, _world.WorldData);
                         tile = tallTile;
                         tallTiles.Add(tallTile);
                         break;
@@ -211,7 +211,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
                 if (tile.BuildingType == BuildingType.Undefined)
                 {
-                    BuildingForPlacing = new Building(tile.GridPosition, BuildingType.Bush);
+                    List<BuildingType> availableBuildingTypes = _world.WorldData.AvailableBuildingForCreation;
+                    BuildingType buildingType = availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
+
+                    BuildingForPlacing = new Building(tile.GridPosition, buildingType);
                     isPositionFree = true;
                 }
             }

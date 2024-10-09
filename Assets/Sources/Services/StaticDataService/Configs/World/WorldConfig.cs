@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Services.StaticDataService.Configs.World
@@ -9,6 +10,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public uint Length;
         public uint Width;
         public TileConfig[] TileConfigs;
+        public BuildingType NextBuildingTypeForCreation;
 
         public void CreateTileConfigs()
         {

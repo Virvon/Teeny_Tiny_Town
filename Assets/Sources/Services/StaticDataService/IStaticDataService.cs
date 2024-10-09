@@ -13,6 +13,7 @@ namespace Assets.Sources.Services.StaticDataService
         WindowsConfig WindowsConfig { get; }
         StoreItemsConfig StoreItemsConfig { get; }
         WorldsConfig WorldsConfig { get; }
+        AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; }
 
         RoadConfig GetRoad(GroundType groundType, RoadType roadType);
         TBuilding GetBuilding<TBuilding>(BuildingType buildingType)

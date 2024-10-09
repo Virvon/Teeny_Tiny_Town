@@ -29,6 +29,7 @@ namespace Assets.Sources.Services.StaticDataService
         public StoreItemsConfig StoreItemsConfig { get; private set; }
         public WindowsConfig WindowsConfig { get; private set; }
         public WorldsConfig WorldsConfig { get; private set; }
+        public AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; private set; }
 
         public async UniTask InitializeAsync()
         {
@@ -40,6 +41,7 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadStoreItemsConfig());
             tasks.Add(LoadWorldsConfig());
             tasks.Add(LoadRoadGroundConfigs());
+            tasks.Add(LoadAvailableForConstructionBuildingsConfig());
 
             await UniTask.WhenAll(tasks);
         }
@@ -66,6 +68,13 @@ namespace Assets.Sources.Services.StaticDataService
             return _groundConfigs.TryGetValue(
                 groundType, out Dictionary<RoadType, RoadConfig> roadConfigs) ? (roadConfigs.TryGetValue(
                 roadType, out RoadConfig config) ? config : null) : null;
+        }
+
+        private async UniTask LoadAvailableForConstructionBuildingsConfig()
+        {
+            AvailableForConstructionBuildingsConfig[] configs = await GetConfigs<AvailableForConstructionBuildingsConfig>();
+
+            AvailableForConstructionBuildingsConfig = configs.First();
         }
 
         private async UniTask LoadRoadGroundConfigs()

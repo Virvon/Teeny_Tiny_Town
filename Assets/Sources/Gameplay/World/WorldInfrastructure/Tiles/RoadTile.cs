@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+﻿using Assets.Sources.Data;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
@@ -13,8 +14,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         public int InspectCount;
 
-        public RoadTile(TileType type, Vector2Int greedPosition,  IStaticDataService staticDataService, BuildingType buildingType)
-            : base(type, greedPosition, staticDataService, buildingType)
+        public RoadTile(TileType type, Vector2Int greedPosition,  IStaticDataService staticDataService, BuildingType buildingType, WorldData worldData)
+            : base(type, greedPosition, staticDataService, buildingType, worldData)
         {
             Ground = new(StaticDataService, StaticDataService.GetGroundType(buildingType));
 

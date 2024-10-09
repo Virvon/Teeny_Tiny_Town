@@ -1,24 +1,28 @@
 ﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using Cysharp.Threading.Tasks;
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine.InputSystem.Utilities;
 
 namespace Assets.Sources.Gameplay.GameplayMover
 {
     public abstract class Command
     {
-        public readonly Building BuildingForPlacing;
         protected readonly WorldChanger WorldChanger;
         private readonly TileInfrastructureData[] _tileDatas;
+        private readonly Building _buildingForPlacing;
 
         public Command(WorldChanger world)
         {
             WorldChanger = world;
-            BuildingForPlacing = WorldChanger.BuildingForPlacing;
+            _buildingForPlacing = WorldChanger.BuildingForPlacing;
             _tileDatas = WorldChanger.Tiles.Select(tile => new TileInfrastructureData(tile.GridPosition, tile.BuildingType)).ToArray();
         }
 
         public abstract void Change();
 
-        public ReadOnlyArray<TileInfrastructureData> TileDatas => _tileDatas;
+        public virtual async UniTask Undo() =>
+            await WorldChanger.Update(_tileDatas, _buildingForPlacing);
     }
 }

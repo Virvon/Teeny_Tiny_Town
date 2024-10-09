@@ -1,6 +1,6 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+﻿using Assets.Sources.Data;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Services.StaticDataService;
-using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
@@ -12,10 +12,14 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
     {
         private const uint MinTilesCountToMerge = 3;
 
+        private readonly WorldData _worldData;
+
         private List<TallTile> _adjacentTiles;
 
-        public TallTile(TileType type, Vector2Int greedPosition, IStaticDataService staticDataService, BuildingType buildingType) : base(type, greedPosition, staticDataService, buildingType)
+        public TallTile(TileType type, Vector2Int greedPosition, IStaticDataService staticDataService, BuildingType buildingType, WorldData worldData) : base(type, greedPosition, staticDataService, buildingType)
         {
+            _worldData = worldData;
+
             _adjacentTiles = new();
         }
 
@@ -61,7 +65,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
                     foreach (Tile tile in countedTiles)
                         tile.RemoveBuilding();
-
                     await UpgradeBuilding();
                 }
                 else
@@ -91,8 +94,15 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             return adjacentTiles;
         }
 
-        private async UniTask UpgradeBuilding() =>
-            await CreateBuilding(StaticDataService.GetBuilding<BuildingConfig>(BuildingType).NextBuilding);
+        private async UniTask UpgradeBuilding()
+        {
+            BuildingType nextBuildingType = StaticDataService.AvailableForConstructionBuildingsConfig.FindNextBuilding(BuildingType);
+
+            if (_worldData.TryAddBuildingTypeForCreation(nextBuildingType, StaticDataService.AvailableForConstructionBuildingsConfig.requiredCreatedBuildingsToAddNext))
+                _worldData.AddNextBuildingTypeForCreation(StaticDataService.AvailableForConstructionBuildingsConfig.FindNextBuilding(StaticDataService.AvailableForConstructionBuildingsConfig.FindNextBuilding(nextBuildingType)));
+
+            await CreateBuilding(nextBuildingType);
+        }
     }
 }
 
