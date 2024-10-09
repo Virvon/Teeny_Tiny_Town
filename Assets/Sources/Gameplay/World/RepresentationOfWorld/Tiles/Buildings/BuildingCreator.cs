@@ -1,11 +1,11 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
-using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
+namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 {
     public class BuildingCreator : MonoBehaviour
     {

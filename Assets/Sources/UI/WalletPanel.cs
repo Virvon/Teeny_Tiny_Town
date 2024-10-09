@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Services.PersistentProgress;
+﻿using Assets.Sources.Gameplay.World;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -9,24 +9,20 @@ namespace Assets.Sources.UI
     {
         [SerializeField] private TMP_Text _walletValue;
 
-        private IPersistentProgressService _persistentProgressService;
+        private World _world;
 
         [Inject]
-        private void Construct(IPersistentProgressService persistentProgressService)
+        private void Construct(World world)
         {
-            _persistentProgressService = persistentProgressService;
+            _world = world;
 
-            _persistentProgressService.Progress.WorldWallet.ValueChanged += OnWorldWalletValueChanged;
+            _world.WorldData.WorldWallet.ValueChanged += OnWorldWalletValueChanged;
         }
 
-        private void OnDestroy()
-        {
-            _persistentProgressService.Progress.WorldWallet.ValueChanged -= OnWorldWalletValueChanged;
-        }
+        private void OnDestroy() =>
+            _world.WorldData.WorldWallet.ValueChanged -= OnWorldWalletValueChanged;
 
-        private void OnWorldWalletValueChanged(uint value)
-        {
+        private void OnWorldWalletValueChanged(uint value) =>
             _walletValue.text = value.ToString();
-        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
-using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
@@ -9,7 +9,7 @@ using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
-using Building = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Building;
+using Building = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings.Building;
 using Ground = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground;
 
 namespace Assets.Sources.Infrastructure.Factories.WorldFactory

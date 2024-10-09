@@ -1,5 +1,4 @@
-﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
-using Assets.Sources.Services.StaticDataService.Configs;
+﻿using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.World;

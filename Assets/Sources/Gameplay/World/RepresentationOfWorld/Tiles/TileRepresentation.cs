@@ -1,7 +1,6 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
-using Assets.Sources.Gameplay.World.WorldInfrastructure;
-using Assets.Sources.Services.StaticDataService.Configs;
-using Assets.Sources.Services.StaticDataService.Configs.World;
+﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;

@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.Input;
 using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using UnityEngine;
 
@@ -33,13 +34,16 @@ namespace Assets.Sources.Gameplay.GameplayMover
         public event Action GameplayMoved;
 
         public void PlaceNewBuilding(Vector2Int gridPosition) =>
-            ExecuteCommand(new PlaceNewBuildingCommand(_worldChanger, gridPosition, _world.WorldData, _staticDataService));
+            ExecuteCommand(new PlaceNewBuildingCommand(_worldChanger, gridPosition, _world.WorldData));
 
         public void RemoveBuilding(Vector2Int gridPosition) =>
             ExecuteCommand(new RemoveBuildingCommand(_worldChanger, gridPosition));
 
         public void ReplaceBuilding(Vector2Int fromGridPosition, BuildingType fromBuildingType, Vector2Int toGridPosition, BuildingType toBuildingType) =>
             ExecuteCommand(new ReplaceBuildingCommand(_worldChanger, fromGridPosition, fromBuildingType, toGridPosition, toBuildingType));
+
+        public void OpenChest(Vector2Int chestGridPosition, uint reward) =>
+            ExecuteCommand(new OpenChestCommand(_worldChanger, reward, chestGridPosition, _world.WorldData.WorldWallet));
 
         public async void TryUndoCommand()
         {

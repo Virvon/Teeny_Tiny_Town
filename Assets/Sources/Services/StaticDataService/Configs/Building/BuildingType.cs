@@ -1,4 +1,4 @@
-﻿namespace Assets.Sources.Gameplay.World.WorldInfrastructure
+﻿namespace Assets.Sources.Services.StaticDataService.Configs.Building
 {
     public enum BuildingType
     {
@@ -6,5 +6,7 @@
         Bush,
         Tree,
         House,
+        Stone,
+        Chest,
     }
 }

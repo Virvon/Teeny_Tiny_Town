@@ -11,6 +11,7 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
 using UnityEngine.InputSystem.Utilities;
 using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Services.StaticDataService.Configs.World;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 {
@@ -91,7 +92,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             Tile tile = GetTile(destroyBuildingGridPosition);
 
             if (tile.BuildingType == BuildingType.Undefined)
-                Debug.LogError("can not destroy empty building");
+                Debug.LogError("Can not destroy empty building");
 
             tile.RemoveBuilding();
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 {

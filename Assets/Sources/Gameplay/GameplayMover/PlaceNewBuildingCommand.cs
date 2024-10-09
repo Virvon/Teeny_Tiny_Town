@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Data;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,19 +13,17 @@ namespace Assets.Sources.Gameplay.GameplayMover
         private readonly Vector2Int _placedBuildingGridPosition;
         private readonly BuildingType _placedBuildingType;
         private readonly WorldData _worldData;
-        private readonly IStaticDataService _staticDataService;
 
         private readonly BuildingType _nextBuildingTypeForCreation;
         private readonly uint _nextBuildingForCreationBuildsCount;
         private readonly List<BuildingType> _availableBuildingForCreation;
 
-        public PlaceNewBuildingCommand(WorldChanger world, Vector2Int placedBuildingGridPosition, WorldData worldData, IStaticDataService staticDataService)
+        public PlaceNewBuildingCommand(WorldChanger world, Vector2Int placedBuildingGridPosition, WorldData worldData)
             : base(world)
         {
             _placedBuildingGridPosition = placedBuildingGridPosition;
             _placedBuildingType = world.BuildingForPlacing.Type;
             _worldData = worldData;
-            _staticDataService = staticDataService;
 
             _nextBuildingTypeForCreation = _worldData.NextBuildingTypeForCreation;
             _nextBuildingForCreationBuildsCount = _worldData.NextBuildingForCreationBuildsCount;

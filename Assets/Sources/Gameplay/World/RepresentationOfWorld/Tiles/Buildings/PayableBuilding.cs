@@ -1,25 +1,24 @@
-﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
-using Assets.Sources.Services.PersistentProgress;
+﻿using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using Zenject;
 
-namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
+namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 {
     public class PayableBuilding : Building
     {
         private IStaticDataService _staticDataService;
         private MoveCounter _moveCounter;
-        private IPersistentProgressService _persistentProgressService;
+        private World _world;
         private uint _payment;
 
         [Inject]
-        private void Construct(IStaticDataService staticDataService, MoveCounter moveCounter, IPersistentProgressService persistentProgressService)
+        private void Construct(IStaticDataService staticDataService, MoveCounter moveCounter, World world)
         {
             _staticDataService = staticDataService;
             _moveCounter = moveCounter;
-            _persistentProgressService = persistentProgressService;
+            _world = world;
 
             _moveCounter.TimeToPaymentPayableBuildings += OnTimeToPaymentPayableBuildings;
         }
@@ -38,7 +37,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
         private void OnTimeToPaymentPayableBuildings()
         {
-            _persistentProgressService.Progress.WorldWallet.Give(_payment);
+            _world.WorldData.WorldWallet.Give(_payment);
         }
     }
 }

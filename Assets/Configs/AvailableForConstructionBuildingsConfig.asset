@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396019db013b72044b4c30b386bf634b, type: 3}
   m_Name: AvailableForConstructionBuildingsConfig
   m_EditorClassIdentifier: 
+  requiredCreatedBuildingsToAddNext: 4
   AvailableUpgradeBrach: 0
-  StartingAvailableBuildingTypes: 0100000002000000
+  StartingAvailableBuildingTypes: 0100000004000000
   Branches:
   - Elements:
     - BuildingType: 1
       NextBuildingType: 2
     - BuildingType: 2
       NextBuildingType: 3
+  - Elements:
+    - BuildingType: 4
+      NextBuildingType: 5

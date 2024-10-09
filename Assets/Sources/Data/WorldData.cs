@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
+﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +12,7 @@ namespace Assets.Sources.Data
         public BuildingType NextBuildingTypeForCreation;
         public uint NextBuildingForCreationBuildsCount;
         public List<BuildingType> AvailableBuildingForCreation;
+        public WorldWallet WorldWallet;
 
         public WorldData(List<TileData> tiles, BuildingType nextBuildingTypeForCreation, List<BuildingType> availableBuildingForCreation)
         {
@@ -19,6 +20,7 @@ namespace Assets.Sources.Data
             NextBuildingTypeForCreation = nextBuildingTypeForCreation;
             AvailableBuildingForCreation = availableBuildingForCreation;
 
+            WorldWallet = new();
             NextBuildingForCreationBuildsCount = 0;
         }
 

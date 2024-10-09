@@ -56,6 +56,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
                 gridPosition.y * _cellSize);
         }
 
+        public Vector2Int WorldToGridPosition(Vector3 position)
+        {
+            return new Vector2Int((int)((position.x - transform.position.x) / _cellSize), (int)((position.z - transform.position.z) / _cellSize));
+        }
+
         public class Factory : PlaceholderFactory<string, UniTask<WorldGenerator>>
         {
         }

@@ -1,5 +1,4 @@
-﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
-using System;
+﻿using System;
 
 namespace Assets.Sources.Services.StaticDataService.Configs.Building
 {

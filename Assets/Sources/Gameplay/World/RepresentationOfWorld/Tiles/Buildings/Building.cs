@@ -1,10 +1,10 @@
-﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
+﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
-namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
+namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 {
     public class Building : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
+﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.GameplayMover
