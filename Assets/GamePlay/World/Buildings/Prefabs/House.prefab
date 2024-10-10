@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8756626472887405085}
-  - component: {fileID: 1056257447705215762}
+  - component: {fileID: 5767263629529668942}
   m_Layer: 0
   m_Name: House
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 8652480867488913416}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1056257447705215762
+--- !u!114 &5767263629529668942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6422756114624647775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f0c9da5bd098b64292a0be52423c7a8, type: 3}
+  m_Script: {fileID: 11500000, guid: a31ba2573f370cc439f5847a042d86e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8311420793615155890

@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 {
-    public class Building : MonoBehaviour
+    public class BuildingRepresentation : MonoBehaviour
     {
         public BuildingType Type { get; private set; }
 
@@ -16,7 +16,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
         public void Destroy() =>
             Destroy(gameObject);
 
-        public class Factory : PlaceholderFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<Building>>
+        public class Factory : PlaceholderFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<BuildingRepresentation>>
         {
         }
     }

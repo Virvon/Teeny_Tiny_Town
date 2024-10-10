@@ -12,7 +12,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
         [SerializeField] private GroundCreator _groundCreator;
         [SerializeField] private BuildingCreator _buildingCreator;
 
-        private Building _building;
+        private BuildingRepresentation _building;
 
         public Vector2Int GridPosition { get; private set; }
         public bool IsEmpty => _building == null;
@@ -25,9 +25,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             GridPosition = gridPosition;
         }
 
-        public Building TakeBuilding()
+        public BuildingRepresentation TakeBuilding()
         {
-            Building building = _building;
+            BuildingRepresentation building = _building;
 
             _building = null;
 
@@ -40,7 +40,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
         public void LowerBuilding() =>
             PlaceBuildingToBuildingPoint(_building);
 
-        public void PlaceBuilding(Building building)
+        public void PlaceBuilding(BuildingRepresentation building)
         {
             if (IsEmpty == false)
                 Debug.LogError("can not place building to non empty tile");
@@ -56,10 +56,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             _building = null;
         }
 
-        private void PlaceBuildingToBuildingPoint(Building building) =>
+        private void PlaceBuildingToBuildingPoint(BuildingRepresentation building) =>
             building.transform.position = _groundCreator.Ground.BuildingPoint.position;
 
-        public async UniTask TryChangeBuilding(BuildingType targetBuildingType)
+        public async UniTask<TBuilding> TryChangeBuilding<TBuilding>(BuildingType targetBuildingType)
+            where TBuilding : BuildingRepresentation
         {
             if (BuildingType != targetBuildingType)
             {
@@ -67,8 +68,14 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
                     DestroyBuilding();
 
                 if (targetBuildingType != BuildingType.Undefined)
+                {
                     _building = await _buildingCreator.Create(targetBuildingType);
+
+                    return _building as TBuilding;
+                }
             }
+
+            return null;
         }
 
         public class Factory : PlaceholderFactory<string, Vector3, Transform, UniTask<TileRepresentation>>

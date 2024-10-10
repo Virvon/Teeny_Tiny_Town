@@ -9,7 +9,7 @@ using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
-using Building = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings.Building;
+using BuildingRepresentation = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings.BuildingRepresentation;
 using Ground = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground;
 
 namespace Assets.Sources.Infrastructure.Factories.WorldFactory
@@ -19,7 +19,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
         private readonly DiContainer _container;
         private readonly WorldGenerator.Factory _worldGeneratorFactory;
         private readonly IStaticDataService _staticDataService;
-        private readonly Building.Factory _buildingFactory;
+        private readonly BuildingRepresentation.Factory _buildingFactory;
         private readonly SelectFrame.Factory _selectFrameFactory;
         private readonly TileRepresentation.Factory _tileRepresentationFactory;
         private readonly Ground.Factory _groundFactory;
@@ -28,7 +28,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
         public WorldFactory(
             DiContainer container,
             WorldGenerator.Factory worldGeneratorFactory,
-            Building.Factory buildingFactory,
+            BuildingRepresentation.Factory buildingFactory,
             SelectFrame.Factory selectFrameFactory,
             TileRepresentation.Factory tileRepresentationFactory,
             Ground.Factory groundFactory,
@@ -88,11 +88,11 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             return WorldGenerator;
         }
 
-        public async UniTask<Building> CreateBuilding(BuildingType type, Vector3 position, Transform parent)
+        public async UniTask<BuildingRepresentation> CreateBuilding(BuildingType type, Vector3 position, Transform parent)
         {
             BuildingConfig buildingConfig = _staticDataService.GetBuilding<BuildingConfig>(type);
 
-            Building building = await _buildingFactory.Create(buildingConfig.AssetReference, position, parent);
+            BuildingRepresentation building = await _buildingFactory.Create(buildingConfig.AssetReference, position, parent);
 
             building.Init(type);
 

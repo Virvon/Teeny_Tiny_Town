@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
     {
         protected readonly WorldChanger WorldChanger;
         private readonly TileInfrastructureData[] _tileDatas;
-        private readonly Building _buildingForPlacing;
+        private readonly BuildingForPlacingInfo _buildingForPlacing;
 
         public Command(WorldChanger world)
         {

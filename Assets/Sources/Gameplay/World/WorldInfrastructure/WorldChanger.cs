@@ -12,27 +12,31 @@ using UnityEngine.InputSystem.Utilities;
 using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
+using Assets.Sources.Services.PersistentProgress;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 {
-    public class WorldChanger
+    public class WorldChanger : IBuildingGivable
     {
         private readonly IStaticDataService _staticDataService;
         private readonly World _world;
+        private readonly IPersistentProgressService _persistentProgressService;
 
         private List<Tile> _tiles;
 
-        public WorldChanger(IStaticDataService staticDataService, World world)
+        public WorldChanger(IStaticDataService staticDataService, World world, IPersistentProgressService persistentProgressService)
         {
             _staticDataService = staticDataService;
             _world = world;
 
             _tiles = new();
+            _persistentProgressService = persistentProgressService;
         }
 
         public event Action TilesChanged;
 
-        public Building BuildingForPlacing { get; private set; }
+        public BuildingForPlacingInfo BuildingForPlacing { get; private set; }
         public IReadOnlyList<Tile> Tiles => _tiles;
 
         public event Action UpdatedInspect;
@@ -50,21 +54,21 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             UpdatedInspect?.Invoke();
 
             Tile changedTile = GetTile(gridPosition);
-            await changedTile.PutBuilding(buildingType);
+            await changedTile.PutBuilding(GetBuilding(buildingType, gridPosition));
 
             AddNewBuilding();
 
             TilesChanged?.Invoke();
         }
 
-        public async UniTask Update(ReadOnlyArray<TileInfrastructureData> tileDatas, Building buildingForPlacing)
+        public async UniTask Update(ReadOnlyArray<TileInfrastructureData> tileDatas, BuildingForPlacingInfo buildingForPlacing)
         {
-            foreach(TileInfrastructureData tileData in tileDatas)
+            foreach (TileInfrastructureData tileData in tileDatas)
             {
                 Tile tile = GetTile(tileData.GridPosition);
 
                 tile.Clean();
-                await tile.PutBuilding(tileData.BuildingType);
+                await tile.PutBuilding(GetBuilding(tileData.BuildingType, tileData.GridPosition));
             }
 
             BuildingForPlacing = buildingForPlacing;
@@ -77,21 +81,43 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             List<Tile> changedTiles = new();
 
             Tile fromTile = GetTile(fromBuildingGridPosition);
-            await fromTile.PutBuilding(toBuildingType);
+            await fromTile.PutBuilding(GetBuilding(toBuildingType, fromBuildingGridPosition));
 
             Tile toTile = GetTile(toBuildingGridPosition);
-            await toTile.PutBuilding(fromBuildingType);
+            await toTile.PutBuilding(GetBuilding(fromBuildingType, toBuildingGridPosition));
 
             AddNewBuilding();
 
             TilesChanged?.Invoke();
         }
 
+        public Building GetBuilding(BuildingType type, Vector2Int gridPosition)
+        {
+            switch (type)
+            {
+                case BuildingType.Undefined:
+                    return null;
+                case BuildingType.Bush:
+                    return new Building(type);
+                case BuildingType.Tree:
+                    return new Building(type);
+                case BuildingType.House:
+                    return new PayableBuilding(type, _staticDataService, _world.WorldData.WorldWallet, _persistentProgressService);
+                case BuildingType.Stone:
+                    return new Building(type);
+                case BuildingType.Chest:
+                    return new Chest(type, _staticDataService, gridPosition);
+            }
+
+            Debug.LogError("building not founded");
+            return null;
+        }
+
         public void RemoveBuilding(Vector2Int destroyBuildingGridPosition)
         {
             Tile tile = GetTile(destroyBuildingGridPosition);
 
-            if (tile.BuildingType == BuildingType.Undefined)
+            if (tile.Building.Type == BuildingType.Undefined)
                 Debug.LogError("Can not destroy empty building");
 
             tile.RemoveBuilding();
@@ -165,31 +191,31 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             List<RoadTile> roadTiles = new();
             List<TallTile> tallTiles = new();
 
-            foreach(TileData tileData in _world.WorldData.Tiles)
+            foreach (TileData tileData in _world.WorldData.Tiles)
             {
                 Tile tile;
 
                 switch (tileData.Type)
                 {
                     case TileType.RoadGround:
-                        RoadTile roadTile = new (tileData.Type, tileData.GridPosition,  _staticDataService, tileData.BuildingType, _world.WorldData);
+                        RoadTile roadTile = new(tileData.Type, tileData.GridPosition, _staticDataService, GetBuilding(tileData.BuildingType, tileData.GridPosition), _world.WorldData, this);
                         tile = roadTile;
                         roadTiles.Add(roadTile);
                         break;
                     case TileType.TallGround:
-                        TallTile tallTile = new (tileData.Type, tileData.GridPosition, _staticDataService, tileData.BuildingType, _world.WorldData);
+                        TallTile tallTile = new(tileData.Type, tileData.GridPosition, _staticDataService, GetBuilding(tileData.BuildingType, tileData.GridPosition), _world.WorldData, this);
                         tile = tallTile;
                         tallTiles.Add(tallTile);
                         break;
                     case TileType.WaterSurface:
-                        tile = new Tile(tileData.Type, tileData.GridPosition, _staticDataService, tileData.BuildingType);
+                        tile = new Tile(tileData.Type, tileData.GridPosition, _staticDataService, GetBuilding(tileData.BuildingType, tileData.GridPosition));
                         break;
                     default:
                         tile = null;
                         Debug.LogError("tile can not be null");
                         break;
                 }
-                             
+
                 _tiles.Add(tile);
             }
 
@@ -198,7 +224,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             InitializeAroundTiles(roadTiles);
             InitializeRoadTiles(roadTiles);
 
-            foreach(Tile tile in _tiles)
+            foreach (Tile tile in _tiles)
                 await tile.CreateRepresentation(tileRepresentationCreatable);
         }
 
@@ -210,12 +236,12 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             {
                 Tile tile = _tiles[Random.Range(0, _tiles.Count)];
 
-                if (tile.BuildingType == BuildingType.Undefined)
+                if (tile.IsEmpty)
                 {
                     List<BuildingType> availableBuildingTypes = _world.WorldData.AvailableBuildingForCreation;
                     BuildingType buildingType = availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
 
-                    BuildingForPlacing = new Building(tile.GridPosition, buildingType);
+                    BuildingForPlacing = new BuildingForPlacingInfo(tile.GridPosition, buildingType);
                     isPositionFree = true;
                 }
             }

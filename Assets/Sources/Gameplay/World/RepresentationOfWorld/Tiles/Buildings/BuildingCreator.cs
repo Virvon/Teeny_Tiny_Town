@@ -19,7 +19,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 
         private Transform BuildingPoint => _groundCreator.Ground.BuildingPoint;
 
-        public async UniTask<Building> Create(BuildingType buildingType)
+        public async UniTask<BuildingRepresentation> Create(BuildingType buildingType)
         {
             return await _worldFactory.CreateBuilding(buildingType, BuildingPoint.position, transform);
         }

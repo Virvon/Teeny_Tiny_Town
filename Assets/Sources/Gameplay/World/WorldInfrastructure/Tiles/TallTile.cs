@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Data;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
@@ -14,14 +15,17 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
         private const uint MinTilesCountToMerge = 3;
 
         private readonly WorldData _worldData;
+        private readonly IBuildingGivable _buildingGibable;
 
         private List<TallTile> _adjacentTiles;
 
-        public TallTile(TileType type, Vector2Int greedPosition, IStaticDataService staticDataService, BuildingType buildingType, WorldData worldData) : base(type, greedPosition, staticDataService, buildingType)
+        public TallTile(TileType type, Vector2Int greedPosition, IStaticDataService staticDataService, Building building, WorldData worldData, IBuildingGivable buildingGibable)
+            : base(type, greedPosition, staticDataService, building)
         {
             _worldData = worldData;
 
             _adjacentTiles = new();
+            _buildingGibable = buildingGibable;
         }
 
         public void AddAdjacentTile(TallTile adjacentTile)
@@ -29,8 +33,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             _adjacentTiles.Add(adjacentTile);
         }
 
-        public override async UniTask PutBuilding(BuildingType buildingType) =>
-            await TryUpdateBuildingsChain(buildingType);
+        public override async UniTask PutBuilding(Building building) =>
+            await TryUpdateBuildingsChain(building);
 
         public int GetBuildingsChainLength(List<TallTile> countedTiles)
         {
@@ -46,9 +50,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             return chainLength;
         }
 
-        private async UniTask TryUpdateBuildingsChain(BuildingType buildingType)
+        private async UniTask TryUpdateBuildingsChain(Building building)
         {
-            await CreateBuilding(buildingType);
+            await CreateBuildingRepresentation(building);
 
             if (IsEmpty)
                 return;
@@ -75,11 +79,14 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             }
         }
 
-        protected virtual async UniTask CreateBuilding(BuildingType type)
+        protected virtual async UniTask CreateBuildingRepresentation(Building building)
         {
-            BuildingType = type;
+            if (building == null)
+                return;
 
-            await TileRepresentation.TryChangeBuilding(BuildingType);
+            Building = building;
+
+            await Building.CreateRepresentation(TileRepresentation);
         }
 
         protected IReadOnlyList<TAdjacentTile> GetAdjacentTiles<TAdjacentTile>()
@@ -102,7 +109,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             if (_worldData.TryAddBuildingTypeForCreation(nextBuildingType, StaticDataService.AvailableForConstructionBuildingsConfig.requiredCreatedBuildingsToAddNext))
                 _worldData.AddNextBuildingTypeForCreation(StaticDataService.AvailableForConstructionBuildingsConfig.FindNextBuilding(StaticDataService.AvailableForConstructionBuildingsConfig.FindNextBuilding(nextBuildingType)));
 
-            await CreateBuilding(nextBuildingType);
+            await CreateBuildingRepresentation(_buildingGibable.GetBuilding(nextBuildingType, GridPosition));
         }
     }
 }

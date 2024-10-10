@@ -27,7 +27,6 @@ namespace Assets.Sources.Gameplay.World
             BindWorldFactory();
             BindGameplayMover();
             BindWorldStateMachine();
-            BindMoveCounter();
             BindUiFactory();
             BindWorld();
         }
@@ -50,11 +49,6 @@ namespace Assets.Sources.Gameplay.World
         private void BindActionHandlerStateMachine()
         {
             ActionHandlerStateMachineInstaller.Install(Container);
-        }
-
-        private void BindMoveCounter()
-        {
-            Container.BindInterfacesAndSelfTo<MoveCounter>().AsSingle();
         }
 
         private void BindWorldStateMachine()

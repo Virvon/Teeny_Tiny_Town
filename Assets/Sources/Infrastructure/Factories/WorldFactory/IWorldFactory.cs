@@ -12,7 +12,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
     {
         WorldGenerator WorldGenerator { get; }
 
-        UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Buildings.Building> CreateBuilding(BuildingType type, Vector3 position, Transform parent);
+        UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Buildings.BuildingRepresentation> CreateBuilding(BuildingType type, Vector3 position, Transform parent);
         UniTask CreateBuildingMarker();
         UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground> CreateGround(TileType tileType, Vector3 position, Transform parent);
         UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground> CreateGround(GroundType groundType, RoadType roadType, Vector3 position, GroundRotation rotation, Transform parent);

@@ -1,7 +1,7 @@
 ﻿using Assets.Sources.Data;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Services.StaticDataService;
-using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
@@ -15,10 +15,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         public int InspectCount;
 
-        public RoadTile(TileType type, Vector2Int greedPosition,  IStaticDataService staticDataService, BuildingType buildingType, WorldData worldData)
-            : base(type, greedPosition, staticDataService, buildingType, worldData)
+        public RoadTile(TileType type, Vector2Int greedPosition,  IStaticDataService staticDataService, Building building, WorldData worldData, IBuildingGivable buildingGivable)
+            : base(type, greedPosition, staticDataService, building, worldData, buildingGivable)
         {
-            Ground = new(StaticDataService, StaticDataService.GetGroundType(buildingType));
+            Ground = new(StaticDataService, StaticDataService.GetGroundType(BuildingType));
 
             _aroundTiles = new();
         }
@@ -85,16 +85,18 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             await TileRepresentation.GroundCreator.Create(Ground.Type, Ground.RoadType, Ground.Rotation);
         }
 
-        protected override async UniTask CreateBuilding(BuildingType type)
+        protected override async UniTask CreateBuildingRepresentation(Building building)
         {
-            BuildingType = type;
+            if (building == null)
+                return;
 
-            if (Ground.TryUpdate(BuildingType))
+            Building = building;
+
+            if (Ground.TryUpdate(Building.Type))
                 ChangeGroundsInChain(new(), true);
 
             await ChangeRoadsInChain(new());
-
-            await TileRepresentation.TryChangeBuilding(BuildingType);
+            await Building.CreateRepresentation(TileRepresentation);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
     public class BuildingMarker : MonoBehaviour
     {
         private IWorldFactory _worldFactory;
-        private Building _building;
+        private BuildingRepresentation _building;
 
         [Inject]
         private void Construct(IWorldFactory worldFactory)
