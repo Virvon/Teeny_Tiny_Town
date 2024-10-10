@@ -43,25 +43,25 @@ MonoBehaviour:
       BuildingType: 0
     - Type: 0
       GridPosition: {x: 2, y: 0}
-      BuildingType: 0
+      BuildingType: 1
     - Type: 0
       GridPosition: {x: 2, y: 1}
       BuildingType: 0
     - Type: 0
       GridPosition: {x: 2, y: 2}
-      BuildingType: 0
+      BuildingType: 2
     - Type: 2
       GridPosition: {x: 2, y: 3}
       BuildingType: 0
     - Type: 0
       GridPosition: {x: 3, y: 0}
-      BuildingType: 0
+      BuildingType: 1
     - Type: 0
       GridPosition: {x: 3, y: 1}
       BuildingType: 0
     - Type: 0
       GridPosition: {x: 3, y: 2}
-      BuildingType: 3
+      BuildingType: 2
     - Type: 2
       GridPosition: {x: 3, y: 3}
       BuildingType: 0

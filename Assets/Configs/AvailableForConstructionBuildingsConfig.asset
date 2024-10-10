@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredCreatedBuildingsToAddNext: 4
   AvailableUpgradeBrach: 0
-  StartingAvailableBuildingTypes: 0100000004000000
+  StartingAvailableBuildingTypes: 0100000002000000
   Branches:
   - Elements:
     - BuildingType: 1

@@ -109,10 +109,12 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                     return new Chest(type, _staticDataService, gridPosition);
                 case BuildingType.Lighthouse:
                     return new Lighthouse(type, _world.WorldData.WorldWallet, _persistentProgressService, this, gridPosition);
+                case BuildingType.Crane:
+                    return new Crane(type, this, gridPosition);
+                default:
+                    Debug.LogError("building not founded");
+                    return null; ;
             }
-
-            Debug.LogError("building not founded");
-            return null;
         }
 
         public void RemoveBuilding(Vector2Int destroyBuildingGridPosition)

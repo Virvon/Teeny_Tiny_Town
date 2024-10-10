@@ -7,12 +7,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 {
     public class Building
     {
-        public readonly BuildingType Type;
-
-        public Building(BuildingType type)
-        {
+        public Building(BuildingType type) =>
             Type = type;
-        }
+
+        public BuildingType Type { get; protected set; }
 
         public virtual async UniTask CreateRepresentation(TileRepresentation tileRepresentation)
         {

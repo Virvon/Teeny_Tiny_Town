@@ -28,23 +28,37 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             _buildingGibable = buildingGibable;
         }
 
+        public IReadOnlyList<TallTile> AdjacentTiles => _adjacentTiles;
+
         public void AddAdjacentTile(TallTile adjacentTile)
         {
             _adjacentTiles.Add(adjacentTile);
         }
 
-        public override async UniTask PutBuilding(Building building) =>
-            await TryUpdateBuildingsChain(building);
+        protected override async UniTask SetUpBuilding(Building building)
+        {
+            Building = building;
 
-        public int GetBuildingsChainLength(List<TallTile> countedTiles)
+            await TryUpdateBuildingsChain(building);
+        }
+
+        public int GetBuildingsChainLength(List<TallTile> countedTiles, BuildingType targetBuildingType = default)
         {
             int chainLength = 1;
             countedTiles.Add(this);
 
             foreach (TallTile tile in _adjacentTiles)
             {
-                if (BuildingType == tile.BuildingType && countedTiles.Contains(tile) == false)
-                    chainLength += tile.GetBuildingsChainLength(countedTiles);
+                if(targetBuildingType == default)
+                {
+                    if (BuildingType == tile.BuildingType && countedTiles.Contains(tile) == false)
+                        chainLength += tile.GetBuildingsChainLength(countedTiles);
+                }
+                else
+                {
+                    if (targetBuildingType == tile.BuildingType && countedTiles.Contains(tile) == false)
+                        chainLength += tile.GetBuildingsChainLength(countedTiles);
+                }
             }
 
             return chainLength;
@@ -69,7 +83,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
                     tilesForRemoveBuildings.Remove(this);
 
                     foreach (Tile tile in countedTiles)
-                        tile.RemoveBuilding();
+                        await tile.RemoveBuilding();
+
                     await UpgradeBuilding();
                 }
                 else
@@ -77,16 +92,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
                     chainCheakCompleted = true;
                 }
             }
-        }
-
-        protected virtual async UniTask CreateBuildingRepresentation(Building building)
-        {
-            if (building == null)
-                return;
-
-            Building = building;
-
-            await Building.CreateRepresentation(TileRepresentation);
         }
 
         protected IReadOnlyList<TAdjacentTile> GetAdjacentTiles<TAdjacentTile>()

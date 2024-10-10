@@ -14,8 +14,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
         private readonly IPersistentProgressService _persistentProgressService;
         private readonly ITileGetable _tileGetable;
         private readonly Vector2Int _gridPosition;
+        private readonly List<Tile> _aroundTiles;
 
-        private List<Tile> _aroundTiles;
 
         public Lighthouse(BuildingType type, WorldWallet worldWallet, IPersistentProgressService persistentProgressService, ITileGetable tileGetable, Vector2Int gridPosition)
             : base(type)
@@ -25,7 +25,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
             _tileGetable = tileGetable;
             _gridPosition = gridPosition;
 
-            _aroundTiles = new();
+            _aroundTiles = GetAroundTiles();
 
             _persistentProgressService.Progress.MoveCounter.TimeToPaymentPayableBuildings += OnTimeToPaymentPayableBuildings;
         }
@@ -35,16 +35,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 
         public override UniTask CreateRepresentation(TileRepresentation tileRepresentation)
         {
-            foreach (int positionY in _tileGetable.GetLineNeighbors(_gridPosition.y))
-            {
-                foreach (int positionX in _tileGetable.GetLineNeighbors(_gridPosition.x))
-                {
-                    Tile tile = _tileGetable.GetTile(new Vector2Int(positionX, positionY));
-
-                    if (tile != null)
-                        _aroundTiles.Add(tile);
-                }    
-            }
+            
 
             return base.CreateRepresentation(tileRepresentation);
         }
@@ -60,6 +51,24 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
             }
 
             _worldWallet.Give(payment);
+        }
+
+        private List<Tile> GetAroundTiles()
+        {
+            List<Tile> tiles = new();
+
+            foreach (int positionY in _tileGetable.GetLineNeighbors(_gridPosition.y))
+            {
+                foreach (int positionX in _tileGetable.GetLineNeighbors(_gridPosition.x))
+                {
+                    Tile tile = _tileGetable.GetTile(new Vector2Int(positionX, positionY));
+
+                    if (tile != null)
+                        tiles.Add(tile);
+                }
+            }
+
+            return tiles;
         }
     }
 }

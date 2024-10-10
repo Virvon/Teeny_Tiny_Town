@@ -1,5 +1,4 @@
-﻿using Assets.Sources.Data;
-using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
@@ -16,12 +15,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
         public Chest(BuildingType type, IStaticDataService staticDataService, Vector2Int gridPosition)
             : base(type)
         {
-            Debug.Log("create chest " + type);
-
             _reward = staticDataService.GetBuilding<ChestConfig>(Type).Reward;
             _gridPosition = gridPosition;
         }
-
 
         public override async UniTask CreateRepresentation(TileRepresentation tileRepresentation)
         {

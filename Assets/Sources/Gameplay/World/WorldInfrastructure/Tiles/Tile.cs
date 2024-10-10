@@ -39,14 +39,16 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
                 await Building.CreateRepresentation(TileRepresentation);
         }
 
-        public virtual async UniTask PutBuilding(Building building)
+        public async UniTask PutBuilding(Building building)
         {
             if (building == null)
+            {
+                await RemoveBuilding();
+
                 return;
+            }
 
-            Building = building;
-
-            await Building.CreateRepresentation(TileRepresentation);
+            await SetUpBuilding(building);
         }
 
         public void Clean()
@@ -58,12 +60,28 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             Building = null;
         }
 
-        public virtual void RemoveBuilding() =>
+        public virtual UniTask RemoveBuilding()
+        {
             Clean();
+
+            return default;
+        }
+
+        protected virtual async UniTask SetUpBuilding(Building building)
+        {
+            await CreateBuildingRepresentation(building);
+        }
 
         protected virtual async UniTask CreateGroundRepresentation()
         {
             await TileRepresentation.GroundCreator.Create(Type);
+        }
+
+        protected virtual async UniTask CreateBuildingRepresentation(Building building)
+        {
+            Building = building;
+
+            await Building.CreateRepresentation(TileRepresentation);
         }
     }
 }

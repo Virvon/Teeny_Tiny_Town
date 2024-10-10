@@ -9,5 +9,6 @@
         Stone,
         Chest,
         Lighthouse,
+        Crane,
     }
 }

@@ -25,9 +25,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         public Ground Ground { get; private set; }
 
-        public override async void RemoveBuilding()
+        public override async UniTask RemoveBuilding()
         {
-            base.RemoveBuilding();
+            await base.RemoveBuilding();
 
             Ground.SetEmpty(_aroundTiles);
             ChangeGroundsInChain(new(), true);
@@ -60,7 +60,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
                     await tile.ChangeRoadsInChain(countedTiles);
             }
 
-            await TileRepresentation.GroundCreator.Create(Ground.Type, Ground.RoadType, Ground.Rotation);
+            await CreateGroundRepresentation();
         }
 
         public void ChangeGroundsInChain(List<RoadTile> countedTiles, bool isSelfTile = false)
@@ -77,19 +77,13 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
                 if (tile.IsEmpty && countedTiles.Contains(tile) == false)
                     tile.ChangeGroundsInChain(countedTiles);
             }
-
         }
 
-        protected override async UniTask CreateGroundRepresentation()
-        {
+        protected override async UniTask CreateGroundRepresentation() =>
             await TileRepresentation.GroundCreator.Create(Ground.Type, Ground.RoadType, Ground.Rotation);
-        }
 
         protected override async UniTask CreateBuildingRepresentation(Building building)
         {
-            if (building == null)
-                return;
-
             Building = building;
 
             if (Ground.TryUpdate(Building.Type))
