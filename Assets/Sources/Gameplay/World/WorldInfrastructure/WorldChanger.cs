@@ -17,7 +17,7 @@ using Assets.Sources.Services.PersistentProgress;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 {
-    public class WorldChanger : IBuildingGivable
+    public class WorldChanger : IBuildingGivable, ITileGetable
     {
         private readonly IStaticDataService _staticDataService;
         private readonly World _world;
@@ -107,6 +107,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                     return new Building(type);
                 case BuildingType.Chest:
                     return new Chest(type, _staticDataService, gridPosition);
+                case BuildingType.Lighthouse:
+                    return new Lighthouse(type, _world.WorldData.WorldWallet, _persistentProgressService, this, gridPosition);
             }
 
             Debug.LogError("building not founded");
@@ -128,7 +130,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         }
 
         public Tile GetTile(Vector2Int gridPosition) =>
-            _tiles.First(tile => tile.GridPosition == gridPosition);
+            _tiles.FirstOrDefault(tile => tile.GridPosition == gridPosition);
 
         private void InitializeAroundTiles(List<RoadTile> roadTiles)
         {
@@ -180,7 +182,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                 tile.AddAroundTile(aroundTile);
         }
 
-        private IEnumerable<int> GetLineNeighbors(int linePosition)
+        public IEnumerable<int> GetLineNeighbors(int linePosition)
         {
             for (int i = linePosition - 1; i <= linePosition + 1; i++)
                 yield return i;

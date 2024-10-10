@@ -8,9 +8,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 {
     public class PayableBuilding : Building
     {
+        public readonly uint Payment;
+
         private readonly IStaticDataService _staticDataService;
         private readonly WorldWallet _worldWallet;
-        private readonly uint _payment;
         private readonly IPersistentProgressService _persistentProgressService;
 
         public PayableBuilding(BuildingType type, IStaticDataService staticDataService, WorldWallet worldWallet, IPersistentProgressService persistentProgressService)
@@ -20,7 +21,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
             _worldWallet = worldWallet;
             _persistentProgressService = persistentProgressService;
 
-            _payment = _staticDataService.GetBuilding<PayableBuildingConfig>(Type).Payment;
+            Payment = _staticDataService.GetBuilding<PayableBuildingConfig>(Type).Payment;
 
             _persistentProgressService.Progress.MoveCounter.TimeToPaymentPayableBuildings += OnTimeToPaymentPayableBuildings;
         }
@@ -28,10 +29,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
         ~PayableBuilding() =>
             _persistentProgressService.Progress.MoveCounter.TimeToPaymentPayableBuildings -= OnTimeToPaymentPayableBuildings;
 
-        private void OnTimeToPaymentPayableBuildings()
-        {
-            _worldWallet.Give(_payment);
-            Debug.Log("pay");
-        }
+        private void OnTimeToPaymentPayableBuildings() =>
+            _worldWallet.Give(Payment);
     }
 }

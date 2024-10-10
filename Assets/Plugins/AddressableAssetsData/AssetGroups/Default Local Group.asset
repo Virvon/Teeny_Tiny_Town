@@ -238,6 +238,17 @@ MonoBehaviour:
     m_SerializedLabels:
     - Configs
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f676007db31962949857b7ceab024c12
+    m_Address: Ligthouse
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4b878176ef42c94c9804d5e1242edd1
+    m_Address: LigthouseConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}
   m_SchemaSet:

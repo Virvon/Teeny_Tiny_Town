@@ -8,5 +8,6 @@
         House,
         Stone,
         Chest,
+        Lighthouse,
     }
 }

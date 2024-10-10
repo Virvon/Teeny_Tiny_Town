@@ -2,7 +2,6 @@
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
-using System;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 {
