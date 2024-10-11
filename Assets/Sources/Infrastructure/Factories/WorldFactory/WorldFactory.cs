@@ -78,7 +78,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             _container.Bind<BuildingMarker>().FromInstance(marker).AsSingle();
         }
 
-        public async UniTask<WorldGenerator> CreateWorldGenerator(Transform parent)
+        public async UniTask<WorldGenerator> CreateWorldGenerator()
         {
             WorldGenerator = await _worldGeneratorFactory.Create(GameplayFactoryAssets.WorldGenerator);
 

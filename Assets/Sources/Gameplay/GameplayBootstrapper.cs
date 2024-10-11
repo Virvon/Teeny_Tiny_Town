@@ -1,10 +1,9 @@
-﻿using Assets.Sources.Gameplay.StateMachine;
+﻿using Assets.Sources.Gameplay.Cameras;
+using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.StateMachine.States;
 using Assets.Sources.Gameplay.World;
-using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Services.StateMachine;
-using Assets.Sources.UI.Windows;
 using Zenject;
 
 namespace Assets.Sources.Gameplay
@@ -13,27 +12,25 @@ namespace Assets.Sources.Gameplay
     {
         private readonly GameplayStateMachine _gameplayStateMachine;
         private readonly StatesFactory _statesFactory;
-        
-        private readonly WindowsSwitcher _windowsSwitcher;
         private readonly IGameplayFactory _gameplayFactory;
+        private readonly CamerasSwitcher _camerasSwitcher;
 
         public GameplayBootstrapper(
             GameplayStateMachine gameplayStateMachine,
             StatesFactory statesFactory,
-            
-            WindowsSwitcher windowsSwitcher,
-            IGameplayFactory gameplayFactory)
+            IGameplayFactory gameplayFactory,
+            CamerasSwitcher camerasSwitcher)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _statesFactory = statesFactory;
-            
-            _windowsSwitcher = windowsSwitcher;
             _gameplayFactory = gameplayFactory;
+            _camerasSwitcher = camerasSwitcher;
         }
 
         public async void Initialize()
         {          
             WorldsList worldsList = await _gameplayFactory.CreateWorldsList();
+            await _camerasSwitcher.CreateCameras();
 
             RegisterGameplayStates();
 

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.Camera;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.InputSystem.Utilities;
 
 namespace Assets.Sources.Services.StaticDataService
 {
@@ -20,6 +22,7 @@ namespace Assets.Sources.Services.StaticDataService
         private Dictionary<BuildingType, StoreItemConfig> _storeItemsConfigs;
         private Dictionary<TileType, TestGroundConfig> _testGroundConfigs;
         private Dictionary<BuildingType, GroundType> _roadGrounds;
+        private Dictionary<GameplayCameraType, GameplayCameraConfig> _cameras;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
@@ -29,10 +32,11 @@ namespace Assets.Sources.Services.StaticDataService
         public WindowsConfig WindowsConfig { get; private set; }
         public WorldsConfig WorldsConfig { get; private set; }
         public AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; private set; }
+        public ReadOnlyArray<GameplayCameraConfig> CameraConfigs { get; private set; }
 
         public async UniTask InitializeAsync()
         {
-            List<UniTask> tasks = new List<UniTask>();
+            List<UniTask> tasks = new ();
 
             tasks.Add(LoadBuildingConfigs());
             tasks.Add(LoadGroundsConfig());
@@ -41,9 +45,13 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadWorldsConfig());
             tasks.Add(LoadRoadGroundConfigs());
             tasks.Add(LoadAvailableForConstructionBuildingsConfig());
+            tasks.Add(LoadCameraConfigs());
 
             await UniTask.WhenAll(tasks);
         }
+
+        public GameplayCameraConfig GetGameplayCamera(GameplayCameraType type) =>
+            _cameras.TryGetValue(type, out GameplayCameraConfig config) ? config : null;
 
         public GroundType GetGroundType(BuildingType buildingType) =>
             _roadGrounds.TryGetValue(buildingType, out GroundType type) ? type : default;
@@ -67,6 +75,13 @@ namespace Assets.Sources.Services.StaticDataService
             return _groundConfigs.TryGetValue(
                 groundType, out Dictionary<RoadType, RoadConfig> roadConfigs) ? (roadConfigs.TryGetValue(
                 roadType, out RoadConfig config) ? config : null) : null;
+        }
+
+        private async UniTask LoadCameraConfigs()
+        {
+            CameraConfigs = await GetConfigs<GameplayCameraConfig>();
+
+            _cameras = CameraConfigs.ToDictionary(value => value.Type, value => value);
         }
 
         private async UniTask LoadAvailableForConstructionBuildingsConfig()

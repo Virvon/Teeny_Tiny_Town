@@ -1,7 +1,6 @@
 ﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Assets.Sources.Data
 {
@@ -13,12 +12,21 @@ namespace Assets.Sources.Data
         public uint NextBuildingForCreationBuildsCount;
         public List<BuildingType> AvailableBuildingForCreation;
         public WorldWallet WorldWallet;
+        public uint Length;
+        public uint Width;
 
-        public WorldData(List<TileData> tiles, BuildingType nextBuildingTypeForCreation, List<BuildingType> availableBuildingForCreation)
+        public WorldData(
+            List<TileData> tiles,
+            BuildingType nextBuildingTypeForCreation,
+            List<BuildingType> availableBuildingForCreation,
+            uint length,
+            uint width)
         {
             Tiles = tiles;
             NextBuildingTypeForCreation = nextBuildingTypeForCreation;
             AvailableBuildingForCreation = availableBuildingForCreation;
+            Length = length;
+            Width = width;
 
             WorldWallet = new();
             NextBuildingForCreationBuildsCount = 0;

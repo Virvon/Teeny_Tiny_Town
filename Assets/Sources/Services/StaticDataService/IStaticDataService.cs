@@ -1,8 +1,10 @@
 ﻿using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.Camera;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
+using UnityEngine.InputSystem.Utilities;
 
 namespace Assets.Sources.Services.StaticDataService
 {
@@ -13,6 +15,7 @@ namespace Assets.Sources.Services.StaticDataService
         StoreItemsConfig StoreItemsConfig { get; }
         WorldsConfig WorldsConfig { get; }
         AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; }
+        ReadOnlyArray<GameplayCameraConfig> CameraConfigs { get; }
 
         RoadConfig GetRoad(GroundType groundType, RoadType roadType);
         TBuilding GetBuilding<TBuilding>(BuildingType buildingType)
@@ -22,5 +25,6 @@ namespace Assets.Sources.Services.StaticDataService
         StoreItemConfig GetStoreItem(BuildingType buildingType);
         TestGroundConfig GetGround(TileType tileType);
         GroundType GetGroundType(BuildingType buildingType);
+        GameplayCameraConfig GetGameplayCamera(GameplayCameraType type);
     }
 }

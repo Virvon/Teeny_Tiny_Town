@@ -18,6 +18,6 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
         UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground> CreateGround(GroundType groundType, RoadType roadType, Vector3 position, GroundRotation rotation, Transform parent);
         UniTask CreateSelectFrame();
         UniTask<TileRepresentation> CreateTileRepresentation(Vector3 position, Transform parent);
-        UniTask<WorldGenerator> CreateWorldGenerator(Transform parent);
+        UniTask<WorldGenerator> CreateWorldGenerator();
     }
 }

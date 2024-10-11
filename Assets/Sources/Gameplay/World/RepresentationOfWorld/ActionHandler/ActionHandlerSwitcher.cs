@@ -1,5 +1,4 @@
 ﻿using Assets.Sources.Services.Input;
-using Assets.Sources.UI;
 using UnityEngine;
 using Zenject;
 
@@ -13,7 +12,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         private IInputService _inputService;
 
         [Inject]
-        private void Construct(ActionHandlerStateMachine handlerStateMachine, WorldRepresentationChanger worldRepresentationChanger, IInputService inputService)
+        private void Construct(
+            ActionHandlerStateMachine handlerStateMachine,
+            WorldRepresentationChanger worldRepresentationChanger,
+            IInputService inputService)
         {
             _handlerStateMachine = handlerStateMachine;
             _worldRepresentationChanger = worldRepresentationChanger;
@@ -21,8 +23,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
             _inputService.RemoveBuildingButtonPressed += OnRemoveBuildingButtonClicked;
             _inputService.ReplaceBuildingButtonPressed += OnReplaceBuildingButtonClicked;
-            //_destroyBuildingButton.Clicked += OnDestroyButtonClicked;
-            //_replaceButton.Clicked += OnReplaceButtonClicked;
             _worldRepresentationChanger.GameplayMoved += OnGameplayMoved;
         }
 
@@ -30,8 +30,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             _inputService.RemoveBuildingButtonPressed -= OnRemoveBuildingButtonClicked;
             _inputService.ReplaceBuildingButtonPressed -= OnReplaceBuildingButtonClicked;
-            //_destroyBuildingButton.Clicked -= OnDestroyButtonClicked;
-            //_replaceButton.Clicked -= OnReplaceButtonClicked;
             _worldRepresentationChanger.GameplayMoved -= OnGameplayMoved;
         }
 

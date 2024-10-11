@@ -18,6 +18,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
             IWorldFactory worldFactory,
             BuildingMarker buildingMarker)
         {
+            Debug.Log("construct");
             _worldChanger = world;
 
             _worldChanger.TilesChanged += OnTilesChanged;

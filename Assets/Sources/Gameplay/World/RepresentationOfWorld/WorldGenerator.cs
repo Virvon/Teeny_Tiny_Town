@@ -26,12 +26,15 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
             _tiles = new();
         }
 
-        public void TestInspect(WorldChanger worldChanger)
+        public void PlaceToCenter(uint gridLength, uint gridWidth)
         {
-            WorldChanger = worldChanger;
-        }
+            Vector3 center = new (
+                (gridLength * _cellSize / 2f) - (_cellSize / 2f),
+                transform.position.y,
+                (gridWidth * _cellSize / 2f) - (_cellSize / 2f));
 
-        public WorldChanger WorldChanger;
+            transform.localPosition = transform.localPosition - center;
+        }
 
         public TileRepresentation GetTile(Vector2Int gridPosition) =>
             _tiles.First(tile => tile.GridPosition == gridPosition);

@@ -21,9 +21,9 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Building
 
         public BuildingType FindNextBuilding(BuildingType buildingType)
         {
-            foreach(BuildingUpgradeBranch branch in Branches)
+            foreach (BuildingUpgradeBranch branch in Branches)
             {
-                foreach(BuildingUpgradeBranchElement branchElement in branch.Elements)
+                foreach (BuildingUpgradeBranchElement branchElement in branch.Elements)
                 {
                     if (branchElement.BuildingType == buildingType)
                         return branchElement.NextBuildingType;
@@ -33,5 +33,5 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Building
             Debug.LogError("Next building is not founded");
             return BuildingType.Bush;
         }
-    }
+    }   
 }

@@ -1,7 +1,5 @@
-﻿using Assets.Sources.Gameplay.World;
-using Assets.Sources.Gameplay.World.RepresentationOfWorld;
-using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
-using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
+﻿using Assets.Sources.Gameplay.Cameras;
+using Assets.Sources.Gameplay.World;
 using Assets.Sources.Services.AssetManagement;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -26,6 +24,10 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             Container
                .BindFactory<string, Vector3, Transform, UniTask<World>, World.Factory>()
                .FromFactory<KeyPrefabFactoryAsync<World>>();
+
+            Container
+                .BindFactory<AssetReferenceGameObject, UniTask<GameplayCamera>, GameplayCamera.Factory>()
+                .FromFactory<ReferencePrefabFactoryAsync<GameplayCamera>>();
         }
     }
 }

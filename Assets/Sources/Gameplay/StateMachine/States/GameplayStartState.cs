@@ -1,5 +1,7 @@
-﻿using Assets.Sources.Infrastructure.Factories.UiFactory;
+﻿using Assets.Sources.Gameplay.Cameras;
+using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.StateMachine;
+using Assets.Sources.Services.StaticDataService.Configs.Camera;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI.Windows;
 using Cysharp.Threading.Tasks;
@@ -11,11 +13,13 @@ namespace Assets.Sources.Gameplay.StateMachine.States
     {
         private readonly WindowsSwitcher _windowsSwitcher;
         private readonly IUiFactory _uiFactory;
+        private readonly CamerasSwitcher _camerasSwitcher;
 
-        public GameplayStartState(WindowsSwitcher windowsSwitcher, IUiFactory uiFactory)
+        public GameplayStartState(WindowsSwitcher windowsSwitcher, IUiFactory uiFactory, CamerasSwitcher camerasSwitcher)
         {
             _windowsSwitcher = windowsSwitcher;
             _uiFactory = uiFactory;
+            _camerasSwitcher = camerasSwitcher;
         }
 
         public async UniTask Enter()
@@ -27,6 +31,7 @@ namespace Assets.Sources.Gameplay.StateMachine.States
             }
 
             _windowsSwitcher.Switch(WindowType.StartWindow);
+            _camerasSwitcher.Switch(GameplayCameraType.StartCamera);
         }
 
         public UniTask Exit()

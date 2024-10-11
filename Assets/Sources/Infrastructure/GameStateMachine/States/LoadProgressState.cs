@@ -60,7 +60,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
 
                 List<TileData> tileDatas = worldConfig.TileConfigs.Select(tileConfig => new TileData(tileConfig.GridPosition, tileConfig.BuildingType, tileConfig.Type)).ToList();
 
-                worldDatas[i] = new WorldData(tileDatas, worldConfig.NextBuildingTypeForCreation, _staticDataService.AvailableForConstructionBuildingsConfig.StartingAvailableBuildingTypes.ToList());
+                worldDatas[i] = new WorldData(tileDatas, worldConfig.NextBuildingTypeForCreation, _staticDataService.AvailableForConstructionBuildingsConfig.StartingAvailableBuildingTypes.ToList(), worldConfig.Length, worldConfig.Width);
 
                 worldDatas[i].WorldWallet.Value = 3000;
             }

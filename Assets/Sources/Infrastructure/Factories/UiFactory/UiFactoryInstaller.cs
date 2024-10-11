@@ -19,11 +19,11 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
 
             Container
                 .BindFactory<AssetReferenceGameObject, UniTask<Window>, Window.Factory>()
-                .FromFactory<RefefencePrefabFactoryAsync<Window>>();
+                .FromFactory<ReferencePrefabFactoryAsync<Window>>();
 
             Container
                 .BindFactory<AssetReferenceGameObject, Transform, UniTask<StoreItem>, StoreItem.Factory>()
-                .FromFactory<RefefencePrefabFactoryAsync<StoreItem>>();
+                .FromFactory<ReferencePrefabFactoryAsync<StoreItem>>();
         }
     }
 }
