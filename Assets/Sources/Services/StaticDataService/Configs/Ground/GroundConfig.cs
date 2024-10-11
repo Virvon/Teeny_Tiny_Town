@@ -26,7 +26,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs
                     return roadConfig.Type;
             }
 
-            Debug.LogError("type not founded");
+            Debug.LogError("road type not founded");
 
             return default;
         }

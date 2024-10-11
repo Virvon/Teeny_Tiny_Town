@@ -13,8 +13,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
     {
         private List<RoadTile> _aroundTiles;
 
-        public int InspectCount;
-
         public RoadTile(TileType type, Vector2Int greedPosition,  IStaticDataService staticDataService, Building building, WorldData worldData, IBuildingGivable buildingGivable)
             : base(type, greedPosition, staticDataService, building, worldData, buildingGivable)
         {
@@ -47,8 +45,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         public async UniTask ChangeRoadsInChain(List<RoadTile> countedTiles)
         {
-            InspectCount++;
-
             countedTiles.Add(this);
 
             if (Ground.TryValidateRoad(GetAdjacentTiles<RoadTile>(), IsEmpty, GridPosition) == false)
@@ -65,8 +61,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         public void ChangeGroundsInChain(List<RoadTile> countedTiles, bool isSelfTile = false)
         {
-            InspectCount++;
-
             countedTiles.Add(this);
 
             if (Ground.TryTakeAroundTilesGroundType(_aroundTiles, IsEmpty) == false && isSelfTile == false)

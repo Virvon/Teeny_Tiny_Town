@@ -39,8 +39,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         public BuildingForPlacingInfo BuildingForPlacing { get; private set; }
         public IReadOnlyList<Tile> Tiles => _tiles;
 
-        public event Action UpdatedInspect;
-
         public async UniTask Generate(ITileRepresentationCreatable tileRepresentationCreatable)
         {
             await Fill(tileRepresentationCreatable);
@@ -51,8 +49,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
         public async UniTask PlaceNewBuilding(Vector2Int gridPosition, BuildingType buildingType)
         {
-            UpdatedInspect?.Invoke();
-
             Tile changedTile = GetTile(gridPosition);
             await changedTile.PutBuilding(GetBuilding(buildingType, gridPosition));
 
@@ -172,7 +168,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         {
             TallTile adjacentTile = _tiles.FirstOrDefault(value => value.GridPosition == gridPosition) as TallTile;
 
-            if (adjacentTile != null && tile != adjacentTile && tile.Type == adjacentTile.Type)
+            if (adjacentTile != null && tile.GridPosition != adjacentTile.GridPosition && tile.Type == adjacentTile.Type)
                 tile.AddAdjacentTile(adjacentTile);
         }
 
