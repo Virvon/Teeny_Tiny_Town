@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
@@ -23,6 +24,7 @@ namespace Assets.Sources.Services.StaticDataService
         private Dictionary<TileType, TestGroundConfig> _testGroundConfigs;
         private Dictionary<BuildingType, GroundType> _roadGrounds;
         private Dictionary<GameplayCameraType, GameplayCameraConfig> _cameras;
+        private Dictionary<string, WorldConfig> _worldConfigs;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
@@ -33,6 +35,7 @@ namespace Assets.Sources.Services.StaticDataService
         public WorldsConfig WorldsConfig { get; private set; }
         public AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; private set; }
         public ReadOnlyArray<GameplayCameraConfig> CameraConfigs { get; private set; }
+        public ReadOnlyArray<WorldConfig> WorldConfigs => _worldConfigs.Values.ToArray();
 
         public async UniTask InitializeAsync()
         {
@@ -46,9 +49,13 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadRoadGroundConfigs());
             tasks.Add(LoadAvailableForConstructionBuildingsConfig());
             tasks.Add(LoadCameraConfigs());
+            tasks.Add(LoadWorldConfigs());
 
             await UniTask.WhenAll(tasks);
         }
+
+        public WorldConfig GetWorld(string id) =>
+            _worldConfigs.TryGetValue(id, out WorldConfig config) ? config : null;
 
         public GameplayCameraConfig GetGameplayCamera(GameplayCameraType type) =>
             _cameras.TryGetValue(type, out GameplayCameraConfig config) ? config : null;
@@ -77,6 +84,13 @@ namespace Assets.Sources.Services.StaticDataService
                 roadType, out RoadConfig config) ? config : null) : null;
         }
 
+        private async UniTask LoadWorldConfigs()
+        {
+            WorldConfig[] worldConfigs = await GetConfigs<WorldConfig>();
+
+            _worldConfigs = worldConfigs.ToDictionary(value => value.Id, value => value);
+        }
+
         private async UniTask LoadCameraConfigs()
         {
             CameraConfigs = await GetConfigs<GameplayCameraConfig>();
@@ -103,7 +117,6 @@ namespace Assets.Sources.Services.StaticDataService
             WorldsConfig[] worldsConfigs = await GetConfigs<WorldsConfig>();
 
             WorldsConfig = worldsConfigs.First();
-
         }
 
         private async UniTask LoadStoreItemsConfig()

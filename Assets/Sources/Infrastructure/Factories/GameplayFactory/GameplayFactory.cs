@@ -33,9 +33,9 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
         public async UniTask<GameplayCamera> CreateCamera(GameplayCameraType type) =>
             await _gameplayCameraFactory.Create(_staticDataService.GetGameplayCamera(type).AssetReference);
 
-        public async UniTask<World> CreateWorld(Vector3 position, Transform parent)
+        public async UniTask<World> CreateWorld(string id, Vector3 position, Transform parent)
         {
-            return await _worldFactory.Create(GameplayFactoryAssets.World, position, parent);
+            return await _worldFactory.Create(_staticDataService.GetWorld(id).AssetReference, position, parent);
         }
 
         public async UniTask<WorldsList> CreateWorldsList()

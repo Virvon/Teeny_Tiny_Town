@@ -4,7 +4,6 @@ using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
-using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
 using UnityEngine;
 using Zenject;
@@ -14,12 +13,6 @@ namespace Assets.Sources.Gameplay.World
     public class WorldInstaller : MonoInstaller
     {
         [SerializeField] private LayerMask _actionHandlerLayerMask;
-
-        private IPersistentProgressService _persistentPorgressService;
-
-        [Inject]
-        private void Construct(IPersistentProgressService persistentProgressService) =>
-            _persistentPorgressService = persistentProgressService;
 
         public WorldStateMachine WorldStateMachine { get; private set; }
 
@@ -34,12 +27,6 @@ namespace Assets.Sources.Gameplay.World
             BindGameplayMover();
             BindWorldStateMachine();
             BindUiFactory();
-            BindWorldData();
-        }
-
-        private void BindWorldData()
-        {
-            Container.BindInstance(_persistentPorgressService.Progress.CurrentWorldData).AsSingle();
         }
 
         private void BindUiFactory()

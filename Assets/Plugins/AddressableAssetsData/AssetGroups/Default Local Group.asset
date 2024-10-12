@@ -298,6 +298,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4141ff073e4b08b43bc3271a9810fa64
+    m_Address: Assets/Configs/WorldConfigs/WorldConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4166c9d83fb665144b2b79697bf64f37
+    m_Address: Assets/Configs/WorldConfigs/ExpandingWorldConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c83a0e82ae2fe074e8598aff9a8d1e25
+    m_Address: ExpandingWorld
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}
   m_SchemaSet:

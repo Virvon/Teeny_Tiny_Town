@@ -39,7 +39,7 @@ namespace Assets.Sources.Gameplay.World
 
         public async UniTask CreateCurrentWorld()
         {
-            _currentWorld = await _gameplayFactory.CreateWorld(_currentWorldPosition, transform);
+            _currentWorld = await _gameplayFactory.CreateWorld(_persistentProgressService.Progress.CurrentWorldData.Id, _currentWorldPosition, transform);
         }
 
         public async UniTask ShowNextWorld()
@@ -49,9 +49,9 @@ namespace Assets.Sources.Gameplay.World
 
             _canChangeWorld = false;
 
-            WorldData nextWorldDat = _persistentProgressService.Progress.GetNextWorldData();
+            WorldData nextWorldData = _persistentProgressService.Progress.GetNextWorldData();
 
-            World world = await _gameplayFactory.CreateWorld(_nextWorldPosition, transform);
+            World world = await _gameplayFactory.CreateWorld(nextWorldData.Id, _nextWorldPosition, transform);
 
             ReplaceWorlds(world, _previousWorldPosition, _currentWorldPosition, () =>
             {
@@ -67,9 +67,9 @@ namespace Assets.Sources.Gameplay.World
 
             _canChangeWorld = false;
 
-            WorldData nextWorldDat = _persistentProgressService.Progress.GetPreviousWorldData();
+            WorldData previousWorldData = _persistentProgressService.Progress.GetPreviousWorldData();
 
-            World world = await _gameplayFactory.CreateWorld(_previousWorldPosition, transform);
+            World world = await _gameplayFactory.CreateWorld(previousWorldData.Id, _previousWorldPosition, transform);
 
             ReplaceWorlds(world, _nextWorldPosition, _currentWorldPosition, () =>
             {

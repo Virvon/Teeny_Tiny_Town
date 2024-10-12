@@ -7,12 +7,5 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
     {
         public float DistanceBetweenWorlds;
         public Vector3 CurrentWorldPosition;
-        public WorldConfig[] Configs;
-
-        private void OnValidate()
-        {
-            foreach (WorldConfig config in Configs)
-                config.CreateTileConfigs();
-        }
     }
 }

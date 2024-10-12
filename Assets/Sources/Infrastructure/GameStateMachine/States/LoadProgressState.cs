@@ -1,14 +1,12 @@
 ﻿using Assets.Sources.Data;
-using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem.Utilities;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {
@@ -50,18 +48,15 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
 
         private WorldData[] GetWorldDatas()
         {
-            WorldConfig[] worldConfigs = _staticDataService.WorldsConfig.Configs;
+            ReadOnlyArray<WorldConfig> worldConfigs = _staticDataService.WorldConfigs;
 
-            WorldData[] worldDatas = new WorldData[worldConfigs.Length];
+            WorldData[] worldDatas = new WorldData[worldConfigs.Count];
 
-            for(int i = 0; i < worldConfigs.Length; i++)
+            for(int i = 0; i < worldConfigs.Count; i++)
             {
                 WorldConfig worldConfig = worldConfigs[i];
 
-                List<TileData> tileDatas = worldConfig.TileConfigs.Select(tileConfig => new TileData(tileConfig.GridPosition, tileConfig.BuildingType, tileConfig.Type)).ToList();
-
-                worldDatas[i] = new WorldData(tileDatas, worldConfig.NextBuildingTypeForCreation, _staticDataService.AvailableForConstructionBuildingsConfig.StartingAvailableBuildingTypes.ToList(), worldConfig.Length, worldConfig.Width, worldConfig.StartStoreList);
-
+                worldDatas[i] = worldConfig.GetWorldData();
                 worldDatas[i].WorldWallet.Value = 3000;
             }
 

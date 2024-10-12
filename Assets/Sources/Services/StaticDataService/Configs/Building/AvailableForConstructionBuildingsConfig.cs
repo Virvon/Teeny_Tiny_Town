@@ -7,7 +7,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Building
     {
         public uint requiredCreatedBuildingsToAddNext;
         public uint AvailableUpgradeBrach;
-        public BuildingType[] StartingAvailableBuildingTypes;
+        
         public BuildingUpgradeBranch[] Branches;
 
         private void OnValidate()

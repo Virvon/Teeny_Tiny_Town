@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Gameplay.World.StateMachine.States;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace Assets.Sources.Gameplay.World
@@ -14,7 +15,7 @@ namespace Assets.Sources.Gameplay.World
             _worldInstaller.WorldStateMachine.Enter<WorldBootsrappState>().Forget();
         }
 
-        public class Factory : PlaceholderFactory<string, Vector3, Transform, UniTask<World>>
+        public class Factory : PlaceholderFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<World>>
         {
         }
     }

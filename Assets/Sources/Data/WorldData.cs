@@ -7,6 +7,7 @@ namespace Assets.Sources.Data
     [Serializable]
     public class WorldData
     {
+        public string Id;
         public List<TileData> Tiles;
         public BuildingType NextBuildingTypeForCreation;
         public uint NextBuildingForCreationBuildsCount;
@@ -17,6 +18,7 @@ namespace Assets.Sources.Data
         public List<BuildingType> StoreList;
 
         public WorldData(
+            string id,
             List<TileData> tiles,
             BuildingType nextBuildingTypeForCreation,
             List<BuildingType> availableBuildingForCreation,
@@ -33,6 +35,7 @@ namespace Assets.Sources.Data
 
             WorldWallet = new();
             NextBuildingForCreationBuildsCount = 0;
+            Id = id;
         }
 
         public event Action<BuildingType> StoreListUpdated;

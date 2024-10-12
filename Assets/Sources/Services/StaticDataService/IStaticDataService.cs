@@ -16,6 +16,7 @@ namespace Assets.Sources.Services.StaticDataService
         WorldsConfig WorldsConfig { get; }
         AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; }
         ReadOnlyArray<GameplayCameraConfig> CameraConfigs { get; }
+        ReadOnlyArray<WorldConfig> WorldConfigs { get; }
 
         RoadConfig GetRoad(GroundType groundType, RoadType roadType);
         TBuilding GetBuilding<TBuilding>(BuildingType buildingType)
@@ -26,5 +27,6 @@ namespace Assets.Sources.Services.StaticDataService
         TestGroundConfig GetGround(TileType tileType);
         GroundType GetGroundType(BuildingType buildingType);
         GameplayCameraConfig GetGameplayCamera(GameplayCameraType type);
+        WorldConfig GetWorld(string id);
     }
 }
