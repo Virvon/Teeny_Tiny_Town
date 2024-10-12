@@ -1,7 +1,6 @@
-﻿using Assets.Sources.Infrastructure.Factories.UiFactory;
-using Assets.Sources.Services.PersistentProgress;
+﻿using Assets.Sources.Data;
+using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -13,14 +12,14 @@ namespace Assets.Sources.Gameplay.Store
         [SerializeField] private List<BuildingType> _availableBuildings;
 
         private IUiFactory _uiFactory;
-        private World.World _world;
+        private WorldData _worldData;
         private List<StoreItem> _storeItems;
 
         [Inject]
-        private void Construct(IUiFactory uiFactory, World.World world)
+        private void Construct(IUiFactory uiFactory, WorldData worldData)
         {
             _uiFactory = uiFactory;
-            _world = world;
+            _worldData = worldData;
 
             _storeItems = new ();
         }
@@ -44,7 +43,7 @@ namespace Assets.Sources.Gameplay.Store
 
         private void OnStoreItemBuyed(BuildingType buildingType, uint cost)
         {
-            if (_world.WorldData.WorldWallet.TryGet(cost))
+            if (_worldData.WorldWallet.TryGet(cost))
             {
                 Debug.Log("sucsess");
             }

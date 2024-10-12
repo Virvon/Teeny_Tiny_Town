@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
@@ -42,6 +43,10 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             Container
                 .BindFactory<string, UniTask<BuildingMarker>, BuildingMarker.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<BuildingMarker>>();
+
+            Container
+                .BindFactory<string, UniTask<ActionHandlerSwitcher>, ActionHandlerSwitcher.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<ActionHandlerSwitcher>>();
         }
     }
 }

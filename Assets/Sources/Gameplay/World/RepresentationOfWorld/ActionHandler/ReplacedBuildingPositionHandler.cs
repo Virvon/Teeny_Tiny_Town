@@ -1,9 +1,7 @@
-﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
-using Assets.Sources.Infrastructure.Factories.GameplayFactory;
+﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
-using TileRepresentation = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.TileRepresentation;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
@@ -12,7 +10,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         private readonly SelectFrame _choosedBuildingSelectFrame;
         private readonly SelectFrame.Factory _selectFrameFactory;
 
-        private readonly Vector3 _choosedBuildingPositionOffset = new Vector3(0, 2, 0);
+        private readonly Vector3 _choosedBuildingPositionOffset = new (0, 2, 0);
 
         private SelectFrame _choosedPlaceSelectFrame;
         private bool _isBuildingChoosed;
@@ -32,7 +30,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         public override async UniTask Enter()
         {
             if(_choosedPlaceSelectFrame == null)
-                _choosedPlaceSelectFrame = await _selectFrameFactory.Create(GameplayFactoryAssets.SelectFrame);
+                _choosedPlaceSelectFrame = await _selectFrameFactory.Create(WorldFactoryAssets.SelectFrame);
 
             _choosedBuildingSelectFrame.Hide();
             _choosedPlaceSelectFrame.Hide();

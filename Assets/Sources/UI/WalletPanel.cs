@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Gameplay.World;
+﻿using Assets.Sources.Data;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -9,18 +9,18 @@ namespace Assets.Sources.UI
     {
         [SerializeField] private TMP_Text _walletValue;
 
-        private World _world;
+        private WorldData _worldData;
 
         [Inject]
-        private void Construct(World world)
+        private void Construct(WorldData worldData)
         {
-            _world = world;
+            _worldData = worldData;
 
-            _world.WorldData.WorldWallet.ValueChanged += OnWorldWalletValueChanged;
+            _worldData.WorldWallet.ValueChanged += OnWorldWalletValueChanged;
         }
 
         private void OnDestroy() =>
-            _world.WorldData.WorldWallet.ValueChanged -= OnWorldWalletValueChanged;
+            _worldData.WorldWallet.ValueChanged -= OnWorldWalletValueChanged;
 
         private void OnWorldWalletValueChanged(uint value) =>
             _walletValue.text = value.ToString();

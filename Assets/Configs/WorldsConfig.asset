@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da19e42d25602bf49b92c9f0e8cc8e79, type: 3}
   m_Name: WorldsConfig
   m_EditorClassIdentifier: 
-  DistanceBetweenWorlds: 20
+  DistanceBetweenWorlds: 35
+  CurrentWorldPosition: {x: 0, y: 0, z: 0}
   Configs:
   - Length: 5
     Width: 5
@@ -91,5 +92,57 @@ MonoBehaviour:
       BuildingType: 0
     - Type: 0
       GridPosition: {x: 4, y: 4}
+      BuildingType: 0
+    NextBuildingTypeForCreation: 2
+  - Length: 4
+    Width: 4
+    TileConfigs:
+    - Type: 0
+      GridPosition: {x: 0, y: 0}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 0, y: 1}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 0, y: 2}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 0, y: 3}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 1, y: 0}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 1, y: 1}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 1, y: 2}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 1, y: 3}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 2, y: 0}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 2, y: 1}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 2, y: 2}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 2, y: 3}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 3, y: 0}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 3, y: 1}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 3, y: 2}
+      BuildingType: 0
+    - Type: 0
+      GridPosition: {x: 3, y: 3}
       BuildingType: 0
     NextBuildingTypeForCreation: 2

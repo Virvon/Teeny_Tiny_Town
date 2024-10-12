@@ -39,14 +39,14 @@ namespace Assets.Sources.UI.Windows
             _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
         }
 
-        private void OnPreviousMapButtonClicked()
+        private async void OnPreviousMapButtonClicked()
         {
-            _worldsList.ShowPreviousWorld();
+            await _worldsList.ShowPreviousWorld();
         }
 
-        private void OnNextMapButtonClicked()
+        private async void OnNextMapButtonClicked()
         {
-            _worldsList.ShowNextWorld();
+            await _worldsList.ShowNextWorld();
         }
 
         private void OnContinueButtonClicked()

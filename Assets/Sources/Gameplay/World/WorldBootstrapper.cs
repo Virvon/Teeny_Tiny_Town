@@ -6,7 +6,6 @@ using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StateMachine;
-using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.Gameplay.World
@@ -19,7 +18,7 @@ namespace Assets.Sources.Gameplay.World
         private readonly StatesFactory _statesFactory;
         private readonly ActionHandlerStateMachine _actionHandlerStateMachine;
         private readonly ActionHandlerStatesFactory _actionHandlerStatesFactory;
-        private readonly World _world;
+        private readonly WorldData _worldData;
 
         public WorldBootstrapper(
             WorldChanger worldChanger,
@@ -28,7 +27,7 @@ namespace Assets.Sources.Gameplay.World
             StatesFactory statesFactory,
             ActionHandlerStateMachine actionHandlerStateMachine,
             ActionHandlerStatesFactory actionHandlerStatesFactory,
-            World worldData)
+            WorldData worldData)
         {
             _worldChanger = worldChanger;
             _worldFactory = worldFactory;
@@ -36,7 +35,7 @@ namespace Assets.Sources.Gameplay.World
             _statesFactory = statesFactory;
             _actionHandlerStateMachine = actionHandlerStateMachine;
             _actionHandlerStatesFactory = actionHandlerStatesFactory;
-            _world = worldData;
+            _worldData = worldData;
         }
 
         public async void Initialize()
@@ -49,10 +48,10 @@ namespace Assets.Sources.Gameplay.World
 
             //_actionHandlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
 
-            worldGenerator.PlaceToCenter(_world.WorldData.Length, _world.WorldData.Width);
+            worldGenerator.PlaceToCenter(_worldData.Length, _worldData.Width);
             await _worldChanger.Generate(worldGenerator);
 
-            //_worldStateMachine.RegisterState(_statesFactory.Create<ChangeWorldState>());
+            _worldStateMachine.RegisterState(_statesFactory.Create<ChangeWorldState>());
             //_worldStateMachine.RegisterState(_statesFactory.Create<ExitWorldState>());
         }
 

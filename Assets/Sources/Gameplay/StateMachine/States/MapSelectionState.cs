@@ -1,5 +1,7 @@
-﻿using Assets.Sources.Infrastructure.Factories.UiFactory;
+﻿using Assets.Sources.Gameplay.Cameras;
+using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.StateMachine;
+using Assets.Sources.Services.StaticDataService.Configs.Camera;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI.Windows;
 using Cysharp.Threading.Tasks;
@@ -10,11 +12,13 @@ namespace Assets.Sources.Gameplay.StateMachine.States
     {
         private readonly WindowsSwitcher _windowsSwitcher;
         private readonly IUiFactory _uiFactory;
+        private readonly CamerasSwitcher _camerasSwtitcher;
 
-        public MapSelectionState(WindowsSwitcher windowsSwitcher, IUiFactory uiFactory)
+        public MapSelectionState(WindowsSwitcher windowsSwitcher, IUiFactory uiFactory, CamerasSwitcher camerasSwtitcher)
         {
             _windowsSwitcher = windowsSwitcher;
             _uiFactory = uiFactory;
+            _camerasSwtitcher = camerasSwtitcher;
         }
 
         public async UniTask Enter()
@@ -26,6 +30,7 @@ namespace Assets.Sources.Gameplay.StateMachine.States
             }
 
             _windowsSwitcher.Switch(WindowType.MapSelectionWindow);
+            _camerasSwtitcher.Switch(GameplayCameraType.MapSelectionCamera);
         }
 
         public UniTask Exit()

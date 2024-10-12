@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Services.Input;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -53,6 +54,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             if (_handlerStateMachine.CurrentState is not NewBuildingPlacePositionHandler)
                 _handlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
+        }
+
+        public class Factory : PlaceholderFactory<string, UniTask<ActionHandlerSwitcher>>
+        {
         }
     }
 }

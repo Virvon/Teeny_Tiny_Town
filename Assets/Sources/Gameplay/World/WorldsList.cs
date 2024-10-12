@@ -3,7 +3,7 @@ using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -11,52 +11,92 @@ namespace Assets.Sources.Gameplay.World
 {
     public class WorldsList : MonoBehaviour
     {
+        [SerializeField] private float _changingSpeed;
+
+        private Vector3 _currentWorldPosition;
+        private Vector3 _previousWorldPosition;
+        private Vector3 _nextWorldPosition;
         private IGameplayFactory _gameplayFactory;
         private IPersistentProgressService _persistentProgressService;
-        private int _currentWorldNumber;
-        private float _distanceBetweenWorlds;
-        private List<World> _worlds;
+
+        private World _currentWorld;
+        private bool _canChangeWorld;
 
         [Inject]
         private void Construct(IStaticDataService staticDataService, IGameplayFactory gameplayFactory, IPersistentProgressService persistentProgressService)
         {
+            _currentWorldPosition = staticDataService.WorldsConfig.CurrentWorldPosition;
+
             _gameplayFactory = gameplayFactory;
             _persistentProgressService = persistentProgressService;
-            _currentWorldNumber = 0;
-            _distanceBetweenWorlds = staticDataService.WorldsConfig.DistanceBetweenWorlds;
-            _worlds = new();
+
+            float distanceBetweenWorlds = staticDataService.WorldsConfig.DistanceBetweenWorlds;
+            _previousWorldPosition = new Vector3(_currentWorldPosition.x - distanceBetweenWorlds, _currentWorldPosition.y, _currentWorldPosition.z);
+            _nextWorldPosition = new Vector3(_currentWorldPosition.x + distanceBetweenWorlds, _currentWorldPosition.y, _currentWorldPosition.z);
+
+            _canChangeWorld = true;
         }
 
-        public async UniTask Create()
+        public async UniTask CreateCurrentWorld()
         {
-            Vector3 position = Vector3.zero;
+            _currentWorld = await _gameplayFactory.CreateWorld(_currentWorldPosition, transform);
+        }
 
-            foreach(WorldData worldData in _persistentProgressService.Progress.WorldDatas)
+        public async UniTask ShowNextWorld()
+        {
+            if (_canChangeWorld == false)
+                return;
+
+            _canChangeWorld = false;
+
+            WorldData nextWorldDat = _persistentProgressService.Progress.GetNextWorldData();
+
+            World world = await _gameplayFactory.CreateWorld(_nextWorldPosition, transform);
+
+            ReplaceWorlds(world, _previousWorldPosition, _currentWorldPosition, () =>
             {
-                World world = await _gameplayFactory.CreateWorld(position, transform);
-
-                world.Init(worldData);
-
-                position += Vector3.right * _distanceBetweenWorlds;
-                _worlds.Add(world);
-            }
+                ChangeCurrentWorld(world);
+                _canChangeWorld = true;                
+            });
         }
 
-        public void ShowNextWorld()
+        public async UniTask ShowPreviousWorld()
         {
-            _currentWorldNumber++;
-            transform.position = new Vector3(-_currentWorldNumber * _distanceBetweenWorlds, 0, 0);
-        }
+            if (_canChangeWorld == false)
+                return;
 
-        public void ShowPreviousWorld()
-        {
-            _currentWorldNumber--;
-            transform.position = new Vector3(-_currentWorldNumber * _distanceBetweenWorlds, 0, 0);
+            _canChangeWorld = false;
+
+            WorldData nextWorldDat = _persistentProgressService.Progress.GetPreviousWorldData();
+
+            World world = await _gameplayFactory.CreateWorld(_previousWorldPosition, transform);
+
+            ReplaceWorlds(world, _nextWorldPosition, _currentWorldPosition, () =>
+            {
+                ChangeCurrentWorld(world);
+                _canChangeWorld = true;
+            });
         }
 
         public void StartCurrentWorld()
         {
-            _worlds[_currentWorldNumber].Choose();
+            _currentWorld.Choose();
+        }
+
+        private void ChangeCurrentWorld(World targetWorld)
+        {
+            Destroy(_currentWorld.gameObject);
+            _currentWorld = targetWorld;
+        }
+
+        private void ReplaceWorlds(World changedWorld, Vector3 currentWorldTargetPosition, Vector3 changedWorldTargetPosition, TweenCallback callback)
+        {
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.Append(_currentWorld.transform.DOMove(currentWorldTargetPosition, _changingSpeed));
+            sequence.Insert(0, changedWorld.transform.DOMove(changedWorldTargetPosition, _changingSpeed));
+
+            sequence.onComplete += callback;
         }
 
         public class Factory : PlaceholderFactory<string, UniTask<WorldsList>>

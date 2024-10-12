@@ -34,7 +34,7 @@ namespace Assets.Sources.Gameplay
 
             RegisterGameplayStates();
 
-            await worldsList.Create();
+            await worldsList.CreateCurrentWorld();
 
             await _gameplayStateMachine.Enter<GameplayStartState>();
         }

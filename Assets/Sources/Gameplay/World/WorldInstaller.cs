@@ -1,10 +1,11 @@
-﻿using Assets.Sources.Data;
-using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
+using Assets.Sources.Services.PersistentProgress;
+using Assets.Sources.Services.StateMachine;
 using UnityEngine;
 using Zenject;
 
@@ -13,7 +14,12 @@ namespace Assets.Sources.Gameplay.World
     public class WorldInstaller : MonoInstaller
     {
         [SerializeField] private LayerMask _actionHandlerLayerMask;
-        [SerializeField] private World _world;
+
+        private IPersistentProgressService _persistentPorgressService;
+
+        [Inject]
+        private void Construct(IPersistentProgressService persistentProgressService) =>
+            _persistentPorgressService = persistentProgressService;
 
         public WorldStateMachine WorldStateMachine { get; private set; }
 
@@ -28,12 +34,12 @@ namespace Assets.Sources.Gameplay.World
             BindGameplayMover();
             BindWorldStateMachine();
             BindUiFactory();
-            BindWorld();
+            BindWorldData();
         }
 
-        private void BindWorld()
+        private void BindWorldData()
         {
-            Container.BindInstance(_world).AsSingle();
+            Container.BindInstance(_persistentPorgressService.Progress.CurrentWorldData).AsSingle();
         }
 
         private void BindUiFactory()
@@ -53,8 +59,10 @@ namespace Assets.Sources.Gameplay.World
 
         private void BindWorldStateMachine()
         {
-            WorldStateMachineInstaller.Install(Container);
-            WorldStateMachine = Container.Resolve<WorldStateMachine>();
+            WorldStateMachine = new();
+
+            Container.BindInstance(WorldStateMachine).AsSingle();
+            Container.Bind<StatesFactory>().AsSingle();
         }
 
         private void BindGameplayMover()

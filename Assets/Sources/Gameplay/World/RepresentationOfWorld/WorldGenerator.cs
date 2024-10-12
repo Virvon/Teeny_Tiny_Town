@@ -1,5 +1,4 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
-using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;

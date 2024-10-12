@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
@@ -24,6 +25,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
         private readonly TileRepresentation.Factory _tileRepresentationFactory;
         private readonly Ground.Factory _groundFactory;
         private readonly BuildingMarker.Factory _buildingMarkerFactory;
+        private readonly ActionHandlerSwitcher.Factory _actionHanlderSwitcherFactory;
 
         public WorldFactory(
             DiContainer container,
@@ -33,7 +35,8 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             TileRepresentation.Factory tileRepresentationFactory,
             Ground.Factory groundFactory,
             BuildingMarker.Factory buildingMarkerFactory,
-            IStaticDataService staticDataService)
+            IStaticDataService staticDataService,
+            ActionHandlerSwitcher.Factory actionHanlderSwitcherFactory)
         {
             _container = container;
             _worldGeneratorFactory = worldGeneratorFactory;
@@ -43,20 +46,26 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             _groundFactory = groundFactory;
             _buildingMarkerFactory = buildingMarkerFactory;
             _staticDataService = staticDataService;
+            _actionHanlderSwitcherFactory = actionHanlderSwitcherFactory;
         }
 
         public WorldGenerator WorldGenerator { get; private set; }
 
+        public async UniTask CreateActionHandlerSwitcher()
+        {
+            await _actionHanlderSwitcherFactory.Create(WorldFactoryAssets.ActionHandlerSwitcher);
+        }
+
         public async UniTask CreateSelectFrame()
         {
-            SelectFrame selectFrame = await _selectFrameFactory.Create(GameplayFactoryAssets.SelectFrame);
+            SelectFrame selectFrame = await _selectFrameFactory.Create(WorldFactoryAssets.SelectFrame);
 
             _container.Bind<SelectFrame>().FromInstance(selectFrame).AsSingle();
         }
 
         public async UniTask<TileRepresentation> CreateTileRepresentation(Vector3 position, Transform parent)
         {
-            TileRepresentation tile = await _tileRepresentationFactory.Create(GameplayFactoryAssets.Tile, position, parent);
+            TileRepresentation tile = await _tileRepresentationFactory.Create(WorldFactoryAssets.Tile, position, parent);
 
             return tile;
         }
@@ -73,14 +82,14 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
 
         public async UniTask CreateBuildingMarker()
         {
-            BuildingMarker marker = await _buildingMarkerFactory.Create(GameplayFactoryAssets.BuildingMarker);
+            BuildingMarker marker = await _buildingMarkerFactory.Create(WorldFactoryAssets.BuildingMarker);
 
             _container.Bind<BuildingMarker>().FromInstance(marker).AsSingle();
         }
 
         public async UniTask<WorldGenerator> CreateWorldGenerator()
         {
-            WorldGenerator = await _worldGeneratorFactory.Create(GameplayFactoryAssets.WorldGenerator);
+            WorldGenerator = await _worldGeneratorFactory.Create(WorldFactoryAssets.WorldGenerator);
 
             _container.BindInstance(WorldGenerator).AsSingle();
             _container.BindInstance(WorldGenerator.GetComponent<BuildingCreator>()).AsSingle();

@@ -6,6 +6,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
     public class WorldsConfig : ScriptableObject
     {
         public float DistanceBetweenWorlds;
+        public Vector3 CurrentWorldPosition;
         public WorldConfig[] Configs;
 
         private void OnValidate()

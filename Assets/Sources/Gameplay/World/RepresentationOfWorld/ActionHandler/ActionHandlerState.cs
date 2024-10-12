@@ -7,7 +7,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
     public abstract class ActionHandlerState : IState
     {
-        private const float RaycastDistance = 100;
+        private const float RaycastDistance = 300;
 
         protected readonly SelectFrame SelectFrame;
         protected readonly GameplayMover.GameplayMover GameplayMover;

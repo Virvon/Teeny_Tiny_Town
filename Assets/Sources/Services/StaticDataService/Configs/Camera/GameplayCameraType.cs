@@ -4,5 +4,6 @@
     {
         BootstrapCamera,
         StartCamera,
+        MapSelectionCamera,
     }
 }

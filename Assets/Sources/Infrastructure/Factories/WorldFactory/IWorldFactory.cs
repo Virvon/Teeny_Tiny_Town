@@ -12,6 +12,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
     {
         WorldGenerator WorldGenerator { get; }
 
+        UniTask CreateActionHandlerSwitcher();
         UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Buildings.BuildingRepresentation> CreateBuilding(BuildingType type, Vector3 position, Transform parent);
         UniTask CreateBuildingMarker();
         UniTask<Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground> CreateGround(TileType tileType, Vector3 position, Transform parent);

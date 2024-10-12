@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
+﻿using Assets.Sources.Data;
+using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Services.Input;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
@@ -11,16 +12,20 @@ namespace Assets.Sources.Gameplay.GameplayMover
     {
         private readonly WorldChanger _worldChanger;
         private readonly IInputService _inputService;
-        private readonly World.World _world;
+        private readonly WorldData _worldData;
         private readonly IPersistentProgressService _persistentProgressService;
 
         private Command _lastCommand;
 
-        public GameplayMover(WorldChanger worldChanger, IInputService inputService, World.World world, IPersistentProgressService persistentProgressService)
+        public GameplayMover(
+            WorldChanger worldChanger,
+            IInputService inputService,
+            WorldData worldData,
+            IPersistentProgressService persistentProgressService)
         {
             _worldChanger = worldChanger;
             _inputService = inputService;
-            _world = world;
+            _worldData = worldData;
 
             _inputService.UndoButtonPressed += TryUndoCommand;
             _persistentProgressService = persistentProgressService;
@@ -32,7 +37,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
         }
 
         public void PlaceNewBuilding(Vector2Int gridPosition) =>
-            ExecuteCommand(new PlaceNewBuildingCommand(_worldChanger, gridPosition, _world.WorldData));
+            ExecuteCommand(new PlaceNewBuildingCommand(_worldChanger, gridPosition, _worldData));
 
         public void RemoveBuilding(Vector2Int gridPosition) =>
             ExecuteCommand(new RemoveBuildingCommand(_worldChanger, gridPosition));
@@ -41,7 +46,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
             ExecuteCommand(new ReplaceBuildingCommand(_worldChanger, fromGridPosition, fromBuildingType, toGridPosition, toBuildingType));
 
         public void OpenChest(Vector2Int chestGridPosition, uint reward) =>
-            ExecuteCommand(new OpenChestCommand(_worldChanger, reward, chestGridPosition, _world.WorldData.WorldWallet));
+            ExecuteCommand(new OpenChestCommand(_worldChanger, reward, chestGridPosition, _worldData.WorldWallet));
 
         public async void TryUndoCommand()
         {

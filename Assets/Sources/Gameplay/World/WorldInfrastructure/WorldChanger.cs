@@ -20,15 +20,15 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
     public class WorldChanger : IBuildingGivable, ITileGetable
     {
         private readonly IStaticDataService _staticDataService;
-        private readonly World _world;
+        private readonly WorldData _worldData;
         private readonly IPersistentProgressService _persistentProgressService;
 
         private List<Tile> _tiles;
 
-        public WorldChanger(IStaticDataService staticDataService, World world, IPersistentProgressService persistentProgressService)
+        public WorldChanger(IStaticDataService staticDataService, WorldData worldData, IPersistentProgressService persistentProgressService)
         {
             _staticDataService = staticDataService;
-            _world = world;
+            _worldData = worldData;
 
             _tiles = new();
             _persistentProgressService = persistentProgressService;
@@ -39,12 +39,13 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         public BuildingForPlacingInfo BuildingForPlacing { get; private set; }
         public IReadOnlyList<Tile> Tiles => _tiles;
 
+        public void Start() =>
+            TilesChanged?.Invoke();
+
         public async UniTask Generate(ITileRepresentationCreatable tileRepresentationCreatable)
         {
             await Fill(tileRepresentationCreatable);
             AddNewBuilding();
-
-            TilesChanged?.Invoke();
         }
 
         public async UniTask PlaceNewBuilding(Vector2Int gridPosition, BuildingType buildingType)
@@ -98,13 +99,13 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                 case BuildingType.Tree:
                     return new Building(type);
                 case BuildingType.House:
-                    return new PayableBuilding(type, _staticDataService, _world.WorldData.WorldWallet, _persistentProgressService);
+                    return new PayableBuilding(type, _staticDataService, _worldData.WorldWallet, _persistentProgressService);
                 case BuildingType.Stone:
                     return new Building(type);
                 case BuildingType.Chest:
                     return new Chest(type, _staticDataService, gridPosition);
                 case BuildingType.Lighthouse:
-                    return new Lighthouse(type, _world.WorldData.WorldWallet, _persistentProgressService, this, gridPosition);
+                    return new Lighthouse(type, _worldData.WorldWallet, _persistentProgressService, this, gridPosition);
                 case BuildingType.Crane:
                     return new Crane(type, this, gridPosition);
                 default:
@@ -191,24 +192,42 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             List<RoadTile> roadTiles = new();
             List<TallTile> tallTiles = new();
 
-            foreach (TileData tileData in _world.WorldData.Tiles)
+            foreach (TileData tileData in _worldData.Tiles)
             {
                 Tile tile;
 
                 switch (tileData.Type)
                 {
                     case TileType.RoadGround:
-                        RoadTile roadTile = new(tileData.Type, tileData.GridPosition, _staticDataService, GetBuilding(tileData.BuildingType, tileData.GridPosition), _world.WorldData, this);
+                        RoadTile roadTile = new(
+                            tileData.Type,
+                            tileData.GridPosition,
+                            _staticDataService,
+                            GetBuilding(tileData.BuildingType, tileData.GridPosition),
+                            _worldData,
+                            this);
+
                         tile = roadTile;
                         roadTiles.Add(roadTile);
                         break;
                     case TileType.TallGround:
-                        TallTile tallTile = new(tileData.Type, tileData.GridPosition, _staticDataService, GetBuilding(tileData.BuildingType, tileData.GridPosition), _world.WorldData, this);
+                        TallTile tallTile = new(
+                            tileData.Type,
+                            tileData.GridPosition,
+                            _staticDataService,
+                            GetBuilding(tileData.BuildingType, tileData.GridPosition),
+                            _worldData,
+                            this);
+
                         tile = tallTile;
                         tallTiles.Add(tallTile);
                         break;
                     case TileType.WaterSurface:
-                        tile = new Tile(tileData.Type, tileData.GridPosition, _staticDataService, GetBuilding(tileData.BuildingType, tileData.GridPosition));
+                        tile = new Tile(
+                            tileData.Type,
+                            tileData.GridPosition,
+                            _staticDataService,
+                            GetBuilding(tileData.BuildingType, tileData.GridPosition));
                         break;
                     default:
                         tile = null;
@@ -238,7 +257,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
                 if (tile.IsEmpty)
                 {
-                    List<BuildingType> availableBuildingTypes = _world.WorldData.AvailableBuildingForCreation;
+                    List<BuildingType> availableBuildingTypes = _worldData.AvailableBuildingForCreation;
                     BuildingType buildingType = availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
 
                     BuildingForPlacing = new BuildingForPlacingInfo(tile.GridPosition, buildingType);
