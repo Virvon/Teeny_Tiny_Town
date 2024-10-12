@@ -40,19 +40,15 @@ namespace Assets.Sources.Gameplay.World
 
         public async void Initialize()
         {
-            //await _worldFactory.CreateSelectFrame();
-            //await _worldFactory.CreateBuildingMarker();
-            WorldGenerator worldGenerator = await _worldFactory.CreateWorldGenerator(); //need to create action handler
-
-            //RegisterActionHandlerStates();
-
-            //_actionHandlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
+            WorldGenerator worldGenerator = await _worldFactory.CreateWorldGenerator();
 
             worldGenerator.PlaceToCenter(_worldData.Length, _worldData.Width);
             await _worldChanger.Generate(worldGenerator);
 
-            _worldStateMachine.RegisterState(_statesFactory.Create<ChangeWorldState>());
-            //_worldStateMachine.RegisterState(_statesFactory.Create<ExitWorldState>());
+            _worldStateMachine.RegisterState(_statesFactory.Create<WorldChangingState>());
+            _worldStateMachine.RegisterState(_statesFactory.Create<ExitWorldState>());
+            _worldStateMachine.RegisterState(_statesFactory.Create<StoreState>());
+            _worldStateMachine.RegisterState(_statesFactory.Create<WorldBootsrappState>());
         }
 
         private void RegisterActionHandlerStates()

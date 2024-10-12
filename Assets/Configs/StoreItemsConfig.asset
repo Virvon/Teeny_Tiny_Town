@@ -19,8 +19,8 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   Configs:
   - BuildingType: 1
-    Cost: 5
+    Price: 5
   - BuildingType: 2
-    Cost: 50
+    Price: 50
   - BuildingType: 3
-    Cost: 1000
+    Price: 100

@@ -1,6 +1,5 @@
 ﻿using Assets.Sources.Data;
 using Assets.Sources.Gameplay.World.WorldInfrastructure;
-using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;

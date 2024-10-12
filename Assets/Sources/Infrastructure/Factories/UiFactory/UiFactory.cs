@@ -29,7 +29,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             StoreItemConfig config = _staticDataService.GetStoreItem(buildingType);
             StoreItem storeItem = await _storeItemFactory.Create(_staticDataService.StoreItemsConfig.AssetReference, parent);
 
-            storeItem.Init(config.Cost, buildingType);
+            storeItem.Init(config.Price, buildingType);
 
             return storeItem;
         }

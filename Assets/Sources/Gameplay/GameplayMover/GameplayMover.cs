@@ -48,6 +48,9 @@ namespace Assets.Sources.Gameplay.GameplayMover
         public void OpenChest(Vector2Int chestGridPosition, uint reward) =>
             ExecuteCommand(new OpenChestCommand(_worldChanger, reward, chestGridPosition, _worldData.WorldWallet));
 
+        public void ChangeBuildingForPlacing(BuildingType targetBuildingType, uint buildingPrice) =>
+            ExecuteCommand(new ChangeBuildingForPlacingCommand(_worldChanger, targetBuildingType, buildingPrice, _worldData.WorldWallet));
+
         public async void TryUndoCommand()
         {
             if (_lastCommand == null)

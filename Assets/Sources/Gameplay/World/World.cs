@@ -11,7 +11,7 @@ namespace Assets.Sources.Gameplay.World
 
         public void Choose()
         {
-            _worldInstaller.WorldStateMachine.Enter<ChangeWorldState>().Forget();
+            _worldInstaller.WorldStateMachine.Enter<WorldBootsrappState>().Forget();
         }
 
         public class Factory : PlaceholderFactory<string, Vector3, Transform, UniTask<World>>

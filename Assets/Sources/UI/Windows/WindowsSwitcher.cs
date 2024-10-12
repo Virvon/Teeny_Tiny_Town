@@ -1,11 +1,7 @@
-﻿using Assets.Sources.Infrastructure.Factories.UiFactory;
-using Assets.Sources.Services.StaticDataService;
-using Assets.Sources.Services.StaticDataService.Configs.Windows;
-using Cysharp.Threading.Tasks;
+﻿using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Assets.Sources.UI.Windows
 {

@@ -48,6 +48,12 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             AddNewBuilding();
         }
 
+        public void ChangeBuildingForPlacing(BuildingType type)
+        {
+            AddNewBuilding(type);
+            TilesChanged?.Invoke();
+        }
+
         public async UniTask PlaceNewBuilding(Vector2Int gridPosition, BuildingType buildingType)
         {
             Tile changedTile = GetTile(gridPosition);
@@ -247,7 +253,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                 await tile.CreateRepresentation(tileRepresentationCreatable);
         }
 
-        private void AddNewBuilding()
+        private void AddNewBuilding(BuildingType type)
         {
             bool isPositionFree = false;
 
@@ -257,13 +263,18 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
                 if (tile.IsEmpty)
                 {
-                    List<BuildingType> availableBuildingTypes = _worldData.AvailableBuildingForCreation;
-                    BuildingType buildingType = availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
-
-                    BuildingForPlacing = new BuildingForPlacingInfo(tile.GridPosition, buildingType);
+                    BuildingForPlacing = new BuildingForPlacingInfo(tile.GridPosition, type);
                     isPositionFree = true;
                 }
             }
+        }
+
+        private void AddNewBuilding()
+        {
+            List<BuildingType> availableBuildingTypes = _worldData.AvailableBuildingForCreation;
+            BuildingType buildingType = availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
+
+            AddNewBuilding(buildingType);
         }
     }
 }

@@ -14,9 +14,9 @@ namespace Assets.Sources.Gameplay.GameplayMover
         private readonly TileInfrastructureData[] _tileDatas;
         private readonly BuildingForPlacingInfo _buildingForPlacing;
 
-        public Command(WorldChanger world)
+        public Command(WorldChanger worldChanger)
         {
-            WorldChanger = world;
+            WorldChanger = worldChanger;
             _buildingForPlacing = WorldChanger.BuildingForPlacing;
             _tileDatas = WorldChanger.Tiles.Select(tile => new TileInfrastructureData(tile.GridPosition, tile.BuildingType)).ToArray();
         }

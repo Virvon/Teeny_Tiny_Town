@@ -7,6 +7,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Windows
     public class StoreItemConfig
     {
         public BuildingType BuildingType;
-        public uint Cost;
+        public uint Price;
     }
 }

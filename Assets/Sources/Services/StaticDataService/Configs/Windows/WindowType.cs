@@ -3,7 +3,7 @@
     public enum WindowType
     {
         GameplayWindow,
-        ItemsWindow,
+        StoreWindow,
         StartWindow,
         MapSelectionWindow,
     }

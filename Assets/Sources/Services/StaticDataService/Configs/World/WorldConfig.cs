@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Sources.Services.StaticDataService.Configs.World
@@ -11,6 +12,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public uint Width;
         public TileConfig[] TileConfigs;
         public BuildingType NextBuildingTypeForCreation;
+        public List<BuildingType> StartStoreList;
 
         public void CreateTileConfigs()
         {

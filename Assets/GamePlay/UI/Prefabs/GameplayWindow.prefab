@@ -270,6 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1568540163141648451}
   _exitButton: {fileID: 9133772129675559181}
+  _storeButton: {fileID: 628957983364422600}
 --- !u!1 &825666121049312744
 GameObject:
   m_ObjectHideFlags: 0
@@ -4284,9 +4285,8 @@ GameObject:
   - component: {fileID: 4152426022326223236}
   - component: {fileID: 5894264124523885335}
   - component: {fileID: 628957983364422600}
-  - component: {fileID: 2755391677183244866}
   m_Layer: 0
-  m_Name: ItmesButton
+  m_Name: StoreButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4470,20 +4470,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2755391677183244866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6970408994108283310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 672e7a200c9872047bcb9fe89a5bb840, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetWindowType: 1
-  _button: {fileID: 628957983364422600}
 --- !u!1 &7245383734845539864
 GameObject:
   m_ObjectHideFlags: 0
