@@ -19,7 +19,10 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public BuildingType[] StartingAvailableBuildingTypes;
         public AssetReferenceGameObject AssetReference;
 
-        protected List<TileData> TilesDatas => TileConfigs.Select(tileConfig => new TileData(tileConfig.GridPosition, tileConfig.BuildingType, tileConfig.Type)).ToList();
+        public TileType GetTileType(Vector2Int gridPosition) =>
+            TileConfigs.First(tile => tile.GridPosition == gridPosition).Type;
+
+        protected List<TileData> TilesDatas => TileConfigs.Select(tileConfig => new TileData(tileConfig.GridPosition, tileConfig.BuildingType)).ToList();
 
         private void OnValidate() =>
             CreateTileConfigs();

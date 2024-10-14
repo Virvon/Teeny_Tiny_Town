@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
@@ -8,7 +7,6 @@ using Assets.Sources.Services.StaticDataService.Configs.Camera;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 
 namespace Assets.Sources.Services.StaticDataService
@@ -54,8 +52,9 @@ namespace Assets.Sources.Services.StaticDataService
             await UniTask.WhenAll(tasks);
         }
 
-        public WorldConfig GetWorld(string id) =>
-            _worldConfigs.TryGetValue(id, out WorldConfig config) ? config : null;
+        public TWorldConfig GetWorld<TWorldConfig>(string id)
+            where TWorldConfig : WorldConfig =>
+            _worldConfigs.TryGetValue(id, out WorldConfig config) ? config as TWorldConfig : null;
 
         public GameplayCameraConfig GetGameplayCamera(GameplayCameraType type) =>
             _cameras.TryGetValue(type, out GameplayCameraConfig config) ? config : null;

@@ -1,5 +1,5 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
-using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
@@ -11,14 +11,14 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         private readonly IWorldFactory _worldFactory;
         private readonly ActionHandlerStateMachine _actionHandlerStateMachine;
         private readonly ActionHandlerStatesFactory _actionHandlerStatesFactory;
-        private readonly WorldChanger _worldChanger;
+        private readonly IWorldChanger _worldChanger;
         private readonly WorldStateMachine _worldStateMachine;
 
         public WorldBootsrappState(
             IWorldFactory worldFactory,
             ActionHandlerStateMachine actionHandlerStateMachine,
             ActionHandlerStatesFactory actionHandlerStatesFactory,
-            WorldChanger worldChanger,
+            IWorldChanger worldChanger,
             WorldStateMachine worldStateMachine)
         {
             _worldFactory = worldFactory;

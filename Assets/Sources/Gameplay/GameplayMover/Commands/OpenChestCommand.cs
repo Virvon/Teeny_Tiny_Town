@@ -1,9 +1,9 @@
 ﻿using Assets.Sources.Data;
-using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Sources.Gameplay.GameplayMover
+namespace Assets.Sources.Gameplay.GameplayMover.Commands
 {
     public class OpenChestCommand : Command
     {
@@ -11,8 +11,8 @@ namespace Assets.Sources.Gameplay.GameplayMover
         private readonly Vector2Int _chestGridPosition;
         private readonly WorldWallet _worldWallet;
 
-        public OpenChestCommand(WorldChanger world, uint reward, Vector2Int chestGridPosition, WorldWallet worldWallet)
-            : base(world)
+        public OpenChestCommand(IWorldChanger world, IWorldData worldData, uint reward, Vector2Int chestGridPosition, WorldWallet worldWallet)
+            : base(world, worldData)
         {
             _reward = reward;
             _chestGridPosition = chestGridPosition;

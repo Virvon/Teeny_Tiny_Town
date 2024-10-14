@@ -1,5 +1,4 @@
 ﻿using Assets.Sources.Data;
-using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
@@ -14,13 +13,19 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
     {
         private const uint MinTilesCountToMerge = 3;
 
-        private readonly WorldData _worldData;
+        private readonly IWorldData _worldData;
         private readonly IBuildingGivable _buildingGibable;
 
         private List<TallTile> _adjacentTiles;
 
-        public TallTile(TileType type, Vector2Int greedPosition, IStaticDataService staticDataService, Building building, WorldData worldData, IBuildingGivable buildingGibable)
-            : base(type, greedPosition, staticDataService, building)
+        public TallTile(
+            TileData tileData,
+            TileType type,
+            IStaticDataService staticDataService,
+            Building building,
+            IWorldData worldData,
+            IBuildingGivable buildingGibable)
+            : base(tileData, type, staticDataService, building)
         {
             _worldData = worldData;
 
@@ -37,7 +42,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         protected override async UniTask SetUpBuilding(Building building)
         {
-            Building = building;
+            SetBuilding(building);
 
             await TryUpdateBuildingsChain(building);
         }
@@ -111,10 +116,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
         {
             BuildingType nextBuildingType = StaticDataService.AvailableForConstructionBuildingsConfig.FindNextBuilding(BuildingType);
 
+            await CreateBuildingRepresentation(_buildingGibable.GetBuilding(nextBuildingType, GridPosition));
+
             if (_worldData.TryAddBuildingTypeForCreation(nextBuildingType, StaticDataService.AvailableForConstructionBuildingsConfig.requiredCreatedBuildingsToAddNext))
                 _worldData.AddNextBuildingTypeForCreation(StaticDataService.AvailableForConstructionBuildingsConfig.FindNextBuilding(StaticDataService.AvailableForConstructionBuildingsConfig.FindNextBuilding(nextBuildingType)));
-
-            await CreateBuildingRepresentation(_buildingGibable.GetBuilding(nextBuildingType, GridPosition));
         }
     }
 }

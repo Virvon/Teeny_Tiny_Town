@@ -5,6 +5,7 @@ using Assets.Sources.Gameplay.World;
 using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Camera;
+using Assets.Sources.Services.StaticDataService.Configs.World;
 
 namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
 {
@@ -35,7 +36,7 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
 
         public async UniTask<World> CreateWorld(string id, Vector3 position, Transform parent)
         {
-            return await _worldFactory.Create(_staticDataService.GetWorld(id).AssetReference, position, parent);
+            return await _worldFactory.Create(_staticDataService.GetWorld<WorldConfig>(id).AssetReference, position, parent);
         }
 
         public async UniTask<WorldsList> CreateWorldsList()

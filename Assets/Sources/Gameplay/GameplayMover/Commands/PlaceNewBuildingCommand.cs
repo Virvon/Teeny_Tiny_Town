@@ -1,24 +1,24 @@
 ﻿using Assets.Sources.Data;
-using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Sources.Gameplay.GameplayMover
+namespace Assets.Sources.Gameplay.GameplayMover.Commands
 {
     public class PlaceNewBuildingCommand : Command
     {
         private readonly Vector2Int _placedBuildingGridPosition;
         private readonly BuildingType _placedBuildingType;
-        private readonly WorldData _worldData;
+        private readonly IWorldData _worldData;
 
         private readonly BuildingType _nextBuildingTypeForCreation;
         private readonly uint _nextBuildingForCreationBuildsCount;
-        private readonly List<BuildingType> _availableBuildingForCreation;
+        private readonly IReadOnlyList<BuildingType> _availableBuildingsForCreation;
 
-        public PlaceNewBuildingCommand(WorldChanger world, Vector2Int placedBuildingGridPosition, WorldData worldData)
-            : base(world)
+        public PlaceNewBuildingCommand(IWorldChanger world, Vector2Int placedBuildingGridPosition, IWorldData worldData)
+            : base(world, worldData)
         {
             _placedBuildingGridPosition = placedBuildingGridPosition;
             _placedBuildingType = world.BuildingForPlacing.Type;
@@ -26,7 +26,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
 
             _nextBuildingTypeForCreation = _worldData.NextBuildingTypeForCreation;
             _nextBuildingForCreationBuildsCount = _worldData.NextBuildingForCreationBuildsCount;
-            _availableBuildingForCreation = _worldData.AvailableBuildingForCreation;
+            _availableBuildingsForCreation = _worldData.AvailableBuildingsForCreation;
         }
 
         public override async void Change() =>
@@ -36,7 +36,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
         {
             _worldData.NextBuildingTypeForCreation = _nextBuildingTypeForCreation;
             _worldData.NextBuildingForCreationBuildsCount = _nextBuildingForCreationBuildsCount;
-            _worldData.AvailableBuildingForCreation = _availableBuildingForCreation;
+            _worldData.UpdateAvailableBuildingForCreation(_availableBuildingsForCreation);
 
             return base.Undo();
         }

@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+﻿using Assets.Sources.Gameplay.GameplayMover;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -20,7 +21,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             SelectFrame selectFrame,
             LayerMask layerMask,
             SelectFrame.Factory selectFrameFactory,
-            GameplayMover.GameplayMover gameplayMover)
+            IGameplayMover gameplayMover)
             : base(selectFrame, layerMask, gameplayMover)
         {
             _selectFrameFactory = selectFrameFactory;

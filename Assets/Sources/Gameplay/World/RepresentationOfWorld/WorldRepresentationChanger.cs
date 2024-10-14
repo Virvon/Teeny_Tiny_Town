@@ -1,24 +1,24 @@
 ﻿using System.Collections.Generic;
 using System;
-using Assets.Sources.Gameplay.World.WorldInfrastructure;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using UnityEngine;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 {
     public class WorldRepresentationChanger
     {
-        private readonly WorldChanger _worldChanger;
+        private readonly IWorldChanger _worldChanger;
         private readonly IWorldFactory _worldFactory;
         private readonly BuildingMarker _buildingMarker;
 
         public WorldRepresentationChanger(
-            WorldChanger world,
+            IWorldChanger worldChanger,
             IWorldFactory worldFactory,
             BuildingMarker buildingMarker)
         {
-            _worldChanger = world;
+            _worldChanger = worldChanger;
 
             _worldChanger.TilesChanged += OnTilesChanged;
 

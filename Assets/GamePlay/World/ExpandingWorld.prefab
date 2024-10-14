@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 487006423451700649}
-  - component: {fileID: 2200294263047648190}
+  - component: {fileID: 3174438327645156940}
   m_Layer: 0
-  m_Name: WorldInstaller
+  m_Name: ExpandingWorldInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3286394918942320156}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2200294263047648190
+--- !u!114 &3174438327645156940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,56 +41,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2328527170472909844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 332f0d1128981984b9bb00c00e0f31d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 681afec2430fb994dae67461fb310c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _actionHandlerLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1 &5121552362599443111
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5557596975828326627}
-  - component: {fileID: 4396781723096833010}
-  m_Layer: 0
-  m_Name: ExpandingWorldDataInstaller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5557596975828326627
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5121552362599443111}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3286394918942320156}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4396781723096833010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5121552362599443111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7a351d371eddfd42a1a810cefd68cfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5847459068844677991
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +79,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 487006423451700649}
-  - {fileID: 5557596975828326627}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7107399174257484372
@@ -140,8 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 2200294263047648190}
-  - {fileID: 4396781723096833010}
+  - {fileID: 3174438327645156940}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
@@ -157,4 +111,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18b8c7e478ccde48a68ef42b3744d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _worldInstaller: {fileID: 2200294263047648190}
+  _worldInstaller: {fileID: 3174438327645156940}

@@ -1,24 +1,34 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+﻿using Assets.Sources.Data;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.StateMachine;
-using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
+using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Sources.Gameplay.World
+namespace Assets.Sources.Gameplay.World.Root
 {
     public class WorldInstaller : MonoInstaller
     {
         [SerializeField] private LayerMask _actionHandlerLayerMask;
 
+        private IPersistentProgressService _persistentProgressService;
+
+        [Inject]
+        private void Construct(IPersistentProgressService persistentProgressService) =>
+            _persistentProgressService = persistentProgressService;
+
         public WorldStateMachine WorldStateMachine { get; private set; }
+        protected WorldData WorldData => _persistentProgressService.Progress.CurrentWorldData;
 
         public override void InstallBindings()
         {
             BindWorldBootstrapper();
+            BindWorldData();
             BindWorldChanger();
             BindActionHandlerLayerMask();
             BindActionHandlerStateMachine();
@@ -27,6 +37,21 @@ namespace Assets.Sources.Gameplay.World
             BindGameplayMover();
             BindWorldStateMachine();
             BindUiFactory();
+        }
+
+        protected virtual void BindWorldData()
+        {
+            Container.BindInterfacesTo<WorldData>().FromInstance(WorldData).AsSingle();
+        }
+
+        protected virtual void BindWorldChanger()
+        {
+            Container.BindInterfacesTo<WorldChanger>().AsSingle();
+        }
+
+        protected virtual void BindGameplayMover()
+        {
+            Container.BindInterfacesTo<GameplayMover.GameplayMover>().AsSingle();
         }
 
         private void BindUiFactory()
@@ -52,11 +77,6 @@ namespace Assets.Sources.Gameplay.World
             Container.Bind<StatesFactory>().AsSingle();
         }
 
-        private void BindGameplayMover()
-        {
-            Container.BindInterfacesAndSelfTo<GameplayMover.GameplayMover>().AsSingle();
-        }
-
         private void BindWorldFactory()
         {
             WorldFactoryInstaller.Install(Container);
@@ -65,11 +85,6 @@ namespace Assets.Sources.Gameplay.World
         private void BindWorldBootstrapper()
         {
             Container.BindInterfacesAndSelfTo<WorldBootstrapper>().AsSingle().NonLazy();
-        }
-
-        private void BindWorldChanger()
-        {
-            Container.BindInterfacesAndSelfTo<WorldChanger>().AsSingle();
         }
 
         private void BindWorldRepresentationChanger()

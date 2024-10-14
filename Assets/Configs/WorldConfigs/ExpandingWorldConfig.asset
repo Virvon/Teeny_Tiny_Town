@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ExpandingWorldConfig
   m_EditorClassIdentifier: 
   Id: f6467933-c0ed-4bb8-bcde-1b89b8e6dba3
-  Length: 4
-  Width: 4
+  Length: 5
+  Width: 5
   TileConfigs:
   - Type: 0
     GridPosition: {x: 0, y: 0}
@@ -29,6 +29,9 @@ MonoBehaviour:
     GridPosition: {x: 0, y: 3}
     BuildingType: 0
   - Type: 0
+    GridPosition: {x: 0, y: 4}
+    BuildingType: 0
+  - Type: 0
     GridPosition: {x: 1, y: 0}
     BuildingType: 0
   - Type: 0
@@ -39,6 +42,9 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 1, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 4}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 2, y: 0}
@@ -53,6 +59,9 @@ MonoBehaviour:
     GridPosition: {x: 2, y: 3}
     BuildingType: 0
   - Type: 0
+    GridPosition: {x: 2, y: 4}
+    BuildingType: 0
+  - Type: 0
     GridPosition: {x: 3, y: 0}
     BuildingType: 0
   - Type: 0
@@ -64,6 +73,24 @@ MonoBehaviour:
   - Type: 0
     GridPosition: {x: 3, y: 3}
     BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 4}
+    BuildingType: 0
   NextBuildingTypeForCreation: 2
   StartStoreList: 01000000
   StartingAvailableBuildingTypes: 01000000
@@ -72,3 +99,10 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  StartLength: 4
+  StartWidth: 4
+  ExpandConfigs:
+  - BuidldingType: 2
+    ExpandedSize: {x: 5, y: 4}
+  - BuidldingType: 3
+    ExpandedSize: {x: 5, y: 5}

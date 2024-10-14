@@ -1,9 +1,9 @@
 ﻿using Assets.Sources.Data;
-using Assets.Sources.Gameplay.World.WorldInfrastructure;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
 
-namespace Assets.Sources.Gameplay.GameplayMover
+namespace Assets.Sources.Gameplay.GameplayMover.Commands
 {
     public class ChangeBuildingForPlacingCommand : Command
     {
@@ -11,8 +11,8 @@ namespace Assets.Sources.Gameplay.GameplayMover
         private readonly uint _buildingPrice;
         private readonly WorldWallet _worldWallet;
 
-        public ChangeBuildingForPlacingCommand(WorldChanger world, BuildingType targetBuilding, uint buildingPrice, WorldWallet worldWallet)
-            : base(world)
+        public ChangeBuildingForPlacingCommand(IWorldChanger world, IWorldData worldData, BuildingType targetBuilding, uint buildingPrice, WorldWallet worldWallet)
+            : base(world, worldData)
         {
             _targetBuilding = targetBuilding;
             _buildingPrice = buildingPrice;

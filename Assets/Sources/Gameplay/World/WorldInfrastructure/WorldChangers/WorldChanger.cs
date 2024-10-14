@@ -15,22 +15,22 @@ using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Services.PersistentProgress;
 
-namespace Assets.Sources.Gameplay.World.WorldInfrastructure
+namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
-    public class WorldChanger : IBuildingGivable, ITileGetable
+    public class WorldChanger : IWorldChanger
     {
+        protected readonly IWorldData WorldData;
+
         private readonly IStaticDataService _staticDataService;
-        private readonly WorldData _worldData;
         private readonly IPersistentProgressService _persistentProgressService;
 
         private List<Tile> _tiles;
 
-        public WorldChanger(IStaticDataService staticDataService, WorldData worldData, IPersistentProgressService persistentProgressService)
+        public WorldChanger(IStaticDataService staticDataService, IWorldData worldData, IPersistentProgressService persistentProgressService)
         {
             _staticDataService = staticDataService;
-            _worldData = worldData;
+            WorldData = worldData;
 
-            _tiles = new();
             _persistentProgressService = persistentProgressService;
         }
 
@@ -39,13 +39,18 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
         public BuildingForPlacingInfo BuildingForPlacing { get; private set; }
         public IReadOnlyList<Tile> Tiles => _tiles;
 
+        protected ITileRepresentationCreatable TileRepresentationCreatable { get; private set; }
+
         public void Start() =>
             TilesChanged?.Invoke();
 
         public async UniTask Generate(ITileRepresentationCreatable tileRepresentationCreatable)
         {
+            TileRepresentationCreatable = tileRepresentationCreatable;
+
             await Fill(tileRepresentationCreatable);
             AddNewBuilding();
+
         }
 
         public void ChangeBuildingForPlacing(BuildingType type)
@@ -60,14 +65,16 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             await changedTile.PutBuilding(GetBuilding(buildingType, gridPosition));
 
             AddNewBuilding();
-
             TilesChanged?.Invoke();
         }
 
-        public async UniTask Update(ReadOnlyArray<TileInfrastructureData> tileDatas, BuildingForPlacingInfo buildingForPlacing)
+        public async UniTask Update(ReadOnlyArray<TileData> tileDatas, BuildingForPlacingInfo buildingForPlacing)
         {
-            foreach (TileInfrastructureData tileData in tileDatas)
+            foreach (TileData tileData in tileDatas)
             {
+                if (IsTileFitsIntoGrid(tileData.GridPosition) == false)
+                    continue;
+
                 Tile tile = GetTile(tileData.GridPosition);
 
                 tile.Clean();
@@ -105,18 +112,18 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                 case BuildingType.Tree:
                     return new Building(type);
                 case BuildingType.House:
-                    return new PayableBuilding(type, _staticDataService, _worldData.WorldWallet, _persistentProgressService);
+                    return new PayableBuilding(type, _staticDataService, WorldData.WorldWallet, _persistentProgressService);
                 case BuildingType.Stone:
                     return new Building(type);
                 case BuildingType.Chest:
                     return new Chest(type, _staticDataService, gridPosition);
                 case BuildingType.Lighthouse:
-                    return new Lighthouse(type, _worldData.WorldWallet, _persistentProgressService, this, gridPosition);
+                    return new Lighthouse(type, WorldData.WorldWallet, _persistentProgressService, this, gridPosition);
                 case BuildingType.Crane:
                     return new Crane(type, this, gridPosition);
                 default:
                     Debug.LogError("building not founded");
-                    return null; ;
+                    return null;
             }
         }
 
@@ -136,6 +143,106 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
 
         public Tile GetTile(Vector2Int gridPosition) =>
             _tiles.FirstOrDefault(tile => tile.GridPosition == gridPosition);
+
+        public IEnumerable<int> GetLineNeighbors(int linePosition)
+        {
+            for (int i = linePosition - 1; i <= linePosition + 1; i++)
+                yield return i;
+        }
+
+        protected void AddNewBuilding()
+        {
+            IReadOnlyList<BuildingType> availableBuildingTypes = WorldData.AvailableBuildingsForCreation;
+            BuildingType buildingType = availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
+
+            AddNewBuilding(buildingType);
+        }
+
+        protected void Clean()
+        {
+            foreach (Tile tile in _tiles)
+                tile.Destroy();
+
+            _tiles.Clear();
+        }
+
+        protected async UniTask Fill(ITileRepresentationCreatable tileRepresentationCreatable)
+        {
+            List<RoadTile> roadTiles = new();
+            List<TallTile> tallTiles = new();
+
+            _tiles = CreateTiles(roadTiles, tallTiles);
+
+            InitializeAdjacentTiles(roadTiles);
+            InitializeAdjacentTiles(tallTiles);
+            InitializeAroundTiles(roadTiles);
+            InitializeRoadTiles(roadTiles);
+
+            foreach (Tile tile in _tiles)
+                await tile.CreateRepresentation(tileRepresentationCreatable);
+        }
+
+        protected virtual List<Tile> CreateTiles(List<RoadTile> roadTiles, List<TallTile> tallTiles)
+        {
+            List<Tile> tiles = new();
+
+            foreach (TileData tileData in WorldData.Tiles)
+            {
+                if (IsTileFitsIntoGrid(tileData.GridPosition) == false)
+                    continue;
+
+                Tile tile = GetGround(roadTiles, tallTiles, tileData);
+
+                tiles.Add(tile);
+            }
+
+            return tiles;
+        }
+
+        protected bool IsTileFitsIntoGrid(Vector2Int gridPosition) =>
+            gridPosition.x < WorldData.Length && gridPosition.y < WorldData.Width;
+
+        protected Tile GetGround(List<RoadTile> roadTiles, List<TallTile> tallTiles, TileData tileData)
+        {
+            TileType tileType = _staticDataService.GetWorld<WorldConfig>(WorldData.Id).GetTileType(tileData.GridPosition);
+
+            switch (tileType)
+            {
+                case TileType.RoadGround:
+                    RoadTile roadTile = new(
+                        tileData,
+                        tileType,
+                        _staticDataService,
+                        GetBuilding(tileData.BuildingType, tileData.GridPosition),
+                        WorldData,
+                        this);
+
+                    roadTiles.Add(roadTile);
+
+                    return roadTile;
+                case TileType.TallGround:
+                    TallTile tallTile = new(
+                        tileData,
+                        tileType,
+                        _staticDataService,
+                        GetBuilding(tileData.BuildingType, tileData.GridPosition),
+                        WorldData,
+                        this);
+
+                    tallTiles.Add(tallTile);
+
+                    return tallTile;
+                case TileType.WaterSurface:
+                    return new Tile(
+                        tileData,
+                        tileType,
+                        _staticDataService,
+                        GetBuilding(tileData.BuildingType, tileData.GridPosition));
+                default:
+                    Debug.LogError("tile can not be null");
+                    return null;
+            }
+        }
 
         private void InitializeAroundTiles(List<RoadTile> roadTiles)
         {
@@ -187,71 +294,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                 tile.AddAroundTile(aroundTile);
         }
 
-        public IEnumerable<int> GetLineNeighbors(int linePosition)
-        {
-            for (int i = linePosition - 1; i <= linePosition + 1; i++)
-                yield return i;
-        }
-
-        private async UniTask Fill(ITileRepresentationCreatable tileRepresentationCreatable)
-        {
-            List<RoadTile> roadTiles = new();
-            List<TallTile> tallTiles = new();
-
-            foreach (TileData tileData in _worldData.Tiles)
-            {
-                Tile tile;
-
-                switch (tileData.Type)
-                {
-                    case TileType.RoadGround:
-                        RoadTile roadTile = new(
-                            tileData.Type,
-                            tileData.GridPosition,
-                            _staticDataService,
-                            GetBuilding(tileData.BuildingType, tileData.GridPosition),
-                            _worldData,
-                            this);
-
-                        tile = roadTile;
-                        roadTiles.Add(roadTile);
-                        break;
-                    case TileType.TallGround:
-                        TallTile tallTile = new(
-                            tileData.Type,
-                            tileData.GridPosition,
-                            _staticDataService,
-                            GetBuilding(tileData.BuildingType, tileData.GridPosition),
-                            _worldData,
-                            this);
-
-                        tile = tallTile;
-                        tallTiles.Add(tallTile);
-                        break;
-                    case TileType.WaterSurface:
-                        tile = new Tile(
-                            tileData.Type,
-                            tileData.GridPosition,
-                            _staticDataService,
-                            GetBuilding(tileData.BuildingType, tileData.GridPosition));
-                        break;
-                    default:
-                        tile = null;
-                        Debug.LogError("tile can not be null");
-                        break;
-                }
-
-                _tiles.Add(tile);
-            }
-
-            InitializeAdjacentTiles(roadTiles);
-            InitializeAdjacentTiles(tallTiles);
-            InitializeAroundTiles(roadTiles);
-            InitializeRoadTiles(roadTiles);
-
-            foreach (Tile tile in _tiles)
-                await tile.CreateRepresentation(tileRepresentationCreatable);
-        }
+        
 
         private void AddNewBuilding(BuildingType type)
         {
@@ -267,14 +310,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
                     isPositionFree = true;
                 }
             }
-        }
-
-        private void AddNewBuilding()
-        {
-            List<BuildingType> availableBuildingTypes = _worldData.AvailableBuildingForCreation;
-            BuildingType buildingType = availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
-
-            AddNewBuilding(buildingType);
         }
     }
 }

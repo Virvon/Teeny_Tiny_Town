@@ -27,6 +27,7 @@ namespace Assets.Sources.Services.StaticDataService
         TestGroundConfig GetGround(TileType tileType);
         GroundType GetGroundType(BuildingType buildingType);
         GameplayCameraConfig GetGameplayCamera(GameplayCameraType type);
-        WorldConfig GetWorld(string id);
+        TWorldConfig GetWorld<TWorldConfig>(string id)
+            where TWorldConfig : WorldConfig;
     }
 }

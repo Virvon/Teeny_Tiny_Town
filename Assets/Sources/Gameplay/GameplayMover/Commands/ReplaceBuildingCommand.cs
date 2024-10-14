@@ -1,8 +1,9 @@
-﻿using Assets.Sources.Gameplay.World.WorldInfrastructure;
+﻿using Assets.Sources.Data;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using UnityEngine;
 
-namespace Assets.Sources.Gameplay.GameplayMover
+namespace Assets.Sources.Gameplay.GameplayMover.Commands
 {
     public class ReplaceBuildingCommand : Command
     {
@@ -11,7 +12,8 @@ namespace Assets.Sources.Gameplay.GameplayMover
         private readonly Vector2Int _toBuildingGridPosition;
         private readonly BuildingType _toBuildingType;
 
-        public ReplaceBuildingCommand(WorldChanger world, Vector2Int fromBuildingGridPosition, BuildingType fromBuildingType, Vector2Int toBuildingGridPosition, BuildingType toBuildingType) : base(world)
+        public ReplaceBuildingCommand(IWorldChanger world, IWorldData worldData, Vector2Int fromBuildingGridPosition, BuildingType fromBuildingType, Vector2Int toBuildingGridPosition, BuildingType toBuildingType)
+            : base(world, worldData)
         {
             _fromBuildingGridPosition = fromBuildingGridPosition;
             _fromBuildingType = fromBuildingType;

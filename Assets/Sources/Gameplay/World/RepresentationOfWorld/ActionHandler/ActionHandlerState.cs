@@ -10,12 +10,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         private const float RaycastDistance = 300;
 
         protected readonly SelectFrame SelectFrame;
-        protected readonly GameplayMover.GameplayMover GameplayMover;
+        protected readonly GameplayMover.IGameplayMover GameplayMover;
 
         private readonly LayerMask _layerMask;
         private readonly Camera _camera;
 
-        public ActionHandlerState(SelectFrame selectFrame, LayerMask layerMask, GameplayMover.GameplayMover gameplayMover)
+        public ActionHandlerState(SelectFrame selectFrame, LayerMask layerMask, GameplayMover.IGameplayMover gameplayMover)
         {
             SelectFrame = selectFrame;
             _layerMask = layerMask;

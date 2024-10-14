@@ -1,6 +1,6 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+﻿using Assets.Sources.Gameplay.GameplayMover;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
@@ -10,7 +10,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         public RemovedBuildingPositionHandler(
             SelectFrame selectFrame,
             LayerMask layerMask,
-            GameplayMover.GameplayMover gameplayMover)
+            IGameplayMover gameplayMover)
             : base(selectFrame, layerMask, gameplayMover)
         {
         }

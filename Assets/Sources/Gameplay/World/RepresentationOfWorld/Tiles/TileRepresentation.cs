@@ -78,6 +78,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             return null;
         }
 
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
+
         public class Factory : PlaceholderFactory<string, Vector3, Transform, UniTask<TileRepresentation>>
         {
         }

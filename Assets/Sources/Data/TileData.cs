@@ -1,20 +1,19 @@
 ﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
-using Assets.Sources.Services.StaticDataService.Configs.World;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Data
 {
+    [Serializable]
     public class TileData
     {
         public Vector2Int GridPosition;
         public BuildingType BuildingType;
-        public TileType Type;
 
-        public TileData(Vector2Int gridPosition, BuildingType buildingType, TileType type)
+        public TileData(Vector2Int gridPosition, BuildingType buildingType)
         {
             GridPosition = gridPosition;
             BuildingType = buildingType;
-            Type = type;
         }
     }
 }

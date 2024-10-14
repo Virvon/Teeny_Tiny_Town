@@ -13,8 +13,13 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
     {
         private List<RoadTile> _aroundTiles;
 
-        public RoadTile(TileType type, Vector2Int greedPosition,  IStaticDataService staticDataService, Building building, WorldData worldData, IBuildingGivable buildingGivable)
-            : base(type, greedPosition, staticDataService, building, worldData, buildingGivable)
+        public RoadTile(
+            TileData tileData,
+            TileType type,
+            IStaticDataService staticDataService,
+            Building building, IWorldData worldData,
+            IBuildingGivable buildingGivable)
+            : base(tileData, type, staticDataService, building, worldData, buildingGivable)
         {
             Ground = new(StaticDataService, StaticDataService.GetGroundType(BuildingType));
 
@@ -78,7 +83,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         protected override async UniTask CreateBuildingRepresentation(Building building)
         {
-            Building = building;
+            SetBuilding(building);
 
             if (Ground.TryUpdate(Building.Type))
                 ChangeGroundsInChain(new(), true);

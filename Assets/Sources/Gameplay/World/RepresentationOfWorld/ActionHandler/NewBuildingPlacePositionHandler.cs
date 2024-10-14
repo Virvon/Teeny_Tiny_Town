@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+using Assets.Sources.Gameplay.GameplayMover;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
@@ -18,7 +19,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         public NewBuildingPlacePositionHandler(
             SelectFrame selectFrame,
             LayerMask layerMask,
-            GameplayMover.GameplayMover gameplayMover,
+            IGameplayMover gameplayMover,
             BuildingMarker buildingMarker,
             WorldRepresentationChanger worldRepresentationChanger)
             : base(selectFrame, layerMask, gameplayMover)

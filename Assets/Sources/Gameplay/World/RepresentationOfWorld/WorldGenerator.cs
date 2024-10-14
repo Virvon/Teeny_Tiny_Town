@@ -45,6 +45,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 
             tileRepresentation.Init(gridPosition);
 
+            if (_tiles.Any(value => value.GridPosition == gridPosition))
+                _tiles.Remove(GetTile(gridPosition));
+
             _tiles.Add(tileRepresentation);
 
             return tileRepresentation;

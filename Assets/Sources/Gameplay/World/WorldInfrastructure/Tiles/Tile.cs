@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+﻿using Assets.Sources.Data;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Services.StaticDataService;
@@ -14,14 +15,17 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
         public readonly TileType Type;
         public readonly Vector2Int GridPosition;
 
+        protected readonly TileData TileData;
         protected readonly IStaticDataService StaticDataService;
 
-        public Tile(TileType type, Vector2Int greedPosition, IStaticDataService staticDataService, Building building)
+        public Tile(TileData tileData, TileType type, IStaticDataService staticDataService, Building building)
         {
+            TileData = tileData;
             Type = type;
-            GridPosition = greedPosition;
             StaticDataService = staticDataService;
             Building = building;
+
+            GridPosition = TileData.GridPosition;
         }
 
         public Building Building { get; protected set; }
@@ -57,7 +61,12 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
                 return;
 
             Building.Destroy(TileRepresentation);
-            Building = null;
+            SetBuilding(null);
+        }
+
+        public void Destroy()
+        {
+            TileRepresentation.Destroy();
         }
 
         public virtual UniTask RemoveBuilding()
@@ -79,9 +88,15 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         protected virtual async UniTask CreateBuildingRepresentation(Building building)
         {
-            Building = building;
+            SetBuilding(building);
 
             await Building.CreateRepresentation(TileRepresentation);
+        }
+
+        protected void SetBuilding(Building building)
+        {
+            Building = building;
+            TileData.BuildingType = IsEmpty ? BuildingType.Undefined : Building.Type;
         }
     }
 }
