@@ -16,6 +16,7 @@ namespace Assets.Sources.Data
         string Id { get; }
         BuildingType NextBuildingTypeForCreation { get; set; }
         uint NextBuildingForCreationBuildsCount { get; set; }
+        IReadOnlyList<BuildingType> StoreList { get; }
 
         void AddNextBuildingTypeForCreation(BuildingType type);
         bool TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext);

@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data;
+using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
@@ -13,13 +14,13 @@ namespace Assets.Sources.Gameplay.Store
     public class ItemsStore : MonoBehaviour
     {
         private IUiFactory _uiFactory;
-        private WorldData _worldData;
+        private IWorldData _worldData;
         private List<StoreItem> _storeItems;
-        private GameplayMover.GameplayMover _gameplayMover;
+        private IGameplayMover _gameplayMover;
         private WorldStateMachine _worldStateMachine;
 
         [Inject]
-        private void Construct(IUiFactory uiFactory, WorldData worldData, GameplayMover.GameplayMover gameplayMover, WorldStateMachine worldStateMachine)
+        private void Construct(IUiFactory uiFactory, IWorldData worldData, IGameplayMover gameplayMover, WorldStateMachine worldStateMachine)
         {
             _uiFactory = uiFactory;
             _worldData = worldData;

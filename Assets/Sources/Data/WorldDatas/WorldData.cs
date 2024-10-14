@@ -62,11 +62,9 @@ namespace Assets.Sources.Data
             get => Width;
             set => Width = value;
         }
-
         IReadOnlyList<TileData> IWorldData.Tiles => Tiles;
-
         IReadOnlyList<BuildingType> IWorldData.AvailableBuildingsForCreation => AvailableBuildingsForCreation;
-
+        IReadOnlyList<BuildingType> IWorldData.StoreList => StoreList;
 
         public virtual bool TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext)
         {
