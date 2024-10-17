@@ -19,19 +19,23 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Building
             }
         }
 
-        public BuildingType FindNextBuilding(BuildingType buildingType)
+        public bool TryFindeNextBuilding(BuildingType buildingType, out BuildingType nextBuildingType)
         {
+            nextBuildingType = BuildingType.Undefined;
+
             foreach (BuildingUpgradeBranch branch in Branches)
             {
                 foreach (BuildingUpgradeBranchElement branchElement in branch.Elements)
                 {
                     if (branchElement.BuildingType == buildingType)
-                        return branchElement.NextBuildingType;
+                    {
+                        nextBuildingType = branchElement.NextBuildingType;
+                        return true;
+                    }
                 }
             }
 
-            Debug.LogError("Next building is not founded");
-            return BuildingType.Bush;
+            return false;
         }
     }   
 }

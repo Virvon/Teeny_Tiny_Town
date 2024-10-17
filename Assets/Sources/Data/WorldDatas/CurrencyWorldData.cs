@@ -28,7 +28,7 @@ namespace Assets.Sources.Data
         WorldWallet ICurrencyWorldData.WorldWallet => WorldWallet;
         IReadOnlyList<BuildingType> ICurrencyWorldData.StoreList => StoreList;
 
-        public override void AddNextBuildingTypeForCreation(BuildingType type)
+        protected override void AddNextBuildingTypeForCreation(BuildingType type)
         {
             base.AddNextBuildingTypeForCreation(type);
 

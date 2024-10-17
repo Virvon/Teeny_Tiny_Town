@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
+﻿using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,17 +60,23 @@ namespace Assets.Sources.Data
         IReadOnlyList<TileData> IWorldData.Tiles => Tiles;
         IReadOnlyList<BuildingType> IWorldData.AvailableBuildingsForCreation => AvailableBuildingsForCreation;
 
-        public virtual bool TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext)
+        public virtual void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)
         {
-            if (NextBuildingTypeForCreation != createdBuilding)
-                return false;
+            if (NextBuildingTypeForCreation != createdBuilding || NextBuildingTypeForCreation == BuildingType.Undefined)
+                return;
 
             NextBuildingForCreationBuildsCount++;
 
-            return NextBuildingForCreationBuildsCount >= requiredCreatedBuildingsToAddNext;
+            if(NextBuildingForCreationBuildsCount >= requiredCreatedBuildingsToAddNext)
+            {
+                if (staticDataService.AvailableForConstructionBuildingsConfig.TryFindeNextBuilding(createdBuilding, out BuildingType nextBuildingType))
+                    AddNextBuildingTypeForCreation(nextBuildingType);
+                else
+                    NextBuildingTypeForCreation = BuildingType.Undefined;
+            }
         }
 
-        public virtual void AddNextBuildingTypeForCreation(BuildingType type)
+        protected virtual void AddNextBuildingTypeForCreation(BuildingType type)
         {
             AvailableBuildingsForCreation.Add(NextBuildingTypeForCreation);
             NextBuildingTypeForCreation = type;

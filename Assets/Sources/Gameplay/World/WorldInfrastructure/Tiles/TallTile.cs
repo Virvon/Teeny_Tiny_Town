@@ -82,15 +82,13 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             {
                 List<TallTile> countedTiles = new();
 
-                if (GetBuildingsChainLength(countedTiles) >= MinTilesCountToMerge)
+                if (GetBuildingsChainLength(countedTiles) >= MinTilesCountToMerge && await TryUpgradeBuilding())
                 {
                     List<TallTile> tilesForRemoveBuildings = countedTiles;
                     tilesForRemoveBuildings.Remove(this);
 
                     foreach (Tile tile in countedTiles)
                         await tile.RemoveBuilding();
-
-                    await UpgradeBuilding();
                 }
                 else
                 {
@@ -112,14 +110,17 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             return adjacentTiles;
         }
 
-        private async UniTask UpgradeBuilding()
+        private async UniTask<bool> TryUpgradeBuilding()
         {
-            BuildingType nextBuildingType = StaticDataService.AvailableForConstructionBuildingsConfig.FindNextBuilding(BuildingType);
+            if (StaticDataService.AvailableForConstructionBuildingsConfig.TryFindeNextBuilding(BuildingType, out BuildingType nextBuildingType))
+            {
+                await CreateBuildingRepresentation(_buildingGibable.GetBuilding(nextBuildingType, GridPosition));
+                _worldData.TryAddBuildingTypeForCreation(nextBuildingType, StaticDataService.AvailableForConstructionBuildingsConfig.requiredCreatedBuildingsToAddNext, StaticDataService);
 
-            await CreateBuildingRepresentation(_buildingGibable.GetBuilding(nextBuildingType, GridPosition));
+                return true;
+            }
 
-            if (_worldData.TryAddBuildingTypeForCreation(nextBuildingType, StaticDataService.AvailableForConstructionBuildingsConfig.requiredCreatedBuildingsToAddNext))
-                _worldData.AddNextBuildingTypeForCreation(StaticDataService.AvailableForConstructionBuildingsConfig.FindNextBuilding(StaticDataService.AvailableForConstructionBuildingsConfig.FindNextBuilding(nextBuildingType)));
+            return false;
         }
     }
 }

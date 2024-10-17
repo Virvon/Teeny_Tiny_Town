@@ -1,7 +1,7 @@
-﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
+﻿using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Assets.Sources.Data
 {
@@ -21,10 +21,10 @@ namespace Assets.Sources.Data
 
         public event Action<BuildingType> BuildingUpdated;
 
-        public override bool TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext)
+        public override void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)
         {
             BuildingUpdated?.Invoke(createdBuilding);
-            return base.TryAddBuildingTypeForCreation(createdBuilding, requiredCreatedBuildingsToAddNext);
+            base.TryAddBuildingTypeForCreation(createdBuilding, requiredCreatedBuildingsToAddNext, staticDataService);
         }
     }
 }

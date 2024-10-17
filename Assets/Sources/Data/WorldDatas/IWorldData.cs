@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
+﻿using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System.Collections.Generic;
 
 namespace Assets.Sources.Data
@@ -13,8 +14,7 @@ namespace Assets.Sources.Data
         BuildingType NextBuildingTypeForCreation { get; set; }
         uint NextBuildingForCreationBuildsCount { get; set; }
 
-        void AddNextBuildingTypeForCreation(BuildingType type);
-        bool TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext);
+        void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService);
         void UpdateTileDatas(TileData[] tileDatas);
         void UpdateAvailableBuildingForCreation(IReadOnlyList<BuildingType> availableBuildingsForCreation);
     }
