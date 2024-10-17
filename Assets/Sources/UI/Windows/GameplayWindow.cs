@@ -10,31 +10,21 @@ namespace Assets.Sources.UI.Windows
 {
     public class GameplayWindow : Window
     {
-        [SerializeField] private Button _exitButton;
-        [SerializeField] private Button _storeButton;
-
-        private WorldStateMachine _worldStateMachine;
-
+        [SerializeField] private Button _hideButton;
+        
         [Inject]
         private void Construct(WorldStateMachine worldStateMachine) =>
-            _worldStateMachine = worldStateMachine;
+            WorldStateMachine = worldStateMachine;
 
-        private void OnEnable()
-        {
-            _exitButton.onClick.AddListener(OnExitButtonClicked);
-            _storeButton.onClick.AddListener(OnStoreButtonClicked);
-        }
+        protected WorldStateMachine WorldStateMachine { get; private set; }
 
-        private void OnDisable()
-        {
-            _exitButton.onClick.RemoveListener(OnExitButtonClicked);
-            _storeButton.onClick.RemoveListener(OnStoreButtonClicked);
-        }
+        protected virtual void OnEnable() =>
+            _hideButton.onClick.AddListener(OnHideButtonClicked);
 
-        private void OnExitButtonClicked() =>
-            _worldStateMachine.Enter<ExitWorldState>().Forget();
+        protected virtual void OnDisable() =>
+            _hideButton.onClick.RemoveListener(OnHideButtonClicked);
 
-        private void OnStoreButtonClicked() =>
-            _worldStateMachine.Enter<StoreState>().Forget();
+        private void OnHideButtonClicked() =>
+            WorldStateMachine.Enter<ExitWorldState>().Forget();
     }
 }

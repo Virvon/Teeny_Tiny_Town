@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 487006423451700649}
-  - component: {fileID: 2200294263047648190}
+  - component: {fileID: 5563351791133058963}
   m_Layer: 0
   m_Name: WorldInstaller
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3286394918942320156}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2200294263047648190
+--- !u!114 &5563351791133058963
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2328527170472909844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 332f0d1128981984b9bb00c00e0f31d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fd2cc50da4f1a84d82566e716d31d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _actionHandlerLayerMask:
@@ -57,9 +57,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3286394918942320156}
   - component: {fileID: 7107399174257484372}
-  - component: {fileID: 5296909339762190094}
+  - component: {fileID: 1583391155626720970}
   m_Layer: 0
-  m_Name: World
+  m_Name: CurrencyWorld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,11 +95,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 2200294263047648190}
+  - {fileID: 5563351791133058963}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!114 &5296909339762190094
+--- !u!114 &1583391155626720970
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5847459068844677991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18b8c7e478ccde48a68ef42b3744d43, type: 3}
+  m_Script: {fileID: 11500000, guid: df948f06c35bade4ea622bef7715aed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WorldInstaller: {fileID: 2200294263047648190}
+  WorldInstaller: {fileID: 5563351791133058963}

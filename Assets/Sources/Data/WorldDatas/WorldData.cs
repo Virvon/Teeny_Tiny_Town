@@ -13,34 +13,28 @@ namespace Assets.Sources.Data
         public BuildingType NextBuildingTypeForCreation;
         public uint NextBuildingForCreationBuildsCount;
         public List<BuildingType> AvailableBuildingsForCreation;
-        public WorldWallet WorldWallet;
+        
         public uint Length;
         public uint Width;
-        public List<BuildingType> StoreList;
-
+        
         public WorldData(
             string id,
             List<TileData> tiles,
             BuildingType nextBuildingTypeForCreation,
             List<BuildingType> availableBuildingForCreation,
             uint length,
-            uint width,
-            List<BuildingType> storeList)
+            uint width)
         {
             Tiles = tiles;
             NextBuildingTypeForCreation = nextBuildingTypeForCreation;
             AvailableBuildingsForCreation = availableBuildingForCreation;
             Length = length;
             Width = width;
-            StoreList = storeList;
 
-            WorldWallet = new();
             NextBuildingForCreationBuildsCount = 0;
             Id = id;
         }
-
-        public event Action<BuildingType> StoreListUpdated;
-        WorldWallet IWorldData.WorldWallet => WorldWallet;
+        
         string IWorldData.Id => Id;
         BuildingType IWorldData.NextBuildingTypeForCreation
         {
@@ -64,7 +58,6 @@ namespace Assets.Sources.Data
         }
         IReadOnlyList<TileData> IWorldData.Tiles => Tiles;
         IReadOnlyList<BuildingType> IWorldData.AvailableBuildingsForCreation => AvailableBuildingsForCreation;
-        IReadOnlyList<BuildingType> IWorldData.StoreList => StoreList;
 
         public virtual bool TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext)
         {
@@ -76,17 +69,11 @@ namespace Assets.Sources.Data
             return NextBuildingForCreationBuildsCount >= requiredCreatedBuildingsToAddNext;
         }
 
-        public void AddNextBuildingTypeForCreation(BuildingType type)
+        public virtual void AddNextBuildingTypeForCreation(BuildingType type)
         {
             AvailableBuildingsForCreation.Add(NextBuildingTypeForCreation);
             NextBuildingTypeForCreation = type;
             NextBuildingForCreationBuildsCount = 0;
-
-            if (StoreList.Contains(type) == false)
-            {
-                StoreList.Add(type);
-                StoreListUpdated?.Invoke(type);
-            }
         }
 
         public void UpdateTileDatas(TileData[] TargetTileDatas)

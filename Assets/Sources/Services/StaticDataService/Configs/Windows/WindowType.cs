@@ -3,6 +3,7 @@
     public enum WindowType
     {
         GameplayWindow,
+        CurrencyGameplayWindow,
         StoreWindow,
         StartWindow,
         MapSelectionWindow,

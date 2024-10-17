@@ -3,7 +3,7 @@ using System;
 
 namespace Assets.Sources.Data
 {
-    public interface IExpandingWorldData : IWorldData
+    public interface IExpandingWorldData : ICurrencyWorldData
     {
         event Action<BuildingType> BuildingUpdated;
     }

@@ -80,7 +80,7 @@ namespace Assets.Sources.Gameplay.World
 
         public void StartCurrentWorld()
         {
-            _currentWorld.Choose();
+            _currentWorld.EnterBootstrapState();
         }
 
         private void ChangeCurrentWorld(World targetWorld)

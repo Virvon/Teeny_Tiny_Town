@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 5730128796572383978}
   - component: {fileID: 1111211520047207145}
   - component: {fileID: 1248744769932689322}
+  - component: {fileID: 5912844472897193077}
   m_Layer: 0
   m_Name: WalletPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5730128796572383978
 RectTransform:
   m_ObjectHideFlags: 0
@@ -153,6 +154,19 @@ MonoBehaviour:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     m_Rotation: 0
+--- !u!114 &5912844472897193077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264596768730167616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d08664b589ad6e346afc593adf38e5a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _walletValue: {fileID: 4922907073757763664}
 --- !u!1 &563100173173134119
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,9 +179,9 @@ GameObject:
   - component: {fileID: 1568540163141648451}
   - component: {fileID: 2244421405932116770}
   - component: {fileID: 2539942933464453976}
-  - component: {fileID: 4909781903856161703}
+  - component: {fileID: 3522878833097906389}
   m_Layer: 5
-  m_Name: GameplayWindow
+  m_Name: CurrencyGameplayWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,7 +270,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4909781903856161703
+--- !u!114 &3522878833097906389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,11 +279,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 563100173173134119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8fc3b09a08c534b83bfa7b46c5ac29, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cedf95bae2b0b44dac6e46f81fc3cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1568540163141648451}
   _hideButton: {fileID: 9133772129675559181}
+  _storeButton: {fileID: 628957983364422600}
 --- !u!1 &825666121049312744
 GameObject:
   m_ObjectHideFlags: 0
@@ -4290,7 +4305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1646332130140455983
 RectTransform:
   m_ObjectHideFlags: 0

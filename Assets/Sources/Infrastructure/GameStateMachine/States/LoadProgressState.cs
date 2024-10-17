@@ -57,7 +57,9 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
                 WorldConfig worldConfig = worldConfigs[i];
 
                 worldDatas[i] = worldConfig.GetWorldData();
-                worldDatas[i].WorldWallet.Value = 3000;
+
+                if (worldDatas[i] is CurrencyWorldData currencyWolrdData)
+                    currencyWolrdData.WorldWallet.Value = 3000;
             }
 
             return worldDatas;

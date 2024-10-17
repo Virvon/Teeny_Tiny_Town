@@ -9,11 +9,11 @@ namespace Assets.Sources.Gameplay.World
 {
     public class World : MonoBehaviour
     {
-        [SerializeField] private WorldInstaller _worldInstaller;
+        [SerializeField] protected WorldInstaller WorldInstaller;
 
-        public void Choose()
+        public virtual void EnterBootstrapState()
         {
-            _worldInstaller.WorldStateMachine.Enter<WorldBootsrappState>().Forget();
+            WorldInstaller.WorldStateMachine.Enter<WorldBootstrapState>().Forget();
         }
 
         public class Factory : PlaceholderFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<World>>

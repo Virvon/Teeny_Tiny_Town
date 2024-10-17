@@ -15,7 +15,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public uint Width;
         public TileConfig[] TileConfigs;
         public BuildingType NextBuildingTypeForCreation;
-        public List<BuildingType> StartStoreList;
         public BuildingType[] StartingAvailableBuildingTypes;
         public AssetReferenceGameObject AssetReference;
 
@@ -28,7 +27,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
             CreateTileConfigs();
 
         public virtual WorldData GetWorldData() => 
-            new WorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Length, Width, StartStoreList);
+            new WorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Length, Width);
 
         private void CreateTileConfigs()
         {

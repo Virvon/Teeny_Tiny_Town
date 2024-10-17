@@ -315,6 +315,22 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2398a6f208640c42a2a29d3aded7148
+    m_Address: CurrencyWorld
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1bcdf5a6e46f3fd4a8f8133947e9a3ac
+    m_Address: Assets/Configs/WorldConfigs/CurrencyWorldConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3e5b39e019b82134dbc5ec2f9b669496
+    m_Address: CurrencyGameplayWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}
   m_SchemaSet:

@@ -7,14 +7,14 @@ using UnityEngine;
 
 namespace Assets.Sources.Gameplay.GameplayMover
 {
-    public class ExpandingGameplayMover : GameplayMover, IExpandingGameplayMover
+    public class ExpandingGameplayMover : CurrencyGameplayMover, IExpandingGameplayMover
     {
         private readonly IExpandingWorldChanger _expandingWorldChanger;
 
         public ExpandingGameplayMover(
             IExpandingWorldChanger expandingWorldChanger,
             IInputService inputService,
-            IWorldData worldData,
+            ICurrencyWorldData worldData,
             IPersistentProgressService persistentProgressService)
             : base(expandingWorldChanger, inputService, worldData, persistentProgressService)
         {

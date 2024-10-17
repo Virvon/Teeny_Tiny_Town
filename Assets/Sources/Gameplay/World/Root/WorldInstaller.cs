@@ -39,6 +39,11 @@ namespace Assets.Sources.Gameplay.World.Root
             BindUiFactory();
         }
 
+        protected virtual void BindWorldBootstrapper()
+        {
+            Container.BindInterfacesAndSelfTo<WorldBootstrapper>().AsSingle().NonLazy();
+        }
+
         protected virtual void BindWorldData()
         {
             Container.BindInterfacesTo<WorldData>().FromInstance(WorldData).AsSingle();
@@ -80,11 +85,6 @@ namespace Assets.Sources.Gameplay.World.Root
         private void BindWorldFactory()
         {
             WorldFactoryInstaller.Install(Container);
-        }
-
-        private void BindWorldBootstrapper()
-        {
-            Container.BindInterfacesAndSelfTo<WorldBootstrapper>().AsSingle().NonLazy();
         }
 
         private void BindWorldRepresentationChanger()

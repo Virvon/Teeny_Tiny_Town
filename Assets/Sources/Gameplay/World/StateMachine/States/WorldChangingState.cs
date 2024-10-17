@@ -5,6 +5,7 @@ using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI.Windows;
 using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
 {
@@ -27,15 +28,17 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _uiFactory = uiFactory;
         }
 
+        protected virtual WindowType WindowType => WindowType.GameplayWindow;
+
         public async UniTask Enter()
         {
-            if(_windowsSwitcher.Contains(WindowType.GameplayWindow) == false)
+            if (_windowsSwitcher.Contains(WindowType) == false)
             {
-                Window window = await _uiFactory.CreateWindow(WindowType.GameplayWindow);
-                _windowsSwitcher.RegisterWindow(WindowType.GameplayWindow, window);
+                Window window = await _uiFactory.CreateWindow(WindowType);
+                _windowsSwitcher.RegisterWindow(WindowType, window);
             }
 
-            _windowsSwitcher.Switch(WindowType.GameplayWindow);
+            _windowsSwitcher.Switch(WindowType);
 
             _actionHandlerStateMachine.SetActive(true);
             _inputService.SetEnabled(true);

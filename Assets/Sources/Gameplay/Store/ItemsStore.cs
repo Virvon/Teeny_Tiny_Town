@@ -14,13 +14,13 @@ namespace Assets.Sources.Gameplay.Store
     public class ItemsStore : MonoBehaviour
     {
         private IUiFactory _uiFactory;
-        private IWorldData _worldData;
+        private ICurrencyWorldData _worldData;
         private List<StoreItem> _storeItems;
-        private IGameplayMover _gameplayMover;
+        private ICurrencyGameplayMover _gameplayMover;
         private WorldStateMachine _worldStateMachine;
 
         [Inject]
-        private void Construct(IUiFactory uiFactory, IWorldData worldData, IGameplayMover gameplayMover, WorldStateMachine worldStateMachine)
+        private void Construct(IUiFactory uiFactory, ICurrencyWorldData worldData, ICurrencyGameplayMover gameplayMover, WorldStateMachine worldStateMachine)
         {
             _uiFactory = uiFactory;
             _worldData = worldData;
@@ -49,7 +49,7 @@ namespace Assets.Sources.Gameplay.Store
             if (_worldData.WorldWallet.TryGet(price))
             {
                 _gameplayMover.ChangeBuildingForPlacing(buildingType, price);
-                _worldStateMachine.Enter<WorldChangingState>().Forget();
+                _worldStateMachine.Enter<CurrencyWorldChangingState>().Forget();
             }
             else
             {
@@ -67,12 +67,5 @@ namespace Assets.Sources.Gameplay.Store
 
         private async void OnStoreListUpdated(BuildingType type) => 
             await CreateStoreItem(type);
-    }
-    public class Store
-    {
-        public Store(WorldData worldData)
-        {
-
-        }
     }
 }

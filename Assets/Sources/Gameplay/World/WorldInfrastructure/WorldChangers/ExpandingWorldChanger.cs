@@ -4,18 +4,16 @@ using Cysharp.Threading.Tasks;
 using Assets.Sources.Services.PersistentProgress;
 using System.Collections.Generic;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
-using System.Linq;
-using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
-    public class ExpandingWorldChanger : WorldChanger, IExpandingWorldChanger
+    public class ExpandingWorldChanger : CurrencyWorldChanger, IExpandingWorldChanger
     {
         private bool _isExpanded;
 
         public ExpandingWorldChanger(
             IStaticDataService staticDataService,
-            IWorldData worldData,
+            ICurrencyWorldData worldData,
             IPersistentProgressService persistentProgressService)
             : base(staticDataService, worldData, persistentProgressService)
         {

@@ -6,15 +6,16 @@ using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
 {
-    public class WorldBootsrappState : IState
+    public class WorldBootstrapState : IState
     {
         private readonly IWorldFactory _worldFactory;
         private readonly ActionHandlerStateMachine _actionHandlerStateMachine;
         private readonly ActionHandlerStatesFactory _actionHandlerStatesFactory;
         private readonly IWorldChanger _worldChanger;
-        private readonly WorldStateMachine _worldStateMachine;
 
-        public WorldBootsrappState(
+        protected readonly WorldStateMachine WorldStateMachine;
+
+        public WorldBootstrapState(
             IWorldFactory worldFactory,
             ActionHandlerStateMachine actionHandlerStateMachine,
             ActionHandlerStatesFactory actionHandlerStatesFactory,
@@ -25,7 +26,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _actionHandlerStateMachine = actionHandlerStateMachine;
             _actionHandlerStatesFactory = actionHandlerStatesFactory;
             _worldChanger = worldChanger;
-            _worldStateMachine = worldStateMachine;
+            WorldStateMachine = worldStateMachine;
         }
 
         public async UniTask Enter()
@@ -39,14 +40,16 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _actionHandlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
 
             _worldChanger.Start();
-
-            _worldStateMachine.Enter<WorldChangingState>().Forget();
+            EnterNextState();
         }
 
         public UniTask Exit()
         {
             return default;
         }
+
+        protected virtual void EnterNextState() =>
+            WorldStateMachine.Enter<WorldChangingState>().Forget();
 
         private void RegisterActionHandlerStates()
         {

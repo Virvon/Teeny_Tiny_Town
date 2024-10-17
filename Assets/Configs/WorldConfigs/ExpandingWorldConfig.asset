@@ -92,7 +92,7 @@ MonoBehaviour:
     GridPosition: {x: 4, y: 4}
     BuildingType: 0
   NextBuildingTypeForCreation: 2
-  StartStoreList: 01000000
+  StartStoreList: 0100000002000000
   StartingAvailableBuildingTypes: 01000000
   AssetReference:
     m_AssetGUID: c83a0e82ae2fe074e8598aff9a8d1e25

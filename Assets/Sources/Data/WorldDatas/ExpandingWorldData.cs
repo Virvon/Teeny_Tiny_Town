@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Sources.Data
 {
-    public class ExpandingWorldData : WorldData, IExpandingWorldData
+    public class ExpandingWorldData : CurrencyWorldData, IExpandingWorldData
     {
         public ExpandingWorldData(
             string id,

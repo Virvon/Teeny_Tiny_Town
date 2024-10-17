@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.Root
 {
-    public class ExpandingWorldInstaller : WorldInstaller
+    public class ExpandingWorldInstaller : CurrencyWorldInstaller
     {
         public override void InstallBindings()
         {

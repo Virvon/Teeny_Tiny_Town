@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Assets.Sources.Services.StaticDataService.Configs.World
 {
     [CreateAssetMenu(fileName = "WorldConfig", menuName = "StaticData/WorldConfig/Create new expanding world config", order = 51)]
-    public class ExpandingWorldConfig : WorldConfig
+    public class ExpandingWorldConfig : CurrencyWorldConfig
     {
         public uint StartLength;
         public uint StartWidth;

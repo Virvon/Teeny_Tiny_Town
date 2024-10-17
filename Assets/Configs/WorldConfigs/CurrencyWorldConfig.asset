@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ed98ece7cbacb4db6d11c86d44a831, type: 3}
+  m_Name: CurrencyWorldConfig
+  m_EditorClassIdentifier: 
+  Id: e636eda1-c70b-44bb-85ca-d218f74661e2
+  Length: 2
+  Width: 2
+  TileConfigs:
+  - Type: 0
+    GridPosition: {x: 0, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 0, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 1}
+    BuildingType: 0
+  NextBuildingTypeForCreation: 2
+  StartingAvailableBuildingTypes: 01000000
+  AssetReference:
+    m_AssetGUID: c2398a6f208640c42a2a29d3aded7148
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  StartStoreList: 0100000002000000

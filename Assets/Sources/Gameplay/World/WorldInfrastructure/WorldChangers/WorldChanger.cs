@@ -20,18 +20,17 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
     public class WorldChanger : IWorldChanger
     {
         protected readonly IWorldData WorldData;
-
-        private readonly IStaticDataService _staticDataService;
-        private readonly IPersistentProgressService _persistentProgressService;
+        protected readonly IStaticDataService StaticDataService;
+        protected readonly IPersistentProgressService PersistentProgressService;
 
         private List<Tile> _tiles;
 
         public WorldChanger(IStaticDataService staticDataService, IWorldData worldData, IPersistentProgressService persistentProgressService)
         {
-            _staticDataService = staticDataService;
+            StaticDataService = staticDataService;
             WorldData = worldData;
 
-            _persistentProgressService = persistentProgressService;
+            PersistentProgressService = persistentProgressService;
         }
 
         public event Action TilesChanged;
@@ -101,7 +100,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
             TilesChanged?.Invoke();
         }
 
-        public Building GetBuilding(BuildingType type, Vector2Int gridPosition)
+        public virtual Building GetBuilding(BuildingType type, Vector2Int gridPosition)
         {
             switch (type)
             {
@@ -112,13 +111,13 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                 case BuildingType.Tree:
                     return new Building(type);
                 case BuildingType.House:
-                    return new PayableBuilding(type, _staticDataService, WorldData.WorldWallet, _persistentProgressService);
+                    return new Building(type);
                 case BuildingType.Stone:
                     return new Building(type);
                 case BuildingType.Chest:
-                    return new Chest(type, _staticDataService, gridPosition);
+                    return new Chest(type, StaticDataService, gridPosition);
                 case BuildingType.Lighthouse:
-                    return new Lighthouse(type, WorldData.WorldWallet, _persistentProgressService, this, gridPosition);
+                    return new Building(type);
                 case BuildingType.Crane:
                     return new Crane(type, this, gridPosition);
                 default:
@@ -204,7 +203,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
         protected Tile GetGround(List<RoadTile> roadTiles, List<TallTile> tallTiles, TileData tileData)
         {
-            TileType tileType = _staticDataService.GetWorld<WorldConfig>(WorldData.Id).GetTileType(tileData.GridPosition);
+            TileType tileType = StaticDataService.GetWorld<WorldConfig>(WorldData.Id).GetTileType(tileData.GridPosition);
 
             switch (tileType)
             {
@@ -212,7 +211,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                     RoadTile roadTile = new(
                         tileData,
                         tileType,
-                        _staticDataService,
+                        StaticDataService,
                         GetBuilding(tileData.BuildingType, tileData.GridPosition),
                         WorldData,
                         this);
@@ -224,7 +223,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                     TallTile tallTile = new(
                         tileData,
                         tileType,
-                        _staticDataService,
+                        StaticDataService,
                         GetBuilding(tileData.BuildingType, tileData.GridPosition),
                         WorldData,
                         this);
@@ -236,7 +235,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                     return new Tile(
                         tileData,
                         tileType,
-                        _staticDataService,
+                        StaticDataService,
                         GetBuilding(tileData.BuildingType, tileData.GridPosition));
                 default:
                     Debug.LogError("tile can not be null");
@@ -294,7 +293,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                 tile.AddAroundTile(aroundTile);
         }
 
-        
+
 
         private void AddNewBuilding(BuildingType type)
         {

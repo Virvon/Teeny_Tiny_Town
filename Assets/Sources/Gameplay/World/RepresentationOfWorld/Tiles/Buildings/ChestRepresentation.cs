@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Sources.Gameplay.GameplayMover;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
@@ -6,12 +7,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 {
     public class ChestRepresentation : BuildingRepresentation, IPointerClickHandler
     {
-        private GameplayMover.GameplayMover _gameplayMover;
+        private IGameplayMover _gameplayMover;
         private Vector2Int _gridPosition;
         private uint _reward;
 
         [Inject]
-        private void Construct(GameplayMover.GameplayMover gameplayMover)
+        private void Construct(IGameplayMover gameplayMover)
         {
             _gameplayMover = gameplayMover;
         }

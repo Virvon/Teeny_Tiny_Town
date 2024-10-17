@@ -9,10 +9,10 @@ namespace Assets.Sources.UI
     {
         [SerializeField] private TMP_Text _walletValue;
 
-        private IWorldData _worldData;
+        private ICurrencyWorldData _worldData;
 
         [Inject]
-        private void Construct(IWorldData worldData)
+        private void Construct(ICurrencyWorldData worldData)
         {
             _worldData = worldData;
 

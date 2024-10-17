@@ -5,7 +5,6 @@ namespace Assets.Sources.Gameplay.GameplayMover
 {
     public interface IGameplayMover
     {
-        void ChangeBuildingForPlacing(BuildingType targetBuildingType, uint buildingPrice);
         void OpenChest(Vector2Int chestGridPosition, uint reward);
         void PlaceNewBuilding(Vector2Int gridPosition);
         void RemoveBuilding(Vector2Int gridPosition);
