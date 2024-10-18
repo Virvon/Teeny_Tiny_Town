@@ -3,7 +3,6 @@ using System.Linq;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
-using Assets.Sources.Services.StaticDataService.Configs.Camera;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
@@ -21,7 +20,6 @@ namespace Assets.Sources.Services.StaticDataService
         private Dictionary<BuildingType, StoreItemConfig> _storeItemsConfigs;
         private Dictionary<TileType, TestGroundConfig> _testGroundConfigs;
         private Dictionary<BuildingType, GroundType> _roadGrounds;
-        private Dictionary<GameplayCameraType, GameplayCameraConfig> _cameras;
         private Dictionary<string, WorldConfig> _worldConfigs;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
@@ -32,7 +30,6 @@ namespace Assets.Sources.Services.StaticDataService
         public WindowsConfig WindowsConfig { get; private set; }
         public WorldsConfig WorldsConfig { get; private set; }
         public AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; private set; }
-        public ReadOnlyArray<GameplayCameraConfig> CameraConfigs { get; private set; }
         public ReadOnlyArray<WorldConfig> WorldConfigs => _worldConfigs.Values.ToArray();
 
         public async UniTask InitializeAsync()
@@ -46,7 +43,6 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadWorldsConfig());
             tasks.Add(LoadRoadGroundConfigs());
             tasks.Add(LoadAvailableForConstructionBuildingsConfig());
-            tasks.Add(LoadCameraConfigs());
             tasks.Add(LoadWorldConfigs());
 
             await UniTask.WhenAll(tasks);
@@ -55,9 +51,6 @@ namespace Assets.Sources.Services.StaticDataService
         public TWorldConfig GetWorld<TWorldConfig>(string id)
             where TWorldConfig : WorldConfig =>
             _worldConfigs.TryGetValue(id, out WorldConfig config) ? config as TWorldConfig : null;
-
-        public GameplayCameraConfig GetGameplayCamera(GameplayCameraType type) =>
-            _cameras.TryGetValue(type, out GameplayCameraConfig config) ? config : null;
 
         public GroundType GetGroundType(BuildingType buildingType) =>
             _roadGrounds.TryGetValue(buildingType, out GroundType type) ? type : default;
@@ -88,13 +81,6 @@ namespace Assets.Sources.Services.StaticDataService
             WorldConfig[] worldConfigs = await GetConfigs<WorldConfig>();
 
             _worldConfigs = worldConfigs.ToDictionary(value => value.Id, value => value);
-        }
-
-        private async UniTask LoadCameraConfigs()
-        {
-            CameraConfigs = await GetConfigs<GameplayCameraConfig>();
-
-            _cameras = CameraConfigs.ToDictionary(value => value.Type, value => value);
         }
 
         private async UniTask LoadAvailableForConstructionBuildingsConfig()

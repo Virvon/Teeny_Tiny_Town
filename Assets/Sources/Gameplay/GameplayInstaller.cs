@@ -1,5 +1,4 @@
-﻿using Assets.Sources.Gameplay.Cameras;
-using Assets.Sources.Gameplay.StateMachine;
+﻿using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.UI.Windows;
@@ -16,12 +15,6 @@ namespace Assets.Sources.Gameplay
             BindGameplayFactory();
             BindWindowsSwitcher();
             BindUiFactory();
-            BindCamerasSwitcher();
-        }
-
-        private void BindCamerasSwitcher()
-        {
-            Container.Bind<CamerasSwitcher>().AsSingle();
         }
 
         private void BindUiFactory()

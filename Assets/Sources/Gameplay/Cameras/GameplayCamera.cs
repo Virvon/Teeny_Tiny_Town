@@ -1,19 +1,18 @@
-﻿using Cinemachine;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace Assets.Sources.Gameplay.Cameras
 {
     public class GameplayCamera : MonoBehaviour
     {
-        [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
+        public void MoveTo(Vector3 position)
+        {
+            transform.DOMove(position, 1);
+        }
 
-        public void SetPriority(int value) =>
-            _cinemachineVirtualCamera.Priority = value;
-
-        public class Factory : PlaceholderFactory<AssetReferenceGameObject, UniTask<GameplayCamera>>
+        public class Factory : PlaceholderFactory<string, UniTask<GameplayCamera>>
         {
         }
     }

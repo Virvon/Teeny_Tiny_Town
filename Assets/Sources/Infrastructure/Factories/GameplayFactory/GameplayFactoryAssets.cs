@@ -3,5 +3,6 @@
     public class GameplayFactoryAssets
     {
         public const string WorldsList = "WorldsList";
+        public const string Camera = "Camera";
     }
 }

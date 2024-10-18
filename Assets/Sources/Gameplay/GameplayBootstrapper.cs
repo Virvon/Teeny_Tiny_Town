@@ -13,24 +13,21 @@ namespace Assets.Sources.Gameplay
         private readonly GameplayStateMachine _gameplayStateMachine;
         private readonly StatesFactory _statesFactory;
         private readonly IGameplayFactory _gameplayFactory;
-        private readonly CamerasSwitcher _camerasSwitcher;
 
         public GameplayBootstrapper(
             GameplayStateMachine gameplayStateMachine,
             StatesFactory statesFactory,
-            IGameplayFactory gameplayFactory,
-            CamerasSwitcher camerasSwitcher)
+            IGameplayFactory gameplayFactory)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _statesFactory = statesFactory;
             _gameplayFactory = gameplayFactory;
-            _camerasSwitcher = camerasSwitcher;
         }
 
         public async void Initialize()
-        {          
+        {
+            await _gameplayFactory.CreateCamera();
             WorldsList worldsList = await _gameplayFactory.CreateWorldsList();
-            await _camerasSwitcher.CreateCameras();
 
             RegisterGameplayStates();
 
@@ -44,8 +41,6 @@ namespace Assets.Sources.Gameplay
             _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayLoopState>());
             _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayStartState>());
             _gameplayStateMachine.RegisterState(_statesFactory.Create<MapSelectionState>());
-        }
-
-        
+        }  
     }
 }

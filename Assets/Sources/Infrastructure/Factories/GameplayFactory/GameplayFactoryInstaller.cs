@@ -26,8 +26,8 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
                .FromFactory<ReferencePrefabFactoryAsync<World>>();
 
             Container
-                .BindFactory<AssetReferenceGameObject, UniTask<GameplayCamera>, GameplayCamera.Factory>()
-                .FromFactory<ReferencePrefabFactoryAsync<GameplayCamera>>();
+                .BindFactory<string, UniTask<GameplayCamera>, GameplayCamera.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<GameplayCamera>>();
         }
     }
 }

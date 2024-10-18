@@ -4,7 +4,6 @@ using Zenject;
 using Assets.Sources.Gameplay.World;
 using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Services.StaticDataService;
-using Assets.Sources.Services.StaticDataService.Configs.Camera;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 
 namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
@@ -31,8 +30,14 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             _staticDataService = staticDataService;
         }
 
-        public async UniTask<GameplayCamera> CreateCamera(GameplayCameraType type) =>
-            await _gameplayCameraFactory.Create(_staticDataService.GetGameplayCamera(type).AssetReference);
+        public async UniTask<GameplayCamera> CreateCamera()
+        {
+            GameplayCamera camera = await _gameplayCameraFactory.Create(GameplayFactoryAssets.Camera);
+
+            _container.BindInstance(camera).AsSingle();
+
+            return camera;
+        }
 
         public async UniTask<World> CreateWorld(string id, Vector3 position, Transform parent)
         {
