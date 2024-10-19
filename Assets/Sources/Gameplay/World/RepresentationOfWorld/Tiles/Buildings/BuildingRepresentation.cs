@@ -12,6 +12,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
     public class BuildingRepresentation : MonoBehaviour
     {
         private AnimationsConfig _animationsConfig;
+        private Sequence _blinking;
 
         [Inject]
         private void Construct(IStaticDataService staticDataservice) =>
@@ -19,8 +20,23 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 
         public BuildingType Type { get; private set; }
 
+        private void OnDestroy()
+        {
+            if (_blinking != null)
+                _blinking.Kill();
+        }
+
         public void Init(BuildingType type) =>
             Type = type;
+
+        public void Blink()
+        {
+            _blinking = DOTween
+                .Sequence()
+                .Append(transform.DOScale(_animationsConfig.BuildingBlinkingScale, _animationsConfig.BuildingBlinkingDuration).SetEase(Ease.OutSine))
+                .Append(transform.DOScale(1, _animationsConfig.BuildingBlinkingDuration).SetEase(Ease.OutSine))
+                .SetLoops(-1);
+        }
 
         public void AnimateDestroy(Vector3 destroyPosition)
         {
@@ -42,12 +58,13 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 
         public async UniTask AnimatePut(bool waitForCompletion)
         {
-            Sequence sequence = DOTween.Sequence();
             float tweenDuration = _animationsConfig.BuildingPutDuration / 3;
 
-            sequence.Append(transform.DOScale(_animationsConfig.BuildingPutMaxScale, tweenDuration));
-            sequence.Append(transform.DOScale(_animationsConfig.BuildingPutMinScale, tweenDuration));
-            sequence.Append(transform.DOScale(1f, tweenDuration));
+            Sequence sequence = DOTween
+                .Sequence()
+                .Append(transform.DOScale(_animationsConfig.BuildingPutMaxScale, tweenDuration))
+                .Append(transform.DOScale(_animationsConfig.BuildingPutMinScale, tweenDuration))
+                .Append(transform.DOScale(1f, tweenDuration));
 
             if (waitForCompletion)
                 await sequence.AsyncWaitForCompletion();

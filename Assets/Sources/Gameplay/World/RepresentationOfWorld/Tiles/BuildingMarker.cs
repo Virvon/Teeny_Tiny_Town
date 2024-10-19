@@ -53,6 +53,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
                 _building?.Destroy();
 
                 _building = await _worldFactory.CreateBuilding(targetBuildingType, transform.position, transform);
+                _building.Blink();
             }
         }
 

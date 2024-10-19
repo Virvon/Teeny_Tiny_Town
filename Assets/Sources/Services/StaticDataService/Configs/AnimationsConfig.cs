@@ -12,5 +12,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs
         public float BuildingPutMaxScale;
         public float BuildingPutMinScale;
         public float BuildingPutDuration;
+        public float BuildingBlinkingScale;
+        public float BuildingBlinkingDuration;
     }
 }
