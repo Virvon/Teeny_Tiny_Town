@@ -12,26 +12,44 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
     public class BuildingRepresentation : MonoBehaviour
     {
         private AnimationsConfig _animationsConfig;
-        private Sequence _blinking;
+        private Sequence _sequence;
+        private Vector3 _startPosition;
 
         [Inject]
-        private void Construct(IStaticDataService staticDataservice) =>
+        private void Construct(IStaticDataService staticDataservice)
+        {
             _animationsConfig = staticDataservice.AnimationsConfig;
+            _startPosition = transform.position;
+        }
 
         public BuildingType Type { get; private set; }
 
-        private void OnDestroy()
-        {
-            if (_blinking != null)
-                _blinking.Kill();
-        }
+        private void OnDestroy() => 
+            TryKillSequence();
 
         public void Init(BuildingType type) =>
             Type = type;
 
+        public void StopShaking()
+        {
+            TryKillSequence();
+
+            transform.position = _startPosition;
+        }
+
+        public void Shake()
+        {
+            TryKillSequence();
+            
+            _sequence = DOTween
+                .Sequence()
+                .Append(transform.DOMove(_startPosition + _animationsConfig.BuildingShakeOffset, _animationsConfig.BuildingShakeTweenDuration).SetEase(_animationsConfig.BuildingShakeCurve))
+                .SetLoops(_animationsConfig.BuildingShakesCount, LoopType.Restart);
+        }
+
         public void Blink()
         {
-            _blinking = DOTween
+            _sequence = DOTween
                 .Sequence()
                 .Append(transform.DOScale(_animationsConfig.BuildingBlinkingScale, _animationsConfig.BuildingBlinkingDuration).SetEase(Ease.OutSine))
                 .Append(transform.DOScale(1, _animationsConfig.BuildingBlinkingDuration).SetEase(Ease.OutSine))
@@ -70,6 +88,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
                 await sequence.AsyncWaitForCompletion();
             else
                 await UniTask.WaitForSeconds(_animationsConfig.TileUpdatingDuration);
+        }
+
+        private void TryKillSequence()
+        {
+            if (_sequence != null)
+                _sequence.Kill();
         }
 
         public class Factory : PlaceholderFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<BuildingRepresentation>>

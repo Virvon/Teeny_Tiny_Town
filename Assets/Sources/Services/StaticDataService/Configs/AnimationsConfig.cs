@@ -14,5 +14,11 @@ namespace Assets.Sources.Services.StaticDataService.Configs
         public float BuildingPutDuration;
         public float BuildingBlinkingScale;
         public float BuildingBlinkingDuration;
+        public AnimationCurve BuildingShakeCurve;
+        public int BuildingShakesCount;
+        public float BuildingShakesDuration;
+        public Vector3 BuildingShakeOffset;
+
+        public float BuildingShakeTweenDuration => BuildingShakesDuration / BuildingShakesCount;
     }
 }

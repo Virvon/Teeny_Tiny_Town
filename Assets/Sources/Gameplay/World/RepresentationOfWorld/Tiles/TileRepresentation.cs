@@ -34,7 +34,13 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
             return building;
         }
-       
+
+        public void ShakeBuilding() =>
+            _building.Shake();
+
+        public void StopBuildingShaking() =>
+            _building.StopShaking();
+
         public void RaiseBuilding(Vector3 offset) =>
             _building.transform.position += offset;
 
