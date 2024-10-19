@@ -16,16 +16,16 @@ MonoBehaviour:
   Length: 5
   Width: 5
   TileConfigs:
-  - Type: 1
+  - Type: 0
     GridPosition: {x: 0, y: 0}
     BuildingType: 0
-  - Type: 1
+  - Type: 0
     GridPosition: {x: 0, y: 1}
     BuildingType: 0
-  - Type: 2
+  - Type: 0
     GridPosition: {x: 0, y: 2}
     BuildingType: 0
-  - Type: 2
+  - Type: 0
     GridPosition: {x: 0, y: 3}
     BuildingType: 0
   - Type: 0

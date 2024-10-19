@@ -88,7 +88,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
                     tilesForRemoveBuildings.Remove(this);
 
                     foreach (Tile tile in countedTiles)
-                        await tile.RemoveBuilding();
+                        await tile.RemoveBuilding(TileRepresentation.BuildingPoint.position);
                 }
                 else
                 {

@@ -8,13 +8,13 @@ using UnityEngine;
 
 namespace Assets.Sources.Gameplay.StateMachine.States
 {
-    public class GameplayStartState : IState
+    public class GameStartState : IState
     {
         private readonly WindowsSwitcher _windowsSwitcher;
         private readonly IUiFactory _uiFactory;
         private readonly GameplayCamera _camera;
 
-        public GameplayStartState(WindowsSwitcher windowsSwitcher, IUiFactory uiFactory, GameplayCamera camera)
+        public GameStartState(WindowsSwitcher windowsSwitcher, IUiFactory uiFactory, GameplayCamera camera)
         {
             _windowsSwitcher = windowsSwitcher;
             _uiFactory = uiFactory;

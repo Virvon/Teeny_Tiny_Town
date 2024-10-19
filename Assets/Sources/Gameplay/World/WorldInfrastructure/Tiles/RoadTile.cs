@@ -1,10 +1,13 @@
 ﻿using Assets.Sources.Data;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
@@ -28,15 +31,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         public Ground Ground { get; private set; }
 
-        public override async UniTask RemoveBuilding()
-        {
-            await base.RemoveBuilding();
-
-            Ground.SetEmpty(_aroundTiles);
-            ChangeGroundsInChain(new(), true);
-            await ChangeRoadsInChain(new());
-        }
-
         public void ValidateRoadType() =>
             Ground.TryValidateRoad(GetAdjacentTiles<RoadTile>(), IsEmpty, GridPosition);
 
@@ -48,7 +42,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             _aroundTiles.Add(aroundTile);
         }
 
-        public async UniTask ChangeRoadsInChain(List<RoadTile> countedTiles)
+        public async UniTask ChangeRoadsInChain(List<RoadTile> countedTiles, bool isWaitedForCreation)
         {
             countedTiles.Add(this);
 
@@ -58,10 +52,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             foreach (RoadTile tile in GetAdjacentTiles<RoadTile>())
             {
                 if (tile.IsEmpty && countedTiles.Contains(tile) == false)
-                    await tile.ChangeRoadsInChain(countedTiles);
+                    await tile.ChangeRoadsInChain(countedTiles, isWaitedForCreation);
             }
 
-            await CreateGroundRepresentation();
+            await CreateGroundRepresentation(isWaitedForCreation);
         }
 
         public void ChangeGroundsInChain(List<RoadTile> countedTiles, bool isSelfTile = false)
@@ -78,18 +72,50 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             }
         }
 
-        protected override async UniTask CreateGroundRepresentation() =>
-            await TileRepresentation.GroundCreator.Create(Ground.Type, Ground.RoadType, Ground.Rotation);
+        protected override async UniTask CreateGroundRepresentation(bool isWaitedForCreation) =>
+            await TileRepresentation.GroundCreator.Create(Ground.Type, Ground.RoadType, Ground.Rotation, isWaitedForCreation);
 
         protected override async UniTask CreateBuildingRepresentation(Building building)
         {
             SetBuilding(building);
+            await ValidateTilesInChain(false);
+            await Building.CreateRepresentation(TileRepresentation, true);
+        }
 
+        private async UniTask ValidateTilesInChain(bool isWaitedForRoadCreation)
+        {
             if (Ground.TryUpdate(Building.Type))
                 ChangeGroundsInChain(new(), true);
 
-            await ChangeRoadsInChain(new());
-            await Building.CreateRepresentation(TileRepresentation);
+            await ChangeRoadsInChain(new(), isWaitedForRoadCreation);
+        }
+
+        public override async UniTask CleanAll()
+        {
+            await base.CleanAll();
+
+            Ground.Clean();
+            await TileRepresentation.GroundCreator.Create(Ground.Type, Ground.RoadType, Ground.Rotation, true);
+        }
+
+        public override async UniTask UpdateBuilding(Building building, IBuildingsUpdatable buildingsUpdatable)
+        {
+            if (building == null)
+                return;
+
+            SetBuilding(building);
+            await Building.CreateRepresentation(TileRepresentation, false);
+
+            buildingsUpdatable.UpdateFinished += async () => await ValidateTilesInChain(true);
+        }
+
+        protected override async UniTask Clean()
+        {
+            await base.Clean();
+
+            Ground.SetEmpty(_aroundTiles);
+            ChangeGroundsInChain(new(), true);
+            await ChangeRoadsInChain(new(), false);
         }
     }
 }

@@ -9,7 +9,6 @@ using Cysharp.Threading.Tasks;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
 using UnityEngine.InputSystem.Utilities;
-using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
@@ -17,7 +16,7 @@ using Assets.Sources.Services.PersistentProgress;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
-    public class WorldChanger : IWorldChanger
+    public class WorldChanger : IWorldChanger, IBuildingsUpdatable
     {
         protected readonly IWorldData WorldData;
         protected readonly IStaticDataService StaticDataService;
@@ -34,6 +33,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         }
 
         public event Action TilesChanged;
+
+        public event Action UpdateFinished;
 
         public BuildingForPlacingInfo BuildingForPlacing { get; private set; }
         public IReadOnlyList<Tile> Tiles => _tiles;
@@ -69,6 +70,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
         public async UniTask Update(ReadOnlyArray<TileData> tileDatas, BuildingForPlacingInfo buildingForPlacing)
         {
+            tileDatas = tileDatas.OrderBy(value => value.GridPosition.x).ToArray();
+
             foreach (TileData tileData in tileDatas)
             {
                 if (IsTileFitsIntoGrid(tileData.GridPosition) == false)
@@ -76,9 +79,22 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
                 Tile tile = GetTile(tileData.GridPosition);
 
-                tile.Clean();
-                await tile.PutBuilding(GetBuilding(tileData.BuildingType, tileData.GridPosition));
+                await tile.CleanAll();
             }
+            
+            tileDatas = tileDatas.Reverse().ToArray();
+
+            foreach (TileData tileData in tileDatas)
+            {
+                if (IsTileFitsIntoGrid(tileData.GridPosition) == false)
+                    continue;
+
+                Tile tile = GetTile(tileData.GridPosition);
+
+                await tile.UpdateBuilding(GetBuilding(tileData.BuildingType, tileData.GridPosition), this);
+            }
+
+            UpdateFinished?.Invoke();
 
             BuildingForPlacing = buildingForPlacing;
 
@@ -126,16 +142,14 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
             }
         }
 
-        public void RemoveBuilding(Vector2Int destroyBuildingGridPosition)
+        public async UniTask RemoveBuilding(Vector2Int destroyBuildingGridPosition)
         {
             Tile tile = GetTile(destroyBuildingGridPosition);
 
             if (tile.Building.Type == BuildingType.Undefined)
                 Debug.LogError("Can not destroy empty building");
 
-            tile.RemoveBuilding();
-
-            List<Tile> changedTiles = new() { tile };
+            await tile.RemoveBuilding();
 
             TilesChanged?.Invoke();
         }

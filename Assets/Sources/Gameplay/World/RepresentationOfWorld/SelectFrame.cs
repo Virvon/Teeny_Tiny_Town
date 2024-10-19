@@ -27,8 +27,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
                 Select(_lastSelectedTile);
         }
 
-        public void Hide() =>
+        public void Hide()
+        {
             _canvas.enabled = false;
+        }
 
         public class Factory : PlaceholderFactory<string, UniTask<SelectFrame>>
         {

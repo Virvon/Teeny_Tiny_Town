@@ -260,39 +260,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Configs
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c300db35ad9ff4b499c148e2e037b1ff
-    m_Address: BootstrapCameraConfig
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: daee8e6a6604e0945aa886c4847be439
-    m_Address: BootstrapCamera
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 53a048f7e05885b4180747a9547ab191
-    m_Address: StartCamera
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3e992251221a44940ad62c87f423a571
-    m_Address: StartCameraConfig
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e0a43efd8379c444a9d731dd3ce88aa8
-    m_Address: MapSelectionCamera
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e520dcba288b75b4db7c926fe9240a24
-    m_Address: MapSelectionCameraConfig
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5030ce78a8e890544ac651b1b03b9f16
     m_Address: ActionHandlerSwitcher
     m_ReadOnly: 0
@@ -335,6 +302,12 @@ MonoBehaviour:
     m_Address: Camera
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 06979d53cbbd4bb409d91b3e0a5151c4
+    m_Address: AnimationsConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}

@@ -33,11 +33,11 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
         ~Lighthouse() =>
             _persistentProgressService.Progress.MoveCounter.TimeToPaymentPayableBuildings -= OnTimeToPaymentPayableBuildings;
 
-        public override UniTask CreateRepresentation(TileRepresentation tileRepresentation)
+        public override UniTask CreateRepresentation(TileRepresentation tileRepresentation, bool waitForCompletion)
         {
             
 
-            return base.CreateRepresentation(tileRepresentation);
+            return base.CreateRepresentation(tileRepresentation, waitForCompletion);
         }
 
         private void OnTimeToPaymentPayableBuildings()

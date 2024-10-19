@@ -33,13 +33,13 @@ namespace Assets.Sources.Gameplay
 
             await worldsList.CreateCurrentWorld();
 
-            await _gameplayStateMachine.Enter<GameplayStartState>();
+            await _gameplayStateMachine.Enter<GameStartState>();
         }
 
         private void RegisterGameplayStates()
         {
             _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayLoopState>());
-            _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayStartState>());
+            _gameplayStateMachine.RegisterState(_statesFactory.Create<GameStartState>());
             _gameplayStateMachine.RegisterState(_statesFactory.Create<MapSelectionState>());
         }  
     }

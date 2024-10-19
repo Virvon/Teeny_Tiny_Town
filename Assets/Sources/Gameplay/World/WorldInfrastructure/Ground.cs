@@ -101,14 +101,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure
             return true;
         }
 
-        public void SetNonEmpty()
+        public void Clean()
         {
+            Type = GroundType.Soil;
             RoadType = RoadType.NonEmpty;
-        }
-
-        public void ChangeGroundType(GroundType type)
-        {
-            Type = type;
         }
     }
 }

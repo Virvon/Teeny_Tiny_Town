@@ -2,6 +2,8 @@
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
+using System;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 {
@@ -12,14 +14,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 
         public BuildingType Type { get; protected set; }
 
-        public virtual async UniTask CreateRepresentation(TileRepresentation tileRepresentation)
+        public virtual async UniTask CreateRepresentation(TileRepresentation tileRepresentation, bool waitForCompletion)
         {
-            await tileRepresentation.TryChangeBuilding<BuildingRepresentation>(Type);
-        }
-
-        public void Destroy(TileRepresentation tileRepresentation)
-        {
-            tileRepresentation.DestroyBuilding();
+            await tileRepresentation.TryChangeBuilding<BuildingRepresentation>(Type, waitForCompletion);
         }
     }
 }

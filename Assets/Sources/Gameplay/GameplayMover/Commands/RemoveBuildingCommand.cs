@@ -12,9 +12,9 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
             : base(world, worldData) =>
             _removedBuildingGridPosition = removedBuildingGridPosition;
 
-        public override void Change()
+        public override async void Change()
         {
-            WorldChanger.RemoveBuilding(_removedBuildingGridPosition);
+            await WorldChanger.RemoveBuilding(_removedBuildingGridPosition);
         }
     }
 }

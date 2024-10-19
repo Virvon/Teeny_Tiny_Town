@@ -24,9 +24,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
             Type = GetNewType();
         }
 
-        public override async UniTask CreateRepresentation(TileRepresentation tileRepresentation)
+        public override async UniTask CreateRepresentation(TileRepresentation tileRepresentation, bool waitForCompletion)
         {
-            await base.CreateRepresentation(tileRepresentation);
+            await base.CreateRepresentation(tileRepresentation, waitForCompletion);
 
             if (Type == BuildingType.Crane)
                 await _selfTile.RemoveBuilding();

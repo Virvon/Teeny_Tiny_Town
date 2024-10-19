@@ -2,6 +2,7 @@
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -33,7 +34,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
             return building;
         }
-
+       
         public void RaiseBuilding(Vector3 offset) =>
             _building.transform.position += offset;
 
@@ -52,24 +53,34 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
         public void DestroyBuilding()
         {
-            Destroy(_building.gameObject);
+            _building.Destroy();
             _building = null;
         }
 
-        private void PlaceBuildingToBuildingPoint(BuildingRepresentation building) =>
-            building.transform.position = _groundCreator.Ground.BuildingPoint.position;
+        public void DestroyBuilding(Vector3 destroyPosition)
+        {
+            _building.AnimateDestroy(destroyPosition);
+            _building = null;
+        }
 
-        public async UniTask<TBuilding> TryChangeBuilding<TBuilding>(BuildingType targetBuildingType)
+        public async UniTask AnimateDestroyBuilding()
+        {
+            await _building.AnimateDestroy();
+            _building = null;
+        }
+
+        public async UniTask<TBuilding> TryChangeBuilding<TBuilding>(BuildingType targetBuildingType, bool waitForCompletion)
             where TBuilding : BuildingRepresentation
         {
             if (BuildingType != targetBuildingType)
             {
-                if(IsEmpty == false)
+                if (IsEmpty == false)
                     DestroyBuilding();
 
                 if (targetBuildingType != BuildingType.Undefined)
                 {
-                    _building = await _buildingCreator.Create(targetBuildingType);
+                    _building = await _buildingCreator.Create(targetBuildingType);  
+                    await _building.AnimatePut(waitForCompletion);
 
                     return _building as TBuilding;
                 }
@@ -78,10 +89,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             return null;
         }
 
-        public void Destroy()
-        {
+        public void Destroy() =>
             Destroy(gameObject);
-        }
+
+        private void PlaceBuildingToBuildingPoint(BuildingRepresentation building) =>
+            building.transform.position = _groundCreator.Ground.BuildingPoint.position;
 
         public class Factory : PlaceholderFactory<string, Vector3, Transform, UniTask<TileRepresentation>>
         {

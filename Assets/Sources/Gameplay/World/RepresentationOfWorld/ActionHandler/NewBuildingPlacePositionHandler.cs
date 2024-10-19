@@ -35,8 +35,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             _worldRepresentationChanger.GameplayMoved -= StartPlacing;
         }
 
-        public event Action<Vector2Int> Placed;
-
         public override UniTask Enter()
         {
             _buildingMarker.Show();
@@ -57,6 +55,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             TileRepresentation startTile = _worldRepresentationChanger.StartTile;
 
+            _buildingMarker.Show();
             _buildingMarker.Mark(startTile);
             SelectFrame.Select(startTile);
         }
@@ -93,10 +92,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty)
             {
-                _buildingMarker.Mark(tile);
+                _buildingMarker.Hide();
                 SelectFrame.Hide();
 
-                Placed?.Invoke(tile.GridPosition);
                 GameplayMover.PlaceNewBuilding(tile.GridPosition);
             }
             else if (_isBuildingPressed)

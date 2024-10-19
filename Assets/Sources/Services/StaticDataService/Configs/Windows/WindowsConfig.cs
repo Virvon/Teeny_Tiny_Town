@@ -7,5 +7,4 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Windows
     {
         public WindowConfig[] Configs;
     }
-
 }

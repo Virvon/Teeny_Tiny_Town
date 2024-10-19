@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
@@ -31,6 +32,7 @@ namespace Assets.Sources.Services.StaticDataService
         public WorldsConfig WorldsConfig { get; private set; }
         public AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; private set; }
         public ReadOnlyArray<WorldConfig> WorldConfigs => _worldConfigs.Values.ToArray();
+        public AnimationsConfig AnimationsConfig { get; private set; }
 
         public async UniTask InitializeAsync()
         {
@@ -44,6 +46,7 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadRoadGroundConfigs());
             tasks.Add(LoadAvailableForConstructionBuildingsConfig());
             tasks.Add(LoadWorldConfigs());
+            tasks.Add(LoadAnimationsConfig());
 
             await UniTask.WhenAll(tasks);
         }
@@ -74,6 +77,13 @@ namespace Assets.Sources.Services.StaticDataService
             return _groundConfigs.TryGetValue(
                 groundType, out Dictionary<RoadType, RoadConfig> roadConfigs) ? (roadConfigs.TryGetValue(
                 roadType, out RoadConfig config) ? config : null) : null;
+        }
+
+        private async UniTask LoadAnimationsConfig()
+        {
+            AnimationsConfig[] configs = await GetConfigs<AnimationsConfig>();
+
+            AnimationsConfig = configs.First();
         }
 
         private async UniTask LoadWorldConfigs()

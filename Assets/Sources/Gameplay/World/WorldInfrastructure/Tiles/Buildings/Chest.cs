@@ -19,9 +19,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
             _gridPosition = gridPosition;
         }
 
-        public override async UniTask CreateRepresentation(TileRepresentation tileRepresentation)
+        public override async UniTask CreateRepresentation(TileRepresentation tileRepresentation, bool waitForCompletion)
         {
-            ChestRepresentation chestRepresentation = await tileRepresentation.TryChangeBuilding<ChestRepresentation>(Type);
+            ChestRepresentation chestRepresentation = await tileRepresentation.TryChangeBuilding<ChestRepresentation>(Type, waitForCompletion);
             chestRepresentation.Init(_gridPosition, _reward);
         }
     }

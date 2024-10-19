@@ -15,6 +15,7 @@ namespace Assets.Sources.Services.StaticDataService
         WorldsConfig WorldsConfig { get; }
         AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; }
         ReadOnlyArray<WorldConfig> WorldConfigs { get; }
+        AnimationsConfig AnimationsConfig { get; }
 
         RoadConfig GetRoad(GroundType groundType, RoadType roadType);
         TBuilding GetBuilding<TBuilding>(BuildingType buildingType)
