@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Sources.Data.WorldDatas;
+using System;
 
 namespace Assets.Sources.Data
 {
@@ -8,13 +9,18 @@ namespace Assets.Sources.Data
         public WorldData[] WorldDatas;
         public MoveCounterData MoveCounter;
         public WorldData CurrentWorldData;
+        public bool IsInventoryUnlocked;
+        public Wallet Wallet;
 
         public PlayerProgress(WorldData[] worldDatas)
         {
             WorldDatas = worldDatas;
+
             MoveCounter = new();
+            Wallet = new ();
 
             CurrentWorldData = WorldDatas[0];
+            IsInventoryUnlocked = false;
         }
 
         public WorldData GetNextWorldData()

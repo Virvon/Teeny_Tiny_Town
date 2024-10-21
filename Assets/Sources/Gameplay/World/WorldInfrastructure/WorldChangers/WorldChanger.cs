@@ -13,6 +13,7 @@ using Assets.Sources.Services.StaticDataService.Configs.World;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Services.PersistentProgress;
+using Assets.Sources.Data.WorldDatas;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
@@ -163,14 +164,20 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                 yield return i;
         }
 
-        protected void AddNewBuilding()
+        public BuildingType UpdateBuildingForPlacingType()
         {
-            IReadOnlyList<BuildingType> availableBuildingTypes = WorldData.AvailableBuildingsForCreation;
-            BuildingType buildingType = availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
+            Vector2Int buildingGridPosition = BuildingForPlacing.GridPosition;
+            BuildingType buildingType = CreateNewBuildingType();
 
-            AddNewBuilding(buildingType);
+            BuildingForPlacing = new BuildingForPlacingInfo(buildingGridPosition, buildingType);
+
+            return BuildingForPlacing.Type;
         }
 
+        protected void AddNewBuilding() =>
+            AddNewBuilding(CreateNewBuildingType());
+
+        
         protected void Clean()
         {
             foreach (Tile tile in _tiles)
@@ -307,6 +314,12 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                 tile.AddAroundTile(aroundTile);
         }
 
+        private BuildingType CreateNewBuildingType()
+        {
+            IReadOnlyList<BuildingType> availableBuildingTypes = WorldData.AvailableBuildingsForCreation;
+
+            return availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
+        }
 
 
         private void AddNewBuilding(BuildingType type)

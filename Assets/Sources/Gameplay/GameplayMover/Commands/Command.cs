@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data;
+using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Cysharp.Threading.Tasks;
@@ -29,10 +30,10 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
 
         public virtual async UniTask Undo()
         {
-            //WorldData.Tiles = TileDatas.ToList();
             WorldData.UpdateTileDatas(TileDatas);
 
             await WorldChanger.Update(TileDatas, _buildingForPlacing);
+            Debug.Log("error in building for placing");
         }
     }
 }

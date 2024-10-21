@@ -26,5 +26,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         UniTask ReplaceBuilding(Vector2Int fromBuildingGridPosition, BuildingType fromBuildingType, Vector2Int toBuildingGridPosition, BuildingType toBuildingType);
         void Start();
         UniTask Update(ReadOnlyArray<TileData> tileDatas, BuildingForPlacingInfo buildingForPlacing);
+        BuildingType UpdateBuildingForPlacingType();
     }
 }

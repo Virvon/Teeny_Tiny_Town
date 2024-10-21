@@ -4,7 +4,7 @@ using System;
 namespace Assets.Sources.Services.StaticDataService.Configs.Windows
 {
     [Serializable]
-    public class StoreItemConfig
+    public class GameplayStoreItemConfig
     {
         public BuildingType BuildingType;
         public uint Price;

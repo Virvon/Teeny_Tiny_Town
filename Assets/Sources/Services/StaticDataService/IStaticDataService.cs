@@ -11,18 +11,19 @@ namespace Assets.Sources.Services.StaticDataService
     {
         GroundsConfig GroundsConfig { get; }
         WindowsConfig WindowsConfig { get; }
-        StoreItemsConfig StoreItemsConfig { get; }
+        GameplayStoreItemsConfig StoreItemsConfig { get; }
         WorldsConfig WorldsConfig { get; }
         AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; }
         ReadOnlyArray<WorldConfig> WorldConfigs { get; }
         AnimationsConfig AnimationsConfig { get; }
+        StoreItemConfig StoreItemConfig { get; }
 
         RoadConfig GetRoad(GroundType groundType, RoadType roadType);
         TBuilding GetBuilding<TBuilding>(BuildingType buildingType)
             where TBuilding : BuildingConfig;
         UniTask InitializeAsync();
         WindowConfig GetWindow(WindowType type);
-        StoreItemConfig GetStoreItem(BuildingType buildingType);
+        Configs.Windows.GameplayStoreItemConfig GetStoreItem(BuildingType buildingType);
         TestGroundConfig GetGround(TileType tileType);
         GroundType GetGroundType(BuildingType buildingType);
         TWorldConfig GetWorld<TWorldConfig>(string id)

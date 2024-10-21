@@ -18,7 +18,7 @@ namespace Assets.Sources.Services.StaticDataService
         private Dictionary<BuildingType, BuildingConfig> _buildingConfigs;
         private Dictionary<GroundType, Dictionary<RoadType, RoadConfig>> _groundConfigs;
         private Dictionary<WindowType, WindowConfig> _windowConfigs;
-        private Dictionary<BuildingType, StoreItemConfig> _storeItemsConfigs;
+        private Dictionary<BuildingType, Configs.Windows.GameplayStoreItemConfig> _storeItemsConfigs;
         private Dictionary<TileType, TestGroundConfig> _testGroundConfigs;
         private Dictionary<BuildingType, GroundType> _roadGrounds;
         private Dictionary<string, WorldConfig> _worldConfigs;
@@ -27,12 +27,13 @@ namespace Assets.Sources.Services.StaticDataService
             _assetsProvider = assetsProvider;
 
         public GroundsConfig GroundsConfig { get; private set; }
-        public StoreItemsConfig StoreItemsConfig { get; private set; }
+        public GameplayStoreItemsConfig StoreItemsConfig { get; private set; }
         public WindowsConfig WindowsConfig { get; private set; }
         public WorldsConfig WorldsConfig { get; private set; }
         public AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; private set; }
         public ReadOnlyArray<WorldConfig> WorldConfigs => _worldConfigs.Values.ToArray();
         public AnimationsConfig AnimationsConfig { get; private set; }
+        public StoreItemConfig StoreItemConfig { get; private set; }
 
         public async UniTask InitializeAsync()
         {
@@ -47,6 +48,7 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadAvailableForConstructionBuildingsConfig());
             tasks.Add(LoadWorldConfigs());
             tasks.Add(LoadAnimationsConfig());
+            tasks.Add(LoadStoreItemConfig());
 
             await UniTask.WhenAll(tasks);
         }
@@ -61,8 +63,8 @@ namespace Assets.Sources.Services.StaticDataService
         public TestGroundConfig GetGround(TileType tileType) =>
             _testGroundConfigs.TryGetValue(tileType, out TestGroundConfig config) ? config : null;
 
-        public StoreItemConfig GetStoreItem(BuildingType buildingType) =>
-            _storeItemsConfigs.TryGetValue(buildingType, out StoreItemConfig config) ? config : null;
+        public Configs.Windows.GameplayStoreItemConfig GetStoreItem(BuildingType buildingType) =>
+            _storeItemsConfigs.TryGetValue(buildingType, out Configs.Windows.GameplayStoreItemConfig config) ? config : null;
 
 
         public WindowConfig GetWindow(WindowType type) =>
@@ -77,6 +79,13 @@ namespace Assets.Sources.Services.StaticDataService
             return _groundConfigs.TryGetValue(
                 groundType, out Dictionary<RoadType, RoadConfig> roadConfigs) ? (roadConfigs.TryGetValue(
                 roadType, out RoadConfig config) ? config : null) : null;
+        }
+
+        private async UniTask LoadStoreItemConfig()
+        {
+            StoreItemConfig[] configs = await GetConfigs<StoreItemConfig>();
+
+            StoreItemConfig = configs.First();
         }
 
         private async UniTask LoadAnimationsConfig()
@@ -116,7 +125,7 @@ namespace Assets.Sources.Services.StaticDataService
 
         private async UniTask LoadStoreItemsConfig()
         {
-            StoreItemsConfig[] storeItemsConfigs = await GetConfigs<StoreItemsConfig>();
+            GameplayStoreItemsConfig[] storeItemsConfigs = await GetConfigs<GameplayStoreItemsConfig>();
 
             StoreItemsConfig = storeItemsConfigs.First();
 

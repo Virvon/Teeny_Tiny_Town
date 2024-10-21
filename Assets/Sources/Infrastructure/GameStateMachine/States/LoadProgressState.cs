@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data;
+using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.StateMachine;
@@ -42,6 +43,8 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
         private PlayerProgress CreateNewProgress()
         {
             PlayerProgress progress = new PlayerProgress(GetWorldDatas());
+
+            progress.Wallet.Value = 3000;
 
             return progress;
         }

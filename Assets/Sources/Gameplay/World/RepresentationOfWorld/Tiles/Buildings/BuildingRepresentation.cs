@@ -37,6 +37,13 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
             transform.position = _startPosition;
         }
 
+        public void StopBlinking()
+        {
+            TryKillSequence();
+
+            transform.localScale = Vector3.one;
+        }
+
         public void Shake()
         {
             TryKillSequence();

@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.GameplayMover;
@@ -95,7 +94,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 _buildingMarker.Hide();
                 SelectFrame.Hide();
 
-                GameplayMover.PlaceNewBuilding(tile.GridPosition);
+                GameplayMover.PlaceNewBuilding(tile.GridPosition, _buildingMarker.BuildingType);
             }
             else if (_isBuildingPressed)
             {

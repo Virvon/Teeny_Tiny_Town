@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Data;
+﻿using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.GameplayMover.Commands;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.Input;
@@ -37,8 +37,8 @@ namespace Assets.Sources.Gameplay.GameplayMover
 
         protected Command LastCommand { get; private set; }
 
-        public void PlaceNewBuilding(Vector2Int gridPosition) =>
-            ExecuteCommand(new PlaceNewBuildingCommand(WorldChanger, gridPosition, WorldData));
+        public void PlaceNewBuilding(Vector2Int gridPosition, BuildingType type) =>
+            ExecuteCommand(new PlaceNewBuildingCommand(WorldChanger, gridPosition, WorldData, type));
 
         public void RemoveBuilding(Vector2Int gridPosition) =>
             ExecuteCommand(new RemoveBuildingCommand(WorldChanger, WorldData, gridPosition));

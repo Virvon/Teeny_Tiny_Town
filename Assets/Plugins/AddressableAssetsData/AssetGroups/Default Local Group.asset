@@ -146,7 +146,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - Configs
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: afeb033472eeb9642bcf6c22ae1555e2
+  - m_GUID: b40d1da30db2cb44e85e7d570c711ca1
     m_Address: GameplayWindow
     m_ReadOnly: 0
     m_SerializedLabels: []
@@ -293,7 +293,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - Configs
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3e5b39e019b82134dbc5ec2f9b669496
+  - m_GUID: 4e9e55bbad0251b4480c47c3cbe8a246
     m_Address: CurrencyGameplayWindow
     m_ReadOnly: 0
     m_SerializedLabels: []
@@ -305,6 +305,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 06979d53cbbd4bb409d91b3e0a5151c4
     m_Address: AnimationsConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c76c53c533de7ee4194f9046fe0786fe
+    m_Address: StoreItemConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - Configs

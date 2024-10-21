@@ -1,11 +1,11 @@
-﻿using Assets.Sources.Data;
+﻿using Assets.Sources.Data.WorldDatas;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.UI
 {
-    public class WalletPanel : MonoBehaviour
+    public class WorldWalletPanel : MonoBehaviour
     {
         [SerializeField] private TMP_Text _walletValue;
 

@@ -3,7 +3,7 @@ using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using System.Collections.Generic;
 
-namespace Assets.Sources.Data
+namespace Assets.Sources.Data.WorldDatas
 {
     public class ExpandingWorldData : CurrencyWorldData, IExpandingWorldData
     {

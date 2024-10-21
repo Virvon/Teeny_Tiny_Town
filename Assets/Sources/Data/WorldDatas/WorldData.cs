@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Assets.Sources.Data
+namespace Assets.Sources.Data.WorldDatas
 {
     [Serializable]
     public class WorldData : IWorldData
@@ -14,10 +14,10 @@ namespace Assets.Sources.Data
         public BuildingType NextBuildingTypeForCreation;
         public uint NextBuildingForCreationBuildsCount;
         public List<BuildingType> AvailableBuildingsForCreation;
-        
+
         public uint Length;
         public uint Width;
-        
+
         public WorldData(
             string id,
             List<TileData> tiles,
@@ -35,7 +35,7 @@ namespace Assets.Sources.Data
             NextBuildingForCreationBuildsCount = 0;
             Id = id;
         }
-        
+
         string IWorldData.Id => Id;
         BuildingType IWorldData.NextBuildingTypeForCreation
         {
@@ -67,7 +67,7 @@ namespace Assets.Sources.Data
 
             NextBuildingForCreationBuildsCount++;
 
-            if(NextBuildingForCreationBuildsCount >= requiredCreatedBuildingsToAddNext)
+            if (NextBuildingForCreationBuildsCount >= requiredCreatedBuildingsToAddNext)
             {
                 if (staticDataService.AvailableForConstructionBuildingsConfig.TryFindeNextBuilding(createdBuilding, out BuildingType nextBuildingType))
                     AddNextBuildingTypeForCreation(nextBuildingType);
@@ -85,7 +85,7 @@ namespace Assets.Sources.Data
 
         public void UpdateTileDatas(TileData[] TargetTileDatas)
         {
-            foreach(TileData targetTileData in TargetTileDatas)
+            foreach (TileData targetTileData in TargetTileDatas)
             {
                 TileData tileData = Tiles.First(value => value.GridPosition == targetTileData.GridPosition);
                 tileData.BuildingType = targetTileData.BuildingType;

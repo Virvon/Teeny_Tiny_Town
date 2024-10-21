@@ -1,10 +1,9 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Assets.Sources.Data
 {
     [Serializable]
-    public class WorldWallet
+    public class Wallet
     {
         public uint Value;
 
@@ -18,7 +17,7 @@ namespace Assets.Sources.Data
 
         public bool TryGet(uint value)
         {
-            if(value > Value)
+            if (value > Value)
                 return false;
 
             Value -= value;
@@ -27,18 +26,7 @@ namespace Assets.Sources.Data
             return true;
         }
 
-        public void ForceGet(uint value)
-        {
-            if (value > Value)
-            {
-                Debug.LogError("Too much value to force get");
-                Value = 0;
-
-                return;
-            }
-
-            Value -= value;
+        protected void OnValueChanged() =>
             ValueChanged?.Invoke(Value);
-        }
     }
 }

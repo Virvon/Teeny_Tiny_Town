@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Assets.Sources.Data
+namespace Assets.Sources.Data.WorldDatas
 {
     [Serializable]
     public class CurrencyWorldData : WorldData, ICurrencyWorldData
