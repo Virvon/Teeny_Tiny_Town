@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
@@ -10,10 +9,7 @@ namespace Assets.Sources.UI.Windows
     {
         [SerializeField] private Canvas _canvas;
 
-        private void OnDestroy()
-        {
-            Hide();
-        }
+        protected Canvas Canvas => _canvas;
 
         public void Open()
         {
