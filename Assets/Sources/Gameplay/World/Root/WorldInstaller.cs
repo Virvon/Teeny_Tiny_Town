@@ -2,6 +2,7 @@
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.StateMachine;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
@@ -37,6 +38,12 @@ namespace Assets.Sources.Gameplay.World.Root
             BindGameplayMover();
             BindWorldStateMachine();
             BindUiFactory();
+            BindNextBuildingForPlacingCreator();
+        }
+
+        private void BindNextBuildingForPlacingCreator()
+        {
+            Container.Bind<NextBuildingForPlacingCreator>().AsSingle();
         }
 
         protected virtual void BindWorldBootstrapper()

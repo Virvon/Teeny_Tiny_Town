@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data.WorldDatas;
+using System;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -17,6 +18,8 @@ namespace Assets.Sources.UI
             _worldData = worldData;
 
             _worldData.WorldWallet.ValueChanged += OnWorldWalletValueChanged;
+
+            OnWorldWalletValueChanged(_worldData.WorldWallet.Value);
         }
 
         private void OnDestroy() =>

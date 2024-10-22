@@ -1,7 +1,9 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -10,20 +12,27 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
     public class BuildingMarker : MonoBehaviour
     {
         private IWorldFactory _worldFactory;
+        private NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
 
         private BuildingRepresentation _building;
 
         [Inject]
-        private void Construct(IWorldFactory worldFactory)
+        private void Construct(IWorldFactory worldFactory, NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
         {
             _worldFactory = worldFactory;
+            _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
 
             IsCreatedBuilding = false;
+
+            _nextBuildingForPlacingCreator.DataChanged += OnNextBuildingForPlacingDataChanged;
         }
 
         public TileRepresentation MarkedTile { get; private set; }
         public bool IsCreatedBuilding { get; private set; }
         public BuildingType BuildingType => _building.Type;
+
+        private void OnDestroy() =>
+            _nextBuildingForPlacingCreator.DataChanged -= OnNextBuildingForPlacingDataChanged;
 
         public void Mark(TileRepresentation tile)
         {
@@ -48,7 +57,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             transform.position = targetPosition;
         }
 
-        public async UniTask TryUpdate(BuildingType targetBuildingType)
+        private async UniTask TryUpdate(BuildingType targetBuildingType)
         {
             if (targetBuildingType == BuildingType.Undefined)
                 Debug.LogError("Building type can not be undefined");
@@ -56,26 +65,29 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             if (IsCreatedBuilding)
                 Debug.LogError("The building is not yet complete");
 
-            if(_building == null || _building.Type != targetBuildingType)
+            if (_building == null || _building.Type != targetBuildingType)
             {
                 _building?.Destroy();
 
                 IsCreatedBuilding = true;
 
                 _building = await _worldFactory.CreateBuilding(targetBuildingType, transform.position, transform);
+
+                if(_building.transform.position != transform.position)
+                {
+                    _building.transform.position = transform.position;
+
+                    Debug.LogWarning("The building's position has shifted");
+                }
+
                 _building.Blink();
 
                 IsCreatedBuilding = false;
             }
         }
 
-        public async UniTask<BuildingType> SwapBuilding(BuildingType newBuildingType)
-        {
-            BuildingType buildingType = _building.Type;
-            await TryUpdate(newBuildingType);
-
-            return buildingType;
-        }
+        private async void OnNextBuildingForPlacingDataChanged(BuildingsForPlacingData data) =>
+            await TryUpdate(data.CurrentBuildingType);
 
         public class Factory : PlaceholderFactory<string, UniTask<BuildingMarker>>
         {

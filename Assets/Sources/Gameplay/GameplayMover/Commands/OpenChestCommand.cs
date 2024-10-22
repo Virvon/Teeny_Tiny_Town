@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -11,8 +12,14 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
         private readonly Vector2Int _chestGridPosition;
         private readonly WorldWallet _worldWallet;
 
-        public OpenChestCommand(IWorldChanger world, IWorldData worldData, uint reward, Vector2Int chestGridPosition, WorldWallet worldWallet)
-            : base(world, worldData)
+        public OpenChestCommand(
+            IWorldChanger world,
+            IWorldData worldData,
+            uint reward,
+            Vector2Int chestGridPosition,
+            WorldWallet worldWallet,
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
+            : base(world, worldData, nextBuildingForPlacingCreator)
         {
             _reward = reward;
             _chestGridPosition = chestGridPosition;

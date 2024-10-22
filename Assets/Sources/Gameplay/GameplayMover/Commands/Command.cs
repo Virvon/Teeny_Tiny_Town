@@ -1,10 +1,9 @@
 ﻿using Assets.Sources.Data;
 using Assets.Sources.Data.WorldDatas;
-using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Cysharp.Threading.Tasks;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 
 namespace Assets.Sources.Gameplay.GameplayMover.Commands
@@ -15,13 +14,22 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
         protected readonly TileData[] TileDatas;
         protected readonly IWorldData WorldData;
 
-        private readonly BuildingForPlacingInfo _buildingForPlacing;
+        private readonly NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
 
-        public Command(IWorldChanger worldChanger, IWorldData worldData)
+        private readonly BuildingsForPlacingData _buildingsForPlacingData;
+
+        public Command(IWorldChanger worldChanger, IWorldData worldData, NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
         {
             WorldChanger = worldChanger;
-            _buildingForPlacing = WorldChanger.BuildingForPlacing;
             WorldData = worldData;
+            _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
+
+            BuildingsForPlacingData buildingsForPlacingData = _nextBuildingForPlacingCreator.BuildingsForPlacingData;
+
+            _buildingsForPlacingData = new BuildingsForPlacingData(
+                buildingsForPlacingData.StartGridPosition,
+                buildingsForPlacingData.CurrentBuildingType,
+                buildingsForPlacingData.NextBuildingType);
 
             TileDatas = WorldData.Tiles.Select(tile => new TileData(tile.GridPosition, tile.BuildingType)).ToArray();
         }
@@ -31,9 +39,8 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
         public virtual async UniTask Undo()
         {
             WorldData.UpdateTileDatas(TileDatas);
-
-            await WorldChanger.Update(TileDatas, _buildingForPlacing);
-            Debug.Log("error in building for placing");
+            await WorldChanger.Update(TileDatas);
+            _nextBuildingForPlacingCreator.Update(_buildingsForPlacingData);
         }
     }
 }

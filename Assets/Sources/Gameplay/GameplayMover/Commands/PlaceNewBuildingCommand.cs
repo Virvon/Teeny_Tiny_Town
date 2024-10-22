@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
@@ -17,8 +18,13 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
         private readonly uint _nextBuildingForCreationBuildsCount;
         private readonly IReadOnlyList<BuildingType> _availableBuildingsForCreation;
 
-        public PlaceNewBuildingCommand(IWorldChanger world, Vector2Int placedBuildingGridPosition, IWorldData worldData, BuildingType placedBuildingType)
-            : base(world, worldData)
+        public PlaceNewBuildingCommand(
+            IWorldChanger world,
+            Vector2Int placedBuildingGridPosition,
+            IWorldData worldData,
+            BuildingType placedBuildingType,
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
+            : base(world, worldData, nextBuildingForPlacingCreator)
         {
             _placedBuildingGridPosition = placedBuildingGridPosition;
             _placedBuildingType = placedBuildingType;

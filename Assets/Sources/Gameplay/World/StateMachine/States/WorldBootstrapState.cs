@@ -1,8 +1,10 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
 {
@@ -12,6 +14,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         private readonly ActionHandlerStateMachine _actionHandlerStateMachine;
         private readonly ActionHandlerStatesFactory _actionHandlerStatesFactory;
         private readonly IWorldChanger _worldChanger;
+        private readonly NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
 
         protected readonly WorldStateMachine WorldStateMachine;
 
@@ -20,13 +23,15 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             ActionHandlerStateMachine actionHandlerStateMachine,
             ActionHandlerStatesFactory actionHandlerStatesFactory,
             IWorldChanger worldChanger,
-            WorldStateMachine worldStateMachine)
+            WorldStateMachine worldStateMachine,
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
         {
             _worldFactory = worldFactory;
             _actionHandlerStateMachine = actionHandlerStateMachine;
             _actionHandlerStatesFactory = actionHandlerStatesFactory;
             _worldChanger = worldChanger;
             WorldStateMachine = worldStateMachine;
+            _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
         }
 
         public async UniTask Enter()
@@ -39,7 +44,9 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
             _actionHandlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
 
+            _nextBuildingForPlacingCreator.CreateData(_worldChanger.Tiles);
             _worldChanger.Start();
+
             EnterNextState();
         }
 

@@ -1,7 +1,7 @@
 ﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets.Sources.Gameplay.GameplayMover.Commands
 {
@@ -15,8 +15,14 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
         private readonly uint _targetWidth;
         private readonly Command _previousCommand;
 
-        public ExpandWorldCommand(IExpandingWorldChanger expandingWorldChanger, IWorldData worldData, uint targetLength, uint targetWidth, Command previousCommand)
-            : base(expandingWorldChanger, worldData)
+        public ExpandWorldCommand(
+            IExpandingWorldChanger expandingWorldChanger,
+            IWorldData worldData,
+            uint targetLength,
+            uint targetWidth,
+            Command previousCommand,
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
+            : base(expandingWorldChanger, worldData, nextBuildingForPlacingCreator)
         {
             _expandingWorldChanger = expandingWorldChanger;
             _worldData = worldData;

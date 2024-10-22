@@ -4,6 +4,7 @@ using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using UnityEngine;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 {
@@ -11,19 +12,19 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
     {
         private readonly IWorldChanger _worldChanger;
         private readonly IWorldFactory _worldFactory;
-        private readonly BuildingMarker _buildingMarker;
+        private readonly NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
 
         public WorldRepresentationChanger(
             IWorldChanger worldChanger,
             IWorldFactory worldFactory,
-            BuildingMarker buildingMarker)
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
         {
             _worldChanger = worldChanger;
 
             _worldChanger.TilesChanged += OnTilesChanged;
 
             _worldFactory = worldFactory;
-            _buildingMarker = buildingMarker;
+            _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
         }
 
         ~WorldRepresentationChanger()
@@ -33,14 +34,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 
         public event Action GameplayMoved;
 
-        public TileRepresentation StartTile => WorldGenerator.GetTile(_worldChanger.BuildingForPlacing.GridPosition);
+        public TileRepresentation StartTile => WorldGenerator.GetTile(_nextBuildingForPlacingCreator.BuildingsForPlacingData.StartGridPosition);
 
         private WorldGenerator WorldGenerator => _worldFactory.WorldGenerator;
 
-        private async void OnTilesChanged()
+        private void OnTilesChanged()
         {
-            await _buildingMarker.TryUpdate(_worldChanger.BuildingForPlacing.Type);
-
             GameplayMoved?.Invoke();
         }
     }

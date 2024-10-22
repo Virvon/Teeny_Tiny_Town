@@ -4,6 +4,7 @@ using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
@@ -14,8 +15,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         public CurrencyWorldChanger
             (IStaticDataService staticDataService,
             ICurrencyWorldData worldData,
-            IPersistentProgressService persistentProgressService)
-            : base(staticDataService, worldData, persistentProgressService)
+            IPersistentProgressService persistentProgressService,
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
+            : base(staticDataService, worldData, persistentProgressService, nextBuildingForPlacingCreator)
         {
             _currencyWorldData = worldData;
         }

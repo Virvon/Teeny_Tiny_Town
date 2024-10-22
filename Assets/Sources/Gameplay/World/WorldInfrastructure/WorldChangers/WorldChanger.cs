@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using Random = UnityEngine.Random;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Data;
 using Cysharp.Threading.Tasks;
@@ -14,6 +13,7 @@ using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
@@ -22,22 +22,25 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         protected readonly IWorldData WorldData;
         protected readonly IStaticDataService StaticDataService;
         protected readonly IPersistentProgressService PersistentProgressService;
+        protected readonly NextBuildingForPlacingCreator NextBuildingForPlacingCreator;
 
         private List<Tile> _tiles;
 
-        public WorldChanger(IStaticDataService staticDataService, IWorldData worldData, IPersistentProgressService persistentProgressService)
+        public WorldChanger(
+            IStaticDataService staticDataService,
+            IWorldData worldData,
+            IPersistentProgressService persistentProgressService,
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
         {
             StaticDataService = staticDataService;
             WorldData = worldData;
-
             PersistentProgressService = persistentProgressService;
+            NextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
         }
 
         public event Action TilesChanged;
-
         public event Action UpdateFinished;
 
-        public BuildingForPlacingInfo BuildingForPlacing { get; private set; }
         public IReadOnlyList<Tile> Tiles => _tiles;
 
         protected ITileRepresentationCreatable TileRepresentationCreatable { get; private set; }
@@ -50,14 +53,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
             TileRepresentationCreatable = tileRepresentationCreatable;
 
             await Fill(tileRepresentationCreatable);
-            AddNewBuilding();
-
-        }
-
-        public void ChangeBuildingForPlacing(BuildingType type)
-        {
-            AddNewBuilding(type);
-            TilesChanged?.Invoke();
         }
 
         public async UniTask PlaceNewBuilding(Vector2Int gridPosition, BuildingType buildingType)
@@ -65,11 +60,11 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
             Tile changedTile = GetTile(gridPosition);
             await changedTile.PutBuilding(GetBuilding(buildingType, gridPosition));
 
-            AddNewBuilding();
+            NextBuildingForPlacingCreator.MoveToNextBuilding(Tiles);
             TilesChanged?.Invoke();
         }
 
-        public async UniTask Update(ReadOnlyArray<TileData> tileDatas, BuildingForPlacingInfo buildingForPlacing)
+        public async UniTask Update(ReadOnlyArray<TileData> tileDatas)
         {
             tileDatas = tileDatas.OrderBy(value => value.GridPosition.x).ToArray();
 
@@ -96,9 +91,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
             }
 
             UpdateFinished?.Invoke();
-
-            BuildingForPlacing = buildingForPlacing;
-
             TilesChanged?.Invoke();
         }
 
@@ -112,7 +104,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
             Tile toTile = GetTile(toBuildingGridPosition);
             await toTile.PutBuilding(GetBuilding(fromBuildingType, toBuildingGridPosition));
 
-            AddNewBuilding();
+            NextBuildingForPlacingCreator.MoveToNextBuilding(Tiles);
 
             TilesChanged?.Invoke();
         }
@@ -164,20 +156,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                 yield return i;
         }
 
-        public BuildingType UpdateBuildingForPlacingType()
-        {
-            Vector2Int buildingGridPosition = BuildingForPlacing.GridPosition;
-            BuildingType buildingType = CreateNewBuildingType();
-
-            BuildingForPlacing = new BuildingForPlacingInfo(buildingGridPosition, buildingType);
-
-            return BuildingForPlacing.Type;
-        }
-
-        protected void AddNewBuilding() =>
-            AddNewBuilding(CreateNewBuildingType());
-
-        
         protected void Clean()
         {
             foreach (Tile tile in _tiles)
@@ -312,30 +290,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
             if (aroundTile != null && tile != aroundTile)
                 tile.AddAroundTile(aroundTile);
-        }
-
-        private BuildingType CreateNewBuildingType()
-        {
-            IReadOnlyList<BuildingType> availableBuildingTypes = WorldData.AvailableBuildingsForCreation;
-
-            return availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
-        }
-
-
-        private void AddNewBuilding(BuildingType type)
-        {
-            bool isPositionFree = false;
-
-            while (isPositionFree == false)
-            {
-                Tile tile = _tiles[Random.Range(0, _tiles.Count)];
-
-                if (tile.IsEmpty)
-                {
-                    BuildingForPlacing = new BuildingForPlacingInfo(tile.GridPosition, type);
-                    isPositionFree = true;
-                }
-            }
         }
     }
 }
