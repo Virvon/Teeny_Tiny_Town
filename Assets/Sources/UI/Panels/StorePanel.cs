@@ -1,33 +1,25 @@
 ﻿using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Sources.UI.Panels
 {
-    public class StorePanel : CanvasGroupPanel
+    public class StorePanel : StartWindowPanel
     {
-        private const string Blur = "_Blur";
-        private const float MaxBlur = 0.015f;
-        private const float MinBlur = 0;
-
-        [SerializeField] private Image _blur;
         [SerializeField] private PackagesPanel _packagesPanel;
+        [SerializeField] private Blur _blur;
 
         public override void Open()
         {
             base.Open();
-            ChangeBlured(MaxBlur);
+            _blur.Show(AnimationsConfig.PanelOpeningStateDuration);
             _packagesPanel.Open();
         }
 
         protected override void Hide(TweenCallback callback)
         {
             base.Hide(callback);
-            ChangeBlured(MinBlur);
+            _blur.Hide(AnimationsConfig.PanelOpeningStateDuration);
             _packagesPanel.Hide();
         }
-
-        private void ChangeBlured(float targetValue) =>
-            _blur.material.DOFloat(targetValue, Blur, AnimationsConfig.PanelOpeningStateDuration);
     }
 }

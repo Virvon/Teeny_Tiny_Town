@@ -1254,8 +1254,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8562630374786512856}
-  - component: {fileID: 3535390136833364456}
   - component: {fileID: 1712545114455597522}
+  - component: {fileID: 5758549848663474643}
   m_Layer: 0
   m_Name: StartPanel
   m_TagString: Untagged
@@ -1283,21 +1283,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3535390136833364456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028124281041895000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 407d4d5701220f741a7cca1fccf5f9d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 1712545114455597522}
-  _openNextPanelButton: {fileID: 4696029409377815514}
-  _nextPanel: {fileID: 6408458316917340464}
 --- !u!225 &1712545114455597522
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1310,6 +1295,21 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &5758549848663474643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028124281041895000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1368a895e0482b47ac5590fc2db245c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 1712545114455597522}
+  _nextPanel: {fileID: 6408458316917340464}
+  _openNextPanelButton: {fileID: 4696029409377815514}
 --- !u!1 &3298449138911837418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,6 +1935,7 @@ GameObject:
   - component: {fileID: 5530091167641963334}
   - component: {fileID: 2760330733638237525}
   - component: {fileID: 6033010183967221446}
+  - component: {fileID: 7062174380498352081}
   m_Layer: 5
   m_Name: Blur
   m_TagString: Untagged
@@ -1999,6 +2000,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7062174380498352081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5160267750421154602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1dad7568a544d488cfdd28e3c248d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blur: {fileID: 6033010183967221446}
 --- !u!1 &5162465260028550934
 GameObject:
   m_ObjectHideFlags: 0
@@ -2063,10 +2077,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 8594035234934948624}
+  _nextPanel: {fileID: 5758549848663474643}
   _openNextPanelButton: {fileID: 6865259778802948170}
-  _nextPanel: {fileID: 3535390136833364456}
-  _blur: {fileID: 6033010183967221446}
   _packagesPanel: {fileID: 4806630039439852208}
+  _blur: {fileID: 7062174380498352081}
 --- !u!1 &6396782769107576410
 GameObject:
   m_ObjectHideFlags: 0

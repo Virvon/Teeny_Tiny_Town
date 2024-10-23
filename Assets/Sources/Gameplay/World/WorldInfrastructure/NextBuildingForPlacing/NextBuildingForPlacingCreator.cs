@@ -4,19 +4,29 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Data.WorldDatas;
 using System;
+using System.Linq;
+using UnityEngine;
+using Assets.Sources.Gameplay.World.StateMachine;
+using Assets.Sources.Gameplay.World.StateMachine.States;
+using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing
 {
     public class NextBuildingForPlacingCreator
     {
         private readonly IWorldData _worldData;
+        private readonly WorldStateMachine _worldStateMachine;
 
-        public NextBuildingForPlacingCreator(IWorldData worldData) =>
+        public NextBuildingForPlacingCreator(IWorldData worldData, WorldStateMachine worldStateMachine)
+        {
             _worldData = worldData;
+            _worldStateMachine = worldStateMachine;
+        }
 
         public BuildingsForPlacingData BuildingsForPlacingData { get; private set; }
 
         public event Action<BuildingsForPlacingData> DataChanged;
+        public event Action NoMoreEmptyTiles;
 
         public void CreateData(IReadOnlyList<Tile> tiles)
         {
@@ -65,6 +75,12 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlaci
 
         private void FindTileToPlacing(IReadOnlyList<Tile> tiles)
         {
+            if(tiles.Any(tile => tile.IsEmpty) == false)
+            {
+                NoMoreEmptyTiles?.Invoke();
+                return;
+            }    
+
             bool isPositionFree = false;
 
             while (isPositionFree == false)

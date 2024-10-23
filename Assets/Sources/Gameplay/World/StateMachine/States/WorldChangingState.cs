@@ -1,10 +1,12 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.Input;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI.Windows;
 using Cysharp.Threading.Tasks;
+using System;
 using System.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
@@ -20,7 +22,8 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             IInputService inputService,
             WindowsSwitcher windowsSwitcher,
             ActionHandlerStateMachine actionHandlerStateMachine,
-            IUiFactory uiFactory)
+            IUiFactory uiFactory,
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
         {
             _inputService = inputService;
             _windowsSwitcher = windowsSwitcher;
