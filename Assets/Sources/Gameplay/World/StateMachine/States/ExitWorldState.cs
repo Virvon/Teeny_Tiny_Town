@@ -1,13 +1,13 @@
 ﻿using Assets.Sources.Gameplay.StateMachine;
-using Assets.Sources.Gameplay.StateMachine.States;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI.Windows;
 using Cysharp.Threading.Tasks;
+using System;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
 {
-    public class ExitWorldState : IState
+    public class ExitWorldState : IPayloadState<Action>
     {
         private readonly GameplayStateMachine _gameplayStateMachine;
         private readonly WindowsSwitcher _windowsSwitcher;
@@ -18,9 +18,10 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _windowsSwitcher = windowsSwitcher;
         }
 
-        public UniTask Enter()
+        public UniTask Enter(Action callbakc)
         {
-            _gameplayStateMachine.Enter<MapSelectionState>().Forget();
+            callbakc?.Invoke();
+
             return default;
         }
 

@@ -1,9 +1,12 @@
 ﻿using Assets.Sources.Gameplay.Cameras;
+using Assets.Sources.Gameplay.StateMachine;
+using Assets.Sources.Gameplay.StateMachine.States;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.UI.Panels;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -17,12 +20,14 @@ namespace Assets.Sources.UI.Windows
         [SerializeField] private WorldChangingWindowPanel _saveGameplayPanel;
 
         private NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
+        private GameplayStateMachine _gameplayStateMachine;
 
         [Inject]
-        private void Construct(WorldStateMachine worldStateMachine, NextBuildingForPlacingCreator nextBuildingForPlacingCreator, GameplayCamera gameplayCamera)
+        private void Construct(WorldStateMachine worldStateMachine, NextBuildingForPlacingCreator nextBuildingForPlacingCreator, GameplayCamera gameplayCamera, GameplayStateMachine gameplayStateMachine)
         {
             WorldStateMachine = worldStateMachine;
             _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
+            _gameplayStateMachine = gameplayStateMachine;
 
             Canvas.worldCamera = gameplayCamera.Camera;
         }
@@ -42,7 +47,7 @@ namespace Assets.Sources.UI.Windows
         }
 
         private void OnHideButtonClicked() =>
-            WorldStateMachine.Enter<ExitWorldState>().Forget();
+            WorldStateMachine.Enter<ExitWorldState, Action>(() => _gameplayStateMachine.Enter<MapSelectionState>().Forget()).Forget();
 
         private void OnNoMoreEmptyTiles()
         {
