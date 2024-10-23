@@ -6,7 +6,6 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.Gameplay.World.Root
@@ -16,6 +15,7 @@ namespace Assets.Sources.Gameplay.World.Root
         private readonly IWorldChanger _worldChanger;
         private readonly IWorldFactory _worldFactory;
         private readonly IWorldData _worldData;
+        private readonly World _world;
 
         protected readonly WorldStateMachine WorldStateMachine;
         protected readonly StatesFactory StatesFactory;
@@ -25,14 +25,21 @@ namespace Assets.Sources.Gameplay.World.Root
             IWorldFactory worldFactory,
             WorldStateMachine worldStateMachine,
             StatesFactory statesFactory,
-            IWorldData worldData)
+            IWorldData worldData,
+            World world)
         {
             _worldChanger = worldChanger;
             _worldFactory = worldFactory;
             WorldStateMachine = worldStateMachine;
             StatesFactory = statesFactory;
             _worldData = worldData;
+            _world = world;
+
+            _world.Entered += OnWorldEntered;
         }
+
+        ~WorldBootstrapper() =>
+            _world.Entered -= OnWorldEntered;
 
         public async void Initialize()
         {
@@ -49,6 +56,10 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine.RegisterState(StatesFactory.Create<WorldBootstrapState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<WorldChangingState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ExitWorldState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<ResultState>());
         }
+
+        protected virtual void OnWorldEntered() =>
+            WorldStateMachine.Enter<WorldBootstrapState>().Forget();
     }
 }

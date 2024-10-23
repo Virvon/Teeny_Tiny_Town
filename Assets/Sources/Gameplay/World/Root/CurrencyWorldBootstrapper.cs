@@ -4,6 +4,7 @@ using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StateMachine;
+using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.World.Root
 {
@@ -14,8 +15,9 @@ namespace Assets.Sources.Gameplay.World.Root
             IWorldFactory worldFactory,
             WorldStateMachine worldStateMachine,
             StatesFactory statesFactory,
-            IWorldData worldData)
-            : base(worldChanger, worldFactory, worldStateMachine, statesFactory, worldData)
+            IWorldData worldData,
+            World world)
+            : base(worldChanger, worldFactory, worldStateMachine, statesFactory, worldData, world)
         {
         }
 
@@ -25,6 +27,10 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine.RegisterState(StatesFactory.Create<CurrencyWorldChangingState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<StoreState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ExitWorldState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<ResultState>());
         }
+
+        protected override void OnWorldEntered() =>
+            WorldStateMachine.Enter<CurrencyWorldBootstrapState>().Forget();
     }
 }

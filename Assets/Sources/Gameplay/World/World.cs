@@ -1,6 +1,9 @@
-﻿using Assets.Sources.Gameplay.World.Root;
-using Assets.Sources.Gameplay.World.StateMachine.States;
+﻿using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
@@ -9,11 +12,39 @@ namespace Assets.Sources.Gameplay.World
 {
     public class World : MonoBehaviour
     {
-        [SerializeField] protected WorldInstaller WorldInstaller;
+        private const float FullRotation = 360;
 
-        public virtual void EnterBootstrapState()
+        private AnimationsConfig _animationsConfig;
+
+        private Sequence _rotating;
+
+        [Inject]
+        private void Construct(IStaticDataService staticDataService)
         {
-            WorldInstaller.WorldStateMachine.Enter<WorldBootstrapState>().Forget();
+            _animationsConfig = staticDataService.AnimationsConfig;
+        }
+
+        private void OnDestroy() =>
+            TryStopRotating();
+
+        public event Action Entered;
+
+        public void EnterBootstrapState() =>
+            Entered?.Invoke();
+
+        public void StartRotating()
+        {
+            _rotating = DOTween
+                .Sequence()
+                .Append(transform.DORotate(new Vector3(transform.rotation.x, transform.rotation.y + FullRotation / 2, transform.rotation.z), _animationsConfig.WorldRotateDuration / 2).From(new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z)).SetEase(Ease.Linear))
+                .Append(transform.DORotate(new Vector3(transform.rotation.x, transform.rotation.y + FullRotation, transform.rotation.z), _animationsConfig.WorldRotateDuration / 2).SetEase(Ease.Linear))
+                .SetLoops(-1, LoopType.Restart);
+        }
+
+        public void TryStopRotating()
+        {
+            if (_rotating != null)
+                _rotating.Kill();
         }
 
         public class Factory : PlaceholderFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<World>>

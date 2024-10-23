@@ -1,4 +1,7 @@
 ﻿using Assets.Sources.Gameplay.GameplayMover;
+using Assets.Sources.Gameplay.World.StateMachine;
+using Assets.Sources.Gameplay.World.StateMachine.States;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
 using UnityEngine;
@@ -15,11 +18,13 @@ namespace Assets.Sources.UI.Panels
         [SerializeField] private Blur _blur;
 
         private IGameplayMover _gameplayMover;
+        private WorldStateMachine _worldStateMachine;
 
         [Inject]
-        private void Construct(IGameplayMover gameplayMover)
+        private void Construct(IGameplayMover gameplayMover, WorldStateMachine worldStateMachine)
         {
             _gameplayMover = gameplayMover;
+            _worldStateMachine = worldStateMachine;
         }
 
         private void OnEnable()
@@ -46,10 +51,8 @@ namespace Assets.Sources.UI.Panels
             _blur.Hide(AnimationsConfig.PanelOpeningStateDuration);
         }
 
-        private void OnCompleteButtonClicked()
-        {
-            throw new NotImplementedException();
-        }
+        private void OnCompleteButtonClicked() =>
+            _worldStateMachine.Enter<ResultState>().Forget();
 
         private void OnUndoButtonClicked()
         {

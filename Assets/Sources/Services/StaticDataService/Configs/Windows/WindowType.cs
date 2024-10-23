@@ -7,5 +7,6 @@
         StoreWindow,
         StartWindow,
         MapSelectionWindow,
+        ResultWindow,
     }
 }

@@ -7,7 +7,6 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.PersistentProgress;
-using Assets.Sources.Services.StateMachine;
 using UnityEngine;
 using Zenject;
 
@@ -16,6 +15,7 @@ namespace Assets.Sources.Gameplay.World.Root
     public class WorldInstaller : MonoInstaller
     {
         [SerializeField] private LayerMask _actionHandlerLayerMask;
+        [SerializeField] private World _world;
 
         private IPersistentProgressService _persistentProgressService;
 
@@ -23,7 +23,6 @@ namespace Assets.Sources.Gameplay.World.Root
         private void Construct(IPersistentProgressService persistentProgressService) =>
             _persistentProgressService = persistentProgressService;
 
-        public WorldStateMachine WorldStateMachine { get; private set; }
         protected WorldData WorldData => _persistentProgressService.Progress.CurrentWorldData;
 
         public override void InstallBindings()
@@ -39,11 +38,7 @@ namespace Assets.Sources.Gameplay.World.Root
             BindWorldStateMachine();
             BindUiFactory();
             BindNextBuildingForPlacingCreator();
-        }
-
-        private void BindNextBuildingForPlacingCreator()
-        {
-            Container.Bind<NextBuildingForPlacingCreator>().AsSingle();
+            BindWorld();
         }
 
         protected virtual void BindWorldBootstrapper()
@@ -66,6 +61,16 @@ namespace Assets.Sources.Gameplay.World.Root
             Container.BindInterfacesTo<GameplayMover.GameplayMover>().AsSingle();
         }
 
+        private void BindWorld()
+        {
+            Container.BindInstance(_world).AsSingle();
+        }
+
+        private void BindNextBuildingForPlacingCreator()
+        {
+            Container.Bind<NextBuildingForPlacingCreator>().AsSingle();
+        }
+
         private void BindUiFactory()
         {
             UiFactoryInstaller.Install(Container);
@@ -83,10 +88,7 @@ namespace Assets.Sources.Gameplay.World.Root
 
         private void BindWorldStateMachine()
         {
-            WorldStateMachine = new();
-
-            Container.BindInstance(WorldStateMachine).AsSingle();
-            Container.Bind<StatesFactory>().AsSingle();
+            WorldStateMachineInstaller.Install(Container);
         }
 
         private void BindWorldFactory()

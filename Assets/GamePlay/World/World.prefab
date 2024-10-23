@@ -47,6 +47,7 @@ MonoBehaviour:
   _actionHandlerLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  _world: {fileID: 5296909339762190094}
 --- !u!1 &5847459068844677991
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,4 +112,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18b8c7e478ccde48a68ef42b3744d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WorldInstaller: {fileID: 2200294263047648190}
