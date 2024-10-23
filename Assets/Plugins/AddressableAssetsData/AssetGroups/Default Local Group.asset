@@ -320,6 +320,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d18b0bf572258f4ab3b025fe0b3fbdc
+    m_Address: AdditionalBonusOfferWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}
   m_SchemaSet:

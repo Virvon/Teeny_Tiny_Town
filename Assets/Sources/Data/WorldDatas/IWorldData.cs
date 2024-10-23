@@ -13,6 +13,7 @@ namespace Assets.Sources.Data.WorldDatas
         string Id { get; }
         BuildingType NextBuildingTypeForCreation { get; set; }
         uint NextBuildingForCreationBuildsCount { get; set; }
+        bool IsChangingStarted { get; set; }
 
         void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService);
         void UpdateTileDatas(TileData[] tileDatas);

@@ -11,9 +11,9 @@ namespace Assets.Sources.Gameplay.Cameras
 
         public Camera Camera => _camera;
 
-        public void MoveTo(Vector3 position)
+        public void MoveTo(Vector3 position, TweenCallback callback = null)
         {
-            transform.DOMove(position, 1);
+            transform.DOMove(position, 1).onComplete += callback;
         }
 
         public class Factory : PlaceholderFactory<string, UniTask<GameplayCamera>>

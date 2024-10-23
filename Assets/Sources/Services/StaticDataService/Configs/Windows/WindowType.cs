@@ -8,5 +8,6 @@
         StartWindow,
         MapSelectionWindow,
         ResultWindow,
+        AdditionalBonusOfferWindow,
     }
 }

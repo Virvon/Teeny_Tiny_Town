@@ -1,12 +1,13 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
-using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
+﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Gameplay.Cameras;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.Input;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI.Windows;
 using Cysharp.Threading.Tasks;
-using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
 {
@@ -16,18 +17,20 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         private readonly WindowsSwitcher _windowsSwitcher;
         private readonly ActionHandlerStateMachine _actionHandlerStateMachine;
         private readonly IUiFactory _uiFactory;
+        private readonly GameplayCamera _camera;
 
         public WorldChangingState(
             IInputService inputService,
             WindowsSwitcher windowsSwitcher,
             ActionHandlerStateMachine actionHandlerStateMachine,
             IUiFactory uiFactory,
-            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
+            GameplayCamera gameplayCamera)
         {
             _inputService = inputService;
             _windowsSwitcher = windowsSwitcher;
             _actionHandlerStateMachine = actionHandlerStateMachine;
             _uiFactory = uiFactory;
+            _camera = gameplayCamera;
         }
 
         protected virtual WindowType WindowType => WindowType.GameplayWindow;
@@ -42,8 +45,11 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
             _windowsSwitcher.Switch(WindowType);
 
-            _actionHandlerStateMachine.SetActive(true);
-            _inputService.SetEnabled(true);
+            _camera.MoveTo(new Vector3(55.1f, 78.8f, -55.1f), callback: () =>
+            {
+                _actionHandlerStateMachine.SetActive(true);
+                _inputService.SetEnabled(true);
+            });
         }
 
         public UniTask Exit()
@@ -51,6 +57,43 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _actionHandlerStateMachine.SetActive(false);
             _inputService.SetEnabled(false);
             return default;
+        }
+    }
+    public class StartWorldState : IState
+    {
+        private readonly IWorldData _worldData;
+        private readonly WindowsSwitcher _windowsSwitcher;
+        private readonly IUiFactory _uiFactory;
+        private readonly WorldStateMachine _worldStateMachine;
+
+        public StartWorldState(IWorldData worldData, WindowsSwitcher windowsSwitcher, IUiFactory uiFactory, WorldStateMachine worldStateMachine)
+        {
+            _worldData = worldData;
+            _windowsSwitcher = windowsSwitcher;
+            _uiFactory = uiFactory;
+            _worldStateMachine = worldStateMachine;
+        }
+
+        public async UniTask Enter()
+        {
+            if (_worldData.IsChangingStarted)
+                _worldStateMachine.Enter<WorldBootstrapState>().Forget();
+            else
+                await ShowAdditionalBonusOffer();
+        }
+
+        public UniTask Exit() =>
+            default;
+
+        private async UniTask ShowAdditionalBonusOffer()
+        {
+            if (_windowsSwitcher.Contains(WindowType.AdditionalBonusOfferWindow) == false)
+            {
+                Window window = await _uiFactory.CreateWindow(WindowType.AdditionalBonusOfferWindow);
+                _windowsSwitcher.RegisterWindow(WindowType.AdditionalBonusOfferWindow, window);
+            }
+
+            _windowsSwitcher.Switch(WindowType.AdditionalBonusOfferWindow);
         }
     }
 }

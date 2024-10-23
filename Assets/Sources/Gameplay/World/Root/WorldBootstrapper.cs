@@ -53,6 +53,7 @@ namespace Assets.Sources.Gameplay.World.Root
 
         protected virtual void RegisterStates()
         {
+            WorldStateMachine.RegisterState(StatesFactory.Create<StartWorldState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<WorldBootstrapState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<WorldChangingState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ExitWorldState>());
@@ -60,6 +61,6 @@ namespace Assets.Sources.Gameplay.World.Root
         }
 
         protected virtual void OnWorldEntered() =>
-            WorldStateMachine.Enter<WorldBootstrapState>().Forget();
+            WorldStateMachine.Enter<StartWorldState>().Forget();
     }
 }

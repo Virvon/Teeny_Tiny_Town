@@ -14,9 +14,9 @@ namespace Assets.Sources.Data.WorldDatas
         public BuildingType NextBuildingTypeForCreation;
         public uint NextBuildingForCreationBuildsCount;
         public List<BuildingType> AvailableBuildingsForCreation;
-
         public uint Length;
         public uint Width;
+        public bool IsChangingStarted;
 
         public WorldData(
             string id,
@@ -26,6 +26,7 @@ namespace Assets.Sources.Data.WorldDatas
             uint length,
             uint width)
         {
+            Id = id;
             Tiles = tiles;
             NextBuildingTypeForCreation = nextBuildingTypeForCreation;
             AvailableBuildingsForCreation = availableBuildingForCreation;
@@ -33,7 +34,7 @@ namespace Assets.Sources.Data.WorldDatas
             Width = width;
 
             NextBuildingForCreationBuildsCount = 0;
-            Id = id;
+            IsChangingStarted = false;
         }
 
         string IWorldData.Id => Id;
@@ -59,6 +60,11 @@ namespace Assets.Sources.Data.WorldDatas
         }
         IReadOnlyList<TileData> IWorldData.Tiles => Tiles;
         IReadOnlyList<BuildingType> IWorldData.AvailableBuildingsForCreation => AvailableBuildingsForCreation;
+        bool IWorldData.IsChangingStarted
+        {
+            get => IsChangingStarted;
+            set => IsChangingStarted = value;
+        }
 
         public virtual void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)
         {

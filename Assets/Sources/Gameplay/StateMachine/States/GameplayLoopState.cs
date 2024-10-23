@@ -9,17 +9,14 @@ namespace Assets.Sources.Gameplay.StateMachine.States
     public class GameplayLoopState : IState
     {
         private readonly WorldsList _worldsList;
-        private readonly GameplayCamera _camera;
 
-        public GameplayLoopState(WorldsList worldsList, GameplayCamera camera)
+        public GameplayLoopState(WorldsList worldsList)
         {
             _worldsList = worldsList;
-            _camera = camera;
         }
 
         public UniTask Enter()
         {
-            _camera.MoveTo(new Vector3(55.1f, 78.8f, -55.1f));
             _worldsList.StartCurrentWorld();
             return default;
         }
