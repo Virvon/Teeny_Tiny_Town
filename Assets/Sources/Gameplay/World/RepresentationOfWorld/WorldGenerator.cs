@@ -25,12 +25,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
             _tiles = new();
         }
 
-        public void PlaceToCenter(uint gridLength, uint gridWidth)
+        public void PlaceToCenter(Vector2Int size)
         {
             Vector3 center = new (
-                (gridLength * _cellSize / 2f) - (_cellSize / 2f),
+                (size.x * _cellSize / 2f) - (_cellSize / 2f),
                 transform.position.y,
-                (gridWidth * _cellSize / 2f) - (_cellSize / 2f));
+                (size.y * _cellSize / 2f) - (_cellSize / 2f));
 
             transform.localPosition = transform.localPosition - center;
         }

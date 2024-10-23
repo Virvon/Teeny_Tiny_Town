@@ -64,9 +64,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
             TilesChanged?.Invoke();
         }
 
-        public async UniTask Update(ReadOnlyArray<TileData> tileDatas)
+        public async UniTask Update()
         {
-            tileDatas = tileDatas.OrderBy(value => value.GridPosition.x).ToArray();
+            TileData[] tileDatas = WorldData.Tiles.OrderBy(value => value.GridPosition.x).ToArray();
 
             foreach (TileData tileData in tileDatas)
             {
@@ -198,7 +198,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         }
 
         protected bool IsTileFitsIntoGrid(Vector2Int gridPosition) =>
-            gridPosition.x < WorldData.Length && gridPosition.y < WorldData.Width;
+            gridPosition.x < WorldData.Size.x && gridPosition.y < WorldData.Size.y;
 
         protected Tile GetGround(List<RoadTile> roadTiles, List<TallTile> tallTiles, TileData tileData)
         {

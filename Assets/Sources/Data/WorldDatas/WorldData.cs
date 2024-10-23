@@ -3,6 +3,8 @@ using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.InputSystem.Utilities;
 
 namespace Assets.Sources.Data.WorldDatas
 {
@@ -10,28 +12,25 @@ namespace Assets.Sources.Data.WorldDatas
     public class WorldData : IWorldData
     {
         public string Id;
-        public List<TileData> Tiles;
+        public TileData[] Tiles;
         public BuildingType NextBuildingTypeForCreation;
         public uint NextBuildingForCreationBuildsCount;
         public List<BuildingType> AvailableBuildingsForCreation;
-        public uint Length;
-        public uint Width;
+        public Vector2Int Size;
         public bool IsChangingStarted;
 
         public WorldData(
             string id,
-            List<TileData> tiles,
+            TileData[] tiles,
             BuildingType nextBuildingTypeForCreation,
             List<BuildingType> availableBuildingForCreation,
-            uint length,
-            uint width)
+            Vector2Int size)
         {
             Id = id;
             Tiles = tiles;
             NextBuildingTypeForCreation = nextBuildingTypeForCreation;
             AvailableBuildingsForCreation = availableBuildingForCreation;
-            Length = length;
-            Width = width;
+            Size = size;
 
             NextBuildingForCreationBuildsCount = 0;
             IsChangingStarted = false;
@@ -48,22 +47,17 @@ namespace Assets.Sources.Data.WorldDatas
             get => NextBuildingForCreationBuildsCount;
             set => NextBuildingForCreationBuildsCount = value;
         }
-        uint IWorldData.Length
-        {
-            get => Length;
-            set => Length = value;
-        }
-        uint IWorldData.Width
-        {
-            get => Width;
-            set => Width = value;
-        }
-        IReadOnlyList<TileData> IWorldData.Tiles => Tiles;
+        ReadOnlyArray<TileData> IWorldData.Tiles => Tiles;
         IReadOnlyList<BuildingType> IWorldData.AvailableBuildingsForCreation => AvailableBuildingsForCreation;
         bool IWorldData.IsChangingStarted
         {
             get => IsChangingStarted;
             set => IsChangingStarted = value;
+        }
+        Vector2Int IWorldData.Size
+        {
+            get => Size;
+            set => Size = value;
         }
 
         public virtual void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)
@@ -100,5 +94,14 @@ namespace Assets.Sources.Data.WorldDatas
 
         public void UpdateAvailableBuildingForCreation(IReadOnlyList<BuildingType> availableBuildingsForCreation) =>
             AvailableBuildingsForCreation = availableBuildingsForCreation.Intersect(AvailableBuildingsForCreation).ToList();
+
+        public void Update(TileData[] tiles, BuildingType nextBuildingTypeForCreation, List<BuildingType> availableBuildingsForCreation)
+        {
+            Tiles = tiles;
+            NextBuildingTypeForCreation = nextBuildingTypeForCreation;
+            AvailableBuildingsForCreation = availableBuildingsForCreation;
+
+            NextBuildingForCreationBuildsCount = 0;
+        }
     }
 }

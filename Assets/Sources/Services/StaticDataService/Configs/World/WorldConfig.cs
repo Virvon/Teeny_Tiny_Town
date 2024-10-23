@@ -12,8 +12,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
     public class WorldConfig : ScriptableObject
     {
         public string Id;
-        public uint Length;
-        public uint Width;
+        public Vector2Int Size;
         public TileConfig[] TileConfigs;
         public BuildingType NextBuildingTypeForCreation;
         public BuildingType[] StartingAvailableBuildingTypes;
@@ -22,25 +21,25 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public TileType GetTileType(Vector2Int gridPosition) =>
             TileConfigs.First(tile => tile.GridPosition == gridPosition).Type;
 
-        protected List<TileData> TilesDatas => TileConfigs.Select(tileConfig => new TileData(tileConfig.GridPosition, tileConfig.BuildingType)).ToList();
+        protected TileData[] TilesDatas => TileConfigs.Select(tileConfig => new TileData(tileConfig.GridPosition, tileConfig.BuildingType)).ToArray();
 
         private void OnValidate() =>
             CreateTileConfigs();
 
         public virtual WorldData GetWorldData() => 
-            new WorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Length, Width);
+            new WorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size);
 
         private void CreateTileConfigs()
         {
-            TileConfig[] newTileConfigs = new TileConfig[Length * Width];
+            TileConfig[] newTileConfigs = new TileConfig[Size.x * Size.y];
 
             if(TileConfigs == null)
             {
                 int i = 0;
 
-                for (int x = 0; x < Length; x++)
+                for (int x = 0; x < Size.x; x++)
                 {
-                    for (int z = 0; z < Width; z++)
+                    for (int z = 0; z < Size.y; z++)
                     {
                         newTileConfigs[i] = new TileConfig(new Vector2Int(x, z));
                         i++;
@@ -53,9 +52,9 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
             {
                 int i = 0;
 
-                for (int x = 0; x < Length; x++)
+                for (int x = 0; x < Size.x; x++)
                 {
-                    for (int z = 0; z < Width; z++)
+                    for (int z = 0; z < Size.y; z++)
                     {
                         if(i >= TileConfigs.Length)
                         {

@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: WorldConfig
   m_EditorClassIdentifier: 
   Id: 73ee-4d7a-a86d-307aa525db02aa525db02
-  Length: 2
-  Width: 2
+  Size: {x: 2, y: 2}
   TileConfigs:
   - Type: 0
     GridPosition: {x: 0, y: 0}

@@ -1,6 +1,8 @@
 ﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StateMachine;
@@ -16,14 +18,25 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine worldStateMachine,
             StatesFactory statesFactory,
             IWorldData worldData,
-            World world)
-            : base(worldChanger, worldFactory, worldStateMachine, statesFactory, worldData, world)
+            World world,
+            ActionHandlerStateMachine actionHandlerStateMachine,
+            ActionHandlerStatesFactory actionHandlerStatesFactory,
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
+            : base(
+                  worldChanger,
+                  worldFactory,
+                  worldStateMachine,
+                  statesFactory,
+                  worldData,
+                  world,
+                  actionHandlerStateMachine,
+                  actionHandlerStatesFactory,
+                  nextBuildingForPlacingCreator)
         {
         }
 
         protected override void RegisterStates()
         {
-            WorldStateMachine.RegisterState(StatesFactory.Create<CurrencyWorldBootstrapState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<CurrencyWorldChangingState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<StoreState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ExitWorldState>());
@@ -31,6 +44,6 @@ namespace Assets.Sources.Gameplay.World.Root
         }
 
         protected override void OnWorldEntered() =>
-            WorldStateMachine.Enter<CurrencyWorldBootstrapState>().Forget();
+            WorldStateMachine.Enter<WorldStartState>().Forget();
     }
 }

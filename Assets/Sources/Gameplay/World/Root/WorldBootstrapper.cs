@@ -1,7 +1,9 @@
 ﻿using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StateMachine;
@@ -16,6 +18,9 @@ namespace Assets.Sources.Gameplay.World.Root
         private readonly IWorldFactory _worldFactory;
         private readonly IWorldData _worldData;
         private readonly World _world;
+        private readonly ActionHandlerStateMachine _actionHandlerStateMachine;
+        private readonly ActionHandlerStatesFactory _actionHandlerStatesFactory;
+        private readonly NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
 
         protected readonly WorldStateMachine WorldStateMachine;
         protected readonly StatesFactory StatesFactory;
@@ -26,7 +31,10 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine worldStateMachine,
             StatesFactory statesFactory,
             IWorldData worldData,
-            World world)
+            World world,
+            ActionHandlerStateMachine actionHandlerStateMachine,
+            ActionHandlerStatesFactory actionHandlerStatesFactory,
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
         {
             _worldChanger = worldChanger;
             _worldFactory = worldFactory;
@@ -36,6 +44,9 @@ namespace Assets.Sources.Gameplay.World.Root
             _world = world;
 
             _world.Entered += OnWorldEntered;
+            _actionHandlerStateMachine = actionHandlerStateMachine;
+            _actionHandlerStatesFactory = actionHandlerStatesFactory;
+            _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
         }
 
         ~WorldBootstrapper() =>
@@ -45,22 +56,39 @@ namespace Assets.Sources.Gameplay.World.Root
         {
             WorldGenerator worldGenerator = await _worldFactory.CreateWorldGenerator();
 
-            worldGenerator.PlaceToCenter(_worldData.Length, _worldData.Width);
+            worldGenerator.PlaceToCenter(_worldData.Size);
             await _worldChanger.Generate(worldGenerator);
 
             RegisterStates();
+
+            await _worldFactory.CreateSelectFrame();
+            await _worldFactory.CreateBuildingMarker();
+            await _worldFactory.CreateActionHandlerSwitcher();
+
+            RegisterActionHandlerStates();
+
+            _actionHandlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
+
+            _nextBuildingForPlacingCreator.CreateData(_worldChanger.Tiles);
+            _worldChanger.Start();
         }
 
         protected virtual void RegisterStates()
         {
-            WorldStateMachine.RegisterState(StatesFactory.Create<StartWorldState>());
-            WorldStateMachine.RegisterState(StatesFactory.Create<WorldBootstrapState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<WorldStartState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<WorldChangingState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ExitWorldState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ResultState>());
         }
 
         protected virtual void OnWorldEntered() =>
-            WorldStateMachine.Enter<StartWorldState>().Forget();
+            WorldStateMachine.Enter<WorldStartState>().Forget();
+
+        private void RegisterActionHandlerStates()
+        {
+            _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<NewBuildingPlacePositionHandler>());
+            _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<RemovedBuildingPositionHandler>());
+            _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<ReplacedBuildingPositionHandler>());
+        }
     }
 }

@@ -21,6 +21,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         UniTask RemoveBuilding(Vector2Int destroyBuildingGridPosition);
         UniTask ReplaceBuilding(Vector2Int fromBuildingGridPosition, BuildingType fromBuildingType, Vector2Int toBuildingGridPosition, BuildingType toBuildingType);
         void Start();
-        UniTask Update(ReadOnlyArray<TileData> tileDatas);
+        UniTask Update();
     }
 }

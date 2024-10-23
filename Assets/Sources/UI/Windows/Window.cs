@@ -12,7 +12,7 @@ namespace Assets.Sources.UI.Windows
 
         protected Canvas Canvas => _canvas;
 
-        public void Open()
+        public virtual void Open()
         {
             _canvas.enabled = true;
         }

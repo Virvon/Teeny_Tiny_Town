@@ -18,25 +18,30 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         private readonly ActionHandlerStateMachine _actionHandlerStateMachine;
         private readonly IUiFactory _uiFactory;
         private readonly GameplayCamera _camera;
+        private readonly IWorldData _worldData;
 
         public WorldChangingState(
             IInputService inputService,
             WindowsSwitcher windowsSwitcher,
             ActionHandlerStateMachine actionHandlerStateMachine,
             IUiFactory uiFactory,
-            GameplayCamera gameplayCamera)
+            GameplayCamera gameplayCamera,
+            IWorldData worldData)
         {
             _inputService = inputService;
             _windowsSwitcher = windowsSwitcher;
             _actionHandlerStateMachine = actionHandlerStateMachine;
             _uiFactory = uiFactory;
             _camera = gameplayCamera;
+            _worldData = worldData;
         }
 
         protected virtual WindowType WindowType => WindowType.GameplayWindow;
 
         public async UniTask Enter()
         {
+            _worldData.IsChangingStarted = true;
+
             if (_windowsSwitcher.Contains(WindowType) == false)
             {
                 Window window = await _uiFactory.CreateWindow(WindowType);
@@ -57,43 +62,6 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _actionHandlerStateMachine.SetActive(false);
             _inputService.SetEnabled(false);
             return default;
-        }
-    }
-    public class StartWorldState : IState
-    {
-        private readonly IWorldData _worldData;
-        private readonly WindowsSwitcher _windowsSwitcher;
-        private readonly IUiFactory _uiFactory;
-        private readonly WorldStateMachine _worldStateMachine;
-
-        public StartWorldState(IWorldData worldData, WindowsSwitcher windowsSwitcher, IUiFactory uiFactory, WorldStateMachine worldStateMachine)
-        {
-            _worldData = worldData;
-            _windowsSwitcher = windowsSwitcher;
-            _uiFactory = uiFactory;
-            _worldStateMachine = worldStateMachine;
-        }
-
-        public async UniTask Enter()
-        {
-            if (_worldData.IsChangingStarted)
-                _worldStateMachine.Enter<WorldBootstrapState>().Forget();
-            else
-                await ShowAdditionalBonusOffer();
-        }
-
-        public UniTask Exit() =>
-            default;
-
-        private async UniTask ShowAdditionalBonusOffer()
-        {
-            if (_windowsSwitcher.Contains(WindowType.AdditionalBonusOfferWindow) == false)
-            {
-                Window window = await _uiFactory.CreateWindow(WindowType.AdditionalBonusOfferWindow);
-                _windowsSwitcher.RegisterWindow(WindowType.AdditionalBonusOfferWindow, window);
-            }
-
-            _windowsSwitcher.Switch(WindowType.AdditionalBonusOfferWindow);
         }
     }
 }

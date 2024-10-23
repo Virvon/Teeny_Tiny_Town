@@ -2,6 +2,7 @@
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.GameplayMover.Commands
 {
@@ -9,42 +10,35 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
     {
         private readonly IExpandingWorldChanger _expandingWorldChanger;
         private readonly IWorldData _worldData;
-        private readonly uint _length;
-        private readonly uint _width;
-        private readonly uint _targetLength;
-        private readonly uint _targetWidth;
+        private readonly Vector2Int _size;
+        private readonly Vector2Int _targetSize;
         private readonly Command _previousCommand;
 
         public ExpandWorldCommand(
             IExpandingWorldChanger expandingWorldChanger,
             IWorldData worldData,
-            uint targetLength,
-            uint targetWidth,
+            Vector2Int targetSize,
             Command previousCommand,
             NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
             : base(expandingWorldChanger, worldData, nextBuildingForPlacingCreator)
         {
             _expandingWorldChanger = expandingWorldChanger;
             _worldData = worldData;
-            _length = worldData.Length;
-            _width = worldData.Width;
-            _targetLength = targetLength;
-            _targetWidth = targetWidth;
+            _size = worldData.Size;
+            _targetSize = targetSize;
             _previousCommand = previousCommand;
         }
 
         public override async void Change()
         {
-            _worldData.Length = _targetLength;
-            _worldData.Width = _targetWidth;
+            _worldData.Size = _targetSize;
 
             await _expandingWorldChanger.Expand();
         }
 
         public override async UniTask Undo()
         {
-            _worldData.Length = _length;
-            _worldData.Width = _width;
+            _worldData.Size = _size;
 
             await _expandingWorldChanger.Expand();
             await _previousCommand.Undo();

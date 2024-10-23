@@ -3,7 +3,6 @@ using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
-using UnityEngine;
 
 namespace Assets.Sources.Gameplay.ExpandingLogic
 {
@@ -30,8 +29,8 @@ namespace Assets.Sources.Gameplay.ExpandingLogic
 
         private void OnBuildingUpdated(BuildingType type)
         {
-            if (_expandingWorldConfig.ContainsExpand(type, out ExpandConfig expandConfig) && expandConfig.ExpandedSize.magnitude > new Vector2(_expandingWorldData.Length, _expandingWorldData.Width).magnitude)
-                _expandingGameplayMover.ExpandWorld((uint)expandConfig.ExpandedSize.x, (uint)expandConfig.ExpandedSize.y);
+            if (_expandingWorldConfig.ContainsExpand(type, out ExpandConfig expandConfig) && expandConfig.ExpandedSize.magnitude > _expandingWorldData.Size.magnitude)
+                _expandingGameplayMover.ExpandWorld(expandConfig.ExpandedSize);
         }
     }
 }

@@ -4,6 +4,7 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.Input;
 using Assets.Sources.Services.PersistentProgress;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.GameplayMover
 {
@@ -22,7 +23,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
             _expandingWorldChanger = expandingWorldChanger;
         }
 
-        public void ExpandWorld(uint targetLength, uint targetWidth) =>
-            ExecuteCommand(new ExpandWorldCommand(_expandingWorldChanger, WorldData, targetLength, targetWidth, LastCommand, NextBuildingForPlacingCreator));
+        public void ExpandWorld(Vector2Int targetSize) =>
+            ExecuteCommand(new ExpandWorldCommand(_expandingWorldChanger, WorldData, targetSize, LastCommand, NextBuildingForPlacingCreator));
     }
 }

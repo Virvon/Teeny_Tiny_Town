@@ -1,7 +1,9 @@
-﻿namespace Assets.Sources.Gameplay.GameplayMover
+﻿using UnityEngine;
+
+namespace Assets.Sources.Gameplay.GameplayMover
 {
     public interface IExpandingGameplayMover : ICurrencyGameplayMover
     {
-        void ExpandWorld(uint targetLength, uint targetWidth);
+        void ExpandWorld(Vector2Int targetSize);
     }
 }

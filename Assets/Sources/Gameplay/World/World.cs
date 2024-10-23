@@ -17,11 +17,17 @@ namespace Assets.Sources.Gameplay.World
         private AnimationsConfig _animationsConfig;
 
         private Sequence _rotating;
+        private Quaternion _startRotation;
 
         [Inject]
         private void Construct(IStaticDataService staticDataService)
         {
             _animationsConfig = staticDataService.AnimationsConfig;
+        }
+
+        private void Start()
+        {
+            _startRotation = transform.rotation;
         }
 
         private void OnDestroy() =>
@@ -45,6 +51,11 @@ namespace Assets.Sources.Gameplay.World
         {
             if (_rotating != null)
                 _rotating.Kill();
+        }
+
+        public void RotateToStart(TweenCallback callback)
+        {
+            transform.DORotateQuaternion(_startRotation, _animationsConfig.WorldRotateToStarDuration).onComplete += callback;
         }
 
         public class Factory : PlaceholderFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<World>>

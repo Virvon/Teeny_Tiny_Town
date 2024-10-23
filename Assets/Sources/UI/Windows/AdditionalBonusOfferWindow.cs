@@ -25,6 +25,6 @@ namespace Assets.Sources.UI.Windows
             _startButton.onClick.RemoveListener(OnStartButtonClicked);
 
         private void OnStartButtonClicked() =>
-            _worldStateMachine.Enter<WorldBootstrapState>().Forget();
+            _worldStateMachine.Enter<WorldChangingState>().Forget();
     }
 }

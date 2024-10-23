@@ -2,6 +2,7 @@
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Sources.Data.WorldDatas
 {
@@ -9,13 +10,12 @@ namespace Assets.Sources.Data.WorldDatas
     {
         public ExpandingWorldData(
             string id,
-            List<TileData> tiles,
+            TileData[] tiles,
             BuildingType nextBuildingTypeForCreation,
             List<BuildingType> availableBuildingForCreation,
-            uint length,
-            uint width,
+            Vector2Int size,
             List<BuildingType> storeList)
-            : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, length, width, storeList)
+            : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size, storeList)
         {
         }
 

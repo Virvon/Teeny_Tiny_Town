@@ -13,6 +13,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public List<BuildingType> StartStoreList;
 
         public override WorldData GetWorldData() =>
-            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Length, Width, StartStoreList);
+            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, StartStoreList);
     }
 }

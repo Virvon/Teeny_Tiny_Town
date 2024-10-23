@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1568540163141648451}
+  _restartButton: {fileID: 6829619403850391936}
 --- !u!1 &1190222307295191001
 GameObject:
   m_ObjectHideFlags: 0
