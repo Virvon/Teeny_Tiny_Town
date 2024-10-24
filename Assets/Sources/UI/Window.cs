@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Assets.Sources.UI
 {
-    public class Window : MonoBehaviour
+    public class Window : MonoBehaviour, IWindow
     {
         [SerializeField] private Canvas _canvas;
 

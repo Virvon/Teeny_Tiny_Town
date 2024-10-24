@@ -49,7 +49,7 @@ namespace Assets.Sources.Gameplay.Store
             if (_worldData.WorldWallet.TryGet(price))
             {
                 _gameplayMover.ChangeBuildingForPlacing(buildingType, price);
-                _worldStateMachine.Enter<CurrencyWorldChangingState>().Forget();
+                _worldStateMachine.Enter<WorldChangingState>().Forget();
             }
             else
             {

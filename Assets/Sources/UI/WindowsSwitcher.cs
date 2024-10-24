@@ -1,13 +1,15 @@
-﻿using Assets.Sources.Services.StaticDataService.Configs.Windows;
+﻿using Assets.Sources.Infrastructure.Factories.UiFactory;
+using Assets.Sources.Services.StaticDataService.Configs.Windows;
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using UnityEngine;
 
 namespace Assets.Sources.UI
 {
     public class WindowsSwitcher
     {
-        private readonly Dictionary<WindowType, Window> _windows;
+        private readonly Dictionary<Type, Window> _windows;
 
         private Window _currentWindow;
 
@@ -16,24 +18,23 @@ namespace Assets.Sources.UI
             _windows = new();
         }
 
-        public void RegisterWindow(WindowType type, Window window)
+        public async UniTask RegisterWindow<TWindow>(WindowType windowType, IUiFactory uiFactory)
+            where TWindow : Window
         {
-            _windows.Add(type, window);
+            Window window = await uiFactory.CreateWindow(windowType);
+
+            if(window is not TWindow)
+                Debug.LogError($"{nameof(window)} is not {typeof(TWindow)}");
+
+            _windows.Add(typeof(TWindow), window);
         }
 
-        public void Switch(WindowType windowTypy)
+        public void Switch<TWindow>()
+            where TWindow : Window
         {
             _currentWindow?.Hide();
-            _currentWindow = _windows[windowTypy];
+            _currentWindow = _windows[typeof(TWindow)];
             _currentWindow.Open();
-        }
-
-        public bool Contains(WindowType windowType) =>
-            _windows.Keys.Contains(windowType);
-
-        public void Remove(WindowType gameplayWindow)
-        {
-            _windows.Remove(gameplayWindow);
         }
     }
 }

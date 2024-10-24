@@ -24,9 +24,7 @@ namespace Assets.Sources.UI.Windows.World.Panels
         private void OnDestroy() =>
             _nextBuildingForPlacingCreator.DataChanged -= OnBuildingForPlacingDataChanged;
 
-        private void OnBuildingForPlacingDataChanged(BuildingsForPlacingData data)
-        {
+        private void OnBuildingForPlacingDataChanged(BuildingsForPlacingData data) =>
             _nextBuildingValue.text = data.NextBuildingType.ToString();
-        }
     }
 }

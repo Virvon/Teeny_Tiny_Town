@@ -4,8 +4,10 @@ using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
+using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StateMachine;
+using Assets.Sources.UI;
 using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.World.Root
@@ -21,7 +23,9 @@ namespace Assets.Sources.Gameplay.World.Root
             World world,
             ActionHandlerStateMachine actionHandlerStateMachine,
             ActionHandlerStatesFactory actionHandlerStatesFactory,
-            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator,
+            WindowsSwitcher windowsSwitcher,
+            IUiFactory uiFactory)
             : base(
                   worldChanger,
                   worldFactory,
@@ -31,13 +35,14 @@ namespace Assets.Sources.Gameplay.World.Root
                   world,
                   actionHandlerStateMachine,
                   actionHandlerStatesFactory,
-                  nextBuildingForPlacingCreator)
+                  nextBuildingForPlacingCreator,
+                  windowsSwitcher,
+                  uiFactory)
         {
         }
 
         protected override void RegisterStates()
         {
-            WorldStateMachine.RegisterState(StatesFactory.Create<CurrencyWorldChangingState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<StoreState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ExitWorldState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ResultState>());

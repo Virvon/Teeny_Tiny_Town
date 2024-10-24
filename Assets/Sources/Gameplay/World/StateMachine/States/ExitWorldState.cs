@@ -27,7 +27,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
         public UniTask Exit()
         {
-            _windowsSwitcher.Remove(WindowType.GameplayWindow);
+            //_windowsSwitcher.Remove(WindowType.GameplayWindow);
             return default;
         }
     }

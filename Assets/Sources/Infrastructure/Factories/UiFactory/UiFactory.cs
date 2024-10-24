@@ -5,7 +5,7 @@ using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI;
-using Assets.Sources.UI.Windows.World.Panels;
+using Assets.Sources.UI.Windows.World.Panels.Reward;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;

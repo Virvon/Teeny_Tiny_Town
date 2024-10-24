@@ -29,7 +29,7 @@ namespace Assets.Sources.UI.Windows.World
 
         private void OnHideButtonClicked()
         {
-            _worldStateMachine.Enter<CurrencyWorldChangingState>().Forget();
+            _worldStateMachine.Enter<WorldChangingState>().Forget();
         }
     }
 }
