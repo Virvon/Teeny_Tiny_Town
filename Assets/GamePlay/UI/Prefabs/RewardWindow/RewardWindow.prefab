@@ -483,6 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1568540163141648451}
+  _rewardsList: {fileID: 6026715270429558105}
 --- !u!1 &1047319966997453226
 GameObject:
   m_ObjectHideFlags: 0
