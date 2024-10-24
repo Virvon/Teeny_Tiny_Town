@@ -4,14 +4,14 @@ using Assets.Sources.Gameplay.StateMachine.States;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
-using Assets.Sources.UI.Panels;
+using Assets.Sources.UI.Windows.World.Panels;
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Sources.UI.Windows
+namespace Assets.Sources.UI.Windows.World
 {
     public class GameplayWindow : Window
     {

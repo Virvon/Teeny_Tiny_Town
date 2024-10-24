@@ -1,7 +1,7 @@
 ﻿using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
-using Assets.Sources.UI.Windows;
+using Assets.Sources.UI;
 using Zenject;
 
 namespace Assets.Sources.Gameplay

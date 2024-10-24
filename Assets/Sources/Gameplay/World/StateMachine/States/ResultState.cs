@@ -6,7 +6,7 @@ using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.World;
-using Assets.Sources.UI.Windows;
+using Assets.Sources.UI;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Linq;
@@ -55,9 +55,8 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _world.RotateToStart(callback: () =>
             {
                 WorldConfig WorldConfig = _staticDataService.GetWorld<WorldConfig>(_worldData.Id);
-                WorldData defaultWorldData = WorldConfig.GetWorldData();
 
-                _worldData.Update(defaultWorldData.Tiles, defaultWorldData.NextBuildingTypeForCreation, defaultWorldData.AvailableBuildingsForCreation);
+                _worldData.Update(WorldConfig.TilesDatas, WorldConfig.NextBuildingTypeForCreation, WorldConfig.StartingAvailableBuildingTypes.ToList());
                 _worldChanger.Update();
             });
 

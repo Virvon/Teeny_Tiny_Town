@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Sources.UI
+namespace Assets.Sources.UI.Windows.World.Panels
 {
     public class NextBuildingPanel : MonoBehaviour
     {

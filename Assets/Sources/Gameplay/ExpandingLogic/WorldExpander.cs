@@ -8,28 +8,28 @@ namespace Assets.Sources.Gameplay.ExpandingLogic
 {
     public class WorldExpander
     {
-        private readonly IExpandingWorldData _expandingWorldData;
+        private readonly IWorldData _worldData;
         private readonly ExpandingWorldConfig _expandingWorldConfig;
         private readonly IExpandingGameplayMover _expandingGameplayMover;
 
-        public WorldExpander(IStaticDataService staticDataService, IExpandingWorldData expandingWorldData, IExpandingGameplayMover expandingGameplayMover)
+        public WorldExpander(IStaticDataService staticDataService, IWorldData worldData, IExpandingGameplayMover expandingGameplayMover)
         {
-            _expandingWorldData = expandingWorldData;
+            _worldData = worldData;
 
-            _expandingWorldConfig = staticDataService.GetWorld<ExpandingWorldConfig>(expandingWorldData.Id);
+            _expandingWorldConfig = staticDataService.GetWorld<ExpandingWorldConfig>(worldData.Id);
 
-            _expandingWorldData.BuildingUpdated += OnBuildingUpdated;
+            _worldData.BuildingUpdated += OnBuildingUpdated;
             _expandingGameplayMover = expandingGameplayMover;
         }
 
         ~WorldExpander()
         {
-            _expandingWorldData.BuildingUpdated -= OnBuildingUpdated;
+            _worldData.BuildingUpdated -= OnBuildingUpdated;
         }
 
         private void OnBuildingUpdated(BuildingType type)
         {
-            if (_expandingWorldConfig.ContainsExpand(type, out ExpandConfig expandConfig) && expandConfig.ExpandedSize.magnitude > _expandingWorldData.Size.magnitude)
+            if (_expandingWorldConfig.ContainsExpand(type, out ExpandConfig expandConfig) && expandConfig.ExpandedSize.magnitude > _worldData.Size.magnitude)
                 _expandingGameplayMover.ExpandWorld(expandConfig.ExpandedSize);
         }
     }

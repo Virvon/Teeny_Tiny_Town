@@ -1,5 +1,4 @@
-﻿using Assets.Sources.Data;
-using Assets.Sources.Data.WorldDatas;
+﻿using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
     {
         public List<BuildingType> StartStoreList;
 
-        public override WorldData GetWorldData() =>
-            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, StartStoreList);
+        public override WorldData GetWorldData(uint[] goals) =>
+            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, StartStoreList, goals);
     }
 }

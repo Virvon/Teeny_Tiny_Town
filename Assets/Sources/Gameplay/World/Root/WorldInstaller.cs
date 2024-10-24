@@ -39,6 +39,7 @@ namespace Assets.Sources.Gameplay.World.Root
             BindUiFactory();
             BindNextBuildingForPlacingCreator();
             BindWorld();
+            BindPointsCounter();
         }
 
         protected virtual void BindWorldBootstrapper()
@@ -59,6 +60,11 @@ namespace Assets.Sources.Gameplay.World.Root
         protected virtual void BindGameplayMover()
         {
             Container.BindInterfacesTo<GameplayMover.GameplayMover>().AsSingle();
+        }
+
+        private void BindPointsCounter()
+        {
+            Container.Bind<PointsCounter.PointsCounter>().AsSingle().NonLazy();
         }
 
         private void BindWorld()

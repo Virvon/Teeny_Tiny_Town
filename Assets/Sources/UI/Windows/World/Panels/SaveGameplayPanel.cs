@@ -3,12 +3,11 @@ using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Sources.UI.Panels
+namespace Assets.Sources.UI.Windows.World.Panels
 {
     public class SaveGameplayPanel : WorldChangingWindowPanel
     {

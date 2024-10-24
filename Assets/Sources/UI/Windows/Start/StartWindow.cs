@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Sources.UI.Windows
+namespace Assets.Sources.UI.Windows.Start
 {
     public class StartWindow : Window
     {

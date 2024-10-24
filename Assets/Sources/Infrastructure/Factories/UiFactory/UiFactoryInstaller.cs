@@ -1,6 +1,6 @@
 ﻿using Assets.Sources.Gameplay.Store;
 using Assets.Sources.Services.AssetManagement;
-using Assets.Sources.UI.Windows;
+using Assets.Sources.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

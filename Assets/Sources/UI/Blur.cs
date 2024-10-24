@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Sources.UI.Panels
+namespace Assets.Sources.UI
 {
     public class Blur : MonoBehaviour
     {

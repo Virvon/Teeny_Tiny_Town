@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Sources.UI.Windows
+namespace Assets.Sources.UI.Windows.World
 {
     public class CurrencyGameplayWindow : GameplayWindow
     {

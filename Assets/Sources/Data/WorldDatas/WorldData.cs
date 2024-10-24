@@ -18,13 +18,15 @@ namespace Assets.Sources.Data.WorldDatas
         public List<BuildingType> AvailableBuildingsForCreation;
         public Vector2Int Size;
         public bool IsChangingStarted;
+        public PointsData PointsData;
 
         public WorldData(
             string id,
             TileData[] tiles,
             BuildingType nextBuildingTypeForCreation,
             List<BuildingType> availableBuildingForCreation,
-            Vector2Int size)
+            Vector2Int size,
+            uint[] goals)
         {
             Id = id;
             Tiles = tiles;
@@ -34,7 +36,10 @@ namespace Assets.Sources.Data.WorldDatas
 
             NextBuildingForCreationBuildsCount = 0;
             IsChangingStarted = false;
+            PointsData = new(goals);
         }
+
+        public event Action<BuildingType> BuildingUpdated;
 
         string IWorldData.Id => Id;
         BuildingType IWorldData.NextBuildingTypeForCreation
@@ -59,9 +64,12 @@ namespace Assets.Sources.Data.WorldDatas
             get => Size;
             set => Size = value;
         }
+        PointsData IWorldData.PointsData => PointsData;
 
-        public virtual void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)
+        public void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)
         {
+            BuildingUpdated?.Invoke(createdBuilding);
+
             if (NextBuildingTypeForCreation != createdBuilding || NextBuildingTypeForCreation == BuildingType.Undefined)
                 return;
 

@@ -2,7 +2,7 @@
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
-using Assets.Sources.UI.Windows;
+using Assets.Sources.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;

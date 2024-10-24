@@ -19,8 +19,8 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
             return expandConfig != null;
         }
 
-        public override WorldData GetWorldData() =>
-            new ExpandingWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), StartSize, StartStoreList);
+        public override WorldData GetWorldData(uint[] goals) =>
+            new ExpandingWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), StartSize, StartStoreList, goals);
     }
     [Serializable]
     public class ExpandConfig

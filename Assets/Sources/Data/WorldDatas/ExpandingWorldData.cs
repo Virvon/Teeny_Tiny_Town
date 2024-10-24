@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Sources.Data.WorldDatas
 {
-    public class ExpandingWorldData : CurrencyWorldData, IExpandingWorldData
+    public class ExpandingWorldData : CurrencyWorldData, ICurrencyWorldData
     {
         public ExpandingWorldData(
             string id,
@@ -14,17 +14,10 @@ namespace Assets.Sources.Data.WorldDatas
             BuildingType nextBuildingTypeForCreation,
             List<BuildingType> availableBuildingForCreation,
             Vector2Int size,
-            List<BuildingType> storeList)
-            : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size, storeList)
+            List<BuildingType> storeList,
+            uint[] goals)
+            : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size, storeList, goals)
         {
-        }
-
-        public event Action<BuildingType> BuildingUpdated;
-
-        public override void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)
-        {
-            BuildingUpdated?.Invoke(createdBuilding);
-            base.TryAddBuildingTypeForCreation(createdBuilding, requiredCreatedBuildingsToAddNext, staticDataService);
         }
     }
 }

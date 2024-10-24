@@ -1,7 +1,7 @@
 ﻿using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
-using Assets.Sources.UI.Windows;
+using Assets.Sources.UI;
 using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States

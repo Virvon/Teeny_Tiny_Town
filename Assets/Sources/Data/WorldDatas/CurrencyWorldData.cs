@@ -17,8 +17,9 @@ namespace Assets.Sources.Data.WorldDatas
             BuildingType nextBuildingTypeForCreation,
             List<BuildingType> availableBuildingForCreation,
             Vector2Int size,
-            List<BuildingType> storeList)
-            : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size)
+            List<BuildingType> storeList,
+            uint[] goals)
+            : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size, goals)
         {
             StoreList = storeList;
 

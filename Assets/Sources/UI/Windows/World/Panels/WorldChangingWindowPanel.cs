@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-namespace Assets.Sources.UI.Panels
+namespace Assets.Sources.UI.Windows.World.Panels
 {
     public class WorldChangingWindowPanel : CanvasGroupPanel
     {

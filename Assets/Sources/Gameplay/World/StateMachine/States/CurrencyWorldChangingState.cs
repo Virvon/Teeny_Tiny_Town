@@ -4,7 +4,7 @@ using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.Input;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
-using Assets.Sources.UI.Windows;
+using Assets.Sources.UI;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
 {

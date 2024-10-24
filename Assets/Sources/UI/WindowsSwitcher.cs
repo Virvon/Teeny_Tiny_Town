@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Assets.Sources.UI.Windows
+namespace Assets.Sources.UI
 {
     public class WindowsSwitcher
     {

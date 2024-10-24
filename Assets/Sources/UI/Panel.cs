@@ -3,7 +3,7 @@ using Assets.Sources.Services.StaticDataService.Configs;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Sources.UI.Panels
+namespace Assets.Sources.UI
 {
     public abstract class Panel : MonoBehaviour
     {

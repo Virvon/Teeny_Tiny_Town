@@ -1,7 +1,6 @@
 ﻿using Assets.Sources.Data;
 using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -21,13 +20,13 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public TileType GetTileType(Vector2Int gridPosition) =>
             TileConfigs.First(tile => tile.GridPosition == gridPosition).Type;
 
-        protected TileData[] TilesDatas => TileConfigs.Select(tileConfig => new TileData(tileConfig.GridPosition, tileConfig.BuildingType)).ToArray();
+        public TileData[] TilesDatas => TileConfigs.Select(tileConfig => new TileData(tileConfig.GridPosition, tileConfig.BuildingType)).ToArray();
 
         private void OnValidate() =>
             CreateTileConfigs();
 
-        public virtual WorldData GetWorldData() => 
-            new WorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size);
+        public virtual WorldData GetWorldData(uint[] goals) => 
+            new WorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, goals);
 
         private void CreateTileConfigs()
         {

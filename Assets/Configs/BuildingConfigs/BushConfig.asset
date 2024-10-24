@@ -18,5 +18,4 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  GroundType: 0
-  NextBuilding: 2
+  PointsRewardForMerge: 100

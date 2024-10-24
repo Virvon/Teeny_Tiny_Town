@@ -2,12 +2,12 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Assets.Sources.UI.Panels
+namespace Assets.Sources.UI
 {
     public abstract class CanvasGroupPanel : Panel
     {
         [SerializeField] private CanvasGroup _canvasGroup;
-        
+
         public CanvasGroup CanvasGroup => _canvasGroup;
 
         public override abstract void Open();

@@ -1,7 +1,7 @@
 ﻿using Assets.Sources.Gameplay.Store;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
-using Assets.Sources.UI.Windows;
+using Assets.Sources.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

@@ -37,20 +37,14 @@ namespace Assets.Sources.UI.Windows
             _mapSelectionButton.onClick.RemoveListener(OnMapSelectionButtonClicked);
         }
 
-        private void OnRestartButtonClicked()
-        {
+        private void OnRestartButtonClicked() =>
             _worldStateMachine.Enter<WorldStartState>().Forget();
-        }
 
-        private void OnStartWindowButtonClicked()
-        {
+        private void OnStartWindowButtonClicked() =>
             _worldStateMachine.Enter<ExitWorldState, Action>(() => _gameplayStateMachine.Enter<GameStartState>().Forget()).Forget();
-        }
 
-        private void OnMapSelectionButtonClicked()
-        {
+        private void OnMapSelectionButtonClicked() =>
             _worldStateMachine.Enter<ExitWorldState, Action>(() => _gameplayStateMachine.Enter<MapSelectionState>().Forget()).Forget();
-        }
 
     }
 }

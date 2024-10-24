@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Assets.Sources.UI.Panels
+namespace Assets.Sources.UI.Windows.Start
 {
     public class PackagesPanel : Panel
     {

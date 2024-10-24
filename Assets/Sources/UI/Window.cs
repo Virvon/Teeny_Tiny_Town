@@ -1,10 +1,9 @@
 ﻿using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
-namespace Assets.Sources.UI.Windows
+namespace Assets.Sources.UI
 {
     public class Window : MonoBehaviour
     {
