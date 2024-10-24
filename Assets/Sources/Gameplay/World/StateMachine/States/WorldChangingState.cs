@@ -7,6 +7,7 @@ using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
@@ -19,6 +20,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         private readonly IUiFactory _uiFactory;
         private readonly GameplayCamera _camera;
         private readonly IWorldData _worldData;
+        private readonly WorldStateMachine _worldStateMachine;
 
         public WorldChangingState(
             IInputService inputService,
@@ -26,7 +28,8 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             ActionHandlerStateMachine actionHandlerStateMachine,
             IUiFactory uiFactory,
             GameplayCamera gameplayCamera,
-            IWorldData worldData)
+            IWorldData worldData,
+            WorldStateMachine worldStateMachine)
         {
             _inputService = inputService;
             _windowsSwitcher = windowsSwitcher;
@@ -34,6 +37,14 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _uiFactory = uiFactory;
             _camera = gameplayCamera;
             _worldData = worldData;
+            _worldStateMachine = worldStateMachine;
+
+            _worldData.PointsData.GoalAchieved += OnGoalAchived;
+        }
+
+        ~WorldChangingState()
+        {
+            _worldData.PointsData.GoalAchieved -= OnGoalAchived;
         }
 
         protected virtual WindowType WindowType => WindowType.GameplayWindow;
@@ -62,6 +73,11 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _actionHandlerStateMachine.SetActive(false);
             _inputService.SetEnabled(false);
             return default;
+        }
+
+        private void OnGoalAchived()
+        {
+            _worldStateMachine.Enter<RewardState>().Forget();
         }
     }
 }

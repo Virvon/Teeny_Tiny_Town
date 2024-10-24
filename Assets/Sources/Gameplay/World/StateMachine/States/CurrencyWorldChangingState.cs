@@ -16,8 +16,9 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             ActionHandlerStateMachine actionHandlerStateMachine,
             IUiFactory uiFactory,
             GameplayCamera gameplayCamera,
-            IWorldData worldData)
-            : base(inputService, windowsSwitcher, actionHandlerStateMachine, uiFactory, gameplayCamera, worldData)
+            IWorldData worldData,
+            WorldStateMachine worldStateMachine)
+            : base(inputService, windowsSwitcher, actionHandlerStateMachine, uiFactory, gameplayCamera, worldData, worldStateMachine)
         {
         }
 

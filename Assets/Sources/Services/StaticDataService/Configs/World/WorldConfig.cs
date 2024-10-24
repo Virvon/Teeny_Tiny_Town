@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Data;
 using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -16,6 +17,9 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public BuildingType NextBuildingTypeForCreation;
         public BuildingType[] StartingAvailableBuildingTypes;
         public AssetReferenceGameObject AssetReference;
+        public RewardType[] AvailableRewards;
+        public int MinRewardVariantsCount;
+        public int MaxRewardVariantsCount;
 
         public TileType GetTileType(Vector2Int gridPosition) =>
             TileConfigs.First(tile => tile.GridPosition == gridPosition).Type;

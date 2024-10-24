@@ -9,5 +9,6 @@
         MapSelectionWindow,
         ResultWindow,
         AdditionalBonusOfferWindow,
+        RewardWindow,
     }
 }

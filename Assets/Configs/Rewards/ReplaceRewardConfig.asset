@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91d4b6b4f1905534ca54e2f9fbfe36ce, type: 3}
+  m_Name: ReplaceRewardConfig
+  m_EditorClassIdentifier: 
+  Type: 0
+  AssetReference:
+    m_AssetGUID: 1a5a40739b61e1c49957b9f8ea967ac5
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  IconAssetReference:
+    m_AssetGUID: f0b37b1ac4e5d0f4da59afb5bf157de2
+    m_SubObjectName: ReplaceIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  ProportionOfLoss: 1

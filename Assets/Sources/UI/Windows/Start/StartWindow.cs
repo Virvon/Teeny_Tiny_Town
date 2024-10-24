@@ -1,15 +1,13 @@
-﻿using Assets.Sources.Gameplay.Cameras;
-using Assets.Sources.Gameplay.StateMachine;
+﻿using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.StateMachine.States;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Assets.Sources.UI.Windows.Start
 {
-    public class StartWindow : Window
+    public class StartWindow : ScreenSpaceCameraWindow
     {
         [SerializeField] private Button _mapSelectionButton;
         [SerializeField] private Button _continueButton;
@@ -17,11 +15,9 @@ namespace Assets.Sources.UI.Windows.Start
         private GameplayStateMachine _gameplayStateMachine;
 
         [Inject]
-        private void Construct(GameplayStateMachine gameplayStateMachine, GameplayCamera gameplayCamera)
+        private void Construct(GameplayStateMachine gameplayStateMachine)
         {
             _gameplayStateMachine = gameplayStateMachine;
-
-            Canvas.worldCamera = gameplayCamera.Camera;
         }
 
         private void OnEnable()

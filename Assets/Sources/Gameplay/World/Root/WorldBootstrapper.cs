@@ -79,6 +79,7 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine.RegisterState(StatesFactory.Create<WorldChangingState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ExitWorldState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ResultState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<RewardState>());
         }
 
         protected virtual void OnWorldEntered() =>

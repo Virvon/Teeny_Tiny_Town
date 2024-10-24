@@ -4,9 +4,11 @@ using System.Linq;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 
 namespace Assets.Sources.Services.StaticDataService
@@ -18,10 +20,11 @@ namespace Assets.Sources.Services.StaticDataService
         private Dictionary<BuildingType, BuildingConfig> _buildingConfigs;
         private Dictionary<GroundType, Dictionary<RoadType, RoadConfig>> _groundConfigs;
         private Dictionary<WindowType, WindowConfig> _windowConfigs;
-        private Dictionary<BuildingType, Configs.Windows.GameplayStoreItemConfig> _storeItemsConfigs;
+        private Dictionary<BuildingType, GameplayStoreItemConfig> _storeItemsConfigs;
         private Dictionary<TileType, TestGroundConfig> _testGroundConfigs;
         private Dictionary<BuildingType, GroundType> _roadGrounds;
         private Dictionary<string, WorldConfig> _worldConfigs;
+        private Dictionary<RewardType, RewardConfig> _rewardConfigs;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
@@ -49,9 +52,13 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadWorldConfigs());
             tasks.Add(LoadAnimationsConfig());
             tasks.Add(LoadStoreItemConfig());
+            tasks.Add(LoadRewardConfigs());
 
             await UniTask.WhenAll(tasks);
         }
+
+        public RewardConfig GetReward(RewardType type) =>
+            _rewardConfigs.TryGetValue(type, out RewardConfig config) ? config : null;
 
         public TWorldConfig GetWorld<TWorldConfig>(string id)
             where TWorldConfig : WorldConfig =>
@@ -63,7 +70,7 @@ namespace Assets.Sources.Services.StaticDataService
         public TestGroundConfig GetGround(TileType tileType) =>
             _testGroundConfigs.TryGetValue(tileType, out TestGroundConfig config) ? config : null;
 
-        public Configs.Windows.GameplayStoreItemConfig GetStoreItem(BuildingType buildingType) =>
+        public GameplayStoreItemConfig GetStoreItem(BuildingType buildingType) =>
             _storeItemsConfigs.TryGetValue(buildingType, out Configs.Windows.GameplayStoreItemConfig config) ? config : null;
 
 
@@ -79,6 +86,13 @@ namespace Assets.Sources.Services.StaticDataService
             return _groundConfigs.TryGetValue(
                 groundType, out Dictionary<RoadType, RoadConfig> roadConfigs) ? (roadConfigs.TryGetValue(
                 roadType, out RoadConfig config) ? config : null) : null;
+        }
+
+        private async UniTask LoadRewardConfigs()
+        {
+            RewardConfig[] configs = await GetConfigs<RewardConfig>();
+
+            _rewardConfigs = configs.ToDictionary(value => value.Type, value => value);
         }
 
         private async UniTask LoadStoreItemConfig()

@@ -13,7 +13,7 @@ using Zenject;
 
 namespace Assets.Sources.UI.Windows.World
 {
-    public class GameplayWindow : Window
+    public class GameplayWindow : ScreenSpaceCameraWindow
     {
         [SerializeField] private Button _hideButton;
         [SerializeField] private WorldChangingWindowPanel _worldChangingWindowPanel;
@@ -23,13 +23,11 @@ namespace Assets.Sources.UI.Windows.World
         private GameplayStateMachine _gameplayStateMachine;
 
         [Inject]
-        private void Construct(WorldStateMachine worldStateMachine, NextBuildingForPlacingCreator nextBuildingForPlacingCreator, GameplayCamera gameplayCamera, GameplayStateMachine gameplayStateMachine)
+        private void Construct(WorldStateMachine worldStateMachine, NextBuildingForPlacingCreator nextBuildingForPlacingCreator, GameplayStateMachine gameplayStateMachine)
         {
             WorldStateMachine = worldStateMachine;
             _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
             _gameplayStateMachine = gameplayStateMachine;
-
-            Canvas.worldCamera = gameplayCamera.Camera;
         }
 
         protected WorldStateMachine WorldStateMachine { get; private set; }

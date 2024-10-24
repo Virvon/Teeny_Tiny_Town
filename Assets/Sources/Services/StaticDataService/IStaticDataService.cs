@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
@@ -28,5 +29,6 @@ namespace Assets.Sources.Services.StaticDataService
         GroundType GetGroundType(BuildingType buildingType);
         TWorldConfig GetWorld<TWorldConfig>(string id)
             where TWorldConfig : WorldConfig;
+        RewardConfig GetReward(RewardType type);
     }
 }

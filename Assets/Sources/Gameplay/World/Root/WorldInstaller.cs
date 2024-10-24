@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Gameplay.PointsCounter;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.StateMachine;
@@ -40,6 +41,7 @@ namespace Assets.Sources.Gameplay.World.Root
             BindNextBuildingForPlacingCreator();
             BindWorld();
             BindPointsCounter();
+            BindRewardsCreator();
         }
 
         protected virtual void BindWorldBootstrapper()
@@ -60,6 +62,11 @@ namespace Assets.Sources.Gameplay.World.Root
         protected virtual void BindGameplayMover()
         {
             Container.BindInterfacesTo<GameplayMover.GameplayMover>().AsSingle();
+        }
+
+        private void BindRewardsCreator()
+        {
+            Container.Bind<RewardsCreator>().AsSingle();
         }
 
         private void BindPointsCounter()
