@@ -39,8 +39,8 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
 
         public override async void Change()
         {
-            base.Change();
             await WorldChanger.PlaceNewBuilding(_placedBuildingGridPosition, _placedBuildingType);
+            base.Change();
         }
 
         public override UniTask Undo()

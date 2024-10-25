@@ -7,13 +7,16 @@ namespace Assets.Sources.Data
     public class GameplayMovesCounterData
     {
         public uint RemainingMovesCount;
-
-        public event Action RemainingMovesCountChanged;
-
+        
         public GameplayMovesCounterData(uint startRemainingMoveCount)
         {
             RemainingMovesCount = startRemainingMoveCount;
         }
+
+        public event Action RemainingMovesCountChanged;
+        public event Action MovesOvered;
+
+        public bool CanMove => RemainingMovesCount != 0;
 
         public void Move()
         {
@@ -26,6 +29,9 @@ namespace Assets.Sources.Data
             RemainingMovesCount--;
 
             RemainingMovesCountChanged?.Invoke();
+
+            if (CanMove == false)
+                MovesOvered?.Invoke();
         }
 
         public void SetCount(uint count)

@@ -25,6 +25,6 @@ namespace Assets.Sources.UI.Windows.World
             _rewardsList.RewardChoosed -= OnRewardChoosed;
 
         private void OnRewardChoosed() =>
-            _worldStateMachine.Enter<WorldChangingState>().Forget();
+            _worldStateMachine.Enter<WorldStartState>().Forget();
     }
 }

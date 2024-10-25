@@ -11,5 +11,6 @@
         AdditionalBonusOfferWindow,
         RewardWindow,
         QuestsWindow,
+        WaitingWindow,
     }
 }

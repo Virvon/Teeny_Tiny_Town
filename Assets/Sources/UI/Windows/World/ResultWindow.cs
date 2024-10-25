@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Sources.UI.Windows
+namespace Assets.Sources.UI.Windows.World
 {
     public class ResultWindow : Window
     {

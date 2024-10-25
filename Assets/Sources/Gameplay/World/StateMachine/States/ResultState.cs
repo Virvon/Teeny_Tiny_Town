@@ -4,7 +4,7 @@ using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Assets.Sources.UI;
-using Assets.Sources.UI.Windows;
+using Assets.Sources.UI.Windows.World;
 using Cysharp.Threading.Tasks;
 using System.Linq;
 

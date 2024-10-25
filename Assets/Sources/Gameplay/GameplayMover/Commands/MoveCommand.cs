@@ -3,6 +3,7 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.PersistentProgress;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.GameplayMover.Commands
 {
@@ -27,7 +28,6 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
 
         public override void Change() =>
             _persistentProgressService.Progress.GameplayMovesCounter.Move();
-
 
         public override async UniTask Undo()
         {

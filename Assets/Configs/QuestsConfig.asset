@@ -19,9 +19,9 @@ MonoBehaviour:
     BuildingType: 2
     TargetCount: 15
   - Id: 17091cd3-2ef2-4e7c-a51e-5c1bead715f5
-    Reward: 15
-    Info: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438 15 \u0434\u043E\u043C\u043E\u0432"
-    BuildingType: 3
+    Reward: 4
+    Info: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438 4 \u043A\u0443\u0441\u0442\u0430"
+    BuildingType: 1
     TargetCount: 15
   StartQuestsId:
   - 8e40cf9d-0cd0-4690-a18e-b5d294e2eda6

@@ -2,6 +2,7 @@
 using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Services.Input;
+using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI;
@@ -19,6 +20,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         private readonly GameplayCamera _camera;
         private readonly IWorldData _worldData;
         private readonly WorldStateMachine _worldStateMachine;
+        private readonly IPersistentProgressService _persistentProgressService;
 
         public WorldChangingState(
             IInputService inputService,
@@ -26,7 +28,8 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             ActionHandlerStateMachine actionHandlerStateMachine,
             GameplayCamera gameplayCamera,
             IWorldData worldData,
-            WorldStateMachine worldStateMachine)
+            WorldStateMachine worldStateMachine,
+            IPersistentProgressService persistentProgressService)
         {
             _inputService = inputService;
             _windowsSwitcher = windowsSwitcher;
@@ -34,6 +37,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _camera = gameplayCamera;
             _worldData = worldData;
             _worldStateMachine = worldStateMachine;
+            _persistentProgressService = persistentProgressService;
 
             _worldData.PointsData.GoalAchieved += OnGoalAchived;
         }
@@ -41,6 +45,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         ~WorldChangingState()
         {
             _worldData.PointsData.GoalAchieved -= OnGoalAchived;
+            _persistentProgressService.Progress.GameplayMovesCounter.MovesOvered -= OnMovesOvered;
         }
 
         protected virtual WindowType WindowType => WindowType.GameplayWindow;
@@ -57,6 +62,8 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
                 _inputService.SetEnabled(true);
             });
 
+            _persistentProgressService.Progress.GameplayMovesCounter.MovesOvered += OnMovesOvered;
+
             return default;
         }
 
@@ -64,7 +71,15 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         {
             _actionHandlerStateMachine.SetActive(false);
             _inputService.SetEnabled(false);
+
+            _persistentProgressService.Progress.GameplayMovesCounter.MovesOvered -= OnMovesOvered;
+
             return default;
+        }
+
+        private void OnMovesOvered()
+        {
+            _worldStateMachine.Enter<WaitingState>().Forget();
         }
 
         private void OnGoalAchived()

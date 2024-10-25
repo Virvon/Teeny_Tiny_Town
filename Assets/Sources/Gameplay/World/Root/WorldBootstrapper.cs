@@ -10,10 +10,8 @@ using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI;
-using Assets.Sources.UI.Windows;
 using Assets.Sources.UI.Windows.World;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.Gameplay.World.Root
@@ -96,6 +94,7 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine.RegisterState(StatesFactory.Create<ResultState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<RewardState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<QuestsState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<WaitingState>());
         }
 
         protected virtual void OnWorldEntered() =>
@@ -115,6 +114,7 @@ namespace Assets.Sources.Gameplay.World.Root
             await _windowsSwitcher.RegisterWindow<RewardWindow>(WindowType.RewardWindow, _uiFactory);
             await _windowsSwitcher.RegisterWindow<ResultWindow>(WindowType.ResultWindow, _uiFactory);
             await _windowsSwitcher.RegisterWindow<QuestsWindow>(WindowType.QuestsWindow, _uiFactory);
+            await _windowsSwitcher.RegisterWindow<WaitingWindow>(WindowType.WaitingWindow, _uiFactory);
         }
     }
 }

@@ -21,8 +21,8 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
 
         public override async void Change()
         {
-            base.Change();
             await WorldChanger.RemoveBuilding(_removedBuildingGridPosition);
+            base.Change();
         }
     }
 }

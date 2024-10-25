@@ -21,9 +21,7 @@ namespace Assets.Sources.Gameplay.PointsCounter
         ~PointsCounter()=>
             _worldData.BuildingUpgraded -= OnBuildingUpdated;
 
-        private void OnBuildingUpdated(BuildingType type)
-        {
+        private void OnBuildingUpdated(BuildingType type) =>
             _worldData.PointsData.Give(_staticDataService.GetBuilding<BuildingConfig>(type).PointsRewardForMerge);
-        }
     }
 }
