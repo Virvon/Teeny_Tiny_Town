@@ -42,16 +42,26 @@ namespace Assets.Sources.Gameplay.GameplayMover
         protected Command LastCommand { get; private set; }
 
         public void PlaceNewBuilding(Vector2Int gridPosition, BuildingType type) =>
-            ExecuteCommand(new PlaceNewBuildingCommand(WorldChanger, gridPosition, WorldData, type, NextBuildingForPlacingCreator));
+            ExecuteCommand(new PlaceNewBuildingCommand(WorldChanger, gridPosition, WorldData, type, NextBuildingForPlacingCreator, _persistentProgressService));
 
         public void RemoveBuilding(Vector2Int gridPosition) =>
-            ExecuteCommand(new RemoveBuildingCommand(WorldChanger, WorldData, gridPosition, NextBuildingForPlacingCreator));
+            ExecuteCommand(new RemoveBuildingCommand(WorldChanger, WorldData, gridPosition, NextBuildingForPlacingCreator, _persistentProgressService));
 
-        public void ReplaceBuilding(Vector2Int fromGridPosition, BuildingType fromBuildingType, Vector2Int toGridPosition, BuildingType toBuildingType) =>
-            ExecuteCommand(new ReplaceBuildingCommand(WorldChanger, WorldData, fromGridPosition, fromBuildingType, toGridPosition, toBuildingType, NextBuildingForPlacingCreator));
+        public void ReplaceBuilding(Vector2Int fromGridPosition, BuildingType fromBuildingType, Vector2Int toGridPosition, BuildingType toBuildingType)
+        {
+            ExecuteCommand(new ReplaceBuildingCommand(
+                WorldChanger,
+                WorldData,
+                fromGridPosition,
+                fromBuildingType,
+                toGridPosition,
+                toBuildingType,
+                NextBuildingForPlacingCreator,
+                _persistentProgressService));
+        }
 
         public virtual void OpenChest(Vector2Int chestGridPosition, uint reward) =>
-            ExecuteCommand(new RemoveBuildingCommand(WorldChanger, WorldData, chestGridPosition, NextBuildingForPlacingCreator));
+            ExecuteCommand(new RemoveBuildingCommand(WorldChanger, WorldData, chestGridPosition, NextBuildingForPlacingCreator, _persistentProgressService));
 
         public async void TryUndoCommand()
         {
@@ -66,7 +76,6 @@ namespace Assets.Sources.Gameplay.GameplayMover
         {
             LastCommand = command;
             command.Change();
-            _persistentProgressService.Progress.MoveCounter.Move();
         }
     }
 }

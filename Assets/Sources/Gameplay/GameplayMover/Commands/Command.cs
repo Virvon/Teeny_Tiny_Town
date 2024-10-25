@@ -15,7 +15,6 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
         protected readonly IWorldData WorldData;
 
         private readonly NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
-
         private readonly BuildingsForPlacingData _buildingsForPlacingData;
 
         public Command(IWorldChanger worldChanger, IWorldData worldData, NextBuildingForPlacingCreator nextBuildingForPlacingCreator)

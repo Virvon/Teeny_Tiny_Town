@@ -8,5 +8,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public float DistanceBetweenWorlds;
         public Vector3 CurrentWorldPosition;
         public uint[] Goals;
+        public uint AvailableMovesCount;
     }
 }

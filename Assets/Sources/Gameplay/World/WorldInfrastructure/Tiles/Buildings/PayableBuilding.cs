@@ -1,8 +1,6 @@
 ﻿using Assets.Sources.Data.WorldDatas;
-using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
-using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 {
@@ -12,22 +10,22 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 
         private readonly IStaticDataService _staticDataService;
         private readonly WorldWallet _worldWallet;
-        private readonly IPersistentProgressService _persistentProgressService;
+        private readonly ICurrencyWorldData _currencyWorldData;
 
-        public PayableBuilding(BuildingType type, IStaticDataService staticDataService, WorldWallet worldWallet, IPersistentProgressService persistentProgressService)
+        public PayableBuilding(BuildingType type, IStaticDataService staticDataService, WorldWallet worldWallet, ICurrencyWorldData currencyWorldData)
             : base(type)
         {
             _staticDataService = staticDataService;
             _worldWallet = worldWallet;
-            _persistentProgressService = persistentProgressService;
+            _currencyWorldData = currencyWorldData;
 
             Payment = _staticDataService.GetBuilding<PayableBuildingConfig>(Type).Payment;
 
-            _persistentProgressService.Progress.MoveCounter.TimeToPaymentPayableBuildings += OnTimeToPaymentPayableBuildings;
+            _currencyWorldData.MovesCounter.TimeToPaymentPayableBuildings += OnTimeToPaymentPayableBuildings;
         }
 
         ~PayableBuilding() =>
-            _persistentProgressService.Progress.MoveCounter.TimeToPaymentPayableBuildings -= OnTimeToPaymentPayableBuildings;
+            _currencyWorldData.MovesCounter.TimeToPaymentPayableBuildings -= OnTimeToPaymentPayableBuildings;
 
         private void OnTimeToPaymentPayableBuildings() =>
             _worldWallet.Give(Payment);

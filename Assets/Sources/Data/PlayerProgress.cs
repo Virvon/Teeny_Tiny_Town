@@ -9,19 +9,20 @@ namespace Assets.Sources.Data
     public class PlayerProgress
     { 
         public WorldData[] WorldDatas;
-        public MoveCounterData MoveCounter;
+        
         public WorldData CurrentWorldData;
         public bool IsInventoryUnlocked;
         public Wallet Wallet;
         public List<QuestData> Quests;
+        public GameplayMovesCounterData GameplayMovesCounter;
 
-        public PlayerProgress(WorldData[] worldDatas, List<QuestData> quests)
+        public PlayerProgress(WorldData[] worldDatas, List<QuestData> quests, uint startRemainingMoveCount)
         {
             WorldDatas = worldDatas;
             Quests = quests;
 
-            MoveCounter = new();
             Wallet = new();
+            GameplayMovesCounter = new(startRemainingMoveCount);
 
             CurrentWorldData = WorldDatas[0];
             IsInventoryUnlocked = false;

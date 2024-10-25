@@ -1,12 +1,13 @@
 ﻿using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
+using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.GameplayMover.Commands
 {
-    public class ReplaceBuildingCommand : Command
+    public class ReplaceBuildingCommand : MoveCommand
     {
         private readonly Vector2Int _fromBuildingGridPosition;
         private readonly BuildingType _fromBuildingType;
@@ -20,8 +21,9 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
             BuildingType fromBuildingType,
             Vector2Int toBuildingGridPosition,
             BuildingType toBuildingType,
-            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
-            : base(world, worldData, nextBuildingForPlacingCreator)
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator,
+            IPersistentProgressService persistentProgressService)
+            : base(world, worldData, nextBuildingForPlacingCreator, persistentProgressService)
         {
             _fromBuildingGridPosition = fromBuildingGridPosition;
             _fromBuildingType = fromBuildingType;
@@ -31,6 +33,7 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
 
         public override async void Change()
         {
+            base.Change();
             await WorldChanger.ReplaceBuilding(_fromBuildingGridPosition, _fromBuildingType, _toBuildingGridPosition, _toBuildingType);
         }
     }

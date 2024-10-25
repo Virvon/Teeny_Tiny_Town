@@ -15,9 +15,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         public CurrencyWorldChanger
             (IStaticDataService staticDataService,
             ICurrencyWorldData worldData,
-            IPersistentProgressService persistentProgressService,
             NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
-            : base(staticDataService, worldData, persistentProgressService, nextBuildingForPlacingCreator)
+            : base(staticDataService, worldData, nextBuildingForPlacingCreator)
         {
             _currencyWorldData = worldData;
         }
@@ -33,13 +32,13 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                 case BuildingType.Tree:
                     return new Building(type);
                 case BuildingType.House:
-                    return new PayableBuilding(type, StaticDataService, _currencyWorldData.WorldWallet, PersistentProgressService);
+                    return new PayableBuilding(type, StaticDataService, _currencyWorldData.WorldWallet, _currencyWorldData);
                 case BuildingType.Stone:
                     return new Building(type);
                 case BuildingType.Chest:
                     return new Chest(type, StaticDataService, gridPosition);
                 case BuildingType.Lighthouse:
-                    return new Lighthouse(type, _currencyWorldData.WorldWallet, PersistentProgressService, this, gridPosition);
+                    return new Lighthouse(type, _currencyWorldData.WorldWallet, _currencyWorldData, this, gridPosition);
                 case BuildingType.Crane:
                     return new Crane(type, this, gridPosition);
                 default:

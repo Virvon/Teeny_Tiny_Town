@@ -7,11 +7,9 @@ using Assets.Sources.Data;
 using Cysharp.Threading.Tasks;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
-using UnityEngine.InputSystem.Utilities;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
-using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 
@@ -21,7 +19,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
     {
         protected readonly IWorldData WorldData;
         protected readonly IStaticDataService StaticDataService;
-        protected readonly IPersistentProgressService PersistentProgressService;
         protected readonly NextBuildingForPlacingCreator NextBuildingForPlacingCreator;
 
         private List<Tile> _tiles;
@@ -29,12 +26,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         public WorldChanger(
             IStaticDataService staticDataService,
             IWorldData worldData,
-            IPersistentProgressService persistentProgressService,
             NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
         {
             StaticDataService = staticDataService;
             WorldData = worldData;
-            PersistentProgressService = persistentProgressService;
             NextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
         }
 

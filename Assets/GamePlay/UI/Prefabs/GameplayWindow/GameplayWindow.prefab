@@ -100,15 +100,15 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2946522003541778679}
   m_SourcePrefab: {fileID: 100100000, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
---- !u!114 &123465047376030353 stripped
+--- !u!114 &881014167067871100 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9133772129675559181, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8308844590748691680, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
   m_PrefabInstance: {fileID: 9184827099878960028}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6056222714799205547 stripped
@@ -156,13 +156,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 7688662034230504415}
-  _hideButton: {fileID: 123465047376030353}
+  _hideButton: {fileID: 8979583046385098752}
   _worldChangingWindowPanel: {fileID: 7323048812106504498}
   _saveGameplayPanel: {fileID: 6056222714799205547}
   _questsWindowOpenButton: {fileID: 8789440570725774273}
+  _remainingMovesCountValue: {fileID: 881014167067871100}
 --- !u!114 &8789440570725774273 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 472123923315464285, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
+  m_PrefabInstance: {fileID: 9184827099878960028}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8979583046385098752 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 282298106879265692, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
   m_PrefabInstance: {fileID: 9184827099878960028}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

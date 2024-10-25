@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Assets.Sources.Data
+namespace Assets.Sources.Data.WorldDatas
 {
-    public class MoveCounterData
+    public class WorldMovesCounterData
     {
         private const uint MovesCountToBuildingsPayment = 5;
 

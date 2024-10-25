@@ -10,5 +10,6 @@ namespace Assets.Sources.Data.WorldDatas
 
         IReadOnlyList<BuildingType> StoreList { get; }
         WorldWallet WorldWallet { get; }
+        WorldMovesCounterData MovesCounter { get; }
     }
 }

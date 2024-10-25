@@ -46,7 +46,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
             List<QuestData> startQuests = new();
             startQuests.AddRange(_staticDataService.QuestsConfig.StartQuestsId.Select(id => new QuestData(id)));
 
-            PlayerProgress progress = new PlayerProgress(GetWorldDatas(), startQuests);
+            PlayerProgress progress = new PlayerProgress(GetWorldDatas(), startQuests, _staticDataService.WorldsConfig.AvailableMovesCount);
 
             progress.Wallet.Value = 3000;
 

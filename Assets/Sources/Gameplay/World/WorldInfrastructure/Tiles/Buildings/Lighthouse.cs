@@ -1,6 +1,5 @@
 ﻿using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
-using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
@@ -11,27 +10,32 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
     public class Lighthouse : Building
     {
         private readonly WorldWallet _worldWallet;
-        private readonly IPersistentProgressService _persistentProgressService;
+        private readonly ICurrencyWorldData _currencyWorldData;
         private readonly ITileGetable _tileGetable;
         private readonly Vector2Int _gridPosition;
         private readonly List<Tile> _aroundTiles;
 
 
-        public Lighthouse(BuildingType type, WorldWallet worldWallet, IPersistentProgressService persistentProgressService, ITileGetable tileGetable, Vector2Int gridPosition)
+        public Lighthouse(
+            BuildingType type,
+            WorldWallet worldWallet,
+            ICurrencyWorldData currencyWorldData,
+            ITileGetable tileGetable,
+            Vector2Int gridPosition)
             : base(type)
         {
             _worldWallet = worldWallet;
-            _persistentProgressService = persistentProgressService;
+            _currencyWorldData = currencyWorldData;
             _tileGetable = tileGetable;
             _gridPosition = gridPosition;
 
             _aroundTiles = GetAroundTiles();
 
-            _persistentProgressService.Progress.MoveCounter.TimeToPaymentPayableBuildings += OnTimeToPaymentPayableBuildings;
+            _currencyWorldData.MovesCounter.TimeToPaymentPayableBuildings += OnTimeToPaymentPayableBuildings;
         }
 
         ~Lighthouse() =>
-            _persistentProgressService.Progress.MoveCounter.TimeToPaymentPayableBuildings -= OnTimeToPaymentPayableBuildings;
+            _currencyWorldData.MovesCounter.TimeToPaymentPayableBuildings -= OnTimeToPaymentPayableBuildings;
 
         public override UniTask CreateRepresentation(TileRepresentation tileRepresentation, bool waitForCompletion)
         {

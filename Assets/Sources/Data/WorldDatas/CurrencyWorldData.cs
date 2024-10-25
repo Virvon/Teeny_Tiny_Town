@@ -10,6 +10,7 @@ namespace Assets.Sources.Data.WorldDatas
     {
         public WorldWallet WorldWallet;
         public List<BuildingType> StoreList;
+        public WorldMovesCounterData MovesCounter;
 
         public CurrencyWorldData(
             string id,
@@ -24,12 +25,14 @@ namespace Assets.Sources.Data.WorldDatas
             StoreList = storeList;
 
             WorldWallet = new();
+            MovesCounter = new();
         }
 
         public event Action<BuildingType> StoreListUpdated;
 
         WorldWallet ICurrencyWorldData.WorldWallet => WorldWallet;
         IReadOnlyList<BuildingType> ICurrencyWorldData.StoreList => StoreList;
+        WorldMovesCounterData ICurrencyWorldData.MovesCounter => MovesCounter;
 
         protected override void AddNextBuildingTypeForCreation(BuildingType type)
         {

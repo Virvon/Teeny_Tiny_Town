@@ -1,7 +1,6 @@
 ﻿using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Data;
 using Cysharp.Threading.Tasks;
-using Assets.Sources.Services.PersistentProgress;
 using System.Collections.Generic;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
 using Assets.Sources.Data.WorldDatas;
@@ -16,9 +15,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         public ExpandingWorldChanger(
             IStaticDataService staticDataService,
             ICurrencyWorldData worldData,
-            IPersistentProgressService persistentProgressService,
             NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
-            : base(staticDataService, worldData, persistentProgressService, nextBuildingForPlacingCreator)
+            : base(staticDataService, worldData, nextBuildingForPlacingCreator)
         {
             _isExpanded = false;
         }
