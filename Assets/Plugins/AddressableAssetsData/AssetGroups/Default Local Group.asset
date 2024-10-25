@@ -309,12 +309,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Configs
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c76c53c533de7ee4194f9046fe0786fe
-    m_Address: StoreItemConfig
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2ae682ecd38026747ac4245c107db619
     m_Address: ResultWindow
     m_ReadOnly: 0
@@ -413,6 +407,17 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 376b5218d69433e4b88b2252494dbf8d
     m_Address: WaitingWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ecb77bcfd7af6b14fab2eae491ea800b
+    m_Address: InventoryStoreConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f944d1d0198a8f4eb00f74baced85fe
+    m_Address: InfinityMovesStoreConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

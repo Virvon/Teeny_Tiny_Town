@@ -54,7 +54,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
 
         public async UniTask<StoreItem> CreateStoreItem(BuildingType buildingType, Transform parent)
         {
-            GameplayStoreItemConfig config = _staticDataService.GetStoreItem(buildingType);
+            GameplayStoreItemConfig config = _staticDataService.GetWorldStoreItem(buildingType);
             StoreItem storeItem = await _storeItemFactory.Create(_staticDataService.StoreItemsConfig.AssetReference, parent);
 
             storeItem.Init(config.Price, buildingType);

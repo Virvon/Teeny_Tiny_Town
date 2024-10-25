@@ -1,11 +1,16 @@
-﻿using UnityEngine;
+﻿using Assets.Sources.Data;
+using System;
+using UnityEngine;
 
 namespace Assets.Sources.Services.StaticDataService.Configs
 {
-    [CreateAssetMenu(fileName = "StoreItemConfig", menuName = "StaticData/Create new store item config", order = 51)]
-    public class StoreItemConfig : ScriptableObject
+
+    public abstract class StoreItemConfig : ScriptableObject
     {
-        public StoreItemType Type;
+        public GameplayStoreItemType Type;
         public uint Cost;
+
+        public abstract void Unlock(StoreData storeData);
+        public abstract bool NeedToShow(StoreData storeData);
     }
 }

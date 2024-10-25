@@ -11,9 +11,9 @@ namespace Assets.Sources.Gameplay.Inventory
         [SerializeField] private Button _button;
 
         [Inject]
-        private void Constroun(IPersistentProgressService persistentProgressService)
+        private void Construct(IPersistentProgressService persistentProgressService)
         {
-            bool isInventoryUnlocked = persistentProgressService.Progress.IsInventoryUnlocked;
+            bool isInventoryUnlocked = persistentProgressService.Progress.StoreData.IsInventoryUnlocked;
 
             _lockIcon.alpha = isInventoryUnlocked ? 0 : 1;
             _button.interactable = isInventoryUnlocked ? true : false;

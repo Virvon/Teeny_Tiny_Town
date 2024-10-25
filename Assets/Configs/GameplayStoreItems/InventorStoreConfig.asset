@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f72851facb2111c42801562f8056d2a0, type: 3}
-  m_Name: StoreItemConfig
+  m_Script: {fileID: 11500000, guid: f8bbe2ae59a278f4799584faa33ad986, type: 3}
+  m_Name: InventorStoreConfig
   m_EditorClassIdentifier: 
   Type: 0
-  Cost: 100
+  Cost: 350

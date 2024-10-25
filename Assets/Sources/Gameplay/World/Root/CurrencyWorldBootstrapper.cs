@@ -6,6 +6,7 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
+using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.UI;
 using Cysharp.Threading.Tasks;
@@ -25,7 +26,8 @@ namespace Assets.Sources.Gameplay.World.Root
             ActionHandlerStatesFactory actionHandlerStatesFactory,
             NextBuildingForPlacingCreator nextBuildingForPlacingCreator,
             WindowsSwitcher windowsSwitcher,
-            IUiFactory uiFactory)
+            IUiFactory uiFactory,
+            IPersistentProgressService persistentProgressService)
             : base(
                   worldChanger,
                   worldFactory,
@@ -37,7 +39,8 @@ namespace Assets.Sources.Gameplay.World.Root
                   actionHandlerStatesFactory,
                   nextBuildingForPlacingCreator,
                   windowsSwitcher,
-                  uiFactory)
+                  uiFactory,
+                  persistentProgressService)
         {
         }
 

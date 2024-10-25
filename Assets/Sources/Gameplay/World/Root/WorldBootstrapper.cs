@@ -7,6 +7,7 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
+using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI;
@@ -27,6 +28,7 @@ namespace Assets.Sources.Gameplay.World.Root
         private readonly NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
         private readonly WindowsSwitcher _windowsSwitcher;
         private readonly IUiFactory _uiFactory;
+        private readonly IPersistentProgressService _persistentProgressService;
 
         protected readonly WorldStateMachine WorldStateMachine;
         protected readonly StatesFactory StatesFactory;
@@ -42,7 +44,8 @@ namespace Assets.Sources.Gameplay.World.Root
             ActionHandlerStatesFactory actionHandlerStatesFactory,
             NextBuildingForPlacingCreator nextBuildingForPlacingCreator,
             WindowsSwitcher windowsSwitcher,
-            IUiFactory uiFactory)
+            IUiFactory uiFactory,
+            IPersistentProgressService persistentProgressService)
         {
             _worldChanger = worldChanger;
             _worldFactory = worldFactory;
@@ -57,6 +60,7 @@ namespace Assets.Sources.Gameplay.World.Root
             _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
             _windowsSwitcher = windowsSwitcher;
             _uiFactory = uiFactory;
+            _persistentProgressService = persistentProgressService;
         }
 
         ~WorldBootstrapper() =>
@@ -94,7 +98,9 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine.RegisterState(StatesFactory.Create<ResultState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<RewardState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<QuestsState>());
-            WorldStateMachine.RegisterState(StatesFactory.Create<WaitingState>());
+            
+            if(_persistentProgressService.Progress.StoreData.IsInfinityMovesUnlocked == false)
+                WorldStateMachine.RegisterState(StatesFactory.Create<WaitingState>());
         }
 
         protected virtual void OnWorldEntered() =>
@@ -114,7 +120,9 @@ namespace Assets.Sources.Gameplay.World.Root
             await _windowsSwitcher.RegisterWindow<RewardWindow>(WindowType.RewardWindow, _uiFactory);
             await _windowsSwitcher.RegisterWindow<ResultWindow>(WindowType.ResultWindow, _uiFactory);
             await _windowsSwitcher.RegisterWindow<QuestsWindow>(WindowType.QuestsWindow, _uiFactory);
-            await _windowsSwitcher.RegisterWindow<WaitingWindow>(WindowType.WaitingWindow, _uiFactory);
+
+            if (_persistentProgressService.Progress.StoreData.IsInfinityMovesUnlocked == false)
+                await _windowsSwitcher.RegisterWindow<WaitingWindow>(WindowType.WaitingWindow, _uiFactory);
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿namespace Assets.Sources.Services.StaticDataService.Configs
 {
-    public enum StoreItemType
+    public enum GameplayStoreItemType
     {
         Inventory,
+        InfinityMoves,
     }
 }

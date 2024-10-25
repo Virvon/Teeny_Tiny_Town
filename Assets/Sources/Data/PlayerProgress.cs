@@ -11,7 +11,7 @@ namespace Assets.Sources.Data
         public WorldData[] WorldDatas;
         
         public WorldData CurrentWorldData;
-        public bool IsInventoryUnlocked;
+        public StoreData StoreData;
         public Wallet Wallet;
         public List<QuestData> Quests;
         public GameplayMovesCounterData GameplayMovesCounter;
@@ -21,11 +21,11 @@ namespace Assets.Sources.Data
             WorldDatas = worldDatas;
             Quests = quests;
 
+            StoreData = new();
             Wallet = new();
-            GameplayMovesCounter = new(startRemainingMoveCount);
+            GameplayMovesCounter = new(startRemainingMoveCount, StoreData);
 
             CurrentWorldData = WorldDatas[0];
-            IsInventoryUnlocked = false;
         }
 
         public WorldData GetNextWorldData()

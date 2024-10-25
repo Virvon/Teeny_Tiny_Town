@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
@@ -20,11 +19,12 @@ namespace Assets.Sources.Services.StaticDataService
         private Dictionary<BuildingType, BuildingConfig> _buildingConfigs;
         private Dictionary<GroundType, Dictionary<RoadType, RoadConfig>> _groundConfigs;
         private Dictionary<WindowType, WindowConfig> _windowConfigs;
-        private Dictionary<BuildingType, GameplayStoreItemConfig> _storeItemsConfigs;
+        private Dictionary<BuildingType, GameplayStoreItemConfig> _worldStoreItemConfigs;
         private Dictionary<TileType, TestGroundConfig> _testGroundConfigs;
         private Dictionary<BuildingType, GroundType> _roadGrounds;
         private Dictionary<string, WorldConfig> _worldConfigs;
         private Dictionary<RewardType, RewardConfig> _rewardConfigs;
+        private Dictionary<GameplayStoreItemType, StoreItemConfig> _gameplayStoreItemConfigs;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
@@ -36,7 +36,6 @@ namespace Assets.Sources.Services.StaticDataService
         public AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; private set; }
         public ReadOnlyArray<WorldConfig> WorldConfigs => _worldConfigs.Values.ToArray();
         public AnimationsConfig AnimationsConfig { get; private set; }
-        public StoreItemConfig StoreItemConfig { get; private set; }
         public QuestsConfig QuestsConfig { get; private set; }
 
         public async UniTask InitializeAsync()
@@ -46,18 +45,21 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadBuildingConfigs());
             tasks.Add(LoadGroundsConfig());
             tasks.Add(LoadWindowsConfig());
-            tasks.Add(LoadStoreItemsConfig());
+            tasks.Add(LoadWorldStoreItemConfigs());
             tasks.Add(LoadWorldsConfig());
             tasks.Add(LoadRoadGroundConfigs());
             tasks.Add(LoadAvailableForConstructionBuildingsConfig());
             tasks.Add(LoadWorldConfigs());
             tasks.Add(LoadAnimationsConfig());
-            tasks.Add(LoadStoreItemConfig());
+            tasks.Add(LoadGameplayStoreItemConfigs());
             tasks.Add(LoadRewardConfigs());
             tasks.Add(LoadQuestsConfig());
 
             await UniTask.WhenAll(tasks);
         }
+
+        public StoreItemConfig GetGameplayStorItem(GameplayStoreItemType type) =>
+            _gameplayStoreItemConfigs.TryGetValue(type, out StoreItemConfig config) ? config : null;
 
         public RewardConfig GetReward(RewardType type) =>
             _rewardConfigs.TryGetValue(type, out RewardConfig config) ? config : null;
@@ -72,8 +74,8 @@ namespace Assets.Sources.Services.StaticDataService
         public TestGroundConfig GetGround(TileType tileType) =>
             _testGroundConfigs.TryGetValue(tileType, out TestGroundConfig config) ? config : null;
 
-        public GameplayStoreItemConfig GetStoreItem(BuildingType buildingType) =>
-            _storeItemsConfigs.TryGetValue(buildingType, out Configs.Windows.GameplayStoreItemConfig config) ? config : null;
+        public GameplayStoreItemConfig GetWorldStoreItem(BuildingType buildingType) =>
+            _worldStoreItemConfigs.TryGetValue(buildingType, out GameplayStoreItemConfig config) ? config : null;
 
 
         public WindowConfig GetWindow(WindowType type) =>
@@ -104,11 +106,11 @@ namespace Assets.Sources.Services.StaticDataService
             _rewardConfigs = configs.ToDictionary(value => value.Type, value => value);
         }
 
-        private async UniTask LoadStoreItemConfig()
+        private async UniTask LoadGameplayStoreItemConfigs()
         {
             StoreItemConfig[] configs = await GetConfigs<StoreItemConfig>();
 
-            StoreItemConfig = configs.First();
+            _gameplayStoreItemConfigs = configs.ToDictionary(value => value.Type, value => value);
         }
 
         private async UniTask LoadAnimationsConfig()
@@ -146,13 +148,13 @@ namespace Assets.Sources.Services.StaticDataService
             WorldsConfig = worldsConfigs.First();
         }
 
-        private async UniTask LoadStoreItemsConfig()
+        private async UniTask LoadWorldStoreItemConfigs()
         {
             GameplayStoreItemsConfig[] storeItemsConfigs = await GetConfigs<GameplayStoreItemsConfig>();
 
             StoreItemsConfig = storeItemsConfigs.First();
 
-            _storeItemsConfigs = StoreItemsConfig.Configs.ToDictionary(value => value.BuildingType, value => value);
+            _worldStoreItemConfigs = StoreItemsConfig.Configs.ToDictionary(value => value.BuildingType, value => value);
         }
 
         private async UniTask LoadWindowsConfig()

@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da19e42d25602bf49b92c9f0e8cc8e79, type: 3}
-  m_Name: WorldsConfig
+  m_Script: {fileID: 11500000, guid: ae2d658deae5d38408de07284091b584, type: 3}
+  m_Name: InfinityMovesStoreConfig
   m_EditorClassIdentifier: 
-  DistanceBetweenWorlds: 35
-  CurrentWorldPosition: {x: 0, y: 0, z: 0}
-  Goals: d007000088130000
-  AvailableMovesCount: 4
+  Type: 1
+  Cost: 1000
