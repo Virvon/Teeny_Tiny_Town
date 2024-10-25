@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
@@ -24,5 +25,8 @@ namespace Assets.Sources.UI
         public class Factory : PlaceholderFactory<AssetReferenceGameObject, UniTask<Window>>
         {
         }
+
+        public void Destroy() =>
+            Destroy(gameObject);
     }
 }

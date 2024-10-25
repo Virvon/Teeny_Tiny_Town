@@ -36,5 +36,20 @@ namespace Assets.Sources.UI
             _currentWindow = _windows[typeof(TWindow)];
             _currentWindow.Open();
         }
+
+        public void Remove<TWindow>()
+            where TWindow : Window
+        {
+            Window window = _windows[typeof(TWindow)];
+
+            if (_currentWindow == window)
+            {
+                _currentWindow.Hide();
+                _currentWindow = null;
+            }
+
+            window.Destroy();
+            _windows.Remove(typeof(TWindow));
+        }
     }
 }

@@ -13,29 +13,33 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         private readonly WindowsSwitcher _windowsSwitcher;
         private readonly WorldStateMachine _worldStateMachine;
         private readonly IPersistentProgressService _persistentProgressService;
+        private readonly WorldWindows _worldWindows;
 
         public WorldStartState(
             IWorldData worldData,
             WindowsSwitcher windowsSwitcher,
             WorldStateMachine worldStateMachine,
-            IPersistentProgressService persistentProgressService)
+            IPersistentProgressService persistentProgressService,
+            WorldWindows worldWindows)
         {
             _worldData = worldData;
             _windowsSwitcher = windowsSwitcher;
             _worldStateMachine = worldStateMachine;
             _persistentProgressService = persistentProgressService;
+            _worldWindows = worldWindows;
         }
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
+            if (_worldWindows.IsRegistered == false)
+                await _worldWindows.Register();
+
             if (_persistentProgressService.Progress.GameplayMovesCounter.CanMove == false)
                 _worldStateMachine.Enter<WaitingState>().Forget();
             else if (_worldData.IsChangingStarted)
                 _worldStateMachine.Enter<WorldChangingState>().Forget();
             else
                 ShowAdditionalBonusOffer();
-
-            return default;
         }
 
         public UniTask Exit() =>

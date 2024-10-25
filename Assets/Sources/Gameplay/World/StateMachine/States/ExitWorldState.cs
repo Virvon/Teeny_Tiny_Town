@@ -1,7 +1,4 @@
-﻿using Assets.Sources.Gameplay.StateMachine;
-using Assets.Sources.Services.StateMachine;
-using Assets.Sources.Services.StaticDataService.Configs.Windows;
-using Assets.Sources.UI;
+﻿using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
 using System;
 
@@ -9,26 +6,20 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 {
     public class ExitWorldState : IPayloadState<Action>
     {
-        private readonly GameplayStateMachine _gameplayStateMachine;
-        private readonly WindowsSwitcher _windowsSwitcher;
+        private readonly WorldWindows _worldWindows;
 
-        public ExitWorldState(GameplayStateMachine gameplayStateMachine, WindowsSwitcher windowsSwitcher)
-        {
-            _gameplayStateMachine = gameplayStateMachine;
-            _windowsSwitcher = windowsSwitcher;
-        }
+        public ExitWorldState(WorldWindows worldWindows) =>
+            _worldWindows = worldWindows;
 
         public UniTask Enter(Action callbakc)
         {
+            _worldWindows.Remove();
             callbakc?.Invoke();
 
             return default;
         }
 
-        public UniTask Exit()
-        {
-            //_windowsSwitcher.Remove(WindowType.GameplayWindow);
-            return default;
-        }
+        public UniTask Exit() =>
+            default;
     }
 }
