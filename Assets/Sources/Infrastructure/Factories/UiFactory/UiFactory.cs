@@ -9,8 +9,6 @@ using Assets.Sources.UI.Windows.World.Panels;
 using Assets.Sources.UI.Windows.World.Panels.Reward;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using Zenject;
 
 namespace Assets.Sources.Infrastructure.Factories.UiFactory
 {
@@ -22,8 +20,9 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
         private readonly RewardPanel.Factory _rewardPanelFactory;
         private readonly IAssetProvider _assetProvider;
         private readonly QuestPanel.Factory _questPanelFactory;
+        private readonly RemainingMovesPanel.Factory _remainingMovesPanelFactory;
 
-        public UiFactory(Window.Factory windowFactory, IStaticDataService staticDataService, StoreItem.Factory storeItemFactory, RewardPanel.Factory rewardPanelFactory, IAssetProvider assetProvider, QuestPanel.Factory questPanelFactory)
+        public UiFactory(Window.Factory windowFactory, IStaticDataService staticDataService, StoreItem.Factory storeItemFactory, RewardPanel.Factory rewardPanelFactory, IAssetProvider assetProvider, QuestPanel.Factory questPanelFactory, RemainingMovesPanel.Factory remainingMovesPanelFactory)
         {
             _windowFactory = windowFactory;
             _staticDataService = staticDataService;
@@ -31,7 +30,11 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             _rewardPanelFactory = rewardPanelFactory;
             _assetProvider = assetProvider;
             _questPanelFactory = questPanelFactory;
+            _remainingMovesPanelFactory = remainingMovesPanelFactory;
         }
+
+        public async UniTask CreateRemainingMovesPanel(Transform parent) =>
+            await _remainingMovesPanelFactory.Create(UiFactoryAssets.RemainingMovesPanel, parent);
 
         public async UniTask<QuestPanel> CreateQuestPanel(string id, Transform parent)
         {

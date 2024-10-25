@@ -34,6 +34,8 @@ namespace Assets.Sources.Gameplay.World
 
             if (_persistentProgressService.Progress.StoreData.IsInfinityMovesUnlocked == false)
                 await _windowsSwitcher.RegisterWindow<WaitingWindow>(WindowType.WaitingWindow, _uiFactory);
+
+            IsRegistered = true;
         }
 
         public void Remove()
@@ -46,6 +48,8 @@ namespace Assets.Sources.Gameplay.World
 
             if (_persistentProgressService.Progress.StoreData.IsInfinityMovesUnlocked == false)
                 _windowsSwitcher.Remove<WaitingWindow>();
+
+            IsRegistered = false;
         }
     }
 }

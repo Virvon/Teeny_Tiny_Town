@@ -34,6 +34,10 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<AssetReferenceGameObject, Transform, UniTask<QuestPanel>, QuestPanel.Factory>()
                 .FromFactory<ReferencePrefabFactoryAsync<QuestPanel>>();
+
+            Container
+                .BindFactory<string, Transform, UniTask<RemainingMovesPanel>, RemainingMovesPanel.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<RemainingMovesPanel>>();
         }
     }
 }

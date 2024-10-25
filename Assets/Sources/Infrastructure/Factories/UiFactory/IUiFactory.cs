@@ -13,6 +13,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
     public interface IUiFactory
     {
         UniTask<QuestPanel> CreateQuestPanel(string id, Transform parent);
+        UniTask CreateRemainingMovesPanel(Transform parent);
         UniTask<RewardPanel> CreateRewardPanel(RewardType type, Transform parent);
         UniTask<StoreItem> CreateStoreItem(BuildingType buildingType, Transform parent);
         UniTask<Window> CreateWindow(WindowType type);

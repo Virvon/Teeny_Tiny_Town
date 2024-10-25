@@ -419,6 +419,12 @@ MonoBehaviour:
   - m_GUID: 6f944d1d0198a8f4eb00f74baced85fe
     m_Address: InfinityMovesStoreConfig
     m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81aaff1a9f2c1bf48b36b68ab570b883
+    m_Address: RemainingMovesPanel
+    m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
