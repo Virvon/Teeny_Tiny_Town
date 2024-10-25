@@ -2,19 +2,16 @@
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Sources.UI.Windows.World.Panels
+namespace Assets.Sources.UI.Windows.World
 {
-    public class SaveGameplayPanel : WorldChangingWindowPanel
+    public class SaveGameplayWindow : ScreenSpaceCameraWindow
     {
         [SerializeField] private Button _undoButton;
         [SerializeField] private Button _completeButton;
-        [SerializeField] private WorldChangingWindowPanel _worldChangingWindowPanel;
-        [SerializeField] private Blur _blur;
 
         private IGameplayMover _gameplayMover;
         private WorldStateMachine _worldStateMachine;
@@ -24,30 +21,15 @@ namespace Assets.Sources.UI.Windows.World.Panels
         {
             _gameplayMover = gameplayMover;
             _worldStateMachine = worldStateMachine;
-        }
 
-        private void OnEnable()
-        {
             _undoButton.onClick.AddListener(OnUndoButtonClicked);
             _completeButton.onClick.AddListener(OnCompleteButtonClicked);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             _undoButton.onClick.RemoveListener(OnUndoButtonClicked);
             _completeButton.onClick.RemoveListener(OnCompleteButtonClicked);
-        }
-
-        public override void Open()
-        {
-            base.Open();
-            _blur.Show(AnimationsConfig.PanelOpeningStateDuration);
-        }
-
-        public override void Hide(TweenCallback callback)
-        {
-            base.Hide(callback);
-            _blur.Hide(AnimationsConfig.PanelOpeningStateDuration);
         }
 
         private void OnCompleteButtonClicked() =>
@@ -55,11 +37,8 @@ namespace Assets.Sources.UI.Windows.World.Panels
 
         private void OnUndoButtonClicked()
         {
-            Hide(callback: () =>
-            {
-                _worldChangingWindowPanel.Open();
-                _gameplayMover.TryUndoCommand();
-            });
+            _gameplayMover.TryUndoCommand();
+            _worldStateMachine.Enter<WorldStartState>().Forget();
         }
     }
 }

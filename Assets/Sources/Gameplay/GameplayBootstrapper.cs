@@ -57,8 +57,8 @@ namespace Assets.Sources.Gameplay
 
         private async UniTask RegisterWindows()
         {
-            await _windowsSwitcher.RegisterWindow<MapSelectionWindow>(WindowType.MapSelectionWindow, _uiFactory);
-            await _windowsSwitcher.RegisterWindow<StartWindow>(WindowType.StartWindow, _uiFactory);
+            await _windowsSwitcher.RegisterWindow<MapSelectionWindow>(WindowType.MapSelection, _uiFactory);
+            await _windowsSwitcher.RegisterWindow<StartWindow>(WindowType.Start, _uiFactory);
         }
     }
 }

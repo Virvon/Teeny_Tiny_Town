@@ -26,14 +26,15 @@ namespace Assets.Sources.Gameplay.World
 
         public async UniTask Register()
         {
-            await _windowsSwitcher.RegisterWindow<AdditionalBonusOfferWindow>(WindowType.AdditionalBonusOfferWindow, _uiFactory);
-            await _windowsSwitcher.RegisterWindow<GameplayWindow>(WindowType.GameplayWindow, _uiFactory);
-            await _windowsSwitcher.RegisterWindow<RewardWindow>(WindowType.RewardWindow, _uiFactory);
-            await _windowsSwitcher.RegisterWindow<ResultWindow>(WindowType.ResultWindow, _uiFactory);
-            await _windowsSwitcher.RegisterWindow<QuestsWindow>(WindowType.QuestsWindow, _uiFactory);
+            await _windowsSwitcher.RegisterWindow<AdditionalBonusOfferWindow>(WindowType.AdditionalBonusOffer, _uiFactory);
+            await _windowsSwitcher.RegisterWindow<GameplayWindow>(WindowType.Gameplay, _uiFactory);
+            await _windowsSwitcher.RegisterWindow<RewardWindow>(WindowType.Reward, _uiFactory);
+            await _windowsSwitcher.RegisterWindow<ResultWindow>(WindowType.Result, _uiFactory);
+            await _windowsSwitcher.RegisterWindow<QuestsWindow>(WindowType.Quests, _uiFactory);
+            await _windowsSwitcher.RegisterWindow<SaveGameplayWindow>(WindowType.SaveGameplay, _uiFactory);
 
             if (_persistentProgressService.Progress.StoreData.IsInfinityMovesUnlocked == false)
-                await _windowsSwitcher.RegisterWindow<WaitingWindow>(WindowType.WaitingWindow, _uiFactory);
+                await _windowsSwitcher.RegisterWindow<WaitingWindow>(WindowType.Waiting, _uiFactory);
 
             IsRegistered = true;
         }

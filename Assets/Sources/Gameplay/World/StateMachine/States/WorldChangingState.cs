@@ -48,8 +48,6 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _persistentProgressService.Progress.GameplayMovesCounter.MovesOvered -= OnMovesOvered;
         }
 
-        protected virtual WindowType WindowType => WindowType.GameplayWindow;
-
         public UniTask Enter()
         {
             _worldData.IsChangingStarted = true;

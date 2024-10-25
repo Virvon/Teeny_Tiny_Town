@@ -43,13 +43,13 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
             base.Change();
         }
 
-        public override UniTask Undo()
+        public override async UniTask Undo()
         {
+            await base.Undo();
+
             _worldData.NextBuildingTypeForCreation = _nextBuildingTypeForCreation;
             _worldData.NextBuildingForCreationBuildsCount = _nextBuildingForCreationBuildsCount;
             _worldData.UpdateAvailableBuildingForCreation(_availableBuildingsForCreation);
-
-            return base.Undo();
         }
     }
 }

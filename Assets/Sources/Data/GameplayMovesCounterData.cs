@@ -41,6 +41,9 @@ namespace Assets.Sources.Data
 
         public void SetCount(uint count)
         {
+            if (StoreData.IsInfinityMovesUnlocked)
+                return;
+
             RemainingMovesCount = count;
             RemainingMovesCountChanged?.Invoke();
         }

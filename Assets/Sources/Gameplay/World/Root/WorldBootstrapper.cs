@@ -87,6 +87,7 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine.RegisterState(StatesFactory.Create<ResultState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<RewardState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<QuestsState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<SaveGameplayState>());
             
             if(_persistentProgressService.Progress.StoreData.IsInfinityMovesUnlocked == false)
                 WorldStateMachine.RegisterState(StatesFactory.Create<WaitingState>());

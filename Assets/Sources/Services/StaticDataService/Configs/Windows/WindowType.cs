@@ -2,15 +2,16 @@
 {
     public enum WindowType
     {
-        GameplayWindow,
-        CurrencyGameplayWindow,
-        StoreWindow,
-        StartWindow,
-        MapSelectionWindow,
-        ResultWindow,
-        AdditionalBonusOfferWindow,
-        RewardWindow,
-        QuestsWindow,
-        WaitingWindow,
+        Gameplay,
+        CurrencyGameplay,
+        WorldStore,
+        Start,
+        MapSelection,
+        Result,
+        AdditionalBonusOffer,
+        Reward,
+        Quests,
+        Waiting,
+        SaveGameplay,
     }
 }

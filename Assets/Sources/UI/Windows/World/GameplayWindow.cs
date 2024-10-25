@@ -5,7 +5,6 @@ using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.PersistentProgress;
-using Assets.Sources.UI.Windows.World.Panels;
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
@@ -17,8 +16,6 @@ namespace Assets.Sources.UI.Windows.World
     public class GameplayWindow : ScreenSpaceCameraWindow
     {
         [SerializeField] private Button _hideButton;
-        [SerializeField] private WorldChangingWindowPanel _worldChangingWindowPanel;
-        [SerializeField] private WorldChangingWindowPanel _saveGameplayPanel;
         [SerializeField] private Button _questsWindowOpenButton;
         [SerializeField] private Transform _remainingMovesPanelParent;
 
@@ -69,6 +66,6 @@ namespace Assets.Sources.UI.Windows.World
             WorldStateMachine.Enter<ExitWorldState, Action>(() => _gameplayStateMachine.Enter<MapSelectionState>().Forget()).Forget();
 
         private void OnNoMoreEmptyTiles() =>
-            _worldChangingWindowPanel.Hide(callback: _saveGameplayPanel.Open);
+            WorldStateMachine.Enter<SaveGameplayState>().Forget();
     }
 }

@@ -3,7 +3,6 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.PersistentProgress;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets.Sources.Gameplay.GameplayMover.Commands
 {
@@ -31,9 +30,9 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
 
         public override async UniTask Undo()
         {
-            await base.Undo();
-
             _persistentProgressService.Progress.GameplayMovesCounter.SetCount(_ramainMovesCount);
+
+            await base.Undo();
         }
     }
 }

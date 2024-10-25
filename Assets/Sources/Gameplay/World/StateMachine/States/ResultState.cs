@@ -29,8 +29,6 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
         public UniTask Enter()
         {
-            //_windowsSwitcher.Remove(WindowType.GameplayWindow);
-
             _windowsSwitcher.Switch<ResultWindow>();
             _world.StartRotating();
             _worldData.IsChangingStarted = false;

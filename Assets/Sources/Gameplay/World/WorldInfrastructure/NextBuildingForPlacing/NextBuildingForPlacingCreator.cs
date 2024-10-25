@@ -15,13 +15,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlaci
     public class NextBuildingForPlacingCreator
     {
         private readonly IWorldData _worldData;
-        private readonly WorldStateMachine _worldStateMachine;
 
-        public NextBuildingForPlacingCreator(IWorldData worldData, WorldStateMachine worldStateMachine)
-        {
+        public NextBuildingForPlacingCreator(IWorldData worldData) =>
             _worldData = worldData;
-            _worldStateMachine = worldStateMachine;
-        }
 
         public BuildingsForPlacingData BuildingsForPlacingData { get; private set; }
 

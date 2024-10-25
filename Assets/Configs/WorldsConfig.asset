@@ -15,4 +15,4 @@ MonoBehaviour:
   DistanceBetweenWorlds: 35
   CurrentWorldPosition: {x: 0, y: 0, z: 0}
   Goals: d007000088130000
-  AvailableMovesCount: 4
+  AvailableMovesCount: 8
