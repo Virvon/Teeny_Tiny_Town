@@ -401,7 +401,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 86f9c7b362875a74886558f7cdb35439
-    m_Address: ActivedQuestPanel
+    m_Address: QuestPanel
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

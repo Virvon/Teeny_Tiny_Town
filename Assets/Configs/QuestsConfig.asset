@@ -26,13 +26,8 @@ MonoBehaviour:
   StartQuestsId:
   - 8e40cf9d-0cd0-4690-a18e-b5d294e2eda6
   - 17091cd3-2ef2-4e7c-a51e-5c1bead715f5
-  ActivedQuestPanelAssetReference:
+  QuestPanelAssetReference:
     m_AssetGUID: 86f9c7b362875a74886558f7cdb35439
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 1
-  CompletedQuestPanel:
-    m_AssetGUID: 
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
