@@ -69,3 +69,4 @@ MonoBehaviour:
   PanelOpeningStateDuration: 0.2
   WorldRotateDuration: 30
   WorldRotateToStarDuration: 0.4
+  WorldSimpleRotateDuration: 0.3

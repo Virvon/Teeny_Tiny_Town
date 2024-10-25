@@ -23,6 +23,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs
 
         public float WorldRotateDuration;
         public float WorldRotateToStarDuration;
+        public float WorldSimpleRotateDuration;
 
         public float BuildingShakeTweenDuration => BuildingShakesDuration / BuildingShakesCount;
     }
