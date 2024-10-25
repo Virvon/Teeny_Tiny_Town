@@ -75,7 +75,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
         protected void ExecuteCommand(Command command)
         {
             LastCommand = command;
-            command.Change();
+            command.Execute();
         }
     }
 }

@@ -37,10 +37,10 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
             _availableBuildingsForCreation = _worldData.AvailableBuildingsForCreation;
         }
 
-        public override async void Change()
+        public override async void Execute()
         {
             await WorldChanger.PlaceNewBuilding(_placedBuildingGridPosition, _placedBuildingType);
-            base.Change();
+            base.Execute();
         }
 
         public override async UniTask Undo()

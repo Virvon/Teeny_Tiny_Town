@@ -28,7 +28,7 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
             _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
         }
 
-        public override void Change() =>
+        public override void Execute() =>
             _nextBuildingForPlacingCreator.ChangeCurrentBuildingForPlacing(_targetBuilding);
 
         public override UniTask Undo()

@@ -31,10 +31,10 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
             _toBuildingType = toBuildingType;
         }
 
-        public override async void Change()
+        public override async void Execute()
         {
             await WorldChanger.ReplaceBuilding(_fromBuildingGridPosition, _fromBuildingType, _toBuildingGridPosition, _toBuildingType);
-            base.Change();
+            base.Execute();
         }
     }
 }

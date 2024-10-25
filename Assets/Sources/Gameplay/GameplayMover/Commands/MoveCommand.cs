@@ -25,7 +25,7 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
             _ramainMovesCount = _persistentProgressService.Progress.GameplayMovesCounter.RemainingMovesCount;
         }
 
-        public override void Change() =>
+        public override void Execute() =>
             _persistentProgressService.Progress.GameplayMovesCounter.Move();
 
         public override async UniTask Undo()

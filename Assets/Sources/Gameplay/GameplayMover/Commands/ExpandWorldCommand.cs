@@ -29,7 +29,7 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
             _previousCommand = previousCommand;
         }
 
-        public override async void Change()
+        public override async void Execute()
         {
             _worldData.Size = _targetSize;
 

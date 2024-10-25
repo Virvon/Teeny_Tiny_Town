@@ -26,7 +26,7 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
             _worldWallet = worldWallet;
         }
 
-        public override void Change()
+        public override void Execute()
         {
             _worldWallet.Give(_reward);
 

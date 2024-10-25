@@ -33,7 +33,7 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
             TileDatas = WorldData.Tiles.Select(tile => new TileData(tile.GridPosition, tile.BuildingType)).ToArray();
         }
 
-        public abstract void Change();
+        public abstract void Execute();
 
         public virtual async UniTask Undo()
         {
