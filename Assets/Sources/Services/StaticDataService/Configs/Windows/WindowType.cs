@@ -10,5 +10,6 @@
         ResultWindow,
         AdditionalBonusOfferWindow,
         RewardWindow,
+        QuestsWindow,
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.Quests;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.World;
@@ -18,6 +19,7 @@ namespace Assets.Sources.Services.StaticDataService
         ReadOnlyArray<WorldConfig> WorldConfigs { get; }
         AnimationsConfig AnimationsConfig { get; }
         StoreItemConfig StoreItemConfig { get; }
+        QuestsConfig QuestsConfig { get; }
 
         RoadConfig GetRoad(GroundType groundType, RoadType roadType);
         TBuilding GetBuilding<TBuilding>(BuildingType buildingType)

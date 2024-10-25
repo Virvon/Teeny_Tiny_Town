@@ -18,13 +18,13 @@ namespace Assets.Sources.Gameplay.ExpandingLogic
 
             _expandingWorldConfig = staticDataService.GetWorld<ExpandingWorldConfig>(worldData.Id);
 
-            _worldData.BuildingUpdated += OnBuildingUpdated;
+            _worldData.BuildingUpgraded += OnBuildingUpdated;
             _expandingGameplayMover = expandingGameplayMover;
         }
 
         ~WorldExpander()
         {
-            _worldData.BuildingUpdated -= OnBuildingUpdated;
+            _worldData.BuildingUpgraded -= OnBuildingUpdated;
         }
 
         private void OnBuildingUpdated(BuildingType type)

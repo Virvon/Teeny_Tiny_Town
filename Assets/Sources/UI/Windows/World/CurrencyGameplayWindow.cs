@@ -10,15 +10,15 @@ namespace Assets.Sources.UI.Windows.World
     {
         [SerializeField] private Button _storeButton;
 
-        protected override void OnEnable()
+        protected override void Subscrube()
         {
-            base.OnEnable();
+            base.Subscrube();
             _storeButton.onClick.AddListener(OnStoreButtonClicked);
         }
 
-        protected override void OnDisable()
+        protected override void Unsubscruby()
         {
-            base.OnDisable();
+            base.Unsubscruby();
             _storeButton.onClick.RemoveListener(OnStoreButtonClicked);
         }
 

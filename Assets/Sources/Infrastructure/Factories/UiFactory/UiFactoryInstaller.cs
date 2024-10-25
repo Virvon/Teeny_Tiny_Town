@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Gameplay.Store;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.UI;
+using Assets.Sources.UI.Windows.World.Panels;
 using Assets.Sources.UI.Windows.World.Panels.Reward;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -29,6 +30,10 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<AssetReferenceGameObject, Transform, UniTask<RewardPanel>, RewardPanel.Factory>()
                 .FromFactory<ReferencePrefabFactoryAsync<RewardPanel>>();
+
+            Container
+                .BindFactory<AssetReferenceGameObject, Transform, UniTask<QuestPanel>, QuestPanel.Factory>()
+                .FromFactory<ReferencePrefabFactoryAsync<QuestPanel>>();
         }
     }
 }

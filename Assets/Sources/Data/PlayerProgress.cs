@@ -1,5 +1,7 @@
 ﻿using Assets.Sources.Data.WorldDatas;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Assets.Sources.Data
 {
@@ -11,13 +13,15 @@ namespace Assets.Sources.Data
         public WorldData CurrentWorldData;
         public bool IsInventoryUnlocked;
         public Wallet Wallet;
+        public List<QuestData> Quests;
 
-        public PlayerProgress(WorldData[] worldDatas)
+        public PlayerProgress(WorldData[] worldDatas, List<QuestData> quests)
         {
             WorldDatas = worldDatas;
+            Quests = quests;
 
             MoveCounter = new();
-            Wallet = new ();
+            Wallet = new();
 
             CurrentWorldData = WorldDatas[0];
             IsInventoryUnlocked = false;
@@ -40,5 +44,8 @@ namespace Assets.Sources.Data
 
             return CurrentWorldData;
         }
+
+        public QuestData GetQuest(string id) =>
+            Quests.First(data => data.Id == id);
     }
 }

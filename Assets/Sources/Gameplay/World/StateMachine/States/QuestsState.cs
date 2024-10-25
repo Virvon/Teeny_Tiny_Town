@@ -5,24 +5,22 @@ using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
 {
-    public class StoreState : IState
+    public class QuestsState : IState
     {
         private readonly WindowsSwitcher _windowsSwitcher;
 
-        public StoreState(WindowsSwitcher windowsSwitcher)
+        public QuestsState(WindowsSwitcher windowsSwitcher)
         {
             _windowsSwitcher = windowsSwitcher;
         }
 
         public UniTask Enter()
         {
-            _windowsSwitcher.Switch<StoreWindow>();
+            _windowsSwitcher.Switch<QuestsWindow>();
             return default;
         }
 
-        public UniTask Exit()
-        {
-            return default;
-        }
+        public UniTask Exit() =>
+            default;
     }
 }

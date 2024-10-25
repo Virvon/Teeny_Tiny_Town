@@ -13,6 +13,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
     public interface IWorldChanger : IBuildingGivable, ITileGetable
     {
         event Action TilesChanged;
+        event Action<BuildingType> BuildingPlaced;
 
         IReadOnlyList<Tile> Tiles { get; }
 

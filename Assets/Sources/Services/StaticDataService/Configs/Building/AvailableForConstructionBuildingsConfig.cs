@@ -37,5 +37,5 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Building
 
             return false;
         }
-    }  
+    } 
 }

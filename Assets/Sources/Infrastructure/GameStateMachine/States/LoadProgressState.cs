@@ -6,8 +6,9 @@ using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.InputSystem.Utilities;
+using System.Linq;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {
@@ -42,7 +43,10 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
 
         private PlayerProgress CreateNewProgress()
         {
-            PlayerProgress progress = new PlayerProgress(GetWorldDatas());
+            List<QuestData> startQuests = new();
+            startQuests.AddRange(_staticDataService.QuestsConfig.StartQuestsId.Select(id => new QuestData(id)));
+
+            PlayerProgress progress = new PlayerProgress(GetWorldDatas(), startQuests);
 
             progress.Wallet.Value = 3000;
 

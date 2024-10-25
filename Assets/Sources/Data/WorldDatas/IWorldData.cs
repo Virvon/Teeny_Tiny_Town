@@ -9,7 +9,7 @@ namespace Assets.Sources.Data.WorldDatas
 {
     public interface IWorldData
     {
-        event Action<BuildingType> BuildingUpdated;
+        event Action<BuildingType> BuildingUpgraded;
 
         ReadOnlyArray<TileData> Tiles { get; }
         Vector2Int Size { get; set; }

@@ -14,12 +14,12 @@ namespace Assets.Sources.Gameplay.PointsCounter
         {
             _worldData = worldData;
 
-            _worldData.BuildingUpdated += OnBuildingUpdated;
+            _worldData.BuildingUpgraded += OnBuildingUpdated;
             _staticDataService = staticDataService;
         }
 
         ~PointsCounter()=>
-            _worldData.BuildingUpdated -= OnBuildingUpdated;
+            _worldData.BuildingUpgraded -= OnBuildingUpdated;
 
         private void OnBuildingUpdated(BuildingType type)
         {

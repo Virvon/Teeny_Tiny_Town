@@ -4,11 +4,11 @@ using System.Linq;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.Quests;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 
 namespace Assets.Sources.Services.StaticDataService
@@ -37,6 +37,7 @@ namespace Assets.Sources.Services.StaticDataService
         public ReadOnlyArray<WorldConfig> WorldConfigs => _worldConfigs.Values.ToArray();
         public AnimationsConfig AnimationsConfig { get; private set; }
         public StoreItemConfig StoreItemConfig { get; private set; }
+        public QuestsConfig QuestsConfig { get; private set; }
 
         public async UniTask InitializeAsync()
         {
@@ -53,6 +54,7 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadAnimationsConfig());
             tasks.Add(LoadStoreItemConfig());
             tasks.Add(LoadRewardConfigs());
+            tasks.Add(LoadQuestsConfig());
 
             await UniTask.WhenAll(tasks);
         }
@@ -86,6 +88,13 @@ namespace Assets.Sources.Services.StaticDataService
             return _groundConfigs.TryGetValue(
                 groundType, out Dictionary<RoadType, RoadConfig> roadConfigs) ? (roadConfigs.TryGetValue(
                 roadType, out RoadConfig config) ? config : null) : null;
+        }
+
+        private async UniTask LoadQuestsConfig()
+        {
+            QuestsConfig[] configs = await GetConfigs<QuestsConfig>();
+
+            QuestsConfig = configs.First();
         }
 
         private async UniTask LoadRewardConfigs()

@@ -39,7 +39,7 @@ namespace Assets.Sources.Data.WorldDatas
             PointsData = new(goals);
         }
 
-        public event Action<BuildingType> BuildingUpdated;
+        public event Action<BuildingType> BuildingUpgraded;
 
         string IWorldData.Id => Id;
         BuildingType IWorldData.NextBuildingTypeForCreation
@@ -68,7 +68,7 @@ namespace Assets.Sources.Data.WorldDatas
 
         public void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)
         {
-            BuildingUpdated?.Invoke(createdBuilding);
+            BuildingUpgraded?.Invoke(createdBuilding);
 
             if (NextBuildingTypeForCreation != createdBuilding || NextBuildingTypeForCreation == BuildingType.Undefined)
                 return;

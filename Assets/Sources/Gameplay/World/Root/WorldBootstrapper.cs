@@ -95,6 +95,7 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine.RegisterState(StatesFactory.Create<ExitWorldState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ResultState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<RewardState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<QuestsState>());
         }
 
         protected virtual void OnWorldEntered() =>
@@ -113,6 +114,7 @@ namespace Assets.Sources.Gameplay.World.Root
             await _windowsSwitcher.RegisterWindow<GameplayWindow>(WindowType.GameplayWindow, _uiFactory);
             await _windowsSwitcher.RegisterWindow<RewardWindow>(WindowType.RewardWindow, _uiFactory);
             await _windowsSwitcher.RegisterWindow<ResultWindow>(WindowType.ResultWindow, _uiFactory);
+            await _windowsSwitcher.RegisterWindow<QuestsWindow>(WindowType.QuestsWindow, _uiFactory);
         }
     }
 }

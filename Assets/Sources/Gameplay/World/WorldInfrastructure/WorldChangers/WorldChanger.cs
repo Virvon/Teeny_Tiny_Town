@@ -40,6 +40,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
         public event Action TilesChanged;
         public event Action UpdateFinished;
+        public event Action<BuildingType> BuildingPlaced;
 
         public IReadOnlyList<Tile> Tiles => _tiles;
 
@@ -62,6 +63,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
             NextBuildingForPlacingCreator.MoveToNextBuilding(Tiles);
             TilesChanged?.Invoke();
+            BuildingPlaced?.Invoke(buildingType);
         }
 
         public async UniTask Update()

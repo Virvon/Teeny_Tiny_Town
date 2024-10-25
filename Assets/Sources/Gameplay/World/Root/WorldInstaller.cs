@@ -42,6 +42,7 @@ namespace Assets.Sources.Gameplay.World.Root
             BindWorld();
             BindPointsCounter();
             BindRewardsCreator();
+            BindQuestsChecker();
         }
 
         protected virtual void BindWorldBootstrapper()
@@ -62,6 +63,11 @@ namespace Assets.Sources.Gameplay.World.Root
         protected virtual void BindGameplayMover()
         {
             Container.BindInterfacesTo<GameplayMover.GameplayMover>().AsSingle();
+        }
+
+        private void BindQuestsChecker()
+        {
+            Container.Bind<QuestsChecker>().AsSingle().NonLazy();
         }
 
         private void BindRewardsCreator()

@@ -5,9 +5,11 @@ using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI;
+using Assets.Sources.UI.Windows.World.Panels;
 using Assets.Sources.UI.Windows.World.Panels.Reward;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace Assets.Sources.Infrastructure.Factories.UiFactory
@@ -19,14 +21,24 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
         private readonly StoreItem.Factory _storeItemFactory;
         private readonly RewardPanel.Factory _rewardPanelFactory;
         private readonly IAssetProvider _assetProvider;
+        private readonly QuestPanel.Factory _questPanelFactory;
 
-        public UiFactory(Window.Factory windowFactory, IStaticDataService staticDataService, StoreItem.Factory storeItemFactory, RewardPanel.Factory rewardPanelFactory, IAssetProvider assetProvider)
+        public UiFactory(Window.Factory windowFactory, IStaticDataService staticDataService, StoreItem.Factory storeItemFactory, RewardPanel.Factory rewardPanelFactory, IAssetProvider assetProvider, QuestPanel.Factory questPanelFactory)
         {
             _windowFactory = windowFactory;
             _staticDataService = staticDataService;
             _storeItemFactory = storeItemFactory;
             _rewardPanelFactory = rewardPanelFactory;
             _assetProvider = assetProvider;
+            _questPanelFactory = questPanelFactory;
+        }
+
+        public async UniTask<QuestPanel> CreateQuestPanel(string id, Transform parent)
+        {
+            QuestPanel questPanel = await _questPanelFactory.Create(_staticDataService.QuestsConfig.QuestPanelAssetReference, parent);
+            questPanel.Init(id);
+
+            return questPanel;
         }
 
         public async UniTask<RewardPanel> CreateRewardPanel(RewardType type, Transform parent)

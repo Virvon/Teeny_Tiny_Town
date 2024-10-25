@@ -18,6 +18,7 @@ namespace Assets.Sources.UI.Windows.World
         [SerializeField] private Button _hideButton;
         [SerializeField] private WorldChangingWindowPanel _worldChangingWindowPanel;
         [SerializeField] private WorldChangingWindowPanel _saveGameplayPanel;
+        [SerializeField] private Button _questsWindowOpenButton;
 
         private NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
         private GameplayStateMachine _gameplayStateMachine;
@@ -28,28 +29,36 @@ namespace Assets.Sources.UI.Windows.World
             WorldStateMachine = worldStateMachine;
             _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
             _gameplayStateMachine = gameplayStateMachine;
+
+            Subscrube();
         }
 
         protected WorldStateMachine WorldStateMachine { get; private set; }
 
-        protected virtual void OnEnable()
+        private void OnDestroy() =>
+            Unsubscruby();
+
+        protected virtual void Subscrube()
         {
             _hideButton.onClick.AddListener(OnHideButtonClicked);
             _nextBuildingForPlacingCreator.NoMoreEmptyTiles += OnNoMoreEmptyTiles;
+            _questsWindowOpenButton.onClick.AddListener(OnQuestsWindowOpenButtonClicked);
         }
 
-        protected virtual void OnDisable()
+        protected virtual void Unsubscruby()
         {
             _hideButton.onClick.RemoveListener(OnHideButtonClicked);
             _nextBuildingForPlacingCreator.NoMoreEmptyTiles -= OnNoMoreEmptyTiles;
+            _questsWindowOpenButton.onClick.AddListener(OnQuestsWindowOpenButtonClicked);
         }
+
+        private void OnQuestsWindowOpenButtonClicked() =>
+            WorldStateMachine.Enter<QuestsState>().Forget();
 
         private void OnHideButtonClicked() =>
             WorldStateMachine.Enter<ExitWorldState, Action>(() => _gameplayStateMachine.Enter<MapSelectionState>().Forget()).Forget();
 
-        private void OnNoMoreEmptyTiles()
-        {
+        private void OnNoMoreEmptyTiles() =>
             _worldChangingWindowPanel.Hide(callback: _saveGameplayPanel.Open);
-        }
     }
 }
