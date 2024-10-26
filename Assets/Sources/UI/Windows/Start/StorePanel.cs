@@ -11,14 +11,14 @@ namespace Assets.Sources.UI.Windows.Start
         public override void Open()
         {
             base.Open();
-            _blur.Show(AnimationsConfig.PanelOpeningStateDuration);
+            _blur.Show(AnimationsConfig.WindowOpeningStateDuration);
             _packagesPanel.Open();
         }
 
         protected override void Hide(TweenCallback callback)
         {
             base.Hide(callback);
-            _blur.Hide(AnimationsConfig.PanelOpeningStateDuration);
+            _blur.Hide(AnimationsConfig.WindowOpeningStateDuration);
             _packagesPanel.Hide();
         }
     }

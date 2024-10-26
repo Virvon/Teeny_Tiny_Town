@@ -13,7 +13,7 @@ using Zenject;
 
 namespace Assets.Sources.UI.Windows.World
 {
-    public class GameplayWindow : ScreenSpaceCameraWindow
+    public class GameplayWindow : Window
     {
         [SerializeField] private Button _hideButton;
         [SerializeField] private Button _questsWindowOpenButton;

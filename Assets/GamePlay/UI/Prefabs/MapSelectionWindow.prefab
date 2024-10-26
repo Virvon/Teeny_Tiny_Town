@@ -314,6 +314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3156594310591509698}
   - component: {fileID: 1568540163141648451}
+  - component: {fileID: 6214524797272433358}
   - component: {fileID: 2244421405932116770}
   - component: {fileID: 2539942933464453976}
   - component: {fileID: -3746850757443209230}
@@ -367,6 +368,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &6214524797272433358
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563100173173134119}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &2244421405932116770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1568540163141648451}
+  _canvasGroup: {fileID: 6214524797272433358}
   _nextMapButton: {fileID: 1969591604384411962}
   _previousMapButton: {fileID: 6374837053504954080}
   _continueButton: {fileID: 1544025125425996124}

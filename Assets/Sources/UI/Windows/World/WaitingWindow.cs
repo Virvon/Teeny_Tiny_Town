@@ -12,7 +12,7 @@ using Zenject;
 
 namespace Assets.Sources.UI.Windows.World
 {
-    public class WaitingWindow : Window
+    public class WaitingWindow : BluredBackgroundWindow
     {
         [SerializeField] private Button _mapSelectionWindowOpenButton;
         [SerializeField] private Button _startWindowOpenButton;

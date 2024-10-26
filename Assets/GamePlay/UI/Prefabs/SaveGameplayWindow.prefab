@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 2244421405932116770}
   - component: {fileID: 2539942933464453976}
   - component: {fileID: 9167623694196970855}
+  - component: {fileID: -5057453744228766556}
   m_Layer: 5
   m_Name: SaveGameplayWindow
   m_TagString: Untagged
@@ -267,9 +268,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c984b93cf8ec70749b6bb35745c9cc72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: -5057453744228766556}
   _canvas: {fileID: 1568540163141648451}
+  _blur: {fileID: 8142157950495123817}
   _undoButton: {fileID: 475818167162804126}
   _completeButton: {fileID: 3714005397576302132}
+--- !u!225 &-5057453744228766556
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563100173173134119}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4162105763509854190
 GameObject:
   m_ObjectHideFlags: 0

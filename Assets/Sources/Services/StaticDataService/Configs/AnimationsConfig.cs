@@ -19,7 +19,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs
         public float BuildingShakesDuration;
         public Vector3 BuildingShakeOffset;
 
-        public float PanelOpeningStateDuration;
+        public float WindowOpeningStateDuration;
 
         public float WorldRotateDuration;
         public float WorldRotateToStarDuration;

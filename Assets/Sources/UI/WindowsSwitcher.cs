@@ -32,9 +32,10 @@ namespace Assets.Sources.UI
         public void Switch<TWindow>()
             where TWindow : Window
         {
-            _currentWindow?.Hide();
-            _currentWindow = _windows[typeof(TWindow)];
-            _currentWindow.Open();
+            if (_currentWindow != null)
+                _currentWindow.Hide(callback: OpenWindow<TWindow>);
+            else
+                OpenWindow<TWindow>();
         }
 
         public void Remove<TWindow>()
@@ -44,12 +45,29 @@ namespace Assets.Sources.UI
 
             if (_currentWindow == window)
             {
-                _currentWindow.Hide();
-                _currentWindow = null;
+                _currentWindow.Hide(callback: () =>
+                {
+                    Remove<TWindow>(window);
+                    _currentWindow = null;
+                });
             }
+            else
+            {
+                Remove<TWindow>(window);
+            }
+        }
 
+        private void Remove<TWindow>(Window window) where TWindow : Window
+        {
             window.Destroy();
             _windows.Remove(typeof(TWindow));
+        }
+
+        private void OpenWindow<TWindow>()
+            where TWindow : Window
+        {
+            _currentWindow = _windows[typeof(TWindow)];
+            _currentWindow.Open();
         }
     }
 }

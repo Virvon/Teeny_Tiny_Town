@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Gameplay.StateMachine;
+﻿using Assets.Sources.Gameplay.Cameras;
+using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.StateMachine.States;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -7,17 +8,19 @@ using Zenject;
 
 namespace Assets.Sources.UI.Windows.Start
 {
-    public class StartWindow : ScreenSpaceCameraWindow
+    public class StartWindow : Window
     {
         [SerializeField] private Button _mapSelectionButton;
         [SerializeField] private Button _continueButton;
+        [SerializeField] private Canvas _canvas;
 
         private GameplayStateMachine _gameplayStateMachine;
 
         [Inject]
-        private void Construct(GameplayStateMachine gameplayStateMachine)
+        private void Construct(GameplayStateMachine gameplayStateMachine, GameplayCamera gameplayCamera)
         {
             _gameplayStateMachine = gameplayStateMachine;
+            _canvas.worldCamera = gameplayCamera.Camera;
         }
 
         private void OnEnable()

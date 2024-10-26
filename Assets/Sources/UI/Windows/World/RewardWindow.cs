@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Assets.Sources.UI.Windows.World
 {
-    public class RewardWindow : ScreenSpaceCameraWindow
+    public class RewardWindow : BluredBackgroundWindow
     {
         [SerializeField] private RewardsList _rewardsList;
 

@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Assets.Sources.UI.Windows.World
 {
-    public class AdditionalBonusOfferWindow : Window
+    public class AdditionalBonusOfferWindow : BluredBackgroundWindow
     {
         [SerializeField] private Button _startButton;
 

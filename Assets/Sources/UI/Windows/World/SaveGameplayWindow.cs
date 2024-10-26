@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Assets.Sources.UI.Windows.World
 {
-    public class SaveGameplayWindow : ScreenSpaceCameraWindow
+    public class SaveGameplayWindow : BluredBackgroundWindow
     {
         [SerializeField] private Button _undoButton;
         [SerializeField] private Button _completeButton;

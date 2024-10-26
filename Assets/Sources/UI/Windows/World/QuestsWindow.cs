@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Assets.Sources.UI.Windows.World
 {
-    public class QuestsWindow : ScreenSpaceCameraWindow
+    public class QuestsWindow : BluredBackgroundWindow
     {
         [SerializeField] private Button _hideButton;
 

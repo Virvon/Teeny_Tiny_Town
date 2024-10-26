@@ -105,6 +105,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5510029049222827449, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
   m_PrefabInstance: {fileID: 9184827099878960028}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &4143215202057337880 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 5046467910521493380, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
+  m_PrefabInstance: {fileID: 9184827099878960028}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4552390273723134768 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4637116898207553708, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
@@ -150,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 7688662034230504415}
+  _canvasGroup: {fileID: 4143215202057337880}
   _hideButton: {fileID: 8979583046385098752}
   _questsWindowOpenButton: {fileID: 8789440570725774273}
   _remainingMovesPanelParent: {fileID: 3675079887081186853}

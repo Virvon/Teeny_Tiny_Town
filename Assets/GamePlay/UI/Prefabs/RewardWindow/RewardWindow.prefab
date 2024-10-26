@@ -374,6 +374,7 @@ GameObject:
   - component: {fileID: 2244421405932116770}
   - component: {fileID: 2539942933464453976}
   - component: {fileID: 3341716492167630682}
+  - component: {fileID: 1115195476318485694}
   m_Layer: 5
   m_Name: RewardWindow
   m_TagString: Untagged
@@ -482,8 +483,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73a774af8a8d52f459069c6b297bd099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 1115195476318485694}
   _canvas: {fileID: 1568540163141648451}
+  _blur: {fileID: 5350262235052729750}
   _rewardsList: {fileID: 6026715270429558105}
+--- !u!225 &1115195476318485694
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563100173173134119}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1047319966997453226
 GameObject:
   m_ObjectHideFlags: 0

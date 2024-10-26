@@ -29,10 +29,10 @@ namespace Assets.Sources.UI.Windows.Start
 
         private void ChangeOpeningState(Vector2 fromMinAnchor, Vector2 fromMaxAnchor, Vector2 fromPivot, Vector2 fromPosition, Vector2 toMinAnchor, Vector2 toMaxAnchor, Vector2 toPivot, Vector2 toPosition)
         {
-            _rectTransform.DOAnchorMin(toMinAnchor, AnimationsConfig.PanelOpeningStateDuration).From(fromMinAnchor);
-            _rectTransform.DOAnchorMax(toMaxAnchor, AnimationsConfig.PanelOpeningStateDuration).From(fromMaxAnchor);
-            _rectTransform.DOPivot(toPivot, AnimationsConfig.PanelOpeningStateDuration).From(fromPivot);
-            _rectTransform.DOAnchorPos(toPosition, AnimationsConfig.PanelOpeningStateDuration).From(fromPosition);
+            _rectTransform.DOAnchorMin(toMinAnchor, AnimationsConfig.WindowOpeningStateDuration).From(fromMinAnchor);
+            _rectTransform.DOAnchorMax(toMaxAnchor, AnimationsConfig.WindowOpeningStateDuration).From(fromMaxAnchor);
+            _rectTransform.DOPivot(toPivot, AnimationsConfig.WindowOpeningStateDuration).From(fromPivot);
+            _rectTransform.DOAnchorPos(toPosition, AnimationsConfig.WindowOpeningStateDuration).From(fromPosition);
         }
     }
 }
