@@ -16,11 +16,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
         private Vector3 _startPosition;
 
         [Inject]
-        private void Construct(IStaticDataService staticDataservice)
-        {
+        private void Construct(IStaticDataService staticDataservice) =>
             _animationsConfig = staticDataservice.AnimationsConfig;
-            _startPosition = transform.position;
-        }
 
         public BuildingType Type { get; private set; }
 
@@ -32,9 +29,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 
         public void StopShaking()
         {
-            TryKillSequence();
-
-            transform.position = _startPosition;
+            if(TryKillSequence())
+                transform.position = _startPosition;
         }
 
         public void StopBlinking()
@@ -47,6 +43,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
         public void Shake()
         {
             TryKillSequence();
+
+            _startPosition = transform.position;
             
             _sequence = DOTween
                 .Sequence()
@@ -97,13 +95,18 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
                 await UniTask.WaitForSeconds(_animationsConfig.TileUpdatingDuration);
         }
 
-        private void TryKillSequence()
+        private bool TryKillSequence()
         {
             if (_sequence != null)
+            {
                 _sequence.Kill();
+                return true;
+            }
+
+            return false;
         }
 
-        public class Factory : PlaceholderFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<BuildingRepresentation>>
+        public class Factory : PlaceholderFactory<AssetReferenceGameObject, Vector3, float, Transform, UniTask<BuildingRepresentation>>
         {
         }
     }

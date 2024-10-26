@@ -19,7 +19,6 @@ namespace Assets.Sources.Gameplay.World
 
         private Sequence _aroundRotating;
         private Quaternion _startRotation;
-        private int _rotationDegrees;
         private Tween _rotation;
 
         [Inject]
@@ -27,10 +26,12 @@ namespace Assets.Sources.Gameplay.World
         {
             _animationsConfig = staticDataService.AnimationsConfig;
 
-            _rotationDegrees = 0;
+            RotationDegrees = 0;
         }
 
         public event Action Entered;
+        
+        public int RotationDegrees { get; private set; }
 
         private void Start()
         {
@@ -70,12 +71,12 @@ namespace Assets.Sources.Gameplay.World
 
         private void Rotate(int degrees)
         {
-            _rotationDegrees += degrees;
+            RotationDegrees += degrees;
 
             if (_rotation != null)
                 _rotation.Kill();
 
-            _rotation = transform.DORotateQuaternion(Quaternion.Euler(transform.rotation.x, _rotationDegrees, transform.rotation.z), _animationsConfig.WorldSimpleRotateDuration);
+            _rotation = transform.DORotateQuaternion(Quaternion.Euler(transform.rotation.x, RotationDegrees, transform.rotation.z), _animationsConfig.WorldSimpleRotateDuration);
         }
 
         public class Factory : PlaceholderFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<World>>

@@ -25,7 +25,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
                 .FromFactory<KeyPrefabFactoryAsync<WorldGenerator>>();
 
             Container
-                .BindFactory<AssetReferenceGameObject, Vector3, Transform, UniTask<BuildingRepresentation>, BuildingRepresentation.Factory>()
+                .BindFactory<AssetReferenceGameObject, Vector3, float, Transform, UniTask<BuildingRepresentation>, BuildingRepresentation.Factory>()
                 .FromFactory<ReferencePrefabFactoryAsync<BuildingRepresentation>>();
 
             Container

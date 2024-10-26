@@ -1,8 +1,9 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+﻿using Assets.Sources.Gameplay.World;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
-using Assets.Sources.Infrastructure.Factories.GameplayFactory;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
@@ -10,8 +11,6 @@ using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
-using BuildingRepresentation = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings.BuildingRepresentation;
-using Ground = Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground;
 
 namespace Assets.Sources.Infrastructure.Factories.WorldFactory
 {
@@ -26,6 +25,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
         private readonly Ground.Factory _groundFactory;
         private readonly BuildingMarker.Factory _buildingMarkerFactory;
         private readonly ActionHandlerSwitcher.Factory _actionHanlderSwitcherFactory;
+        private readonly World _world;
 
         public WorldFactory(
             DiContainer container,
@@ -36,7 +36,8 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             Ground.Factory groundFactory,
             BuildingMarker.Factory buildingMarkerFactory,
             IStaticDataService staticDataService,
-            ActionHandlerSwitcher.Factory actionHanlderSwitcherFactory)
+            ActionHandlerSwitcher.Factory actionHanlderSwitcherFactory,
+            World world)
         {
             _container = container;
             _worldGeneratorFactory = worldGeneratorFactory;
@@ -47,6 +48,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             _buildingMarkerFactory = buildingMarkerFactory;
             _staticDataService = staticDataService;
             _actionHanlderSwitcherFactory = actionHanlderSwitcherFactory;
+            _world = world;
         }
 
         public WorldGenerator WorldGenerator { get; private set; }
@@ -77,7 +79,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
 
         public async UniTask<Ground> CreateGround(GroundType groundType, RoadType roadType, Vector3 position, GroundRotation rotation, Transform parent)
         {
-            return await _groundFactory.Create(_staticDataService.GetRoad(groundType, roadType).AssetReference, position, (int)rotation, parent);
+            return await _groundFactory.Create(_staticDataService.GetRoad(groundType, roadType).AssetReference, position, (int)rotation + _world.RotationDegrees, parent);
         }
 
         public async UniTask CreateBuildingMarker()
@@ -101,7 +103,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
         {
             BuildingConfig buildingConfig = _staticDataService.GetBuilding<BuildingConfig>(type);
 
-            BuildingRepresentation building = await _buildingFactory.Create(buildingConfig.AssetReference, position, parent);
+            BuildingRepresentation building = await _buildingFactory.Create(buildingConfig.AssetReference, position, _world.RotationDegrees, parent);
 
             building.Init(type);
 
