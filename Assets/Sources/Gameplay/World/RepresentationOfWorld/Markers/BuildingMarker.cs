@@ -1,13 +1,13 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
+﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
+namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
 {
     public class BuildingMarker : MonoBehaviour
     {
@@ -15,6 +15,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
         private NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
 
         private BuildingRepresentation _building;
+        private bool _isHided;
 
         [Inject]
         private void Construct(IWorldFactory worldFactory, NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
@@ -23,6 +24,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
 
             IsCreatedBuilding = false;
+            _isHided = true;
 
             _nextBuildingForPlacingCreator.DataChanged += OnNextBuildingForPlacingDataChanged;
         }
@@ -42,20 +44,22 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
         public void Show()
         {
-            if(_building != null)
+            if (_building != null)
                 _building.gameObject.SetActive(true);
+
+            _isHided = false;
         }
 
         public void Hide()
         {
-            if(_building != null)
+            if (_building != null)
                 _building.gameObject.SetActive(false);
+
+            _isHided = true;
         }
 
-        public void Replace(Vector3 targetPosition)
-        {
+        public void Replace(Vector3 targetPosition) =>
             transform.position = targetPosition;
-        }
 
         private async UniTask TryUpdate(BuildingType targetBuildingType)
         {
@@ -73,7 +77,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
                 _building = await _worldFactory.CreateBuilding(targetBuildingType, transform.position, transform);
 
-                if(_building.transform.position != transform.position)
+                if (_building.transform.position != transform.position)
                 {
                     _building.transform.position = transform.position;
 
@@ -81,6 +85,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
                 }
 
                 _building.Blink();
+
+                if (_isHided)
+                    _building.gameObject.SetActive(false);
 
                 IsCreatedBuilding = false;
             }
@@ -91,6 +98,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
         public class Factory : PlaceholderFactory<string, UniTask<BuildingMarker>>
         {
-        } 
+        }
     }
 }

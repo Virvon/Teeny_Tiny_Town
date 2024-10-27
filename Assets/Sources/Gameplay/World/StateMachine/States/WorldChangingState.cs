@@ -1,10 +1,10 @@
 ﻿using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Services.Input;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
-using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI;
 using Assets.Sources.UI.Windows.World;
 using Cysharp.Threading.Tasks;
@@ -21,6 +21,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         private readonly IWorldData _worldData;
         private readonly WorldStateMachine _worldStateMachine;
         private readonly IPersistentProgressService _persistentProgressService;
+        private readonly MarkersVisibility _markersVisibility;
 
         public WorldChangingState(
             IInputService inputService,
@@ -29,7 +30,8 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             GameplayCamera gameplayCamera,
             IWorldData worldData,
             WorldStateMachine worldStateMachine,
-            IPersistentProgressService persistentProgressService)
+            IPersistentProgressService persistentProgressService,
+            MarkersVisibility markersVisibility)
         {
             _inputService = inputService;
             _windowsSwitcher = windowsSwitcher;
@@ -38,6 +40,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _worldData = worldData;
             _worldStateMachine = worldStateMachine;
             _persistentProgressService = persistentProgressService;
+            _markersVisibility = markersVisibility;            
 
             _worldData.PointsData.GoalAchieved += OnGoalAchived;
         }
@@ -58,6 +61,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             {
                 _actionHandlerStateMachine.SetActive(true);
                 _inputService.SetEnabled(true);
+                _markersVisibility.ChangeAllowedVisibility(true);
             });
 
             _persistentProgressService.Progress.GameplayMovesCounter.MovesOvered += OnMovesOvered;

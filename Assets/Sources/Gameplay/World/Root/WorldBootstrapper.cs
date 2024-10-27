@@ -64,13 +64,13 @@ namespace Assets.Sources.Gameplay.World.Root
             worldGenerator.PlaceToCenter(_worldData.Size);
             await _worldChanger.Generate(worldGenerator);
 
-            RegisterStates();
 
             await _worldFactory.CreateSelectFrame();
             await _worldFactory.CreateBuildingMarker();
             await _worldFactory.CreateActionHandlerSwitcher();
 
             RegisterActionHandlerStates();
+            RegisterStates();
 
             _actionHandlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
 

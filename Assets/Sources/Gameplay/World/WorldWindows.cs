@@ -46,6 +46,7 @@ namespace Assets.Sources.Gameplay.World
             _windowsSwitcher.Remove<RewardWindow>();
             _windowsSwitcher.Remove<ResultWindow>();
             _windowsSwitcher.Remove<QuestsWindow>();
+            _windowsSwitcher.Remove<SaveGameplayWindow>();
 
             if (_persistentProgressService.Progress.StoreData.IsInfinityMovesUnlocked == false)
                 _windowsSwitcher.Remove<WaitingWindow>();

@@ -2,6 +2,7 @@
 using Assets.Sources.Gameplay.PointsCounter;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
@@ -44,6 +45,7 @@ namespace Assets.Sources.Gameplay.World.Root
             BindRewardsCreator();
             BindQuestsChecker();
             BindWorldWindows();
+            BindMarkersVisibility();
         }
 
         protected virtual void BindWorldBootstrapper()
@@ -64,6 +66,11 @@ namespace Assets.Sources.Gameplay.World.Root
         protected virtual void BindGameplayMover()
         {
             Container.BindInterfacesTo<GameplayMover.GameplayMover>().AsSingle();
+        }
+
+        private void BindMarkersVisibility()
+        {
+            Container.Bind<MarkersVisibility>().AsSingle();
         }
 
         private void BindWorldWindows()

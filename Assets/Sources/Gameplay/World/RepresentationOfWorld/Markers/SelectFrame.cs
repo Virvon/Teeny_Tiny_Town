@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
+namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
 {
     public class SelectFrame : MonoBehaviour
     {
@@ -15,11 +15,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         private void Start() =>
             Hide();
 
-        public void Select(TileRepresentation tile)
-        {
+        public void Select(TileRepresentation tile) =>
             transform.position = tile.BuildingPoint.position + _offset;
-            _canvas.enabled = true;
-        }
 
         public void SelectLast()
         {
@@ -27,10 +24,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
                 Select(_lastSelectedTile);
         }
 
-        public void Hide()
-        {
+        public void Show() =>
+            _canvas.enabled = true;
+
+        public void Hide() =>
             _canvas.enabled = false;
-        }
 
         public class Factory : PlaceholderFactory<string, UniTask<SelectFrame>>
         {

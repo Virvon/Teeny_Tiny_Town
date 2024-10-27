@@ -2,6 +2,7 @@
 using UnityEngine;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.GameplayMover;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
@@ -11,6 +12,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         private readonly BuildingMarker _buildingMarker;
         private readonly WorldRepresentationChanger _worldRepresentationChanger;
+        private readonly MarkersVisibility _markersVisibility;
 
         private TileRepresentation _handlePressedMoveStartTile;
         private bool _isBuildingPressed;
@@ -19,24 +21,25 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             SelectFrame selectFrame,
             LayerMask layerMask,
             IGameplayMover gameplayMover,
-            BuildingMarker buildingMarker,
-            WorldRepresentationChanger worldRepresentationChanger)
+            WorldRepresentationChanger worldRepresentationChanger,
+            MarkersVisibility markersVisibility,
+            BuildingMarker buildingMarker)
             : base(selectFrame, layerMask, gameplayMover)
         {
-            _buildingMarker = buildingMarker;
             _worldRepresentationChanger = worldRepresentationChanger;
+            _markersVisibility = markersVisibility;
+            _buildingMarker = buildingMarker;
 
             _worldRepresentationChanger.GameplayMoved += StartPlacing;
         }
 
-        ~NewBuildingPlacePositionHandler()
-        {
+        ~NewBuildingPlacePositionHandler() =>
             _worldRepresentationChanger.GameplayMoved -= StartPlacing;
-        }
 
         public override UniTask Enter()
         {
-            _buildingMarker.Show();
+            _markersVisibility.SetBuildingShowed(true);
+            _markersVisibility.SetSelectFrameShowed(true);
             SelectFrame.SelectLast();
 
             return default;
@@ -44,8 +47,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override UniTask Exit()
         {
-            SelectFrame.Hide();
-            _buildingMarker.Hide();
+            _markersVisibility.SetBuildingShowed(false);
+            _markersVisibility.SetSelectFrameShowed(false);
 
             return default;
         }
@@ -54,9 +57,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             TileRepresentation startTile = _worldRepresentationChanger.StartTile;
 
-            _buildingMarker.Show();
             _buildingMarker.Mark(startTile);
             SelectFrame.Select(startTile);
+            _markersVisibility.SetBuildingShowed(true);
+            _markersVisibility.SetSelectFrameShowed(true);
         }
 
         public override void OnHandleMoved(Vector2 handlePosition)
@@ -91,8 +95,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty)
             {
-                _buildingMarker.Hide();
-                SelectFrame.Hide();
+                _markersVisibility.SetBuildingShowed(false);
+                _markersVisibility.SetSelectFrameShowed(false);
 
                 GameplayMover.PlaceNewBuilding(tile.GridPosition, _buildingMarker.BuildingType);
             }

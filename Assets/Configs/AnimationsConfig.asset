@@ -66,7 +66,8 @@ MonoBehaviour:
   BuildingShakesCount: 2
   BuildingShakesDuration: 0.4
   BuildingShakeOffset: {x: 0.2, y: 0, z: 0}
-  WindowOpeningStateDuration: 0.2
+  WindowOpeningStateDuration: 0.4
   WorldRotateDuration: 30
-  WorldRotateToStarDuration: 0.4
+  WorldRotateToStarDuration: 0.6
   WorldSimpleRotateDuration: 0.3
+  CameraMoveDuration: 1.2

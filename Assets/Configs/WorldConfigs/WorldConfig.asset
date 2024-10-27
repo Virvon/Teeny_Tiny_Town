@@ -64,7 +64,7 @@ MonoBehaviour:
     GridPosition: {x: 3, y: 3}
     BuildingType: 0
   NextBuildingTypeForCreation: 3
-  StartingAvailableBuildingTypes: 04000000
+  StartingAvailableBuildingTypes: 01000000
   AssetReference:
     m_AssetGUID: 53dd55884ea178b44ba935da121b352f
     m_SubObjectName: 
