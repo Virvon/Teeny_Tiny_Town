@@ -15,13 +15,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
         private void Start() =>
             Hide();
 
-        public void Select(TileRepresentation tile) =>
-            transform.position = tile.BuildingPoint.position + _offset;
-
-        public void SelectLast()
+        public void Select(TileRepresentation tile)
         {
-            if (_lastSelectedTile != null)
-                Select(_lastSelectedTile);
+            transform.position = tile.BuildingPoint.position + _offset;
+            _lastSelectedTile = tile;
         }
 
         public void Show() =>

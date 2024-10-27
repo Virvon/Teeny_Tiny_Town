@@ -16,6 +16,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         private TileRepresentation _handlePressedMoveStartTile;
         private bool _isBuildingPressed;
+        private TileRepresentation _lastSelectedTile;
 
         public NewBuildingPlacePositionHandler(
             SelectFrame selectFrame,
@@ -38,9 +39,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override UniTask Enter()
         {
+            if(_lastSelectedTile != null)
+                SelectFrame.Select(_lastSelectedTile);
+
             _markersVisibility.SetBuildingShowed(true);
             _markersVisibility.SetSelectFrameShowed(true);
-            SelectFrame.SelectLast();
 
             return default;
         }
@@ -68,6 +71,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty)
             {
                 SelectFrame.Select(tile);
+
+                _lastSelectedTile = tile;
 
                 if (_isBuildingPressed == false)
                     _buildingMarker.Mark(tile);
@@ -104,6 +109,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             {
                 _buildingMarker.Mark(_handlePressedMoveStartTile);
                 SelectFrame.Select(_handlePressedMoveStartTile);
+
+                _lastSelectedTile = _handlePressedMoveStartTile;
+
+                _lastSelectedTile = tile;
             }
 
             _handlePressedMoveStartTile = null;

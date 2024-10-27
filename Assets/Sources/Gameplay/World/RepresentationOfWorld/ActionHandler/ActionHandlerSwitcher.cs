@@ -24,14 +24,20 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
             _inputService.RemoveBuildingButtonPressed += OnRemoveBuildingButtonClicked;
             _inputService.ReplaceBuildingButtonPressed += OnReplaceBuildingButtonClicked;
-            _worldRepresentationChanger.GameplayMoved += OnGameplayMoved;
+            _worldRepresentationChanger.GameplayMoved += EnterToDefaultState;
         }
 
         private void OnDestroy()
         {
             _inputService.RemoveBuildingButtonPressed -= OnRemoveBuildingButtonClicked;
             _inputService.ReplaceBuildingButtonPressed -= OnReplaceBuildingButtonClicked;
-            _worldRepresentationChanger.GameplayMoved -= OnGameplayMoved;
+            _worldRepresentationChanger.GameplayMoved -= EnterToDefaultState;
+        }
+
+        public void EnterToDefaultState()
+        {
+            if (_handlerStateMachine.CurrentState is not NewBuildingPlacePositionHandler)
+                _handlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
         }
 
         private void OnReplaceBuildingButtonClicked()
@@ -47,12 +53,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             if (_handlerStateMachine.CurrentState is not RemovedBuildingPositionHandler)
                 _handlerStateMachine.Enter<RemovedBuildingPositionHandler>();
             else
-                _handlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
-        }
-
-        private void OnGameplayMoved()
-        {
-            if (_handlerStateMachine.CurrentState is not NewBuildingPlacePositionHandler)
                 _handlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
         }
 

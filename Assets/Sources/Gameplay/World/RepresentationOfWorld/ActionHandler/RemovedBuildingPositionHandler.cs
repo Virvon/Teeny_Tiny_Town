@@ -8,14 +8,18 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
     public class RemovedBuildingPositionHandler : ActionHandlerState
     {
+        private readonly MarkersVisibility _markersVisibility;
+
         private TileRepresentation _selectedTile;
 
         public RemovedBuildingPositionHandler(
             SelectFrame selectFrame,
             LayerMask layerMask,
-            IGameplayMover gameplayMover)
+            IGameplayMover gameplayMover,
+            MarkersVisibility markersVisibility)
             : base(selectFrame, layerMask, gameplayMover)
         {
+            _markersVisibility = markersVisibility;
         }
 
         public override UniTask Enter() =>
@@ -34,6 +38,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 if(_selectedTile != tile)
                 {
                     SelectFrame.Select(tile);
+                    _markersVisibility.SetSelectFrameShowed(true);
                     tile.ShakeBuilding();
                     ChangeSelectedTile(tile);
                 }

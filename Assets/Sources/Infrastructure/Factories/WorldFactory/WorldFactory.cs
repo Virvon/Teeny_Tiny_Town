@@ -56,7 +56,9 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
 
         public async UniTask CreateActionHandlerSwitcher()
         {
-            await _actionHanlderSwitcherFactory.Create(WorldFactoryAssets.ActionHandlerSwitcher);
+            ActionHandlerSwitcher actionHandlerSwitcher = await _actionHanlderSwitcherFactory.Create(WorldFactoryAssets.ActionHandlerSwitcher);
+
+            _container.BindInstance(actionHandlerSwitcher).AsSingle();
         }
 
         public async UniTask CreateSelectFrame()
