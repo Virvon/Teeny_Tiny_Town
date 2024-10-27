@@ -45,7 +45,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             }
             else
             {
-                SelectFrame.Hide();
+                _markersVisibility.SetSelectFrameShowed(false);
                 ChangeSelectedTile(null);
             }
         }
@@ -54,8 +54,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty == false)
             {
-                SelectFrame.Hide();
-
+                _markersVisibility.SetSelectFrameShowed(false);
                 GameplayMover.RemoveBuilding(tile.GridPosition);
             }
         }

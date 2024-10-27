@@ -11,6 +11,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
     {
         private readonly SelectFrame _choosedBuildingSelectFrame;
         private readonly SelectFrame.Factory _selectFrameFactory;
+        private readonly MarkersVisibility _markersVisibility;
 
         private readonly Vector3 _choosedBuildingPositionOffset = new (0, 2, 0);
 
@@ -22,11 +23,13 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             SelectFrame selectFrame,
             LayerMask layerMask,
             SelectFrame.Factory selectFrameFactory,
-            IGameplayMover gameplayMover)
+            IGameplayMover gameplayMover,
+            MarkersVisibility markersVisibility)
             : base(selectFrame, layerMask, gameplayMover)
         {
             _selectFrameFactory = selectFrameFactory;
             _choosedBuildingSelectFrame = SelectFrame;
+            _markersVisibility = markersVisibility;
         }
 
         public override async UniTask Enter()
@@ -34,12 +37,18 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             if(_choosedPlaceSelectFrame == null)
                 _choosedPlaceSelectFrame = await _selectFrameFactory.Create(WorldFactoryAssets.SelectFrame);
 
-            _choosedBuildingSelectFrame.Hide();
+            _markersVisibility.SetSelectFrameShowed(false);
             _choosedPlaceSelectFrame.Hide();
         }
 
         public override UniTask Exit()
         {
+            if (_choosedToReplacingTile != null)
+                _choosedToReplacingTile.LowerBuilding();
+
+            _markersVisibility.SetSelectFrameShowed(false);
+            _choosedPlaceSelectFrame.Hide();
+
             _isBuildingChoosed = false;
 
             return default;
@@ -52,17 +61,19 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 if (_isBuildingChoosed && _choosedToReplacingTile != tile)
                 {
                     _choosedPlaceSelectFrame.Select(tile);
+                    _choosedPlaceSelectFrame.Show();
                 }
                 else if (_isBuildingChoosed == false && tile.IsEmpty == false)
                 {
                     _choosedBuildingSelectFrame.Select(tile);
+                    _markersVisibility.SetSelectFrameShowed(true);
                 }
                 else
                 {
                     if (_isBuildingChoosed)
                         _choosedPlaceSelectFrame.Hide();
                     else
-                        _choosedBuildingSelectFrame.Hide();
+                        _markersVisibility.SetSelectFrameShowed(false);
                 }
             }
             else if (_isBuildingChoosed)
@@ -71,7 +82,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             }
             else
             {
-                _choosedBuildingSelectFrame.Hide();
+                _markersVisibility.SetSelectFrameShowed(false);
             }
         }
 
@@ -85,12 +96,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                     {
                         _choosedToReplacingTile.LowerBuilding();
                         _choosedToReplacingTile = null;
-                        _choosedBuildingSelectFrame.Hide();
+                        _markersVisibility.SetSelectFrameShowed(false);
                         _isBuildingChoosed = false;
                     }
                     else
                     {
-                        _choosedBuildingSelectFrame.Hide();
+                        _markersVisibility.SetSelectFrameShowed(false);
                         _choosedPlaceSelectFrame.Hide();
 
                         GameplayMover.ReplaceBuilding(_choosedToReplacingTile.GridPosition, _choosedToReplacingTile.BuildingType, tile.GridPosition, tile.BuildingType);
@@ -100,6 +111,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 {
                     _choosedToReplacingTile = tile;
                     _choosedBuildingSelectFrame.Select(_choosedToReplacingTile);
+                    _markersVisibility.SetSelectFrameShowed(true);
                     _choosedToReplacingTile.RaiseBuilding(_choosedBuildingPositionOffset);
                     _isBuildingChoosed = true;
                 }

@@ -40,10 +40,13 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         public override UniTask Enter()
         {
             if(_lastSelectedTile != null)
+            {
                 SelectFrame.Select(_lastSelectedTile);
+                _markersVisibility.SetSelectFrameShowed(true);
+            }
 
             _markersVisibility.SetBuildingShowed(true);
-            _markersVisibility.SetSelectFrameShowed(true);
+            
 
             return default;
         }
@@ -60,6 +63,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             TileRepresentation startTile = _worldRepresentationChanger.StartTile;
 
+            _lastSelectedTile = startTile;
+
             _buildingMarker.Mark(startTile);
             SelectFrame.Select(startTile);
             _markersVisibility.SetBuildingShowed(true);
@@ -71,7 +76,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty)
             {
                 SelectFrame.Select(tile);
-
+                _markersVisibility.SetSelectFrameShowed(true);
                 _lastSelectedTile = tile;
 
                 if (_isBuildingPressed == false)
@@ -79,7 +84,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             }
             else if (_isBuildingPressed)
             {
-                SelectFrame.Hide();
+                _markersVisibility.SetSelectFrameShowed(false);
             }
 
             if (_isBuildingPressed)
@@ -103,16 +108,17 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 _markersVisibility.SetBuildingShowed(false);
                 _markersVisibility.SetSelectFrameShowed(false);
 
+                _lastSelectedTile = null;
+
                 GameplayMover.PlaceNewBuilding(tile.GridPosition, _buildingMarker.BuildingType);
             }
             else if (_isBuildingPressed)
             {
                 _buildingMarker.Mark(_handlePressedMoveStartTile);
                 SelectFrame.Select(_handlePressedMoveStartTile);
+                _markersVisibility.SetSelectFrameShowed(true);
 
                 _lastSelectedTile = _handlePressedMoveStartTile;
-
-                _lastSelectedTile = tile;
             }
 
             _handlePressedMoveStartTile = null;
