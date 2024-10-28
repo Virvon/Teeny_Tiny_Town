@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
+using static Assets.Sources.Data.WorldDatas.WorldData;
 
 namespace Assets.Sources.Data.WorldDatas
 {
@@ -19,6 +20,8 @@ namespace Assets.Sources.Data.WorldDatas
         uint NextBuildingForCreationBuildsCount { get; set; }
         bool IsChangingStarted { get; set; }
         PointsData PointsData { get; }
+        UpgradeData BuldozerItems { get; }
+        UpgradeData ReplaceItems { get; }
 
         void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService);
         void UpdateTileDatas(TileData[] tileDatas);

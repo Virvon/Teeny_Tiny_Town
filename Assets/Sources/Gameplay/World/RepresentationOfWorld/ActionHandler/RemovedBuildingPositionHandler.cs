@@ -2,6 +2,7 @@
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
@@ -22,12 +23,19 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             _markersVisibility = markersVisibility;
         }
 
-        public override UniTask Enter() =>
-            default;
+        public event Action Entered;
+        public event Action Exited;
+
+        public override UniTask Enter()
+        {
+            Entered?.Invoke();
+            return default;
+        }
 
         public override UniTask Exit()
         {
             _selectedTile = null;
+            Exited?.Invoke();
             return default;
         }
 

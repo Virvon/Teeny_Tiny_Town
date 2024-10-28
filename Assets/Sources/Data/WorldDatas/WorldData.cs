@@ -9,7 +9,7 @@ using UnityEngine.InputSystem.Utilities;
 namespace Assets.Sources.Data.WorldDatas
 {
     [Serializable]
-    public class WorldData : IWorldData
+    public partial class WorldData : IWorldData
     {
         public string Id;
         public TileData[] Tiles;
@@ -19,6 +19,8 @@ namespace Assets.Sources.Data.WorldDatas
         public Vector2Int Size;
         public bool IsChangingStarted;
         public PointsData PointsData;
+        public UpgradeData BuldozerItems;
+        public UpgradeData ReplaceItems;
 
         public WorldData(
             string id,
@@ -37,6 +39,8 @@ namespace Assets.Sources.Data.WorldDatas
             NextBuildingForCreationBuildsCount = 0;
             IsChangingStarted = false;
             PointsData = new(goals);
+            BuldozerItems = new();
+            ReplaceItems = new();
         }
 
         public event Action<BuildingType> BuildingUpgraded;
@@ -65,6 +69,8 @@ namespace Assets.Sources.Data.WorldDatas
             set => Size = value;
         }
         PointsData IWorldData.PointsData => PointsData;
+        UpgradeData IWorldData.BuldozerItems => BuldozerItems;
+        UpgradeData IWorldData.ReplaceItems => ReplaceItems;
 
         public void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)
         {

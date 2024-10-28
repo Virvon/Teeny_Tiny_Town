@@ -27,6 +27,12 @@ namespace Assets.Sources.Services.StaticDataService.Configs
 
         public float CameraMoveDuration;
 
+        public Color ActiveGainButtonColor;
+        public Color DefaultGainButtonColor;
+        public Color ActiveGainButtonIconColor;
+        public Color DefaultGainButtonIconColor;
+        public float ChangeGainButtonActiveDuration;
+
         public float BuildingShakeTweenDuration => BuildingShakesDuration / BuildingShakesCount;
     }
 }

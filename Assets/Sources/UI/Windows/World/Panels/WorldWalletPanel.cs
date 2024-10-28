@@ -1,5 +1,4 @@
 ﻿using Assets.Sources.Data.WorldDatas;
-using System;
 using TMPro;
 using UnityEngine;
 using Zenject;

@@ -3,6 +3,7 @@ using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
@@ -32,9 +33,14 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             _markersVisibility = markersVisibility;
         }
 
+        public event Action Entered;
+        public event Action Exited;
+
         public override async UniTask Enter()
         {
-            if(_choosedPlaceSelectFrame == null)
+            Entered?.Invoke();
+
+            if (_choosedPlaceSelectFrame == null)
                 _choosedPlaceSelectFrame = await _selectFrameFactory.Create(WorldFactoryAssets.SelectFrame);
 
             _markersVisibility.SetSelectFrameShowed(false);
@@ -50,6 +56,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             _choosedPlaceSelectFrame.Hide();
 
             _isBuildingChoosed = false;
+
+            Exited?.Invoke();
 
             return default;
         }
