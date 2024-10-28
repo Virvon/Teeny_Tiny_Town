@@ -530,6 +530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 407149785579527693}
   _button: {fileID: 6037718817453939609}
+  _countValue: {fileID: 7220905561799222317}
 --- !u!114 &6037718817453939609
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,9 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.Reward;
+using Cysharp.Threading.Tasks;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
@@ -11,6 +15,20 @@ namespace Assets.Sources.UI.Windows.World.Panels.Reward
     {
         [SerializeField] private Image _icon;
         [SerializeField] private Button _button;
+        [SerializeField] private TMP_Text _countValue;
+
+        private IStaticDataService _staticDataService;
+        private IWorldData _worldData;
+
+        [Inject]
+        private void Construct(IStaticDataService staticDataService, IWorldData worldData)
+        {
+            _staticDataService = staticDataService;
+            _worldData = worldData;
+        }
+
+        public RewardType Type { get; private set; }
+        public uint RewardCount { get; private set; }
 
         public event Action<RewardPanel> Clicked;
 
@@ -20,8 +38,15 @@ namespace Assets.Sources.UI.Windows.World.Panels.Reward
         private void OnDisable() =>
             _button.onClick.RemoveListener(OnButtonClicked);
 
-        public void Init(Sprite icon) =>
+        public void Init(Sprite icon, RewardType rewardType)
+        {
             _icon.sprite = icon;
+            Type = rewardType;
+
+            RewardCount = _staticDataService.GetReward(Type).GetRewardCount(_worldData);
+
+            _countValue.text = RewardCount.ToString();
+        }
 
         private void OnButtonClicked() =>
             Clicked?.Invoke(this);

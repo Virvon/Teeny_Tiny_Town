@@ -63,7 +63,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             RewardPanel rewardPanel = await _rewardPanelFactory.Create(rewardConfig.AssetReference, parent);
             Sprite icon = await _assetProvider.Load<Sprite>(rewardConfig.IconAssetReference);
 
-            rewardPanel.Init(icon);
+            rewardPanel.Init(icon, type);
 
             return rewardPanel;
         }

@@ -10,16 +10,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
         [SerializeField] private Canvas _canvas;
         [SerializeField] private Vector3 _offset;
 
-        private TileRepresentation _lastSelectedTile;
-
         private void Start() =>
             Hide();
 
-        public void Select(TileRepresentation tile)
-        {
+        public void Select(TileRepresentation tile) =>
             transform.position = tile.BuildingPoint.position + _offset;
-            _lastSelectedTile = tile;
-        }
 
         public void Show() =>
             _canvas.enabled = true;

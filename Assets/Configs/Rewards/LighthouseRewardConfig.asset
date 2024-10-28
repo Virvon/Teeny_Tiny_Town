@@ -25,3 +25,5 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
   ProportionOfLoss: 1
+  MinCount: 1
+  MaxCount: 1

@@ -46,6 +46,7 @@ namespace Assets.Sources.Gameplay.World.Root
             BindQuestsChecker();
             BindWorldWindows();
             BindMarkersVisibility();
+            BindRewarder();
         }
 
         protected virtual void BindWorldBootstrapper()
@@ -66,6 +67,11 @@ namespace Assets.Sources.Gameplay.World.Root
         protected virtual void BindGameplayMover()
         {
             Container.BindInterfacesTo<GameplayMover.GameplayMover>().AsSingle();
+        }
+
+        private void BindRewarder()
+        {
+            Container.Bind<Rewarder>().AsSingle();
         }
 
         private void BindMarkersVisibility()
