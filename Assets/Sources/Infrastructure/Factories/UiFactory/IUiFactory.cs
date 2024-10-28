@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Gameplay.Store;
+using Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
@@ -12,6 +13,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
 {
     public interface IUiFactory
     {
+        UniTask CreateAdditionBonusOfferItem(AdditionalBonusType type, Transform parent);
         UniTask<QuestPanel> CreateQuestPanel(string id, Transform parent);
         UniTask CreateRemainingMovesPanel(Transform parent);
         UniTask<RewardPanel> CreateRewardPanel(RewardType type, Transform parent);

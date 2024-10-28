@@ -60,9 +60,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: RoundsBlack
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -1948458986
   material: {fileID: -8898009254563598713}
-  materialHashCode: 0
+  materialHashCode: -506061322
   m_Version: 1.1.0
   m_SourceFontFileGUID: a8647c346e16b9f4bb57c92824881f1c
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: a8647c346e16b9f4bb57c92824881f1c, type: 3}
@@ -80,7 +80,7 @@ MonoBehaviour:
     m_CapLine: 38
     m_MeanLine: 38
     m_Baseline: 0
-    m_DescentLine: -13.5
+    m_DescentLine: 0
     m_SuperscriptOffset: 51.310547
     m_SuperscriptSize: 0.5
     m_SubscriptOffset: -13.5

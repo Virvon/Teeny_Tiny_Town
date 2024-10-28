@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
+using Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Quests;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
@@ -25,6 +27,7 @@ namespace Assets.Sources.Services.StaticDataService
         private Dictionary<string, WorldConfig> _worldConfigs;
         private Dictionary<RewardType, RewardConfig> _rewardConfigs;
         private Dictionary<GameplayStoreItemType, StoreItemConfig> _gameplayStoreItemConfigs;
+        private Dictionary<AdditionalBonusType, AdditionalBonusConfig> _additionalBonusConfigs;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
@@ -54,9 +57,13 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadGameplayStoreItemConfigs());
             tasks.Add(LoadRewardConfigs());
             tasks.Add(LoadQuestsConfig());
+            tasks.Add(LoadAdditionalBonusConfigs());
 
             await UniTask.WhenAll(tasks);
         }
+
+        public AdditionalBonusConfig GetAdditionalBonus(AdditionalBonusType type) =>
+            _additionalBonusConfigs.TryGetValue(type, out AdditionalBonusConfig config) ? config : null;
 
         public StoreItemConfig GetGameplayStorItem(GameplayStoreItemType type) =>
             _gameplayStoreItemConfigs.TryGetValue(type, out StoreItemConfig config) ? config : null;
@@ -77,7 +84,6 @@ namespace Assets.Sources.Services.StaticDataService
         public GameplayStoreItemConfig GetWorldStoreItem(BuildingType buildingType) =>
             _worldStoreItemConfigs.TryGetValue(buildingType, out GameplayStoreItemConfig config) ? config : null;
 
-
         public WindowConfig GetWindow(WindowType type) =>
             _windowConfigs.TryGetValue(type, out WindowConfig config) ? config : null;
 
@@ -91,6 +97,14 @@ namespace Assets.Sources.Services.StaticDataService
                 groundType, out Dictionary<RoadType, RoadConfig> roadConfigs) ? (roadConfigs.TryGetValue(
                 roadType, out RoadConfig config) ? config : null) : null;
         }
+
+        private async UniTask LoadAdditionalBonusConfigs()
+        {
+            AdditionalBonusConfig[] configs = await GetConfigs<AdditionalBonusConfig>();
+
+            _additionalBonusConfigs = configs.ToDictionary(value => value.Type, value => value);
+        }
+
 
         private async UniTask LoadQuestsConfig()
         {

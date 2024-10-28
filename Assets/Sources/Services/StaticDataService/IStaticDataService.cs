@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Services.StaticDataService.Configs;
+using Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Quests;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
@@ -32,5 +33,6 @@ namespace Assets.Sources.Services.StaticDataService
             where TWorldConfig : WorldConfig;
         RewardConfig GetReward(RewardType type);
         StoreItemConfig GetGameplayStorItem(GameplayStoreItemType type);
+        AdditionalBonusConfig GetAdditionalBonus(AdditionalBonusType type);
     }
 }

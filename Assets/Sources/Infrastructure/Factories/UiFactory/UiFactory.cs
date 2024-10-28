@@ -1,11 +1,13 @@
 ﻿using Assets.Sources.Gameplay.Store;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI;
 using Assets.Sources.UI.Windows.World.Panels;
+using Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer;
 using Assets.Sources.UI.Windows.World.Panels.Reward;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -21,8 +23,9 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
         private readonly IAssetProvider _assetProvider;
         private readonly QuestPanel.Factory _questPanelFactory;
         private readonly RemainingMovesPanel.Factory _remainingMovesPanelFactory;
+        private readonly AdditionalBonusOfferItem.Factory _additionalBonusOfferItemFactory;
 
-        public UiFactory(Window.Factory windowFactory, IStaticDataService staticDataService, StoreItem.Factory storeItemFactory, RewardPanel.Factory rewardPanelFactory, IAssetProvider assetProvider, QuestPanel.Factory questPanelFactory, RemainingMovesPanel.Factory remainingMovesPanelFactory)
+        public UiFactory(Window.Factory windowFactory, IStaticDataService staticDataService, StoreItem.Factory storeItemFactory, RewardPanel.Factory rewardPanelFactory, IAssetProvider assetProvider, QuestPanel.Factory questPanelFactory, RemainingMovesPanel.Factory remainingMovesPanelFactory, AdditionalBonusOfferItem.Factory additionalBonusOfferItemFactory)
         {
             _windowFactory = windowFactory;
             _staticDataService = staticDataService;
@@ -31,6 +34,16 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             _assetProvider = assetProvider;
             _questPanelFactory = questPanelFactory;
             _remainingMovesPanelFactory = remainingMovesPanelFactory;
+            _additionalBonusOfferItemFactory = additionalBonusOfferItemFactory;
+        }
+
+        public async UniTask CreateAdditionBonusOfferItem(AdditionalBonusType type, Transform parent)
+        {
+            AdditionalBonusConfig additionalBonusConfig = _staticDataService.GetAdditionalBonus(type);
+            AdditionalBonusOfferItem additionalBonusOfferItem = await _additionalBonusOfferItemFactory.Create(additionalBonusConfig.PanelAssetReference, parent);
+            Sprite icon = await _assetProvider.Load<Sprite>(additionalBonusConfig.IconAssetReference);
+
+            additionalBonusOfferItem.Init(type, icon);
         }
 
         public async UniTask CreateRemainingMovesPanel(Transform parent) =>

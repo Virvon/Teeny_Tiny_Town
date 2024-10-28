@@ -73,3 +73,4 @@ MonoBehaviour:
   AvailableRewards: 0000000001000000020000000300000004000000
   MinRewardVariantsCount: 2
   MaxRewardVariantsCount: 3
+  AvailableAdditionalBonuses: 000000000100000002000000

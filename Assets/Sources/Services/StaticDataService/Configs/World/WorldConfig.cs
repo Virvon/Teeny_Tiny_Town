@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Data;
 using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public RewardType[] AvailableRewards;
         public int MinRewardVariantsCount;
         public int MaxRewardVariantsCount;
+        public AdditionalBonusType[] AvailableAdditionalBonuses;
 
         public TileType GetTileType(Vector2Int gridPosition) =>
             TileConfigs.First(tile => tile.GridPosition == gridPosition).Type;

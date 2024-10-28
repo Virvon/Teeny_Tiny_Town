@@ -2,6 +2,7 @@
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.UI;
 using Assets.Sources.UI.Windows.World.Panels;
+using Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer;
 using Assets.Sources.UI.Windows.World.Panels.Reward;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -38,6 +39,10 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<string, Transform, UniTask<RemainingMovesPanel>, RemainingMovesPanel.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<RemainingMovesPanel>>();
+
+            Container
+                .BindFactory<AssetReferenceGameObject, Transform, UniTask<AdditionalBonusOfferItem>, AdditionalBonusOfferItem.Factory>()
+                .FromFactory<ReferencePrefabFactoryAsync<AdditionalBonusOfferItem>>();
         }
     }
 }
