@@ -7,29 +7,35 @@ namespace Assets.Sources.Data.WorldDatas
         [Serializable]
         public class UpgradeData
         {
-            public uint ItemsCount;
+            public uint Count;
 
             public UpgradeData() =>
-                ItemsCount = 0;
+                Count = 0;
 
             public event Action<uint> CountChanged;
 
             public void AddItems(uint count)
             {
-                ItemsCount += count;
+                Count += count;
 
-                CountChanged?.Invoke(ItemsCount);
+                CountChanged?.Invoke(Count);
             }
 
             public bool TryGet()
             {
-                if (ItemsCount == 0)
+                if (Count == 0)
                     return false;
 
-                ItemsCount--;
-                CountChanged?.Invoke(ItemsCount);
+                Count--;
+                CountChanged?.Invoke(Count);
 
                 return true;
+            }
+
+            public void SetItemsCount(uint count)
+            {
+                Count = count;
+                CountChanged?.Invoke(Count);
             }
         }
     }

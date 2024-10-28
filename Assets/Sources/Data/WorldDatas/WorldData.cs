@@ -69,7 +69,7 @@ namespace Assets.Sources.Data.WorldDatas
             set => Size = value;
         }
         PointsData IWorldData.PointsData => PointsData;
-        UpgradeData IWorldData.BuldozerItems => BuldozerItems;
+        UpgradeData IWorldData.BulldozerItems => BuldozerItems;
         UpgradeData IWorldData.ReplaceItems => ReplaceItems;
 
         public void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)

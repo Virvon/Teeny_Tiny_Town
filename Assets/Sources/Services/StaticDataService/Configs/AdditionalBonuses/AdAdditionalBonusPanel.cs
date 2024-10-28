@@ -32,7 +32,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses
 
         private void OnButtonClicked()
         {
-            _worldData.BuldozerItems.AddItems(_buldozerItemsCount);
+            _worldData.BulldozerItems.AddItems(_buldozerItemsCount);
             _worldData.ReplaceItems.AddItems(_replaceItemsCount);
             Destroy(gameObject);
         }

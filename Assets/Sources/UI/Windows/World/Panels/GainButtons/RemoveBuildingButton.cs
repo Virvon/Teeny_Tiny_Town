@@ -13,18 +13,18 @@ namespace Assets.Sources.UI.Windows.World.Panels.GainButtons
         {
             _removedBuildingPositionHandler = removedBuildingPositionHandler;
 
-            ChangeCountValue(WorldData.BuldozerItems.ItemsCount);
+            ChangeCountValue(WorldData.BulldozerItems.Count);
 
             _removedBuildingPositionHandler.Entered += OnRemovedBuildingPositionHandlerEntered;
             _removedBuildingPositionHandler.Exited += OnRemovedBuildingPositionHandlerExited;
-            WorldData.BuldozerItems.CountChanged += ChangeCountValue;
+            WorldData.BulldozerItems.CountChanged += ChangeCountValue;
         }
 
         private void OnDisable()
         {
             _removedBuildingPositionHandler.Entered -= OnRemovedBuildingPositionHandlerEntered;
             _removedBuildingPositionHandler.Exited -= OnRemovedBuildingPositionHandlerExited;
-            WorldData.BuldozerItems.CountChanged -= ChangeCountValue;
+            WorldData.BulldozerItems.CountChanged -= ChangeCountValue;
         }
 
         private void OnRemovedBuildingPositionHandlerExited() =>

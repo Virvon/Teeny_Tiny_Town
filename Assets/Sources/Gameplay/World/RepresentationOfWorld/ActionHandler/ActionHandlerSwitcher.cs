@@ -1,6 +1,6 @@
-﻿using Assets.Sources.Services.Input;
+﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Services.Input;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -12,16 +12,19 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         private ActionHandlerStateMachine _handlerStateMachine;
         private IInputService _inputService;
+        private IWorldData _worldData;
 
         [Inject]
         private void Construct(
             ActionHandlerStateMachine handlerStateMachine,
             WorldRepresentationChanger worldRepresentationChanger,
-            IInputService inputService)
+            IInputService inputService,
+            IWorldData worldData)
         {
             _handlerStateMachine = handlerStateMachine;
             _worldRepresentationChanger = worldRepresentationChanger;
             _inputService = inputService;
+            _worldData = worldData;
 
             _inputService.RemoveBuildingButtonPressed += OnRemoveBuildingButtonClicked;
             _inputService.ReplaceBuildingButtonPressed += OnReplaceBuildingButtonClicked;
@@ -43,6 +46,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         private void OnReplaceBuildingButtonClicked()
         {
+            if (_worldData.ReplaceItems.Count == 0)
+                return;
+
             if (_handlerStateMachine.CurrentState is not ReplacedBuildingPositionHandler)
                 _handlerStateMachine.Enter<ReplacedBuildingPositionHandler>();
             else
@@ -51,6 +57,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         private void OnRemoveBuildingButtonClicked()
         {
+            if (_worldData.BulldozerItems.Count == 0)
+                return;
+
             if (_handlerStateMachine.CurrentState is not RemovedBuildingPositionHandler)
                 _handlerStateMachine.Enter<RemovedBuildingPositionHandler>();
             else

@@ -9,6 +9,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses
         public override AdditionalBonusType Type => AdditionalBonusType.Buldozer;
 
         public override void Anwenden(IWorldData worldData) =>
-            worldData.BuldozerItems.AddItems(Count);
+            worldData.BulldozerItems.AddItems(Count);
     }
 }

@@ -20,7 +20,7 @@ namespace Assets.Sources.Data.WorldDatas
         uint NextBuildingForCreationBuildsCount { get; set; }
         bool IsChangingStarted { get; set; }
         PointsData PointsData { get; }
-        UpgradeData BuldozerItems { get; }
+        UpgradeData BulldozerItems { get; }
         UpgradeData ReplaceItems { get; }
 
         void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService);

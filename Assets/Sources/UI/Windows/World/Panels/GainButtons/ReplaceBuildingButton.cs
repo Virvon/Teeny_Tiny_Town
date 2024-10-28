@@ -12,7 +12,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.GainButtons
         {
             _replacedBuildingPositionHandler = replacedBuildingPositionHandler;
 
-            ChangeCountValue(WorldData.ReplaceItems.ItemsCount);
+            ChangeCountValue(WorldData.ReplaceItems.Count);
 
             _replacedBuildingPositionHandler.Entered += OnReplaceBuildingPositionHandlerEntered;
             _replacedBuildingPositionHandler.Exited += OnReplaceBuildingPositionHandlerExited;
@@ -23,7 +23,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.GainButtons
         {
             _replacedBuildingPositionHandler.Entered -= OnReplaceBuildingPositionHandlerEntered;
             _replacedBuildingPositionHandler.Exited -= OnReplaceBuildingPositionHandlerExited;
-            WorldData.BuldozerItems.CountChanged -= ChangeCountValue;
+            WorldData.BulldozerItems.CountChanged -= ChangeCountValue;
         }
 
         private void OnReplaceBuildingPositionHandlerExited() =>
