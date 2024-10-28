@@ -45,6 +45,5 @@ namespace Assets.Sources.UI.Windows.World
 
         private void OnMapSelectionButtonClicked() =>
             _worldStateMachine.Enter<ExitWorldState, Action>(() => _gameplayStateMachine.Enter<MapSelectionState>().Forget()).Forget();
-
     }
 }
