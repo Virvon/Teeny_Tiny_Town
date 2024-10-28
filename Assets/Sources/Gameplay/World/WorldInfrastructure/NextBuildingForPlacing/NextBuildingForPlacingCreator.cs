@@ -5,10 +5,6 @@ using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Data.WorldDatas;
 using System;
 using System.Linq;
-using UnityEngine;
-using Assets.Sources.Gameplay.World.StateMachine;
-using Assets.Sources.Gameplay.World.StateMachine.States;
-using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing
 {
@@ -61,21 +57,13 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlaci
             MoveToNextBuilding();
         }
 
-        private BuildingType CreateBuildingType()
+        public void FindTileToPlacing(IReadOnlyList<Tile> tiles)
         {
-            IReadOnlyList<BuildingType> availableBuildingTypes = _worldData.AvailableBuildingsForCreation;
-
-            return availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
-        }
-
-
-        private void FindTileToPlacing(IReadOnlyList<Tile> tiles)
-        {
-            if(tiles.Any(tile => tile.IsEmpty) == false)
+            if (tiles.Any(tile => tile.IsEmpty) == false)
             {
                 NoMoreEmptyTiles?.Invoke();
                 return;
-            }    
+            }
 
             bool isPositionFree = false;
 
@@ -90,5 +78,12 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlaci
                 }
             }
         }
+
+        private BuildingType CreateBuildingType()
+        {
+            IReadOnlyList<BuildingType> availableBuildingTypes = _worldData.AvailableBuildingsForCreation;
+
+            return availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
+        }       
     }
 }

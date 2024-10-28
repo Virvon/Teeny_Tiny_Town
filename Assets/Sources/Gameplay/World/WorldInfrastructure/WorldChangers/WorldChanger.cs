@@ -93,15 +93,18 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
         public async UniTask ReplaceBuilding(Vector2Int fromBuildingGridPosition, BuildingType fromBuildingType, Vector2Int toBuildingGridPosition, BuildingType toBuildingType)
         {
-            List<Tile> changedTiles = new();
+            List<UniTask> tasks = new();
+
 
             Tile fromTile = GetTile(fromBuildingGridPosition);
-            await fromTile.PutBuilding(GetBuilding(toBuildingType, fromBuildingGridPosition));
+            tasks.Add(fromTile.PutBuilding(GetBuilding(toBuildingType, fromBuildingGridPosition)));
 
             Tile toTile = GetTile(toBuildingGridPosition);
-            await toTile.PutBuilding(GetBuilding(fromBuildingType, toBuildingGridPosition));
+            tasks.Add(toTile.PutBuilding(GetBuilding(fromBuildingType, toBuildingGridPosition)));
 
-            NextBuildingForPlacingCreator.MoveToNextBuilding(Tiles);
+            await UniTask.WhenAll(tasks);
+
+            NextBuildingForPlacingCreator.FindTileToPlacing(Tiles);
 
             TilesChanged?.Invoke();
         }

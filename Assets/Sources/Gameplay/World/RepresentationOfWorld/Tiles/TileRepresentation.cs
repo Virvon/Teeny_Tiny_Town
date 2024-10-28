@@ -44,17 +44,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
         public void RaiseBuilding(Vector3 offset) =>
             _building.transform.position += offset;
 
-        public void LowerBuilding() =>
-            PlaceBuildingToBuildingPoint(_building);
-
-        public void PlaceBuilding(BuildingRepresentation building)
+        public void LowerBuilding()
         {
-            if (IsEmpty == false)
-                Debug.LogError("can not place building to non empty tile");
-
-            _building = building;
-
-            PlaceBuildingToBuildingPoint(building);
+            if(_building != null)
+                PlaceBuildingToBuildingPoint(_building);
         }
 
         public void DestroyBuilding()
