@@ -504,6 +504,7 @@ MonoBehaviour:
   _canvas: {fileID: 1568540163141648451}
   _blur: {fileID: 8955112163145351605}
   _startButton: {fileID: 7972601361413817576}
+  _hideWindowButton: {fileID: 110365712936847992}
 --- !u!225 &940022186240297833
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3860,6 +3861,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24188c9dd6f64824b979a5ca863b80f0, type: 3}
+--- !u!114 &110365712936847992 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 330411502854261291, guid: 24188c9dd6f64824b979a5ca863b80f0, type: 3}
+  m_PrefabInstance: {fileID: 368664621465141331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4210742662058522249 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4571807424775435994, guid: 24188c9dd6f64824b979a5ca863b80f0, type: 3}

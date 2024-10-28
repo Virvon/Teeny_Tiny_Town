@@ -324,7 +324,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ae387fe4fba2f0b428f0ba834f3ea1ef
+  - m_GUID: 8053c6628baa30b4eaff904f1f30851c
     m_Address: WorldWalletValueRewardConfig
     m_ReadOnly: 0
     m_SerializedLabels:

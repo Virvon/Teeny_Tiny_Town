@@ -2,6 +2,7 @@
 using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.StateMachine.States;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -21,28 +22,21 @@ namespace Assets.Sources.UI.Windows.Start
         {
             _gameplayStateMachine = gameplayStateMachine;
             _canvas.worldCamera = gameplayCamera.Camera;
-        }
 
-        private void OnEnable()
-        {
             _mapSelectionButton.onClick.AddListener(OnMapSelectionButtonClicked);
             _continueButton.onClick.AddListener(OnContinueButtonClicked);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             _mapSelectionButton.onClick.RemoveListener(OnMapSelectionButtonClicked);
             _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
         }
 
-        private void OnMapSelectionButtonClicked()
-        {
+        private void OnMapSelectionButtonClicked() =>
             _gameplayStateMachine.Enter<MapSelectionState>().Forget();
-        }
 
-        private void OnContinueButtonClicked()
-        {
+        private void OnContinueButtonClicked() =>
             _gameplayStateMachine.Enter<GameplayLoopState>().Forget();
-        }
     }
 }
