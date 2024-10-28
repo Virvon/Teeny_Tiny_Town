@@ -91,9 +91,9 @@ namespace Assets.Sources.Data.WorldDatas
             NextBuildingForCreationBuildsCount = 0;
         }
 
-        public void UpdateTileDatas(TileData[] TargetTileDatas)
+        public void UpdateTileDatas(TileData[] targetTileDatas)
         {
-            foreach (TileData targetTileData in TargetTileDatas)
+            foreach (TileData targetTileData in targetTileDatas)
             {
                 TileData tileData = Tiles.First(value => value.GridPosition == targetTileData.GridPosition);
                 tileData.BuildingType = targetTileData.BuildingType;
@@ -105,7 +105,7 @@ namespace Assets.Sources.Data.WorldDatas
 
         public void Update(TileData[] tiles, BuildingType nextBuildingTypeForCreation, List<BuildingType> availableBuildingsForCreation)
         {
-            Tiles = tiles;
+            UpdateTileDatas(tiles);
             NextBuildingTypeForCreation = nextBuildingTypeForCreation;
             AvailableBuildingsForCreation = availableBuildingsForCreation;
 

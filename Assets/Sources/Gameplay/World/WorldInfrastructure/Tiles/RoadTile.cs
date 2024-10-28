@@ -7,6 +7,7 @@ using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 {
@@ -82,7 +83,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         private async UniTask ValidateTilesInChain(bool isWaitedForRoadCreation)
         {
-            if (Ground.TryUpdate(Building.Type))
+            if (Ground.TryUpdate(BuildingType))
                 ChangeGroundsInChain(new(), true);
 
             await ChangeRoadsInChain(new(), isWaitedForRoadCreation);

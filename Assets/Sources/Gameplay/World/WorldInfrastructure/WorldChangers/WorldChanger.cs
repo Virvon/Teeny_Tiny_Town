@@ -63,7 +63,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
         public async UniTask Update()
         {
-            TileData[] tileDatas = WorldData.Tiles.OrderBy(value => value.GridPosition.x).ToArray();
+            TileData[] tileDatas = new TileData[WorldData.Tiles.Count];
+
+            for(int i = 0; i < WorldData.Tiles.Count; i++)
+                tileDatas[i] = new TileData(WorldData.Tiles[i].GridPosition, WorldData.Tiles[i].BuildingType);
 
             foreach (TileData tileData in tileDatas)
             {
