@@ -45,7 +45,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
         public void Show()
         {
             if (_building != null)
+            {
                 _building.gameObject.SetActive(true);
+                _building.Blink();
+            }
 
             _isHided = false;
         }
@@ -53,7 +56,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
         public void Hide()
         {
             if (_building != null)
+            {
                 _building.gameObject.SetActive(false);
+                _building.StopBlinking();
+            }
 
             _isHided = true;
         }
@@ -84,7 +90,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
                     Debug.LogWarning("The building's position has shifted");
                 }
 
-                _building.Blink();
+                //_building.Blink();
 
                 if (_isHided)
                     _building.gameObject.SetActive(false);

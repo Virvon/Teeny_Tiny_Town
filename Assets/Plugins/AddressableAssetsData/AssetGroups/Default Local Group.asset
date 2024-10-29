@@ -61,32 +61,38 @@ MonoBehaviour:
   - m_GUID: 5d91f09438cd0c74082f55df2e00b431
     m_Address: Soil
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9da9192ce99c9b844929012a80c2f0c0
     m_Address: RoadTurnTrail
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d4265b664fb93054f8d569c53e637f9b
     m_Address: RoadCrossroad
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3ee1e1a4bf6562549bbc0baaf9e37f10
     m_Address: RoadTrail
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 46d5b83091ef91843905a89ff7fcfa36
     m_Address: RoadDeadlock
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 328232fecc65bd14a9e6ffda682acdbe
     m_Address: RoadTripleCrossroad
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0a3ae727c0fbdd344a575f9b6cbe08f3
     m_Address: BuildingMarker
@@ -96,27 +102,32 @@ MonoBehaviour:
   - m_GUID: cee3afc67e1e72c468fee90898a6d679
     m_Address: SoilCrossroad
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 22c217840d1f37049aa8fddba157324b
     m_Address: SoilTripleCrossroad
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bd41b115696fa45489a14a7fc6fe6151
     m_Address: SoilDeadlock
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 75d5d54f24557a243812cf7377196c00
     m_Address: SoilTrail
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bace00ccfac489340b8f24d89e628809
     m_Address: SoilTurnTrail
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cb1a1d86d6cf44744a80b7966ef6e17e
     m_Address: TreeConfig
@@ -274,8 +285,7 @@ MonoBehaviour:
   - m_GUID: 4166c9d83fb665144b2b79697bf64f37
     m_Address: Assets/Configs/WorldConfigs/ExpandingWorldConfig.asset
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c83a0e82ae2fe074e8598aff9a8d1e25
     m_Address: ExpandingWorld
@@ -288,7 +298,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1bcdf5a6e46f3fd4a8f8133947e9a3ac
-    m_Address: Assets/Configs/WorldConfigs/CurrencyWorldConfig.asset
+    m_Address: CurrencyWorldConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - Configs

@@ -23,8 +23,7 @@ namespace Assets.Sources.Gameplay.World.Root
             ActionHandlerStateMachine actionHandlerStateMachine,
             ActionHandlerStatesFactory actionHandlerStatesFactory,
             NextBuildingForPlacingCreator nextBuildingForPlacingCreator,
-            IPersistentProgressService persistentProgressService,
-            WorldWindows worldWindows)
+            IPersistentProgressService persistentProgressService)
             : base(
                   worldChanger,
                   worldFactory,
@@ -35,8 +34,7 @@ namespace Assets.Sources.Gameplay.World.Root
                   actionHandlerStateMachine,
                   actionHandlerStatesFactory,
                   nextBuildingForPlacingCreator,
-                  persistentProgressService,
-                  worldWindows)
+                  persistentProgressService)
         {
         }
 

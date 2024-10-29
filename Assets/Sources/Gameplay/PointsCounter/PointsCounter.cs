@@ -1,7 +1,6 @@
 ﻿using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
-using System;
 
 namespace Assets.Sources.Gameplay.PointsCounter
 {

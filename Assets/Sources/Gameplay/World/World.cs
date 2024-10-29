@@ -3,7 +3,6 @@ using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
@@ -20,6 +19,7 @@ namespace Assets.Sources.Gameplay.World
         private Sequence _aroundRotating;
         private Quaternion _startRotation;
         private Tween _rotation;
+        private Tween _movement;
 
         [Inject]
         private void Construct(IStaticDataService staticDataService)
@@ -27,23 +27,30 @@ namespace Assets.Sources.Gameplay.World
             _animationsConfig = staticDataService.AnimationsConfig;
 
             RotationDegrees = 0;
+            IsCreated = false;
         }
 
         public event Action Entered;
         
         public int RotationDegrees { get; private set; }
+        public bool IsCreated { get; private set; }
 
-        private void Start()
-        {
+        private void Start() =>
             _startRotation = transform.rotation;
-        }
 
-        private void OnDestroy() =>
+        private void OnDestroy()
+        {
             TryStopRotating();
 
+            _movement?.Kill();
+            _rotation?.Kill();
+        }
 
         public void EnterBootstrapState() =>
             Entered?.Invoke();
+
+        public void OnCreated() =>
+            IsCreated = true;
 
         public void StartRotating()
         {
@@ -54,11 +61,8 @@ namespace Assets.Sources.Gameplay.World
                 .SetLoops(-1, LoopType.Restart);
         }
 
-        public void TryStopRotating()
-        {
-            if (_aroundRotating != null)
-                _aroundRotating.Kill();
-        }
+        public void TryStopRotating() =>
+            _aroundRotating?.Kill();
 
         public void RotateToStart(TweenCallback callback) =>
             transform.DORotateQuaternion(_startRotation, _animationsConfig.WorldRotateToStarDuration).onComplete += callback;
@@ -69,12 +73,17 @@ namespace Assets.Sources.Gameplay.World
         public void RotateСounterclockwise() =>
             Rotate(-SimpleRotation);
 
+        public void MoveTo(Vector3 targetPosition, TweenCallback callback = null)
+        {
+            _movement = transform.DOMove(targetPosition, _animationsConfig.WorldMoveDuration);
+            _movement.onComplete = callback;
+        }
+
         private void Rotate(int degrees)
         {
             RotationDegrees += degrees;
 
-            if (_rotation != null)
-                _rotation.Kill();
+            _rotation?.Kill();
 
             _rotation = transform.DORotateQuaternion(Quaternion.Euler(transform.rotation.x, RotationDegrees, transform.rotation.z), _animationsConfig.WorldSimpleRotateDuration);
         }

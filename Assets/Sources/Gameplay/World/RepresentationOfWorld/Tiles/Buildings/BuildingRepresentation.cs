@@ -21,7 +21,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 
         public BuildingType Type { get; private set; }
 
-        private void OnDestroy() => 
+        private void OnDestroy() =>
             TryKillSequence();
 
         public void Init(BuildingType type) =>
@@ -54,6 +54,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 
         public void Blink()
         {
+            TryKillSequence();
+
             _sequence = DOTween
                 .Sequence()
                 .Append(transform.DOScale(_animationsConfig.BuildingBlinkingScale, _animationsConfig.BuildingBlinkingDuration).SetEase(Ease.OutSine))

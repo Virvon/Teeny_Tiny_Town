@@ -9,6 +9,7 @@ using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.Gameplay.World.Root
@@ -37,8 +38,7 @@ namespace Assets.Sources.Gameplay.World.Root
             ActionHandlerStateMachine actionHandlerStateMachine,
             ActionHandlerStatesFactory actionHandlerStatesFactory,
             NextBuildingForPlacingCreator nextBuildingForPlacingCreator,
-            IPersistentProgressService persistentProgressService,
-            WorldWindows worldWindows)
+            IPersistentProgressService persistentProgressService)
         {
             _worldChanger = worldChanger;
             _worldFactory = worldFactory;
@@ -62,8 +62,8 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldGenerator worldGenerator = await _worldFactory.CreateWorldGenerator();
 
             worldGenerator.PlaceToCenter(_worldData.Size);
-            await _worldChanger.Generate(worldGenerator);
 
+            await _worldChanger.Generate(worldGenerator);
 
             await _worldFactory.CreateSelectFrame();
             await _worldFactory.CreateBuildingMarker();
@@ -75,8 +75,8 @@ namespace Assets.Sources.Gameplay.World.Root
             _actionHandlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
 
             _nextBuildingForPlacingCreator.CreateData(_worldChanger.Tiles);
-
             _worldChanger.Start();
+            _world.OnCreated();
         }
 
         protected virtual void RegisterStates()

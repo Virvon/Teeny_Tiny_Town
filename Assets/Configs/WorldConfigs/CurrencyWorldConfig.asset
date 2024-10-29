@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ed98ece7cbacb4db6d11c86d44a831, type: 3}
   m_Name: CurrencyWorldConfig
   m_EditorClassIdentifier: 
-  Id: e636eda1-c70b-44bb-85ca-d218f74661e2
-  Length: 2
-  Width: 2
+  Id: 0f873ea3-6bb2-42e4-ac1b-77b904b0b8e1
+  Size: {x: 4, y: 4}
   TileConfigs:
   - Type: 0
     GridPosition: {x: 0, y: 0}
@@ -23,16 +22,56 @@ MonoBehaviour:
     GridPosition: {x: 0, y: 1}
     BuildingType: 0
   - Type: 0
+    GridPosition: {x: 0, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 0, y: 3}
+    BuildingType: 0
+  - Type: 0
     GridPosition: {x: 1, y: 0}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 1, y: 1}
     BuildingType: 0
-  NextBuildingTypeForCreation: 2
+  - Type: 0
+    GridPosition: {x: 1, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 3}
+    BuildingType: 0
+  NextBuildingTypeForCreation: 0
   StartingAvailableBuildingTypes: 01000000
   AssetReference:
     m_AssetGUID: c2398a6f208640c42a2a29d3aded7148
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  StartStoreList: 0100000002000000
+  AvailableRewards: 00000000010000000200000004000000
+  MinRewardVariantsCount: 1
+  MaxRewardVariantsCount: 3
+  AvailableAdditionalBonuses: 000000000100000002000000
+  StartStoreList: 01000000

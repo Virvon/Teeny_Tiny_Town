@@ -41,7 +41,10 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
 
         public async UniTask<World> CreateWorld(string id, Vector3 position, Transform parent)
         {
-            return await _worldFactory.Create(_staticDataService.GetWorld<WorldConfig>(id).AssetReference, position, parent);
+            World world = await _worldFactory.Create(_staticDataService.GetWorld<WorldConfig>(id).AssetReference, position, parent);
+
+            await UniTask.WaitUntil(() => world.IsCreated);
+            return world;
         }
 
         public async UniTask<WorldsList> CreateWorldsList()

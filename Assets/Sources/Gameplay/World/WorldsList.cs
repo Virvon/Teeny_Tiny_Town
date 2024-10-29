@@ -37,10 +37,8 @@ namespace Assets.Sources.Gameplay.World
             _canChangeWorld = true;
         }
 
-        public async UniTask CreateCurrentWorld()
-        {
+        public async UniTask CreateCurrentWorld() =>
             _currentWorld = await _gameplayFactory.CreateWorld(_persistentProgressService.Progress.CurrentWorldData.Id, _currentWorldPosition, transform);
-        }
 
         public async UniTask ShowNextWorld()
         {
@@ -50,12 +48,11 @@ namespace Assets.Sources.Gameplay.World
             _canChangeWorld = false;
 
             WorldData nextWorldData = _persistentProgressService.Progress.GetNextWorldData();
-
             World world = await _gameplayFactory.CreateWorld(nextWorldData.Id, _nextWorldPosition, transform);
 
             ReplaceWorlds(world, _previousWorldPosition, _currentWorldPosition, () =>
             {
-                ChangeCurrentWorld(world);
+                _currentWorld = world;
                 _canChangeWorld = true;                
             });
         }
@@ -68,12 +65,11 @@ namespace Assets.Sources.Gameplay.World
             _canChangeWorld = false;
 
             WorldData previousWorldData = _persistentProgressService.Progress.GetPreviousWorldData();
-
             World world = await _gameplayFactory.CreateWorld(previousWorldData.Id, _previousWorldPosition, transform);
 
             ReplaceWorlds(world, _nextWorldPosition, _currentWorldPosition, () =>
             {
-                ChangeCurrentWorld(world);
+                _currentWorld = world;
                 _canChangeWorld = true;
             });
         }
@@ -83,20 +79,13 @@ namespace Assets.Sources.Gameplay.World
             _currentWorld.EnterBootstrapState();
         }
 
-        private void ChangeCurrentWorld(World targetWorld)
-        {
-            Destroy(_currentWorld.gameObject);
-            _currentWorld = targetWorld;
-        }
-
         private void ReplaceWorlds(World changedWorld, Vector3 currentWorldTargetPosition, Vector3 changedWorldTargetPosition, TweenCallback callback)
         {
-            Sequence sequence = DOTween.Sequence();
+            Debug.Log("replace");
+            World currentWorld = _currentWorld;
 
-            sequence.Append(_currentWorld.transform.DOMove(currentWorldTargetPosition, _changingSpeed));
-            sequence.Insert(0, changedWorld.transform.DOMove(changedWorldTargetPosition, _changingSpeed));
-
-            sequence.onComplete += callback;
+            currentWorld.MoveTo(currentWorldTargetPosition, callback: () => Destroy(currentWorld.gameObject));
+            changedWorld.MoveTo(changedWorldTargetPosition, callback);
         }
 
         public class Factory : PlaceholderFactory<string, UniTask<WorldsList>>
