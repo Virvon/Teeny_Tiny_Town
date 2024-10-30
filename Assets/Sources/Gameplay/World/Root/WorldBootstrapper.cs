@@ -65,7 +65,6 @@ namespace Assets.Sources.Gameplay.World.Root
 
             await _worldFactory.CreateSelectFrame(worldGenerator.transform);
             await _worldFactory.CreateBuildingMarker(worldGenerator.transform);
-            await _worldFactory.CreateActionHandlerSwitcher();
 
             RegisterActionHandlerStates();
             RegisterStates(_persistentProgressService.Progress.StoreData.IsInfinityMovesUnlocked == false);

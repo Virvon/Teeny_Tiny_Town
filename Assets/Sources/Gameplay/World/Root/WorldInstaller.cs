@@ -48,6 +48,12 @@ namespace Assets.Sources.Gameplay.World.Root
             BindWorldWindows();
             BindMarkersVisibility();
             BindRewarder();
+            BindAcitonHandlerSwitcher();
+        }
+
+        protected virtual void BindAcitonHandlerSwitcher()
+        {
+            Container.BindInterfacesTo<ActionHandlerSwitcher>().AsSingle();
         }
 
         protected virtual void BindWorldWindows()

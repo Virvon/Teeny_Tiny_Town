@@ -44,10 +44,6 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             Container
                 .BindFactory<string, Transform, UniTask<BuildingMarker>, BuildingMarker.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<BuildingMarker>>();
-
-            Container
-                .BindFactory<string, UniTask<ActionHandlerSwitcher>, ActionHandlerSwitcher.Factory>()
-                .FromFactory<KeyPrefabFactoryAsync<ActionHandlerSwitcher>>();
         }
     }
 }

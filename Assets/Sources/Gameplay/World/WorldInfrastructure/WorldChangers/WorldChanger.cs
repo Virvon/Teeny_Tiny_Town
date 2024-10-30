@@ -57,14 +57,12 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
         public async UniTask PlaceNewBuilding(Vector2Int gridPosition, BuildingType buildingType)
         {
-            Debug.Log("place new building start");
             Tile changedTile = GetTile(gridPosition);
             await changedTile.PutBuilding(GetBuilding(buildingType, gridPosition));
 
             NextBuildingForPlacingCreator.MoveToNextBuilding(Tiles);
             TilesChanged?.Invoke();
             BuildingPlaced?.Invoke(buildingType);
-            Debug.Log("place new building end");
         }
 
         public async UniTask Update()

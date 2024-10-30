@@ -14,7 +14,6 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
     {
         WorldGenerator WorldGenerator { get; }
 
-        UniTask CreateActionHandlerSwitcher();
         UniTask<BuildingRepresentation> CreateBuilding(BuildingType type, Vector3 position, Transform parent);
         UniTask CreateBuildingMarker(Transform parent);
         UniTask<Ground> CreateGround(TileType tileType, Vector3 position, Transform parent);

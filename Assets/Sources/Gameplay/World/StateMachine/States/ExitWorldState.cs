@@ -11,9 +11,9 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
     {
         private readonly IWorldWindows _worldWindows;
         private readonly MarkersVisibility _markersVisibility;
-        private readonly ActionHandlerSwitcher _actionHandlerSwitcher;
+        private readonly IActionHandlerSwitcher _actionHandlerSwitcher;
 
-        public ExitWorldState(IWorldWindows worldWindows, MarkersVisibility markersVisibility, ActionHandlerSwitcher actionHandlerSwitcher)
+        public ExitWorldState(IWorldWindows worldWindows, MarkersVisibility markersVisibility, IActionHandlerSwitcher actionHandlerSwitcher)
         {
             _worldWindows = worldWindows;
             _markersVisibility = markersVisibility;

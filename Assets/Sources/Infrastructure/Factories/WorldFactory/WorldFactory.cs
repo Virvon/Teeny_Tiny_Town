@@ -25,7 +25,6 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
         private readonly TileRepresentation.Factory _tileRepresentationFactory;
         private readonly Ground.Factory _groundFactory;
         private readonly BuildingMarker.Factory _buildingMarkerFactory;
-        private readonly ActionHandlerSwitcher.Factory _actionHanlderSwitcherFactory;
         private readonly World _world;
 
         public WorldFactory(
@@ -37,7 +36,6 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             Ground.Factory groundFactory,
             BuildingMarker.Factory buildingMarkerFactory,
             IStaticDataService staticDataService,
-            ActionHandlerSwitcher.Factory actionHanlderSwitcherFactory,
             World world)
         {
             _container = container;
@@ -48,18 +46,10 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             _groundFactory = groundFactory;
             _buildingMarkerFactory = buildingMarkerFactory;
             _staticDataService = staticDataService;
-            _actionHanlderSwitcherFactory = actionHanlderSwitcherFactory;
             _world = world;
         }
 
         public WorldGenerator WorldGenerator { get; private set; }
-
-        public async UniTask CreateActionHandlerSwitcher()
-        {
-            ActionHandlerSwitcher actionHandlerSwitcher = await _actionHanlderSwitcherFactory.Create(WorldFactoryAssets.ActionHandlerSwitcher);
-
-            _container.BindInstance(actionHandlerSwitcher).AsSingle();
-        }
 
         public async UniTask CreateSelectFrame(Transform parent)
         {

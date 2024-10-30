@@ -1,21 +1,16 @@
 ﻿using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Services.Input;
-using Cysharp.Threading.Tasks;
-using UnityEngine;
-using Zenject;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
-    public class ActionHandlerSwitcher : MonoBehaviour
+    public class ActionHandlerSwitcher : IActionHandlerSwitcher
     {
-        private WorldRepresentationChanger _worldRepresentationChanger;
+        private readonly WorldRepresentationChanger _worldRepresentationChanger;
+        private readonly ActionHandlerStateMachine _handlerStateMachine;
+        private readonly IInputService _inputService;
+        private readonly IWorldData WorldData;
 
-        private ActionHandlerStateMachine _handlerStateMachine;
-        private IInputService _inputService;
-        private IWorldData _worldData;
-
-        [Inject]
-        private void Construct(
+        public ActionHandlerSwitcher(
             ActionHandlerStateMachine handlerStateMachine,
             WorldRepresentationChanger worldRepresentationChanger,
             IInputService inputService,
@@ -24,14 +19,14 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             _handlerStateMachine = handlerStateMachine;
             _worldRepresentationChanger = worldRepresentationChanger;
             _inputService = inputService;
-            _worldData = worldData;
+            WorldData = worldData;
 
             _inputService.RemoveBuildingButtonPressed += OnRemoveBuildingButtonClicked;
             _inputService.ReplaceBuildingButtonPressed += OnReplaceBuildingButtonClicked;
             _worldRepresentationChanger.GameplayMoved += EnterToDefaultState;
         }
 
-        private void OnDestroy()
+        ~ActionHandlerSwitcher()
         {
             _inputService.RemoveBuildingButtonPressed -= OnRemoveBuildingButtonClicked;
             _inputService.ReplaceBuildingButtonPressed -= OnReplaceBuildingButtonClicked;
@@ -44,9 +39,15 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 _handlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
         }
 
+        protected virtual bool CheckBulldozerItemsCount() =>
+            WorldData.BulldozerItems.Count != 0;
+
+        protected virtual bool CheckReplaceItemsCount() =>
+            WorldData.ReplaceItems.Count != 0;
+
         private void OnReplaceBuildingButtonClicked()
         {
-            if (_worldData.ReplaceItems.Count == 0)
+            if (CheckReplaceItemsCount() == false)
                 return;
 
             if (_handlerStateMachine.CurrentState is not ReplacedBuildingPositionHandler)
@@ -57,7 +58,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         private void OnRemoveBuildingButtonClicked()
         {
-            if (_worldData.BulldozerItems.Count == 0)
+            if (CheckBulldozerItemsCount() == false)
                 return;
 
             if (_handlerStateMachine.CurrentState is not RemovedBuildingPositionHandler)
@@ -66,8 +67,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 _handlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
         }
 
-        public class Factory : PlaceholderFactory<string, UniTask<ActionHandlerSwitcher>>
-        {
-        }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Data.WorldDatas.Currency;
 using Assets.Sources.Gameplay.GameplayMover;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.Windows;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.UI.Windows.World.Panels.Store;
@@ -15,6 +16,11 @@ namespace Assets.Sources.Gameplay.World.Root
 
             Container.Bind<GainBuyer>().AsSingle();
             Container.Bind<UnlimitedQuantityGainBuyer>().AsSingle();
+        }
+
+        protected override void BindAcitonHandlerSwitcher()
+        {
+            Container.BindInterfacesTo<CurrencyWorldActionHandlerSwitcher>().AsSingle();
         }
 
         protected override void BindWorldWindows()
