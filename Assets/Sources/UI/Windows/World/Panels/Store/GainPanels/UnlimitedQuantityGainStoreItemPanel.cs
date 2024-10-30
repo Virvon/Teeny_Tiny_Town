@@ -1,6 +1,4 @@
 ﻿using Assets.Sources.Data.WorldDatas.Currency;
-using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
-using UnityEngine;
 
 namespace Assets.Sources.UI.Windows.World.Panels.Store
 {
@@ -12,5 +10,11 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
 
         protected override void GetData() =>
             _data = CurrencyWorldData.WorldStore.GetGainData<GainStoreItemData>(Type);
+
+        protected override void OnBuyButtonClicked()
+        {
+            if (CurrencyWorldData.WorldWallet.TryGet(Cost))
+                GainBuyer.Buy(Type);
+        }
     }
 }

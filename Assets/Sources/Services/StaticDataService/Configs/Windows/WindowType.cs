@@ -13,5 +13,6 @@
         Quests,
         Waiting,
         SaveGameplay,
+        GainBuying,
     }
 }

@@ -75,4 +75,4 @@ MonoBehaviour:
   MaxRewardVariantsCount: 3
   AvailableAdditionalBonuses: 000000000100000002000000
   StartStoreList: 01000000
-  AvailableGainStoreItems: 01000000
+  AvailableGainStoreItems: 0100000002000000

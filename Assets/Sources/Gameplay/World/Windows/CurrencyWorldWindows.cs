@@ -24,6 +24,7 @@ namespace Assets.Sources.Gameplay.World.Windows
             await base.Register();
 
             await WindowsSwitcher.RegisterWindow<StoreWindow>(WindowType.WorldStore, UiFactory);
+            await WindowsSwitcher.RegisterWindow<GainBuyingWindow>(WindowType.GainBuying, UiFactory);
         }
 
         public override void Remove()
@@ -31,6 +32,7 @@ namespace Assets.Sources.Gameplay.World.Windows
             base.Remove();
 
             WindowsSwitcher.Remove<StoreWindow>();
+            WindowsSwitcher.Remove<GainBuyingWindow>();
         }
     }
 }

@@ -2,12 +2,21 @@
 using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Gameplay.World.Windows;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
+using Assets.Sources.UI.Windows.World.Panels.Store;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.Root
 {
     public class CurrencyWorldInstaller : WorldInstaller
     {
+        public override void InstallBindings()
+        {
+            base.InstallBindings();
+
+            Container.Bind<GainBuyer>().AsSingle();
+            Container.Bind<UnlimitedQuantityGainBuyer>().AsSingle();
+        }
+
         protected override void BindWorldWindows()
         {
             Container.BindInterfacesTo<CurrencyWorldWindows>().AsSingle();

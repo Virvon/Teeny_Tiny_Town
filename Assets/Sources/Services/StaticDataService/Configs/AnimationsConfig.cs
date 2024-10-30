@@ -34,6 +34,9 @@ namespace Assets.Sources.Services.StaticDataService.Configs
         public Color DefaultGainButtonIconColor;
         public float ChangeGainButtonActiveDuration;
 
+        public Color PurchasePermittingColor;
+        public Color ProhibitingPurchaseColor;
+
         public float BuildingShakeTweenDuration => BuildingShakesDuration / BuildingShakesCount;
     }
 }

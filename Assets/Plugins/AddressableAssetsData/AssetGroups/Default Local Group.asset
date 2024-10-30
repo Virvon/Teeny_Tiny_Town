@@ -489,6 +489,12 @@ MonoBehaviour:
   - m_GUID: d4c240fbccd1a544fa187ee56c6c7874
     m_Address: CraneStoreItemConfig
     m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 833a24bba5f015c43bb4f6321bac2d8b
+    m_Address: GainBuyingWindow
+    m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0

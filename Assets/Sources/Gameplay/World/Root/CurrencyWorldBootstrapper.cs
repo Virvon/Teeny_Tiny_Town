@@ -48,6 +48,7 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine.RegisterState(StatesFactory.Create<QuestsState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<SaveGameplayState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<StoreState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<GainBuyingState>());
 
             if (needRegisterWaitinState)
                 WorldStateMachine.RegisterState(StatesFactory.Create<WaitingState>());

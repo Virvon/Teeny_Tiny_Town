@@ -11,5 +11,12 @@ namespace Assets.Sources.Data.WorldDatas.Currency
         {
             RemainingCount = startCount;
         }
+
+        public override void ChangeBuyingCount(uint count)
+        {
+            RemainingCount = RemainingCount < count ? 0 : RemainingCount - count;
+
+            base.ChangeBuyingCount(count);
+        }
     }
 }
