@@ -36,7 +36,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         public async UniTask CreateRepresentation(ITileRepresentationCreatable tileRepresentationCreatable)
         {
-            TileRepresentation = await tileRepresentationCreatable.Create(GridPosition);
+            TileRepresentation = await tileRepresentationCreatable.Create(GridPosition, Type);
             await CreateGroundRepresentation(false);
 
             if(Building != null)

@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
@@ -15,14 +16,16 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
         private BuildingRepresentation _building;
 
+        public TileType Type { get; private set; }
         public Vector2Int GridPosition { get; private set; }
         public bool IsEmpty => _building == null;
         public BuildingType BuildingType => IsEmpty ? BuildingType.Undefined : _building.Type;
         public Transform BuildingPoint => _groundCreator.Ground.BuildingPoint;
         public GroundCreator GroundCreator => _groundCreator;
 
-        public void Init(Vector2Int gridPosition)
+        public void Init(TileType type, Vector2Int gridPosition)
         {
+            Type = type;
             GridPosition = gridPosition;
         }
 

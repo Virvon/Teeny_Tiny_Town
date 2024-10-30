@@ -1,6 +1,8 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Services.StateMachine;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -58,5 +60,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         protected Ray GetRay(Vector2 handlePosition) =>
             _camera.ScreenPointToRay(new Vector3(handlePosition.x, handlePosition.y, 1));
+
+        protected bool CheckBuildingAndTileCompatibility(BuildingType buildingType, TileType tileType)
+        {
+            return ((buildingType == BuildingType.Lighthouse && tileType != TileType.WaterSurface)
+                || (buildingType != BuildingType.Lighthouse && tileType == TileType.WaterSurface))
+                == false;
+        }
     }
 }

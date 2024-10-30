@@ -69,7 +69,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             if (CheckTileIntersection(handlePosition, out TileRepresentation tile))
             {
-                if (_isBuildingChoosed && _choosedToReplacingTile != tile)
+                if (_isBuildingChoosed
+                    && _choosedToReplacingTile != tile
+                    && CheckBuildingAndTileCompatibility(_choosedToReplacingTile.BuildingType, tile.Type))
                 {
                     _choosedPlaceSelectFrame.Select(tile);
                     _choosedPlaceSelectFrame.Show();
@@ -110,7 +112,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                         _markersVisibility.SetSelectFrameShowed(false);
                         _isBuildingChoosed = false;
                     }
-                    else
+                    else if (CheckBuildingAndTileCompatibility(_choosedToReplacingTile.BuildingType, tile.Type))
                     {
                         _markersVisibility.SetSelectFrameShowed(false);
                         _choosedPlaceSelectFrame.Hide();

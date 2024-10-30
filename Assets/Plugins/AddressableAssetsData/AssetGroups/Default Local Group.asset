@@ -271,11 +271,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Configs
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5030ce78a8e890544ac651b1b03b9f16
-    m_Address: ActionHandlerSwitcher
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4141ff073e4b08b43bc3271a9810fa64
     m_Address: Assets/Configs/WorldConfigs/WorldConfig.asset
     m_ReadOnly: 0
@@ -284,8 +279,7 @@ MonoBehaviour:
   - m_GUID: 4166c9d83fb665144b2b79697bf64f37
     m_Address: Assets/Configs/WorldConfigs/ExpandingWorldConfig.asset
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c83a0e82ae2fe074e8598aff9a8d1e25
     m_Address: ExpandingWorld
@@ -300,7 +294,8 @@ MonoBehaviour:
   - m_GUID: 1bcdf5a6e46f3fd4a8f8133947e9a3ac
     m_Address: CurrencyWorldConfig
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Configs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4e9e55bbad0251b4480c47c3cbe8a246
     m_Address: CurrencyGameplayWindow
@@ -493,6 +488,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 833a24bba5f015c43bb4f6321bac2d8b
     m_Address: GainBuyingWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad2964b30710098459358670c0ed5b2b
+    m_Address: LighthouseStoreItemConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

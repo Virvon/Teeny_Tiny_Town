@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
+using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
@@ -31,12 +32,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         public TileRepresentation GetTile(Vector2Int gridPosition) =>
             _tiles.First(tile => tile.GridPosition == gridPosition);
 
-        public async UniTask<TileRepresentation> Create(Vector2Int gridPosition)
+        public async UniTask<TileRepresentation> Create(Vector2Int gridPosition, TileType tileType)
         {
             Vector3 worldPosition = GridToWorldPosition(gridPosition) + transform.position;
             TileRepresentation tileRepresentation = await _worldFactory.CreateTileRepresentation(worldPosition, transform);
 
-            tileRepresentation.Init(gridPosition);
+            tileRepresentation.Init(tileType, gridPosition);
 
             if (_tiles.Any(value => value.GridPosition == gridPosition))
                 _tiles.Remove(GetTile(gridPosition));

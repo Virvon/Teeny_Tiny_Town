@@ -73,7 +73,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override void OnHandleMoved(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty)
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile)
+                && tile.IsEmpty
+                && CheckBuildingAndTileCompatibility(_buildingMarker.BuildingType, tile.Type))
             {
                 SelectFrame.Select(tile);
                 _markersVisibility.SetSelectFrameShowed(true);
@@ -103,7 +105,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override void OnPressed(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty)
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile)
+                && tile.IsEmpty
+                && CheckBuildingAndTileCompatibility(_buildingMarker.BuildingType, tile.Type))
             {
                 _markersVisibility.SetBuildingShowed(false);
                 _markersVisibility.SetSelectFrameShowed(false);
