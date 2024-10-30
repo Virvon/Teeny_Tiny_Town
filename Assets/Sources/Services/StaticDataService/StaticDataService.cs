@@ -5,10 +5,12 @@ using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.GameplayStore;
 using Assets.Sources.Services.StaticDataService.Configs.Quests;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.World;
+using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
 using Cysharp.Threading.Tasks;
 using UnityEngine.InputSystem.Utilities;
 
@@ -28,12 +30,13 @@ namespace Assets.Sources.Services.StaticDataService
         private Dictionary<RewardType, RewardConfig> _rewardConfigs;
         private Dictionary<GameplayStoreItemType, StoreItemConfig> _gameplayStoreItemConfigs;
         private Dictionary<AdditionalBonusType, AdditionalBonusConfig> _additionalBonusConfigs;
+        private Dictionary<GainStoreItemType, GainStoreItemConfig> _gainStoreItemConfigs;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
 
         public GroundsConfig GroundsConfig { get; private set; }
-        public GameplayStoreItemsConfig StoreItemsConfig { get; private set; }
+        public WorldStoreItemsCofnig StoreItemsConfig { get; private set; }
         public WindowsConfig WindowsConfig { get; private set; }
         public WorldsConfig WorldsConfig { get; private set; }
         public AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; private set; }
@@ -58,9 +61,13 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadRewardConfigs());
             tasks.Add(LoadQuestsConfig());
             tasks.Add(LoadAdditionalBonusConfigs());
+            tasks.Add(LoadGainStoreItemConfigs());
 
             await UniTask.WhenAll(tasks);
         }
+
+        public GainStoreItemConfig GetGainStoreItem(GainStoreItemType type) =>
+            _gainStoreItemConfigs.TryGetValue(type, out GainStoreItemConfig config) ? config : null;
 
         public AdditionalBonusConfig GetAdditionalBonus(AdditionalBonusType type) =>
             _additionalBonusConfigs.TryGetValue(type, out AdditionalBonusConfig config) ? config : null;
@@ -96,6 +103,13 @@ namespace Assets.Sources.Services.StaticDataService
             return _groundConfigs.TryGetValue(
                 groundType, out Dictionary<RoadType, RoadConfig> roadConfigs) ? (roadConfigs.TryGetValue(
                 roadType, out RoadConfig config) ? config : null) : null;
+        }
+
+        private async UniTask LoadGainStoreItemConfigs()
+        {
+            GainStoreItemConfig[] configs = await GetConfigs<GainStoreItemConfig>();
+
+            _gainStoreItemConfigs = configs.ToDictionary(value => value.Type, value => value);
         }
 
         private async UniTask LoadAdditionalBonusConfigs()
@@ -164,7 +178,7 @@ namespace Assets.Sources.Services.StaticDataService
 
         private async UniTask LoadWorldStoreItemConfigs()
         {
-            GameplayStoreItemsConfig[] storeItemsConfigs = await GetConfigs<GameplayStoreItemsConfig>();
+            WorldStoreItemsCofnig[] storeItemsConfigs = await GetConfigs<WorldStoreItemsCofnig>();
 
             StoreItemsConfig = storeItemsConfigs.First();
 

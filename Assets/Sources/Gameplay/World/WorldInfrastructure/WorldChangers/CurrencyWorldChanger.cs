@@ -3,8 +3,8 @@ using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Services.PersistentProgress;
-using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
+using Assets.Sources.Data.WorldDatas.Currency;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {

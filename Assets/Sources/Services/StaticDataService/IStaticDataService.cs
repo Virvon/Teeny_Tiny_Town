@@ -1,10 +1,12 @@
 ﻿using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.GameplayStore;
 using Assets.Sources.Services.StaticDataService.Configs.Quests;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.World;
+using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
 using Cysharp.Threading.Tasks;
 using UnityEngine.InputSystem.Utilities;
 
@@ -14,7 +16,7 @@ namespace Assets.Sources.Services.StaticDataService
     {
         GroundsConfig GroundsConfig { get; }
         WindowsConfig WindowsConfig { get; }
-        GameplayStoreItemsConfig StoreItemsConfig { get; }
+        WorldStoreItemsCofnig StoreItemsConfig { get; }
         WorldsConfig WorldsConfig { get; }
         AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; }
         ReadOnlyArray<WorldConfig> WorldConfigs { get; }
@@ -34,5 +36,6 @@ namespace Assets.Sources.Services.StaticDataService
         RewardConfig GetReward(RewardType type);
         StoreItemConfig GetGameplayStorItem(GameplayStoreItemType type);
         AdditionalBonusConfig GetAdditionalBonus(AdditionalBonusType type);
+        GainStoreItemConfig GetGainStoreItem(GainStoreItemType type);
     }
 }

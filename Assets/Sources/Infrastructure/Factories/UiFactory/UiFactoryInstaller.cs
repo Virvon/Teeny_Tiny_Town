@@ -1,9 +1,9 @@
-﻿using Assets.Sources.Gameplay.Store;
-using Assets.Sources.Services.AssetManagement;
+﻿using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.UI;
 using Assets.Sources.UI.Windows.World.Panels;
 using Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer;
 using Assets.Sources.UI.Windows.World.Panels.Reward;
+using Assets.Sources.UI.Windows.World.Panels.Store;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -25,8 +25,8 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
                 .FromFactory<ReferencePrefabFactoryAsync<Window>>();
 
             Container
-                .BindFactory<AssetReferenceGameObject, Transform, UniTask<StoreItem>, StoreItem.Factory>()
-                .FromFactory<ReferencePrefabFactoryAsync<StoreItem>>();
+                .BindFactory<AssetReferenceGameObject, Transform, UniTask<BuildingStoreItem>, BuildingStoreItem.Factory>()
+                .FromFactory<ReferencePrefabFactoryAsync<BuildingStoreItem>>();
 
             Container
                 .BindFactory<AssetReferenceGameObject, Transform, UniTask<RewardPanel>, RewardPanel.Factory>()
@@ -43,6 +43,10 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<AssetReferenceGameObject, Transform, UniTask<AdditionalBonusOfferItem>, AdditionalBonusOfferItem.Factory>()
                 .FromFactory<ReferencePrefabFactoryAsync<AdditionalBonusOfferItem>>();
+            
+            Container
+                .BindFactory<AssetReferenceGameObject, Transform, UniTask<GainStoreItemPanel>, GainStoreItemPanel.Factory>()
+                .FromFactory<ReferencePrefabFactoryAsync<GainStoreItemPanel>>();
         }
     }
 }

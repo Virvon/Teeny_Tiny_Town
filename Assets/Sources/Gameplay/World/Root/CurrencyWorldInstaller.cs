@@ -1,5 +1,6 @@
-﻿using Assets.Sources.Data.WorldDatas;
+﻿using Assets.Sources.Data.WorldDatas.Currency;
 using Assets.Sources.Gameplay.GameplayMover;
+using Assets.Sources.Gameplay.World.Windows;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using UnityEngine;
 
@@ -7,6 +8,11 @@ namespace Assets.Sources.Gameplay.World.Root
 {
     public class CurrencyWorldInstaller : WorldInstaller
     {
+        protected override void BindWorldWindows()
+        {
+            Container.BindInterfacesTo<CurrencyWorldWindows>().AsSingle();
+        }
+
         protected override void BindWorldBootstrapper()
         {
             Container.BindInterfacesAndSelfTo<CurrencyWorldBootstrapper>().AsSingle().NonLazy();

@@ -1,5 +1,7 @@
 ﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Data.WorldDatas.Currency;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,8 +12,19 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
     public class CurrencyWorldConfig : WorldConfig
     {
         public List<BuildingType> StartStoreList;
+        public GainStoreItemType[] AvailableGainStoreItems;
 
-        public override WorldData GetWorldData(uint[] goals) =>
-            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, StartStoreList, goals);
+        public override WorldData GetWorldData(uint[] goals, IStaticDataService staticDataService) =>
+            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, StartStoreList, goals, GetGainStoreItemsList(staticDataService));
+
+        protected GainStoreItemData[] GetGainStoreItemsList(IStaticDataService staticDataService)
+        {
+            GainStoreItemData[] datas = new GainStoreItemData[AvailableGainStoreItems.Length];
+
+            for(int i = 0; i < AvailableGainStoreItems.Length; i++)
+                datas[i] = staticDataService.GetGainStoreItem(AvailableGainStoreItems[i]).GetData();
+
+            return datas;
+        }
     }
 }

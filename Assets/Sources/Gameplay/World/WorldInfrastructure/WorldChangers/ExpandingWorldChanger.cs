@@ -3,8 +3,8 @@ using Assets.Sources.Data;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
-using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
+using Assets.Sources.Data.WorldDatas.Currency;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {

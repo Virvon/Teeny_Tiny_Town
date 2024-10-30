@@ -1,6 +1,5 @@
 ﻿using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
-using System;
 using System.Linq;
 using UnityEngine;
 
@@ -19,13 +18,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
             return expandConfig != null;
         }
 
-        public override WorldData GetWorldData(uint[] goals) =>
-            new ExpandingWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), StartSize, StartStoreList, goals);
-    }
-    [Serializable]
-    public class ExpandConfig
-    {
-        public BuildingType BuidldingType;
-        public Vector2Int ExpandedSize;
+        public override WorldData GetWorldData(uint[] goals, IStaticDataService staticDataService) =>
+            new ExpandingWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), StartSize, StartStoreList, goals, GetGainStoreItemsList(staticDataService));
     }
 }

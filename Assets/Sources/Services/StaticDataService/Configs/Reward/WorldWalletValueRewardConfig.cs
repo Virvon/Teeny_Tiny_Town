@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Data.WorldDatas.Currency;
 using UnityEngine;
 
 namespace Assets.Sources.Services.StaticDataService.Configs.Reward

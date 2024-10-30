@@ -9,6 +9,7 @@ using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine.InputSystem.Utilities;
 using System.Linq;
+using Assets.Sources.Data.WorldDatas.Currency;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {
@@ -63,7 +64,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
             {
                 WorldConfig worldConfig = worldConfigs[i];
 
-                worldDatas[i] = worldConfig.GetWorldData(_staticDataService.WorldsConfig.Goals);
+                worldDatas[i] = worldConfig.GetWorldData(_staticDataService.WorldsConfig.Goals, _staticDataService);
 
                 if (worldDatas[i] is CurrencyWorldData currencyWolrdData)
                     currencyWolrdData.WorldWallet.Value = 3000;

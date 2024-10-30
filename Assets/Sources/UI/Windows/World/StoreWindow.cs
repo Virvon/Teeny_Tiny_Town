@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Assets.Sources.UI.Windows.World
 {
-    public class StoreWindow : Window
+    public class StoreWindow : BluredBackgroundWindow
     {
         [SerializeField] private Button _hideButton;
 
@@ -17,19 +17,13 @@ namespace Assets.Sources.UI.Windows.World
         private void Construct(WorldStateMachine worldStateMachine) =>
             _worldStateMachine = worldStateMachine;
 
-        private void OnEnable()
-        {
+        private void OnEnable() =>
             _hideButton.onClick.AddListener(OnHideButtonClicked);
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() =>
             _hideButton.onClick.RemoveListener(OnHideButtonClicked);
-        }
 
-        private void OnHideButtonClicked()
-        {
+        private void OnHideButtonClicked() =>
             _worldStateMachine.Enter<WorldChangingState>().Forget();
-        }
     }
 }

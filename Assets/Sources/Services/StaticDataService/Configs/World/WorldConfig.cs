@@ -31,7 +31,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         private void OnValidate() =>
             CreateTileConfigs();
 
-        public virtual WorldData GetWorldData(uint[] goals) => 
+        public virtual WorldData GetWorldData(uint[] goals, IStaticDataService staticDataService) => 
             new WorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, goals);
 
         private void CreateTileConfigs()

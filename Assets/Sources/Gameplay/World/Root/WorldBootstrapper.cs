@@ -70,7 +70,7 @@ namespace Assets.Sources.Gameplay.World.Root
             await _worldFactory.CreateActionHandlerSwitcher();
 
             RegisterActionHandlerStates();
-            RegisterStates();
+            RegisterStates(_persistentProgressService.Progress.StoreData.IsInfinityMovesUnlocked == false);
 
             _actionHandlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
 
@@ -79,7 +79,7 @@ namespace Assets.Sources.Gameplay.World.Root
             _world.OnCreated();
         }
 
-        protected virtual void RegisterStates()
+        protected virtual void RegisterStates(bool needRegisterWaitinState)
         {
             WorldStateMachine.RegisterState(StatesFactory.Create<WorldStartState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<WorldChangingState>());
@@ -89,7 +89,7 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine.RegisterState(StatesFactory.Create<QuestsState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<SaveGameplayState>());
             
-            if(_persistentProgressService.Progress.StoreData.IsInfinityMovesUnlocked == false)
+            if(needRegisterWaitinState)
                 WorldStateMachine.RegisterState(StatesFactory.Create<WaitingState>());
         }
 

@@ -1,14 +1,15 @@
-﻿using Assets.Sources.Gameplay.Store;
-using Assets.Sources.Services.AssetManagement;
+﻿using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
+using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
 using Assets.Sources.UI;
 using Assets.Sources.UI.Windows.World.Panels;
 using Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer;
 using Assets.Sources.UI.Windows.World.Panels.Reward;
+using Assets.Sources.UI.Windows.World.Panels.Store;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -18,14 +19,24 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
     {
         private readonly Window.Factory _windowFactory;
         private readonly IStaticDataService _staticDataService;
-        private readonly StoreItem.Factory _storeItemFactory;
+        private readonly BuildingStoreItem.Factory _storeItemFactory;
         private readonly RewardPanel.Factory _rewardPanelFactory;
         private readonly IAssetProvider _assetProvider;
         private readonly QuestPanel.Factory _questPanelFactory;
         private readonly RemainingMovesPanel.Factory _remainingMovesPanelFactory;
         private readonly AdditionalBonusOfferItem.Factory _additionalBonusOfferItemFactory;
+        private readonly GainStoreItemPanel.Factory _gainStoreItemPanelFactory;
 
-        public UiFactory(Window.Factory windowFactory, IStaticDataService staticDataService, StoreItem.Factory storeItemFactory, RewardPanel.Factory rewardPanelFactory, IAssetProvider assetProvider, QuestPanel.Factory questPanelFactory, RemainingMovesPanel.Factory remainingMovesPanelFactory, AdditionalBonusOfferItem.Factory additionalBonusOfferItemFactory)
+        public UiFactory(
+            Window.Factory windowFactory,
+            IStaticDataService staticDataService,
+            BuildingStoreItem.Factory storeItemFactory,
+            RewardPanel.Factory rewardPanelFactory,
+            IAssetProvider assetProvider,
+            QuestPanel.Factory questPanelFactory,
+            RemainingMovesPanel.Factory remainingMovesPanelFactory,
+            AdditionalBonusOfferItem.Factory additionalBonusOfferItemFactory,
+            GainStoreItemPanel.Factory gainStoreItemPanelFactory)
         {
             _windowFactory = windowFactory;
             _staticDataService = staticDataService;
@@ -35,6 +46,16 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             _questPanelFactory = questPanelFactory;
             _remainingMovesPanelFactory = remainingMovesPanelFactory;
             _additionalBonusOfferItemFactory = additionalBonusOfferItemFactory;
+            _gainStoreItemPanelFactory = gainStoreItemPanelFactory;
+        }
+
+        public async UniTask CreateGainStoreItemPanel(GainStoreItemType type, Transform parent)
+        {
+            GainStoreItemConfig gainStoreItemConfig = _staticDataService.GetGainStoreItem(type);
+            GainStoreItemPanel gainStoreItemPanel = await _gainStoreItemPanelFactory.Create(gainStoreItemConfig.PanelAssetReference, parent);
+            Sprite icon = await _assetProvider.Load<Sprite>(gainStoreItemConfig.IconAssetReferecne);
+
+            gainStoreItemPanel.Init(type, icon);
         }
 
         public async UniTask CreateAdditionBonusOfferItem(AdditionalBonusType type, Transform parent)
@@ -68,10 +89,10 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             return rewardPanel;
         }
 
-        public async UniTask<StoreItem> CreateStoreItem(BuildingType buildingType, Transform parent)
+        public async UniTask<BuildingStoreItem> CreateStoreItem(BuildingType buildingType, Transform parent)
         {
             GameplayStoreItemConfig config = _staticDataService.GetWorldStoreItem(buildingType);
-            StoreItem storeItem = await _storeItemFactory.Create(_staticDataService.StoreItemsConfig.AssetReference, parent);
+            BuildingStoreItem storeItem = await _storeItemFactory.Create(_staticDataService.StoreItemsConfig.AssetReference, parent);
 
             storeItem.Init(config.Price, buildingType);
 

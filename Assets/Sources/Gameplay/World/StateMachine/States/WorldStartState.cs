@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Gameplay.World.Windows;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.UI;
@@ -13,14 +14,14 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         private readonly WindowsSwitcher _windowsSwitcher;
         private readonly WorldStateMachine _worldStateMachine;
         private readonly IPersistentProgressService _persistentProgressService;
-        private readonly WorldWindows _worldWindows;
+        private readonly IWorldWindows _worldWindows;
 
         public WorldStartState(
             IWorldData worldData,
             WindowsSwitcher windowsSwitcher,
             WorldStateMachine worldStateMachine,
             IPersistentProgressService persistentProgressService,
-            WorldWindows worldWindows)
+            IWorldWindows worldWindows)
         {
             _worldData = worldData;
             _windowsSwitcher = windowsSwitcher;

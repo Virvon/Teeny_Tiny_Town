@@ -4,6 +4,7 @@ using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.StateMachine;
+using Assets.Sources.Gameplay.World.Windows;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
@@ -49,6 +50,11 @@ namespace Assets.Sources.Gameplay.World.Root
             BindRewarder();
         }
 
+        protected virtual void BindWorldWindows()
+        {
+            Container.BindInterfacesTo<WorldWindows>().AsSingle();
+        }
+
         protected virtual void BindWorldBootstrapper()
         {
             Container.BindInterfacesAndSelfTo<WorldBootstrapper>().AsSingle().NonLazy();
@@ -79,10 +85,7 @@ namespace Assets.Sources.Gameplay.World.Root
             Container.Bind<MarkersVisibility>().AsSingle();
         }
 
-        private void BindWorldWindows()
-        {
-            Container.Bind<WorldWindows>().AsSingle();
-        }
+        
 
         private void BindQuestsChecker()
         {

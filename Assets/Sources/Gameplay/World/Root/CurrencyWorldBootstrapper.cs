@@ -38,11 +38,19 @@ namespace Assets.Sources.Gameplay.World.Root
         {
         }
 
-        protected override void RegisterStates()
+        protected override void RegisterStates(bool needRegisterWaitinState)
         {
-            WorldStateMachine.RegisterState(StatesFactory.Create<StoreState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<WorldStartState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<WorldChangingState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ExitWorldState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<ResultState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<RewardState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<QuestsState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<SaveGameplayState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<StoreState>());
+
+            if (needRegisterWaitinState)
+                WorldStateMachine.RegisterState(StatesFactory.Create<WaitingState>());
         }
 
         protected override void OnWorldEntered() =>

@@ -169,12 +169,12 @@ MonoBehaviour:
     - Configs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bfb047b41f6f11b4198a7e33ca8635c3
-    m_Address: Item
+    m_Address: BuildingItem
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c7140c9c77020104c995f17c9a48edbf
-    m_Address: StoreItemsConfig
+  - m_GUID: 6e257124536ae514d8b3f66d27975773
+    m_Address: BuildingsStoreConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - Configs
@@ -469,6 +469,27 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f77dfec413a17e241bbecd24d767c3e0
+    m_Address: BulldozerStoreItemConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ddbb3fd39d291a4ea4968ccccf6143b
+    m_Address: GainItemPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5584bda734a1a6141a98e149f4da4423
+    m_Address: LimitedQuantityGainStoreItemPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4c240fbccd1a544fa187ee56c6c7874
+    m_Address: CraneStoreItemConfig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}

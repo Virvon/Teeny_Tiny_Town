@@ -81,7 +81,6 @@ namespace Assets.Sources.Gameplay.World
 
         private void ReplaceWorlds(World changedWorld, Vector3 currentWorldTargetPosition, Vector3 changedWorldTargetPosition, TweenCallback callback)
         {
-            Debug.Log("replace");
             World currentWorld = _currentWorld;
 
             currentWorld.MoveTo(currentWorldTargetPosition, callback: () => Destroy(currentWorld.gameObject));
