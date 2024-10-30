@@ -38,6 +38,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
 
         public void Mark(TileRepresentation tile)
         {
+            if (tile == null)
+                return;
+
             transform.position = tile.BuildingPoint.position;
             MarkedTile = tile;
         }
@@ -102,7 +105,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
         private async void OnNextBuildingForPlacingDataChanged(BuildingsForPlacingData data) =>
             await TryUpdate(data.CurrentBuildingType);
 
-        public class Factory : PlaceholderFactory<string, UniTask<BuildingMarker>>
+        public class Factory : PlaceholderFactory<string, Transform, UniTask<BuildingMarker>>
         {
         }
     }

@@ -34,7 +34,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
                 .FromFactory<KeyPrefabFactoryAsync<TileRepresentation>>();
 
             Container
-                .BindFactory<string, UniTask<SelectFrame>, SelectFrame.Factory>()
+                .BindFactory<string, Transform, UniTask<SelectFrame>, SelectFrame.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<SelectFrame>>();
 
             Container
@@ -42,7 +42,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
                 .FromFactory<ReferencePrefabFactoryAsync<Ground>>();
 
             Container
-                .BindFactory<string, UniTask<BuildingMarker>, BuildingMarker.Factory>()
+                .BindFactory<string, Transform, UniTask<BuildingMarker>, BuildingMarker.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<BuildingMarker>>();
 
             Container

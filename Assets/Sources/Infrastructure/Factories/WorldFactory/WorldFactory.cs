@@ -61,9 +61,9 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             _container.BindInstance(actionHandlerSwitcher).AsSingle();
         }
 
-        public async UniTask CreateSelectFrame()
+        public async UniTask CreateSelectFrame(Transform parent)
         {
-            SelectFrame selectFrame = await _selectFrameFactory.Create(WorldFactoryAssets.SelectFrame);
+            SelectFrame selectFrame = await _selectFrameFactory.Create(WorldFactoryAssets.SelectFrame, parent);
 
             _container.Bind<SelectFrame>().FromInstance(selectFrame).AsSingle();
         }
@@ -85,9 +85,9 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             return await _groundFactory.Create(_staticDataService.GetRoad(groundType, roadType).AssetReference, position, (int)rotation + _world.RotationDegrees, parent);
         }
 
-        public async UniTask CreateBuildingMarker()
+        public async UniTask CreateBuildingMarker(Transform parent)
         {
-            BuildingMarker marker = await _buildingMarkerFactory.Create(WorldFactoryAssets.BuildingMarker);
+            BuildingMarker marker = await _buildingMarkerFactory.Create(WorldFactoryAssets.BuildingMarker, parent);
 
             _container.Bind<BuildingMarker>().FromInstance(marker).AsSingle();
         }

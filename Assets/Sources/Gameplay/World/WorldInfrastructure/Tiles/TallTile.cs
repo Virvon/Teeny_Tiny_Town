@@ -86,10 +86,19 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
                 if (GetBuildingsChainLength(countedTiles) >= MinTilesCountToMerge && await TryUpgradeBuilding())
                 {
                     List<TallTile> tilesForRemoveBuildings = countedTiles;
+                    List<UniTask> removeBuildingTask = new();
+
                     tilesForRemoveBuildings.Remove(this);
 
                     foreach (Tile tile in countedTiles)
-                        await tile.RemoveBuilding(TileRepresentation.BuildingPoint.position);
+                        removeBuildingTask.Add(tile.RemoveBuilding(TileRepresentation.BuildingPoint.position));
+
+                    await UniTask.WhenAll(removeBuildingTask);
+
+                    Debug.Log("try add");
+
+                    _worldData.TryAddBuildingTypeForCreation(BuildingType, StaticDataService.AvailableForConstructionBuildingsConfig.requiredCreatedBuildingsToAddNext, StaticDataService);
+                    Debug.Log(BuildingType);
                 }
                 else
                 {
@@ -116,7 +125,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             if (StaticDataService.AvailableForConstructionBuildingsConfig.TryFindeNextBuilding(BuildingType, out BuildingType nextBuildingType))
             {
                 await CreateBuildingRepresentation(_buildingGibable.GetBuilding(nextBuildingType, GridPosition));
-                _worldData.TryAddBuildingTypeForCreation(nextBuildingType, StaticDataService.AvailableForConstructionBuildingsConfig.requiredCreatedBuildingsToAddNext, StaticDataService);
 
                 return true;
             }

@@ -14,6 +14,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
     {
         event Action TilesChanged;
         event Action<BuildingType> BuildingPlaced;
+        event Action<Vector2Int, bool> CenterChanged;
 
         IReadOnlyList<Tile> Tiles { get; }
 

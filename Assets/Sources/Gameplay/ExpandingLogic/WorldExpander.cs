@@ -3,6 +3,7 @@ using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.ExpandingLogic
 {
@@ -29,6 +30,8 @@ namespace Assets.Sources.Gameplay.ExpandingLogic
 
         private void OnBuildingUpdated(BuildingType type)
         {
+            Debug.Log("building updated");
+
             if (_expandingWorldConfig.ContainsExpand(type, out ExpandConfig expandConfig) && expandConfig.ExpandedSize.magnitude > _worldData.Size.magnitude)
                 _expandingGameplayMover.ExpandWorld(expandConfig.ExpandedSize);
         }

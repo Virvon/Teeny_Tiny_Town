@@ -13,6 +13,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         private readonly SelectFrame _choosedBuildingSelectFrame;
         private readonly SelectFrame.Factory _selectFrameFactory;
         private readonly MarkersVisibility _markersVisibility;
+        private readonly Transform _selectFrameParent;
 
         private readonly Vector3 _choosedBuildingPositionOffset = new (0, 2, 0);
 
@@ -25,12 +26,14 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             LayerMask layerMask,
             SelectFrame.Factory selectFrameFactory,
             IGameplayMover gameplayMover,
-            MarkersVisibility markersVisibility)
+            MarkersVisibility markersVisibility,
+            WorldGenerator worldGenerator)
             : base(selectFrame, layerMask, gameplayMover)
         {
             _selectFrameFactory = selectFrameFactory;
             _choosedBuildingSelectFrame = SelectFrame;
             _markersVisibility = markersVisibility;
+            _selectFrameParent = worldGenerator.transform;
         }
 
         public event Action Entered;
@@ -41,7 +44,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             Entered?.Invoke();
 
             if (_choosedPlaceSelectFrame == null)
-                _choosedPlaceSelectFrame = await _selectFrameFactory.Create(WorldFactoryAssets.SelectFrame);
+                _choosedPlaceSelectFrame = await _selectFrameFactory.Create(WorldFactoryAssets.SelectFrame, _selectFrameParent);
 
             _markersVisibility.SetSelectFrameShowed(false);
             _choosedPlaceSelectFrame.Hide();

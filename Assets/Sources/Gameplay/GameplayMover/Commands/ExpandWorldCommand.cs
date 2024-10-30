@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Cysharp.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
         private readonly Vector2Int _size;
         private readonly Vector2Int _targetSize;
         private readonly Command _previousCommand;
+        private readonly WorldGenerator _worldGenerator;
 
         public ExpandWorldCommand(
             IExpandingWorldChanger expandingWorldChanger,

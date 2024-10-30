@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         [SerializeField] private TileRepresentation _tile;
         [SerializeField] private float _cellSize;
 
-        private IWorldFactory _worldFactory;
+        private IWorldFactory _worldFactory;        
 
         private List<TileRepresentation> _tiles;
 
@@ -21,19 +22,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         private void Construct(IWorldFactory worldFactory)
         {
             _worldFactory = worldFactory;
-
+            
             _tiles = new();
         }
 
-        public void PlaceToCenter(Vector2Int size)
-        {
-            Vector3 center = new (
-                (size.x * _cellSize / 2f) - (_cellSize / 2f),
-                transform.position.y,
-                (size.y * _cellSize / 2f) - (_cellSize / 2f));
-
-            transform.localPosition = transform.localPosition - center;
-        }
+        public float CellSize => _cellSize;
 
         public TileRepresentation GetTile(Vector2Int gridPosition) =>
             _tiles.First(tile => tile.GridPosition == gridPosition);

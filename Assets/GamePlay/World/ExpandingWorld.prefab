@@ -47,6 +47,7 @@ MonoBehaviour:
   _actionHandlerLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  _world: {fileID: 3139434561914402083}
 --- !u!1 &5847459068844677991
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3286394918942320156}
   - component: {fileID: 7107399174257484372}
-  - component: {fileID: 513837899364491617}
+  - component: {fileID: 3139434561914402083}
   m_Layer: 0
   m_Name: ExpandingWorld
   m_TagString: Untagged
@@ -99,7 +100,7 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!114 &513837899364491617
+--- !u!114 &3139434561914402083
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +109,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5847459068844677991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df948f06c35bade4ea622bef7715aed8, type: 3}
+  m_Script: {fileID: 11500000, guid: c18b8c7e478ccde48a68ef42b3744d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WorldInstaller: {fileID: 3174438327645156940}

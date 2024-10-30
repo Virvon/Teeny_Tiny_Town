@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4365406492730119258}
   - component: {fileID: 6368165746342944013}
+  - component: {fileID: 104275101090128062}
   m_Layer: 0
   m_Name: WorldGenerator
   m_TagString: Untagged
@@ -46,3 +47,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tile: {fileID: -6689234198555655170, guid: f3281d3e4b7ecc8469b81b7d355e33ec, type: 3}
   _cellSize: 3
+--- !u!114 &104275101090128062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8454899544082395810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd253bba279a2244aae40579f0aa8eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _worldGenerator: {fileID: 6368165746342944013}

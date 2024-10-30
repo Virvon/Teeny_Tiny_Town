@@ -24,10 +24,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         public async UniTask Expand()
         {
             _isExpanded = true;
+
             Clean();
             await Fill(TileRepresentationCreatable);
-            NextBuildingForPlacingCreator.MoveToNextBuilding(Tiles);
-            Start();
+            OnCenterChanged(true);
 
             _isExpanded = false;
         }

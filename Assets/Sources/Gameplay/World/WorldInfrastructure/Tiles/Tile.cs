@@ -7,8 +7,6 @@ using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
@@ -92,7 +90,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             if (IsEmpty)
                 return;
 
-            TileRepresentation.DestroyBuilding(destroyPosition);
+            await TileRepresentation.DestroyBuilding(destroyPosition);
             await Clean();
         }
 

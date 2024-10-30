@@ -22,7 +22,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
         public void Hide() =>
             _canvas.enabled = false;
 
-        public class Factory : PlaceholderFactory<string, UniTask<SelectFrame>>
+        public class Factory : PlaceholderFactory<string, Transform, UniTask<SelectFrame>>
         {
         }
     }

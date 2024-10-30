@@ -63,13 +63,16 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
                 .SetLoops(-1);
         }
 
-        public void AnimateDestroy(Vector3 destroyPosition)
+        public async UniTask AnimateDestroy(Vector3 destroyPosition)
         {
-            transform.DOJump(
+            await transform.DOJump(
                 destroyPosition + _animationsConfig.BuildingJumpDestroyOffset,
                 _animationsConfig.BuildingJumpDestroyPower,
                 1,
-                _animationsConfig.BuildingJumpDestroyDuration).onComplete += Destroy;
+                _animationsConfig.BuildingJumpDestroyDuration).AsyncWaitForCompletion();
+
+            Destroy();
+            Debug.Log("destroyed");
         }
 
         public void Destroy() =>

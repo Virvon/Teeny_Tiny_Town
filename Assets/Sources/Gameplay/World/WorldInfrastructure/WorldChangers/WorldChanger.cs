@@ -36,13 +36,17 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         public event Action TilesChanged;
         public event Action UpdateFinished;
         public event Action<BuildingType> BuildingPlaced;
+        public event Action<Vector2Int, bool> CenterChanged;
 
         public IReadOnlyList<Tile> Tiles => _tiles;
 
         protected ITileRepresentationCreatable TileRepresentationCreatable { get; private set; }
 
-        public void Start() =>
+        public void Start()
+        {
             TilesChanged?.Invoke();
+            OnCenterChanged(false);
+        }
 
         public async UniTask Generate(ITileRepresentationCreatable tileRepresentationCreatable)
         {
@@ -53,12 +57,14 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
         public async UniTask PlaceNewBuilding(Vector2Int gridPosition, BuildingType buildingType)
         {
+            Debug.Log("place new building start");
             Tile changedTile = GetTile(gridPosition);
             await changedTile.PutBuilding(GetBuilding(buildingType, gridPosition));
 
             NextBuildingForPlacingCreator.MoveToNextBuilding(Tiles);
             TilesChanged?.Invoke();
             BuildingPlaced?.Invoke(buildingType);
+            Debug.Log("place new building end");
         }
 
         public async UniTask Update()
@@ -244,6 +250,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                     return null;
             }
         }
+
+        protected void OnCenterChanged(bool isNeedAnimate) =>
+            CenterChanged?.Invoke(WorldData.Size, isNeedAnimate);
 
         private void InitializeAroundTiles(List<RoadTile> roadTiles)
         {

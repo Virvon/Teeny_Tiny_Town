@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: ExpandingWorldConfig
   m_EditorClassIdentifier: 
   Id: f6467933-c0ed-4bb8-bcde-1b89b8e6dba3
-  Length: 5
-  Width: 5
+  Size: {x: 5, y: 5}
   TileConfigs:
   - Type: 0
     GridPosition: {x: 0, y: 0}
@@ -92,15 +91,19 @@ MonoBehaviour:
     GridPosition: {x: 4, y: 4}
     BuildingType: 0
   NextBuildingTypeForCreation: 2
-  StartStoreList: 0100000002000000
   StartingAvailableBuildingTypes: 01000000
   AssetReference:
     m_AssetGUID: c83a0e82ae2fe074e8598aff9a8d1e25
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  StartLength: 4
-  StartWidth: 4
+  AvailableRewards: 01000000
+  MinRewardVariantsCount: 1
+  MaxRewardVariantsCount: 1
+  AvailableAdditionalBonuses: 00000000
+  StartStoreList: 0100000002000000
+  AvailableGainStoreItems: 
+  StartSize: {x: 4, y: 4}
   ExpandConfigs:
   - BuidldingType: 2
     ExpandedSize: {x: 5, y: 4}

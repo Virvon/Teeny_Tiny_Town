@@ -71,6 +71,7 @@ MonoBehaviour:
   WorldRotateToStarDuration: 0.6
   WorldSimpleRotateDuration: 0.3
   WorldMoveDuration: 1
+  WorldMoveToCenterDuration: 0.5
   CameraMoveDuration: 1.2
   ActiveGainButtonColor: {r: 1, g: 1, b: 1, a: 1}
   DefaultGainButtonColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.5019608}

@@ -56,9 +56,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             _building = null;
         }
 
-        public void DestroyBuilding(Vector3 destroyPosition)
+        public async UniTask DestroyBuilding(Vector3 destroyPosition)
         {
-            _building.AnimateDestroy(destroyPosition);
+            await _building.AnimateDestroy(destroyPosition);
             _building = null;
         }
 

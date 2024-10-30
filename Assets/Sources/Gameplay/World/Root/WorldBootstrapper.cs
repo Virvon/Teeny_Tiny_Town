@@ -61,12 +61,10 @@ namespace Assets.Sources.Gameplay.World.Root
         {
             WorldGenerator worldGenerator = await _worldFactory.CreateWorldGenerator();
 
-            worldGenerator.PlaceToCenter(_worldData.Size);
-
             await _worldChanger.Generate(worldGenerator);
 
-            await _worldFactory.CreateSelectFrame();
-            await _worldFactory.CreateBuildingMarker();
+            await _worldFactory.CreateSelectFrame(worldGenerator.transform);
+            await _worldFactory.CreateBuildingMarker(worldGenerator.transform);
             await _worldFactory.CreateActionHandlerSwitcher();
 
             RegisterActionHandlerStates();
