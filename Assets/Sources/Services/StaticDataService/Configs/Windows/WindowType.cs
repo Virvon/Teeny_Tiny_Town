@@ -15,5 +15,6 @@
         SaveGameplay,
         GainBuying,
         Sandbox,
+        Collection,
     }
 }

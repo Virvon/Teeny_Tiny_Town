@@ -803,6 +803,7 @@ MonoBehaviour:
   _continueButton: {fileID: 8344539769557277674}
   _canvas: {fileID: 1568540163141648451}
   _sandboxButton: {fileID: 6122173341016813020}
+  _collectionButton: {fileID: 4139209969996370137}
 --- !u!225 &5775652594877809166
 CanvasGroup:
   m_ObjectHideFlags: 0
