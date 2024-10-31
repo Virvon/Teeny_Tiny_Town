@@ -37,6 +37,11 @@ namespace Assets.Sources.Sandbox
             await tile.PutGround(type);
         }
 
+        public async UniTask ClearTile(Vector2Int gridPosition)
+        {
+            await GetTile(gridPosition).CleanAll();
+        }
+
         public async UniTask Generate(ITileRepresentationCreatable tileRepresentationCreatable)
         {
             //TileRepresentationCreatable = tileRepresentationCreatable;

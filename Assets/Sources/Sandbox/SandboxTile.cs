@@ -42,6 +42,15 @@ namespace Assets.Sources.Sandbox
             _adjacentTiles.Add(adjacentTile);
         }
 
+        public async UniTask CleanAll()
+        {
+            if (IsEmpty == false)
+                TileRepresentation.DestroyBuilding();
+
+            SetBuilding(null);
+            await TileRepresentation.GroundCreator.Create(TileType.RoadGround);
+        }
+
         public async UniTask PutGround(SandboxGroundType sandboxGroundType)
         {
             await RemoveBuilding();
