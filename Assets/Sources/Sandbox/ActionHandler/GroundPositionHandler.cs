@@ -11,6 +11,7 @@ namespace Assets.Sources.Sandbox.ActionHandler
     public class GroundPositionHandler : ActionHandlerState
     {
         private readonly SandboxChanger _sandboxChanger;
+
         private bool _isPressed;
         private SandboxGroundType _groundType;
         public TileRepresentation _placedTile;

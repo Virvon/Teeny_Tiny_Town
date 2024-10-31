@@ -33,7 +33,7 @@ namespace Assets.Sources.Sandbox
         }
 
         public bool IsEmpty => Building == null;
-        public SandboxGroundType GroundType => _tileData.GroundType;
+        public SandboxGroundType SandboxGroundType => _tileData.GroundType;
         public Building Building { get; protected set; }
         protected TileRepresentation TileRepresentation { get; private set; }
 
@@ -42,12 +42,11 @@ namespace Assets.Sources.Sandbox
             _adjacentTiles.Add(adjacentTile);
         }
 
-
         public async UniTask PutGround(SandboxGroundType sandboxGroundType)
         {
             await RemoveBuilding();
 
-            if (GroundType == sandboxGroundType)
+            if (SandboxGroundType == sandboxGroundType)
                 return;
 
             _tileData.GroundType = sandboxGroundType;
@@ -81,7 +80,7 @@ namespace Assets.Sources.Sandbox
 
             foreach (SandboxTile tile in _adjacentTiles)
             {
-                if (tile.GroundType == GroundType && countedTiles.Contains(tile) == false)
+                if (tile.SandboxGroundType == SandboxGroundType && countedTiles.Contains(tile) == false)
                     await tile.ChangeRoadsInChain(countedTiles, isWaitedForCreation);
             }
 
@@ -93,11 +92,11 @@ namespace Assets.Sources.Sandbox
             if (isEmpty)
             {
                 List<Vector2Int> adjacentEmptyTileGridPositions = adjacentTiles
-                    .Where(tile => tile.IsEmpty && tile.GroundType == GroundType)
+                    .Where(tile => tile.IsEmpty && tile.SandboxGroundType == SandboxGroundType)
                     .Select(tile => tile.GridPosition)
                     .ToList();
 
-                GroundType groundType = GroundType == SandboxGroundType.SoilRoad ? Services.StaticDataService.Configs.GroundType.Soil : Services.StaticDataService.Configs.GroundType.Asphalt;
+                GroundType groundType = SandboxGroundType == SandboxGroundType.SoilRoad ? Services.StaticDataService.Configs.GroundType.Soil : Services.StaticDataService.Configs.GroundType.Asphalt;
 
                 return await TrySet(gridPosition, adjacentEmptyTileGridPositions, groundType);
             }
@@ -124,6 +123,21 @@ namespace Assets.Sources.Sandbox
             }
 
             await SetUpBuilding(building);
+
+            if(_tileData.GroundType != SandboxGroundType.TallGround && building.Type != BuildingType.Lighthouse)
+            {
+                GroundType groundType = _staticDataService.GetGroundType(Building.Type);
+
+                await TileRepresentation.GroundCreator.Create(groundType, RoadType.NonEmpty, GroundRotation.Degrees0, false);
+
+                _tileData.GroundType = SandboxGroundType.Soil;
+            }
+            else if(building.Type == BuildingType.Lighthouse)
+            {
+                await TileRepresentation.GroundCreator.Create(TileType.WaterSurface);
+
+                _tileData.GroundType = SandboxGroundType.WaterSurface;
+            }
         }
 
         public async UniTask RemoveBuilding()

@@ -10,6 +10,9 @@ using System;
 using UnityEngine;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using System.Linq;
+using System.Threading.Tasks;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 
 namespace Assets.Sources.Sandbox
 {
@@ -40,6 +43,11 @@ namespace Assets.Sources.Sandbox
 
             await Fill(tileRepresentationCreatable);
             CenterChanged?.Invoke(_staticDataService.SandboxConfig.Size, false);
+        }
+
+        public async UniTask PutBuilding(Vector2Int gridPosition, BuildingType buildingType)
+        {
+            await GetTile(gridPosition).PutBuilding(new Building(buildingType));
         }
 
         protected async UniTask Fill(ITileRepresentationCreatable tileRepresentationCreatable)
