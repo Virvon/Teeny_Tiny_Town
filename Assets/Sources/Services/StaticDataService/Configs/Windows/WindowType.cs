@@ -14,5 +14,6 @@
         Waiting,
         SaveGameplay,
         GainBuying,
+        Sandbox,
     }
 }

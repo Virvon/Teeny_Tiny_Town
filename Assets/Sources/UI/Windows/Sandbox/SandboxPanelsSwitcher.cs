@@ -14,12 +14,15 @@ namespace Assets.Sources.UI.Windows.Sandbox
         [SerializeField] private Button _tilesButton;
 
         private SandboxPanel _currentPanel;
+        private bool _canSwitch;
 
         private void OnEnable()
         {
             _buildingsButton.onClick.AddListener(OnBuildingsButtonClicked);
             _tilesButton.onClick.AddListener(OnTilesButtonClicked);
             _removeButton.onClick.AddListener(OnRemoveButtonClicked);
+
+            _canSwitch = true;
         }
 
         private void OnDisable()
@@ -31,25 +34,34 @@ namespace Assets.Sources.UI.Windows.Sandbox
 
         private void OnRemoveButtonClicked()
         {
-            HideCurrentPanel();
+            if(_canSwitch)
+                HideCurrentPanel();
         }
 
         private void OnTilesButtonClicked()
         {
-            SwitchPanels(_tilesPanel);
+            if(_currentPanel != _tilesPanel)
+                SwitchPanels(_tilesPanel);
         }
 
         private void OnBuildingsButtonClicked()
         {
-            SwitchPanels(_buildingsPanel);
+            if(_currentPanel != _buildingsPanel)
+                SwitchPanels(_buildingsPanel);
         }
 
         private void SwitchPanels(SandboxPanel targetPanel)
         {
+            if (_canSwitch == false)
+                return;
+
+            _canSwitch = false;
+
             HideCurrentPanel(callback: () =>
             {
                 _currentPanel = targetPanel;
                 _currentPanel.Open();
+                _canSwitch = true;
             });
         }
 
