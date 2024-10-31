@@ -43,6 +43,7 @@ namespace Assets.Sources.Services.StaticDataService
         public ReadOnlyArray<WorldConfig> WorldConfigs => _worldConfigs.Values.ToArray();
         public AnimationsConfig AnimationsConfig { get; private set; }
         public QuestsConfig QuestsConfig { get; private set; }
+        public SandboxConfig SandboxConfig { get; private set; }
 
         public async UniTask InitializeAsync()
         {
@@ -62,6 +63,7 @@ namespace Assets.Sources.Services.StaticDataService
             tasks.Add(LoadQuestsConfig());
             tasks.Add(LoadAdditionalBonusConfigs());
             tasks.Add(LoadGainStoreItemConfigs());
+            tasks.Add(LoadSandboxConfig());
 
             await UniTask.WhenAll(tasks);
         }
@@ -103,6 +105,13 @@ namespace Assets.Sources.Services.StaticDataService
             return _groundConfigs.TryGetValue(
                 groundType, out Dictionary<RoadType, RoadConfig> roadConfigs) ? (roadConfigs.TryGetValue(
                 roadType, out RoadConfig config) ? config : null) : null;
+        }
+
+        private async UniTask LoadSandboxConfig()
+        {
+            SandboxConfig[] sandboxConfigs = await GetConfigs<SandboxConfig>();
+
+            SandboxConfig = sandboxConfigs.First();
         }
 
         private async UniTask LoadGainStoreItemConfigs()

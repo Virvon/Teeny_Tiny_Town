@@ -12,7 +12,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 {
     public class WorldGenerator : MonoBehaviour, ITileRepresentationCreatable
     {
-        [SerializeField] private TileRepresentation _tile;
         [SerializeField] private float _cellSize;
 
         private IWorldFactory _worldFactory;        

@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Data.WorldDatas.Currency;
+﻿using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Services.AssetManagement;

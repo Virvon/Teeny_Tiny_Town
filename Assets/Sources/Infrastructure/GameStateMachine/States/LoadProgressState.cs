@@ -1,5 +1,4 @@
 ﻿using Assets.Sources.Data;
-using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.StateMachine;
@@ -9,7 +8,8 @@ using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine.InputSystem.Utilities;
 using System.Linq;
-using Assets.Sources.Data.WorldDatas.Currency;
+using Assets.Sources.Data.World.Currency;
+using Assets.Sources.Data.World;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {
@@ -47,7 +47,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
             List<QuestData> startQuests = new();
             startQuests.AddRange(_staticDataService.QuestsConfig.StartQuestsId.Select(id => new QuestData(id)));
 
-            PlayerProgress progress = new PlayerProgress(GetWorldDatas(), startQuests, _staticDataService.WorldsConfig.AvailableMovesCount);
+            PlayerProgress progress = new PlayerProgress(GetWorldDatas(), startQuests, _staticDataService.WorldsConfig.AvailableMovesCount, _staticDataService.SandboxConfig.Size);
 
             progress.Wallet.Value = 3000;
 

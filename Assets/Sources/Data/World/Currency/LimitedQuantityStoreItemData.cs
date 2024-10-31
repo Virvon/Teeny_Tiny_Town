@@ -1,6 +1,6 @@
 ﻿using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
 
-namespace Assets.Sources.Data.WorldDatas.Currency
+namespace Assets.Sources.Data.World.Currency
 {
     public class LimitedQuantityStoreItemData : GainStoreItemData
     {

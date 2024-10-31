@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Infrastructure.Factories.UiFactory;
+using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Zenject;
 
 namespace Assets.Sources.Sandbox
@@ -9,6 +10,9 @@ namespace Assets.Sources.Sandbox
         {
             BindSandboxBootstrapper();
             BindUiFactory();
+            WorldFactoryInstaller.Install(Container);
+            Container.BindInterfacesAndSelfTo<SandboxChanger>().AsSingle();
+            Container.BindInterfacesTo<SandboxRotation>().AsSingle();
         }
 
         private void BindUiFactory()

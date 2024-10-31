@@ -14,14 +14,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds
 
         private IWorldFactory _worldFactory;
         private AnimationsConfig _animationsConfig;
-        private World _world;
 
         [Inject]
-        private void Construct(IWorldFactory worldFactory, IStaticDataService staticDataService, World world)
+        private void Construct(IWorldFactory worldFactory, IStaticDataService staticDataService)
         {
             _worldFactory = worldFactory;
             _animationsConfig = staticDataService.AnimationsConfig;
-            _world = world;
         }
 
         public Ground Ground { get; private set; }

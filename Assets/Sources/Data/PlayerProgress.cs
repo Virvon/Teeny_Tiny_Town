@@ -1,7 +1,9 @@
-﻿using Assets.Sources.Data.WorldDatas;
+﻿using Assets.Sources.Data.Sandbox;
+using Assets.Sources.Data.World;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Assets.Sources.Data
 {
@@ -15,8 +17,9 @@ namespace Assets.Sources.Data
         public Wallet Wallet;
         public List<QuestData> Quests;
         public GameplayMovesCounterData GameplayMovesCounter;
+        public SandboxData SandboxData;
 
-        public PlayerProgress(WorldData[] worldDatas, List<QuestData> quests, uint startRemainingMoveCount)
+        public PlayerProgress(WorldData[] worldDatas, List<QuestData> quests, uint startRemainingMoveCount, Vector2Int sandboxSize)
         {
             WorldDatas = worldDatas;
             Quests = quests;
@@ -24,6 +27,7 @@ namespace Assets.Sources.Data
             StoreData = new();
             Wallet = new();
             GameplayMovesCounter = new(startRemainingMoveCount, StoreData);
+            SandboxData = new(sandboxSize);
 
             CurrentWorldData = WorldDatas[0];
         }

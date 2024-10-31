@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Sources.Data.WorldDatas
+namespace Assets.Sources.Data.World
 {
 
     [Serializable]

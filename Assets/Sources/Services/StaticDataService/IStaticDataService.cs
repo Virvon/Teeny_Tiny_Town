@@ -22,6 +22,7 @@ namespace Assets.Sources.Services.StaticDataService
         ReadOnlyArray<WorldConfig> WorldConfigs { get; }
         AnimationsConfig AnimationsConfig { get; }
         QuestsConfig QuestsConfig { get; }
+        SandboxConfig SandboxConfig { get; }
 
         RoadConfig GetRoad(GroundType groundType, RoadType roadType);
         TBuilding GetBuilding<TBuilding>(BuildingType buildingType)

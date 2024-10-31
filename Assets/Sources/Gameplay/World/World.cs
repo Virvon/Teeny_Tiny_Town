@@ -9,7 +9,7 @@ using Zenject;
 
 namespace Assets.Sources.Gameplay.World
 {
-    public class World : MonoBehaviour
+    public class World : MonoBehaviour, IWorldRotation
     {
         private const int FullRotation = 360;
         private const int SimpleRotation = 90;

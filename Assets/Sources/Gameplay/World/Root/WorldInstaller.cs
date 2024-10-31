@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Data.WorldDatas;
+﻿using Assets.Sources.Data.World;
 using Assets.Sources.Gameplay.PointsCounter;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
@@ -110,7 +110,7 @@ namespace Assets.Sources.Gameplay.World.Root
 
         private void BindWorld()
         {
-            Container.BindInstance(_world).AsSingle();
+            Container.BindInterfacesAndSelfTo<World>().FromInstance(_world).AsSingle();
         }
 
         private void BindNextBuildingForPlacingCreator()

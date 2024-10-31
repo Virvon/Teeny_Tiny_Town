@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Data.WorldDatas.Currency;
+﻿using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.WorldStore;

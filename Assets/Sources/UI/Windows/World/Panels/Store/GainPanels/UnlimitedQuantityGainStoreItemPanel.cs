@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Data.WorldDatas.Currency;
+﻿using Assets.Sources.Data.World.Currency;
 
 namespace Assets.Sources.UI.Windows.World.Panels.Store
 {

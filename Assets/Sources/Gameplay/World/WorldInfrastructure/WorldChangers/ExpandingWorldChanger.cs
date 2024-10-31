@@ -4,13 +4,15 @@ using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
-using Assets.Sources.Data.WorldDatas.Currency;
+using Assets.Sources.Data.World.Currency;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
     public class ExpandingWorldChanger : CurrencyWorldChanger, IExpandingWorldChanger
     {
         private bool _isExpanded;
+        private ITileRepresentationCreatable _tileRepresentationCreatable;
 
         public ExpandingWorldChanger(
             IStaticDataService staticDataService,
@@ -21,12 +23,18 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
             _isExpanded = false;
         }
 
+        public override UniTask Generate(ITileRepresentationCreatable tileRepresentationCreatable)
+        {
+            _tileRepresentationCreatable = tileRepresentationCreatable;
+            return base.Generate(tileRepresentationCreatable);
+        }
+
         public async UniTask Expand()
         {
             _isExpanded = true;
 
             Clean();
-            await Fill(TileRepresentationCreatable);
+            await Fill(_tileRepresentationCreatable);
             OnCenterChanged(true);
 
             _isExpanded = false;

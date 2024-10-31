@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Sources.Data.WorldDatas
+namespace Assets.Sources.Data.World
 {
     public partial class WorldData
     {

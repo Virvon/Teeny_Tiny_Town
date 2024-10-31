@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Services.StaticDataService;
+﻿using Assets.Sources.Data.WorldDatas;
+using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Assets.Sources.Data.WorldDatas
+namespace Assets.Sources.Data.World
 {
     [Serializable]
     public partial class WorldData : IWorldData

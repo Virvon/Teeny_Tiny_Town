@@ -25,7 +25,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
         private readonly TileRepresentation.Factory _tileRepresentationFactory;
         private readonly Ground.Factory _groundFactory;
         private readonly BuildingMarker.Factory _buildingMarkerFactory;
-        private readonly World _world;
+        private readonly IWorldRotation _worldRotation;
 
         public WorldFactory(
             DiContainer container,
@@ -36,7 +36,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             Ground.Factory groundFactory,
             BuildingMarker.Factory buildingMarkerFactory,
             IStaticDataService staticDataService,
-            World world)
+            IWorldRotation worldRotation)
         {
             _container = container;
             _worldGeneratorFactory = worldGeneratorFactory;
@@ -46,7 +46,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             _groundFactory = groundFactory;
             _buildingMarkerFactory = buildingMarkerFactory;
             _staticDataService = staticDataService;
-            _world = world;
+            _worldRotation = worldRotation;
         }
 
         public WorldGenerator WorldGenerator { get; private set; }
@@ -72,7 +72,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
 
         public async UniTask<Ground> CreateGround(GroundType groundType, RoadType roadType, Vector3 position, GroundRotation rotation, Transform parent)
         {
-            return await _groundFactory.Create(_staticDataService.GetRoad(groundType, roadType).AssetReference, position, (int)rotation + _world.RotationDegrees, parent);
+            return await _groundFactory.Create(_staticDataService.GetRoad(groundType, roadType).AssetReference, position, (int)rotation + _worldRotation.RotationDegrees, parent);
         }
 
         public async UniTask CreateBuildingMarker(Transform parent)
@@ -96,7 +96,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
         {
             BuildingConfig buildingConfig = _staticDataService.GetBuilding<BuildingConfig>(type);
 
-            BuildingRepresentation building = await _buildingFactory.Create(buildingConfig.AssetReference, position, _world.RotationDegrees, parent);
+            BuildingRepresentation building = await _buildingFactory.Create(buildingConfig.AssetReference, position, _worldRotation.RotationDegrees, parent);
 
             building.Init(type);
 

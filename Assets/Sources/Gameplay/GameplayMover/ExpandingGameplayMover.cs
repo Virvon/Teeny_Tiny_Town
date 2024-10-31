@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Data.WorldDatas.Currency;
+﻿using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Gameplay.GameplayMover.Commands;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;

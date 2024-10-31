@@ -1,4 +1,6 @@
-﻿namespace Assets.Sources.Data.WorldDatas.Currency
+﻿using Assets.Sources.Data.WorldDatas;
+
+namespace Assets.Sources.Data.World.Currency
 {
     public interface ICurrencyWorldData : IWorldData
     {

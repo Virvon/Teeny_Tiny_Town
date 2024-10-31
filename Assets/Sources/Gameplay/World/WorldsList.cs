@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Data.WorldDatas;
+﻿using Assets.Sources.Data.World;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;

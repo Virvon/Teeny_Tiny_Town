@@ -15,7 +15,8 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
-    public class WorldChanger : IWorldChanger, IBuildingsUpdatable
+
+    public class WorldChanger : IWorldChanger, IBuildingsUpdatable, ICenterChangeable
     {
         protected readonly IWorldData WorldData;
         protected readonly IStaticDataService StaticDataService;
@@ -40,20 +41,14 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
         public IReadOnlyList<Tile> Tiles => _tiles;
 
-        protected ITileRepresentationCreatable TileRepresentationCreatable { get; private set; }
-
         public void Start()
         {
             TilesChanged?.Invoke();
             OnCenterChanged(false);
         }
 
-        public async UniTask Generate(ITileRepresentationCreatable tileRepresentationCreatable)
-        {
-            TileRepresentationCreatable = tileRepresentationCreatable;
-
+        public virtual async UniTask Generate(ITileRepresentationCreatable tileRepresentationCreatable) =>
             await Fill(tileRepresentationCreatable);
-        }
 
         public async UniTask PlaceNewBuilding(Vector2Int gridPosition, BuildingType buildingType)
         {

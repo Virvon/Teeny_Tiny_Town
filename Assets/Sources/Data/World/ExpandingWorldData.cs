@@ -1,11 +1,11 @@
-﻿using Assets.Sources.Data.WorldDatas.Currency;
+﻿using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Sources.Data.WorldDatas
+namespace Assets.Sources.Data.World
 {
     public class ExpandingWorldData : CurrencyWorldData, ICurrencyWorldData
     {

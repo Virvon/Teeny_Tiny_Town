@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Assets.Sources.Data.WorldDatas.Currency
+namespace Assets.Sources.Data.World.Currency
 {
     [Serializable]
     public class WorldStore

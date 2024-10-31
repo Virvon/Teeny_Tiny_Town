@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Sources.Data.WorldDatas
+namespace Assets.Sources.Data.World
 {
     [Serializable]
     public class PointsData
@@ -32,7 +32,7 @@ namespace Assets.Sources.Data.WorldDatas
 
             pointsCount += count;
 
-            if(pointsCount >= Goal)
+            if (pointsCount >= Goal)
             {
                 pointsCount = pointsCount - Goal;
 

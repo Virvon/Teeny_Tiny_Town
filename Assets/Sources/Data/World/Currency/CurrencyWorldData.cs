@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Sources.Data.WorldDatas.Currency
+namespace Assets.Sources.Data.World.Currency
 {
     [Serializable]
     public class CurrencyWorldData : WorldData, ICurrencyWorldData

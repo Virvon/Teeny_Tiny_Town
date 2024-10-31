@@ -11,20 +11,20 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
     {
         [SerializeField] private WorldGenerator _worldGenerator;
 
-        private IWorldChanger _worldChanger;
+        private ICenterChangeable _centerChangeable;
         private AnimationsConfig _animationsConfig;
 
         [Inject]
-        private void Construct(IWorldChanger worldChanger, IStaticDataService staticDataService)
+        private void Construct(ICenterChangeable centerChangeable, IStaticDataService staticDataService)
         {
-            _worldChanger = worldChanger;
+            _centerChangeable = centerChangeable;
             _animationsConfig = staticDataService.AnimationsConfig;
 
-            _worldChanger.CenterChanged += OnCenterChanged;
+            _centerChangeable.CenterChanged += OnCenterChanged;
         }
 
         private void OnDestroy() =>
-            _worldChanger.CenterChanged -= OnCenterChanged;
+            _centerChangeable.CenterChanged -= OnCenterChanged;
 
         private void OnCenterChanged(Vector2Int size, bool isNeedAnimate)
         {
