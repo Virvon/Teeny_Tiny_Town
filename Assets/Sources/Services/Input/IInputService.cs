@@ -12,6 +12,9 @@ namespace Assets.Sources.Services.Input
         event Action UndoButtonPressed;
         event Action RemoveBuildingButtonPressed;
         event Action ReplaceBuildingButtonPressed;
+        event Action ClearTilesButtonPressed;
+        event Action BuildingsButtonPressed;
+        event Action GroundsButtonPressed;
 
         void SetEnabled(bool enabled);
     }

@@ -3,5 +3,6 @@
     public class UiFactoryAssets
     {
         public const string RemainingMovesPanel = "RemainingMovesPanel";
+        public const string SandboxPanelElement = "SandboxPanelElement";
     }
 }

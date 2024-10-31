@@ -2,6 +2,7 @@
 using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
+using Assets.Sources.Sandbox.ActionHandler;
 using Assets.Sources.Services.Input;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
@@ -55,7 +56,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         {
             _worldData.IsChangingStarted = true;
 
-            _windowsSwitcher.Switch<GameplayWindow>();
+            _windowsSwitcher.Switch<GameplayWindow>("world changing");
 
             _camera.MoveTo(new Vector3(55.1f, 78.8f, -55.1f), callback: () =>
             {

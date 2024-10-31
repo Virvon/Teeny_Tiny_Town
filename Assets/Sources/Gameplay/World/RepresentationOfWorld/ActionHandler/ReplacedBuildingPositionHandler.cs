@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
-    public class ReplacedBuildingPositionHandler : ActionHandlerState
+    public class ReplacedBuildingPositionHandler : WorldActionHandlerState
     {
         private readonly SelectFrame _choosedBuildingSelectFrame;
         private readonly SelectFrame.Factory _selectFrameFactory;

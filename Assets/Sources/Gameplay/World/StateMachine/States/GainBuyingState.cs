@@ -4,6 +4,7 @@ using Assets.Sources.UI;
 using Assets.Sources.UI.Windows.World;
 using Assets.Sources.UI.Windows.World.Panels.Store;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
 {
@@ -20,8 +21,9 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
         public UniTask Enter(GainStoreItemType gainStoreItemType)
         {
+            Debug.Log("open");
             _gainBuyer.SetBuyingGainType(gainStoreItemType);
-            _windowsSwitcher.Switch<GainBuyingWindow>();
+            _windowsSwitcher.Switch<GainBuyingWindow>("gain buyin");
             return default;
         }
 

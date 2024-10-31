@@ -6,11 +6,13 @@ using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
 using Assets.Sources.UI;
+using Assets.Sources.UI.Windows.Sandbox;
 using Assets.Sources.UI.Windows.World.Panels;
 using Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer;
 using Assets.Sources.UI.Windows.World.Panels.Reward;
 using Assets.Sources.UI.Windows.World.Panels.Store;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Infrastructure.Factories.UiFactory
@@ -26,6 +28,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
         private readonly RemainingMovesPanel.Factory _remainingMovesPanelFactory;
         private readonly AdditionalBonusOfferItem.Factory _additionalBonusOfferItemFactory;
         private readonly GainStoreItemPanel.Factory _gainStoreItemPanelFactory;
+        private readonly SandboxPanelElement.Factory _sandboxPanelFactory;
 
         public UiFactory(
             Window.Factory windowFactory,
@@ -36,7 +39,8 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             QuestPanel.Factory questPanelFactory,
             RemainingMovesPanel.Factory remainingMovesPanelFactory,
             AdditionalBonusOfferItem.Factory additionalBonusOfferItemFactory,
-            GainStoreItemPanel.Factory gainStoreItemPanelFactory)
+            GainStoreItemPanel.Factory gainStoreItemPanelFactory,
+            SandboxPanelElement.Factory sandboxPanelFactory)
         {
             _windowFactory = windowFactory;
             _staticDataService = staticDataService;
@@ -47,6 +51,17 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             _remainingMovesPanelFactory = remainingMovesPanelFactory;
             _additionalBonusOfferItemFactory = additionalBonusOfferItemFactory;
             _gainStoreItemPanelFactory = gainStoreItemPanelFactory;
+            _sandboxPanelFactory = sandboxPanelFactory;
+        }
+
+        public async UniTask<SandboxPanelElement> CreateSandboxPanelElement<TType>(TType type, Transform parent)
+            where TType : Enum
+        {
+            SandboxPanelElement sandboxPanelElement = await _sandboxPanelFactory.Create(UiFactoryAssets.SandboxPanelElement, parent);
+
+            sandboxPanelElement.Init(type.ToString());
+
+            return sandboxPanelElement;
         }
 
         public async UniTask CreateGainStoreItemPanel(GainStoreItemType type, Transform parent)

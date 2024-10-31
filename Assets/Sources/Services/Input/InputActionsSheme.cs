@@ -204,6 +204,74 @@ namespace Assets.Sources.Services.Input
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""SandboxWindowInput"",
+            ""id"": ""a3eccc49-23a5-4c1b-bd30-fba95e5c94a6"",
+            ""actions"": [
+                {
+                    ""name"": ""ClearTilesButtonPressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""582fc540-fe2b-46a2-a544-e0af43c4fd1d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BuildingsButtonPressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""a0a7fd50-ac20-4a90-8fe8-f747973e3ab2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GroundsButtonPressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""04205c1e-16d2-41f3-a863-43c150237a5b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8f96946d-062a-45f3-9ed5-a9058661c640"",
+                    ""path"": ""<Touchscreen>/touch3/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClearTilesButtonPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb0fc95f-1f2e-4797-aeed-4d3ad981553a"",
+                    ""path"": ""<Touchscreen>/touch4/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BuildingsButtonPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07c9c47a-d68e-42e0-8d83-6cc9da8732d2"",
+                    ""path"": ""<Touchscreen>/touch5/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GroundsButtonPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -218,6 +286,11 @@ namespace Assets.Sources.Services.Input
             m_GameplayWindowInput_UndoButtonPressed = m_GameplayWindowInput.FindAction("UndoButtonPressed", throwIfNotFound: true);
             m_GameplayWindowInput_RemoveBuildingButtonPressed = m_GameplayWindowInput.FindAction("RemoveBuildingButtonPressed", throwIfNotFound: true);
             m_GameplayWindowInput_ReplaceBuildingButtonPressed = m_GameplayWindowInput.FindAction("ReplaceBuildingButtonPressed", throwIfNotFound: true);
+            // SandboxWindowInput
+            m_SandboxWindowInput = asset.FindActionMap("SandboxWindowInput", throwIfNotFound: true);
+            m_SandboxWindowInput_ClearTilesButtonPressed = m_SandboxWindowInput.FindAction("ClearTilesButtonPressed", throwIfNotFound: true);
+            m_SandboxWindowInput_BuildingsButtonPressed = m_SandboxWindowInput.FindAction("BuildingsButtonPressed", throwIfNotFound: true);
+            m_SandboxWindowInput_GroundsButtonPressed = m_SandboxWindowInput.FindAction("GroundsButtonPressed", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -399,6 +472,68 @@ namespace Assets.Sources.Services.Input
             }
         }
         public GameplayWindowInputActions @GameplayWindowInput => new GameplayWindowInputActions(this);
+
+        // SandboxWindowInput
+        private readonly InputActionMap m_SandboxWindowInput;
+        private List<ISandboxWindowInputActions> m_SandboxWindowInputActionsCallbackInterfaces = new List<ISandboxWindowInputActions>();
+        private readonly InputAction m_SandboxWindowInput_ClearTilesButtonPressed;
+        private readonly InputAction m_SandboxWindowInput_BuildingsButtonPressed;
+        private readonly InputAction m_SandboxWindowInput_GroundsButtonPressed;
+        public struct SandboxWindowInputActions
+        {
+            private @InputActionsSheme m_Wrapper;
+            public SandboxWindowInputActions(@InputActionsSheme wrapper) { m_Wrapper = wrapper; }
+            public InputAction @ClearTilesButtonPressed => m_Wrapper.m_SandboxWindowInput_ClearTilesButtonPressed;
+            public InputAction @BuildingsButtonPressed => m_Wrapper.m_SandboxWindowInput_BuildingsButtonPressed;
+            public InputAction @GroundsButtonPressed => m_Wrapper.m_SandboxWindowInput_GroundsButtonPressed;
+            public InputActionMap Get() { return m_Wrapper.m_SandboxWindowInput; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(SandboxWindowInputActions set) { return set.Get(); }
+            public void AddCallbacks(ISandboxWindowInputActions instance)
+            {
+                if (instance == null || m_Wrapper.m_SandboxWindowInputActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_SandboxWindowInputActionsCallbackInterfaces.Add(instance);
+                @ClearTilesButtonPressed.started += instance.OnClearTilesButtonPressed;
+                @ClearTilesButtonPressed.performed += instance.OnClearTilesButtonPressed;
+                @ClearTilesButtonPressed.canceled += instance.OnClearTilesButtonPressed;
+                @BuildingsButtonPressed.started += instance.OnBuildingsButtonPressed;
+                @BuildingsButtonPressed.performed += instance.OnBuildingsButtonPressed;
+                @BuildingsButtonPressed.canceled += instance.OnBuildingsButtonPressed;
+                @GroundsButtonPressed.started += instance.OnGroundsButtonPressed;
+                @GroundsButtonPressed.performed += instance.OnGroundsButtonPressed;
+                @GroundsButtonPressed.canceled += instance.OnGroundsButtonPressed;
+            }
+
+            private void UnregisterCallbacks(ISandboxWindowInputActions instance)
+            {
+                @ClearTilesButtonPressed.started -= instance.OnClearTilesButtonPressed;
+                @ClearTilesButtonPressed.performed -= instance.OnClearTilesButtonPressed;
+                @ClearTilesButtonPressed.canceled -= instance.OnClearTilesButtonPressed;
+                @BuildingsButtonPressed.started -= instance.OnBuildingsButtonPressed;
+                @BuildingsButtonPressed.performed -= instance.OnBuildingsButtonPressed;
+                @BuildingsButtonPressed.canceled -= instance.OnBuildingsButtonPressed;
+                @GroundsButtonPressed.started -= instance.OnGroundsButtonPressed;
+                @GroundsButtonPressed.performed -= instance.OnGroundsButtonPressed;
+                @GroundsButtonPressed.canceled -= instance.OnGroundsButtonPressed;
+            }
+
+            public void RemoveCallbacks(ISandboxWindowInputActions instance)
+            {
+                if (m_Wrapper.m_SandboxWindowInputActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(ISandboxWindowInputActions instance)
+            {
+                foreach (var item in m_Wrapper.m_SandboxWindowInputActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_SandboxWindowInputActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public SandboxWindowInputActions @SandboxWindowInput => new SandboxWindowInputActions(this);
         public interface IGameplayInputActions
         {
             void OnHandlePressedMove(InputAction.CallbackContext context);
@@ -410,6 +545,12 @@ namespace Assets.Sources.Services.Input
             void OnUndoButtonPressed(InputAction.CallbackContext context);
             void OnRemoveBuildingButtonPressed(InputAction.CallbackContext context);
             void OnReplaceBuildingButtonPressed(InputAction.CallbackContext context);
+        }
+        public interface ISandboxWindowInputActions
+        {
+            void OnClearTilesButtonPressed(InputAction.CallbackContext context);
+            void OnBuildingsButtonPressed(InputAction.CallbackContext context);
+            void OnGroundsButtonPressed(InputAction.CallbackContext context);
         }
     }
 }

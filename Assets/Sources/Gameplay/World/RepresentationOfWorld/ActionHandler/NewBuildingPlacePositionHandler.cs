@@ -6,7 +6,7 @@ using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
-    public class NewBuildingPlacePositionHandler : ActionHandlerState
+    public class NewBuildingPlacePositionHandler : WorldActionHandlerState
     {
         private const float PressedBuildingHeight = 5;
 

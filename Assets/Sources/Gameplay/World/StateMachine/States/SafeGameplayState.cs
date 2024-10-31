@@ -6,12 +6,12 @@ using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
 {
-    public class SaveGameplayState : IState
+    public class SafeGameplayState : IState
     {
         private readonly WindowsSwitcher _windowsSwitcher;
         private readonly MarkersVisibility _markersVisibility;
 
-        public SaveGameplayState(WindowsSwitcher windowsSwitcher, MarkersVisibility markersVisibility)
+        public SafeGameplayState(WindowsSwitcher windowsSwitcher, MarkersVisibility markersVisibility)
         {
             _windowsSwitcher = windowsSwitcher;
             _markersVisibility = markersVisibility;
@@ -20,7 +20,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         public UniTask Enter()
         {
             _markersVisibility.ChangeAllowedVisibility(false);
-            _windowsSwitcher.Switch<SaveGameplayWindow>();
+            _windowsSwitcher.Switch<SaveGameplayWindow>("save game");
 
             return default;
         }

@@ -1,8 +1,6 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Services.StateMachine;
-using Assets.Sources.Services.StaticDataService.Configs.Building;
-using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -13,18 +11,16 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         private const float RaycastDistance = 300;
 
         protected readonly SelectFrame SelectFrame;
-        protected readonly GameplayMover.IGameplayMover GameplayMover;
 
         private readonly LayerMask _layerMask;
         private readonly Camera _camera;
 
-        public ActionHandlerState(SelectFrame selectFrame, LayerMask layerMask, GameplayMover.IGameplayMover gameplayMover)
+        public ActionHandlerState(SelectFrame selectFrame, LayerMask layerMask)
         {
             SelectFrame = selectFrame;
             _layerMask = layerMask;
 
             _camera = Camera.main;
-            GameplayMover = gameplayMover;
         }
 
         public abstract UniTask Enter();
@@ -60,12 +56,5 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         protected Ray GetRay(Vector2 handlePosition) =>
             _camera.ScreenPointToRay(new Vector3(handlePosition.x, handlePosition.y, 1));
-
-        protected bool CheckBuildingAndTileCompatibility(BuildingType buildingType, TileType tileType)
-        {
-            return ((buildingType == BuildingType.Lighthouse && tileType != TileType.WaterSurface)
-                || (buildingType != BuildingType.Lighthouse && tileType == TileType.WaterSurface))
-                == false;
-        }
     }
 }

@@ -18,7 +18,7 @@ namespace Assets.Sources.Services.Input
             //_inputActionsSheme.GameplayInput.Enable();
             //_inputActionsSheme.GameplayWindowInput.Enable();
 
-            _inputActionsSheme.GameplayInput.HandlePressedMove.performed += OnHandlePressedMoveStarted;
+            _inputActionsSheme.GameplayInput.HandlePressedMove.started += OnHandlePressedMoveStarted;
             _inputActionsSheme.GameplayInput.HandlePressedMove.performed += OnHandlePressedMovePerformed;
             _inputActionsSheme.GameplayInput.HandlePressedMove.canceled += OnHandlePressedMoveCancled;
             _inputActionsSheme.GameplayInput.HandleMove.performed += OnHandleMovePerformed;
@@ -27,11 +27,14 @@ namespace Assets.Sources.Services.Input
             _inputActionsSheme.GameplayWindowInput.RemoveBuildingButtonPressed.performed += ctx => RemoveBuildingButtonPressed?.Invoke();
             _inputActionsSheme.GameplayWindowInput.ReplaceBuildingButtonPressed.performed += ctx => ReplaceBuildingButtonPressed?.Invoke();
 
+            _inputActionsSheme.SandboxWindowInput.ClearTilesButtonPressed.performed += ctx => ClearTilesButtonPressed?.Invoke();
+            _inputActionsSheme.SandboxWindowInput.BuildingsButtonPressed.performed += ctx => BuildingsButtonPressed?.Invoke();
+            _inputActionsSheme.SandboxWindowInput.GroundsButtonPressed.performed += ctx => GroundsButtonPressed?.Invoke();
         }
 
         ~InputService()
         {
-            _inputActionsSheme.GameplayInput.HandlePressedMove.performed -= OnHandlePressedMoveStarted;
+            _inputActionsSheme.GameplayInput.HandlePressedMove.started -= OnHandlePressedMoveStarted;
             _inputActionsSheme.GameplayInput.HandlePressedMove.performed -= OnHandlePressedMovePerformed;
             _inputActionsSheme.GameplayInput.HandlePressedMove.canceled -= OnHandlePressedMoveCancled;
             _inputActionsSheme.GameplayInput.HandleMove.performed -= OnHandleMovePerformed;
@@ -47,6 +50,10 @@ namespace Assets.Sources.Services.Input
         public event Action UndoButtonPressed;
         public event Action RemoveBuildingButtonPressed;
         public event Action ReplaceBuildingButtonPressed;
+
+        public event Action ClearTilesButtonPressed;
+        public event Action BuildingsButtonPressed;
+        public event Action GroundsButtonPressed;
 
         public void SetEnabled(bool enabled)
         {

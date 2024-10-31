@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Data.Sandbox;
 using Assets.Sources.Data.World;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,14 @@ namespace Assets.Sources.Data
         public List<QuestData> Quests;
         public GameplayMovesCounterData GameplayMovesCounter;
         public SandboxData SandboxData;
+        public BuildingData[] BuildingDatas;
 
-        public PlayerProgress(WorldData[] worldDatas, List<QuestData> quests, uint startRemainingMoveCount, Vector2Int sandboxSize)
+        public PlayerProgress(
+            WorldData[] worldDatas,
+            List<QuestData> quests,
+            uint startRemainingMoveCount,
+            Vector2Int sandboxSize,
+            BuildingType[] allBuildings)
         {
             WorldDatas = worldDatas;
             Quests = quests;
@@ -30,6 +37,11 @@ namespace Assets.Sources.Data
             SandboxData = new(sandboxSize);
 
             CurrentWorldData = WorldDatas[0];
+
+            BuildingDatas = new BuildingData[allBuildings.Length];
+
+            for(int i = 0; i < allBuildings.Length; i++)
+                BuildingDatas[i] = new BuildingData(allBuildings[i]);
         }
 
         public WorldData GetNextWorldData()

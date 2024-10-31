@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ddd16100aa08f64bb1472a5afc8ad94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildingsPanel: {fileID: 2376103158843700365}
-  _tilesPanel: {fileID: 2289789599411539296}
+  _buildingsPanel: {fileID: 7637304552658279740}
+  _tilesPanel: {fileID: 2058264191327460774}
   _removeButton: {fileID: 8713725119684246734}
   _buildingsButton: {fileID: 4417811773712738112}
   _tilesButton: {fileID: 1111801252800299095}
@@ -160,8 +160,9 @@ GameObject:
   - component: {fileID: 907588173465540716}
   - component: {fileID: 8713725119684246734}
   - component: {fileID: 8273007786884175794}
+  - component: {fileID: 5249772407495821030}
   m_Layer: 5
-  m_Name: RemoveButton
+  m_Name: ClearTilesButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,6 +347,19 @@ MonoBehaviour:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     m_Rotation: 0
+--- !u!114 &5249772407495821030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783119463417022525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ControlPath: <Touchscreen>/touch3/tap
 --- !u!1 &2310802339028773133
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,8 +598,9 @@ GameObject:
   - component: {fileID: 3128362790600614459}
   - component: {fileID: 1111801252800299095}
   - component: {fileID: 4000381430392820742}
+  - component: {fileID: 1813330277527588435}
   m_Layer: 5
-  m_Name: TilesButton
+  m_Name: GroundsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -770,6 +785,19 @@ MonoBehaviour:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     m_Rotation: 0
+--- !u!114 &1813330277527588435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3371508932162810285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ControlPath: <Touchscreen>/touch5/tap
 --- !u!1 &3889407023889652932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,6 +1152,7 @@ GameObject:
   - component: {fileID: 5243844144780634404}
   - component: {fileID: 4417811773712738112}
   - component: {fileID: 3967147331057753334}
+  - component: {fileID: 1467632275966535283}
   m_Layer: 5
   m_Name: BuildingsButton
   m_TagString: Untagged
@@ -1310,6 +1339,19 @@ MonoBehaviour:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     m_Rotation: 0
+--- !u!114 &1467632275966535283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7439113546625955612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ControlPath: <Touchscreen>/touch4/tap
 --- !u!1 &7885259887995912749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,7 +1702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2056925382543050464, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
       propertyPath: m_Name
-      value: TilesPanel
+      value: GroundsPanel
       objectReference: {fileID: 0}
     - target: {fileID: 3689942100731340705, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1837,24 +1879,48 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2056925382543050464, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2058264191327460774}
   m_SourcePrefab: {fileID: 100100000, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
 --- !u!224 &1633262920381411261 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5800992319367958663, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
   m_PrefabInstance: {fileID: 5056346381566148410}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2289789599411539296 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6479896722903134810, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
+--- !u!224 &3546469577454874493 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8582831149422317639, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
   m_PrefabInstance: {fileID: 5056346381566148410}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!1 &6530336567563811290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2056925382543050464, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
+  m_PrefabInstance: {fileID: 5056346381566148410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2058264191327460774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6530336567563811290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26be38a1d30dbae47afd84248eeb3e30, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a5111653e8e04243939f50ba207a319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 1633262920381411261}
+  _openedMinAnchor: {x: 0, y: 0}
+  _openedMaxAnchor: {x: 0, y: 0}
+  _openedPivot: {x: 0, y: 0}
+  _openedPosition: {x: 0, y: 0}
+  _hidedMinAnchor: {x: 0, y: 0}
+  _hidedMaxAnchor: {x: 0, y: 0}
+  _hidedPivot: {x: 0, y: 1}
+  _hidedPosition: {x: 0, y: -44}
+  _content: {fileID: 3546469577454874493}
 --- !u!1001 &8724785875211519703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2051,24 +2117,49 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6479896722903134810, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2056925382543050464, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7637304552658279740}
   m_SourcePrefab: {fileID: 100100000, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
---- !u!114 &2376103158843700365 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6479896722903134810, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
+--- !u!224 &1011337340576962192 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8582831149422317639, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
   m_PrefabInstance: {fileID: 8724785875211519703}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26be38a1d30dbae47afd84248eeb3e30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &2996557590821230160 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5800992319367958663, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
   m_PrefabInstance: {fileID: 8724785875211519703}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7322571776064651319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2056925382543050464, guid: 6790b1b20a2290e43ac8fbd331f9fc98, type: 3}
+  m_PrefabInstance: {fileID: 8724785875211519703}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7637304552658279740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7322571776064651319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09fb60fe09b747445970a646e92eba5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 2996557590821230160}
+  _openedMinAnchor: {x: 0, y: 0}
+  _openedMaxAnchor: {x: 0, y: 0}
+  _openedPivot: {x: 0, y: 0}
+  _openedPosition: {x: 0, y: 0}
+  _hidedMinAnchor: {x: 0, y: 0}
+  _hidedMaxAnchor: {x: 0, y: 0}
+  _hidedPivot: {x: 0, y: 1}
+  _hidedPosition: {x: 0, y: -44}
+  _content: {fileID: 1011337340576962192}

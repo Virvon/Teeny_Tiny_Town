@@ -29,7 +29,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
         public UniTask Enter()
         {
-            _windowsSwitcher.Switch<ResultWindow>();
+            _windowsSwitcher.Switch<ResultWindow>("result state");
             _world.StartRotating();
             _worldData.IsChangingStarted = false;
 

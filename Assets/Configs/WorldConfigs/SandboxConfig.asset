@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SandboxConfig
   m_EditorClassIdentifier: Assembly-CSharp:Assets.Sources.Services.StaticDataService.Configs.World:SandboxConfig
   Size: {x: 9, y: 9}
+  Grounds: 0000000001000000020000000300000004000000

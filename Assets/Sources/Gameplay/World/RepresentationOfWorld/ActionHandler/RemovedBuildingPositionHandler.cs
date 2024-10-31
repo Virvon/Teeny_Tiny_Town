@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
-    public class RemovedBuildingPositionHandler : ActionHandlerState
+    public class RemovedBuildingPositionHandler : WorldActionHandlerState
     {
         private readonly MarkersVisibility _markersVisibility;
 

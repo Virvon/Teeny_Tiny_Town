@@ -75,7 +75,7 @@ namespace Assets.Sources.UI.Windows.World
             WorldStateMachine.Enter<ExitWorldState, Action>(() => _gameplayStateMachine.Enter<MapSelectionState>().Forget()).Forget();
 
         private void OnNoMoreEmptyTiles() =>
-            WorldStateMachine.Enter<SaveGameplayState>().Forget();
+            WorldStateMachine.Enter<SafeGameplayState>().Forget();
 
         private void OnRotateWorldCounterclockwiseButtonClicked() =>
             _world.RotateСounterclockwise();

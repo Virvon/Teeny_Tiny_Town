@@ -1,13 +1,14 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.Windows;
+using Assets.Sources.Sandbox.ActionHandler;
 using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
 using System;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
 {
-    public class ExitWorldState : IPayloadState<Action>
+    public class ExitWorldState : IPayloadState<System.Action>
     {
         private readonly IWorldWindows _worldWindows;
         private readonly MarkersVisibility _markersVisibility;
@@ -20,7 +21,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _actionHandlerSwitcher = actionHandlerSwitcher;
         }
 
-        public UniTask Enter(Action callbakc)
+        public UniTask Enter(System.Action callbakc)
         {
             _markersVisibility.ChangeAllowedVisibility(false);
             _actionHandlerSwitcher.EnterToDefaultState();

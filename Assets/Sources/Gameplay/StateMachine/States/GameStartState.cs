@@ -24,7 +24,7 @@ namespace Assets.Sources.Gameplay.StateMachine.States
         public UniTask Enter()
         {
             _assetProvider.WarmupAssetsByLable(AssetLabels.Gameplay);
-            _windowsSwitcher.Switch<StartWindow>();
+            _windowsSwitcher.Switch<StartWindow>("game start");
             _camera.MoveTo(new Vector3(67.3f, 93.1f, -67.3f));
 
             return default;

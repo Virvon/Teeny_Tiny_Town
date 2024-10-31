@@ -9,14 +9,12 @@ namespace Assets.Sources.Data.Sandbox
     [Serializable]
     public class SandboxTileData : TileData
     {
-        public TileType Type;
-        public GroundType GroundType;
+        public SandboxGroundType GroundType;
 
         public SandboxTileData(Vector2Int gridPosition)
             : base(gridPosition, BuildingType.Undefined)
         {
-            Type = TileType.RoadGround;
-            GroundType = GroundType.Soil;
+            GroundType = SandboxGroundType.Soil;
         }
     }
 }

@@ -5,6 +5,7 @@ using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
+using Assets.Sources.Sandbox.ActionHandler;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
@@ -46,7 +47,7 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine.RegisterState(StatesFactory.Create<ResultState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<RewardState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<QuestsState>());
-            WorldStateMachine.RegisterState(StatesFactory.Create<SaveGameplayState>());
+            WorldStateMachine.RegisterState(StatesFactory.Create<SafeGameplayState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<StoreState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<GainBuyingState>());
 

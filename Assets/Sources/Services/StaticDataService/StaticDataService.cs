@@ -68,6 +68,9 @@ namespace Assets.Sources.Services.StaticDataService
             await UniTask.WhenAll(tasks);
         }
 
+        public BuildingType[] GetAllBuildings() =>
+            _buildingConfigs.Keys.ToArray();
+
         public GainStoreItemConfig GetGainStoreItem(GainStoreItemType type) =>
             _gainStoreItemConfigs.TryGetValue(type, out GainStoreItemConfig config) ? config : null;
 

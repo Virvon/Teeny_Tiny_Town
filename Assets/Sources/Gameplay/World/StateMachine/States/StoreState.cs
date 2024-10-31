@@ -16,7 +16,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
         public UniTask Enter()
         {
-            _windowsSwitcher.Switch<StoreWindow>();
+            _windowsSwitcher.Switch<StoreWindow>("store stsata");
             return default;
         }
 

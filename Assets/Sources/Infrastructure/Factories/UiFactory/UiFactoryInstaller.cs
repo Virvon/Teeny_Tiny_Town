@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.UI;
+using Assets.Sources.UI.Windows.Sandbox;
 using Assets.Sources.UI.Windows.World.Panels;
 using Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer;
 using Assets.Sources.UI.Windows.World.Panels.Reward;
@@ -47,6 +48,10 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<AssetReferenceGameObject, Transform, UniTask<GainStoreItemPanel>, GainStoreItemPanel.Factory>()
                 .FromFactory<ReferencePrefabFactoryAsync<GainStoreItemPanel>>();
+
+            Container
+                .BindFactory<string, Transform, UniTask<SandboxPanelElement>, SandboxPanelElement.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<SandboxPanelElement>>();
         }
     }
 }

@@ -9,6 +9,7 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
+using Assets.Sources.Sandbox.ActionHandler;
 using Assets.Sources.Services.PersistentProgress;
 using UnityEngine;
 using Zenject;
@@ -53,7 +54,7 @@ namespace Assets.Sources.Gameplay.World.Root
 
         protected virtual void BindAcitonHandlerSwitcher()
         {
-            Container.BindInterfacesTo<ActionHandlerSwitcher>().AsSingle();
+            Container.BindInterfacesTo<RepresentationOfWorld.ActionHandler.ActionHandlerSwitcher>().AsSingle();
         }
 
         protected virtual void BindWorldWindows()

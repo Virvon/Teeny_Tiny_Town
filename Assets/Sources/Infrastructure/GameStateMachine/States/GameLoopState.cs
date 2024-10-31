@@ -21,21 +21,4 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
         public UniTask Exit() =>
             default;
     }
-    public class SandboxState : IState
-    {
-        private readonly ISceneLoader _sceneLoader;
-
-        public SandboxState(ISceneLoader sceneLoader) =>
-            _sceneLoader = sceneLoader;
-
-        public UniTask Enter()
-        {
-            _sceneLoader.Load(InfrastructureAssetPath.SandboxScene);
-
-            return default;
-        }
-
-        public UniTask Exit() =>
-            default;
-    }
 }

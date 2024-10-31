@@ -16,7 +16,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
         public UniTask Enter()
         {
-            _windowsSwitcher.Switch<QuestsWindow>();
+            _windowsSwitcher.Switch<QuestsWindow>("questa");
             return default;
         }
 

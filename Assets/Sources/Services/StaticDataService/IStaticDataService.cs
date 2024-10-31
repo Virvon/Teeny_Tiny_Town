@@ -38,5 +38,6 @@ namespace Assets.Sources.Services.StaticDataService
         StoreItemConfig GetGameplayStorItem(GameplayStoreItemType type);
         AdditionalBonusConfig GetAdditionalBonus(AdditionalBonusType type);
         GainStoreItemConfig GetGainStoreItem(GainStoreItemType type);
+        BuildingType[] GetAllBuildings();
     }
 }

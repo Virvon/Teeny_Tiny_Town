@@ -29,13 +29,13 @@ namespace Assets.Sources.UI
             _windows.Add(typeof(TWindow), window);
         }
 
-        public void Switch<TWindow>()
+        public void Switch<TWindow>(string str)
             where TWindow : Window
         {
             if (_currentWindow != null)
-                _currentWindow.Hide(callback: OpenWindow<TWindow>);
+                _currentWindow.Hide(callback: () => OpenWindow<TWindow>(str));
             else
-                OpenWindow<TWindow>();
+                OpenWindow<TWindow>(str);
         }
 
         public void Remove<TWindow>()
@@ -63,9 +63,10 @@ namespace Assets.Sources.UI
             _windows.Remove(typeof(TWindow));
         }
 
-        private void OpenWindow<TWindow>()
+        private void OpenWindow<TWindow>(string str)
             where TWindow : Window
         {
+            Debug.Log(str);
             _currentWindow = _windows[typeof(TWindow)];
             _currentWindow.Open();
         }

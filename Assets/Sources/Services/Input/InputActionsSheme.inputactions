@@ -180,6 +180,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "SandboxWindowInput",
+            "id": "a3eccc49-23a5-4c1b-bd30-fba95e5c94a6",
+            "actions": [
+                {
+                    "name": "ClearTilesButtonPressed",
+                    "type": "Button",
+                    "id": "582fc540-fe2b-46a2-a544-e0af43c4fd1d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BuildingsButtonPressed",
+                    "type": "Button",
+                    "id": "a0a7fd50-ac20-4a90-8fe8-f747973e3ab2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GroundsButtonPressed",
+                    "type": "Button",
+                    "id": "04205c1e-16d2-41f3-a863-43c150237a5b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8f96946d-062a-45f3-9ed5-a9058661c640",
+                    "path": "<Touchscreen>/touch3/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ClearTilesButtonPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb0fc95f-1f2e-4797-aeed-4d3ad981553a",
+                    "path": "<Touchscreen>/touch4/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BuildingsButtonPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "07c9c47a-d68e-42e0-8d83-6cc9da8732d2",
+                    "path": "<Touchscreen>/touch5/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GroundsButtonPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

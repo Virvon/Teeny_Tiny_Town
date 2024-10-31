@@ -48,7 +48,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
         private void ShowAdditionalBonusOffer()
         {
-            _windowsSwitcher.Switch<AdditionalBonusOfferWindow>();
+            _windowsSwitcher.Switch<AdditionalBonusOfferWindow>("show addit");
         }
     }
 }
