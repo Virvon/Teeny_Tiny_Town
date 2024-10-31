@@ -798,10 +798,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1166c39a1c699347bf17e205a984286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvas: {fileID: 1568540163141648451}
   _canvasGroup: {fileID: 5775652594877809166}
   _mapSelectionButton: {fileID: 1413571894243195051}
   _continueButton: {fileID: 8344539769557277674}
+  _canvas: {fileID: 1568540163141648451}
+  _sandboxButton: {fileID: 6122173341016813020}
 --- !u!225 &5775652594877809166
 CanvasGroup:
   m_ObjectHideFlags: 0

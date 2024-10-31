@@ -1,6 +1,8 @@
 ﻿using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.StateMachine.States;
+using Assets.Sources.Infrastructure.GameStateMachine;
+using Assets.Sources.Infrastructure.GameStateMachine.States;
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
@@ -14,23 +16,28 @@ namespace Assets.Sources.UI.Windows.Start
         [SerializeField] private Button _mapSelectionButton;
         [SerializeField] private Button _continueButton;
         [SerializeField] private Canvas _canvas;
+        [SerializeField] private Button _sandboxButton;
 
         private GameplayStateMachine _gameplayStateMachine;
+        private GameStateMachine _gameStateMachine;
 
         [Inject]
-        private void Construct(GameplayStateMachine gameplayStateMachine, GameplayCamera gameplayCamera)
+        private void Construct(GameplayStateMachine gameplayStateMachine, GameplayCamera gameplayCamera, GameStateMachine gameStateMachine)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _canvas.worldCamera = gameplayCamera.Camera;
+            _gameStateMachine = gameStateMachine;
 
             _mapSelectionButton.onClick.AddListener(OnMapSelectionButtonClicked);
             _continueButton.onClick.AddListener(OnContinueButtonClicked);
+            _sandboxButton.onClick.AddListener(OnSandboxButtonClicked);
         }
 
         private void OnDestroy()
         {
             _mapSelectionButton.onClick.RemoveListener(OnMapSelectionButtonClicked);
             _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
+            _sandboxButton.onClick.AddListener(OnSandboxButtonClicked);
         }
 
         private void OnMapSelectionButtonClicked() =>
@@ -38,5 +45,8 @@ namespace Assets.Sources.UI.Windows.Start
 
         private void OnContinueButtonClicked() =>
             _gameplayStateMachine.Enter<GameplayLoopState>().Forget();
+
+        private void OnSandboxButtonClicked() =>
+            _gameStateMachine.Enter<SandboxState>().Forget();
     }
 }

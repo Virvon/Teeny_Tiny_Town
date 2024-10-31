@@ -494,6 +494,12 @@ MonoBehaviour:
   - m_GUID: ad2964b30710098459358670c0ed5b2b
     m_Address: LighthouseStoreItemConfig
     m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6def0b75f5697e469038e34edd397bf
+    m_Address: SandboxScene
+    m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
