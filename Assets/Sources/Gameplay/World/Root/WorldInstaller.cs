@@ -54,7 +54,7 @@ namespace Assets.Sources.Gameplay.World.Root
 
         protected virtual void BindAcitonHandlerSwitcher()
         {
-            Container.BindInterfacesTo<RepresentationOfWorld.ActionHandler.ActionHandlerSwitcher>().AsSingle();
+            Container.BindInterfacesTo<ActionHandlerSwitcher>().AsSingle();
         }
 
         protected virtual void BindWorldWindows()
@@ -91,8 +91,6 @@ namespace Assets.Sources.Gameplay.World.Root
         {
             Container.Bind<MarkersVisibility>().AsSingle();
         }
-
-        
 
         private void BindQuestsChecker()
         {

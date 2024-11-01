@@ -28,6 +28,10 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             Container
                 .BindFactory<string, UniTask<GameplayCamera>, GameplayCamera.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<GameplayCamera>>();
+
+            Container
+                .BindFactory<string, Vector3, Transform, UniTask<EducationWorld>, EducationWorld.EducationFactory>()
+                .FromFactory<KeyPrefabFactoryAsync<EducationWorld>>();
         }
     }
 }

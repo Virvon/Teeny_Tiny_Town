@@ -37,8 +37,14 @@ namespace Assets.Sources.Gameplay.World
             _canChangeWorld = true;
         }
 
-        public async UniTask CreateCurrentWorld() =>
-            _currentWorld = await _gameplayFactory.CreateWorld(_persistentProgressService.Progress.CurrentWorldData.Id, _currentWorldPosition, transform);
+        public async UniTask CreateCurrentWorld()
+        {
+            if (_persistentProgressService.Progress.IsEducationCompleted)
+                _currentWorld = await _gameplayFactory.CreateWorld(_persistentProgressService.Progress.CurrentWorldData.Id, _currentWorldPosition, transform);
+            else
+                _currentWorld = await _gameplayFactory.CreateEducationWorld(_currentWorldPosition, transform);
+
+        }
 
         public async UniTask ShowNextWorld()
         {

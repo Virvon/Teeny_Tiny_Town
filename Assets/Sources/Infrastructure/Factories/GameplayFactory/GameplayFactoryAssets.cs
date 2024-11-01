@@ -4,5 +4,6 @@
     {
         public const string WorldsList = "WorldsList";
         public const string Camera = "Camera";
+        public const string EducationWorld = "EducationWorld";
     }
 }

@@ -20,6 +20,7 @@ namespace Assets.Sources.Data
         public GameplayMovesCounterData GameplayMovesCounter;
         public SandboxData SandboxData;
         public BuildingData[] BuildingDatas;
+        public bool IsEducationCompleted;
 
         public PlayerProgress(
             WorldData[] worldDatas,
@@ -37,6 +38,7 @@ namespace Assets.Sources.Data
             SandboxData = new(sandboxSize);
 
             CurrentWorldData = WorldDatas[0];
+            IsEducationCompleted = false;
 
             BuildingDatas = new BuildingData[allBuildings.Length];
 

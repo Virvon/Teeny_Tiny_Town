@@ -8,6 +8,7 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
     public interface IGameplayFactory
     {
         UniTask<GameplayCamera> CreateCamera();
+        UniTask<EducationWorld> CreateEducationWorld(Vector3 position, Transform parent);
         UniTask<World> CreateWorld(string id, Vector3 position, Transform parent);
         UniTask<WorldsList> CreateWorldsList();
     }

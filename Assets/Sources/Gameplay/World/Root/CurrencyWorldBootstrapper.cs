@@ -1,5 +1,4 @@
-﻿using Assets.Sources.Data.WorldDatas;
-using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
+﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
@@ -19,7 +18,6 @@ namespace Assets.Sources.Gameplay.World.Root
             IWorldFactory worldFactory,
             WorldStateMachine worldStateMachine,
             StatesFactory statesFactory,
-            IWorldData worldData,
             World world,
             ActionHandlerStateMachine actionHandlerStateMachine,
             ActionHandlerStatesFactory actionHandlerStatesFactory,
@@ -30,7 +28,6 @@ namespace Assets.Sources.Gameplay.World.Root
                   worldFactory,
                   worldStateMachine,
                   statesFactory,
-                  worldData,
                   world,
                   actionHandlerStateMachine,
                   actionHandlerStatesFactory,

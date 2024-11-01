@@ -15,19 +15,22 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
         private readonly World.Factory _worldFactory;
         private readonly GameplayCamera.Factory _gameplayCameraFactory;
         private readonly IStaticDataService _staticDataService;
+        private readonly EducationWorld.EducationFactory _educationWorldFactory;
 
         public GameplayFactory(
             DiContainer container,
             WorldsList.Factory worldsListFactory,
             World.Factory worldFactory,
             GameplayCamera.Factory gameplayCameraFactory,
-            IStaticDataService staticDataService)
+            IStaticDataService staticDataService,
+            EducationWorld.EducationFactory educationWorldFactory)
         {
             _container = container;
             _worldsListFactory = worldsListFactory;
             _worldFactory = worldFactory;
             _gameplayCameraFactory = gameplayCameraFactory;
             _staticDataService = staticDataService;
+            _educationWorldFactory = educationWorldFactory;
         }
 
         public async UniTask<GameplayCamera> CreateCamera()
@@ -37,6 +40,14 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             _container.BindInstance(camera).AsSingle();
 
             return camera;
+        }
+
+        public async UniTask<EducationWorld> CreateEducationWorld(Vector3 position, Transform parent)
+        {
+            EducationWorld world = await _educationWorldFactory.Create(GameplayFactoryAssets.EducationWorld, position, parent);
+
+            await UniTask.WaitUntil(() => world.IsCreated);
+            return world;
         }
 
         public async UniTask<World> CreateWorld(string id, Vector3 position, Transform parent)

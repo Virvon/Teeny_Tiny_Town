@@ -52,4 +52,5 @@ namespace Assets.Sources.Gameplay.World.Root
             Container.BindInterfacesTo<CurrencyWorldChanger>().AsSingle();
         }
     }
+
 }

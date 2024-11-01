@@ -16,5 +16,6 @@
         GainBuying,
         Sandbox,
         Collection,
+        Education,
     }
 }

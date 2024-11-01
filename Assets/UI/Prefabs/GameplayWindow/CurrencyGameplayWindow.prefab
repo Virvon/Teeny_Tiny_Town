@@ -1099,7 +1099,7 @@ MonoBehaviour:
   _canvasGroup: {fileID: 854264246263105098}
   _hideButton: {fileID: 5636465749616958034}
   _questsWindowOpenButton: {fileID: 5431060953199298963}
-  _remainingMovesPanelParent: {fileID: 118744127232564343}
+  _remainingMovesPanelParent: {fileID: 7316455170532253287}
   "_rotateWorld\u0421lockwiseButton": {fileID: 8756730947693872320}
   "_rotateWorld\u0421ounterclockwiseButton": {fileID: 975040716495489378}
   _storeButton: {fileID: 7844182018802149203}
@@ -1125,6 +1125,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &7316455170532253287 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2907942358764736425, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
+  m_PrefabInstance: {fileID: 5607635872328372686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8756730947693872320 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3770774557790065934, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}

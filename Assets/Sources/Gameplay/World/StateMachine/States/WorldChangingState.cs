@@ -56,13 +56,13 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         {
             _worldData.IsChangingStarted = true;
 
-            _windowsSwitcher.Switch<GameplayWindow>("world changing");
-
             _camera.MoveTo(new Vector3(55.1f, 78.8f, -55.1f), callback: () =>
             {
                 _actionHandlerStateMachine.SetActive(true);
                 _inputService.SetEnabled(true);
                 _markersVisibility.ChangeAllowedVisibility(true);
+
+                _windowsSwitcher.Switch<GameplayWindow>("world changing");
             });
 
             _persistentProgressService.Progress.GameplayMovesCounter.MovesOvered += OnMovesOvered;

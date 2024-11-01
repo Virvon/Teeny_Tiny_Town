@@ -9,10 +9,9 @@ namespace Assets.Sources.Gameplay.World.Windows
 {
     public class WorldWindows : IWorldWindows
     {
+        private readonly IPersistentProgressService _persistentProgressService;
         protected readonly WindowsSwitcher WindowsSwitcher;
         protected readonly IUiFactory UiFactory;
-
-        private readonly IPersistentProgressService _persistentProgressService;
 
         public WorldWindows(IPersistentProgressService persistentProgressService, WindowsSwitcher windowsSwitcher, IUiFactory uiFactory)
         {

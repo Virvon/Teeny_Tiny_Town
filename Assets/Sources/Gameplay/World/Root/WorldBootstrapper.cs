@@ -19,7 +19,6 @@ namespace Assets.Sources.Gameplay.World.Root
     {
         private readonly IWorldChanger _worldChanger;
         private readonly IWorldFactory _worldFactory;
-        private readonly IWorldData _worldData;
         private readonly World _world;
         private readonly ActionHandlerStateMachine _actionHandlerStateMachine;
         private readonly ActionHandlerStatesFactory _actionHandlerStatesFactory;
@@ -34,7 +33,6 @@ namespace Assets.Sources.Gameplay.World.Root
             IWorldFactory worldFactory,
             WorldStateMachine worldStateMachine,
             StatesFactory statesFactory,
-            IWorldData worldData,
             World world,
             ActionHandlerStateMachine actionHandlerStateMachine,
             ActionHandlerStatesFactory actionHandlerStatesFactory,
@@ -45,7 +43,6 @@ namespace Assets.Sources.Gameplay.World.Root
             _worldFactory = worldFactory;
             WorldStateMachine = worldStateMachine;
             StatesFactory = statesFactory;
-            _worldData = worldData;
             _world = world;
 
             _world.Entered += OnWorldEntered;
@@ -58,7 +55,7 @@ namespace Assets.Sources.Gameplay.World.Root
         ~WorldBootstrapper() =>
             _world.Entered -= OnWorldEntered;
 
-        public async void Initialize()
+        public virtual async void Initialize()
         {
             WorldGenerator worldGenerator = await _worldFactory.CreateWorldGenerator();
 
