@@ -64,5 +64,8 @@ namespace Assets.Sources.Data
 
         public QuestData GetQuest(string id) =>
             Quests.First(data => data.Id == id);
+
+        public void AddBuildingToCollection(BuildingType type) =>
+            BuildingDatas.First(data => data.Type == type).Count++;
     }
 }

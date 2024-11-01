@@ -16,6 +16,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
 
         UniTask<BuildingRepresentation> CreateBuilding(BuildingType type, Vector3 position, Transform parent);
         UniTask CreateBuildingMarker(Transform parent);
+        UniTask CreateCollectionItemCreator();
         UniTask<Ground> CreateGround(TileType tileType, Vector3 position, Transform parent);
         UniTask<Ground> CreateGround(GroundType groundType, RoadType roadType, Vector3 position, GroundRotation rotation, Transform parent);
         UniTask CreateSelectFrame(Transform parent);

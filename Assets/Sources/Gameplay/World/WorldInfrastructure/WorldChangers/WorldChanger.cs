@@ -12,6 +12,7 @@ using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
+using Assets.Sources.Services.PersistentProgress;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
@@ -21,17 +22,20 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         protected readonly IWorldData WorldData;
         protected readonly IStaticDataService StaticDataService;
         protected readonly NextBuildingForPlacingCreator NextBuildingForPlacingCreator;
+        private readonly IPersistentProgressService _persistentProgressService;
 
         private List<Tile> _tiles;
 
         public WorldChanger(
             IStaticDataService staticDataService,
             IWorldData worldData,
-            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator,
+            IPersistentProgressService persistentProgressService)
         {
             StaticDataService = staticDataService;
             WorldData = worldData;
             NextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
+            _persistentProgressService = persistentProgressService;
         }
 
         public event Action TilesChanged;
@@ -215,7 +219,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                         StaticDataService,
                         GetBuilding(tileData.BuildingType, tileData.GridPosition),
                         WorldData,
-                        this);
+                        this,
+                        _persistentProgressService);
 
                     roadTiles.Add(roadTile);
 
@@ -227,7 +232,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                         StaticDataService,
                         GetBuilding(tileData.BuildingType, tileData.GridPosition),
                         WorldData,
-                        this);
+                        this,
+                        _persistentProgressService);
 
                     tallTiles.Add(tallTile);
 

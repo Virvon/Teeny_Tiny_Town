@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+﻿using Assets.Sources.Collection;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
@@ -44,6 +45,10 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             Container
                 .BindFactory<string, Transform, UniTask<BuildingMarker>, BuildingMarker.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<BuildingMarker>>();
+
+            Container
+                .BindFactory<string, UniTask<CollectionItemCreator>, CollectionItemCreator.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<CollectionItemCreator>>();
         }
     }
 }

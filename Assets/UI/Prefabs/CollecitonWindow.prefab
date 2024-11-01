@@ -162,8 +162,9 @@ GameObject:
   - component: {fileID: 2297501183616853747}
   - component: {fileID: 3112670049167231596}
   - component: {fileID: 727934824733849939}
+  - component: {fileID: 8989425335850629165}
   m_Layer: 0
-  m_Name: PlaceddBuildingsQuantityPanel
+  m_Name: PlacedBuildingsQuantityPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,6 +306,18 @@ MonoBehaviour:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     m_Rotation: 0
+--- !u!225 &8989425335850629165
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155702609494979024}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &264596768730167616
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +602,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 6214524797272433358}
+  _showNextItemButton: {fileID: 1969591604384411962}
+  _showPreviousItemButton: {fileID: 6374837053504954080}
+  _unlockedBuildingsQuentityValue: {fileID: 4922907073757763664}
+  _placedBuildingsQuantityPanel: {fileID: 8989425335850629165}
+  _placedBuildingsQuantityValue: {fileID: 8151627534134150922}
 --- !u!1 &948818797283745440
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +620,7 @@ GameObject:
   - component: {fileID: 4169088577708007259}
   - component: {fileID: 1969591604384411962}
   m_Layer: 0
-  m_Name: NextMapButton
+  m_Name: NextItemButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1128,7 +1146,7 @@ GameObject:
   - component: {fileID: 6675777163220155405}
   - component: {fileID: 6374837053504954080}
   m_Layer: 0
-  m_Name: PreviousMapButton
+  m_Name: PreviousItemButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,8 +15,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         public CurrencyWorldChanger
             (IStaticDataService staticDataService,
             ICurrencyWorldData worldData,
-            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
-            : base(staticDataService, worldData, nextBuildingForPlacingCreator)
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator,
+            IPersistentProgressService persistentProgressService)
+            : base(staticDataService, worldData, nextBuildingForPlacingCreator, persistentProgressService)
         {
             _currencyWorldData = worldData;
         }

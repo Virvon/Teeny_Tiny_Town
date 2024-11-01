@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Data;
 using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
+using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
@@ -16,6 +17,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         private readonly IWorldData _worldData;
         private readonly IBuildingGivable _buildingGibable;
+        private readonly IPersistentProgressService _persistentProgressService;
 
         private List<TallTile> _adjacentTiles;
 
@@ -25,13 +27,15 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             IStaticDataService staticDataService,
             Building building,
             IWorldData worldData,
-            IBuildingGivable buildingGibable)
+            IBuildingGivable buildingGibable,
+            IPersistentProgressService persistentProgressService)
             : base(tileData, type, staticDataService, building)
         {
             _worldData = worldData;
+            _buildingGibable = buildingGibable;
+            _persistentProgressService = persistentProgressService;
 
             _adjacentTiles = new();
-            _buildingGibable = buildingGibable;
         }
 
         public IReadOnlyList<TallTile> AdjacentTiles => _adjacentTiles;
@@ -125,6 +129,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             if (StaticDataService.AvailableForConstructionBuildingsConfig.TryFindeNextBuilding(BuildingType, out BuildingType nextBuildingType))
             {
                 await CreateBuildingRepresentation(_buildingGibable.GetBuilding(nextBuildingType, GridPosition));
+                _persistentProgressService.Progress.AddBuildingToCollection(nextBuildingType);
 
                 return true;
             }

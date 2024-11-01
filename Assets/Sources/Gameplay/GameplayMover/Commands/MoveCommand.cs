@@ -8,10 +8,9 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
 {
     public abstract class MoveCommand : Command
     {
-        private readonly IPersistentProgressService _persistentProgressService;
+        protected readonly IPersistentProgressService PersistentProgressService;
 
         private readonly uint _ramainMovesCount;
-
 
         public MoveCommand(
             IWorldChanger worldChanger,
@@ -20,17 +19,17 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
             IPersistentProgressService persistentProgressService)
             : base(worldChanger, worldData, nextBuildingForPlacingCreator)
         {
-            _persistentProgressService = persistentProgressService;
+            PersistentProgressService = persistentProgressService;
 
-            _ramainMovesCount = _persistentProgressService.Progress.GameplayMovesCounter.RemainingMovesCount;
+            _ramainMovesCount = PersistentProgressService.Progress.GameplayMovesCounter.RemainingMovesCount;
         }
 
         public override void Execute() =>
-            _persistentProgressService.Progress.GameplayMovesCounter.Move();
+            PersistentProgressService.Progress.GameplayMovesCounter.Move();
 
         public override async UniTask Undo()
         {
-            _persistentProgressService.Progress.GameplayMovesCounter.SetCount(_ramainMovesCount);
+            PersistentProgressService.Progress.GameplayMovesCounter.SetCount(_ramainMovesCount);
 
             await base.Undo();
         }

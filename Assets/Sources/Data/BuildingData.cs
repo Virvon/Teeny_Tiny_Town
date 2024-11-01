@@ -7,13 +7,15 @@ namespace Assets.Sources.Data
     public class BuildingData
     {
         public BuildingType Type;
-        public bool isUnlocked;
+        public uint Count;
 
         public BuildingData(BuildingType type)
         {
             Type = type;
 
-            isUnlocked = false;
+            Count = 0;
         }
+
+        public bool IsUnlocked => Count > 0;
     }
 }

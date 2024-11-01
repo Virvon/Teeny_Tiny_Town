@@ -1,6 +1,6 @@
-﻿using Assets.Sources.Gameplay.World;
+﻿using Assets.Sources.Collection;
+using Assets.Sources.Gameplay.World;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
-using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
@@ -26,6 +26,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
         private readonly Ground.Factory _groundFactory;
         private readonly BuildingMarker.Factory _buildingMarkerFactory;
         private readonly IWorldRotation _worldRotation;
+        private readonly CollectionItemCreator.Factory _collectionItemCreator;
 
         public WorldFactory(
             DiContainer container,
@@ -36,7 +37,8 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             Ground.Factory groundFactory,
             BuildingMarker.Factory buildingMarkerFactory,
             IStaticDataService staticDataService,
-            IWorldRotation worldRotation)
+            IWorldRotation worldRotation,
+            CollectionItemCreator.Factory collectionItemCreator)
         {
             _container = container;
             _worldGeneratorFactory = worldGeneratorFactory;
@@ -47,9 +49,17 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             _buildingMarkerFactory = buildingMarkerFactory;
             _staticDataService = staticDataService;
             _worldRotation = worldRotation;
+            _collectionItemCreator = collectionItemCreator;
         }
 
         public WorldGenerator WorldGenerator { get; private set; }
+
+        public async UniTask CreateCollectionItemCreator()
+        {
+            CollectionItemCreator collectionItemCreator = await _collectionItemCreator.Create(WorldFactoryAssets.CollectionItemCreator);
+
+            _container.BindInstance(collectionItemCreator).AsSingle();
+        }
 
         public async UniTask CreateSelectFrame(Transform parent)
         {

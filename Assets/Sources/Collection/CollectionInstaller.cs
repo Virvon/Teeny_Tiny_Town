@@ -1,4 +1,6 @@
 ﻿using Assets.Sources.Infrastructure.Factories.UiFactory;
+using Assets.Sources.Infrastructure.Factories.WorldFactory;
+using Assets.Sources.Sandbox;
 using Zenject;
 
 namespace Assets.Sources.Collection
@@ -9,6 +11,8 @@ namespace Assets.Sources.Collection
         {
             Container.BindInterfacesAndSelfTo<CollectionBootstrapper>().AsSingle().NonLazy();
             UiFactoryInstaller.Install(Container);
+            WorldFactoryInstaller.Install(Container);
+            Container.BindInterfacesTo<SandboxRotation>().AsSingle();
         }
     }
 }

@@ -39,6 +39,7 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
 
         public override async void Execute()
         {
+            PersistentProgressService.Progress.AddBuildingToCollection(_placedBuildingType);
             await WorldChanger.PlaceNewBuilding(_placedBuildingGridPosition, _placedBuildingType);
             base.Execute();
         }

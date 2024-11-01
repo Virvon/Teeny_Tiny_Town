@@ -3,6 +3,7 @@ using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
+using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
@@ -20,8 +21,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             TileType type,
             IStaticDataService staticDataService,
             Building building, IWorldData worldData,
-            IBuildingGivable buildingGivable)
-            : base(tileData, type, staticDataService, building, worldData, buildingGivable)
+            IBuildingGivable buildingGivable,
+            IPersistentProgressService persistentProgressService)
+            : base(tileData, type, staticDataService, building, worldData, buildingGivable, persistentProgressService)
         {
             Ground = new(StaticDataService, StaticDataService.GetGroundType(BuildingType));
 

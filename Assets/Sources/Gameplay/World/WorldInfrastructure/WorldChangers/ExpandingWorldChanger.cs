@@ -6,6 +6,7 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+using Assets.Sources.Services.PersistentProgress;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
@@ -17,8 +18,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         public ExpandingWorldChanger(
             IStaticDataService staticDataService,
             ICurrencyWorldData worldData,
-            NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
-            : base(staticDataService, worldData, nextBuildingForPlacingCreator)
+            NextBuildingForPlacingCreator nextBuildingForPlacingCreator,
+            IPersistentProgressService persistentProgressService)
+            : base(staticDataService, worldData, nextBuildingForPlacingCreator, persistentProgressService)
         {
             _isExpanded = false;
         }

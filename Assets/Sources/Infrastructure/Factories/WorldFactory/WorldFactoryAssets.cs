@@ -7,5 +7,6 @@
         public const string Tile = "Tile";
         public const string SelectFrame = "SelectFrame";
         public const string BuildingMarker = "BuildingMarker";
+        public const string CollectionItemCreator = "CollectionItemCreator";
     }
 }

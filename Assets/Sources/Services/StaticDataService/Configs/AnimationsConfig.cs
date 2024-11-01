@@ -38,6 +38,8 @@ namespace Assets.Sources.Services.StaticDataService.Configs
         public Color PurchasePermittingColor;
         public Color ProhibitingPurchaseColor;
 
+        public float CollectionItemMoveDuration;
+
         public float BuildingShakeTweenDuration => BuildingShakesDuration / BuildingShakesCount;
     }
 }
