@@ -5,7 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Sources.Gameplay.VisualTheme
+namespace Assets.Sources.VisualTheme
 {
     public abstract class VisualTheme : MonoBehaviour
     {
@@ -17,7 +17,7 @@ namespace Assets.Sources.Gameplay.VisualTheme
             PersistentProgressService = persistentProgressService;
             AnimationsConfig = staticDataService.AnimationsConfig;
 
-            PersistentProgressService.Progress.ThemeChanged += ChangeTheme;
+            PersistentProgressService.Progress.SettingsData.ThemeChanged += ChangeTheme;
         }
 
         protected IPersistentProgressService PersistentProgressService { get; private set; }
@@ -25,7 +25,7 @@ namespace Assets.Sources.Gameplay.VisualTheme
 
         private void OnDestroy()
         {
-            PersistentProgressService.Progress.ThemeChanged -= ChangeTheme;
+            PersistentProgressService.Progress.SettingsData.ThemeChanged -= ChangeTheme;
             ThemeChanger?.Kill();
         }
 

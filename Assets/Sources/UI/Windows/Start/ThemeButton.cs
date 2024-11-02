@@ -22,20 +22,20 @@ namespace Assets.Sources.UI.Windows.Start
 
             ChangeThemeIcon();
 
-            _persistentProgressService.Progress.ThemeChanged += ChangeThemeIcon;
+            _persistentProgressService.Progress.SettingsData.ThemeChanged += ChangeThemeIcon;
             _button.onClick.AddListener(OnButtonClicked);
         }
 
         private void OnDestroy()
         {
-            _persistentProgressService.Progress.ThemeChanged -= ChangeThemeIcon;
+            _persistentProgressService.Progress.SettingsData.ThemeChanged -= ChangeThemeIcon;
             _button.onClick.RemoveListener(OnButtonClicked);
         }
 
         private void OnButtonClicked() =>
-            _persistentProgressService.Progress.ChangeTheme(_persistentProgressService.Progress.IsDarkTheme == false);
+            _persistentProgressService.Progress.SettingsData.ChangeTheme(_persistentProgressService.Progress.SettingsData.IsDarkTheme == false);
 
         private void ChangeThemeIcon() =>
-            _icon.sprite = _persistentProgressService.Progress.IsDarkTheme ? _moonIcon : _sunIcon;
+            _icon.sprite = _persistentProgressService.Progress.SettingsData.IsDarkTheme ? _moonIcon : _sunIcon;
     }
 }

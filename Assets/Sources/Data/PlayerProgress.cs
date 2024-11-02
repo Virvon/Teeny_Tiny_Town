@@ -22,7 +22,7 @@ namespace Assets.Sources.Data
         public SandboxData SandboxData;
         public BuildingData[] BuildingDatas;
         public bool IsEducationCompleted;
-        public bool IsDarkTheme;
+        public SettingsData SettingsData;        
 
         public PlayerProgress(
             WorldData[] worldDatas,
@@ -38,18 +38,16 @@ namespace Assets.Sources.Data
             Wallet = new();
             GameplayMovesCounter = new(startRemainingMoveCount, StoreData);
             SandboxData = new(sandboxSize);
+            SettingsData = new();
 
             CurrentWorldData = WorldDatas[0];
             IsEducationCompleted = true;
-            IsDarkTheme = false;
 
             BuildingDatas = new BuildingData[allBuildings.Length];
 
             for(int i = 0; i < allBuildings.Length; i++)
                 BuildingDatas[i] = new BuildingData(allBuildings[i]);
         }
-
-        public event Action ThemeChanged;
 
         public WorldData GetNextWorldData()
         {
@@ -75,10 +73,33 @@ namespace Assets.Sources.Data
         public void AddBuildingToCollection(BuildingType type) =>
             BuildingDatas.First(data => data.Type == type).Count++;
 
+        
+    }
+    [Serializable]
+    public class SettingsData
+    {
+        public bool IsDarkTheme;
+        public bool IsOrthographicCamera;
+
+        public SettingsData()
+        {
+            IsDarkTheme = false;
+            IsOrthographicCamera = false;
+        }
+
+        public event Action ThemeChanged;
+        public event Action OrthographicChanged;
+
         public void ChangeTheme(bool isDarkTheme)
         {
             IsDarkTheme = isDarkTheme;
             ThemeChanged?.Invoke();
+        }
+
+        public void ChangeOrthographic(bool value)
+        {
+            IsOrthographicCamera = value;
+            OrthographicChanged?.Invoke();
         }
     }
 }

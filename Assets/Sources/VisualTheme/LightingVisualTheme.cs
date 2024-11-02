@@ -2,7 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Assets.Sources.Gameplay.VisualTheme
+namespace Assets.Sources.VisualTheme
 {
     public class LightingVisualTheme : VisualTheme
     {
@@ -11,7 +11,7 @@ namespace Assets.Sources.Gameplay.VisualTheme
 
         private void Start()
         {
-            Vector3 rotation = PersistentProgressService.Progress.IsDarkTheme ? _darkThemeRotation : _sunThemeRotation;
+            Vector3 rotation = PersistentProgressService.Progress.SettingsData.IsDarkTheme ? _darkThemeRotation : _sunThemeRotation;
 
             transform.rotation = Quaternion.Euler(rotation);
         }
@@ -20,7 +20,7 @@ namespace Assets.Sources.Gameplay.VisualTheme
         {
             ThemeChanger?.Kill();
 
-            Vector3 targetRotation = PersistentProgressService.Progress.IsDarkTheme ? _darkThemeRotation : _sunThemeRotation;
+            Vector3 targetRotation = PersistentProgressService.Progress.SettingsData.IsDarkTheme ? _darkThemeRotation : _sunThemeRotation;
             ThemeChanger = transform.DORotateQuaternion(Quaternion.Euler(targetRotation), AnimationsConfig.ThemeChangingDuration);
         }
     }

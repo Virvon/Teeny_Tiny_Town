@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Assets.Sources.Gameplay.VisualTheme
+namespace Assets.Sources.VisualTheme
 {
     public class CameraVisualTheme : VisualTheme
     {
@@ -11,7 +11,7 @@ namespace Assets.Sources.Gameplay.VisualTheme
 
         private void Start()
         {
-            int value = PersistentProgressService.Progress.IsDarkTheme ? 1 : 0;
+            int value = PersistentProgressService.Progress.SettingsData.IsDarkTheme ? 1 : 0;
 
             _themeVolume.weight = value;
         }
@@ -20,7 +20,7 @@ namespace Assets.Sources.Gameplay.VisualTheme
         {
             ThemeChanger?.Kill();
 
-            int targetValue = PersistentProgressService.Progress.IsDarkTheme ? 1 : 0;
+            int targetValue = PersistentProgressService.Progress.SettingsData.IsDarkTheme ? 1 : 0;
             ThemeChanger = DOTween.To(() => _themeVolume.weight, value => _themeVolume.weight = value, targetValue, AnimationsConfig.ThemeChangingDuration);
         }
     }
