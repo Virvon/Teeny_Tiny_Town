@@ -37,11 +37,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 632be997c9720004a8142c6b45108b0e
-    m_Address: Tree
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3d612f05727028342ac259c0967669a5
     m_Address: SelectFrame
     m_ReadOnly: 0
@@ -147,15 +142,14 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0762e6a6bfcb38d4b8157188b4620d0c
-    m_Address: House
+    m_Address: BigApartment
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0087dc9c880f50b4ab2a4952b30de344
-    m_Address: HouseConfig
+  - m_GUID: faefb778994bfaa469cc8d5f4b146420
+    m_Address: Sawmill
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b40d1da30db2cb44e85e7d570c711ca1
     m_Address: GameplayWindow
@@ -237,39 +231,35 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2a6d2b691e2bb7045ae2216eff88a0af
-    m_Address: StoneConfig
+  - m_GUID: 21d709e9c03346045bdeb72e6b8ddcc6
+    m_Address: Tree
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f57a14e68a3d7444b94aabe2af1376f9
-    m_Address: Chest
+  - m_GUID: 6acf77e135ffaed4fafa8efa1a3d28ec
+    m_Address: FuturisticBuilding
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f676007db31962949857b7ceab024c12
     m_Address: Ligthouse
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f4b878176ef42c94c9804d5e1242edd1
-    m_Address: LigthouseConfig
+  - m_GUID: 064bdf778703dad4caaa34ac935da1cd
+    m_Address: Skyscraper
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 588e48240c8a96d4f93ad0ada66bc5ba
     m_Address: Crane
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c86cd83dc4d39ae4e94aab376308bc74
-    m_Address: CraneConfig
+  - m_GUID: d90c1100f7a019b408293ceec23273fa
+    m_Address: Logs
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4141ff073e4b08b43bc3271a9810fa64
     m_Address: Assets/Configs/WorldConfigs/WorldConfig.asset
@@ -542,6 +532,93 @@ MonoBehaviour:
     m_Address: EducationWindow
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ee914b24eec232045b0b36ae489b610b
+    m_Address: WoodenHouse
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70512cda1d6f4e144a897a7742dd7acd
+    m_Address: BigApartmentConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca94d65d199ed0646b9f65c6d028fcb6
+    m_Address: FituristicBuildingConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64deeee06e7ceed41905ac0388f61844
+    m_Address: LogsConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af841f3f09129e64aa649618c8e0b204
+    m_Address: SawmillConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d88c342f4efe4f499841f8a4792cf79
+    m_Address: SkyscraperConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f70e7fa602d81d49b09c9df8934ee31
+    m_Address: WoodenHouseConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b3aac35b12443b41bffae12c37a0366
+    m_Address: StoneConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7323cafc25231e94aafa2f4f433a8e97
+    m_Address: PileOftonesConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b98338ce9a24b94596ecb916f753140
+    m_Address: PileOftones
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ededcf7386bf5e043ba1afa69f062957
+    m_Address: Gold
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc9735ab390770b479c01f3b2eeaeae1
+    m_Address: GoldConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f3749c687b9cf64781a3b9bd953f750
+    m_Address: ChestConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fb4b7c55300b3942a8fefaaaf861180
+    m_Address: LighthouseConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9421b0adc716b3419ba46e888106d48
+    m_Address: CraneConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}

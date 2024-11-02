@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d3f57217be7f2409e2067cd5adaf05, type: 3}
   m_Name: StoneConfig
   m_EditorClassIdentifier: 
-  BuildingType: 4
+  BuildingType: 9
   AssetReference:
     m_AssetGUID: 880215ba157abfb4bba6772c9116fcb2
     m_SubObjectName: 
     m_SubObjectType: 
-    m_EditorAssetChanged: 1
+    m_EditorAssetChanged: 0
+  PointsRewardForMerge: 100

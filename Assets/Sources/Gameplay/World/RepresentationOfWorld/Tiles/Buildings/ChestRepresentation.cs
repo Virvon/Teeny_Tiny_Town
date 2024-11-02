@@ -12,7 +12,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
         private uint _reward;
 
         [Inject]
-        private void Construct(IGameplayMover gameplayMover)
+        private void Construct(IGameplayMover gameplayMover = null)
         {
             _gameplayMover = gameplayMover;
         }
@@ -23,7 +23,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
             _reward = reward;
         }
 
-        public void OnPointerClick(PointerEventData eventData) =>
-            _gameplayMover.OpenChest(_gridPosition, _reward);
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if(_gameplayMover != null)
+                _gameplayMover.OpenChest(_gridPosition, _reward);
+        }
     }
 }

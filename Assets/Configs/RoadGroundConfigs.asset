@@ -18,4 +18,16 @@ MonoBehaviour:
   - BuildingType: 2
     GroundType: 0
   - BuildingType: 3
+    GroundType: 0
+  - BuildingType: 4
+    GroundType: 0
+  - BuildingType: 5
+    GroundType: 0
+  - BuildingType: 6
     GroundType: 1
+  - BuildingType: 7
+    GroundType: 1
+  - BuildingType: 8
+    GroundType: 1
+  - BuildingType: 9
+    GroundType: 0

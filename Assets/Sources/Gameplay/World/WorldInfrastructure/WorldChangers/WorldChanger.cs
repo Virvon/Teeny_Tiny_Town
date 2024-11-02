@@ -125,7 +125,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                     return new Building(type);
                 case BuildingType.Tree:
                     return new Building(type);
-                case BuildingType.House:
+                case BuildingType.WoodenHouse:
                     return new Building(type);
                 case BuildingType.Stone:
                     return new Building(type);

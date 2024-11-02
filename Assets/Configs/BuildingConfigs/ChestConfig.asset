@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66d24d5b66bafbd4d965591ee08153a5, type: 3}
   m_Name: ChestConfig
   m_EditorClassIdentifier: 
-  BuildingType: 5
+  BuildingType: 12
   AssetReference:
     m_AssetGUID: 282703337d9b3fa4bb9a74b5a9f5aaa8
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  Reward: 1000
+  PointsRewardForMerge: 0
+  Reward: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildingType: 2
   AssetReference:
-    m_AssetGUID: 632be997c9720004a8142c6b45108b0e
+    m_AssetGUID: 21d709e9c03346045bdeb72e6b8ddcc6
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

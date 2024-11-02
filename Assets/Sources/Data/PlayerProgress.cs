@@ -38,7 +38,7 @@ namespace Assets.Sources.Data
             SandboxData = new(sandboxSize);
 
             CurrentWorldData = WorldDatas[0];
-            IsEducationCompleted = false;
+            IsEducationCompleted = true;
 
             BuildingDatas = new BuildingData[allBuildings.Length];
 

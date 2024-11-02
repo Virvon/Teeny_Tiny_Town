@@ -15,16 +15,16 @@ MonoBehaviour:
   Id: 0f873ea3-6bb2-42e4-ac1b-77b904b0b8e1
   Size: {x: 4, y: 4}
   TileConfigs:
-  - Type: 1
+  - Type: 0
     GridPosition: {x: 0, y: 0}
     BuildingType: 0
-  - Type: 1
+  - Type: 0
     GridPosition: {x: 0, y: 1}
     BuildingType: 0
-  - Type: 2
+  - Type: 0
     GridPosition: {x: 0, y: 2}
     BuildingType: 0
-  - Type: 2
+  - Type: 0
     GridPosition: {x: 0, y: 3}
     BuildingType: 0
   - Type: 0
