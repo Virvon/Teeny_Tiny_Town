@@ -6,9 +6,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Sources.UI.Windows.Start
+namespace Assets.Sources.UI.Windows.Start.Store
 {
-    public class StoreItem : MonoBehaviour
+    public class GameplayStoreItem : MonoBehaviour
     {
         [SerializeField] private GameplayStoreItemType _type;
         [SerializeField] private Button _buyButton;

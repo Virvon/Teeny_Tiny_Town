@@ -1,4 +1,4 @@
-﻿namespace Assets.Sources.UI.Windows.Start
+﻿namespace Assets.Sources.UI.Windows.Start.Store
 {
     public class PackagesPanel : SlidePanel
     {
