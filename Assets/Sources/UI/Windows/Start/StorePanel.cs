@@ -1,4 +1,6 @@
-﻿using DG.Tweening;
+﻿using Assets.Sources.Gameplay.Cameras;
+using DG.Tweening;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.UI.Windows.Start

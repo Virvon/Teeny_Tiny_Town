@@ -26,7 +26,7 @@ namespace Assets.Sources.UI.Windows.Start
         private void Construct(GameplayStateMachine gameplayStateMachine, GameplayCamera gameplayCamera, GameStateMachine gameStateMachine)
         {
             _gameplayStateMachine = gameplayStateMachine;
-            _canvas.worldCamera = gameplayCamera.Camera;
+            _canvas.worldCamera = gameplayCamera.UiCamera;
             _gameStateMachine = gameStateMachine;
 
             _mapSelectionButton.onClick.AddListener(OnMapSelectionButtonClicked);

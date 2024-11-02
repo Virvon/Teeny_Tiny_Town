@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Data.Sandbox;
 using Assets.Sources.Data.World;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using ModestTree.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace Assets.Sources.Data
         public SandboxData SandboxData;
         public BuildingData[] BuildingDatas;
         public bool IsEducationCompleted;
+        public bool IsDarkTheme;
 
         public PlayerProgress(
             WorldData[] worldDatas,
@@ -39,12 +41,15 @@ namespace Assets.Sources.Data
 
             CurrentWorldData = WorldDatas[0];
             IsEducationCompleted = true;
+            IsDarkTheme = false;
 
             BuildingDatas = new BuildingData[allBuildings.Length];
 
             for(int i = 0; i < allBuildings.Length; i++)
                 BuildingDatas[i] = new BuildingData(allBuildings[i]);
         }
+
+        public event Action ThemeChanged;
 
         public WorldData GetNextWorldData()
         {
@@ -69,5 +74,11 @@ namespace Assets.Sources.Data
 
         public void AddBuildingToCollection(BuildingType type) =>
             BuildingDatas.First(data => data.Type == type).Count++;
+
+        public void ChangeTheme(bool isDarkTheme)
+        {
+            IsDarkTheme = isDarkTheme;
+            ThemeChanged?.Invoke();
+        }
     }
 }

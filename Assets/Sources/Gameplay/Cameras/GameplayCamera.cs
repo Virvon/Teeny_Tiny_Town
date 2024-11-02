@@ -9,7 +9,7 @@ namespace Assets.Sources.Gameplay.Cameras
 {
     public class GameplayCamera : MonoBehaviour
     {
-        [SerializeField] private Camera _camera;
+        [SerializeField] private Camera _uiCamera;
 
         private AnimationsConfig _animationsConfig;
 
@@ -19,7 +19,7 @@ namespace Assets.Sources.Gameplay.Cameras
             _animationsConfig = staticDataService.AnimationsConfig;
         }
 
-        public Camera Camera => _camera;
+        public Camera UiCamera => _uiCamera;
 
         public void MoveTo(Vector3 position, TweenCallback callback = null) =>
             transform.DOMove(position, _animationsConfig.CameraMoveDuration).onComplete += callback;

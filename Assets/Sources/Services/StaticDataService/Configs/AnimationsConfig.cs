@@ -40,6 +40,8 @@ namespace Assets.Sources.Services.StaticDataService.Configs
 
         public float CollectionItemMoveDuration;
 
+        public float ThemeChangingDuration;
+
         public float BuildingShakeTweenDuration => BuildingShakesDuration / BuildingShakesCount;
     }
 }

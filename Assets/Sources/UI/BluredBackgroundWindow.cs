@@ -16,7 +16,7 @@ namespace Assets.Sources.UI
         [Inject]
         private void Construct(GameplayCamera gameplayCamera)
         {
-            _canvas.worldCamera = gameplayCamera.Camera;
+            _canvas.worldCamera = gameplayCamera.UiCamera;
             _canvas.planeDistance = PlaneDistance;
         }
 
