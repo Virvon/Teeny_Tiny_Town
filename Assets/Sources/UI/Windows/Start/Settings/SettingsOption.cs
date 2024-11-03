@@ -19,6 +19,8 @@ namespace Assets.Sources.UI.Windows.Start
             _toggle.onValueChanged.AddListener(OnToggleValueChanged);
         }
 
+        protected Toggle Toggle => _toggle;
+
         protected IPersistentProgressService PersistentProgressService { get; private set; }
 
         private void OnDestroy() =>

@@ -17,6 +17,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
     public interface IUiFactory
     {
         UniTask CreateAdditionBonusOfferItem(AdditionalBonusType type, Transform parent);
+        UniTask CreateBlur();
         UniTask CreateGainStoreItemPanel(GainStoreItemType type, Transform parent);
         UniTask<QuestPanel> CreateQuestPanel(string id, Transform parent);
         UniTask CreateRemainingMovesPanel(Transform parent);

@@ -41,7 +41,7 @@ namespace Assets.Sources.Data
             SettingsData = new();
 
             CurrentWorldData = WorldDatas[0];
-            IsEducationCompleted = false;
+            IsEducationCompleted = true;
 
             BuildingDatas = new BuildingData[allBuildings.Length];
 

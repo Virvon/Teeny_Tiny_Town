@@ -13,7 +13,6 @@ namespace Assets.Sources.Gameplay.Cameras
     {
         private const int OrthographicSize = 20;
 
-        [SerializeField] private Camera _uiCamera;
         [SerializeField] private Camera _mainCamera;
 
         private AnimationsConfig _animationsConfig;
@@ -32,7 +31,7 @@ namespace Assets.Sources.Gameplay.Cameras
             _persistentProgressService.Progress.SettingsData.OrthographicChanged += ChangeOrthographic;
         }
 
-        public Camera UiCamera => _uiCamera;
+        public Camera MainCamera => _mainCamera;
 
         private void OnDestroy() =>
             _persistentProgressService.Progress.SettingsData.OrthographicChanged -= ChangeOrthographic;

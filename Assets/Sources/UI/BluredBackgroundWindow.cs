@@ -1,35 +1,27 @@
 ﻿using Assets.Sources.Gameplay.Cameras;
 using DG.Tweening;
-using System;
-using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.UI
 {
     public class BluredBackgroundWindow : Window
     {
-        private const int PlaneDistance = 1;
-
-        [SerializeField] private Canvas _canvas;
-        [SerializeField] private Blur _blur;
+        private Blur _blur;
 
         [Inject]
-        private void Construct(GameplayCamera gameplayCamera)
-        {
-            _canvas.worldCamera = gameplayCamera.UiCamera;
-            _canvas.planeDistance = PlaneDistance;
-        }
+        private void Construct(GameplayCamera gameplayCamera, Blur blur) =>
+            _blur = blur;
 
         public override void Open()
         {
             base.Open();
-            _blur.Show(AnimationsConfig.WindowOpeningStateDuration);
+            _blur.Open();
         }
 
         public override void Hide(TweenCallback callback)
         {
             base.Hide(callback);
-            _blur.Hide(AnimationsConfig.WindowOpeningStateDuration);
+            _blur.Hide();
         }
     }
 }

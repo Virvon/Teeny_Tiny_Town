@@ -56,6 +56,10 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<string, Transform, UniTask<RotationPanel>, RotationPanel.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<RotationPanel>>();
+
+            Container
+                .BindFactory<string, UniTask<Blur>, Blur.BlurFactory>()
+                .FromFactory<KeyPrefabFactoryAsync<Blur>>();
         }
     }
 }

@@ -14,6 +14,7 @@ using Assets.Sources.UI.Windows.World.Panels.Store;
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Sources.Infrastructure.Factories.UiFactory
 {
@@ -30,6 +31,8 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
         private readonly GainStoreItemPanel.Factory _gainStoreItemPanelFactory;
         private readonly SandboxPanelElement.Factory _sandboxPanelFactory;
         private readonly RotationPanel.Factory _rotationPanelFactory;
+        private readonly Blur.BlurFactory _blurFactory;
+        private readonly DiContainer _container;
 
         public UiFactory(
             Window.Factory windowFactory,
@@ -42,7 +45,9 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             AdditionalBonusOfferItem.Factory additionalBonusOfferItemFactory,
             GainStoreItemPanel.Factory gainStoreItemPanelFactory,
             SandboxPanelElement.Factory sandboxPanelFactory,
-            RotationPanel.Factory rotationPanelFactory)
+            RotationPanel.Factory rotationPanelFactory,
+            Blur.BlurFactory blurFactory,
+            DiContainer container)
         {
             _windowFactory = windowFactory;
             _staticDataService = staticDataService;
@@ -55,6 +60,15 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             _gainStoreItemPanelFactory = gainStoreItemPanelFactory;
             _sandboxPanelFactory = sandboxPanelFactory;
             _rotationPanelFactory = rotationPanelFactory;
+            _blurFactory = blurFactory;
+            _container = container;
+        }
+
+        public async UniTask CreateBlur()
+        {
+            Blur blur = await _blurFactory.Create(UiFactoryAssets.Blur);
+            blur.HideImmediately();
+            _container.BindInstance(blur).AsSingle();
         }
 
         public async UniTask CreateRotationPanel(Transform parent) =>

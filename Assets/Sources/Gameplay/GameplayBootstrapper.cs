@@ -42,6 +42,7 @@ namespace Assets.Sources.Gameplay
 
             RegisterGameplayStates();
 
+            await _uiFactory.CreateBlur();
             await worldsList.CreateCurrentWorld();
             await RegisterWindows();
 

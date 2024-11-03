@@ -15,7 +15,6 @@ namespace Assets.Sources.UI.Windows.Start
     {
         [SerializeField] private Button _mapSelectionButton;
         [SerializeField] private Button _continueButton;
-        [SerializeField] private Canvas _canvas;
         [SerializeField] private Button _sandboxButton;
         [SerializeField] private Button _collectionButton;
 
@@ -23,10 +22,9 @@ namespace Assets.Sources.UI.Windows.Start
         private GameStateMachine _gameStateMachine;
 
         [Inject]
-        private void Construct(GameplayStateMachine gameplayStateMachine, GameplayCamera gameplayCamera, GameStateMachine gameStateMachine)
+        private void Construct(GameplayStateMachine gameplayStateMachine, GameStateMachine gameStateMachine)
         {
             _gameplayStateMachine = gameplayStateMachine;
-            _canvas.worldCamera = gameplayCamera.UiCamera;
             _gameStateMachine = gameStateMachine;
 
             _mapSelectionButton.onClick.AddListener(OnMapSelectionButtonClicked);
