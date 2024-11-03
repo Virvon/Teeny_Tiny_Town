@@ -105,31 +105,14 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 5046467910521493380, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
   m_PrefabInstance: {fileID: 9184827099878960028}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4552390273723134768 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4637116898207553708, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
-  m_PrefabInstance: {fileID: 9184827099878960028}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5414299746313633426 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3770774557790065934, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
-  m_PrefabInstance: {fileID: 9184827099878960028}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &6281423886706893877 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2907942358764736425, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
+  m_PrefabInstance: {fileID: 9184827099878960028}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &7089110302736725539 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2096034025306430911, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
   m_PrefabInstance: {fileID: 9184827099878960028}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8694066083777788091 stripped
@@ -153,8 +136,7 @@ MonoBehaviour:
   _hideButton: {fileID: 8979583046385098752}
   _questsWindowOpenButton: {fileID: 8789440570725774273}
   _remainingMovesPanelParent: {fileID: 6281423886706893877}
-  "_rotateWorld\u0421lockwiseButton": {fileID: 4552390273723134768}
-  "_rotateWorld\u0421ounterclockwiseButton": {fileID: 5414299746313633426}
+  _rotationPanelParent: {fileID: 7089110302736725539}
 --- !u!114 &8789440570725774273 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 472123923315464285, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}

@@ -21,6 +21,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
         UniTask<QuestPanel> CreateQuestPanel(string id, Transform parent);
         UniTask CreateRemainingMovesPanel(Transform parent);
         UniTask<RewardPanel> CreateRewardPanel(RewardType type, Transform parent);
+        UniTask CreateRotationPanel(Transform parent);
         UniTask<SandboxPanelElement> CreateSandboxPanelElement<TType>(TType type, Transform parent)
             where TType : Enum;
         UniTask<BuildingStoreItem> CreateStoreItem(BuildingType buildingType, Transform parent);

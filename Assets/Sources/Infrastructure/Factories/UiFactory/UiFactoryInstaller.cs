@@ -52,6 +52,10 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<string, Transform, UniTask<SandboxPanelElement>, SandboxPanelElement.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<SandboxPanelElement>>();
+            
+            Container
+                .BindFactory<string, Transform, UniTask<RotationPanel>, RotationPanel.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<RotationPanel>>();
         }
     }
 }

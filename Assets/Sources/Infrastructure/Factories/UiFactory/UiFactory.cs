@@ -29,6 +29,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
         private readonly AdditionalBonusOfferItem.Factory _additionalBonusOfferItemFactory;
         private readonly GainStoreItemPanel.Factory _gainStoreItemPanelFactory;
         private readonly SandboxPanelElement.Factory _sandboxPanelFactory;
+        private readonly RotationPanel.Factory _rotationPanelFactory;
 
         public UiFactory(
             Window.Factory windowFactory,
@@ -40,7 +41,8 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             RemainingMovesPanel.Factory remainingMovesPanelFactory,
             AdditionalBonusOfferItem.Factory additionalBonusOfferItemFactory,
             GainStoreItemPanel.Factory gainStoreItemPanelFactory,
-            SandboxPanelElement.Factory sandboxPanelFactory)
+            SandboxPanelElement.Factory sandboxPanelFactory,
+            RotationPanel.Factory rotationPanelFactory)
         {
             _windowFactory = windowFactory;
             _staticDataService = staticDataService;
@@ -52,7 +54,11 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             _additionalBonusOfferItemFactory = additionalBonusOfferItemFactory;
             _gainStoreItemPanelFactory = gainStoreItemPanelFactory;
             _sandboxPanelFactory = sandboxPanelFactory;
+            _rotationPanelFactory = rotationPanelFactory;
         }
+
+        public async UniTask CreateRotationPanel(Transform parent) =>
+            await _rotationPanelFactory.Create(UiFactoryAssets.RotationPanel, parent);
 
         public async UniTask<SandboxPanelElement> CreateSandboxPanelElement<TType>(TType type, Transform parent)
             where TType : Enum

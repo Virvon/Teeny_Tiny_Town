@@ -41,7 +41,7 @@ namespace Assets.Sources.Data
             SettingsData = new();
 
             CurrentWorldData = WorldDatas[0];
-            IsEducationCompleted = true;
+            IsEducationCompleted = false;
 
             BuildingDatas = new BuildingData[allBuildings.Length];
 
@@ -72,34 +72,5 @@ namespace Assets.Sources.Data
 
         public void AddBuildingToCollection(BuildingType type) =>
             BuildingDatas.First(data => data.Type == type).Count++;
-
-        
-    }
-    [Serializable]
-    public class SettingsData
-    {
-        public bool IsDarkTheme;
-        public bool IsOrthographicCamera;
-
-        public SettingsData()
-        {
-            IsDarkTheme = false;
-            IsOrthographicCamera = false;
-        }
-
-        public event Action ThemeChanged;
-        public event Action OrthographicChanged;
-
-        public void ChangeTheme(bool isDarkTheme)
-        {
-            IsDarkTheme = isDarkTheme;
-            ThemeChanged?.Invoke();
-        }
-
-        public void ChangeOrthographic(bool value)
-        {
-            IsOrthographicCamera = value;
-            OrthographicChanged?.Invoke();
-        }
     }
 }
