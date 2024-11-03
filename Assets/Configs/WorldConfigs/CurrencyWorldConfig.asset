@@ -77,5 +77,16 @@ MonoBehaviour:
   IsUnlockedOnStart: 1
   Cost: 0
   Name: "\u041C\u0438\u0440 \u0441 \u0434\u0435\u043D\u044C\u0433\u0430\u043C\u0438"
+  PeculiarityIconAssetReferences:
+  - m_AssetGUID: d5ef8be1c4e660e44a10e9abc223991f
+    m_SubObjectName: RiverIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  - m_AssetGUID: cfe6e4756f2c69845b5d5c18c37ab06a
+    m_SubObjectName: NoMoneyIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
   StartStoreList: 01000000
   AvailableGainStoreItems: 010000000200000003000000

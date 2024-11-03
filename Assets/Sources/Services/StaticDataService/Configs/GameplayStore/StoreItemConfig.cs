@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Assets.Sources.Services.StaticDataService.Configs.GameplayStore
 {
-
     public abstract class StoreItemConfig : ScriptableObject
     {
         public GameplayStoreItemType Type;
