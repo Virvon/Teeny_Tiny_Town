@@ -802,7 +802,6 @@ MonoBehaviour:
   _canvasGroup: {fileID: 5775652594877809166}
   _mapSelectionButton: {fileID: 1413571894243195051}
   _continueButton: {fileID: 8344539769557277674}
-  _canvas: {fileID: 1568540163141648451}
   _sandboxButton: {fileID: 6122173341016813020}
   _collectionButton: {fileID: 4139209969996370137}
 --- !u!225 &5775652594877809166
@@ -4317,6 +4316,7 @@ GameObject:
   - component: {fileID: 1310347368375304946}
   - component: {fileID: 6022455629499404020}
   - component: {fileID: 9211511964790220553}
+  - component: {fileID: 2730896231077441341}
   m_Layer: 0
   m_Name: TutorialButton
   m_TagString: Untagged
@@ -4504,6 +4504,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2730896231077441341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8232269899364865198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb1b8af3c5ddceb4ab475ffb58acbd13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 9211511964790220553}
+  _settingsPanel: {fileID: 1565076493789784680}
 --- !u!1 &8271887376854106588
 GameObject:
   m_ObjectHideFlags: 0

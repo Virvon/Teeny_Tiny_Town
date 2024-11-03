@@ -64,7 +64,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
             BuildingPlaced?.Invoke(buildingType);
         }
 
-        public async UniTask Update()
+        public async UniTask Update(bool isAnimate)
         {
             TileData[] tileDatas = new TileData[WorldData.Tiles.Count];
 
@@ -78,7 +78,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
                 Tile tile = GetTile(tileData.GridPosition);
 
-                await tile.CleanAll();
+                await tile.CleanAll(isAnimate);
             }
             
             tileDatas = tileDatas.Reverse().ToArray();
@@ -90,7 +90,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
                 Tile tile = GetTile(tileData.GridPosition);
 
-                await tile.UpdateBuilding(GetBuilding(tileData.BuildingType, tileData.GridPosition), this);
+                await tile.UpdateBuilding(GetBuilding(tileData.BuildingType, tileData.GridPosition), this, isAnimate);
             }
 
             UpdateFinished?.Invoke();

@@ -32,14 +32,14 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds
             Ground = await _worldFactory.CreateGround(tileType, _groundPoint.position, transform);
         }
 
-        public async UniTask Create(GroundType groundType, RoadType roadType, GroundRotation rotation, bool isWaitedForCreation)
+        public async UniTask Create(GroundType groundType, RoadType roadType, GroundRotation rotation, bool isAnimate)
         {
             if (Ground != null)
                 Destroy(Ground.gameObject);
 
             Ground = await _worldFactory.CreateGround(groundType, roadType, _groundPoint.position, rotation, transform);
 
-            if(isWaitedForCreation)
+            if(isAnimate)
                 await UniTask.WaitForSeconds(_animationsConfig.TileUpdatingDuration);
         }
     }

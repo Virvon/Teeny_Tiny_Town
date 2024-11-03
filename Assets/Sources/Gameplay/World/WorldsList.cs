@@ -2,8 +2,11 @@
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -18,23 +21,25 @@ namespace Assets.Sources.Gameplay.World
         private Vector3 _nextWorldPosition;
         private IGameplayFactory _gameplayFactory;
         private IPersistentProgressService _persistentProgressService;
+        private IStaticDataService _staticDataService;
 
         private World _currentWorld;
-        private bool _canChangeWorld;
+        private bool _isWorldChanged;
 
         [Inject]
         private void Construct(IStaticDataService staticDataService, IGameplayFactory gameplayFactory, IPersistentProgressService persistentProgressService)
         {
-            _currentWorldPosition = staticDataService.WorldsConfig.CurrentWorldPosition;
+            _staticDataService = staticDataService;
+            _currentWorldPosition = _staticDataService.WorldsConfig.CurrentWorldPosition;
 
             _gameplayFactory = gameplayFactory;
             _persistentProgressService = persistentProgressService;
 
-            float distanceBetweenWorlds = staticDataService.WorldsConfig.DistanceBetweenWorlds;
+            float distanceBetweenWorlds = _staticDataService.WorldsConfig.DistanceBetweenWorlds;
             _previousWorldPosition = new Vector3(_currentWorldPosition.x - distanceBetweenWorlds, _currentWorldPosition.y, _currentWorldPosition.z);
             _nextWorldPosition = new Vector3(_currentWorldPosition.x + distanceBetweenWorlds, _currentWorldPosition.y, _currentWorldPosition.z);
 
-            _canChangeWorld = true;
+            _isWorldChanged = false;
         }
 
         public async UniTask CreateCurrentWorld()
@@ -48,10 +53,10 @@ namespace Assets.Sources.Gameplay.World
 
         public async UniTask ShowNextWorld()
         {
-            if (_canChangeWorld == false)
+            if (_isWorldChanged)
                 return;
 
-            _canChangeWorld = false;
+            _isWorldChanged = true;
 
             WorldData nextWorldData = _persistentProgressService.Progress.GetNextWorldData();
             World world = await _gameplayFactory.CreateWorld(nextWorldData.Id, _nextWorldPosition, transform);
@@ -59,16 +64,16 @@ namespace Assets.Sources.Gameplay.World
             ReplaceWorlds(world, _previousWorldPosition, _currentWorldPosition, () =>
             {
                 _currentWorld = world;
-                _canChangeWorld = true;                
+                _isWorldChanged = false;                
             });
         }
 
         public async UniTask ShowPreviousWorld()
         {
-            if (_canChangeWorld == false)
+            if (_isWorldChanged)
                 return;
 
-            _canChangeWorld = false;
+            _isWorldChanged = false;
 
             WorldData previousWorldData = _persistentProgressService.Progress.GetPreviousWorldData();
             World world = await _gameplayFactory.CreateWorld(previousWorldData.Id, _previousWorldPosition, transform);
@@ -76,13 +81,34 @@ namespace Assets.Sources.Gameplay.World
             ReplaceWorlds(world, _nextWorldPosition, _currentWorldPosition, () =>
             {
                 _currentWorld = world;
-                _canChangeWorld = true;
+                _isWorldChanged = false;
             });
         }
 
         public void StartCurrentWorld()
         {
-            _currentWorld.EnterBootstrapState();
+            if(_isWorldChanged == false)
+                _currentWorld.EnterBootstrapState();
+        }
+
+        public async UniTask ChangeToEducationWorld(Action callback)
+        {
+            _isWorldChanged = true;
+
+            WorldConfig worldConfig = _staticDataService.GetWorld<WorldConfig>(_staticDataService.WorldsConfig.EducationWorldId);
+
+            WorldData nextWorldData = _persistentProgressService.Progress.ChangeWorldData(_staticDataService.WorldsConfig.EducationWorldId);
+
+            nextWorldData.Update(worldConfig.TilesDatas, worldConfig.NextBuildingTypeForCreation, worldConfig.StartingAvailableBuildingTypes.ToList());
+
+            World world = await _gameplayFactory.CreateEducationWorld(_nextWorldPosition, transform);
+
+            ReplaceWorlds(world, _previousWorldPosition, _currentWorldPosition, () =>
+            {
+                _currentWorld = world;
+                _isWorldChanged = false;
+                callback?.Invoke();
+            });
         }
 
         private void ReplaceWorlds(World changedWorld, Vector3 currentWorldTargetPosition, Vector3 changedWorldTargetPosition, TweenCallback callback)

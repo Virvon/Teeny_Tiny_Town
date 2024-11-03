@@ -80,7 +80,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
         {
             SetBuilding(building);
             await ValidateTilesInChain(false);
-            await Building.CreateRepresentation(TileRepresentation, true);
+            await Building.CreateRepresentation(TileRepresentation, true, true);
         }
 
         private async UniTask ValidateTilesInChain(bool isWaitedForRoadCreation)
@@ -91,21 +91,21 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             await ChangeRoadsInChain(new(), isWaitedForRoadCreation);
         }
 
-        public override async UniTask CleanAll()
+        public override async UniTask CleanAll(bool isAnimate)
         {
-            await base.CleanAll();
+            await base.CleanAll(isAnimate);
 
             Ground.Clean();
-            await TileRepresentation.GroundCreator.Create(Ground.Type, Ground.RoadType, Ground.Rotation, true);
+            await TileRepresentation.GroundCreator.Create(Ground.Type, Ground.RoadType, Ground.Rotation, isAnimate);
         }
 
-        public override async UniTask UpdateBuilding(Building building, IBuildingsUpdatable buildingsUpdatable)
+        public override async UniTask UpdateBuilding(Building building, IBuildingsUpdatable buildingsUpdatable, bool isAnimate)
         {
             if (building == null)
                 return;
 
             SetBuilding(building);
-            await Building.CreateRepresentation(TileRepresentation, false);
+            await Building.CreateRepresentation(TileRepresentation, true, false);
 
             buildingsUpdatable.UpdateFinished += async () => await ValidateTilesInChain(true);
         }

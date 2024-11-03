@@ -38,7 +38,7 @@ namespace Assets.Sources.Gameplay.GameplayMover.Commands
         public virtual async UniTask Undo()
         {
             WorldData.UpdateTileDatas(TileDatas);
-            await WorldChanger.Update();
+            await WorldChanger.Update(true);
             _nextBuildingForPlacingCreator.Update(_buildingsForPlacingData);
         }
     }

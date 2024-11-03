@@ -1,12 +1,10 @@
-﻿using Assets.Sources.Data.WorldDatas;
-using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
-using Assets.Sources.Sandbox.ActionHandler;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
@@ -71,6 +69,7 @@ namespace Assets.Sources.Gameplay.World.Root
 
             _nextBuildingForPlacingCreator.CreateData(_worldChanger.Tiles);
             _worldChanger.Start();
+            Debug.Log("create complete");
             _world.OnCreated();
         }
 

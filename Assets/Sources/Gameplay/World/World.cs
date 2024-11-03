@@ -3,6 +3,7 @@ using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
@@ -27,11 +28,13 @@ namespace Assets.Sources.Gameplay.World
             _animationsConfig = staticDataService.AnimationsConfig;
 
             RotationDegrees = 0;
+
+            Debug.Log("start create " + IsCreated);
             IsCreated = false;
         }
 
         public event Action Entered;
-        
+
         public int RotationDegrees { get; private set; }
         public bool IsCreated { get; private set; }
 

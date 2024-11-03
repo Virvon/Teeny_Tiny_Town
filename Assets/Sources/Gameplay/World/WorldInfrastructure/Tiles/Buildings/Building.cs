@@ -14,9 +14,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 
         public BuildingType Type { get; protected set; }
 
-        public virtual async UniTask CreateRepresentation(TileRepresentation tileRepresentation, bool waitForCompletion)
+        public virtual async UniTask CreateRepresentation(TileRepresentation tileRepresentation, bool isAnimate, bool waitForCompletion)
         {
-            await tileRepresentation.TryChangeBuilding<BuildingRepresentation>(Type, waitForCompletion);
+            await tileRepresentation.TryChangeBuilding<BuildingRepresentation>(Type, isAnimate, waitForCompletion);
         }
     }
 }

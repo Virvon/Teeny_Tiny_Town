@@ -5,6 +5,7 @@ using Assets.Sources.Gameplay.World;
 using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
+using UnityEngine.AddressableAssets;
 
 namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
 {
@@ -15,22 +16,19 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
         private readonly World.Factory _worldFactory;
         private readonly GameplayCamera.Factory _gameplayCameraFactory;
         private readonly IStaticDataService _staticDataService;
-        private readonly EducationWorld.EducationFactory _educationWorldFactory;
 
         public GameplayFactory(
             DiContainer container,
             WorldsList.Factory worldsListFactory,
             World.Factory worldFactory,
             GameplayCamera.Factory gameplayCameraFactory,
-            IStaticDataService staticDataService,
-            EducationWorld.EducationFactory educationWorldFactory)
+            IStaticDataService staticDataService)
         {
             _container = container;
             _worldsListFactory = worldsListFactory;
             _worldFactory = worldFactory;
             _gameplayCameraFactory = gameplayCameraFactory;
             _staticDataService = staticDataService;
-            _educationWorldFactory = educationWorldFactory;
         }
 
         public async UniTask<GameplayCamera> CreateCamera()
@@ -42,21 +40,11 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             return camera;
         }
 
-        public async UniTask<EducationWorld> CreateEducationWorld(Vector3 position, Transform parent)
-        {
-            EducationWorld world = await _educationWorldFactory.Create(GameplayFactoryAssets.EducationWorld, position, parent);
+        public async UniTask<World> CreateEducationWorld(Vector3 position, Transform parent) =>
+            await CreateWorld(_staticDataService.WorldsConfig.EducationWorldAssetReference, position, parent);
 
-            await UniTask.WaitUntil(() => world.IsCreated);
-            return world;
-        }
-
-        public async UniTask<World> CreateWorld(string id, Vector3 position, Transform parent)
-        {
-            World world = await _worldFactory.Create(_staticDataService.GetWorld<WorldConfig>(id).AssetReference, position, parent);
-
-            await UniTask.WaitUntil(() => world.IsCreated);
-            return world;
-        }
+        public async UniTask<World> CreateWorld(string id, Vector3 position, Transform parent) =>
+            await CreateWorld(_staticDataService.GetWorld<WorldConfig>(id).AssetReference, position, parent);
 
         public async UniTask<WorldsList> CreateWorldsList()
         {
@@ -65,6 +53,16 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             _container.BindInstance(worldsList).AsSingle();
 
             return worldsList;
+        }
+
+        private async UniTask<World> CreateWorld(AssetReferenceGameObject assetReference, Vector3 position, Transform parent)
+        {
+            World world = await _worldFactory.Create(assetReference, position, parent);
+
+            await UniTask.WaitUntil(() => world.IsCreated);
+            Debug.Log("return");
+
+            return world;
         }
     }
 }

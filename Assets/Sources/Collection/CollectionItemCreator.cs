@@ -103,7 +103,7 @@ namespace Assets.Sources.Collection
             else
                 await tile.GroundCreator.Create(_staticDataService.GetGroundType(buildingType), RoadType.NonEmpty, GroundRotation.Degrees0, false);
 
-            await tile.TryChangeBuilding<BuildingRepresentation>(buildingType, true);
+            await tile.TryChangeBuilding<BuildingRepresentation>(buildingType, false, false);
 
             return tile;
         }

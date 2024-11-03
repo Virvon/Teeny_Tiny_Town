@@ -16,3 +16,9 @@ MonoBehaviour:
   CurrentWorldPosition: {x: 0, y: 0, z: 0}
   Goals: d007000088130000
   AvailableMovesCount: 30
+  EducationWorldId: 0f873ea3-6bb2-42e4-ac1b-77b904b0b8e1
+  EducationWorldAssetReference:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

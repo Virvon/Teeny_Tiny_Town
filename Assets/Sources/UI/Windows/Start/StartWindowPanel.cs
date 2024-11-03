@@ -24,14 +24,14 @@ namespace Assets.Sources.UI.Windows.Start
             });
         }
 
+        public void OpenNextPanel() =>
+            Hide(callback: _nextPanel.Open);
+
         protected virtual void Hide(TweenCallback callback)
         {
             CanvasGroup.blocksRaycasts = false;
             CanvasGroup.interactable = false;
             ChangeCanvasGroupAlpha(0, callback);
         }
-
-        private void OpenNextPanel() =>
-            Hide(callback: _nextPanel.Open);
     }
 }

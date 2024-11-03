@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Assets.Sources.Services.StaticDataService.Configs.World
 {
@@ -9,5 +10,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public Vector3 CurrentWorldPosition;
         public uint[] Goals;
         public uint AvailableMovesCount;
+        public string EducationWorldId;
+        public AssetReferenceGameObject EducationWorldAssetReference;
     }
 }

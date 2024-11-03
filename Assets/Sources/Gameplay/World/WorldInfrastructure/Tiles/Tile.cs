@@ -40,10 +40,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             await CreateGroundRepresentation(false);
 
             if(Building != null)
-                await Building.CreateRepresentation(TileRepresentation, true);
+                await Building.CreateRepresentation(TileRepresentation, true, true);
         }
 
-        public virtual async UniTask UpdateBuilding(Building building, IBuildingsUpdatable buildingsUpdatable)
+        public virtual async UniTask UpdateBuilding(Building building, IBuildingsUpdatable buildingsUpdatable, bool isAnimate)
         {
             if (building == null)
                 return;
@@ -68,10 +68,15 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             TileRepresentation.Destroy();
         }
 
-        public virtual async UniTask CleanAll()
+        public virtual async UniTask CleanAll(bool isAnimate)
         {
             if(IsEmpty == false)
-                await TileRepresentation.AnimateDestroyBuilding();
+            {
+                if (isAnimate)
+                    await TileRepresentation.AnimateDestroyBuilding();
+                else
+                    TileRepresentation.DestroyBuilding();
+            }
 
             SetBuilding(null);
         }
@@ -115,7 +120,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
         {
             SetBuilding(building);
 
-            await Building.CreateRepresentation(TileRepresentation, true);
+            await Building.CreateRepresentation(TileRepresentation, true, true);
         }
 
         protected void SetBuilding(Building building)

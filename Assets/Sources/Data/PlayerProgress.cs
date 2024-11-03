@@ -67,6 +67,13 @@ namespace Assets.Sources.Data
             return CurrentWorldData;
         }
 
+        public WorldData ChangeWorldData(string id)
+        {
+            CurrentWorldData = WorldDatas.First(data => data.Id == id);
+
+            return CurrentWorldData;
+        }
+
         public QuestData GetQuest(string id) =>
             Quests.First(data => data.Id == id);
 

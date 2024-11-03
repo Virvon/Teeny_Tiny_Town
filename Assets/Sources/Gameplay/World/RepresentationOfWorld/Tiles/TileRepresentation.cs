@@ -71,7 +71,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             _building = null;
         }
 
-        public async UniTask<TBuilding> TryChangeBuilding<TBuilding>(BuildingType targetBuildingType, bool waitForCompletion)
+        public async UniTask<TBuilding> TryChangeBuilding<TBuilding>(BuildingType targetBuildingType, bool isAnimate, bool waitForCompletion)
             where TBuilding : BuildingRepresentation
         {
             if (BuildingType != targetBuildingType)
@@ -82,7 +82,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
                 if (targetBuildingType != BuildingType.Undefined)
                 {
                     _building = await _buildingCreator.Create(targetBuildingType);  
-                    await _building.AnimatePut(waitForCompletion);
+                    
+                    if(isAnimate)
+                        await _building.AnimatePut(waitForCompletion);
 
                     return _building as TBuilding;
                 }

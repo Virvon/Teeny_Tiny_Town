@@ -45,7 +45,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
                 WorldConfig WorldConfig = _staticDataService.GetWorld<WorldConfig>(_worldData.Id);
 
                 _worldData.Update(WorldConfig.TilesDatas, WorldConfig.NextBuildingTypeForCreation, WorldConfig.StartingAvailableBuildingTypes.ToList());
-                _worldChanger.Update();
+                _worldChanger.Update(true);
             });
 
             return default;

@@ -47,7 +47,7 @@ MonoBehaviour:
   _actionHandlerLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  _world: {fileID: 2679559077376544515}
+  _world: {fileID: 5463311989392032734}
 --- !u!1 &5847459068844677991
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3286394918942320156}
   - component: {fileID: 7107399174257484372}
-  - component: {fileID: 2679559077376544515}
+  - component: {fileID: 5463311989392032734}
   m_Layer: 0
   m_Name: EducationWorld
   m_TagString: Untagged
@@ -100,7 +100,7 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!114 &2679559077376544515
+--- !u!114 &5463311989392032734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,6 +109,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5847459068844677991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93535f50936d31646b8a3c81e71529ca, type: 3}
+  m_Script: {fileID: 11500000, guid: c18b8c7e478ccde48a68ef42b3744d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

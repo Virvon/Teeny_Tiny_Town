@@ -185,7 +185,7 @@ namespace Assets.Sources.Sandbox
             await CreateGroundRepresentation(false);
 
             if (Building != null)
-                await Building.CreateRepresentation(TileRepresentation, true);
+                await Building.CreateRepresentation(TileRepresentation,false, false);
         }
 
         protected virtual async UniTask CreateGroundRepresentation(bool isWaitedForCreation)
@@ -209,7 +209,7 @@ namespace Assets.Sources.Sandbox
         {
             SetBuilding(building);
 
-            await Building.CreateRepresentation(TileRepresentation, true);
+            await Building.CreateRepresentation(TileRepresentation, false, false);
         }
 
         protected void SetBuilding(Building building)
