@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.UI;
+using Assets.Sources.UI.Windows.MapSelection;
 using Assets.Sources.UI.Windows.Sandbox;
 using Assets.Sources.UI.Windows.World.Panels;
 using Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer;
@@ -60,6 +61,10 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<string, UniTask<Blur>, Blur.BlurFactory>()
                 .FromFactory<KeyPrefabFactoryAsync<Blur>>();
+            
+            Container
+                .BindFactory<string, Transform, UniTask<PeculiarityIconPanel>, PeculiarityIconPanel.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<PeculiarityIconPanel>>();
         }
     }
 }

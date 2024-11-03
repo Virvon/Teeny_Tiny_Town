@@ -50,6 +50,12 @@ namespace Assets.Sources.Gameplay.World.Root
             BindMarkersVisibility();
             BindRewarder();
             BindAcitonHandlerSwitcher();
+            BindWorldCleaner();
+        }
+
+        private void BindWorldCleaner()
+        {
+            Container.Bind<WorldCleaner>().AsSingle().NonLazy();
         }
 
         protected virtual void BindAcitonHandlerSwitcher()

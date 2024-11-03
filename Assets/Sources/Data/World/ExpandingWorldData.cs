@@ -17,8 +17,9 @@ namespace Assets.Sources.Data.World
             Vector2Int size,
             List<BuildingType> storeList,
             uint[] goals,
-            GainStoreItemData[] gainsStoreList)
-            : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size, storeList, goals, gainsStoreList)
+            GainStoreItemData[] gainsStoreList,
+            bool isUnlocked)
+            : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size, storeList, goals, gainsStoreList, isUnlocked)
         {
         }
     }

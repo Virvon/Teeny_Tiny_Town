@@ -23,6 +23,7 @@ namespace Assets.Sources.Data.WorldDatas
         PointsData PointsData { get; }
         UpgradeData BulldozerItems { get; }
         UpgradeData ReplaceItems { get; }
+        bool IsUnlocked { get; set; }
 
         void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService);
         void UpdateTileDatas(TileData[] tileDatas);

@@ -20,8 +20,9 @@ namespace Assets.Sources.Data.World.Currency
             Vector2Int size,
             List<BuildingType> buildingsStoreList,
             uint[] goals,
-            GainStoreItemData[] gainsStoreList)
-            : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size, goals)
+            GainStoreItemData[] gainsStoreList,
+            bool isUnlocked)
+            : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size, goals, isUnlocked)
         {
             WorldWallet = new();
             MovesCounter = new();

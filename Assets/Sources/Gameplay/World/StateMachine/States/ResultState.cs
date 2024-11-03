@@ -39,14 +39,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         public UniTask Exit()
         {
             _world.TryStopRotating();
-
-            _world.RotateToStart(callback: () =>
-            {
-                WorldConfig WorldConfig = _staticDataService.GetWorld<WorldConfig>(_worldData.Id);
-
-                _worldData.Update(WorldConfig.TilesDatas, WorldConfig.NextBuildingTypeForCreation, WorldConfig.StartingAvailableBuildingTypes.ToList());
-                _worldChanger.Update(true);
-            });
+            _world.RotateToStart(callback: _world.Clean);
 
             return default;
         }

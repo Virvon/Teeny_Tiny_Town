@@ -15,7 +15,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public GainStoreItemType[] AvailableGainStoreItems;
 
         public override WorldData GetWorldData(uint[] goals, IStaticDataService staticDataService) =>
-            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, StartStoreList, goals, GetGainStoreItemsList(staticDataService));
+            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, StartStoreList, goals, GetGainStoreItemsList(staticDataService), IsUnlockedOnStart);
 
         protected GainStoreItemData[] GetGainStoreItemsList(IStaticDataService staticDataService)
         {

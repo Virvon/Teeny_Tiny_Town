@@ -34,6 +34,7 @@ namespace Assets.Sources.Gameplay.World
         }
 
         public event Action Entered;
+        public event Action Cleaned;
 
         public int RotationDegrees { get; private set; }
         public bool IsCreated { get; private set; }
@@ -81,6 +82,9 @@ namespace Assets.Sources.Gameplay.World
             _movement = transform.DOMove(targetPosition, _animationsConfig.WorldMoveDuration);
             _movement.onComplete = callback;
         }
+
+        public void Clean() =>
+            Cleaned?.Invoke();
 
         private void Rotate(int degrees)
         {

@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 9103245100419809403}
   - component: {fileID: 6452364969357286021}
   - component: {fileID: 4518637971268364323}
+  - component: {fileID: -230640314372080531}
   m_Layer: 0
   m_Name: PeculiarityIconPanel
   m_TagString: Untagged
@@ -242,3 +243,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 2
   m_AspectRatio: 1
+--- !u!114 &-230640314372080531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444565764049072238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 265bf8105f99c6f48950c94045dee8e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 3253414056778503539}

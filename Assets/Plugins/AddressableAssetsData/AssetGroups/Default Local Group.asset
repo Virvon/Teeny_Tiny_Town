@@ -264,7 +264,8 @@ MonoBehaviour:
   - m_GUID: 4141ff073e4b08b43bc3271a9810fa64
     m_Address: Assets/Configs/WorldConfigs/WorldConfig.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Configs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4166c9d83fb665144b2b79697bf64f37
     m_Address: Assets/Configs/WorldConfigs/ExpandingWorldConfig.asset

@@ -1,7 +1,7 @@
 ﻿using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.UI;
-using Assets.Sources.UI.Windows;
+using Assets.Sources.UI.Windows.MapSelection;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

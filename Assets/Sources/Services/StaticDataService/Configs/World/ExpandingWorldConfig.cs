@@ -19,6 +19,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         }
 
         public override WorldData GetWorldData(uint[] goals, IStaticDataService staticDataService) =>
-            new ExpandingWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), StartSize, StartStoreList, goals, GetGainStoreItemsList(staticDataService));
+            new ExpandingWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), StartSize, StartStoreList, goals, GetGainStoreItemsList(staticDataService), IsUnlockedOnStart);
     }
 }

@@ -22,6 +22,7 @@ namespace Assets.Sources.Data.World
         public PointsData PointsData;
         public UpgradeData BuldozerItems;
         public UpgradeData ReplaceItems;
+        public bool IsUnlocked;
 
         public WorldData(
             string id,
@@ -29,13 +30,15 @@ namespace Assets.Sources.Data.World
             BuildingType nextBuildingTypeForCreation,
             List<BuildingType> availableBuildingForCreation,
             Vector2Int size,
-            uint[] goals)
+            uint[] goals,
+            bool isUnlocked)
         {
             Id = id;
             Tiles = tiles;
             NextBuildingTypeForCreation = nextBuildingTypeForCreation;
             AvailableBuildingsForCreation = availableBuildingForCreation;
             Size = size;
+            IsUnlocked = isUnlocked;
 
             NextBuildingForCreationBuildsCount = 0;
             IsChangingStarted = false;
@@ -72,6 +75,11 @@ namespace Assets.Sources.Data.World
         PointsData IWorldData.PointsData => PointsData;
         UpgradeData IWorldData.BulldozerItems => BuldozerItems;
         UpgradeData IWorldData.ReplaceItems => ReplaceItems;
+        bool IWorldData.IsUnlocked
+        {
+            get => IsUnlocked;
+            set => IsUnlocked = value;
+        }
 
         public void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)
         {

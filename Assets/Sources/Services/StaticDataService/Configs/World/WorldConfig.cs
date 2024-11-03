@@ -22,6 +22,10 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public int MinRewardVariantsCount;
         public int MaxRewardVariantsCount;
         public AdditionalBonusType[] AvailableAdditionalBonuses;
+        public bool IsUnlockedOnStart;
+        public uint Cost;
+        public string Name;
+        public AssetReference[] PeculiarityIconAssetReferences;
 
         public TileType GetTileType(Vector2Int gridPosition) =>
             TileConfigs.First(tile => tile.GridPosition == gridPosition).Type;
@@ -32,7 +36,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
             CreateTileConfigs();
 
         public virtual WorldData GetWorldData(uint[] goals, IStaticDataService staticDataService) => 
-            new WorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, goals);
+            new WorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, goals, IsUnlockedOnStart);
 
         private void CreateTileConfigs()
         {

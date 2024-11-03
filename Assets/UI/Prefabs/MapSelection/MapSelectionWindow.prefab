@@ -810,8 +810,11 @@ MonoBehaviour:
   _canvasGroup: {fileID: 6214524797272433358}
   _nextMapButton: {fileID: 1969591604384411962}
   _previousMapButton: {fileID: 6374837053504954080}
-  _continueButton: {fileID: 1544025125425996124}
   _hideButton: {fileID: 1883392744897890405}
+  _unlockedMapPanel: {fileID: 5534030876774814519}
+  _lcockedMapPanel: {fileID: 6898121095807665123}
+  _sizeValue: {fileID: 2490606545278588991}
+  _name: {fileID: 7309725363751034273}
 --- !u!1 &591168005019117332
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,6 +825,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4463585977198314012}
   - component: {fileID: 8775595191311048130}
+  - component: {fileID: 5534030876774814519}
   m_Layer: 5
   m_Name: UnlockedMapPanel
   m_TagString: Untagged
@@ -862,6 +866,22 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &5534030876774814519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591168005019117332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d6ee3fd40866a8419f8d76b419dfecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 8775595191311048130}
+  _continueButton: {fileID: 1544025125425996124}
+  _restartButton: {fileID: 4497470194512643000}
+  _restartButtonCanvasGroup: {fileID: 8541013170380401236}
 --- !u!1 &703283440997249100
 GameObject:
   m_ObjectHideFlags: 0
@@ -2180,6 +2200,7 @@ GameObject:
   - component: {fileID: 8012599879908827114}
   - component: {fileID: 1834113766374882143}
   - component: {fileID: 4497470194512643000}
+  - component: {fileID: 8541013170380401236}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -2260,6 +2281,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &8541013170380401236
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5131832832426284767}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5776025357397950309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,7 +2305,7 @@ GameObject:
   - component: {fileID: 6033237353037930797}
   - component: {fileID: 7046036051295657447}
   m_Layer: 5
-  m_Name: Value
+  m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2480,6 +2513,7 @@ GameObject:
   - component: {fileID: 8724081185649223292}
   - component: {fileID: 2552090118793761101}
   - component: {fileID: 5356420077285443779}
+  - component: {fileID: 2240270517688995333}
   m_Layer: 5
   m_Name: PeculiarityPanel
   m_TagString: Untagged
@@ -2546,6 +2580,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
   m_VerticalFit: 0
+--- !u!114 &2240270517688995333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546919379637794297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a1741a9311b6d44bc9393a0a516d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6614444463264628923
 GameObject:
   m_ObjectHideFlags: 0
@@ -2707,6 +2753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1769628602151824218}
   - component: {fileID: 1302687555516224711}
+  - component: {fileID: 6898121095807665123}
   m_Layer: 5
   m_Name: LockedMapPanel
   m_TagString: Untagged
@@ -2748,6 +2795,22 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &6898121095807665123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6766402142943549794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ccbca5dab5aad40bc8c4df5aacbec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 1302687555516224711}
+  _buyButton: {fileID: 7590281668831586203}
+  _costValue: {fileID: 7046036051295657447}
+  _mapSelectionWindow: {fileID: -3746850757443209230}
 --- !u!1 &8264648839251426749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2893,6 +2956,7 @@ GameObject:
   - component: {fileID: 3650983759147092869}
   - component: {fileID: 6857142354809770873}
   - component: {fileID: 9026550636159476020}
+  - component: {fileID: 7590281668831586203}
   m_Layer: 0
   m_Name: BuyButton
   m_TagString: Untagged
@@ -3036,6 +3100,50 @@ MonoBehaviour:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     m_Rotation: 0
+--- !u!114 &7590281668831586203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8328873555724105792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 9026550636159476020}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8349071911469502101
 GameObject:
   m_ObjectHideFlags: 0

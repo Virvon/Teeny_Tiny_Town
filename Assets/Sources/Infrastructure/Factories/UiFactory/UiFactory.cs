@@ -6,6 +6,7 @@ using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
 using Assets.Sources.UI;
+using Assets.Sources.UI.Windows.MapSelection;
 using Assets.Sources.UI.Windows.Sandbox;
 using Assets.Sources.UI.Windows.World.Panels;
 using Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer;
@@ -14,6 +15,7 @@ using Assets.Sources.UI.Windows.World.Panels.Store;
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace Assets.Sources.Infrastructure.Factories.UiFactory
@@ -33,6 +35,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
         private readonly RotationPanel.Factory _rotationPanelFactory;
         private readonly Blur.BlurFactory _blurFactory;
         private readonly DiContainer _container;
+        private readonly PeculiarityIconPanel.Factory _peculiarityIconPanelFactory;
 
         public UiFactory(
             Window.Factory windowFactory,
@@ -47,7 +50,8 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             SandboxPanelElement.Factory sandboxPanelFactory,
             RotationPanel.Factory rotationPanelFactory,
             Blur.BlurFactory blurFactory,
-            DiContainer container)
+            DiContainer container,
+            PeculiarityIconPanel.Factory peculiarityIconPanelFactory)
         {
             _windowFactory = windowFactory;
             _staticDataService = staticDataService;
@@ -62,6 +66,16 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             _rotationPanelFactory = rotationPanelFactory;
             _blurFactory = blurFactory;
             _container = container;
+            _peculiarityIconPanelFactory = peculiarityIconPanelFactory;
+        }
+
+        public async UniTask<PeculiarityIconPanel> CreatePeculiarityIconPanel(AssetReference iconAssetReference, Transform parent)
+        {
+            PeculiarityIconPanel peculiarityIconPanel = await _peculiarityIconPanelFactory.Create(UiFactoryAssets.PeculiarityIconPanel, parent);
+            Sprite icon = await _assetProvider.Load<Sprite>(iconAssetReference);
+            peculiarityIconPanel.Init(icon);
+
+            return peculiarityIconPanel;
         }
 
         public async UniTask CreateBlur()

@@ -42,6 +42,9 @@ namespace Assets.Sources.Gameplay.World
             _isWorldChanged = false;
         }
 
+        public void CleanCurrentWorld() =>
+            _currentWorld.Clean();
+
         public async UniTask CreateCurrentWorld()
         {
             if (_persistentProgressService.Progress.IsEducationCompleted)
@@ -73,7 +76,7 @@ namespace Assets.Sources.Gameplay.World
             if (_isWorldChanged)
                 return;
 
-            _isWorldChanged = false;
+            _isWorldChanged = true;
 
             WorldData previousWorldData = _persistentProgressService.Progress.GetPreviousWorldData();
             World world = await _gameplayFactory.CreateWorld(previousWorldData.Id, _previousWorldPosition, transform);

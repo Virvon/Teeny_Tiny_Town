@@ -1,7 +1,6 @@
 ﻿using Assets.Sources.Data.Sandbox;
 using Assets.Sources.Data.World;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
-using ModestTree.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +12,6 @@ namespace Assets.Sources.Data
     public class PlayerProgress
     { 
         public WorldData[] WorldDatas;
-        
         public WorldData CurrentWorldData;
         public StoreData StoreData;
         public Wallet Wallet;
@@ -49,11 +47,14 @@ namespace Assets.Sources.Data
                 BuildingDatas[i] = new BuildingData(allBuildings[i]);
         }
 
+        public event Action CurrentWorldChanged;
+
         public WorldData GetNextWorldData()
         {
             int curentWorldDataIndex = Array.IndexOf(WorldDatas, CurrentWorldData);
 
             CurrentWorldData = curentWorldDataIndex >= WorldDatas.Length - 1 ? WorldDatas[0] : WorldDatas[curentWorldDataIndex + 1];
+            CurrentWorldChanged?.Invoke();
 
             return CurrentWorldData;
         }
@@ -63,6 +64,7 @@ namespace Assets.Sources.Data
             int curentWorldDataIndex = Array.IndexOf(WorldDatas, CurrentWorldData);
 
             CurrentWorldData = curentWorldDataIndex <= 0 ? WorldDatas[WorldDatas.Length - 1] : WorldDatas[curentWorldDataIndex - 1];
+            CurrentWorldChanged?.Invoke();
 
             return CurrentWorldData;
         }
@@ -70,6 +72,7 @@ namespace Assets.Sources.Data
         public WorldData ChangeWorldData(string id)
         {
             CurrentWorldData = WorldDatas.First(data => data.Id == id);
+            CurrentWorldChanged?.Invoke();
 
             return CurrentWorldData;
         }

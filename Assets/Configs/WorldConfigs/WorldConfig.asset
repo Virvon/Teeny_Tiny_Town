@@ -38,3 +38,6 @@ MonoBehaviour:
   MinRewardVariantsCount: 2
   MaxRewardVariantsCount: 3
   AvailableAdditionalBonuses: 000000000100000002000000
+  IsUnlockedOnStart: 0
+  Cost: 100
+  Name: "\u0414\u0435\u0444\u043E\u043B\u0442\u043D\u044B\u0439 \u043C\u0438\u0440"
