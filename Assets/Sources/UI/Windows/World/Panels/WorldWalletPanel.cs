@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data.World.Currency;
+using Assets.Sources.Utils;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -25,6 +26,6 @@ namespace Assets.Sources.UI.Windows.World.Panels
             _worldData.WorldWallet.ValueChanged -= OnWorldWalletValueChanged;
 
         private void OnWorldWalletValueChanged(uint value) =>
-            _walletValue.text = value.ToString();
+            _walletValue.text = DigitUtils.CutDigit(value);
     }
 }

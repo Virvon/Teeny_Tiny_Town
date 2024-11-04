@@ -15,11 +15,11 @@ namespace Assets.Sources.Data.World
             BuildingType nextBuildingTypeForCreation,
             List<BuildingType> availableBuildingForCreation,
             Vector2Int size,
-            List<BuildingType> storeList,
+            BuildingType[] startBuildingsStoreList,
             uint[] goals,
             GainStoreItemData[] gainsStoreList,
             bool isUnlocked)
-            : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size, storeList, goals, gainsStoreList, isUnlocked)
+            : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size, startBuildingsStoreList, goals, gainsStoreList, isUnlocked)
         {
         }
     }

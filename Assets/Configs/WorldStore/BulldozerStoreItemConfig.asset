@@ -18,7 +18,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  IconAssetReferecne:
+  IconAssetReference:
     m_AssetGUID: 10a5f25e0ca897b4796ca659477c9fb6
     m_SubObjectName: BulldozerIcon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,

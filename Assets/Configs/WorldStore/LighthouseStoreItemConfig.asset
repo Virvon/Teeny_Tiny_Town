@@ -18,7 +18,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  IconAssetReferecne:
+  IconAssetReference:
     m_AssetGUID: 73661bf111a7d864c95ede444bc817e8
     m_SubObjectName: LighthouseIcon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,

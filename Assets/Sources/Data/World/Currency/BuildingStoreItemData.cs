@@ -1,26 +1,26 @@
-﻿using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
+﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 
 namespace Assets.Sources.Data.World.Currency
 {
-    public class GainStoreItemData
+    public class BuildingStoreItemData
     {
-        public GainStoreItemType Type;
+        public BuildingType Type;
         public uint BuyingCount;
 
-
-        public GainStoreItemData(GainStoreItemType type)
+        public BuildingStoreItemData(BuildingType type)
         {
             Type = type;
 
             BuyingCount = 0;
         }
 
+
         public event Action BuyingCountChanged;
 
-        public virtual void ChangeBuyingCount(uint count)
+        public void ChangeBuyingCount()
         {
-            BuyingCount += count;
+            BuyingCount++;
             BuyingCountChanged?.Invoke();
         }
     }

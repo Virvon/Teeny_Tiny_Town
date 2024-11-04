@@ -13,7 +13,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
 
         protected override void OnBuyButtonClicked()
         {
-            if (CurrencyWorldData.WorldWallet.TryGet(Cost))
+            if (CurrencyWorldData.WorldWallet.Value >= Cost)
                 GainBuyer.Buy(Type);
         }
     }

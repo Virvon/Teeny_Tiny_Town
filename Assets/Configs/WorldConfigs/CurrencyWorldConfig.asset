@@ -88,5 +88,5 @@ MonoBehaviour:
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  StartStoreList: 01000000
+  StartStoreList: 090000000100000002000000030000000400000005000000060000000700000008000000
   AvailableGainStoreItems: 010000000200000003000000

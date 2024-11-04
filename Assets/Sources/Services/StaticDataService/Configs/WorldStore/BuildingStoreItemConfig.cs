@@ -1,21 +1,17 @@
-﻿using Assets.Sources.Data.World.Currency;
+﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
+using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace Assets.Sources.Services.StaticDataService.Configs.WorldStore
 {
-    [CreateAssetMenu(fileName = "GainStorItemConfig", menuName = "StaticData/WorldStore/Create new gain store item config", order = 51)]
-    public class GainStoreItemConfig : ScriptableObject
+    [Serializable]
+    public class BuildingStoreItemConfig
     {
-        public GainStoreItemType Type;
-        public AssetReferenceGameObject PanelAssetReference;
+        public BuildingType BuildingType;
         public AssetReference IconAssetReference;
-        public string Name;
         public uint Cost;
         public float CostCoefficient;
-
-        public virtual GainStoreItemData GetData() =>
-            new GainStoreItemData(Type);
 
         public uint GetCost(uint n) =>
             (uint)(Cost * Mathf.Pow(CostCoefficient, n - 1));

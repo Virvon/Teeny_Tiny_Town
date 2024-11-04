@@ -9,6 +9,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.WorldStore
         public uint AvailableCount;
 
         public override GainStoreItemData GetData() =>
-            new LimitedQuantityStoreItemData(Type, Cost, AvailableCount);
+            new LimitedQuantityStoreItemData(Type, AvailableCount);
     }
 }

@@ -70,7 +70,7 @@ namespace Assets.Sources.UI.Windows.World
 
         public override async void Open()
         {
-            _gainIcon.sprite = await _assetProvider.Load<Sprite>(_staticDataService.GetGainStoreItem(_gainBuyer.GainStoreItemType).IconAssetReferecne);
+            _gainIcon.sprite = await _assetProvider.Load<Sprite>(_staticDataService.GetGainStoreItem(_gainBuyer.GainStoreItemType).IconAssetReference);
             _purchasedQuantity = MinPurchasedQuantity;
             _gainStoreItemConfig = _staticDataService.GetGainStoreItem(_gainBuyer.GainStoreItemType);
 

@@ -18,7 +18,7 @@ namespace Assets.Sources.Data.World.Currency
             BuildingType nextBuildingTypeForCreation,
             List<BuildingType> availableBuildingForCreation,
             Vector2Int size,
-            List<BuildingType> buildingsStoreList,
+            BuildingType[] startBuildingsStoreList,
             uint[] goals,
             GainStoreItemData[] gainsStoreList,
             bool isUnlocked)
@@ -26,7 +26,7 @@ namespace Assets.Sources.Data.World.Currency
         {
             WorldWallet = new();
             MovesCounter = new();
-            WorldStore = new(buildingsStoreList, gainsStoreList);
+            WorldStore = new(startBuildingsStoreList, gainsStoreList);
         }
 
         WorldWallet ICurrencyWorldData.WorldWallet => WorldWallet;

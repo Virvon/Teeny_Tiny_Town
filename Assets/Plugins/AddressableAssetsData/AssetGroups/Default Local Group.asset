@@ -167,12 +167,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6e257124536ae514d8b3f66d27975773
-    m_Address: BuildingsStoreConfig
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Configs
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2b6acc30a2b4eac4885d405d7a8947e9
     m_Address: StartWindow
     m_ReadOnly: 0
@@ -650,6 +644,57 @@ MonoBehaviour:
     m_Address: RiverIcon
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18c2513b718e1ef48adc1f5abb21b5ad
+    m_Address: GroundedFuturisticBuildingIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 748b6214d63c04540bf1d2c7d1dc1f11
+    m_Address: GroundedLogsIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 581b620b2a58f9e4f9fd6a72aaa019ce
+    m_Address: GroundedTreeIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15a20c6713d50a84eb7a256a242c5ef6
+    m_Address: GroundedBushIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7dd6a15f39c97634abea166bf93db89a
+    m_Address: GroundedBigAppartmentIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 514b4a45f348d324586a731a75b1a686
+    m_Address: GroundedSawmillIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8628467deaff5f143a0858d1e5e870d2
+    m_Address: GroundedSkyscraperIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 37e3195fb0a355044870e6cd01012032
+    m_Address: GroundedWoodenHouseIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 22cc2d51dca6faf46a509c50c98192ff
+    m_Address: GroundedStoneIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 282a1baf094256544b365f2841e3ab7e
+    m_Address: BuildingStoreItemsConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}

@@ -9,22 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c818960acc595e48a8382732ebfd4c9, type: 3}
-  m_Name: CraneStoreItemConfig
+  m_Script: {fileID: 11500000, guid: bee9467f99085f34c9bc6a4b2bf1228e, type: 3}
+  m_Name: ReplaceStoreItemConfig
   m_EditorClassIdentifier: 
-  Type: 2
+  Type: 1
   PanelAssetReference:
-    m_AssetGUID: 5584bda734a1a6141a98e149f4da4423
+    m_AssetGUID: 0ddbb3fd39d291a4ea4968ccccf6143b
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   IconAssetReference:
-    m_AssetGUID: 6b045acec7b196e4981c4522d7d63b0b
-    m_SubObjectName: CraneIcon
+    m_AssetGUID: 10a5f25e0ca897b4796ca659477c9fb6
+    m_SubObjectName: BulldozerIcon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  Name: "\u041A\u0440\u0430\u043D"
-  Cost: 500
-  CostCoefficient: 5
-  AvailableCount: 5
+  Name: "\u0411\u0443\u043B\u044C\u0434\u043E\u0437\u0435\u0440"
+  Cost: 50
+  CostCoefficient: 1.5

@@ -102,7 +102,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
         {
             GainStoreItemConfig gainStoreItemConfig = _staticDataService.GetGainStoreItem(type);
             GainStoreItemPanel gainStoreItemPanel = await _gainStoreItemPanelFactory.Create(gainStoreItemConfig.PanelAssetReference, parent);
-            Sprite icon = await _assetProvider.Load<Sprite>(gainStoreItemConfig.IconAssetReferecne);
+            Sprite icon = await _assetProvider.Load<Sprite>(gainStoreItemConfig.IconAssetReference);
 
             gainStoreItemPanel.Init(type, icon);
         }
@@ -140,10 +140,11 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
 
         public async UniTask<BuildingStoreItem> CreateStoreItem(BuildingType buildingType, Transform parent)
         {
-            GameplayStoreItemConfig config = _staticDataService.GetWorldStoreItem(buildingType);
+            BuildingStoreItemConfig config = _staticDataService.GetBuildingStoreItem(buildingType);
             BuildingStoreItem storeItem = await _storeItemFactory.Create(_staticDataService.StoreItemsConfig.AssetReference, parent);
+            Sprite icon = await _assetProvider.Load<Sprite>(config.IconAssetReference);
 
-            storeItem.Init(config.Price, buildingType);
+            storeItem.Init(buildingType, icon);
 
             return storeItem;
         }

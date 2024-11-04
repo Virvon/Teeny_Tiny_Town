@@ -23,7 +23,7 @@ namespace Assets.Sources.Services.StaticDataService
         private Dictionary<BuildingType, BuildingConfig> _buildingConfigs;
         private Dictionary<GroundType, Dictionary<RoadType, RoadConfig>> _groundConfigs;
         private Dictionary<WindowType, WindowConfig> _windowConfigs;
-        private Dictionary<BuildingType, GameplayStoreItemConfig> _worldStoreItemConfigs;
+        private Dictionary<BuildingType, BuildingStoreItemConfig> _worldStoreItemConfigs;
         private Dictionary<TileType, TestGroundConfig> _testGroundConfigs;
         private Dictionary<BuildingType, GroundType> _roadGrounds;
         private Dictionary<string, WorldConfig> _worldConfigs;
@@ -36,7 +36,7 @@ namespace Assets.Sources.Services.StaticDataService
             _assetsProvider = assetsProvider;
 
         public GroundsConfig GroundsConfig { get; private set; }
-        public WorldStoreItemsCofnig StoreItemsConfig { get; private set; }
+        public BuildingStoreItemsCofnig StoreItemsConfig { get; private set; }
         public WindowsConfig WindowsConfig { get; private set; }
         public WorldsConfig WorldsConfig { get; private set; }
         public AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; private set; }
@@ -93,8 +93,8 @@ namespace Assets.Sources.Services.StaticDataService
         public TestGroundConfig GetGround(TileType tileType) =>
             _testGroundConfigs.TryGetValue(tileType, out TestGroundConfig config) ? config : null;
 
-        public GameplayStoreItemConfig GetWorldStoreItem(BuildingType buildingType) =>
-            _worldStoreItemConfigs.TryGetValue(buildingType, out GameplayStoreItemConfig config) ? config : null;
+        public BuildingStoreItemConfig GetBuildingStoreItem(BuildingType buildingType) =>
+            _worldStoreItemConfigs.TryGetValue(buildingType, out BuildingStoreItemConfig config) ? config : null;
 
         public WindowConfig GetWindow(WindowType type) =>
             _windowConfigs.TryGetValue(type, out WindowConfig config) ? config : null;
@@ -190,7 +190,7 @@ namespace Assets.Sources.Services.StaticDataService
 
         private async UniTask LoadWorldStoreItemConfigs()
         {
-            WorldStoreItemsCofnig[] storeItemsConfigs = await GetConfigs<WorldStoreItemsCofnig>();
+            BuildingStoreItemsCofnig[] storeItemsConfigs = await GetConfigs<BuildingStoreItemsCofnig>();
 
             StoreItemsConfig = storeItemsConfigs.First();
 

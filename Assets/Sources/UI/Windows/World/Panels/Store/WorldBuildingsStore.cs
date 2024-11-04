@@ -31,12 +31,14 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
 
             _worldData.WorldStore.BuildingsStoreListUpdated += OnBuildingsStoreListUpdated;
 
-            foreach (var buildingType in _worldData.WorldStore.BuildingsStoreList)
-                await CreateStoreItem(buildingType);
+            foreach (BuildingStoreItemData data in _worldData.WorldStore.BuildingsStoreList)
+                await CreateStoreItem(data.Type);
         }
 
         private void OnDestroy()
         {
+            _worldData.WorldStore.BuildingsStoreListUpdated -= OnBuildingsStoreListUpdated;
+
             foreach (var storeItem in _storeItems)
                 storeItem.Buyed -= OnStoreItemBuyed;
         }
@@ -45,12 +47,9 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
         {
             if (_worldData.WorldWallet.TryGet(price))
             {
+                _worldData.WorldStore.GetBuildingData(buildingType).ChangeBuyingCount();
                 _gameplayMover.ChangeBuildingForPlacing(buildingType, price);
                 _worldStateMachine.Enter<WorldChangingState>().Forget();
-            }
-            else
-            {
-                Debug.Log("no money");
             }
         }
 

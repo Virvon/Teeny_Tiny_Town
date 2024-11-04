@@ -2,6 +2,7 @@
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
+using Assets.Sources.Utils;
 using Cysharp.Threading.Tasks;
 using System;
 using TMPro;
@@ -64,10 +65,10 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
 
         protected abstract void GetData();
 
-        protected virtual void ChangeCostValue(uint WorldWalletValue)
+        protected virtual void ChangeCostValue(uint worldWalletValue)
         {
-            _costValue.text = Cost.ToString();
-            _costValue.color = WorldWalletValue >= Cost ? _animationsConfig.PurchasePermittingColor : _animationsConfig.ProhibitingPurchaseColor;
+            _costValue.text = DigitUtils.CutDigit(Cost);
+            _costValue.color = worldWalletValue >= Cost ? _animationsConfig.PurchasePermittingColor : _animationsConfig.ProhibitingPurchaseColor;
         }
             
         protected abstract void OnBuyButtonClicked();

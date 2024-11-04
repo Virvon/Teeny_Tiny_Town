@@ -6,8 +6,8 @@ namespace Assets.Sources.Data.World.Currency
     {
         public uint RemainingCount;
 
-        public LimitedQuantityStoreItemData(GainStoreItemType type, uint startCost, uint startCount)
-            : base(type, startCost)
+        public LimitedQuantityStoreItemData(GainStoreItemType type, uint startCount)
+            : base(type)
         {
             RemainingCount = startCount;
         }

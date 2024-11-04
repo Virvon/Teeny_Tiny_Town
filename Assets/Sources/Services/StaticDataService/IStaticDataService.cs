@@ -16,7 +16,7 @@ namespace Assets.Sources.Services.StaticDataService
     {
         GroundsConfig GroundsConfig { get; }
         WindowsConfig WindowsConfig { get; }
-        WorldStoreItemsCofnig StoreItemsConfig { get; }
+        BuildingStoreItemsCofnig StoreItemsConfig { get; }
         WorldsConfig WorldsConfig { get; }
         AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; }
         ReadOnlyArray<WorldConfig> WorldConfigs { get; }
@@ -29,7 +29,7 @@ namespace Assets.Sources.Services.StaticDataService
             where TBuilding : BuildingConfig;
         UniTask InitializeAsync();
         WindowConfig GetWindow(WindowType type);
-        GameplayStoreItemConfig GetWorldStoreItem(BuildingType buildingType);
+        BuildingStoreItemConfig GetBuildingStoreItem(BuildingType buildingType);
         TestGroundConfig GetGround(TileType tileType);
         GroundType GetGroundType(BuildingType buildingType);
         TWorldConfig GetWorld<TWorldConfig>(string id)
