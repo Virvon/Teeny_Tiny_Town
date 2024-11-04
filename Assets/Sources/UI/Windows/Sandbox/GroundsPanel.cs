@@ -22,10 +22,10 @@ namespace Assets.Sources.UI.Windows.Sandbox
 
             _elements = new();
 
-            foreach (SandboxGroundType sandboxGroundType in staticDataService.SandboxConfig.Grounds)
+            foreach (SandboxGroundConfig groundConfig in staticDataService.SandboxConfig.Grounds)
             {
-                SandboxPanelElement sandboxPanelElement = await uiFactory.CreateSandboxPanelElement(sandboxGroundType, Content);
-                _elements.Add(sandboxPanelElement, sandboxGroundType);
+                SandboxPanelElement sandboxPanelElement = await uiFactory.CreateSandboxPanelElement(Content, groundConfig.IconAssetReference);
+                _elements.Add(sandboxPanelElement, groundConfig.Type);
 
                 sandboxPanelElement.Clicked += OnElementClicked;
             }

@@ -11,7 +11,6 @@ namespace Assets.Sources.UI.Windows.Sandbox
     {
         [SerializeField] private Image _icon;
         [SerializeField] private Button _button;
-        [SerializeField] private TMP_Text _text;
 
         public event Action<SandboxPanelElement> Clicked;
 
@@ -21,9 +20,10 @@ namespace Assets.Sources.UI.Windows.Sandbox
         private void OnDisable() =>
             _button.onClick.RemoveListener(OnButtonClicked);
 
-        public void Init( string name)
+        public void Init(Sprite icon)
         {
-            _text.text = name;
+            _icon.sprite = icon;
+            _icon.SetNativeSize();
         }
 
         private void OnButtonClicked() =>

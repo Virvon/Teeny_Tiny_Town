@@ -13,4 +13,39 @@ MonoBehaviour:
   m_Name: SandboxConfig
   m_EditorClassIdentifier: Assembly-CSharp:Assets.Sources.Services.StaticDataService.Configs.World:SandboxConfig
   Size: {x: 9, y: 9}
-  Grounds: 0000000001000000020000000300000004000000
+  Grounds:
+  - Type: 0
+    IconAssetReference:
+      m_AssetGUID: 0c5ff46412815854a9e910681a3c7dcf
+      m_SubObjectName: SoilIcon
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_EditorAssetChanged: 1
+  - Type: 1
+    IconAssetReference:
+      m_AssetGUID: 56eb806cf93c56d4eb2b0586428ada88
+      m_SubObjectName: WaterSurfaceIcon
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_EditorAssetChanged: 1
+  - Type: 2
+    IconAssetReference:
+      m_AssetGUID: 9e845ff6ce54bb34f93bc34ba355166c
+      m_SubObjectName: TallGroundIcon
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_EditorAssetChanged: 1
+  - Type: 3
+    IconAssetReference:
+      m_AssetGUID: 01abd6005c8e1be4c8fa88f9af58a59b
+      m_SubObjectName: SoilRoadIcon
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_EditorAssetChanged: 1
+  - Type: 4
+    IconAssetReference:
+      m_AssetGUID: 5a8e3651fc4916e40b9e89a63d07bb86
+      m_SubObjectName: AsphaltRoadIcon
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_EditorAssetChanged: 1

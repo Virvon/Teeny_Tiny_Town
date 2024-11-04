@@ -19,3 +19,15 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   PointsRewardForMerge: 100
+  IconAssetReference:
+    m_AssetGUID: 9311affb245ba334c93755b9c8a3cba2
+    m_SubObjectName: GoldenIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  LockIconAssetReference:
+    m_AssetGUID: feae81302347e5749a1280fbc0060945
+    m_SubObjectName: LockedGoldenIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1

@@ -19,3 +19,15 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 1
   PointsRewardForMerge: 0
+  IconAssetReference:
+    m_AssetGUID: bfe79b9e5bcf38645818580c5898d436
+    m_SubObjectName: CraneIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  LockIconAssetReference:
+    m_AssetGUID: 519b948fd81419e4fbcbec9264cce00c
+    m_SubObjectName: LockedCraneIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1

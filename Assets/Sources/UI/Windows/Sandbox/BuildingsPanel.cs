@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Sandbox.ActionHandler;
 using Assets.Sources.Services.PersistentProgress;
+using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,11 @@ namespace Assets.Sources.UI.Windows.Sandbox
         private Dictionary<SandboxPanelElement, BuildingType> _elements;
 
         [Inject]
-        private async void Construct(IUiFactory uiFactory, IPersistentProgressService persistentProgressService, BuildingPositionHandler buildingPositionHandler)
+        private async void Construct(
+            IUiFactory uiFactory,
+            IPersistentProgressService persistentProgressService,
+            BuildingPositionHandler buildingPositionHandler,
+            IStaticDataService staticDataService)
         {
             _buildingPositionHandler = buildingPositionHandler;
 
@@ -23,13 +28,24 @@ namespace Assets.Sources.UI.Windows.Sandbox
 
             foreach (Data.BuildingData buildingData in persistentProgressService.Progress.BuildingDatas)
             {
-                SandboxPanelElement sandboxPanelElement = await uiFactory.CreateSandboxPanelElement(buildingData.Type, Content);
-                _elements.Add(sandboxPanelElement, buildingData.Type);
+                BuildingConfig config = staticDataService.GetBuilding<BuildingConfig>(buildingData.Type);
 
-                sandboxPanelElement.Clicked += OnElementClicked;
+                if (buildingData.IsUnlocked)
+                {
+                    SandboxPanelElement sandboxPanelElement = await uiFactory.CreateSandboxPanelElement(Content, config.IconAssetReference);
+                    _elements.Add(sandboxPanelElement, buildingData.Type);
+
+                    sandboxPanelElement.Clicked += OnElementClicked;
+                }
+                else
+                {
+                    SandboxPanelElement sandboxPanelElement = await uiFactory.CreateSandboxPanelElement(Content, config.LockIconAssetReference);
+                    await uiFactory.CreateLockIcon(sandboxPanelElement.transform);
+                }
             }
 
-            _buildingPositionHandler.SetBuilding(_elements.Values.First());
+            if (_elements.Count > 0)
+                _buildingPositionHandler.SetBuilding(_elements.Values.First());
         }
 
         private void OnDestroy()

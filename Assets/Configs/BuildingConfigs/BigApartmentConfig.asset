@@ -19,4 +19,16 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   PointsRewardForMerge: 0
-  Payment: 0
+  IconAssetReference:
+    m_AssetGUID: 6af5b182019c4244c8dc7387ca4a6da8
+    m_SubObjectName: BigAppartentIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  LockIconAssetReference:
+    m_AssetGUID: 65a5c324faddc244f98a256635de218c
+    m_SubObjectName: LockedBigAppartentIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  Payment: 5

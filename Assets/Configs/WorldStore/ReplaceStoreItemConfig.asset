@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee9467f99085f34c9bc6a4b2bf1228e, type: 3}
   m_Name: ReplaceStoreItemConfig
   m_EditorClassIdentifier: 
-  Type: 1
+  Type: 0
   PanelAssetReference:
     m_AssetGUID: 0ddbb3fd39d291a4ea4968ccccf6143b
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   IconAssetReference:
-    m_AssetGUID: 10a5f25e0ca897b4796ca659477c9fb6
-    m_SubObjectName: BulldozerIcon
+    m_AssetGUID: f0b37b1ac4e5d0f4da59afb5bf157de2
+    m_SubObjectName: ReplaceIcon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  Name: "\u0411\u0443\u043B\u044C\u0434\u043E\u0437\u0435\u0440"
-  Cost: 50
+  Name: "\u041F\u0435\u0440\u0435\u043C\u0435\u0449\u0435\u043D\u0438\u0435"
+  Cost: 80
   CostCoefficient: 1.5

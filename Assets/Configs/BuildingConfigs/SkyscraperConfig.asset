@@ -19,4 +19,16 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   PointsRewardForMerge: 0
-  Payment: 0
+  IconAssetReference:
+    m_AssetGUID: bcf0ee05cc04f1f4fa2abfc6cbaccfdb
+    m_SubObjectName: SkyskraperIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  LockIconAssetReference:
+    m_AssetGUID: 285e38fb33082be49963c04f49a30519
+    m_SubObjectName: LockedSkyskraperIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  Payment: 7

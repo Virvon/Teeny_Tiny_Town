@@ -19,4 +19,16 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   PointsRewardForMerge: 0
-  Payment: 0
+  IconAssetReference:
+    m_AssetGUID: 113b491fa12a4b94da0a92c67fe4b6de
+    m_SubObjectName: FuturisticBuildingIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  LockIconAssetReference:
+    m_AssetGUID: 9d44ab849f5e6104fa66d0791553b7b2
+    m_SubObjectName: LockedFuturisticBuilding
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  Payment: 6

@@ -19,3 +19,15 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   PointsRewardForMerge: 10
+  IconAssetReference:
+    m_AssetGUID: 204e4b8917553844abcffb12adca0538
+    m_SubObjectName: LogsIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  LockIconAssetReference:
+    m_AssetGUID: 4b11fc4be8a700f4786db4212e4f161e
+    m_SubObjectName: LockedLogsIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1

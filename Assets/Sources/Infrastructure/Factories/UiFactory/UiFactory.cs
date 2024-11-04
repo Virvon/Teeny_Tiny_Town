@@ -36,6 +36,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
         private readonly Blur.BlurFactory _blurFactory;
         private readonly DiContainer _container;
         private readonly PeculiarityIconPanel.Factory _peculiarityIconPanelFactory;
+        private readonly LockIcon.Factory _lockIconFactory;
 
         public UiFactory(
             Window.Factory windowFactory,
@@ -51,7 +52,8 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             RotationPanel.Factory rotationPanelFactory,
             Blur.BlurFactory blurFactory,
             DiContainer container,
-            PeculiarityIconPanel.Factory peculiarityIconPanelFactory)
+            PeculiarityIconPanel.Factory peculiarityIconPanelFactory,
+            LockIcon.Factory lockIconFactory)
         {
             _windowFactory = windowFactory;
             _staticDataService = staticDataService;
@@ -67,7 +69,11 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             _blurFactory = blurFactory;
             _container = container;
             _peculiarityIconPanelFactory = peculiarityIconPanelFactory;
+            _lockIconFactory = lockIconFactory;
         }
+
+        public async UniTask CreateLockIcon(Transform parent) =>
+            await _lockIconFactory.Create(UiFactoryAssets.LockIcon, parent);
 
         public async UniTask<PeculiarityIconPanel> CreatePeculiarityIconPanel(AssetReference iconAssetReference, Transform parent)
         {
@@ -88,12 +94,12 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
         public async UniTask CreateRotationPanel(Transform parent) =>
             await _rotationPanelFactory.Create(UiFactoryAssets.RotationPanel, parent);
 
-        public async UniTask<SandboxPanelElement> CreateSandboxPanelElement<TType>(TType type, Transform parent)
-            where TType : Enum
+        public async UniTask<SandboxPanelElement> CreateSandboxPanelElement(Transform parent, AssetReference iconAssetReference)
         {
             SandboxPanelElement sandboxPanelElement = await _sandboxPanelFactory.Create(UiFactoryAssets.SandboxPanelElement, parent);
+            Sprite icon = await _assetProvider.Load<Sprite>(iconAssetReference);
 
-            sandboxPanelElement.Init(type.ToString());
+            sandboxPanelElement.Init(icon);
 
             return sandboxPanelElement;
         }

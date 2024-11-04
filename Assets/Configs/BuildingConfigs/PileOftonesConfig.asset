@@ -19,3 +19,15 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   PointsRewardForMerge: 100
+  IconAssetReference:
+    m_AssetGUID: 0d6c745681f605f4d8b1559e2f13d116
+    m_SubObjectName: PileOfStonesIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  LockIconAssetReference:
+    m_AssetGUID: db1204c47f1252f4d8b2fc6983335c7d
+    m_SubObjectName: LockedPileOfStonesIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1

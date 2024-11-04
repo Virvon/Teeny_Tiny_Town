@@ -9,14 +9,10 @@ namespace Assets.Sources.UI.Windows.Sandbox
 
         protected Transform Content => _content;
 
-        public override void Open()
-        {
+        public override void Open() =>
             SlideOpen();
-        }
 
-        public void Hide(TweenCallback callback)
-        {
+        public void Hide(TweenCallback callback) =>
             SlideHide(callback);
-        }
     }
 }

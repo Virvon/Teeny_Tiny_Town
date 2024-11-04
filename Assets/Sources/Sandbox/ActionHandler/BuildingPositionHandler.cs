@@ -15,11 +15,14 @@ namespace Assets.Sources.Sandbox.ActionHandler
         private bool _isPressed;
         private BuildingType _buildingType;
         private TileRepresentation _placedTile;
+        private bool _isBuildingSetted;
 
         public BuildingPositionHandler(SelectFrame selectFrame, LayerMask layerMask, SandboxChanger sandboxChanger)
             : base(selectFrame, layerMask)
         {
             _sandboxChanger = sandboxChanger;
+
+            _isBuildingSetted = false;
         }
 
         public event Action Entered;
@@ -38,8 +41,11 @@ namespace Assets.Sources.Sandbox.ActionHandler
             return default;
         }
 
-        public void SetBuilding(BuildingType type) =>
+        public void SetBuilding(BuildingType type)
+        {
             _buildingType = type;
+            _isBuildingSetted = true;
+        }
 
         public async override void OnHandleMoved(Vector2 handlePosition)
         {
@@ -63,6 +69,9 @@ namespace Assets.Sources.Sandbox.ActionHandler
 
         private async UniTask TryCreateBuilding(Vector2 handlePosition)
         {
+            if (_isBuildingSetted == false)
+                return;
+
             if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile != _placedTile && tile.IsEmpty)
             {
                 SelectFrame.Select(tile);

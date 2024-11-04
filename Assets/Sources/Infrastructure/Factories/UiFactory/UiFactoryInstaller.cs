@@ -65,6 +65,10 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<string, Transform, UniTask<PeculiarityIconPanel>, PeculiarityIconPanel.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<PeculiarityIconPanel>>();
+
+            Container
+                .BindFactory<string, Transform, UniTask<LockIcon>, LockIcon.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<LockIcon>>();
         }
     }
 }

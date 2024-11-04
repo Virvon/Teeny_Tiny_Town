@@ -69,7 +69,7 @@ namespace Assets.Sources.Services.StaticDataService
         }
 
         public BuildingType[] GetAllBuildings() =>
-            _buildingConfigs.Keys.ToArray();
+            _buildingConfigs.Keys.OrderBy(type => (int)type).ToArray();
 
         public GainStoreItemConfig GetGainStoreItem(GainStoreItemType type) =>
             _gainStoreItemConfigs.TryGetValue(type, out GainStoreItemConfig config) ? config : null;

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Sources.Services.StaticDataService.Configs.World
 {
@@ -7,6 +6,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
     public class SandboxConfig : ScriptableObject
     {
         public Vector2Int Size;
-        public SandboxGroundType[] Grounds;
+        public SandboxGroundConfig[] Grounds;
     }
 }

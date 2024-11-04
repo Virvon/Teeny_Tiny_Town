@@ -19,4 +19,16 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   PointsRewardForMerge: 0
+  IconAssetReference:
+    m_AssetGUID: 37c61bec6db592044833d561ba65e400
+    m_SubObjectName: ChestIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  LockIconAssetReference:
+    m_AssetGUID: 266d4c40f5844c74b9c8db85c37871bc
+    m_SubObjectName: LockedChestIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
   Reward: 0

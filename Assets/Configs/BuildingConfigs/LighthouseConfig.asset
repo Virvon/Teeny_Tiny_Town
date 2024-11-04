@@ -19,4 +19,16 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   PointsRewardForMerge: 0
+  IconAssetReference:
+    m_AssetGUID: 777f51833826b56479670216f00b8048
+    m_SubObjectName: LighthouseIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  LockIconAssetReference:
+    m_AssetGUID: 6249e59805de0f947b272b643f6c21b6
+    m_SubObjectName: LockedLighthouseIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
   Payment: 0

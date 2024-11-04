@@ -696,6 +696,187 @@ MonoBehaviour:
     m_SerializedLabels:
     - Configs
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fade3a25011da814bb9dc73890d0020c
+    m_Address: ReplaceStoreItemConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5a8e3651fc4916e40b9e89a63d07bb86
+    m_Address: AsphaltRoadIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56eb806cf93c56d4eb2b0586428ada88
+    m_Address: WaterSurfaceIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95c7ae6591373c34fbd059d358ee3372
+    m_Address: AsphaltIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 01abd6005c8e1be4c8fa88f9af58a59b
+    m_Address: SoilRoadIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c5ff46412815854a9e910681a3c7dcf
+    m_Address: SoilIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e845ff6ce54bb34f93bc34ba355166c
+    m_Address: TallGroundIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6af5b182019c4244c8dc7387ca4a6da8
+    m_Address: BigAppartentIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4bee11453e145134eb2f4722c608a03f
+    m_Address: BushIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 37c61bec6db592044833d561ba65e400
+    m_Address: ChestIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bfe79b9e5bcf38645818580c5898d436
+    m_Address: CraneIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 113b491fa12a4b94da0a92c67fe4b6de
+    m_Address: FuturisticBuildingIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9311affb245ba334c93755b9c8a3cba2
+    m_Address: GoldenIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 777f51833826b56479670216f00b8048
+    m_Address: LighthouseIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 204e4b8917553844abcffb12adca0538
+    m_Address: LogsIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d6c745681f605f4d8b1559e2f13d116
+    m_Address: PileOfStonesIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96f4b4bc9e19be84c9635eef9cd9649a
+    m_Address: SawmillIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bcf0ee05cc04f1f4fa2abfc6cbaccfdb
+    m_Address: SkyskraperIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d5bb0ac937721349a92b1a951410b35
+    m_Address: StoneIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ce20ce0f4320ad4b8e73c6fb5556336
+    m_Address: TreeIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74614b34fddf0f34089abaf57e03e065
+    m_Address: WoodenHouseIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae2883e8e8397a446936452c0b826eb2
+    m_Address: LockIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65a5c324faddc244f98a256635de218c
+    m_Address: LockedBigAppartentIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 39c816fe6ea15834a86460c9b8f12da1
+    m_Address: LockedBushIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 266d4c40f5844c74b9c8db85c37871bc
+    m_Address: LockedChestIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 519b948fd81419e4fbcbec9264cce00c
+    m_Address: LockedCraneIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d44ab849f5e6104fa66d0791553b7b2
+    m_Address: LockedFuturisticBuilding
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: feae81302347e5749a1280fbc0060945
+    m_Address: LockedGoldenIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6249e59805de0f947b272b643f6c21b6
+    m_Address: LockedLighthouseIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b11fc4be8a700f4786db4212e4f161e
+    m_Address: LockedLogsIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db1204c47f1252f4d8b2fc6983335c7d
+    m_Address: LockedPileOfStonesIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad135eb1ace7e81498aa64503c885eba
+    m_Address: LockedSawmilIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 285e38fb33082be49963c04f49a30519
+    m_Address: LockedSkyskraperIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a18865be18a0f9c41a28f8533bbe36b3
+    m_Address: LockedStoneIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed8b31f68cc15d44fbd504dcfeffbfec
+    m_Address: LockedTreeIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d992818a751005a44a300fd4ba0b24aa
+    m_Address: LockedWoodenHouseIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}
   m_SchemaSet:

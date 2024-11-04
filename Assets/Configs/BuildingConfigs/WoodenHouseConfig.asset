@@ -19,4 +19,16 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   PointsRewardForMerge: 0
-  Payment: 0
+  IconAssetReference:
+    m_AssetGUID: 74614b34fddf0f34089abaf57e03e065
+    m_SubObjectName: WoodenHouseIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  LockIconAssetReference:
+    m_AssetGUID: d992818a751005a44a300fd4ba0b24aa
+    m_SubObjectName: LockedWoodenHouseIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  Payment: 4
