@@ -1,5 +1,4 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
-using Assets.Sources.Sandbox.ActionHandler;
 using Zenject;
 
 namespace Assets.Sources.UI.Windows.World.Panels.GainButtons
@@ -20,7 +19,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.GainButtons
             WorldData.ReplaceItems.CountChanged += ChangeCountValue;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             _replacedBuildingPositionHandler.Entered -= OnReplaceBuildingPositionHandlerEntered;
             _replacedBuildingPositionHandler.Exited -= OnReplaceBuildingPositionHandlerExited;

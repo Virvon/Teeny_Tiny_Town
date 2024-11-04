@@ -60,7 +60,6 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             World world = await _worldFactory.Create(assetReference, position, parent);
 
             await UniTask.WaitUntil(() => world.IsCreated);
-            Debug.Log("return");
 
             return world;
         }

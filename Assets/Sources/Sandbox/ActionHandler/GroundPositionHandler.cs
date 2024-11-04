@@ -4,6 +4,7 @@ using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Sources.Sandbox.ActionHandler
@@ -22,14 +23,19 @@ namespace Assets.Sources.Sandbox.ActionHandler
             _sandboxChanger = sandboxChanger;
         }
 
+        public event Action Entered;
+        public event Action Exited;
+
         public override UniTask Enter()
         {
             _isPressed = false;
+            Entered?.Invoke();
             return default;
         }
 
         public override UniTask Exit()
         {
+            Exited?.Invoke();
             return default;
         }
 
@@ -38,33 +44,34 @@ namespace Assets.Sources.Sandbox.ActionHandler
 
         public override async void OnHandleMoved(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && _isPressed && tile != _placedTile)
-            {
-                SelectFrame.Select(tile);
-                SelectFrame.Show();
-                _placedTile = tile;
-                await _sandboxChanger.PutGround(tile.GridPosition, _groundType);
-            }
+            if (_isPressed)
+                await CreateGround(handlePosition);
         }
 
         public override void OnPressed(Vector2 handlePosition)
         {
-            SelectFrame.Hide();
+            Debug.Log("on ground pressed");
+            SelectFrame.Hide("ground");
             _isPressed = false;
             _placedTile = null;
         }
 
         public override async void OnHandlePressedMoveStarted(Vector2 handlePosition)
         {
-            if(CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile != _placedTile)
+            await CreateGround(handlePosition);
+
+            _isPressed = true;
+        }
+
+        private async UniTask CreateGround(Vector2 handlePosition)
+        {
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile != _placedTile)
             {
                 SelectFrame.Select(tile);
                 SelectFrame.Show();
                 _placedTile = tile;
                 await _sandboxChanger.PutGround(tile.GridPosition, _groundType);
             }
-
-            _isPressed = true;
         }
     }
 }

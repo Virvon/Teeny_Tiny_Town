@@ -69,7 +69,6 @@ namespace Assets.Sources.Gameplay.World.Root
 
             _nextBuildingForPlacingCreator.CreateData(_worldChanger.Tiles);
             _worldChanger.Start();
-            Debug.Log("create complete");
             _world.OnCreated();
         }
 

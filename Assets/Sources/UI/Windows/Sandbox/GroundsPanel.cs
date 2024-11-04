@@ -39,10 +39,7 @@ namespace Assets.Sources.UI.Windows.Sandbox
                 sandboxPanelElement.Clicked -= OnElementClicked;
         }
 
-        private void OnElementClicked(SandboxPanelElement element)
-        {
+        private void OnElementClicked(SandboxPanelElement element) =>
             _groundPositionHaneler.SetGround(_elements[element]);
-            Debug.Log("choose " + (_elements[element]).ToString());
-        }
     }
 }

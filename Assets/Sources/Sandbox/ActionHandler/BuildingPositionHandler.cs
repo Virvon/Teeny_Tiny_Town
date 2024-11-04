@@ -4,6 +4,7 @@ using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Sources.Sandbox.ActionHandler
@@ -21,14 +22,19 @@ namespace Assets.Sources.Sandbox.ActionHandler
             _sandboxChanger = sandboxChanger;
         }
 
+        public event Action Entered;
+        public event Action Exited;
+
         public override UniTask Enter()
         {
             _isPressed = false;
+            Entered?.Invoke();
             return default;
         }
 
         public override UniTask Exit()
         {
+            Exited?.Invoke();
             return default;
         }
 
@@ -37,33 +43,33 @@ namespace Assets.Sources.Sandbox.ActionHandler
 
         public async override void OnHandleMoved(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && _isPressed && tile != _placedTile)
-            {
-                SelectFrame.Select(tile);
-                SelectFrame.Show();
-                _placedTile = tile;
-                await _sandboxChanger.PutBuilding(tile.GridPosition, _buildingType);
-            }
+            if (_isPressed)
+                await TryCreateBuilding(handlePosition);
         }
 
         public override void OnPressed(Vector2 handlePosition)
         {
-            SelectFrame.Hide();
+            SelectFrame.Hide("building on pressed");
             _isPressed = false;
             _placedTile = null;
         }
 
         public override async void OnHandlePressedMoveStarted(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile != _placedTile)
+            await TryCreateBuilding(handlePosition);
+
+            _isPressed = true;
+        }
+
+        private async UniTask TryCreateBuilding(Vector2 handlePosition)
+        {
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile != _placedTile && tile.IsEmpty)
             {
                 SelectFrame.Select(tile);
                 SelectFrame.Show();
                 _placedTile = tile;
                 await _sandboxChanger.PutBuilding(tile.GridPosition, _buildingType);
             }
-
-            _isPressed = true;
         }
     }
 }

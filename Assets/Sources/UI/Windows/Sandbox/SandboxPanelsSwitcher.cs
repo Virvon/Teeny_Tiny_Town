@@ -1,7 +1,9 @@
-﻿using DG.Tweening;
+﻿using Assets.Sources.Sandbox.ActionHandler;
+using DG.Tweening;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Assets.Sources.UI.Windows.Sandbox
 {
@@ -34,35 +36,36 @@ namespace Assets.Sources.UI.Windows.Sandbox
 
         private void OnRemoveButtonClicked()
         {
-            if(_canSwitch)
-                HideCurrentPanel();
+            HideCurrentPanel();
         }
 
         private void OnTilesButtonClicked()
         {
-            if(_currentPanel != _tilesPanel)
+            if (_currentPanel != _tilesPanel)
                 SwitchPanels(_tilesPanel);
+            else
+                HideCurrentPanel();
         }
 
         private void OnBuildingsButtonClicked()
         {
-            if(_currentPanel != _buildingsPanel)
+            if (_currentPanel != _buildingsPanel)
                 SwitchPanels(_buildingsPanel);
+            else
+                HideCurrentPanel();
         }
 
         private void SwitchPanels(SandboxPanel targetPanel)
         {
             if (_canSwitch == false)
-                return;
+            {
+                _currentPanel.HideImmediately();
+                OpenPanel(targetPanel);
+            }
 
             _canSwitch = false;
 
-            HideCurrentPanel(callback: () =>
-            {
-                _currentPanel = targetPanel;
-                _currentPanel.Open();
-                _canSwitch = true;
-            });
+            HideCurrentPanel(callback: () => OpenPanel(targetPanel));
         }
 
         private void HideCurrentPanel(Action callback = null)
@@ -77,6 +80,13 @@ namespace Assets.Sources.UI.Windows.Sandbox
             }
             else
                 callback?.Invoke();
+        }
+
+        private void OpenPanel(SandboxPanel targetPanel)
+        {
+            _currentPanel = targetPanel;
+            _currentPanel.Open();
+            _canSwitch = true;
         }
     }
 }

@@ -61,7 +61,7 @@ namespace Assets.Sources.Gameplay.GameplayMover
         }
 
         public virtual void OpenChest(Vector2Int chestGridPosition, uint reward) =>
-            ExecuteCommand(new RemoveCheastCommand(WorldChanger, WorldData, chestGridPosition, NextBuildingForPlacingCreator, _persistentProgressService));
+            ExecuteCommand(new RemoveChestCommand(WorldChanger, WorldData, chestGridPosition, NextBuildingForPlacingCreator, _persistentProgressService));
 
         public async void TryUndoCommand()
         {

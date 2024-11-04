@@ -19,12 +19,13 @@ namespace Assets.Sources.Sandbox.ActionHandler
             _inputService.ClearTilesButtonPressed += OnClearTilesButtonPressed;
             _inputService.BuildingsButtonPressed += OnBuildingsButtonPressed;
             _inputService.GroundsButtonPressed += OnGroundsButtonPressed;
-
-            Debug.Log("construct");
         }
 
         ~SandboxActionHandlerSwitcher()
         {
+            Debug.Log("enter to default");
+            EnterToDefaultState();
+
             _inputService.ClearTilesButtonPressed -= OnClearTilesButtonPressed;
             _inputService.BuildingsButtonPressed -= OnBuildingsButtonPressed;
             _inputService.GroundsButtonPressed -= OnGroundsButtonPressed;

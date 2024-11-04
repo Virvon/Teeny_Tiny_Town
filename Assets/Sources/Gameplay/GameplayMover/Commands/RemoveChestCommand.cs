@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace Assets.Sources.Gameplay.GameplayMover.Commands
 {
-    public class RemoveCheastCommand : MoveCommand
+    public class RemoveChestCommand : MoveCommand
     {
         private readonly Vector2Int _cheastPosition;
 
-        public RemoveCheastCommand(
+        public RemoveChestCommand(
             IWorldChanger world,
             IWorldData worldData,
             Vector2Int cheastPosition,

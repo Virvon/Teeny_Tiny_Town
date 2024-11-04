@@ -1,5 +1,4 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
-using Assets.Sources.Sandbox.ActionHandler;
 using System;
 using Zenject;
 
@@ -21,7 +20,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.GainButtons
             WorldData.BulldozerItems.CountChanged += ChangeCountValue;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             _removedBuildingPositionHandler.Entered -= OnRemovedBuildingPositionHandlerEntered;
             _removedBuildingPositionHandler.Exited -= OnRemovedBuildingPositionHandlerExited;

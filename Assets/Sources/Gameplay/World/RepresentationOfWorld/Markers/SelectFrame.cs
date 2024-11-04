@@ -11,16 +11,28 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
         [SerializeField] private Vector3 _offset;
 
         private void Start() =>
-            Hide();
+            Hide("self start");
 
-        public void Select(TileRepresentation tile) =>
+        public void Select(TileRepresentation tile)
+        {
+            if (tile == null)
+            {
+                Hide("self");
+
+                return;
+            }
+
             transform.position = tile.BuildingPoint.position + _offset;
+        }
 
         public void Show() =>
             _canvas.enabled = true;
 
-        public void Hide() =>
+        public void Hide(string str)
+        {
+            Debug.Log(str);
             _canvas.enabled = false;
+        }
 
         public class Factory : PlaceholderFactory<string, Transform, UniTask<SelectFrame>>
         {

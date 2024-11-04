@@ -7,6 +7,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 {
     public class ChestRepresentation : BuildingRepresentation, IPointerClickHandler
     {
+        [SerializeField] private Collider _collider;
+
         private IGameplayMover _gameplayMover;
         private Vector2Int _gridPosition;
         private uint _reward;
@@ -15,6 +17,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
         private void Construct(IGameplayMover gameplayMover = null)
         {
             _gameplayMover = gameplayMover;
+
+            _collider.enabled = gameplayMover != null;
         }
 
         public void Init(Vector2Int gridPosition, uint reward)

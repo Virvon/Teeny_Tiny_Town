@@ -22,37 +22,59 @@ namespace Assets.Sources.Sandbox
         private readonly IStaticDataService _staticDataService;
 
         private List<SandboxTile> _tiles;
+        private bool _isTileChangedComplete;
 
         public SandboxChanger(IPersistentProgressService persistentProgressService, IStaticDataService staticDataService)
         {
             _persistentProgressService = persistentProgressService;
             _staticDataService = staticDataService;
+
+            _isTileChangedComplete = true;
         }
 
         public event Action<Vector2Int, bool> CenterChanged;
 
         public async UniTask PutGround(Vector2Int gridPosition, SandboxGroundType type)
         {
+            if (_isTileChangedComplete == false)
+                return;
+
+            _isTileChangedComplete = false;
+
             SandboxTile tile = GetTile(gridPosition);
             await tile.PutGround(type);
+
+            _isTileChangedComplete = true;
         }
 
         public async UniTask ClearTile(Vector2Int gridPosition)
         {
+            if (_isTileChangedComplete == false)
+                return;
+
+            _isTileChangedComplete = false;
+
             await GetTile(gridPosition).CleanAll();
+
+            _isTileChangedComplete = true;
         }
 
         public async UniTask Generate(ITileRepresentationCreatable tileRepresentationCreatable)
         {
-            //TileRepresentationCreatable = tileRepresentationCreatable;
-
             await Fill(tileRepresentationCreatable);
             CenterChanged?.Invoke(_staticDataService.SandboxConfig.Size, false);
         }
 
         public async UniTask PutBuilding(Vector2Int gridPosition, BuildingType buildingType)
         {
+            if (_isTileChangedComplete == false)
+                return;
+
+            _isTileChangedComplete = false;
+
             await GetTile(gridPosition).PutBuilding(new Building(buildingType));
+
+            _isTileChangedComplete = true;
         }
 
         protected async UniTask Fill(ITileRepresentationCreatable tileRepresentationCreatable)
@@ -87,7 +109,7 @@ namespace Assets.Sources.Sandbox
             }
         }
 
-        public IEnumerable<int> GetLineNeighbors(int linePosition)
+        private IEnumerable<int> GetLineNeighbors(int linePosition)
         {
             for (int i = linePosition - 1; i <= linePosition + 1; i++)
                 yield return i;
@@ -98,61 +120,12 @@ namespace Assets.Sources.Sandbox
             List<SandboxTile> tiles = new();
 
             foreach (SandboxTileData tileData in _persistentProgressService.Progress.SandboxData.Tiles)
-            {
-
-                SandboxTile tile = GetGround(tileData);
-
-                tiles.Add(tile);
-
-                
-            }
+                tiles.Add(new SandboxTile(tileData, _staticDataService));
 
             return tiles;
         }
 
         private SandboxTile GetTile(Vector2Int gridPosition) =>
             _tiles.FirstOrDefault(tile => tile.GridPosition == gridPosition);
-
-        private SandboxTile GetGround(SandboxTileData tileData)
-        {
-            return new SandboxTile(tileData, _staticDataService);
-
-            //switch (tileData.Type)
-            //{
-            //    case TileType.RoadGround:
-            //        RoadTile roadTile = new(
-            //            tileData,
-            //            tileType,
-            //            StaticDataService,
-            //            GetBuilding(tileData.BuildingType, tileData.GridPosition),
-            //            WorldData,
-            //            this);
-
-            //        roadTiles.Add(roadTile);
-
-            //        return roadTile;
-            //    case TileType.TallGround:
-            //        TallTile tallTile = new(
-            //            tileData,
-            //            tileType,
-            //            StaticDataService,
-            //            GetBuilding(tileData.BuildingType, tileData.GridPosition),
-            //            WorldData,
-            //            this);
-
-            //        tallTiles.Add(tallTile);
-
-            //        return tallTile;
-            //    case TileType.WaterSurface:
-            //        return new Tile(
-            //            tileData,
-            //            tileType,
-            //            StaticDataService,
-            //            GetBuilding(tileData.BuildingType, tileData.GridPosition));
-            //    default:
-            //        Debug.LogError("tile can not be null");
-            //        return null;
-            //}
-        }
     }
 }

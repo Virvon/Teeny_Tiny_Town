@@ -31,8 +31,8 @@ namespace Assets.Sources.Services.StaticDataService.Configs
 
         public Color ActiveGainButtonColor;
         public Color DefaultGainButtonColor;
-        public Color ActiveGainButtonIconColor;
-        public Color DefaultGainButtonIconColor;
+        public Color ActiveActionHandlerButtonIconColor;
+        public Color DefaultActionHandlerButtonIconColor;
         public float ChangeGainButtonActiveDuration;
 
         public Color PurchasePermittingColor;

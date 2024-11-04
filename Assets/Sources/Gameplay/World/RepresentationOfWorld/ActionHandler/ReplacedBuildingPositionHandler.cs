@@ -47,7 +47,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 _choosedPlaceSelectFrame = await _selectFrameFactory.Create(WorldFactoryAssets.SelectFrame, _selectFrameParent);
 
             _markersVisibility.SetSelectFrameShowed(false);
-            _choosedPlaceSelectFrame.Hide();
+            _choosedPlaceSelectFrame.Hide("replace");
         }
 
         public override UniTask Exit()
@@ -56,7 +56,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 _choosedToReplacingTile.LowerBuilding();
 
             _markersVisibility.SetSelectFrameShowed(false);
-            _choosedPlaceSelectFrame.Hide();
+            _choosedPlaceSelectFrame.Hide("replace");
 
             _isBuildingChoosed = false;
 
@@ -84,14 +84,14 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 else
                 {
                     if (_isBuildingChoosed)
-                        _choosedPlaceSelectFrame.Hide();
+                        _choosedPlaceSelectFrame.Hide("replace");
                     else
                         _markersVisibility.SetSelectFrameShowed(false);
                 }
             }
             else if (_isBuildingChoosed)
             {
-                _choosedPlaceSelectFrame.Hide();
+                _choosedPlaceSelectFrame.Hide("replace");
             }
             else
             {
@@ -115,7 +115,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                     else if (CheckBuildingAndTileCompatibility(_choosedToReplacingTile.BuildingType, tile.Type))
                     {
                         _markersVisibility.SetSelectFrameShowed(false);
-                        _choosedPlaceSelectFrame.Hide();
+                        _choosedPlaceSelectFrame.Hide("replace");
 
                         GameplayMover.ReplaceBuilding(_choosedToReplacingTile.GridPosition, _choosedToReplacingTile.BuildingType, tile.GridPosition, tile.BuildingType);
                     }

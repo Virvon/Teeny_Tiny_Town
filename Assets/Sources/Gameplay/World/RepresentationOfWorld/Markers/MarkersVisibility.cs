@@ -54,7 +54,7 @@
             if (_isSelectFrameShowed && _isVisibilityAllowed)
                 _selectFrame.Show();
             else
-                _selectFrame.Hide();
+                _selectFrame.Hide("marker");
         }
     }
 }

@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 8713725119684246734}
   - component: {fileID: 8273007786884175794}
   - component: {fileID: 5249772407495821030}
+  - component: {fileID: 4852681894232945983}
   m_Layer: 5
   m_Name: ClearTilesButton
   m_TagString: Untagged
@@ -361,6 +362,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Touchscreen>/touch3/tap
+--- !u!114 &4852681894232945983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783119463417022525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc11b8c5963e0fb41b806b4e6658f543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 5568193258984657049}
+  _background: {fileID: 8273007786884175794}
 --- !u!1 &2310802339028773133
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,6 +615,7 @@ GameObject:
   - component: {fileID: 1111801252800299095}
   - component: {fileID: 4000381430392820742}
   - component: {fileID: 1813330277527588435}
+  - component: {fileID: 5549939288377992459}
   m_Layer: 5
   m_Name: GroundsButton
   m_TagString: Untagged
@@ -799,6 +815,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Touchscreen>/touch5/tap
+--- !u!114 &5549939288377992459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3371508932162810285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e73d4a272be2604bb5db0df06c677fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 5362146929606293368}
+  _background: {fileID: 4000381430392820742}
 --- !u!1 &3889407023889652932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,6 +1184,7 @@ GameObject:
   - component: {fileID: 4417811773712738112}
   - component: {fileID: 3967147331057753334}
   - component: {fileID: 1467632275966535283}
+  - component: {fileID: 3169307472416387568}
   m_Layer: 5
   m_Name: BuildingsButton
   m_TagString: Untagged
@@ -1353,6 +1384,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Touchscreen>/touch4/tap
+--- !u!114 &3169307472416387568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7439113546625955612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc064ae63149cb49bb7393f41e9c3ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 3173198216035218270}
+  _background: {fileID: 3967147331057753334}
 --- !u!1 &7885259887995912749
 GameObject:
   m_ObjectHideFlags: 0

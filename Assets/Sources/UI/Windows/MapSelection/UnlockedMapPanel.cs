@@ -47,8 +47,6 @@ namespace Assets.Sources.UI.Windows.MapSelection
 
         private void ChangeRestartButtonVisibility()
         {
-            Debug.Log(_persistentProgressService.Progress.CurrentWorldData.IsChangingStarted);
-
             if (_persistentProgressService.Progress.CurrentWorldData.IsChangingStarted)
             {
                 _restartButtonCanvasGroup.alpha = 1;

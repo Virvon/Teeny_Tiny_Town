@@ -28,8 +28,6 @@ namespace Assets.Sources.Gameplay.World
             _animationsConfig = staticDataService.AnimationsConfig;
 
             RotationDegrees = 0;
-
-            Debug.Log("start create " + IsCreated);
             IsCreated = false;
         }
 
