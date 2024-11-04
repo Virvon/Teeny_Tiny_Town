@@ -20,7 +20,7 @@ namespace Assets.Sources.Sandbox
             Container.BindInterfacesTo<SandboxRotation>().AsSingle();
             ActionHandlerStateMachineInstaller.Install(Container);
             Container.BindInstance(_layerMask);
-            Container.Bind<SandboxActionHandlerSwitcher>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<SandboxActionHandlerSwitcher>().AsSingle().NonLazy();
         }
 
         private void BindUiFactory()

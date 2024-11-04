@@ -3,11 +3,12 @@ using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.ExpandingLogic
 {
-    public class WorldExpander
+    public class WorldExpander : IDisposable
     {
         private readonly IWorldData _worldData;
         private readonly ExpandingWorldConfig _expandingWorldConfig;
@@ -23,10 +24,8 @@ namespace Assets.Sources.Gameplay.ExpandingLogic
             _expandingGameplayMover = expandingGameplayMover;
         }
 
-        ~WorldExpander()
-        {
+        public void Dispose() =>
             _worldData.BuildingUpgraded -= OnBuildingUpdated;
-        }
 
         private void OnBuildingUpdated(BuildingType type)
         {

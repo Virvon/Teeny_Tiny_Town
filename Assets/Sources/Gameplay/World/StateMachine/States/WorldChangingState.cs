@@ -9,11 +9,12 @@ using Assets.Sources.Services.StateMachine;
 using Assets.Sources.UI;
 using Assets.Sources.UI.Windows.World;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
 {
-    public class WorldChangingState : IState
+    public class WorldChangingState : IState, IDisposable
     {
         private readonly IInputService _inputService;
         private readonly WindowsSwitcher _windowsSwitcher;
@@ -41,15 +42,17 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _worldData = worldData;
             _worldStateMachine = worldStateMachine;
             _persistentProgressService = persistentProgressService;
-            _markersVisibility = markersVisibility;            
+            _markersVisibility = markersVisibility;
 
             _worldData.PointsData.GoalAchieved += OnGoalAchived;
         }
 
-        ~WorldChangingState()
+        public void Dispose()
         {
+            Debug.Log("destruct world changing state");
+
             _worldData.PointsData.GoalAchieved -= OnGoalAchived;
-            _persistentProgressService.Progress.GameplayMovesCounter.MovesOvered -= OnMovesOvered;
+            _persistentProgressService.Progress.GameplayMovesCounter.MovesOvered -= OnMovesOvered;                
         }
 
         public UniTask Enter()

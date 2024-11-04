@@ -17,7 +17,7 @@ using Assets.Sources.Services.PersistentProgress;
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
 
-    public class WorldChanger : IWorldChanger, IBuildingsUpdatable, ICenterChangeable
+    public class WorldChanger : IWorldChanger, IBuildingsUpdatable, ICenterChangeable, IDisposable
     {
         protected readonly IWorldData WorldData;
         protected readonly IStaticDataService StaticDataService;
@@ -44,6 +44,15 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         public event Action<Vector2Int, bool> CenterChanged;
 
         public IReadOnlyList<Tile> Tiles => _tiles;
+
+        public void Dispose()
+        {
+            if(_tiles != null)
+            {
+                foreach (Tile tile in _tiles)
+                    tile.DisposeBuilding();
+            }
+        }
 
         public void Start()
         {

@@ -8,7 +8,7 @@ using System;
 
 namespace Assets.Sources.Gameplay
 {
-    public class QuestsChecker
+    public class QuestsChecker : IDisposable
     {
         private readonly IPersistentProgressService _persistentProgressService;
         private readonly IWorldData _worldData;
@@ -30,7 +30,7 @@ namespace Assets.Sources.Gameplay
             _worldChanger.BuildingPlaced += OnBuildingPlaced;
         }
 
-        ~QuestsChecker()
+        public void Dispose()
         {
             _worldData.BuildingUpgraded -= OnBuildingPlaced;
             _worldChanger.BuildingPlaced -= OnBuildingPlaced;

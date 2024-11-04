@@ -8,10 +8,8 @@ namespace Assets.Sources.Gameplay.StateMachine.States
     {
         private readonly WorldsList _worldsList;
 
-        public GameplayLoopState(WorldsList worldsList)
-        {
+        public GameplayLoopState(WorldsList worldsList) =>
             _worldsList = worldsList;
-        }
 
         public UniTask Enter()
         {

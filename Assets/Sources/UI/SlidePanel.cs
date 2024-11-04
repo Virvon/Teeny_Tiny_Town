@@ -19,6 +19,9 @@ namespace Assets.Sources.UI
 
         private Sequence _sequence;
 
+        private void OnDestroy() =>
+            _sequence?.Kill();
+
         protected void SlideOpen(TweenCallback callback = null) =>
             ChangeOpeningState(_hidedMinAnchor, _hidedMaxAnchor, _hidedPivot, _hidedPosition, _openedMinAnchor, _openedMaxAnchor, _openedPivot, _openedPosition, callback);
 

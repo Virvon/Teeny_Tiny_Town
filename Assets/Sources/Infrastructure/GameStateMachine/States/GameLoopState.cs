@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Services.SceneManagment;
 using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
+using System;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {
@@ -18,7 +19,10 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
             return default;
         }
 
-        public UniTask Exit() =>
-            default;
+        public UniTask Exit()
+        {
+            
+            return default;
+        }
     }
 }

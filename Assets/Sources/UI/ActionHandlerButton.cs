@@ -16,16 +16,23 @@ namespace Assets.Sources.UI
 
         private AnimationsConfig _animationsConfig;
 
+        private Tween _tween;
+
         [Inject]
         private void Construct(IStaticDataService staticDataService) =>
             _animationsConfig = staticDataService.AnimationsConfig;
 
+        private void OnDestroy() =>
+            _tween?.Kill();
+
         protected void SetActive(bool isActive)
         {
+            _tween?.Kill();
+
             Color targetColor = isActive ? _animationsConfig.ActiveGainButtonColor : _animationsConfig.DefaultGainButtonColor;
 
             _icon.color = isActive ? _animationsConfig.ActiveActionHandlerButtonIconColor : _animationsConfig.DefaultActionHandlerButtonIconColor;
-            _background.DOColor(targetColor, _animationsConfig.ChangeGainButtonActiveDuration);
+            _tween = _background.DOColor(targetColor, _animationsConfig.ChangeGainButtonActiveDuration);
         }
     }
 }

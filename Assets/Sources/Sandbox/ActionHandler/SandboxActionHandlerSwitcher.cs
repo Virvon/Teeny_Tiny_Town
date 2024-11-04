@@ -1,10 +1,11 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Services.Input;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Sandbox.ActionHandler
 {
-    public class SandboxActionHandlerSwitcher
+    public class SandboxActionHandlerSwitcher : IDisposable
     {
         private readonly ActionHandlerStateMachine _handlerStateMachine;
         private readonly IInputService _inputService;
@@ -21,11 +22,8 @@ namespace Assets.Sources.Sandbox.ActionHandler
             _inputService.GroundsButtonPressed += OnGroundsButtonPressed;
         }
 
-        ~SandboxActionHandlerSwitcher()
+        public void Dispose()
         {
-            Debug.Log("enter to default");
-            EnterToDefaultState();
-
             _inputService.ClearTilesButtonPressed -= OnClearTilesButtonPressed;
             _inputService.BuildingsButtonPressed -= OnBuildingsButtonPressed;
             _inputService.GroundsButtonPressed -= OnGroundsButtonPressed;

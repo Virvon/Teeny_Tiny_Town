@@ -3,10 +3,11 @@ using UnityEngine;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
+using System;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
-    public class NewBuildingPlacePositionHandler : WorldActionHandlerState
+    public class NewBuildingPlacePositionHandler : WorldActionHandlerState, IDisposable
     {
         private const float PressedBuildingHeight = 5;
 
@@ -34,8 +35,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             _worldRepresentationChanger.GameplayMoved += StartPlacing;
         }
 
-        ~NewBuildingPlacePositionHandler() =>
+        public void Dispose()
+        {
+            Debug.Log("new buildin placing dispose");
             _worldRepresentationChanger.GameplayMoved -= StartPlacing;
+        }
 
         public override UniTask Enter()
         {

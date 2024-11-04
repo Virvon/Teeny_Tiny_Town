@@ -7,6 +7,7 @@ using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -151,6 +152,12 @@ namespace Assets.Sources.Sandbox
                 await Building.CreateRepresentation(TileRepresentation, false, false);
         }
 
+        public void DisposeBuilding()
+        {
+            if (Building != null && Building is IDisposable disposable)
+                disposable.Dispose();
+        }
+
         private async UniTask TryValidateRoad(IReadOnlyList<SandboxTile> adjacentTiles, bool isEmpty, Vector2Int gridPosition)
         {
             if (isEmpty)
@@ -214,6 +221,8 @@ namespace Assets.Sources.Sandbox
 
         protected void SetBuilding(Building building)
         {
+            DisposeBuilding();
+
             Building = building;
             _tileData.BuildingType = IsEmpty ? BuildingType.Undefined : Building.Type;
         }

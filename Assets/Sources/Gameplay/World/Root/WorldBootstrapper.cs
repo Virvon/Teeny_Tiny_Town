@@ -8,12 +8,13 @@ using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.Gameplay.World.Root
 {
-    public class WorldBootstrapper : IInitializable
+    public class WorldBootstrapper : IInitializable, IDisposable
     {
         private readonly IWorldChanger _worldChanger;
         private readonly IWorldFactory _worldFactory;
@@ -22,7 +23,6 @@ namespace Assets.Sources.Gameplay.World.Root
         private readonly ActionHandlerStatesFactory _actionHandlerStatesFactory;
         private readonly NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
         private readonly IPersistentProgressService _persistentProgressService;
-
         protected readonly WorldStateMachine WorldStateMachine;
         protected readonly StatesFactory StatesFactory;
 
@@ -50,7 +50,7 @@ namespace Assets.Sources.Gameplay.World.Root
             _persistentProgressService = persistentProgressService;
         }
 
-        ~WorldBootstrapper() =>
+        public void Dispose() =>
             _world.Entered -= OnWorldEntered;
 
         public virtual async void Initialize()
@@ -95,5 +95,7 @@ namespace Assets.Sources.Gameplay.World.Root
             _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<RemovedBuildingPositionHandler>());
             _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<ReplacedBuildingPositionHandler>());
         }
+
+        
     }
 }

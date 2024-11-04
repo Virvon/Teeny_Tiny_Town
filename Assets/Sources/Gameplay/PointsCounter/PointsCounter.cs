@@ -1,10 +1,11 @@
 ﻿using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using System;
 
 namespace Assets.Sources.Gameplay.PointsCounter
 {
-    public class PointsCounter
+    public class PointsCounter : IDisposable
     {
         private readonly IWorldData _worldData;
         private readonly IStaticDataService _staticDataService;
@@ -12,12 +13,12 @@ namespace Assets.Sources.Gameplay.PointsCounter
         public PointsCounter(IWorldData worldData, IStaticDataService staticDataService)
         {
             _worldData = worldData;
+            _staticDataService = staticDataService;
 
             _worldData.BuildingUpgraded += OnBuildingUpdated;
-            _staticDataService = staticDataService;
         }
 
-        ~PointsCounter()=>
+        public void Dispose() =>
             _worldData.BuildingUpgraded -= OnBuildingUpdated;
 
         private void OnBuildingUpdated(BuildingType type) =>

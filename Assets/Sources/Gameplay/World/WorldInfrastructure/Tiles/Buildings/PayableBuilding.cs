@@ -2,10 +2,11 @@
 using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using System;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 {
-    public class PayableBuilding : Building
+    public class PayableBuilding : Building, IDisposable
     {
         public readonly uint Payment;
 
@@ -25,7 +26,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
             _currencyWorldData.MovesCounter.TimeToPaymentPayableBuildings += OnTimeToPaymentPayableBuildings;
         }
 
-        ~PayableBuilding() =>
+        public void Dispose() =>
             _currencyWorldData.MovesCounter.TimeToPaymentPayableBuildings -= OnTimeToPaymentPayableBuildings;
 
         private void OnTimeToPaymentPayableBuildings() =>

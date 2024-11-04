@@ -16,7 +16,7 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 
 namespace Assets.Sources.Sandbox
 {
-    public class SandboxChanger : ICenterChangeable
+    public class SandboxChanger : ICenterChangeable, IDisposable
     {
         private readonly IPersistentProgressService _persistentProgressService;
         private readonly IStaticDataService _staticDataService;
@@ -33,6 +33,15 @@ namespace Assets.Sources.Sandbox
         }
 
         public event Action<Vector2Int, bool> CenterChanged;
+
+        public void Dispose()
+        {
+            if(_tiles != null)
+            {
+                foreach (SandboxTile tile in _tiles)
+                    tile.DisposeBuilding();
+            }
+        }
 
         public async UniTask PutGround(Vector2Int gridPosition, SandboxGroundType type)
         {

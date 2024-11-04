@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Assets.Sources.Services.Input
 {
-    public class InputService : IInputService
+    public class InputService : IInputService, IDisposable
     {
         private readonly InputActionsSheme _inputActionsSheme;
 
@@ -32,16 +32,6 @@ namespace Assets.Sources.Services.Input
             _inputActionsSheme.SandboxWindowInput.GroundsButtonPressed.performed += ctx => GroundsButtonPressed?.Invoke();
         }
 
-        ~InputService()
-        {
-            _inputActionsSheme.GameplayInput.HandlePressedMove.started -= OnHandlePressedMoveStarted;
-            _inputActionsSheme.GameplayInput.HandlePressedMove.performed -= OnHandlePressedMovePerformed;
-            _inputActionsSheme.GameplayInput.HandlePressedMove.canceled -= OnHandlePressedMoveCancled;
-            _inputActionsSheme.GameplayInput.HandleMove.performed -= OnHandleMovePerformed;
-
-            _inputActionsSheme.Disable();
-        }
-
         public event Action<Vector2> HandlePressedMoveStarted;
         public event Action<Vector2> HandlePressedMovePerformed;
         public event Action<Vector2> Pressed;
@@ -54,6 +44,16 @@ namespace Assets.Sources.Services.Input
         public event Action ClearTilesButtonPressed;
         public event Action BuildingsButtonPressed;
         public event Action GroundsButtonPressed;
+
+        public void Dispose()
+        {
+            _inputActionsSheme.GameplayInput.HandlePressedMove.started -= OnHandlePressedMoveStarted;
+            _inputActionsSheme.GameplayInput.HandlePressedMove.performed -= OnHandlePressedMovePerformed;
+            _inputActionsSheme.GameplayInput.HandlePressedMove.canceled -= OnHandlePressedMoveCancled;
+            _inputActionsSheme.GameplayInput.HandleMove.performed -= OnHandleMovePerformed;
+
+            _inputActionsSheme.Disable();
+        }
 
         public void SetEnabled(bool enabled)
         {

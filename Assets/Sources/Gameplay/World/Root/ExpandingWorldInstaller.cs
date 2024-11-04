@@ -35,7 +35,7 @@ namespace Assets.Sources.Gameplay.World.Root
 
         private void BindWorldExpander()
         {
-            Container.Bind<WorldExpander>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<WorldExpander>().AsSingle().NonLazy();
         }
     }
 }

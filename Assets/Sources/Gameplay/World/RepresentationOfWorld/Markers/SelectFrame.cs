@@ -10,14 +10,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
         [SerializeField] private Canvas _canvas;
         [SerializeField] private Vector3 _offset;
 
-        private void Start() =>
-            Hide("self start");
-
         public void Select(TileRepresentation tile)
         {
             if (tile == null)
             {
-                Hide("self");
+                Hide();
 
                 return;
             }
@@ -28,11 +25,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
         public void Show() =>
             _canvas.enabled = true;
 
-        public void Hide(string str)
-        {
-            Debug.Log(str);
+        public void Hide() =>
             _canvas.enabled = false;
-        }
 
         public class Factory : PlaceholderFactory<string, Transform, UniTask<SelectFrame>>
         {

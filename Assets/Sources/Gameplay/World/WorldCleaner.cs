@@ -2,11 +2,12 @@
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
+using System;
 using System.Linq;
 
 namespace Assets.Sources.Gameplay.World
 {
-    public class WorldCleaner
+    public class WorldCleaner : IDisposable
     {
         private readonly World _world;
         private readonly IWorldData _worldData;
@@ -23,10 +24,8 @@ namespace Assets.Sources.Gameplay.World
             _worldChanger = worldChanger;
         }
 
-        ~WorldCleaner()
-        {
+        public void Dispose() =>
             _world.Cleaned -= OnWorldCleaned;
-        }
 
         private void OnWorldCleaned()
         {

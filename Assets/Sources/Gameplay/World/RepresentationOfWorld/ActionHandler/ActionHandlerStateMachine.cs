@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
-    public class ActionHandlerStateMachine
+    public class ActionHandlerStateMachine : IDisposable
     {
         private readonly IInputService _inputService;
         public readonly Dictionary<Type, ActionHandlerState> _states;
@@ -25,15 +25,15 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             _inputService.HandlePressedMovePerformed += OnHandlePressedMovePerformed;
         }
 
-        ~ActionHandlerStateMachine()
+        public ActionHandlerState CurrentState { get; private set; }
+
+        public void Dispose()
         {
             _inputService.HandleMoved -= OnHandleMoved;
             _inputService.Pressed -= OnPressed;
             _inputService.HandlePressedMoveStarted -= OnHandlePressedMoveStarted;
             _inputService.HandlePressedMovePerformed -= OnHandlePressedMovePerformed;
         }
-
-        public ActionHandlerState CurrentState { get; private set; }
 
         public void Enter<TState>() where TState : ActionHandlerState
         {
@@ -72,6 +72,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             if (CurrentState != null && _isActive)
                 CurrentState.OnHandlePressedMoveStarted(handlePosition);
-        }
+        }        
     }
 }

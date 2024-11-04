@@ -49,7 +49,7 @@ namespace Assets.Sources.Sandbox.ActionHandler
 
         public override void OnPressed(Vector2 handlePosition)
         {
-            SelectFrame.Hide("building on pressed");
+            SelectFrame.Hide();
             _isPressed = false;
             _placedTile = null;
         }

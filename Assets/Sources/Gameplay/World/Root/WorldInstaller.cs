@@ -53,11 +53,6 @@ namespace Assets.Sources.Gameplay.World.Root
             BindWorldCleaner();
         }
 
-        private void BindWorldCleaner()
-        {
-            Container.Bind<WorldCleaner>().AsSingle().NonLazy();
-        }
-
         protected virtual void BindAcitonHandlerSwitcher()
         {
             Container.BindInterfacesTo<ActionHandlerSwitcher>().AsSingle();
@@ -88,6 +83,11 @@ namespace Assets.Sources.Gameplay.World.Root
             Container.BindInterfacesTo<GameplayMover.GameplayMover>().AsSingle();
         }
 
+        private void BindWorldCleaner()
+        {
+            Container.BindInterfacesAndSelfTo<WorldCleaner>().AsSingle().NonLazy();
+        }
+
         private void BindRewarder()
         {
             Container.Bind<Rewarder>().AsSingle();
@@ -100,7 +100,7 @@ namespace Assets.Sources.Gameplay.World.Root
 
         private void BindQuestsChecker()
         {
-            Container.Bind<QuestsChecker>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<QuestsChecker>().AsSingle().NonLazy();
         }
 
         private void BindRewardsCreator()
@@ -110,7 +110,7 @@ namespace Assets.Sources.Gameplay.World.Root
 
         private void BindPointsCounter()
         {
-            Container.Bind<PointsCounter.PointsCounter>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<PointsCounter.PointsCounter>().AsSingle().NonLazy();
         }
 
         private void BindWorld()

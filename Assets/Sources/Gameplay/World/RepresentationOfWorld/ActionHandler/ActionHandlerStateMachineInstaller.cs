@@ -6,7 +6,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
     {
         public override void InstallBindings()
         {
-            Container.Bind<ActionHandlerStateMachine>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ActionHandlerStateMachine>().AsSingle();
             Container.Bind<ActionHandlerStatesFactory>().AsSingle();
         }
     }

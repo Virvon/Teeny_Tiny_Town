@@ -1,10 +1,11 @@
 ﻿using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Services.Input;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
-    public class ActionHandlerSwitcher : IActionHandlerSwitcher
+    public class ActionHandlerSwitcher : IActionHandlerSwitcher, IDisposable
     {
         private readonly WorldRepresentationChanger _worldRepresentationChanger;
         private readonly ActionHandlerStateMachine _handlerStateMachine;
@@ -27,7 +28,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             _worldRepresentationChanger.GameplayMoved += EnterToDefaultState;
         }
 
-        ~ActionHandlerSwitcher()
+        public void Dispose()
         {
             _inputService.RemoveBuildingButtonPressed -= OnRemoveBuildingButtonClicked;
             _inputService.ReplaceBuildingButtonPressed -= OnReplaceBuildingButtonClicked;
@@ -69,7 +70,5 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             else
                 _handlerStateMachine.Enter<NewBuildingPlacePositionHandler>();
         }
-
-
     }
 }

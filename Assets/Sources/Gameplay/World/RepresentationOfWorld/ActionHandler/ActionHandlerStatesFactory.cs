@@ -17,7 +17,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             where TState : ActionHandlerState
         {
             TState state = _instantiator.Instantiate<TState>();
-            _container.BindInstance(state).AsSingle();
+            _container.BindInterfacesAndSelfTo<TState>().FromInstance(state).AsSingle();
 
             return state;
         }

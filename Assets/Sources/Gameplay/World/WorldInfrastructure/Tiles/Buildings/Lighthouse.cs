@@ -3,12 +3,13 @@ using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 {
-    public class Lighthouse : Building
+    public class Lighthouse : Building, IDisposable
     {
         private readonly WorldWallet _worldWallet;
         private readonly ICurrencyWorldData _currencyWorldData;
@@ -35,7 +36,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
             _currencyWorldData.MovesCounter.TimeToPaymentPayableBuildings += OnTimeToPaymentPayableBuildings;
         }
 
-        ~Lighthouse() =>
+        public void Dispose() =>
             _currencyWorldData.MovesCounter.TimeToPaymentPayableBuildings -= OnTimeToPaymentPayableBuildings;
 
         public override UniTask CreateRepresentation(TileRepresentation tileRepresentation, bool isAnimate, bool waitForCompletion)

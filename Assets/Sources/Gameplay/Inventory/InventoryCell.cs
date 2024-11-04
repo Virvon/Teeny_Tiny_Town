@@ -27,17 +27,12 @@ namespace Assets.Sources.Gameplay.Inventory
             _actionHandlerStateMachine = actionHandlerStateMachine;
             _buildingMarker = buildingMarker;
             _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
-        }
 
-        private void OnEnable()
-        {
             _button.onClick.AddListener(OnButtonClicked);
         }
 
-        private void OnDisable()
-        {
+        private void OnDestroy() =>
             _button.onClick.RemoveListener(OnButtonClicked);
-        }
 
         private void OnButtonClicked()
         {

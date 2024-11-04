@@ -50,8 +50,7 @@ namespace Assets.Sources.Sandbox.ActionHandler
 
         public override void OnPressed(Vector2 handlePosition)
         {
-            Debug.Log("on ground pressed");
-            SelectFrame.Hide("ground");
+            SelectFrame.Hide();
             _isPressed = false;
             _placedTile = null;
         }

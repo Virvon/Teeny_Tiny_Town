@@ -7,6 +7,7 @@ using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
@@ -99,6 +100,12 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             await Clean();
         }
 
+        public void DisposeBuilding()
+        {
+            if (Building != null && Building is IDisposable disposable)
+                disposable.Dispose();
+        }
+
         protected virtual UniTask Clean()
         {
             SetBuilding(null);
@@ -125,6 +132,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         protected void SetBuilding(Building building)
         {
+            DisposeBuilding();
+
             Building = building;
             TileData.BuildingType = IsEmpty ? BuildingType.Undefined : Building.Type;
         }

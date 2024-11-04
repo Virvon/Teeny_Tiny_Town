@@ -5,11 +5,12 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.Input;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.GameplayMover
 {
-    public class GameplayMover : IGameplayMover
+    public class GameplayMover : IGameplayMover, IDisposable
     {
         protected readonly IWorldChanger WorldChanger;
         protected readonly IWorldData WorldData;
@@ -34,10 +35,8 @@ namespace Assets.Sources.Gameplay.GameplayMover
             _inputService.UndoButtonPressed += TryUndoCommand;
         }
 
-        ~GameplayMover()
-        {
+        public void Dispose() =>
             _inputService.UndoButtonPressed -= TryUndoCommand;
-        }
 
         protected Command LastCommand { get; private set; }
 
