@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+﻿using Assets.Sources.Data;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.PersistentProgress;
@@ -46,7 +47,7 @@ namespace Assets.Sources.Collection
             _canChangeItems = true;
         }
 
-        public event Action<uint> ItemChanged;
+        public event Action<BuildingData> ItemChanged;
 
         public int CollectionItemIndex { get; private set; }
 
@@ -83,7 +84,7 @@ namespace Assets.Sources.Collection
 
         private async UniTask ChangeTiles(Vector3 destroyedTileTargetPosition, Vector3 currentTileStartPosition, TweenCallback callback)
         {
-            ItemChanged?.Invoke(_persistentProgressService.Progress.BuildingDatas[CollectionItemIndex].Count);
+            ItemChanged?.Invoke(_persistentProgressService.Progress.BuildingDatas[CollectionItemIndex]);
 
             TileRepresentation destroyedTile = _currentTile;
             _currentTile = await CreateItem(currentTileStartPosition);
@@ -93,8 +94,9 @@ namespace Assets.Sources.Collection
         }
 
         private async UniTask<TileRepresentation> CreateItem(Vector3 position)
-        {   
-            BuildingType buildingType = _persistentProgressService.Progress.BuildingDatas[CollectionItemIndex].Type;
+        {
+            BuildingData data = _persistentProgressService.Progress.BuildingDatas[CollectionItemIndex];
+            BuildingType buildingType = data.Type;
 
             TileRepresentation tile = await _worldFactory.CreateTileRepresentation(position, transform);
 
@@ -103,7 +105,8 @@ namespace Assets.Sources.Collection
             else
                 await tile.GroundCreator.Create(_staticDataService.GetGroundType(buildingType), RoadType.NonEmpty, GroundRotation.Degrees0, false);
 
-            await tile.TryChangeBuilding<BuildingRepresentation>(buildingType, false, false);
+            if(data.IsUnlocked)
+                await tile.TryChangeBuilding<BuildingRepresentation>(buildingType, false, false);
 
             return tile;
         }

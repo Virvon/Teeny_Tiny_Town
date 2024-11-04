@@ -11,5 +11,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Building
         public uint PointsRewardForMerge;
         public AssetReference IconAssetReference;
         public AssetReference LockIconAssetReference;
+        public string Name;
+        public string Title;
     }
 }

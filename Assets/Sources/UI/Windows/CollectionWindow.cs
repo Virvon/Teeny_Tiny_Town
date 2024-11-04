@@ -1,5 +1,12 @@
 ﻿using Assets.Sources.Collection;
+using Assets.Sources.Data;
+using Assets.Sources.Infrastructure.GameStateMachine;
+using Assets.Sources.Infrastructure.GameStateMachine.States;
 using Assets.Sources.Services.PersistentProgress;
+using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Cysharp.Threading.Tasks;
+using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -10,31 +17,46 @@ namespace Assets.Sources.UI.Windows
 {
     public class CollectionWindow : Window
     {
+        const string LockedName = "???";
+        const string LockedTitle = "??? ??? ???";
+
         [SerializeField] private Button _showNextItemButton;
         [SerializeField] private Button _showPreviousItemButton;
         [SerializeField] private TMP_Text _unlockedBuildingsQuentityValue;
         [SerializeField] private CanvasGroup _placedBuildingsQuantityPanel;
         [SerializeField] private TMP_Text _placedBuildingsQuantityValue;
+        [SerializeField] private TMP_Text _buildingName;
+        [SerializeField] private TMP_Text _buildingTitle;
+        [SerializeField] private Button _hideButton;
 
         private CollectionItemCreator _collectionItemCreator;
         private IPersistentProgressService _persistentProgressService;
+        private IStaticDataService _staticDataService;
+        private GameStateMachine _gameStateMachine;
 
         [Inject]
-        private void Construct(CollectionItemCreator collectionItemCreator, IPersistentProgressService persistentProgressService)
+        private void Construct(
+            CollectionItemCreator collectionItemCreator,
+            IPersistentProgressService persistentProgressService,
+            IStaticDataService staticDataService,
+            GameStateMachine gameStateMachine)
         {
             _collectionItemCreator = collectionItemCreator;
             _persistentProgressService = persistentProgressService;
+            _staticDataService = staticDataService;
+            _gameStateMachine = gameStateMachine;
 
             int unlockedBuildingsCount = _persistentProgressService.Progress.BuildingDatas.Count(data => data.IsUnlocked);
             int buildingsCount = _persistentProgressService.Progress.BuildingDatas.Length;
 
             _unlockedBuildingsQuentityValue.text = $"{unlockedBuildingsCount}/{buildingsCount}";
 
-            OnItemChanged(_persistentProgressService.Progress.BuildingDatas[_collectionItemCreator.CollectionItemIndex].Count);
+            OnItemChanged(_persistentProgressService.Progress.BuildingDatas[_collectionItemCreator.CollectionItemIndex]);
 
             _showNextItemButton.onClick.AddListener(OnShowNextItemButtonClicked);
             _showPreviousItemButton.onClick.AddListener(OnShowPreviousItemButtonClicked);
             _collectionItemCreator.ItemChanged += OnItemChanged;
+            _hideButton.onClick.AddListener(OnHideButtonClicked);
         }
 
         private void OnDestroy()
@@ -42,6 +64,7 @@ namespace Assets.Sources.UI.Windows
             _showNextItemButton.onClick.RemoveListener(OnShowNextItemButtonClicked);
             _showPreviousItemButton.onClick.RemoveListener(OnShowPreviousItemButtonClicked);
             _collectionItemCreator.ItemChanged -= OnItemChanged;
+            _hideButton.onClick.RemoveListener(OnHideButtonClicked);
         }
 
         private async void OnShowPreviousItemButtonClicked() =>
@@ -50,10 +73,18 @@ namespace Assets.Sources.UI.Windows
         private async void OnShowNextItemButtonClicked() =>
             await _collectionItemCreator.ShowNextBuilding();
 
-        private void OnItemChanged(uint placedBuildingsCount)
+        private void OnItemChanged(BuildingData buildingData)
         {
-            _placedBuildingsQuantityValue.text = placedBuildingsCount.ToString();
-            _placedBuildingsQuantityPanel.alpha = placedBuildingsCount > 0? 1 : 0;
+            BuildingConfig buildingConfig = _staticDataService.GetBuilding<BuildingConfig>(buildingData.Type);
+
+            _placedBuildingsQuantityValue.text = buildingData.Count.ToString();
+            _placedBuildingsQuantityPanel.alpha = buildingData.IsUnlocked? 1 : 0;
+
+            _buildingName.text = buildingData.IsUnlocked ? buildingConfig.Name : LockedName;
+            _buildingTitle.text = buildingData.IsUnlocked ? buildingConfig.Title : LockedTitle;
         }
+
+        private void OnHideButtonClicked() =>
+            _gameStateMachine.Enter<GameLoopState>().Forget();
     }
 }

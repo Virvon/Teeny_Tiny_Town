@@ -606,6 +606,9 @@ MonoBehaviour:
   _unlockedBuildingsQuentityValue: {fileID: 4922907073757763664}
   _placedBuildingsQuantityPanel: {fileID: 8989425335850629165}
   _placedBuildingsQuantityValue: {fileID: 8151627534134150922}
+  _buildingName: {fileID: 7405233280712712728}
+  _buildingTitle: {fileID: 8079401387689404065}
+  _hideButton: {fileID: 1005364234201503713}
 --- !u!1 &948818797283745440
 GameObject:
   m_ObjectHideFlags: 0
@@ -2550,6 +2553,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24188c9dd6f64824b979a5ca863b80f0, type: 3}
+--- !u!114 &1005364234201503713 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 330411502854261291, guid: 24188c9dd6f64824b979a5ca863b80f0, type: 3}
+  m_PrefabInstance: {fileID: 677262823530847690}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3896823494785755920 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4571807424775435994, guid: 24188c9dd6f64824b979a5ca863b80f0, type: 3}
