@@ -6,6 +6,7 @@ using System.Collections;
 using Agava.YandexGames;
 using System;
 using Assets.Sources.Services.CoroutineRunner;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {
@@ -30,6 +31,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
 
         public async UniTask Enter()
         {
+            //TouchSimulation.Enable();
             await Initialize();
 
             _coroutineRunner.StartCoroutine(InitializeYandexSdk(callback: () => _gameStateMachine.Enter<LoadProgressState>().Forget()));

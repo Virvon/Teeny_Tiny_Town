@@ -59,7 +59,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
             return new Vector2Int((int)((position.x - transform.position.x) / _cellSize), (int)((position.z - transform.position.z) / _cellSize));
         }
 
-        public class Factory : PlaceholderFactory<string, UniTask<WorldGenerator>>
+        public class Factory : PlaceholderFactory<string, Transform, UniTask<WorldGenerator>>
         {
         }
     }

@@ -5,6 +5,7 @@ using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
+using Assets.Sources.Sandbox;
 using Assets.Sources.Services.AssetManagement;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
                 .AsSingle();
 
             Container
-                .BindFactory<string, UniTask<WorldGenerator>, WorldGenerator.Factory>()
+                .BindFactory<string, Transform, UniTask<WorldGenerator>, WorldGenerator.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<WorldGenerator>>();
 
             Container
@@ -49,6 +50,10 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             Container
                 .BindFactory<string, UniTask<CollectionItemCreator>, CollectionItemCreator.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<CollectionItemCreator>>();
+
+            Container
+                .BindFactory<string, UniTask<SandboxWorld>, SandboxWorld.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<SandboxWorld>>();
         }
     }
 }

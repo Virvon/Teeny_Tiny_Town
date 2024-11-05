@@ -34,7 +34,7 @@ namespace Assets.Sources.Gameplay.World
         public event Action Entered;
         public event Action Cleaned;
 
-        public int RotationDegrees { get; private set; }
+        public float RotationDegrees { get; private set; }
         public bool IsCreated { get; private set; }
 
         private void Start() =>

@@ -5,6 +5,7 @@ using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
+using Assets.Sources.Sandbox;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
@@ -27,6 +28,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
         private readonly BuildingMarker.Factory _buildingMarkerFactory;
         private readonly IWorldRotation _worldRotation;
         private readonly CollectionItemCreator.Factory _collectionItemCreator;
+        private readonly SandboxWorld.Factory _sandboxWorldFactory;
 
         public WorldFactory(
             DiContainer container,
@@ -38,7 +40,8 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             BuildingMarker.Factory buildingMarkerFactory,
             IStaticDataService staticDataService,
             IWorldRotation worldRotation,
-            CollectionItemCreator.Factory collectionItemCreator)
+            CollectionItemCreator.Factory collectionItemCreator,
+            SandboxWorld.Factory sandboxWorldFactory)
         {
             _container = container;
             _worldGeneratorFactory = worldGeneratorFactory;
@@ -50,9 +53,13 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             _staticDataService = staticDataService;
             _worldRotation = worldRotation;
             _collectionItemCreator = collectionItemCreator;
+            _sandboxWorldFactory = sandboxWorldFactory;
         }
 
         public WorldGenerator WorldGenerator { get; private set; }
+
+        public async UniTask<SandboxWorld> CreateSandboxWorld() =>
+            await _sandboxWorldFactory.Create(WorldFactoryAssets.SandboxWorld);
 
         public async UniTask CreateCollectionItemCreator()
         {
@@ -77,7 +84,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
 
         public async UniTask<Ground> CreateGround(TileType tileType, Vector3 position, Transform parent)
         {
-            return await _groundFactory.Create(_staticDataService.GetGround(tileType).AssetReference, position, 0, parent);
+            return await _groundFactory.Create(_staticDataService.GetGround(tileType).AssetReference, position, _worldRotation.RotationDegrees, parent);
         }
 
         public async UniTask<Ground> CreateGround(GroundType groundType, RoadType roadType, Vector3 position, GroundRotation rotation, Transform parent)
@@ -92,9 +99,9 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             _container.Bind<BuildingMarker>().FromInstance(marker).AsSingle();
         }
 
-        public async UniTask<WorldGenerator> CreateWorldGenerator()
+        public async UniTask<WorldGenerator> CreateWorldGenerator(Transform parent = null)
         {
-            WorldGenerator = await _worldGeneratorFactory.Create(WorldFactoryAssets.WorldGenerator);
+            WorldGenerator = await _worldGeneratorFactory.Create(WorldFactoryAssets.WorldGenerator, parent);
 
             _container.BindInstance(WorldGenerator).AsSingle();
             _container.BindInstance(WorldGenerator.GetComponent<BuildingCreator>()).AsSingle();

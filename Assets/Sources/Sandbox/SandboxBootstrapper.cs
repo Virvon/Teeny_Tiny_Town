@@ -16,24 +16,30 @@ namespace Assets.Sources.Sandbox
         private readonly IWorldFactory _worldFactory;
         private readonly ActionHandlerStateMachine _actionHandlerStateMachine;
         private readonly ActionHandlerStatesFactory _actionHandlerStatesFactory;
+        private readonly SandboxRotation _sandboxRotation;
 
         public SandboxBootstrapper(
             IUiFactory uiFactory,
             SandboxChanger sandboxChanger,
             IWorldFactory worldFactory,
             ActionHandlerStateMachine actionHandlerStateMachine,
-            ActionHandlerStatesFactory actionHandlerStatesFactory)
+            ActionHandlerStatesFactory actionHandlerStatesFactory,
+            SandboxRotation sandboxRotation)
         {
             _uiFactory = uiFactory;
             _sandboxChanger = sandboxChanger;
             _worldFactory = worldFactory;
             _actionHandlerStateMachine = actionHandlerStateMachine;
             _actionHandlerStatesFactory = actionHandlerStatesFactory;
+            _sandboxRotation = sandboxRotation;
         }
 
         public async void Initialize()
         {
-            WorldGenerator worldGenerator = await _worldFactory.CreateWorldGenerator();
+            SandboxWorld sandboxWorld = await _worldFactory.CreateSandboxWorld();
+            WorldGenerator worldGenerator = await _worldFactory.CreateWorldGenerator(sandboxWorld.transform);
+
+            _sandboxRotation.Init(sandboxWorld);
 
             await _sandboxChanger.Generate(worldGenerator);
             await _worldFactory.CreateSelectFrame(worldGenerator.transform);

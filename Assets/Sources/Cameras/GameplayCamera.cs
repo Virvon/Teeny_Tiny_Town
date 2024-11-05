@@ -33,7 +33,7 @@ namespace Assets.Sources.Gameplay.Cameras
 
         public Camera MainCamera => _mainCamera;
 
-        private void OnDestroy() =>
+        protected virtual void OnDestroy() =>
             _persistentProgressService.Progress.SettingsData.OrthographicChanged -= ChangeOrthographic;
 
         public void MoveTo(Vector3 position, TweenCallback callback = null) =>

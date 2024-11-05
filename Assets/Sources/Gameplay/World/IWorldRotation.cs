@@ -2,6 +2,6 @@
 {
     public interface IWorldRotation
     {
-        int RotationDegrees { get; }
+        float RotationDegrees { get; }
     }
 }

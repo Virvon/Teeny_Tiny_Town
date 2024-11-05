@@ -17,7 +17,7 @@ namespace Assets.Sources.Sandbox
             BindUiFactory();
             WorldFactoryInstaller.Install(Container);
             Container.BindInterfacesAndSelfTo<SandboxChanger>().AsSingle();
-            Container.BindInterfacesTo<SandboxRotation>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SandboxRotation>().AsSingle();
             ActionHandlerStateMachineInstaller.Install(Container);
             Container.BindInstance(_layerMask);
             Container.BindInterfacesAndSelfTo<SandboxActionHandlerSwitcher>().AsSingle().NonLazy();

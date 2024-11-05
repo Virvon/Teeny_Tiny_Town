@@ -93,17 +93,6 @@ namespace Assets.Sources.Services.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4e5b1ba9-a4b7-4e52-8e64-04db696edbfd"",
-                    ""path"": ""<Touchscreen>/position"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""HandlePressedMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""5138a63f-e945-40c7-8290-f3d252e660cf"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
@@ -187,6 +176,39 @@ namespace Assets.Sources.Services.Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""683d4a70-3e03-4dc7-a413-c0460af5f6b1"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HandlePressedMove"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""f17317a8-b05f-458e-8ecb-131c42310c7a"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HandlePressedMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""10ddf3f8-2ab2-4acf-a521-5ece9e989d49"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HandlePressedMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -327,6 +349,149 @@ namespace Assets.Sources.Services.Input
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""SandboxInput"",
+            ""id"": ""7b6d7e48-ddb8-4f6a-afff-7ab58ad3e8b7"",
+            ""actions"": [
+                {
+                    ""name"": ""FirstTouch"",
+                    ""type"": ""Value"",
+                    ""id"": ""00e10591-2ee4-4906-b801-5ceabf5fb22b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SecondTouch"",
+                    ""type"": ""Value"",
+                    ""id"": ""a34a6296-a9d5-455c-b323-061be04d71e1"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MouseScroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""20fecaeb-944d-4356-b46a-c6f10ebcb788"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RotateWorld"",
+                    ""type"": ""Value"",
+                    ""id"": ""50fdd226-ec3f-4bad-9397-de408fce685c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e81349c8-8967-4e26-b5af-6fb258a84191"",
+                    ""path"": ""<Touchscreen>/touch0/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FirstTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""268c6f60-8880-4a09-b1f9-433a9fb18221"",
+                    ""path"": ""<Touchscreen>/touch1/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0bef466e-3db8-416c-9a46-325a89b2a675"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseScroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""df231783-a58e-4a8e-816f-0be76756e59b"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateWorld"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""4c981bbe-df19-4789-bda8-2ec1e4769a04"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateWorld"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""5df69bcb-3021-424d-b314-af0b1f5c882e"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateWorld"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""48752b78-8a2f-42bd-ba0b-96cd23f028c3"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateWorld"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""70a69ae4-c640-42f0-8be6-46e13aaa3898"",
+                    ""path"": ""<Touchscreen>/touch1/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateWorld"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""8c732685-922f-4b60-a609-72862c914d19"",
+                    ""path"": ""<Touchscreen>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateWorld"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -346,6 +511,12 @@ namespace Assets.Sources.Services.Input
             m_SandboxWindowInput_ClearTilesButtonPressed = m_SandboxWindowInput.FindAction("ClearTilesButtonPressed", throwIfNotFound: true);
             m_SandboxWindowInput_BuildingsButtonPressed = m_SandboxWindowInput.FindAction("BuildingsButtonPressed", throwIfNotFound: true);
             m_SandboxWindowInput_GroundsButtonPressed = m_SandboxWindowInput.FindAction("GroundsButtonPressed", throwIfNotFound: true);
+            // SandboxInput
+            m_SandboxInput = asset.FindActionMap("SandboxInput", throwIfNotFound: true);
+            m_SandboxInput_FirstTouch = m_SandboxInput.FindAction("FirstTouch", throwIfNotFound: true);
+            m_SandboxInput_SecondTouch = m_SandboxInput.FindAction("SecondTouch", throwIfNotFound: true);
+            m_SandboxInput_MouseScroll = m_SandboxInput.FindAction("MouseScroll", throwIfNotFound: true);
+            m_SandboxInput_RotateWorld = m_SandboxInput.FindAction("RotateWorld", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -589,6 +760,76 @@ namespace Assets.Sources.Services.Input
             }
         }
         public SandboxWindowInputActions @SandboxWindowInput => new SandboxWindowInputActions(this);
+
+        // SandboxInput
+        private readonly InputActionMap m_SandboxInput;
+        private List<ISandboxInputActions> m_SandboxInputActionsCallbackInterfaces = new List<ISandboxInputActions>();
+        private readonly InputAction m_SandboxInput_FirstTouch;
+        private readonly InputAction m_SandboxInput_SecondTouch;
+        private readonly InputAction m_SandboxInput_MouseScroll;
+        private readonly InputAction m_SandboxInput_RotateWorld;
+        public struct SandboxInputActions
+        {
+            private @InputActionsSheme m_Wrapper;
+            public SandboxInputActions(@InputActionsSheme wrapper) { m_Wrapper = wrapper; }
+            public InputAction @FirstTouch => m_Wrapper.m_SandboxInput_FirstTouch;
+            public InputAction @SecondTouch => m_Wrapper.m_SandboxInput_SecondTouch;
+            public InputAction @MouseScroll => m_Wrapper.m_SandboxInput_MouseScroll;
+            public InputAction @RotateWorld => m_Wrapper.m_SandboxInput_RotateWorld;
+            public InputActionMap Get() { return m_Wrapper.m_SandboxInput; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(SandboxInputActions set) { return set.Get(); }
+            public void AddCallbacks(ISandboxInputActions instance)
+            {
+                if (instance == null || m_Wrapper.m_SandboxInputActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_SandboxInputActionsCallbackInterfaces.Add(instance);
+                @FirstTouch.started += instance.OnFirstTouch;
+                @FirstTouch.performed += instance.OnFirstTouch;
+                @FirstTouch.canceled += instance.OnFirstTouch;
+                @SecondTouch.started += instance.OnSecondTouch;
+                @SecondTouch.performed += instance.OnSecondTouch;
+                @SecondTouch.canceled += instance.OnSecondTouch;
+                @MouseScroll.started += instance.OnMouseScroll;
+                @MouseScroll.performed += instance.OnMouseScroll;
+                @MouseScroll.canceled += instance.OnMouseScroll;
+                @RotateWorld.started += instance.OnRotateWorld;
+                @RotateWorld.performed += instance.OnRotateWorld;
+                @RotateWorld.canceled += instance.OnRotateWorld;
+            }
+
+            private void UnregisterCallbacks(ISandboxInputActions instance)
+            {
+                @FirstTouch.started -= instance.OnFirstTouch;
+                @FirstTouch.performed -= instance.OnFirstTouch;
+                @FirstTouch.canceled -= instance.OnFirstTouch;
+                @SecondTouch.started -= instance.OnSecondTouch;
+                @SecondTouch.performed -= instance.OnSecondTouch;
+                @SecondTouch.canceled -= instance.OnSecondTouch;
+                @MouseScroll.started -= instance.OnMouseScroll;
+                @MouseScroll.performed -= instance.OnMouseScroll;
+                @MouseScroll.canceled -= instance.OnMouseScroll;
+                @RotateWorld.started -= instance.OnRotateWorld;
+                @RotateWorld.performed -= instance.OnRotateWorld;
+                @RotateWorld.canceled -= instance.OnRotateWorld;
+            }
+
+            public void RemoveCallbacks(ISandboxInputActions instance)
+            {
+                if (m_Wrapper.m_SandboxInputActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(ISandboxInputActions instance)
+            {
+                foreach (var item in m_Wrapper.m_SandboxInputActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_SandboxInputActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public SandboxInputActions @SandboxInput => new SandboxInputActions(this);
         public interface IGameplayInputActions
         {
             void OnHandlePressedMove(InputAction.CallbackContext context);
@@ -606,6 +847,13 @@ namespace Assets.Sources.Services.Input
             void OnClearTilesButtonPressed(InputAction.CallbackContext context);
             void OnBuildingsButtonPressed(InputAction.CallbackContext context);
             void OnGroundsButtonPressed(InputAction.CallbackContext context);
+        }
+        public interface ISandboxInputActions
+        {
+            void OnFirstTouch(InputAction.CallbackContext context);
+            void OnSecondTouch(InputAction.CallbackContext context);
+            void OnMouseScroll(InputAction.CallbackContext context);
+            void OnRotateWorld(InputAction.CallbackContext context);
         }
     }
 }

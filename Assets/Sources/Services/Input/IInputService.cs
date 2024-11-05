@@ -15,6 +15,8 @@ namespace Assets.Sources.Services.Input
         event Action ClearTilesButtonPressed;
         event Action BuildingsButtonPressed;
         event Action GroundsButtonPressed;
+        event Action<float> Zoomed;
+        event Action<float> Rotated;
 
         void SetEnabled(bool enabled);
     }
