@@ -72,7 +72,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
                 _animationsConfig.BuildingJumpDestroyDuration).AsyncWaitForCompletion();
 
             Destroy();
-            Debug.Log("destroyed");
         }
 
         public void Destroy() =>

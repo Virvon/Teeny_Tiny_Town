@@ -31,7 +31,7 @@ namespace Assets.Sources.Gameplay.PointsCounter
             int rewardVariansCount = GetRewardVariantsCount();
 
             for (int i = 0; i < rewardVariansCount; i++)
-                rewards.Add(GetReward(availableRewards.Except(rewards).ToArray()));
+                rewards.Add(GetRewards(availableRewards.Except(rewards).ToArray()));
 
             RewardsCreated?.Invoke(rewards);
         }
@@ -43,7 +43,7 @@ namespace Assets.Sources.Gameplay.PointsCounter
             return Random.Range(worldConfig.MinRewardVariantsCount, worldConfig.MaxRewardVariantsCount + 1);
         }
 
-        private RewardType GetReward(RewardType[] availableRewards)
+        private RewardType GetRewards(RewardType[] availableRewards)
         {
             RewardConfig[] rewardConfigs = availableRewards
                 .Select(rewardType => _staticDataService.GetReward(rewardType))

@@ -13,5 +13,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Building
         public AssetReference LockIconAssetReference;
         public string Name;
         public string Title;
+        public uint ProportionOfLoss;
     }
 }

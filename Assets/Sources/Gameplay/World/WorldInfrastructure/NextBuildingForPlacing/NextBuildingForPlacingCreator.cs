@@ -7,15 +7,20 @@ using System.Linq;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using UnityEngine;
 using Assets.Sources.Data.World;
+using Assets.Sources.Services.StaticDataService;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing
 {
     public class NextBuildingForPlacingCreator
     {
         private readonly IWorldData _worldData;
+        private readonly IStaticDataService _staticDataService;
 
-        public NextBuildingForPlacingCreator(IWorldData worldData) =>
+        public NextBuildingForPlacingCreator(IWorldData worldData, IStaticDataService staticDataService)
+        {
             _worldData = worldData;
+            _staticDataService = staticDataService;
+        }
 
         public BuildingsForPlacingData BuildingsForPlacingData { get; private set; }
 
@@ -85,7 +90,26 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlaci
         {
             IReadOnlyList<BuildingType> availableBuildingTypes = _worldData.AvailableBuildingsForCreation;
 
-            return availableBuildingTypes[Random.Range(0, availableBuildingTypes.Count)];
+            BuildingConfig[] buildingConfigs = availableBuildingTypes
+                .Select(buildingType => _staticDataService.GetBuilding<BuildingConfig>(buildingType))
+                .OrderBy(buildingConfig => buildingConfig.ProportionOfLoss)
+                .ToArray();
+
+            int proportionsOfLossSum = (int)buildingConfigs.Sum(value => value.ProportionOfLoss);
+
+            int resultChance = Random.Range(0, proportionsOfLossSum) + 1;
+            uint chance = 0;
+
+            for (int i = 0; i < buildingConfigs.Length; i++)
+            {
+                chance += buildingConfigs[i].ProportionOfLoss;
+
+                if (resultChance <= chance)
+                    return buildingConfigs[i].BuildingType;
+            }
+
+            Debug.LogError("Reward type not founded");
+            return BuildingType.Bush;
         }       
     }
 }

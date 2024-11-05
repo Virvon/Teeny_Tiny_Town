@@ -83,6 +83,5 @@ namespace Assets.Sources.UI.Windows.World.Panels.Reward
 
         private void OnUpdateRewardsButtonClicked() =>
             _rewardsCreator.CreateRewards();
-
     }
 }

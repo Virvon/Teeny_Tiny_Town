@@ -99,8 +99,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
                     await UniTask.WhenAll(removeBuildingTask);
 
-                    Debug.Log("try add");
-
                     _worldData.TryAddBuildingTypeForCreation(BuildingType, StaticDataService.AvailableForConstructionBuildingsConfig.requiredCreatedBuildingsToAddNext, StaticDataService);
                     Debug.Log(BuildingType);
                 }
