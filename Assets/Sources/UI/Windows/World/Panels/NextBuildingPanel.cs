@@ -1,30 +1,41 @@
 ﻿using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
-using TMPro;
+using Assets.Sources.Services.AssetManagement;
+using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Assets.Sources.UI.Windows.World.Panels
 {
     public class NextBuildingPanel : MonoBehaviour
     {
-        [SerializeField] private TMP_Text _nextBuildingValue;
+        [SerializeField] private Image _icon;
 
         private NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
+        private IStaticDataService _staticDataService;
+        private IAssetProvider _assetProvider;
 
         [Inject]
-        private void Construct(NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
+        private void Construct(NextBuildingForPlacingCreator nextBuildingForPlacingCreator, IStaticDataService staticDataService, IAssetProvider assetProvider)
         {
             _nextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
-
-            _nextBuildingForPlacingCreator.DataChanged += OnBuildingForPlacingDataChanged;
+            _staticDataService = staticDataService;
+            _assetProvider = assetProvider;
 
             OnBuildingForPlacingDataChanged(_nextBuildingForPlacingCreator.BuildingsForPlacingData);
+
+            _nextBuildingForPlacingCreator.DataChanged += OnBuildingForPlacingDataChanged;
         }
 
         private void OnDestroy() =>
             _nextBuildingForPlacingCreator.DataChanged -= OnBuildingForPlacingDataChanged;
 
-        private void OnBuildingForPlacingDataChanged(BuildingsForPlacingData data) =>
-            _nextBuildingValue.text = data.NextBuildingType.ToString();
+        private async void OnBuildingForPlacingDataChanged(BuildingsForPlacingData data)
+        {
+            BuildingConfig buildingConfig = _staticDataService.GetBuilding<BuildingConfig>(data.NextBuildingType);
+            _icon.sprite = await _assetProvider.Load<Sprite>(buildingConfig.IconAssetReference);
+            _icon.SetNativeSize();
+        }
     }
 }
