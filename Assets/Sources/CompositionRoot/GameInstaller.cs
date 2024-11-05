@@ -1,5 +1,6 @@
 using Assets.Sources.Infrastructure.GameStateMachine;
 using Assets.Sources.Services.AssetManagement;
+using Assets.Sources.Services.CoroutineRunner;
 using Assets.Sources.Services.Input;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.SaveLoadProgress;
@@ -7,7 +8,7 @@ using Assets.Sources.Services.SceneManagment;
 using Assets.Sources.Services.StaticDataService;
 using Zenject;
 
-public class GameInstaller : MonoInstaller
+public class GameInstaller : MonoInstaller, ICoroutineRunner
 {
     public override void InstallBindings()
     {
@@ -18,6 +19,12 @@ public class GameInstaller : MonoInstaller
         BindStaticDataService();
         BindSaveLoadService();
         BindPersistentProgressService();
+        BindCoroutineRunner();
+    }
+
+    private void BindCoroutineRunner()
+    {
+        Container.Bind<ICoroutineRunner>().FromInstance(this).AsSingle();
     }
 
     private void BindPersistentProgressService()
