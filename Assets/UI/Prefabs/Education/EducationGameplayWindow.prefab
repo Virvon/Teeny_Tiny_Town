@@ -2766,6 +2766,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EducationGameplayWindow
       objectReference: {fileID: 0}
+    - target: {fileID: 1568540163141648451, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3156594310591509698, guid: 5fd5d9c9d0d3f484d8a0a1447aff825d, type: 3}
       propertyPath: m_Pivot.x
       value: 0

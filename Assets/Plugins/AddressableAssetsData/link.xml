@@ -1,0 +1,269 @@
+<linker>
+  <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="Assets.Sources.Collection.CollectionInstaller" preserve="all" />
+    <type fullname="Assets.Sources.Collection.CollectionItemCreator" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.Cameras.GameplayCamera" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.GameplayInstaller" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.Inventory.InventoryCell" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.Inventory.InventoryLock" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers.BuildingMarker" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers.SelectFrame" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings.BuildingCreator" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings.BuildingRepresentation" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings.ChestRepresentation" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.GroundCollider" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds.Ground" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds.GroundCreator" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.TileRepresentation" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.RepresentationOfWorld.WorldGenerator" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.RepresentationOfWorld.WorldPositioner" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.Root.CurrencyWorldInstaller" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.Root.EducationWorldInstaller" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.Root.ExpandingWorldInstaller" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.Root.WorldInstaller" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.World" preserve="all" />
+    <type fullname="Assets.Sources.Gameplay.World.WorldsList" preserve="all" />
+    <type fullname="Assets.Sources.Sandbox.SandboxInstaller" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses.AdAdditionalBonusPanel" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses.BuldozerAdditionalBonusConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses.ReplaceItemAdditionalBonusConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses.WorldWalletValueAddtionalBonusConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.AnimationsConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.Building.AvailableForConstructionBuildingsConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.Building.BuildingConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.Building.ChestConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.Building.PayableBuildingConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.GameplayStore.InfinityMovesStoreConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.GameplayStore.InventoryStoreConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.GroundsConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.Quests.QuestsConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.Reward.RewardConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.Reward.WorldWalletValueRewardConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.RoadGroundConfigs" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.Windows.WindowsConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.World.CurrencyWorldConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.World.ExpandingWorldConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.World.SandboxConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.World.WorldConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.World.WorldsConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.WorldStore.BuildingStoreItemsCofnig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.WorldStore.GainStoreItemConfig" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.WorldStore.LimitedQuantityGainStoreItemConfig" preserve="all" />
+    <type fullname="Assets.Sources.UI.Blur" preserve="all" />
+    <type fullname="Assets.Sources.UI.GameplayWalletPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Test" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.CollectionWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Education.ContinueEducationPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Education.EducationWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Education.FinishEducationPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Education.MergedBuildingPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Education.PlacedBuildingEducationPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Education.ShowUiPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.GameplayQuestsWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.MapSelection.LockedMapPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.MapSelection.MapSelectionWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.MapSelection.PeculiarityIconPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.MapSelection.PeculiarityPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.MapSelection.UnlockedMapPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Sandbox.BuildingButton" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Sandbox.BuildingsPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Sandbox.ClearTileButton" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Sandbox.GroundButton" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Sandbox.GroundsPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Sandbox.SandboxPanelElement" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Sandbox.SandboxPanelsSwitcher" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Sandbox.SandboxWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.BluredStartPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.DarkThemeOption" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.OrthographicSettingsOption" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.RotationSnapOption" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.StartWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.StartWindowPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.Store.AdvertisingGameplayStoreItem" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.Store.GainsGameplayStoreItem" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.Store.GameplayStoreItem" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.Store.PackagesPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.Store.StorePanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.ThemeButton" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.Start.TutorialButton" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.AdditionalBonusOfferWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.CurrencyGameplayWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.GainBuyingWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.GameplayWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer.AdditionalBonusesList" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer.AdditionalBonusOfferItem" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.GainButtons.RemoveBuildingButton" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.GainButtons.ReplaceBuildingButton" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.GoalPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.NextBuildingPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.QuestPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.QuestsList" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.RemainingMovesPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.Reward.RewardPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.Reward.RewardsList" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.RotationPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.Store.BuildingStoreItem" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.Store.GainsStore" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.Store.LimitedQuantityGainStoreItemPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.Store.UnlimitedQuantityGainStoreItemPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.Store.WorldBuildingsStore" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.Panels.WorldWalletPanel" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.ResultWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.RewardWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.SaveGameplayWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.StoreWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.WaitingWindow" preserve="all" />
+    <type fullname="Assets.Sources.UI.Windows.World.WorldQuestsWindow" preserve="all" />
+    <type fullname="Assets.Sources.VisualTheme.CameraVisualTheme" preserve="all" />
+    <type fullname="Assets.Sources.VisualTheme.LightingVisualTheme" preserve="all" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.Building.BuildingUpgradeBranch" preserve="nothing" serialized="true" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.Building.BuildingUpgradeBranchElement" preserve="nothing" serialized="true" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.GroundConfig" preserve="nothing" serialized="true" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.Quests.QuestConfig" preserve="nothing" serialized="true" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.RoadConfig" preserve="nothing" serialized="true" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.RoadGroundConfig" preserve="nothing" serialized="true" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.TestGroundConfig" preserve="nothing" serialized="true" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.ValidNeighborsGridPositions" preserve="nothing" serialized="true" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.Windows.WindowConfig" preserve="nothing" serialized="true" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.World.ExpandConfig" preserve="nothing" serialized="true" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.World.SandboxGroundConfig" preserve="nothing" serialized="true" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.World.TileConfig" preserve="nothing" serialized="true" />
+    <type fullname="Assets.Sources.Services.StaticDataService.Configs.WorldStore.BuildingStoreItemConfig" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="MPUIKit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="MPUIKIT.MPImage" preserve="all" />
+    <type fullname="MPUIKIT.Circle" preserve="nothing" serialized="true" />
+    <type fullname="MPUIKIT.GradientEffect" preserve="nothing" serialized="true" />
+    <type fullname="MPUIKIT.Hexagon" preserve="nothing" serialized="true" />
+    <type fullname="MPUIKIT.NStarPolygon" preserve="nothing" serialized="true" />
+    <type fullname="MPUIKIT.Pentagon" preserve="nothing" serialized="true" />
+    <type fullname="MPUIKIT.Rectangle" preserve="nothing" serialized="true" />
+    <type fullname="MPUIKIT.Triangle" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
+    <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
+    <type fullname="UnityEngine.AddressableAssets.AssetReference" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.AddressableAssets.AssetReferenceGameObject" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.InputSystem.InputActionAsset" preserve="all" />
+    <type fullname="UnityEngine.InputSystem.InputActionReference" preserve="all" />
+    <type fullname="UnityEngine.InputSystem.OnScreen.OnScreenButton" preserve="all" />
+    <type fullname="UnityEngine.InputSystem.UI.InputSystemUIInputModule" preserve="all" />
+    <type fullname="UnityEngine.InputSystem.InputAction" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.InputSystem.InputActionMap" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.InputSystem.InputBinding" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.InputSystem.InputControlScheme" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.InputSystem.InputControlScheme/DeviceRequirement" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Unity.RenderPipelines.Core.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Rendering.Volume" preserve="all" />
+    <type fullname="UnityEngine.Rendering.VolumeProfile" preserve="all" />
+    <type fullname="UnityEngine.Rendering.ClampedFloatParameter" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Rendering.Universal.ChannelMixer" preserve="all" />
+    <type fullname="UnityEngine.Rendering.Universal.UniversalAdditionalCameraData" preserve="all" />
+    <type fullname="UnityEngine.Rendering.Universal.UniversalAdditionalLightData" preserve="all" />
+  </assembly>
+  <assembly fullname="Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.BundledAssetProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.InstanceProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.LegacyResourcesProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.SceneProvider" preserve="all" />
+  </assembly>
+  <assembly fullname="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="TMPro.TextMeshProUGUI" preserve="all" />
+    <type fullname="TMPro.TMP_FontAsset" preserve="all" />
+    <type fullname="TMPro.FaceInfo_Legacy" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.FontAssetCreationSettings" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.KerningTable" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_Character" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_FontFeatureTable" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_FontWeightPair" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_GlyphAdjustmentRecord" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_GlyphPairAdjustmentRecord" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_GlyphValueRecord" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.VertexGradient" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.AudioListener" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Camera" preserve="all" />
+    <type fullname="UnityEngine.GameObject" preserve="all" />
+    <type fullname="UnityEngine.Light" preserve="all" />
+    <type fullname="UnityEngine.LightingSettings" preserve="all" />
+    <type fullname="UnityEngine.LightmapSettings" preserve="all" />
+    <type fullname="UnityEngine.LightProbes" preserve="all" />
+    <type fullname="UnityEngine.Material" preserve="all" />
+    <type fullname="UnityEngine.Mesh" preserve="all" />
+    <type fullname="UnityEngine.MeshFilter" preserve="all" />
+    <type fullname="UnityEngine.MeshRenderer" preserve="all" />
+    <type fullname="UnityEngine.Object" preserve="all" />
+    <type fullname="UnityEngine.RectTransform" preserve="all" />
+    <type fullname="UnityEngine.RenderSettings" preserve="all" />
+    <type fullname="UnityEngine.Shader" preserve="all" />
+    <type fullname="UnityEngine.Sprite" preserve="all" />
+    <type fullname="UnityEngine.Texture2D" preserve="all" />
+    <type fullname="UnityEngine.Transform" preserve="all" />
+    <type fullname="UnityEngine.Events.PersistentCallGroup" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.RectOffset" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Events.UnityEvent" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEngine.ParticleSystemModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.ParticleSystem" preserve="all" />
+    <type fullname="UnityEngine.ParticleSystemRenderer" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.BoxCollider" preserve="all" />
+    <type fullname="UnityEngine.MeshCollider" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Font" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.EventSystems.EventSystem" preserve="all" />
+    <type fullname="UnityEngine.EventSystems.PhysicsRaycaster" preserve="all" />
+    <type fullname="UnityEngine.UI.AspectRatioFitter" preserve="all" />
+    <type fullname="UnityEngine.UI.Button" preserve="all" />
+    <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
+    <type fullname="UnityEngine.UI.ContentSizeFitter" preserve="all" />
+    <type fullname="UnityEngine.UI.GraphicRaycaster" preserve="all" />
+    <type fullname="UnityEngine.UI.GridLayoutGroup" preserve="all" />
+    <type fullname="UnityEngine.UI.HorizontalLayoutGroup" preserve="all" />
+    <type fullname="UnityEngine.UI.Image" preserve="all" />
+    <type fullname="UnityEngine.UI.LayoutElement" preserve="all" />
+    <type fullname="UnityEngine.UI.Mask" preserve="all" />
+    <type fullname="UnityEngine.UI.RectMask2D" preserve="all" />
+    <type fullname="UnityEngine.UI.Scrollbar" preserve="all" />
+    <type fullname="UnityEngine.UI.ScrollRect" preserve="all" />
+    <type fullname="UnityEngine.UI.Toggle" preserve="all" />
+    <type fullname="UnityEngine.UI.VerticalLayoutGroup" preserve="all" />
+    <type fullname="UnityEngine.UI.AnimationTriggers" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.Button/ButtonClickedEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.ColorBlock" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.MaskableGraphic/CullStateChangedEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.Navigation" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.ScrollRect/ScrollRectEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.Scrollbar/ScrollEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.SpriteState" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.Toggle/ToggleEvent" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Canvas" preserve="all" />
+    <type fullname="UnityEngine.CanvasGroup" preserve="all" />
+    <type fullname="UnityEngine.CanvasRenderer" preserve="all" />
+  </assembly>
+  <assembly fullname="Zenject, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="Zenject.GameObjectContext" preserve="all" />
+    <type fullname="Zenject.SceneContext" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.TextCoreFontEngineModule">
+    <type fullname="UnityEngine.TextCore.FaceInfo" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.TextCore.Glyph" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.TextCore.GlyphMetrics" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.TextCore.GlyphRect" preserve="nothing" serialized="true" />
+  </assembly>
+</linker>
