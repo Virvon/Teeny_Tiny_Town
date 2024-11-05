@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Data.WorldDatas;
+﻿using Assets.Sources.Data.World;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;

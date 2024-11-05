@@ -34,9 +34,9 @@ namespace Assets.Sources.UI.Windows.Start.Store
         {
             if(_persistentProgressServcie.Progress.Wallet.TryGet(_cost))
             {
-                WorldData worldData = _persistentProgressServcie.Progress.CurrentWorldData;
+                IWorldData worldData = _persistentProgressServcie.Progress.LastPlayedWorldData;
 
-                worldData.BuldozerItems.AddItems(ItemsCount);
+                worldData.BulldozerItems.AddItems(ItemsCount);
                 worldData.ReplaceItems.AddItems(ItemsCount);
             }
         }

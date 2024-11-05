@@ -26,6 +26,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public uint Cost;
         public string Name;
         public AssetReference[] PeculiarityIconAssetReferences;
+        public int SerialNumber;
 
         public TileType GetTileType(Vector2Int gridPosition) =>
             TileConfigs.First(tile => tile.GridPosition == gridPosition).Type;

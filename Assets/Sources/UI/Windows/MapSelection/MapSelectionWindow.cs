@@ -1,5 +1,4 @@
 ﻿using Assets.Sources.Data.World;
-using Assets.Sources.Data.WorldDatas;
 using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.StateMachine.States;
 using Assets.Sources.Gameplay.World;
@@ -7,7 +6,6 @@ using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,7 +43,7 @@ namespace Assets.Sources.UI.Windows.MapSelection
             _nextMapButton.onClick.AddListener(OnNextMapButtonClicked);
             _previousMapButton.onClick.AddListener(OnPreviousMapButtonClicked);
             _hideButton.onClick.AddListener(OnHideButtonClicked);
-            _persistentProgressService.Progress.CurrentWorldChanged += ChangeCurrentWorldInfo;
+            _worldsList.CurrentWorldChanged += ChangeCurrentWorldInfo;
 
         }
 
@@ -54,25 +52,24 @@ namespace Assets.Sources.UI.Windows.MapSelection
             _nextMapButton.onClick.RemoveListener(OnNextMapButtonClicked);
             _previousMapButton.onClick.RemoveListener(OnPreviousMapButtonClicked);          
             _hideButton.onClick.RemoveListener(OnHideButtonClicked);
-            _persistentProgressService.Progress.CurrentWorldChanged -= ChangeCurrentWorldInfo;
+            _worldsList.CurrentWorldChanged -= ChangeCurrentWorldInfo;
         }
 
         public override void Open()
         {
             base.Open();
-            ChangeCurrentWorldInfo();
+            ChangeCurrentWorldInfo(_worldsList.CurrentWorldData);
         }
 
-        public void ChangeCurrentWorldInfo()
+        public void ChangeCurrentWorldInfo(IWorldData worldData)
         {
-            WorldData worldData = _persistentProgressService.Progress.CurrentWorldData;
             WorldConfig worldConfig = _staticDataService.GetWorld<WorldConfig>(worldData.Id);
             Vector2Int size = worldData.Size;
 
             _sizeValue.text = $"{size.x}x{size.y}";
             _name.text = worldConfig.Name;
 
-            if(_persistentProgressService.Progress.CurrentWorldData.IsUnlocked)
+            if(worldData.IsUnlocked)
             {
                 _unlockedMapPanel.Open();
                 _lcockedMapPanel.Hide();

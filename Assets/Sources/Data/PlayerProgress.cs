@@ -12,7 +12,6 @@ namespace Assets.Sources.Data
     public class PlayerProgress
     { 
         public WorldData[] WorldDatas;
-        public WorldData CurrentWorldData;
         public StoreData StoreData;
         public Wallet Wallet;
         public List<QuestData> Quests;
@@ -20,7 +19,8 @@ namespace Assets.Sources.Data
         public SandboxData SandboxData;
         public BuildingData[] BuildingDatas;
         public bool IsEducationCompleted;
-        public SettingsData SettingsData;        
+        public SettingsData SettingsData;
+        public IWorldData LastPlayedWorldData;
 
         public PlayerProgress(
             WorldData[] worldDatas,
@@ -38,7 +38,7 @@ namespace Assets.Sources.Data
             SandboxData = new(sandboxSize);
             SettingsData = new();
 
-            CurrentWorldData = WorldDatas[0];
+            LastPlayedWorldData = WorldDatas[0];
             IsEducationCompleted = true;
 
             BuildingDatas = new BuildingData[allBuildings.Length];
@@ -47,34 +47,25 @@ namespace Assets.Sources.Data
                 BuildingDatas[i] = new BuildingData(allBuildings[i]);
         }
 
-        public event Action CurrentWorldChanged;
-
-        public WorldData GetNextWorldData()
+        public IWorldData GetNextWorldData(IWorldData currentWorldData)
         {
-            int curentWorldDataIndex = Array.IndexOf(WorldDatas, CurrentWorldData);
+            int curentWorldDataIndex = Array.IndexOf(WorldDatas, currentWorldData);
 
-            CurrentWorldData = curentWorldDataIndex >= WorldDatas.Length - 1 ? WorldDatas[0] : WorldDatas[curentWorldDataIndex + 1];
-            CurrentWorldChanged?.Invoke();
-
-            return CurrentWorldData;
+            return curentWorldDataIndex >= WorldDatas.Length - 1 ? WorldDatas[0] : WorldDatas[curentWorldDataIndex + 1];
         }
 
-        public WorldData GetPreviousWorldData()
+        public IWorldData GetPreviousWorldData(IWorldData currentWorldData)
         {
-            int curentWorldDataIndex = Array.IndexOf(WorldDatas, CurrentWorldData);
+            int curentWorldDataIndex = Array.IndexOf(WorldDatas, currentWorldData);
 
-            CurrentWorldData = curentWorldDataIndex <= 0 ? WorldDatas[WorldDatas.Length - 1] : WorldDatas[curentWorldDataIndex - 1];
-            CurrentWorldChanged?.Invoke();
-
-            return CurrentWorldData;
+            return curentWorldDataIndex <= 0 ? WorldDatas[WorldDatas.Length - 1] : WorldDatas[curentWorldDataIndex - 1];
         }
 
-        public WorldData ChangeWorldData(string id)
+        public IWorldData ChangeWorldData(string id)
         {
-            CurrentWorldData = WorldDatas.First(data => data.Id == id);
-            CurrentWorldChanged?.Invoke();
+            LastPlayedWorldData = WorldDatas.First(data => data.Id == id);
 
-            return CurrentWorldData;
+            return LastPlayedWorldData;
         }
 
         public QuestData GetQuest(string id) =>

@@ -1,5 +1,4 @@
-﻿using Assets.Sources.Data.World;
-using Assets.Sources.Services.StaticDataService;
+﻿using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 using static Assets.Sources.Data.World.WorldData;
 
-namespace Assets.Sources.Data.WorldDatas
+namespace Assets.Sources.Data.World
 {
     public interface IWorldData
     {

@@ -48,7 +48,7 @@ namespace Assets.Sources.UI.Windows.Start
             _gameplayStateMachine.Enter<MapSelectionState>().Forget();
 
         private void OnContinueButtonClicked() =>
-            _gameplayStateMachine.Enter<GameplayLoopState>().Forget();
+            _gameplayStateMachine.Enter<GameplayLoopState, bool>(false).Forget();
 
         private void OnSandboxButtonClicked() =>
             _gameStateMachine.Enter<SandboxState>().Forget();

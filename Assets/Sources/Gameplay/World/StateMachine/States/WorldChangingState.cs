@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Data.WorldDatas;
+﻿using Assets.Sources.Data.World;
 using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
@@ -58,6 +58,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         public UniTask Enter()
         {
             _worldData.IsChangingStarted = true;
+            _persistentProgressService.Progress.LastPlayedWorldData = _worldData;
 
             _camera.MoveTo(new Vector3(55.1f, 78.8f, -55.1f), callback: () =>
             {

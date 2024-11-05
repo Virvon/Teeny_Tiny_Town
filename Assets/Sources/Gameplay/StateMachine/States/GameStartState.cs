@@ -36,7 +36,7 @@ namespace Assets.Sources.Gameplay.StateMachine.States
             }
             else
             {
-                _gameplayStateMachine.Enter<GameplayLoopState>().Forget();
+                _gameplayStateMachine.Enter<GameplayLoopState, bool>(true).Forget();
             }
             
 

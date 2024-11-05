@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Data.WorldDatas;
+﻿using Assets.Sources.Data.World;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

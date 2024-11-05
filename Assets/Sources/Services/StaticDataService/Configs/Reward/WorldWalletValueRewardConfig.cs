@@ -1,5 +1,5 @@
-﻿using Assets.Sources.Data.World.Currency;
-using Assets.Sources.Data.WorldDatas;
+﻿using Assets.Sources.Data.World;
+using Assets.Sources.Data.World.Currency;
 using UnityEngine;
 
 namespace Assets.Sources.Services.StaticDataService.Configs.Reward

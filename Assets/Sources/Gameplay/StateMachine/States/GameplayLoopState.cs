@@ -4,22 +4,22 @@ using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.StateMachine.States
 {
-    public class GameplayLoopState : IState
+    public class GameplayLoopState : IPayloadState<bool>
     {
         private readonly WorldsList _worldsList;
 
         public GameplayLoopState(WorldsList worldsList) =>
             _worldsList = worldsList;
 
-        public UniTask Enter()
+        public async UniTask Enter(bool startCurrentWorld)
         {
-            _worldsList.StartCurrentWorld();
-            return default;
+            if (startCurrentWorld)
+                await _worldsList.StartCurrentWorld();
+            else
+                await _worldsList.StartLastPlayedWorld();
         }
 
-        public UniTask Exit()
-        {
-            return default;
-        }
+        public UniTask Exit() =>
+            default;
     }
 }

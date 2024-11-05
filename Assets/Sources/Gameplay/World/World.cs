@@ -48,7 +48,7 @@ namespace Assets.Sources.Gameplay.World
             _rotation?.Kill();
         }
 
-        public void EnterBootstrapState() =>
+        public void Enter() =>
             Entered?.Invoke();
 
         public void OnCreated() =>

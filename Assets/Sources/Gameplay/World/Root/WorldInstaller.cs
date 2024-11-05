@@ -22,12 +22,16 @@ namespace Assets.Sources.Gameplay.World.Root
         [SerializeField] private World _world;
 
         private IPersistentProgressService _persistentProgressService;
+        private WorldsList _worldsList;
 
         [Inject]
-        private void Construct(IPersistentProgressService persistentProgressService) =>
+        private void Construct(IPersistentProgressService persistentProgressService, WorldsList worldsList)
+        {
             _persistentProgressService = persistentProgressService;
+            _worldsList = worldsList;
+        }
 
-        protected WorldData WorldData => _persistentProgressService.Progress.CurrentWorldData;
+        protected IWorldData WorldData => _worldsList.CurrentWorldData ?? _persistentProgressService.Progress.LastPlayedWorldData;
 
         public override void InstallBindings()
         {
@@ -70,7 +74,7 @@ namespace Assets.Sources.Gameplay.World.Root
 
         protected virtual void BindWorldData()
         {
-            Container.BindInterfacesTo<WorldData>().FromInstance(WorldData).AsSingle();
+            Container.BindInstance(WorldData).AsSingle();
         }
 
         protected virtual void BindWorldChanger()

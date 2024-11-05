@@ -47,7 +47,7 @@ namespace Assets.Sources.UI.Windows.MapSelection
 
         private void ChangeRestartButtonVisibility()
         {
-            if (_persistentProgressService.Progress.CurrentWorldData.IsChangingStarted)
+            if (_persistentProgressService.Progress.LastPlayedWorldData.IsChangingStarted)
             {
                 _restartButtonCanvasGroup.alpha = 1;
                 _restartButtonCanvasGroup.blocksRaycasts = true;
@@ -61,13 +61,13 @@ namespace Assets.Sources.UI.Windows.MapSelection
             }
         }
 
-        private void OnRestartButtonClicked()
+        private async void OnRestartButtonClicked()
         {
             _worldsList.CleanCurrentWorld();
-            _worldsList.StartCurrentWorld();
+            await _worldsList.StartLastPlayedWorld();
         }
 
         private void OnContinueButtonClicked() =>
-           _gameplayStateMachine.Enter<GameplayLoopState>().Forget();
+           _gameplayStateMachine.Enter<GameplayLoopState, bool>(true).Forget();
     }
 }

@@ -42,56 +42,49 @@ namespace Assets.Sources.Gameplay.World
             _isWorldChanged = false;
         }
 
+        public event Action<IWorldData> CurrentWorldChanged;
+
+        public IWorldData CurrentWorldData { get; private set; }
+
         public void CleanCurrentWorld() =>
             _currentWorld.Clean();
 
         public async UniTask CreateCurrentWorld()
         {
             if (_persistentProgressService.Progress.IsEducationCompleted)
-                _currentWorld = await _gameplayFactory.CreateWorld(_persistentProgressService.Progress.CurrentWorldData.Id, _currentWorldPosition, transform);
+                _currentWorld = await _gameplayFactory.CreateWorld(_persistentProgressService.Progress.LastPlayedWorldData.Id, _currentWorldPosition, transform);
             else
                 _currentWorld = await _gameplayFactory.CreateEducationWorld(_currentWorldPosition, transform);
 
+            CurrentWorldData = _persistentProgressService.Progress.LastPlayedWorldData;
         }
 
-        public async UniTask ShowNextWorld()
+        public async UniTask ShowNextWorld() =>
+            await ChangeWorld(_persistentProgressService.Progress.GetNextWorldData(CurrentWorldData), _nextWorldPosition, _previousWorldPosition);
+
+        public async UniTask ShowPreviousWorld() =>
+            await ChangeWorld(_persistentProgressService.Progress.GetPreviousWorldData(CurrentWorldData), _previousWorldPosition, _nextWorldPosition);
+
+        public async UniTask StartLastPlayedWorld()
         {
             if (_isWorldChanged)
-                return;
+                await UniTask.WaitWhile(() => _isWorldChanged);
 
-            _isWorldChanged = true;
-
-            WorldData nextWorldData = _persistentProgressService.Progress.GetNextWorldData();
-            World world = await _gameplayFactory.CreateWorld(nextWorldData.Id, _nextWorldPosition, transform);
-
-            ReplaceWorlds(world, _previousWorldPosition, _currentWorldPosition, () =>
+            if (CurrentWorldData != _persistentProgressService.Progress.LastPlayedWorldData)
             {
-                _currentWorld = world;
-                _isWorldChanged = false;                
-            });
+                await ChangeWorld(_persistentProgressService.Progress.LastPlayedWorldData, _nextWorldPosition, _previousWorldPosition);
+                await UniTask.WaitWhile(() => _isWorldChanged);
+            }
+
+            _currentWorld.Enter();
         }
 
-        public async UniTask ShowPreviousWorld()
+        public async UniTask StartCurrentWorld()
         {
             if (_isWorldChanged)
-                return;
+                await UniTask.WaitWhile(() => _isWorldChanged);
 
-            _isWorldChanged = true;
-
-            WorldData previousWorldData = _persistentProgressService.Progress.GetPreviousWorldData();
-            World world = await _gameplayFactory.CreateWorld(previousWorldData.Id, _previousWorldPosition, transform);
-
-            ReplaceWorlds(world, _nextWorldPosition, _currentWorldPosition, () =>
-            {
-                _currentWorld = world;
-                _isWorldChanged = false;
-            });
-        }
-
-        public void StartCurrentWorld()
-        {
-            if(_isWorldChanged == false)
-                _currentWorld.EnterBootstrapState();
+            _currentWorld.Enter();
         }
 
         public async UniTask ChangeToEducationWorld(Action callback)
@@ -99,10 +92,9 @@ namespace Assets.Sources.Gameplay.World
             _isWorldChanged = true;
 
             WorldConfig worldConfig = _staticDataService.GetWorld<WorldConfig>(_staticDataService.WorldsConfig.EducationWorldId);
+            CurrentWorldData = _persistentProgressService.Progress.ChangeWorldData(_staticDataService.WorldsConfig.EducationWorldId);
 
-            WorldData nextWorldData = _persistentProgressService.Progress.ChangeWorldData(_staticDataService.WorldsConfig.EducationWorldId);
-
-            nextWorldData.Update(worldConfig.TilesDatas, worldConfig.NextBuildingTypeForCreation, worldConfig.StartingAvailableBuildingTypes.ToList());
+            CurrentWorldData.Update(worldConfig.TilesDatas, worldConfig.NextBuildingTypeForCreation, worldConfig.StartingAvailableBuildingTypes.ToList());
 
             World world = await _gameplayFactory.CreateEducationWorld(_nextWorldPosition, transform);
 
@@ -110,7 +102,27 @@ namespace Assets.Sources.Gameplay.World
             {
                 _currentWorld = world;
                 _isWorldChanged = false;
+                CurrentWorldChanged?.Invoke(CurrentWorldData);
                 callback?.Invoke();
+            });
+        }
+
+        private async UniTask ChangeWorld(IWorldData targetWorldData, Vector3 newWorldStartPosition, Vector3 currentWorldTargetPosition)
+        {
+            if (_isWorldChanged)
+                return;
+
+            _isWorldChanged = true;
+
+            CurrentWorldData = targetWorldData;
+            CurrentWorldChanged?.Invoke(CurrentWorldData);
+
+            World world = await _gameplayFactory.CreateWorld(targetWorldData.Id, newWorldStartPosition, transform);
+
+            ReplaceWorlds(world, currentWorldTargetPosition, _currentWorldPosition, () =>
+            {
+                _currentWorld = world;
+                _isWorldChanged = false;
             });
         }
 

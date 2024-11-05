@@ -1,5 +1,4 @@
-﻿using Assets.Sources.Data.WorldDatas;
-using Assets.Sources.Services.StaticDataService;
+﻿using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
 using DG.Tweening;
 using MPUIKIT;

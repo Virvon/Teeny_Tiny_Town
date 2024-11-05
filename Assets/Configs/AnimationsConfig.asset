@@ -70,7 +70,7 @@ MonoBehaviour:
   WorldRotateDuration: 30
   WorldRotateToStarDuration: 0.6
   WorldSimpleRotateDuration: 0.3
-  WorldMoveDuration: 1
+  WorldMoveDuration: 0.5
   WorldMoveToCenterDuration: 0.5
   CameraMoveDuration: 1.2
   ActiveGainButtonColor: {r: 1, g: 1, b: 1, a: 1}
