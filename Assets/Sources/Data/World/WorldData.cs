@@ -11,6 +11,8 @@ namespace Assets.Sources.Data.World
     [Serializable]
     public partial class WorldData : IWorldData
     {
+        private const int InventorySize = 3;
+
         public string Id;
         public TileData[] Tiles;
         public BuildingType NextBuildingTypeForCreation;
@@ -22,6 +24,7 @@ namespace Assets.Sources.Data.World
         public UpgradeData BuldozerItems;
         public UpgradeData ReplaceItems;
         public bool IsUnlocked;
+        public BuildingType[] Inventory;
 
         public WorldData(
             string id,
@@ -44,6 +47,7 @@ namespace Assets.Sources.Data.World
             PointsData = new(goals);
             BuldozerItems = new();
             ReplaceItems = new();
+            Inventory = new BuildingType[InventorySize];
         }
 
         public event Action<BuildingType> BuildingUpgraded;
@@ -79,6 +83,7 @@ namespace Assets.Sources.Data.World
             get => IsUnlocked;
             set => IsUnlocked = value;
         }
+        BuildingType[] IWorldData.Inventory => Inventory;
 
         public void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)
         {
@@ -124,6 +129,7 @@ namespace Assets.Sources.Data.World
             AvailableBuildingsForCreation = availableBuildingsForCreation;
 
             NextBuildingForCreationBuildsCount = 0;
+            Inventory = new BuildingType[InventorySize];
         }
     }
 }

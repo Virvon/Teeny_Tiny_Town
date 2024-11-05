@@ -23,6 +23,7 @@ namespace Assets.Sources.Data.World
         UpgradeData BulldozerItems { get; }
         UpgradeData ReplaceItems { get; }
         bool IsUnlocked { get; set; }
+        public BuildingType[] Inventory { get; }
 
         void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService);
         void UpdateTileDatas(TileData[] tileDatas);
