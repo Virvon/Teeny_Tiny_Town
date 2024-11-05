@@ -21,15 +21,12 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
         public UniTask Enter(GainStoreItemType gainStoreItemType)
         {
-            Debug.Log("open");
             _gainBuyer.SetBuyingGainType(gainStoreItemType);
-            _windowsSwitcher.Switch<GainBuyingWindow>("gain buyin");
+            _windowsSwitcher.Switch<GainBuyingWindow>();
             return default;
         }
 
-        public UniTask Exit()
-        {
-            return default;
-        }
+        public UniTask Exit() =>
+            default;
     }
 }

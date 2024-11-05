@@ -20,7 +20,7 @@ namespace Assets.Sources.Gameplay.StateMachine.States
 
         public UniTask Enter()
         {
-            _windowsSwitcher.Switch<MapSelectionWindow>("map selection");
+            _windowsSwitcher.Switch<MapSelectionWindow>();
             _camera.MoveTo(new Vector3(60.9f, 93.1f, -60.9f));
             return default;
         }

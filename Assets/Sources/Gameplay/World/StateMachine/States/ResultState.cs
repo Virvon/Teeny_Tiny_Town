@@ -2,11 +2,9 @@
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService;
-using Assets.Sources.Services.StaticDataService.Configs.World;
 using Assets.Sources.UI;
 using Assets.Sources.UI.Windows.World;
 using Cysharp.Threading.Tasks;
-using System.Linq;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
 {
@@ -29,7 +27,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
         public UniTask Enter()
         {
-            _windowsSwitcher.Switch<ResultWindow>("result state");
+            _windowsSwitcher.Switch<ResultWindow>();
             _world.StartRotating();
             _worldData.IsChangingStarted = false;
 

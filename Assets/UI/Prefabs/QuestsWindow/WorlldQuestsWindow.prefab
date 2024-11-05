@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 8024002819516954605}
   - component: {fileID: 1319030425377148000}
   m_Layer: 5
-  m_Name: QuestsWindow
+  m_Name: WorlldQuestsWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 563100173173134119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea7d784f946944a44af239cbfa270ceb, type: 3}
+  m_Script: {fileID: 11500000, guid: c4b9ac428e848f9448983879e60d419d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 1319030425377148000}

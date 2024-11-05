@@ -65,7 +65,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
                 _inputService.SetEnabled(true);
                 _markersVisibility.ChangeAllowedVisibility(true);
 
-                _windowsSwitcher.Switch<GameplayWindow>("world changing");
+                _windowsSwitcher.Switch<GameplayWindow>();
             });
 
             _persistentProgressService.Progress.GameplayMovesCounter.MovesOvered += OnMovesOvered;

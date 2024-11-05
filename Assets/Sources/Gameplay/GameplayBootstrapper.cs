@@ -6,6 +6,7 @@ using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI;
+using Assets.Sources.UI.Windows;
 using Assets.Sources.UI.Windows.MapSelection;
 using Assets.Sources.UI.Windows.Start;
 using Cysharp.Threading.Tasks;
@@ -54,12 +55,14 @@ namespace Assets.Sources.Gameplay
             _gameplayStateMachine.RegisterState(_statesFactory.Create<GameplayLoopState>());
             _gameplayStateMachine.RegisterState(_statesFactory.Create<GameStartState>());
             _gameplayStateMachine.RegisterState(_statesFactory.Create<MapSelectionState>());
+            _gameplayStateMachine.RegisterState(_statesFactory.Create<ShowQuestsState>());
         }  
 
         private async UniTask RegisterWindows()
         {
             await _windowsSwitcher.RegisterWindow<MapSelectionWindow>(WindowType.MapSelection, _uiFactory);
             await _windowsSwitcher.RegisterWindow<StartWindow>(WindowType.Start, _uiFactory);
+            await _windowsSwitcher.RegisterWindow<GameplayQuestsWindow>(WindowType.GameplayQuests, _uiFactory);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
         public UniTask Enter()
         {
-            _windowsSwitcher.Switch<RewardWindow>("reward stat");
+            _windowsSwitcher.Switch<RewardWindow>();
             _rewardsCreator.CreateRewards();
 
             return default;

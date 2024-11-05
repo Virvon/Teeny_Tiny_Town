@@ -379,7 +379,7 @@ MonoBehaviour:
     - Configs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 23d77459bc9a3cb4785e48b9041799e8
-    m_Address: QuestsWindow
+    m_Address: WorldQuestsWindow
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -874,6 +874,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d992818a751005a44a300fd4ba0b24aa
     m_Address: LockedWoodenHouseIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa116ef85722e7a48868805cdfaadd30
+    m_Address: GameplayQuestsWindow
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

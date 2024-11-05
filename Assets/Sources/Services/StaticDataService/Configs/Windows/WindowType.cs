@@ -10,12 +10,13 @@
         Result,
         AdditionalBonusOffer,
         Reward,
-        Quests,
+        WorldQuests,
         Waiting,
         SaveGameplay,
         GainBuying,
         Sandbox,
         Collection,
         Education,
+        GameplayQuests,
     }
 }

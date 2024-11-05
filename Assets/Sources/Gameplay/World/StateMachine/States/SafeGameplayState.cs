@@ -20,7 +20,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         public UniTask Enter()
         {
             _markersVisibility.ChangeAllowedVisibility(false);
-            _windowsSwitcher.Switch<SaveGameplayWindow>("save game");
+            _windowsSwitcher.Switch<SaveGameplayWindow>();
 
             return default;
         }

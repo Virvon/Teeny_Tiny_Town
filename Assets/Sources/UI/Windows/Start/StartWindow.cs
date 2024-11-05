@@ -17,6 +17,7 @@ namespace Assets.Sources.UI.Windows.Start
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _sandboxButton;
         [SerializeField] private Button _collectionButton;
+        [SerializeField] private Button _questsButton;
 
         private GameplayStateMachine _gameplayStateMachine;
         private GameStateMachine _gameStateMachine;
@@ -31,6 +32,7 @@ namespace Assets.Sources.UI.Windows.Start
             _continueButton.onClick.AddListener(OnContinueButtonClicked);
             _sandboxButton.onClick.AddListener(OnSandboxButtonClicked);
             _collectionButton.onClick.AddListener(OnCollectionButtonClicked);
+            _questsButton.onClick.AddListener(OnQuestsButtonClicked);
         }
 
         private void OnDestroy()
@@ -39,6 +41,7 @@ namespace Assets.Sources.UI.Windows.Start
             _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
             _sandboxButton.onClick.AddListener(OnSandboxButtonClicked);
             _collectionButton.onClick.RemoveListener(OnCollectionButtonClicked);
+            _questsButton.onClick.RemoveListener(OnQuestsButtonClicked);
         }
 
         private void OnMapSelectionButtonClicked() =>
@@ -52,5 +55,8 @@ namespace Assets.Sources.UI.Windows.Start
 
         private void OnCollectionButtonClicked() =>
             _gameStateMachine.Enter<CollectionState>().Forget();
+
+        private void OnQuestsButtonClicked() =>
+            _gameplayStateMachine.Enter<ShowQuestsState>().Forget();
     }
 }

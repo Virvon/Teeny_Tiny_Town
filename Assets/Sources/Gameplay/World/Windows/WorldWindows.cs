@@ -31,7 +31,7 @@ namespace Assets.Sources.Gameplay.World.Windows
             await WindowsSwitcher.RegisterWindow<GameplayWindow>(GameplayWindowType, UiFactory);
             await WindowsSwitcher.RegisterWindow<RewardWindow>(WindowType.Reward, UiFactory);
             await WindowsSwitcher.RegisterWindow<ResultWindow>(WindowType.Result, UiFactory);
-            await WindowsSwitcher.RegisterWindow<QuestsWindow>(WindowType.Quests, UiFactory);
+            await WindowsSwitcher.RegisterWindow<WorldQuestsWindow>(WindowType.WorldQuests, UiFactory);
             await WindowsSwitcher.RegisterWindow<SaveGameplayWindow>(WindowType.SaveGameplay, UiFactory);
 
             if (_persistentProgressService.Progress.StoreData.IsInfinityMovesUnlocked == false)
@@ -46,7 +46,7 @@ namespace Assets.Sources.Gameplay.World.Windows
             WindowsSwitcher.Remove<GameplayWindow>();
             WindowsSwitcher.Remove<RewardWindow>();
             WindowsSwitcher.Remove<ResultWindow>();
-            WindowsSwitcher.Remove<QuestsWindow>();
+            WindowsSwitcher.Remove<WorldQuestsWindow>();
             WindowsSwitcher.Remove<SaveGameplayWindow>();
 
             if (_persistentProgressService.Progress.StoreData.IsInfinityMovesUnlocked == false)

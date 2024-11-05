@@ -29,7 +29,7 @@ namespace Assets.Sources.UI
             _windows.Add(typeof(TWindow), window);
         }
 
-        public void Switch<TWindow>(string str)
+        public void Switch<TWindow>()
             where TWindow : Window
         {
             if (_currentWindow != null)

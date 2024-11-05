@@ -31,7 +31,7 @@ namespace Assets.Sources.Gameplay.StateMachine.States
             if(_persistentProgressService.Progress.IsEducationCompleted)
             {
                 _assetProvider.WarmupAssetsByLable(AssetLabels.Gameplay);
-                _windowsSwitcher.Switch<StartWindow>("game start");
+                _windowsSwitcher.Switch<StartWindow>();
                 _camera.MoveTo(new Vector3(67.3f, 93.1f, -67.3f));
             }
             else

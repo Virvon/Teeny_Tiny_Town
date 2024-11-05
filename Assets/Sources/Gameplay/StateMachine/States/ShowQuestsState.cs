@@ -1,22 +1,20 @@
 ﻿using Assets.Sources.Services.StateMachine;
 using Assets.Sources.UI;
-using Assets.Sources.UI.Windows.World;
+using Assets.Sources.UI.Windows;
 using Cysharp.Threading.Tasks;
 
-namespace Assets.Sources.Gameplay.World.StateMachine.States
+namespace Assets.Sources.Gameplay.StateMachine.States
 {
-    public class QuestsState : IState
+    public class ShowQuestsState : IState
     {
         private readonly WindowsSwitcher _windowsSwitcher;
 
-        public QuestsState(WindowsSwitcher windowsSwitcher)
-        {
+        public ShowQuestsState(WindowsSwitcher windowsSwitcher) =>
             _windowsSwitcher = windowsSwitcher;
-        }
 
         public UniTask Enter()
         {
-            _windowsSwitcher.Switch<WorldQuestsWindow>();
+            _windowsSwitcher.Switch<GameplayQuestsWindow>();
             return default;
         }
 
