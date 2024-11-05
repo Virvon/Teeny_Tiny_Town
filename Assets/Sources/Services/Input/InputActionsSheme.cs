@@ -93,8 +93,30 @@ namespace Assets.Sources.Services.Input
                 },
                 {
                     ""name"": """",
+                    ""id"": ""4e5b1ba9-a4b7-4e52-8e64-04db696edbfd"",
+                    ""path"": ""<Touchscreen>/position"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HandlePressedMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""5138a63f-e945-40c7-8290-f3d252e660cf"",
                     ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HandleMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f606eea-1ba4-423f-a11a-5ca287c5a47f"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -128,6 +150,39 @@ namespace Assets.Sources.Services.Input
                     ""name"": ""binding"",
                     ""id"": ""ce8b8914-5eb4-4483-86c9-c6e287ad08fc"",
                     ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""36191520-911e-4fc6-92e0-fb4540b4d448"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Press"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""507c35c2-8023-4095-af46-b11f637d035d"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""0fcfa9e0-cd55-445c-a541-556b69768406"",
+                    ""path"": ""<Touchscreen>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -173,7 +228,7 @@ namespace Assets.Sources.Services.Input
                 {
                     ""name"": """",
                     ""id"": ""b6237c84-4f2b-4dca-ae21-3e9a67a57033"",
-                    ""path"": ""<Touchscreen>/touch0/tap"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -184,7 +239,7 @@ namespace Assets.Sources.Services.Input
                 {
                     ""name"": """",
                     ""id"": ""be247254-0c51-43e8-96ff-92465681d723"",
-                    ""path"": ""<Touchscreen>/touch1/tap"",
+                    ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -195,7 +250,7 @@ namespace Assets.Sources.Services.Input
                 {
                     ""name"": """",
                     ""id"": ""76223388-43cc-4041-a3da-2592ac1b396e"",
-                    ""path"": ""<Touchscreen>/touch2/tap"",
+                    ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -241,7 +296,7 @@ namespace Assets.Sources.Services.Input
                 {
                     ""name"": """",
                     ""id"": ""8f96946d-062a-45f3-9ed5-a9058661c640"",
-                    ""path"": ""<Touchscreen>/touch3/tap"",
+                    ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -252,7 +307,7 @@ namespace Assets.Sources.Services.Input
                 {
                     ""name"": """",
                     ""id"": ""eb0fc95f-1f2e-4797-aeed-4d3ad981553a"",
-                    ""path"": ""<Touchscreen>/touch4/tap"",
+                    ""path"": ""<Keyboard>/5"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -263,7 +318,7 @@ namespace Assets.Sources.Services.Input
                 {
                     ""name"": """",
                     ""id"": ""07c9c47a-d68e-42e0-8d83-6cc9da8732d2"",
-                    ""path"": ""<Touchscreen>/touch5/tap"",
+                    ""path"": ""<Keyboard>/6"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
