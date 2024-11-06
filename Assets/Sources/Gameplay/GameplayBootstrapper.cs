@@ -10,6 +10,7 @@ using Assets.Sources.UI.Windows;
 using Assets.Sources.UI.Windows.MapSelection;
 using Assets.Sources.UI.Windows.Start;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.Gameplay
@@ -39,7 +40,7 @@ namespace Assets.Sources.Gameplay
         public async void Initialize()
         {
             await _gameplayFactory.CreateUiSoundPlayer();
-            await _gameplayFactory.CreateCamera();
+            await _gameplayFactory.CreateCamera(new Vector3(56.2f, 78f, -56.2f));
             WorldsList worldsList = await _gameplayFactory.CreateWorldsList();
 
             RegisterGameplayStates();

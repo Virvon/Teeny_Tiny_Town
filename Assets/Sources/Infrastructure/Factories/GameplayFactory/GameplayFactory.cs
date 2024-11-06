@@ -48,9 +48,9 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             _container.BindInstance(uiSoundPlayer).AsSingle();
         }
 
-        public async UniTask<GameplayCamera> CreateCamera()
+        public async UniTask<GameplayCamera> CreateCamera(Vector3 position)
         {
-            GameplayCamera camera = await _gameplayCameraFactory.Create(GameplayFactoryAssets.Camera);
+            GameplayCamera camera = await _gameplayCameraFactory.Create(GameplayFactoryAssets.Camera, position);
 
             _container.BindInstance(camera).AsSingle();
 

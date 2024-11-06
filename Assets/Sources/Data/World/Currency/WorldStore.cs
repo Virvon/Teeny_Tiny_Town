@@ -3,6 +3,7 @@ using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Assets.Sources.Data.World.Currency
 {

@@ -13,24 +13,27 @@ MonoBehaviour:
   m_Name: CurrencyWorldConfig
   m_EditorClassIdentifier: 
   Id: 0f873ea3-6bb2-42e4-ac1b-77b904b0b8e1
-  Size: {x: 4, y: 4}
+  Size: {x: 5, y: 5}
   TileConfigs:
-  - Type: 1
+  - Type: 0
     GridPosition: {x: 0, y: 0}
     BuildingType: 0
-  - Type: 2
+  - Type: 0
     GridPosition: {x: 0, y: 1}
     BuildingType: 0
-  - Type: 2
+  - Type: 0
     GridPosition: {x: 0, y: 2}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 0, y: 3}
     BuildingType: 0
-  - Type: 2
+  - Type: 0
+    GridPosition: {x: 0, y: 4}
+    BuildingType: 0
+  - Type: 0
     GridPosition: {x: 1, y: 0}
     BuildingType: 0
-  - Type: 2
+  - Type: 0
     GridPosition: {x: 1, y: 1}
     BuildingType: 0
   - Type: 0
@@ -38,6 +41,9 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 1, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 4}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 2, y: 0}
@@ -52,6 +58,9 @@ MonoBehaviour:
     GridPosition: {x: 2, y: 3}
     BuildingType: 0
   - Type: 0
+    GridPosition: {x: 2, y: 4}
+    BuildingType: 0
+  - Type: 0
     GridPosition: {x: 3, y: 0}
     BuildingType: 0
   - Type: 0
@@ -63,8 +72,26 @@ MonoBehaviour:
   - Type: 0
     GridPosition: {x: 3, y: 3}
     BuildingType: 0
-  NextBuildingTypeForCreation: 0
-  StartingAvailableBuildingTypes: 0100000002000000
+  - Type: 0
+    GridPosition: {x: 3, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 4}
+    BuildingType: 0
+  NextBuildingTypeForCreation: 2
+  StartingAvailableBuildingTypes: 01000000
   AssetReference:
     m_AssetGUID: c2398a6f208640c42a2a29d3aded7148
     m_SubObjectName: 
@@ -91,5 +118,5 @@ MonoBehaviour:
   SerialNumber: 0
   NextWorldId: 73ee-4d7a-a86d-307aa525db02aa525db02
   PreviousWorldId: 73ee-4d7a-a86d-307aa525db02aa525db02
-  StartStoreList: 090000000100000002000000030000000400000005000000060000000700000008000000
+  StartStoreList: 0900000001000000
   AvailableGainStoreItems: 010000000200000003000000

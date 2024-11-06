@@ -42,7 +42,7 @@ namespace Assets.Sources.Gameplay.Cameras
         private void ChangeOrthographic() =>
             _mainCamera.orthographic = _persistentProgressService.Progress.SettingsData.IsOrthographicCamera;
 
-        public class Factory : PlaceholderFactory<string, UniTask<GameplayCamera>>
+        public class Factory : PlaceholderFactory<string, Vector3, UniTask<GameplayCamera>>
         {
         }
     }
