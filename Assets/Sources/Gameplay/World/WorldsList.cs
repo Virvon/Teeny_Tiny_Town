@@ -49,7 +49,7 @@ namespace Assets.Sources.Gameplay.World
         public void CleanCurrentWorld() =>
             _currentWorld.Clean();
 
-        public async UniTask CreateCurrentWorld()
+        public async UniTask Initialize()
         {
             if (_persistentProgressService.Progress.IsEducationCompleted)
                 _currentWorld = await _gameplayFactory.CreateWorld(_persistentProgressService.Progress.LastPlayedWorldDataId, _currentWorldPosition, transform);

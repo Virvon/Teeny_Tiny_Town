@@ -7,6 +7,7 @@ using Agava.YandexGames;
 using System;
 using Assets.Sources.Services.CoroutineRunner;
 using UnityEngine.InputSystem.EnhancedTouch;
+using Assets.Sources.UI.LoadingCurtain;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {
@@ -16,22 +17,24 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
         private readonly IAssetProvider _assetProvider;
         private readonly IStaticDataService _staticDataService;
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly LoadingCurtainProxy _loadingCurtainProxy;
 
         public BootstrapState(
             GameStateMachine gameStateMachine,
             IAssetProvider assetProvider,
             IStaticDataService staticDataService,
-            ICoroutineRunner coroutineRunner)
+            ICoroutineRunner coroutineRunner,
+            LoadingCurtainProxy loadingCurtainProxy)
         {
             _gameStateMachine = gameStateMachine;
             _assetProvider = assetProvider;
             _staticDataService = staticDataService;
             _coroutineRunner = coroutineRunner;
+            _loadingCurtainProxy = loadingCurtainProxy;
         }
 
         public async UniTask Enter()
         {
-            //TouchSimulation.Enable();
             await Initialize();
 
             _coroutineRunner.StartCoroutine(InitializeYandexSdk(callback: () => _gameStateMachine.Enter<LoadProgressState>().Forget()));
@@ -41,6 +44,9 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
         {
             await _assetProvider.InitializeAsync();
             await _staticDataService.InitializeAsync();
+            await _loadingCurtainProxy.InitializeAsync();
+
+            _loadingCurtainProxy.Show();
         }
 
         public UniTask Exit() =>

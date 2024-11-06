@@ -6,6 +6,7 @@ using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Assets.Sources.UI;
+using Assets.Sources.UI.LoadingCurtain;
 using Assets.Sources.UI.Windows;
 using Assets.Sources.UI.Windows.MapSelection;
 using Assets.Sources.UI.Windows.Start;
@@ -22,19 +23,22 @@ namespace Assets.Sources.Gameplay
         private readonly IGameplayFactory _gameplayFactory;
         private readonly WindowsSwitcher _windowsSwitcher;
         private readonly IUiFactory _uiFactory;
+        private readonly ILoadingCurtain _loadingCurtain;
 
         public GameplayBootstrapper(
             GameplayStateMachine gameplayStateMachine,
             StatesFactory statesFactory,
             IGameplayFactory gameplayFactory,
             WindowsSwitcher windowsSwitcher,
-            IUiFactory uiFactory)
+            IUiFactory uiFactory,
+            ILoadingCurtain loadingCurtain)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _statesFactory = statesFactory;
             _gameplayFactory = gameplayFactory;
             _windowsSwitcher = windowsSwitcher;
             _uiFactory = uiFactory;
+            _loadingCurtain = loadingCurtain;
         }
 
         public async void Initialize()
@@ -46,10 +50,12 @@ namespace Assets.Sources.Gameplay
             RegisterGameplayStates();
 
             await _uiFactory.CreateBlur();
-            await worldsList.CreateCurrentWorld();
+            await worldsList.Initialize();
             await RegisterWindows();
 
             await _gameplayStateMachine.Enter<GameStartState>();
+
+            _loadingCurtain.Hide();
         }
 
         private void RegisterGameplayStates()
