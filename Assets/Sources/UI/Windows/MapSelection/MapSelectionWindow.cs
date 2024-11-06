@@ -58,11 +58,12 @@ namespace Assets.Sources.UI.Windows.MapSelection
         public override void Open()
         {
             base.Open();
-            ChangeCurrentWorldInfo(_worldsList.CurrentWorldData);
+            ChangeCurrentWorldInfo(_worldsList.CurrentWorldDataId);
         }
 
-        public void ChangeCurrentWorldInfo(IWorldData worldData)
+        public void ChangeCurrentWorldInfo(string worldDataId)
         {
+            WorldData worldData = _persistentProgressService.Progress.GetWorldData(worldDataId);
             WorldConfig worldConfig = _staticDataService.GetWorld<WorldConfig>(worldData.Id);
             Vector2Int size = worldData.Size;
 

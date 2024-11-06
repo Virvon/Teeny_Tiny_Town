@@ -58,7 +58,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
         public UniTask Enter()
         {
             _worldData.IsChangingStarted = true;
-            _persistentProgressService.Progress.LastPlayedWorldData = _worldData;
+            _persistentProgressService.Progress.LastPlayedWorldDataId = _worldData.Id;
 
             _camera.MoveTo(new Vector3(55.1f, 78.8f, -55.1f), callback: () =>
             {

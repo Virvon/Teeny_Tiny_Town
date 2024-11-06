@@ -47,7 +47,7 @@ namespace Assets.Sources.UI.Windows.MapSelection
 
         private void ChangeRestartButtonVisibility()
         {
-            if (_persistentProgressService.Progress.LastPlayedWorldData.IsChangingStarted)
+            if (_persistentProgressService.Progress.GetWorldData(_persistentProgressService.Progress.LastPlayedWorldDataId).IsChangingStarted)
             {
                 _restartButtonCanvasGroup.alpha = 1;
                 _restartButtonCanvasGroup.blocksRaycasts = true;

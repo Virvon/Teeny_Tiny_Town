@@ -52,7 +52,8 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
                 startQuests,
                 _staticDataService.WorldsConfig.AvailableMovesCount,
                 _staticDataService.SandboxConfig.Size,
-                _staticDataService.GetAllBuildings());
+                _staticDataService.GetAllBuildings(),
+                _staticDataService.WorldsConfig.EducationWorldId);
 
             progress.Wallet.Value = 3000;
 

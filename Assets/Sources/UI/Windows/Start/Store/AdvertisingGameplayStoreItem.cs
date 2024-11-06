@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Services.PersistentProgress;
+using Assets.Sources.Services.SaveLoadProgress;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +14,13 @@ namespace Assets.Sources.UI.Windows.Start.Store
         [SerializeField] private TMP_Text _rewardValue;
 
         private IPersistentProgressService _persistentProgressServcie;
+        private ISaveLoadService _saveLoadService;
 
         [Inject]
-        private void Construct(IPersistentProgressService persistentProgressService)
+        private void Construct(IPersistentProgressService persistentProgressService, ISaveLoadService saveLoadService)
         {
             _persistentProgressServcie = persistentProgressService;
+            _saveLoadService = saveLoadService;
 
             _rewardValue.text = _reward.ToString();
 
@@ -30,6 +33,7 @@ namespace Assets.Sources.UI.Windows.Start.Store
         private void OnButtonClicked()
         {
             _persistentProgressServcie.Progress.Wallet.Give(_reward);
+            _saveLoadService.SaveProgress();
         }
     }
 }

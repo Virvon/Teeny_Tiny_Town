@@ -31,6 +31,9 @@ namespace Assets.Sources.Sandbox
             GridPosition = _tileData.GridPosition;
 
             _adjacentTiles = new();
+
+            if(tileData.BuildingType != BuildingType.Undefined)
+                Building = new Building(_tileData.BuildingType);
         }
 
         public bool IsEmpty => Building == null;
@@ -146,7 +149,7 @@ namespace Assets.Sources.Sandbox
         public async UniTask CreateRepresentation(ITileRepresentationCreatable tileRepresentationCreatable)
         {
             TileRepresentation = await tileRepresentationCreatable.Create(GridPosition, GetTileType());
-            await CreateGroundRepresentation(false);
+            await CreateGroundRepresentation();
 
             if (Building != null)
                 await Building.CreateRepresentation(TileRepresentation, false, false);
@@ -199,15 +202,24 @@ namespace Assets.Sources.Sandbox
             return TileType.RoadGround;
         }
 
-        protected virtual async UniTask CreateGroundRepresentation(bool isWaitedForCreation) =>
-            await TileRepresentation.GroundCreator.Create(GetTileType());
+        protected virtual async UniTask CreateGroundRepresentation()
+        {
+            if(_tileData.GroundType == SandboxGroundType.AsphaltRoad || _tileData.GroundType == SandboxGroundType.SoilRoad)
+                await TryValidateRoad(_adjacentTiles, IsEmpty, GridPosition);
+            else
+                await TileRepresentation.GroundCreator.Create(GetTileType());
+        }
 
-        protected virtual async UniTask SetUpBuilding(Building building) =>
+        protected virtual async UniTask SetUpBuilding(Building building)
+        {
             await CreateBuildingRepresentation(building);
+        }
 
         protected virtual UniTask Clean()
         {
             SetBuilding(null);
+
+            _tileData.GroundType = SandboxGroundType.Soil;
 
             return default;
         }

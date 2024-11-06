@@ -55,8 +55,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
         public void DestroyBuilding()
         {
-            _building.Destroy();
-            _building = null;
+            if(_building != null)
+            {
+                _building.Destroy();
+                _building = null;
+            }
         }
 
         public async UniTask DestroyBuilding(Vector3 destroyPosition)

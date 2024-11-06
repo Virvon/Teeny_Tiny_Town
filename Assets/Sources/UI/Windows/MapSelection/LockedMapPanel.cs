@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Gameplay.World;
 using Assets.Sources.Services.PersistentProgress;
+using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using TMPro;
@@ -18,29 +19,33 @@ namespace Assets.Sources.UI.Windows.MapSelection
         private IPersistentProgressService _persistentProgressService;
         private IStaticDataService _staticDataServcie;
         private WorldsList _worldsList;
+        private ISaveLoadService _saveLoadService;
 
         private uint _currentWorldCost;
 
         [Inject]
-        private void Construct(IPersistentProgressService persistentProgressService, IStaticDataService staticDataService, WorldsList worldsList)
+        private void Construct(
+            IPersistentProgressService persistentProgressService,
+            IStaticDataService staticDataService,
+            WorldsList worldsList,
+            ISaveLoadService saveLoadService)
         {
             _persistentProgressService = persistentProgressService;
             _staticDataServcie = staticDataService;
             _worldsList = worldsList;
+            _saveLoadService = saveLoadService;
 
             _buyButton.onClick.AddListener(OnBuyButtonClicked);
         }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             _buyButton.onClick.RemoveListener(OnBuyButtonClicked);
-        }
 
         public override void Open()
         {
             base.Open();
 
-            WorldConfig worldConfig = _staticDataServcie.GetWorld<WorldConfig>(_worldsList.CurrentWorldData.Id);
+            WorldConfig worldConfig = _staticDataServcie.GetWorld<WorldConfig>(_worldsList.CurrentWorldDataId);
             _currentWorldCost = worldConfig.Cost;
             _costValue.text = _currentWorldCost.ToString();
         }
@@ -49,8 +54,9 @@ namespace Assets.Sources.UI.Windows.MapSelection
         {
             if(_persistentProgressService.Progress.Wallet.TryGet(_currentWorldCost))
             {
-                _worldsList.CurrentWorldData.IsUnlocked = true;
-                _mapSelectionWindow.ChangeCurrentWorldInfo(_worldsList.CurrentWorldData);
+                _persistentProgressService.Progress.GetWorldData(_worldsList.CurrentWorldDataId).IsUnlocked = true;
+                _mapSelectionWindow.ChangeCurrentWorldInfo(_worldsList.CurrentWorldDataId);
+                _saveLoadService.SaveProgress();
             }
         }
     }

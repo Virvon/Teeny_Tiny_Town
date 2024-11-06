@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Services.PersistentProgress;
+using Assets.Sources.Services.SaveLoadProgress;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
@@ -10,12 +11,15 @@ namespace Assets.Sources.UI.Windows.Education
         [SerializeField] private CanvasGroup[] _showedUi;
 
         private IPersistentProgressService _persistentProgressService;
+        private ISaveLoadService _saveLoadService;
+
         private uint _startMovesCount;
 
         [Inject]
-        private void Construct(IPersistentProgressService presistentProgressService)
+        private void Construct(IPersistentProgressService presistentProgressService, ISaveLoadService saveLoadService)
         {
             _persistentProgressService = presistentProgressService;
+            _saveLoadService = saveLoadService;
 
             _startMovesCount = _persistentProgressService.Progress.GameplayMovesCounter.RemainingMovesCount;
             _persistentProgressService.Progress.GameplayMovesCounter.SetCount(uint.MaxValue);
@@ -49,8 +53,6 @@ namespace Assets.Sources.UI.Windows.Education
             ActionHandlerStateMachine.SetActive(true);
             MarkersVisibility.ChangeAllowedVisibility(true);
 
-            Debug.Log("hide");
-
             _persistentProgressService.Progress.IsEducationCompleted = true;
 
             foreach (CanvasGroup canvasGroup in _showedUi)
@@ -61,6 +63,8 @@ namespace Assets.Sources.UI.Windows.Education
                     canvasGroup.interactable = true;
                 };
             }
+
+            _saveLoadService.SaveProgress();
         }
     }
 }

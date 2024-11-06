@@ -3,6 +3,7 @@ using System;
 
 namespace Assets.Sources.Data.World.Currency
 {
+    [Serializable]
     public class GainStoreItemData
     {
         public GainStoreItemType Type;

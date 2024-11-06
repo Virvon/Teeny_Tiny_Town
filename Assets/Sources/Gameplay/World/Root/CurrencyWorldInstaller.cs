@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Data.World.Currency;
+﻿using Assets.Sources.Data.World;
+using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.Windows;
@@ -36,10 +37,17 @@ namespace Assets.Sources.Gameplay.World.Root
 
         protected override void BindWorldData()
         {
-            if (WorldData is not CurrencyWorldData)
-                Debug.LogError(nameof(WorldData) + " is not " + typeof(CurrencyWorldData));
+            WorldData worldData = PersistentProgressService.Progress.GetWorldData(WorldDataId);
 
-            Container.BindInterfacesTo<CurrencyWorldData>().FromInstance(WorldData as CurrencyWorldData).AsSingle();
+            Debug.Log(worldData.Id);
+            Debug.Log(worldData is WorldData);
+            Debug.Log(worldData is ExpandingWorldData);
+            Debug.Log(worldData is CurrencyWorldData);
+
+            if (worldData is not CurrencyWorldData)
+                Debug.LogError(nameof(WorldDataId) + " is not " + typeof(CurrencyWorldData));
+
+            Container.BindInterfacesTo<CurrencyWorldData>().FromInstance(worldData as CurrencyWorldData).AsSingle();
         }
 
         protected override void BindGameplayMover()

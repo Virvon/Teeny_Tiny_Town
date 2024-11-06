@@ -17,10 +17,12 @@ namespace Assets.Sources.Gameplay.World.Root
 
         protected override void BindWorldData()
         {
-            if (WorldData is not ExpandingWorldData)
-                Debug.LogError(nameof(WorldData) + " is not " + typeof(ExpandingWorldData));
+            WorldData worldData = PersistentProgressService.Progress.GetWorldData(WorldDataId);
 
-            Container.BindInterfacesTo<ExpandingWorldData>().FromInstance(WorldData as ExpandingWorldData).AsSingle();
+            if (worldData is not ExpandingWorldData)
+                Debug.LogError(nameof(WorldDataId) + " is not " + typeof(ExpandingWorldData));
+
+            Container.BindInterfacesTo<ExpandingWorldData>().FromInstance(worldData as ExpandingWorldData).AsSingle();
         }
 
         protected override void BindGameplayMover()

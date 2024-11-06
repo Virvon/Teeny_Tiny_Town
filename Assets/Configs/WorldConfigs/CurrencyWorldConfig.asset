@@ -64,7 +64,7 @@ MonoBehaviour:
     GridPosition: {x: 3, y: 3}
     BuildingType: 0
   NextBuildingTypeForCreation: 0
-  StartingAvailableBuildingTypes: 01000000
+  StartingAvailableBuildingTypes: 0100000002000000
   AssetReference:
     m_AssetGUID: c2398a6f208640c42a2a29d3aded7148
     m_SubObjectName: 
@@ -88,5 +88,8 @@ MonoBehaviour:
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
+  SerialNumber: 0
+  NextWorldId: 73ee-4d7a-a86d-307aa525db02aa525db02
+  PreviousWorldId: 73ee-4d7a-a86d-307aa525db02aa525db02
   StartStoreList: 090000000100000002000000030000000400000005000000060000000700000008000000
   AvailableGainStoreItems: 010000000200000003000000

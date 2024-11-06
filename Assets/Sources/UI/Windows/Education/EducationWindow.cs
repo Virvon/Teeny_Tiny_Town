@@ -15,10 +15,8 @@ namespace Assets.Sources.UI.Windows.Education
         private int _currentEducationPanelIndex;
 
         [Inject]
-        private void Construct(IPersistentProgressService persistentProgressService)
-        {
+        private void Construct(IPersistentProgressService persistentProgressService) =>
             _persistentProgressService = persistentProgressService;
-        }
 
         public override void Open()
         {

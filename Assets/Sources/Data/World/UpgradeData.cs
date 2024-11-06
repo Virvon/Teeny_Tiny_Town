@@ -2,41 +2,38 @@
 
 namespace Assets.Sources.Data.World
 {
-    public partial class WorldData
+    [Serializable]
+    public class UpgradeData
     {
-        [Serializable]
-        public class UpgradeData
+        public uint Count;
+
+        public UpgradeData() =>
+            Count = 0;
+
+        public event Action<uint> CountChanged;
+
+        public void AddItems(uint count)
         {
-            public uint Count;
+            Count += count;
 
-            public UpgradeData() =>
-                Count = 0;
+            CountChanged?.Invoke(Count);
+        }
 
-            public event Action<uint> CountChanged;
+        public bool TryGet()
+        {
+            if (Count == 0)
+                return false;
 
-            public void AddItems(uint count)
-            {
-                Count += count;
+            Count--;
+            CountChanged?.Invoke(Count);
 
-                CountChanged?.Invoke(Count);
-            }
+            return true;
+        }
 
-            public bool TryGet()
-            {
-                if (Count == 0)
-                    return false;
-
-                Count--;
-                CountChanged?.Invoke(Count);
-
-                return true;
-            }
-
-            public void SetItemsCount(uint count)
-            {
-                Count = count;
-                CountChanged?.Invoke(Count);
-            }
+        public void SetItemsCount(uint count)
+        {
+            Count = count;
+            CountChanged?.Invoke(Count);
         }
     }
 }

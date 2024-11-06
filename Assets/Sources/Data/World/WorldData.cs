@@ -21,7 +21,7 @@ namespace Assets.Sources.Data.World
         public Vector2Int Size;
         public bool IsChangingStarted;
         public PointsData PointsData;
-        public UpgradeData BuldozerItems;
+        public UpgradeData BulldozerItems;
         public UpgradeData ReplaceItems;
         public bool IsUnlocked;
         public BuildingType[] Inventory;
@@ -45,7 +45,7 @@ namespace Assets.Sources.Data.World
             NextBuildingForCreationBuildsCount = 0;
             IsChangingStarted = false;
             PointsData = new(goals);
-            BuldozerItems = new();
+            BulldozerItems = new();
             ReplaceItems = new();
             Inventory = new BuildingType[InventorySize];
         }
@@ -76,7 +76,7 @@ namespace Assets.Sources.Data.World
             set => Size = value;
         }
         PointsData IWorldData.PointsData => PointsData;
-        UpgradeData IWorldData.BulldozerItems => BuldozerItems;
+        UpgradeData IWorldData.BulldozerItems => BulldozerItems;
         UpgradeData IWorldData.ReplaceItems => ReplaceItems;
         bool IWorldData.IsUnlocked
         {

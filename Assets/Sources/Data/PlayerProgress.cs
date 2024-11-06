@@ -1,6 +1,9 @@
 ﻿using Assets.Sources.Data.Sandbox;
 using Assets.Sources.Data.World;
+using Assets.Sources.Data.World.Currency;
+using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.World;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +14,9 @@ namespace Assets.Sources.Data
     [Serializable]
     public class PlayerProgress
     { 
-        public WorldData[] WorldDatas;
+        public List<WorldData> WorldDatas;
+        public List<CurrencyWorldData> CurrencyWorldDatas;
+        public List<ExpandingWorldData> ExpandingWorldDatas;
         public StoreData StoreData;
         public Wallet Wallet;
         public List<QuestData> Quests;
@@ -20,52 +25,43 @@ namespace Assets.Sources.Data
         public BuildingData[] BuildingDatas;
         public bool IsEducationCompleted;
         public SettingsData SettingsData;
-        public IWorldData LastPlayedWorldData;
+        public string LastPlayedWorldDataId;
 
         public PlayerProgress(
             WorldData[] worldDatas,
             List<QuestData> quests,
             uint startRemainingMoveCount,
             Vector2Int sandboxSize,
-            BuildingType[] allBuildings)
+            BuildingType[] allBuildings,
+            string startWorldId)
         {
-            WorldDatas = worldDatas;
             Quests = quests;
-
             StoreData = new();
             Wallet = new();
             GameplayMovesCounter = new(startRemainingMoveCount, StoreData);
             SandboxData = new(sandboxSize);
             SettingsData = new();
-
-            LastPlayedWorldData = WorldDatas[0];
+            LastPlayedWorldDataId = startWorldId;
             IsEducationCompleted = true;
 
             BuildingDatas = new BuildingData[allBuildings.Length];
 
             for(int i = 0; i < allBuildings.Length; i++)
                 BuildingDatas[i] = new BuildingData(allBuildings[i]);
-        }
 
-        public IWorldData GetNextWorldData(IWorldData currentWorldData)
-        {
-            int curentWorldDataIndex = Array.IndexOf(WorldDatas, currentWorldData);
+            WorldDatas = new();
+            CurrencyWorldDatas = new();
+            ExpandingWorldDatas = new();
 
-            return curentWorldDataIndex >= WorldDatas.Length - 1 ? WorldDatas[0] : WorldDatas[curentWorldDataIndex + 1];
-        }
-
-        public IWorldData GetPreviousWorldData(IWorldData currentWorldData)
-        {
-            int curentWorldDataIndex = Array.IndexOf(WorldDatas, currentWorldData);
-
-            return curentWorldDataIndex <= 0 ? WorldDatas[WorldDatas.Length - 1] : WorldDatas[curentWorldDataIndex - 1];
-        }
-
-        public IWorldData ChangeWorldData(string id)
-        {
-            LastPlayedWorldData = WorldDatas.First(data => data.Id == id);
-
-            return LastPlayedWorldData;
+            foreach(WorldData worldData in worldDatas)
+            {
+                if (worldData is CurrencyWorldData)
+                    CurrencyWorldDatas.Add((CurrencyWorldData)worldData);
+                else if (worldData is ExpandingWorldData)
+                    ExpandingWorldDatas.Add((ExpandingWorldData)worldData);
+                else
+                    WorldDatas.Add(worldData);
+            }
         }
 
         public QuestData GetQuest(string id) =>
@@ -73,5 +69,21 @@ namespace Assets.Sources.Data
 
         public void AddBuildingToCollection(BuildingType type) =>
             BuildingDatas.First(data => data.Type == type).Count++;
+
+        public WorldData GetWorldData(string id)
+        {
+            WorldData worldData = WorldDatas.FirstOrDefault(data => data.Id == id);
+
+            if(worldData == null)
+                worldData = CurrencyWorldDatas.FirstOrDefault(data => data.Id == id);
+
+            if(worldData == null)
+                worldData = ExpandingWorldDatas.FirstOrDefault(data => data.Id == id);
+
+            if (worldData == null)
+                Debug.LogError(nameof(worldData) + " is not founded");
+
+            return worldData;
+        }
     }
 }

@@ -48,3 +48,5 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
   SerialNumber: 1
+  NextWorldId: 0f873ea3-6bb2-42e4-ac1b-77b904b0b8e1
+  PreviousWorldId: 0f873ea3-6bb2-42e4-ac1b-77b904b0b8e1

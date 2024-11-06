@@ -30,7 +30,7 @@ namespace Assets.Sources.UI.Windows.MapSelection
 
             _icons = new();
 
-            ChangeIcons(_worldsList.CurrentWorldData);
+            ChangeIcons(_worldsList.CurrentWorldDataId);
 
             _worldsList.CurrentWorldChanged += ChangeIcons;
         }
@@ -38,14 +38,14 @@ namespace Assets.Sources.UI.Windows.MapSelection
         private void OnDestroy() =>
             _worldsList.CurrentWorldChanged += ChangeIcons;
 
-        private async void ChangeIcons(IWorldData worldData)
+        private async void ChangeIcons(string worldDataId)
         {
             foreach (PeculiarityIconPanel panel in _icons)
                 Destroy(panel.gameObject);
 
             _icons.Clear();
 
-            WorldConfig worldConfig = _staticDataService.GetWorld<WorldConfig>(worldData.Id);
+            WorldConfig worldConfig = _staticDataService.GetWorld<WorldConfig>(worldDataId);
 
             foreach (AssetReference iconAssetReference in worldConfig.PeculiarityIconAssetReferences)
                 _icons.Add(await _uiFactory.CreatePeculiarityIconPanel(iconAssetReference, transform));

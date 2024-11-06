@@ -2,6 +2,7 @@
 
 namespace Assets.Sources.Data.World
 {
+    [Serializable]
     public class WorldMovesCounterData
     {
         private const uint MovesCountToBuildingsPayment = 5;

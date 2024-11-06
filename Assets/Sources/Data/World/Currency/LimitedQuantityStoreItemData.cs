@@ -1,7 +1,9 @@
 ﻿using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
+using System;
 
 namespace Assets.Sources.Data.World.Currency
 {
+    [Serializable]
     public class LimitedQuantityStoreItemData : GainStoreItemData
     {
         public uint RemainingCount;

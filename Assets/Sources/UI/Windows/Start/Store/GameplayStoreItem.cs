@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Services.PersistentProgress;
+using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.GameplayStore;
 using System;
@@ -16,12 +17,16 @@ namespace Assets.Sources.UI.Windows.Start.Store
         [SerializeField] private TMP_Text _costValue;
 
         private IPersistentProgressService _persistentProgressService;
+        private ISaveLoadService _saveLoadService;
+
         private StoreItemConfig _storeItemConfig;
 
         [Inject]
-        private void Construct(IPersistentProgressService persistentProgressService, IStaticDataService staticDataService)
+        private void Construct(IPersistentProgressService persistentProgressService, IStaticDataService staticDataService, ISaveLoadService saveLoadService)
         {
             _persistentProgressService = persistentProgressService;
+            _saveLoadService = saveLoadService;
+
             _storeItemConfig = staticDataService.GetGameplayStorItem(_type);
 
             _costValue.text = _storeItemConfig.Cost.ToString();
@@ -41,6 +46,7 @@ namespace Assets.Sources.UI.Windows.Start.Store
             if (_persistentProgressService.Progress.Wallet.TryGet(_storeItemConfig.Cost))
             {
                 _storeItemConfig.Unlock(_persistentProgressService.Progress.StoreData);
+                _saveLoadService.SaveProgress();
                 Destroy(gameObject);
             }
         }
