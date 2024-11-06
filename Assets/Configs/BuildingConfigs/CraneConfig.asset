@@ -31,3 +31,8 @@ MonoBehaviour:
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
+  Name: "\u041A\u0440\u0430\u043D"
+  Title: "\u041C\u043E\u0433\u0443\u0447\u0438\u0439 \u043A\u0440\u0430\u043D, \u0441\u0442\u0440\u043E\u044F\u0449\u0438\u0439
+    \u043C\u0438\u0440 \u043E\u0434\u043D\u0438\u043C \u043F\u043E\u0434\u044A\u0435\u043C\u043E\u043C
+    \u0437\u0430 \u0440\u0430\u0437."
+  ProportionOfLoss: 2

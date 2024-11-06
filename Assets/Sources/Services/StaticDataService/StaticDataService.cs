@@ -40,7 +40,7 @@ namespace Assets.Sources.Services.StaticDataService
         public WindowsConfig WindowsConfig { get; private set; }
         public WorldsConfig WorldsConfig { get; private set; }
         public AvailableForConstructionBuildingsConfig AvailableForConstructionBuildingsConfig { get; private set; }
-        public ReadOnlyArray<WorldConfig> WorldConfigs => _worldConfigs.Values.OrderBy(config => config.SerialNumber).ToArray();
+        public ReadOnlyArray<WorldConfig> WorldConfigs => _worldConfigs.Values.ToArray();
         public AnimationsConfig AnimationsConfig { get; private set; }
         public QuestsConfig QuestsConfig { get; private set; }
         public SandboxConfig SandboxConfig { get; private set; }

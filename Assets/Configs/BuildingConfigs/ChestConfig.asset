@@ -18,7 +18,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  PointsRewardForMerge: 0
+  PointsRewardForMerge: 800
   IconAssetReference:
     m_AssetGUID: 37c61bec6db592044833d561ba65e400
     m_SubObjectName: ChestIcon
@@ -31,4 +31,7 @@ MonoBehaviour:
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
+  Name: "\u0421\u0443\u043D\u0434\u0443\u043A \u0441 \u0441\u043E\u043A\u0440\u043E\u0432\u0438\u0449\u0430\u043C\u0438"
+  Title: "\u0421\u0443\u043D\u0434\u043A \u043F\u043E\u043B\u043D\u044B\u0439 \u0442\u0430\u0439\u043D"
+  ProportionOfLoss: 0
   Reward: 0

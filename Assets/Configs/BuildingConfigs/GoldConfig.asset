@@ -18,7 +18,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  PointsRewardForMerge: 100
+  PointsRewardForMerge: 130
   IconAssetReference:
     m_AssetGUID: 9311affb245ba334c93755b9c8a3cba2
     m_SubObjectName: GoldenIcon
@@ -31,3 +31,7 @@ MonoBehaviour:
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
+  Name: "\u0417\u043E\u043B\u043E\u0442\u043E"
+  Title: "\u0411\u043B\u0435\u0441\u0442\u044F\u0449\u0435\u0435 \u0437\u043E\u043B\u043E\u0442\u043E,
+    \u0446\u0435\u043D\u043D\u043E\u0435 \u0438 \u0436\u0435\u043B\u0430\u043D\u043D\u043E\u0435."
+  ProportionOfLoss: 0

@@ -256,15 +256,16 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4141ff073e4b08b43bc3271a9810fa64
-    m_Address: Assets/Configs/WorldConfigs/WorldConfig.asset
+    m_Address: World10Config
     m_ReadOnly: 0
     m_SerializedLabels:
     - Configs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4166c9d83fb665144b2b79697bf64f37
-    m_Address: Assets/Configs/WorldConfigs/ExpandingWorldConfig.asset
+    m_Address: World2Config
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Configs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c83a0e82ae2fe074e8598aff9a8d1e25
     m_Address: ExpandingWorld
@@ -277,7 +278,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1bcdf5a6e46f3fd4a8f8133947e9a3ac
-    m_Address: CurrencyWorldConfig
+    m_Address: World1Config
     m_ReadOnly: 0
     m_SerializedLabels:
     - Configs
@@ -901,6 +902,59 @@ MonoBehaviour:
     m_Address: LoadingCurtain
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07e2aca811b5588479bc933c3f623c75
+    m_Address: TallIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b504b95ea0153a24eb51f397aa12e5f3
+    m_Address: World11Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14e866419c4370b4bb1551078441fe40
+    m_Address: World3Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6db431711c57d7648996dd11af17aa4f
+    m_Address: World4Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c99b5591281b36b4bba96b7684cb2a8c
+    m_Address: World5Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0d753b83b5639645af991c4e614ca87
+    m_Address: World6Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff17538cb43c06848a13be21ebd47a71
+    m_Address: World7Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 574f221819a198d46a3c28ba109423e8
+    m_Address: World8Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d95ae9d005531be42a2c4aeb77383121
+    m_Address: World9Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Configs
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13630a71aa280ed49bfea3262f9b689e, type: 2}

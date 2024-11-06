@@ -18,7 +18,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  PointsRewardForMerge: 0
+  PointsRewardForMerge: 14000
   IconAssetReference:
     m_AssetGUID: bcf0ee05cc04f1f4fa2abfc6cbaccfdb
     m_SubObjectName: SkyskraperIcon
@@ -31,4 +31,9 @@ MonoBehaviour:
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  Payment: 7
+  Name: "\u041D\u0435\u0431\u043E\u0441\u043A\u0440\u0435\u0431"
+  Title: "\u041E\u043D \u043D\u0430\u0441\u0442\u043E\u043B\u044C\u043A\u043E \u0432\u044B\u0441\u043E\u043A\u0438\u0439,
+    \u0447\u0442\u043E \u043F\u0440\u044F\u0447\u0435\u0442\u0441\u044F \u0437\u0430
+    \u043E\u0431\u043B\u0430\u043A\u0430\u043C\u0438."
+  ProportionOfLoss: 1
+  Payment: 64

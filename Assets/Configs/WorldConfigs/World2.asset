@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6832831c78d65f34481560f3f8ab2d74, type: 3}
+  m_Name: World2
+  m_EditorClassIdentifier: 
+  Id: f6467933-c0ed-4bb8-bcde-1b89b8e6dba3
+  Size: {x: 6, y: 6}
+  TileConfigs:
+  - Type: 0
+    GridPosition: {x: 0, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 0, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 0, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 0, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 0, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 0, y: 5}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 5}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 5}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 5}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 5}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 5, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 5, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 5, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 5, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 5, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 5, y: 5}
+    BuildingType: 0
+  NextBuildingTypeForCreation: 3
+  StartingAvailableBuildingTypes: 090000000a0000000100000002000000
+  AssetReference:
+    m_AssetGUID: c83a0e82ae2fe074e8598aff9a8d1e25
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  AvailableRewards: 0000000001000000020000000300000004000000
+  MinRewardVariantsCount: 1
+  MaxRewardVariantsCount: 3
+  AvailableAdditionalBonuses: 000000000100000002000000
+  IsUnlockedOnStart: 1
+  Cost: 0
+  Name: "\u0420\u0430\u0441\u0448\u0438\u0440\u044F\u044E\u0449\u0438\u0435\u0441\u044F
+    \u0437\u0435\u043C\u043B\u0438"
+  PeculiarityIconAssetReferences:
+  - m_AssetGUID: 0beeffde9f1349c4aa9d35f9892b0e7d
+    m_SubObjectName: ExpandIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  - m_AssetGUID: d5ef8be1c4e660e44a10e9abc223991f
+    m_SubObjectName: RiverIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  NextWorldId: 8c53d4ad-5ea5-49e1-a85c-e0bbf06971ad
+  PreviousWorldId: 0f873ea3-6bb2-42e4-ac1b-77b904b0b8e1
+  StartStoreList: 09000000010000000200000003000000
+  AvailableGainStoreItems: 00000000010000000200000003000000
+  StartSize: {x: 4, y: 4}
+  ExpandConfigs:
+  - BuidldingType: 5
+    ExpandedSize: {x: 5, y: 4}
+  - BuidldingType: 6
+    ExpandedSize: {x: 5, y: 5}
+  - BuidldingType: 7
+    ExpandedSize: {x: 6, y: 5}
+  - BuidldingType: 8
+    ExpandedSize: {x: 6, y: 6}

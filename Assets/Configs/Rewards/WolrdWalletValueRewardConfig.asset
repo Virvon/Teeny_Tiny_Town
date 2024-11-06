@@ -24,7 +24,7 @@ MonoBehaviour:
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  ProportionOfLoss: 1
+  ProportionOfLoss: 6
   MinCount: 100
   MaxCount: 1000
   Multiplier: 0.002

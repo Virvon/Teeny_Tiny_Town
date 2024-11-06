@@ -31,3 +31,11 @@ MonoBehaviour:
     GroundType: 1
   - BuildingType: 9
     GroundType: 0
+  - BuildingType: 10
+    GroundType: 0
+  - BuildingType: 11
+    GroundType: 0
+  - BuildingType: 12
+    GroundType: 0
+  - BuildingType: 14
+    GroundType: 0

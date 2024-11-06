@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DistanceBetweenWorlds: 35
   CurrentWorldPosition: {x: 0, y: 0, z: 0}
-  Goals: d007000088130000
-  AvailableMovesCount: 30
+  Goals: d00700008813000010270000983a0000204e000050c30000a0860100400d0300
+  AvailableMovesCount: 300
   EducationWorldId: 0f873ea3-6bb2-42e4-ac1b-77b904b0b8e1
   EducationWorldAssetReference:
     m_AssetGUID: 7398baee431af1a4daf87c0a2eb22367

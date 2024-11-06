@@ -34,4 +34,15 @@ MonoBehaviour:
       NextBuildingType: 0
   - Elements:
     - BuildingType: 9
+      NextBuildingType: 10
+    - BuildingType: 10
+      NextBuildingType: 11
+    - BuildingType: 11
+      NextBuildingType: 12
+    - BuildingType: 12
+      NextBuildingType: 0
+  - Elements:
+    - BuildingType: 13
+      NextBuildingType: 0
+    - BuildingType: 14
       NextBuildingType: 0

@@ -18,7 +18,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  PointsRewardForMerge: 100
+  PointsRewardForMerge: 13
   IconAssetReference:
     m_AssetGUID: 0d6c745681f605f4d8b1559e2f13d116
     m_SubObjectName: PileOfStonesIcon
@@ -31,3 +31,7 @@ MonoBehaviour:
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
+  Name: "\u041A\u0443\u0447\u0430 \u043A\u0430\u043C\u043D\u0435\u0439"
+  Title: "\u041A\u0443\u0447\u0430 \u043A\u0430\u043C\u043D\u0435\u0439, \u0433\u043E\u0442\u043E\u0432\u044B\u0445
+    \u043A \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044E."
+  ProportionOfLoss: 4

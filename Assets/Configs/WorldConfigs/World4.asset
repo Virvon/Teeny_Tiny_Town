@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ed98ece7cbacb4db6d11c86d44a831, type: 3}
+  m_Name: World4
+  m_EditorClassIdentifier: 
+  Id: 4397eea9-930f-489a-bae5-6aeb42cf5dd0
+  Size: {x: 6, y: 6}
+  TileConfigs:
+  - Type: 0
+    GridPosition: {x: 0, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 0, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 0, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 0, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 0, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 0, y: 5}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 1, y: 5}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 2, y: 5}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 3, y: 5}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 4, y: 5}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 5, y: 0}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 5, y: 1}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 5, y: 2}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 5, y: 3}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 5, y: 4}
+    BuildingType: 0
+  - Type: 0
+    GridPosition: {x: 5, y: 5}
+    BuildingType: 0
+  NextBuildingTypeForCreation: 3
+  StartingAvailableBuildingTypes: 090000000a0000000100000002000000
+  AssetReference:
+    m_AssetGUID: c2398a6f208640c42a2a29d3aded7148
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  AvailableRewards: 0000000001000000020000000400000003000000
+  MinRewardVariantsCount: 1
+  MaxRewardVariantsCount: 3
+  AvailableAdditionalBonuses: 000000000100000002000000
+  IsUnlockedOnStart: 0
+  Cost: 200
+  Name: "\u0414\u0435\u0440\u0435\u0432\u043D\u044F \u0443 \u0440\u0435\u043A\u0438"
+  PeculiarityIconAssetReferences:
+  - m_AssetGUID: d5ef8be1c4e660e44a10e9abc223991f
+    m_SubObjectName: RiverIcon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  NextWorldId: 992341d7-2a3b-44b5-b11c-b21e373bb515
+  PreviousWorldId: 8c53d4ad-5ea5-49e1-a85c-e0bbf06971ad
+  StartStoreList: 09000000010000000200000003000000
+  AvailableGainStoreItems: 00000000010000000200000003000000

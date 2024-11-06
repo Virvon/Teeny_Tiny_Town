@@ -26,7 +26,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public uint Cost;
         public string Name;
         public AssetReference[] PeculiarityIconAssetReferences;
-        public int SerialNumber;
         public string NextWorldId;
         public string PreviousWorldId;
 
