@@ -49,7 +49,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         private void OnReplaceBuildingButtonClicked()
         {
-            Debug.Log("On replace");
             if (CheckReplaceItemsCount() == false)
                 return;
 
@@ -61,7 +60,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         private void OnRemoveBuildingButtonClicked()
         {
-            Debug.Log("On remove");
             if (CheckBulldozerItemsCount() == false)
                 return;
 

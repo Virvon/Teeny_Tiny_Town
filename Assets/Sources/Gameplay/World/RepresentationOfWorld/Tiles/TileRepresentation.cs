@@ -3,7 +3,6 @@ using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +12,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
     {
         [SerializeField] private GroundCreator _groundCreator;
         [SerializeField] private BuildingCreator _buildingCreator;
+        [SerializeField] private AudioSource _putBuildingAudioSource;
+        [SerializeField] private AudioSource _destroyBuildinAudioSource;
+        [SerializeField] private AudioSource _cleanTileAudioSource;
+        [SerializeField] private AudioSource _mergeBuildingAudioSource;
 
         private BuildingRepresentation _building;
 
@@ -53,10 +56,12 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
                 PlaceBuildingToBuildingPoint(_building);
         }
 
-        public void DestroyBuilding()
+        public void DestroyBuilding(bool needSound)
         {
             if(_building != null)
             {
+                if(needSound)
+                    _destroyBuildinAudioSource.Play();
                 _building.Destroy();
                 _building = null;
             }
@@ -64,12 +69,14 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
         public async UniTask DestroyBuilding(Vector3 destroyPosition)
         {
+            _mergeBuildingAudioSource.Play();
             await _building.AnimateDestroy(destroyPosition);
             _building = null;
         }
 
         public async UniTask AnimateDestroyBuilding()
         {
+            _cleanTileAudioSource.Play();
             await _building.AnimateDestroy();
             _building = null;
         }
@@ -80,14 +87,17 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
             if (BuildingType != targetBuildingType)
             {
                 if (IsEmpty == false)
-                    DestroyBuilding();
+                    DestroyBuilding(false);
 
                 if (targetBuildingType != BuildingType.Undefined)
                 {
                     _building = await _buildingCreator.Create(targetBuildingType);  
                     
                     if(isAnimate)
+                    {
+                        _putBuildingAudioSource.Play();
                         await _building.AnimatePut(waitForCompletion);
+                    }
 
                     return _building as TBuilding;
                 }

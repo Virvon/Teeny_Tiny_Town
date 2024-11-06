@@ -47,7 +47,7 @@ namespace Assets.Sources.Sandbox
         public async UniTask CleanAll()
         {
             if (IsEmpty == false)
-                TileRepresentation.DestroyBuilding();
+                TileRepresentation.DestroyBuilding(false);
 
             SetBuilding(null);
 
@@ -142,7 +142,7 @@ namespace Assets.Sources.Sandbox
             if (IsEmpty)
                 return;
 
-            TileRepresentation.DestroyBuilding();
+            TileRepresentation.DestroyBuilding(false);
             await Clean();
         }
 

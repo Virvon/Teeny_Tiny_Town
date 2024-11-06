@@ -76,7 +76,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
                 if (isAnimate)
                     await TileRepresentation.AnimateDestroyBuilding();
                 else
-                    TileRepresentation.DestroyBuilding();
+                    TileRepresentation.DestroyBuilding(false);
             }
 
             SetBuilding(null);
@@ -87,7 +87,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             if (IsEmpty)
                 return;
 
-            TileRepresentation.DestroyBuilding();
+            TileRepresentation.DestroyBuilding(true);
             await Clean();
         }
 
