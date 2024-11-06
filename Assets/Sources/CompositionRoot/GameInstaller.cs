@@ -8,10 +8,13 @@ using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.SceneManagment;
 using Assets.Sources.Services.StaticDataService;
 using UnityEngine;
+using UnityEngine.Audio;
 using Zenject;
 
 public class GameInstaller : MonoInstaller, ICoroutineRunner
 {
+    [SerializeField] private AudioMixer _audioMixer;
+
     public override void InstallBindings()
     {
         BindSceneLoader();
@@ -22,6 +25,12 @@ public class GameInstaller : MonoInstaller, ICoroutineRunner
         BindSaveLoadService();
         BindPersistentProgressService();
         BindCoroutineRunner();
+        BindAudioMixer();
+    }
+
+    private void BindAudioMixer()
+    {
+        Container.BindInstance(_audioMixer).AsSingle();
     }
 
     private void BindCoroutineRunner()

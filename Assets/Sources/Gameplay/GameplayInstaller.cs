@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Gameplay.StateMachine;
+﻿using Assets.Sources.Audio;
+using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.UI;
@@ -15,6 +16,12 @@ namespace Assets.Sources.Gameplay
             BindGameplayFactory();
             BindWindowsSwitcher();
             BindUiFactory();
+            BindAudioMixerChanger();
+        }
+
+        private void BindAudioMixerChanger()
+        {
+            Container.BindInterfacesAndSelfTo<AudioMixerChanger>().AsSingle().NonLazy();
         }
 
         private void BindUiFactory()
