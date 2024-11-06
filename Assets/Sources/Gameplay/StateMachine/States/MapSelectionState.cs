@@ -18,11 +18,10 @@ namespace Assets.Sources.Gameplay.StateMachine.States
             _camera = camera;
         }
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
-            _windowsSwitcher.Switch<MapSelectionWindow>();
+            await _windowsSwitcher.Switch<MapSelectionWindow>();
             _camera.MoveTo(new Vector3(60.9f, 93.1f, -60.9f));
-            return default;
         }
 
         public UniTask Exit()

@@ -12,10 +12,13 @@ namespace Assets.Sources.UI
         private readonly Dictionary<Type, Window> _windows;
 
         private Window _currentWindow;
+        private bool _currentWindowHided;
 
         public WindowsSwitcher()
         {
             _windows = new();
+
+            _currentWindowHided = false;
         }
 
         public async UniTask RegisterWindow<TWindow>(WindowType windowType, IUiFactory uiFactory)
@@ -29,9 +32,12 @@ namespace Assets.Sources.UI
             _windows.Add(typeof(TWindow), window);
         }
 
-        public void Switch<TWindow>()
+        public async UniTask Switch<TWindow>()
             where TWindow : Window
         {
+            if (_currentWindowHided)
+                await UniTask.WaitWhile(() => _currentWindowHided);
+
             if (_currentWindow != null)
                 _currentWindow.Hide(callback: () => OpenWindow<TWindow>());
             else
@@ -55,6 +61,16 @@ namespace Assets.Sources.UI
             {
                 Remove<TWindow>(window);
             }
+        }
+
+        public void HideCurrentWindow()
+        {
+            if(_currentWindowHided)
+                return;
+
+            _currentWindowHided = true;
+
+            _currentWindow.Hide(callback: () => _currentWindowHided = false);
         }
 
         private void Remove<TWindow>(Window window) where TWindow : Window

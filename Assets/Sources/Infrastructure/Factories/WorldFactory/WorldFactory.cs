@@ -68,11 +68,13 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
             _container.BindInstance(collectionItemCreator).AsSingle();
         }
 
-        public async UniTask CreateSelectFrame(Transform parent)
+        public async UniTask<SelectFrame> CreateSelectFrame(Transform parent)
         {
             SelectFrame selectFrame = await _selectFrameFactory.Create(WorldFactoryAssets.SelectFrame, parent);
 
             _container.Bind<SelectFrame>().FromInstance(selectFrame).AsSingle();
+
+            return selectFrame;
         }
 
         public async UniTask<TileRepresentation> CreateTileRepresentation(Vector3 position, Transform parent)

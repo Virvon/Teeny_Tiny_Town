@@ -17,12 +17,10 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _rewardsCreator = rewardsCreator;
         }
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
-            _windowsSwitcher.Switch<RewardWindow>();
+            await _windowsSwitcher.Switch<RewardWindow>();
             _rewardsCreator.CreateRewards();
-
-            return default;
         }
 
         public UniTask Exit()

@@ -19,11 +19,10 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _windowsSwitcher = windowsSwitcher;
         }
 
-        public UniTask Enter(GainStoreItemType gainStoreItemType)
+        public async UniTask Enter(GainStoreItemType gainStoreItemType)
         {
             _gainBuyer.SetBuyingGainType(gainStoreItemType);
-            _windowsSwitcher.Switch<GainBuyingWindow>();
-            return default;
+            await _windowsSwitcher.Switch<GainBuyingWindow>();
         }
 
         public UniTask Exit() =>

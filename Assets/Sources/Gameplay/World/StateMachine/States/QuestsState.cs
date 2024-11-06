@@ -14,10 +14,9 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _windowsSwitcher = windowsSwitcher;
         }
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
-            _windowsSwitcher.Switch<WorldQuestsWindow>();
-            return default;
+            await _windowsSwitcher.Switch<WorldQuestsWindow>();
         }
 
         public UniTask Exit() =>

@@ -17,12 +17,10 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _markersVisibility = markersVisibility;
         }
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
             _markersVisibility.ChangeAllowedVisibility(false);
-            _windowsSwitcher.Switch<SaveGameplayWindow>();
-
-            return default;
+            await _windowsSwitcher.Switch<SaveGameplayWindow>();
         }
 
         public UniTask Exit() =>

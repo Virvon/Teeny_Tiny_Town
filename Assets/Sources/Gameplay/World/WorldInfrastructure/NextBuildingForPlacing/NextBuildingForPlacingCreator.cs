@@ -66,7 +66,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlaci
 
         public void FindTileToPlacing(IReadOnlyList<Tile> tiles)
         {
-            if (tiles.Any(tile => tile.IsEmpty) == false)
+            if (tiles.Any(tile => tile.IsEmpty && tile.Type != TileType.WaterSurface) == false)
             {
                 NoMoreEmptyTiles?.Invoke();
                 return;

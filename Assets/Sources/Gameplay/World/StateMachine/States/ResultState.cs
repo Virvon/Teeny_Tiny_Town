@@ -25,13 +25,11 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _staticDataService = staticDataService;
         }
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
-            _windowsSwitcher.Switch<ResultWindow>();
+            await _windowsSwitcher.Switch<ResultWindow>();
             _world.StartRotating();
             _worldData.IsChangingStarted = false;
-
-            return default;
         }
 
         public UniTask Exit()

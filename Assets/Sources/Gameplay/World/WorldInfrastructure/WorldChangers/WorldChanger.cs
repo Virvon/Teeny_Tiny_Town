@@ -144,6 +144,20 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
                     return new Building(type);
                 case BuildingType.Crane:
                     return new Crane(type, this, gridPosition);
+                case BuildingType.Sawmill:
+                    return new Building(type);
+                case BuildingType.Logs:
+                    return new Building(type);
+                case BuildingType.BigApartment:
+                    return new Building(type);
+                case BuildingType.FuturisticBuilding:
+                    return new Building(type);
+                case BuildingType.Skyscraper:
+                    return new Building(type);
+                case BuildingType.PileOftones:
+                    return new Building(type);
+                case BuildingType.Gold:
+                    return new Building(type);
                 default:
                     Debug.LogError("building not founded");
                     return null;

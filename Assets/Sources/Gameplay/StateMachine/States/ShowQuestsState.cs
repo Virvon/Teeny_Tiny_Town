@@ -12,10 +12,9 @@ namespace Assets.Sources.Gameplay.StateMachine.States
         public ShowQuestsState(WindowsSwitcher windowsSwitcher) =>
             _windowsSwitcher = windowsSwitcher;
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
-            _windowsSwitcher.Switch<GameplayQuestsWindow>();
-            return default;
+            await _windowsSwitcher.Switch<GameplayQuestsWindow>();
         }
 
         public UniTask Exit() =>

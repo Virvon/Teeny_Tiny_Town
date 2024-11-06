@@ -15,11 +15,9 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _windowsSwintcher = windowsSwintcher;
         }
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
-            _windowsSwintcher.Switch<WaitingWindow>();
-
-            return default;
+            await _windowsSwintcher.Switch<WaitingWindow>();
         }
 
         public UniTask Exit()

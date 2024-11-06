@@ -40,15 +40,15 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             else if (_worldData.IsChangingStarted)
                 _worldStateMachine.Enter<WorldChangingState>().Forget();
             else
-                ShowAdditionalBonusOffer();
+                await ShowAdditionalBonusOffer();
         }
 
         public UniTask Exit() =>
             default;
 
-        private void ShowAdditionalBonusOffer()
+        private async UniTask ShowAdditionalBonusOffer()
         {
-            _windowsSwitcher.Switch<AdditionalBonusOfferWindow>();
+            await _windowsSwitcher.Switch<AdditionalBonusOfferWindow>();
         }
     }
 }

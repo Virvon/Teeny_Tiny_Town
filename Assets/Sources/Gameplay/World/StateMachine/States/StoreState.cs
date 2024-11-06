@@ -14,10 +14,9 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             _windowsSwitcher = windowsSwitcher;
         }
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
-            _windowsSwitcher.Switch<StoreWindow>();
-            return default;
+            await _windowsSwitcher.Switch<StoreWindow>();
         }
 
         public UniTask Exit()

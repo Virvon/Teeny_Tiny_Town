@@ -28,7 +28,7 @@ namespace Assets.Sources.Sandbox
 
         private void OnRotated(float value)
         {
-            Rotation += value;
+            Rotation -= value;
             transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, Rotation, transform.rotation.z));
         }
 

@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
@@ -47,7 +48,9 @@ namespace Assets.Sources.Sandbox
             _sandboxRotation.Init(sandboxWorld);
 
             await _sandboxChanger.Generate(worldGenerator);
-            await _worldFactory.CreateSelectFrame(worldGenerator.transform);
+            SelectFrame selectFrame = await _worldFactory.CreateSelectFrame(worldGenerator.transform);
+
+            selectFrame.Hide();
 
             _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<BuildingPositionHandler>());
             _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<GroundPositionHandler>());

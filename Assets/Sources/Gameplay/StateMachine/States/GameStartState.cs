@@ -26,21 +26,18 @@ namespace Assets.Sources.Gameplay.StateMachine.States
             _gameplayStateMachine = gameplayStateMachine;
         }
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
             if(_persistentProgressService.Progress.IsEducationCompleted)
             {
-                _assetProvider.WarmupAssetsByLable(AssetLabels.Gameplay);
-                _windowsSwitcher.Switch<StartWindow>();
+                await _assetProvider.WarmupAssetsByLable(AssetLabels.Gameplay);
+                await _windowsSwitcher.Switch<StartWindow>();
                 _camera.MoveTo(new Vector3(67.3f, 93.1f, -67.3f));
             }
             else
             {
                 _gameplayStateMachine.Enter<GameplayLoopState, bool>(true).Forget();
             }
-            
-
-            return default;
         }
 
         public UniTask Exit()

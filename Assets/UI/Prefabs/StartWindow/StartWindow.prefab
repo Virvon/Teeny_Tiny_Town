@@ -8121,9 +8121,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 3753179842405411942, guid: 2f53868f22901a742ab3e14a9c0d3e6e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4234982577271895244, guid: 2f53868f22901a742ab3e14a9c0d3e6e, type: 3}
       propertyPath: m_Name
       value: RewardValue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5380289820062338105, guid: 2f53868f22901a742ab3e14a9c0d3e6e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6109794221925421142, guid: 2f53868f22901a742ab3e14a9c0d3e6e, type: 3}
       propertyPath: m_Circle.m_Radius

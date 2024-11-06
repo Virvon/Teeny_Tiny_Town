@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds;
@@ -21,7 +22,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
         UniTask<Ground> CreateGround(TileType tileType, Vector3 position, Transform parent);
         UniTask<Ground> CreateGround(GroundType groundType, RoadType roadType, Vector3 position, GroundRotation rotation, Transform parent);
         UniTask<SandboxWorld> CreateSandboxWorld();
-        UniTask CreateSelectFrame(Transform parent);
+        UniTask<SelectFrame> CreateSelectFrame(Transform parent);
         UniTask<TileRepresentation> CreateTileRepresentation(Vector3 position, Transform parent);
         UniTask<WorldGenerator> CreateWorldGenerator(Transform parent = null);
     }
