@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.agava.webutility": {
+      "version": "https://github.com/forcepusher/com.agava.webutility.git#3.2.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "558effef721399ade58d7bd3cc7f2c1541ea828d"
+    },
     "com.agava.yandexgames": {
       "version": "https://github.com/forcepusher/com.agava.yandexgames.git#16.1.1",
       "depth": 0,

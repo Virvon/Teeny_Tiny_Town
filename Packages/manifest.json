@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.agava.webutility": "https://github.com/forcepusher/com.agava.webutility.git#3.2.0",
     "com.agava.yandexgames": "https://github.com/forcepusher/com.agava.yandexgames.git#16.1.1",
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.unity.addressables": "1.21.21",
