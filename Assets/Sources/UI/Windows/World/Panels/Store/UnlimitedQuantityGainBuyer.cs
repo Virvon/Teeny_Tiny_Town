@@ -33,7 +33,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
                     break;
             }
 
-            _currencyWorldData.WorldStore.GetGainData<GainStoreItemData>(GainStoreItemType).ChangeBuyingCount(count);
+            _currencyWorldData.WorldStore.GetGainData(GainStoreItemType).ChangeBuyingCount(count);
         }
     }
 }

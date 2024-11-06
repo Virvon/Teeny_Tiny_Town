@@ -17,7 +17,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
 
         private WorldStateMachine _worldStateMachine;
 
-        private LimitedQuantityStoreItemData _data;
+        private GainStoreItemData _data;
 
         [Inject]
         private void Construct(WorldStateMachine worldStateMachine) =>
@@ -33,7 +33,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
         }
 
         protected override void GetData() =>
-            _data = CurrencyWorldData.WorldStore.GetGainData<LimitedQuantityStoreItemData>(Type);
+            _data = CurrencyWorldData.WorldStore.GetGainData(Type);
 
         protected override void OnBuyButtonClicked()
         {

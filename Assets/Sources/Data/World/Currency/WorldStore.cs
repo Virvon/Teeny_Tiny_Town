@@ -34,9 +34,8 @@ namespace Assets.Sources.Data.World.Currency
             }
         }
 
-        public TData GetGainData<TData>(GainStoreItemType type)
-            where TData : GainStoreItemData =>
-            GainStoreList.First(data => data.Type == type) as TData;
+        public GainStoreItemData GetGainData(GainStoreItemType type) =>
+            GainStoreList.First(data => data.Type == type);
 
         public BuildingStoreItemData GetBuildingData(BuildingType type) =>
             BuildingsStoreList.First(data => data.Type == type);

@@ -9,7 +9,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
         protected override GainStoreItemData Data => _data;
 
         protected override void GetData() =>
-            _data = CurrencyWorldData.WorldStore.GetGainData<GainStoreItemData>(Type);
+            _data = CurrencyWorldData.WorldStore.GetGainData(Type);
 
         protected override void OnBuyButtonClicked()
         {

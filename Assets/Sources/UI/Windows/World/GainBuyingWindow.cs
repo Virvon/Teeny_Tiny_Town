@@ -95,7 +95,7 @@ namespace Assets.Sources.UI.Windows.World
         {
             _purchasedQuantity = (uint)Mathf.Clamp(_purchasedQuantity, MinPurchasedQuantity, MaxPurchasedQuantity);
 
-            uint buyingCount = _currencyWorldData.WorldStore.GetGainData<GainStoreItemData>(_gainBuyer.GainStoreItemType).BuyingCount;
+            uint buyingCount = _currencyWorldData.WorldStore.GetGainData(_gainBuyer.GainStoreItemType).BuyingCount;
 
             _cost = _gainStoreItemConfig.GetCostsSum(buyingCount, buyingCount + _purchasedQuantity);
 
