@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
+using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Sandbox.ActionHandler;
@@ -21,6 +22,7 @@ namespace Assets.Sources.Sandbox
             ActionHandlerStateMachineInstaller.Install(Container);
             Container.BindInstance(_layerMask);
             Container.BindInterfacesAndSelfTo<SandboxActionHandlerSwitcher>().AsSingle().NonLazy();
+            GameplayFactoryInstaller.Install(Container);
         }
 
         private void BindUiFactory()

@@ -6,6 +6,7 @@ using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using UnityEngine.AddressableAssets;
+using Assets.Sources.Audio;
 
 namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
 {
@@ -16,19 +17,35 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
         private readonly World.Factory _worldFactory;
         private readonly GameplayCamera.Factory _gameplayCameraFactory;
         private readonly IStaticDataService _staticDataService;
+        private readonly UiSoundPlayer.Factory _uiSoundPlayerFactory;
+        private readonly WorldWalletSoundPlayer.Factory _worldWalletSoundPlayerFactory;
 
         public GameplayFactory(
             DiContainer container,
             WorldsList.Factory worldsListFactory,
             World.Factory worldFactory,
             GameplayCamera.Factory gameplayCameraFactory,
-            IStaticDataService staticDataService)
+            IStaticDataService staticDataService,
+            UiSoundPlayer.Factory uiSoundPlayerFactory,
+            WorldWalletSoundPlayer.Factory worldWalletSoundPlayerFactory)
         {
             _container = container;
             _worldsListFactory = worldsListFactory;
             _worldFactory = worldFactory;
             _gameplayCameraFactory = gameplayCameraFactory;
             _staticDataService = staticDataService;
+            _uiSoundPlayerFactory = uiSoundPlayerFactory;
+            _worldWalletSoundPlayerFactory = worldWalletSoundPlayerFactory;
+        }
+
+        public async UniTask CreateWorldWalletSoundPlayer() =>
+            await _worldWalletSoundPlayerFactory.Create(GameplayFactoryAssets.WorldWalletSoundPlayer);
+
+        public async UniTask CreateUiSoundPlayer()
+        {
+            UiSoundPlayer uiSoundPlayer = await _uiSoundPlayerFactory.Create(GameplayFactoryAssets.UiSoundPlayer);
+
+            _container.BindInstance(uiSoundPlayer).AsSingle();
         }
 
         public async UniTask<GameplayCamera> CreateCamera()

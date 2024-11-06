@@ -38,6 +38,7 @@ namespace Assets.Sources.Gameplay
 
         public async void Initialize()
         {
+            await _gameplayFactory.CreateUiSoundPlayer();
             await _gameplayFactory.CreateCamera();
             WorldsList worldsList = await _gameplayFactory.CreateWorldsList();
 

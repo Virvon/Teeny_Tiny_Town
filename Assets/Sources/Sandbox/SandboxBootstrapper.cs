@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
+using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Sandbox.ActionHandler;
@@ -17,6 +18,7 @@ namespace Assets.Sources.Sandbox
         private readonly ActionHandlerStateMachine _actionHandlerStateMachine;
         private readonly ActionHandlerStatesFactory _actionHandlerStatesFactory;
         private readonly SandboxRotation _sandboxRotation;
+        private readonly IGameplayFactory _gameplayFactory;
 
         public SandboxBootstrapper(
             IUiFactory uiFactory,
@@ -24,7 +26,8 @@ namespace Assets.Sources.Sandbox
             IWorldFactory worldFactory,
             ActionHandlerStateMachine actionHandlerStateMachine,
             ActionHandlerStatesFactory actionHandlerStatesFactory,
-            SandboxRotation sandboxRotation)
+            SandboxRotation sandboxRotation,
+            IGameplayFactory gameplayFactory)
         {
             _uiFactory = uiFactory;
             _sandboxChanger = sandboxChanger;
@@ -32,10 +35,12 @@ namespace Assets.Sources.Sandbox
             _actionHandlerStateMachine = actionHandlerStateMachine;
             _actionHandlerStatesFactory = actionHandlerStatesFactory;
             _sandboxRotation = sandboxRotation;
+            _gameplayFactory = gameplayFactory;
         }
 
         public async void Initialize()
         {
+            await _gameplayFactory.CreateUiSoundPlayer();
             SandboxWorld sandboxWorld = await _worldFactory.CreateSandboxWorld();
             WorldGenerator worldGenerator = await _worldFactory.CreateWorldGenerator(sandboxWorld.transform);
 

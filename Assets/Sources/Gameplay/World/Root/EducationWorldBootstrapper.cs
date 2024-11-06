@@ -3,6 +3,7 @@ using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
+using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
@@ -25,8 +26,19 @@ namespace Assets.Sources.Gameplay.World.Root
             ActionHandlerStatesFactory actionHandlerStatesFactory,
             NextBuildingForPlacingCreator nextBuildingForPlacingCreator,
             IPersistentProgressService persistentProgressService,
-            IWorldData worldData)
-            : base(worldChanger, worldFactory, worldStateMachine, statesFactory, world, actionHandlerStateMachine, actionHandlerStatesFactory, nextBuildingForPlacingCreator, persistentProgressService)
+            IWorldData worldData,
+            IGameplayFactory gameplayFactory)
+            : base(
+                  worldChanger,
+                  worldFactory,
+                  worldStateMachine,
+                  statesFactory,
+                  world,
+                  actionHandlerStateMachine,
+                  actionHandlerStatesFactory,
+                  nextBuildingForPlacingCreator,
+                  persistentProgressService,
+                  gameplayFactory)
         {
             _worldData = worldData;
         }

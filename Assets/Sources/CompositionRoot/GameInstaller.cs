@@ -12,8 +12,6 @@ using Zenject;
 
 public class GameInstaller : MonoInstaller, ICoroutineRunner
 {
-    [SerializeField] UiSoundPlayer _uiSoundPlayer;
-
     public override void InstallBindings()
     {
         BindSceneLoader();
@@ -24,12 +22,6 @@ public class GameInstaller : MonoInstaller, ICoroutineRunner
         BindSaveLoadService();
         BindPersistentProgressService();
         BindCoroutineRunner();
-        BindUiSoundPlayer();
-    }
-
-    private void BindUiSoundPlayer()
-    {
-        Container.BindInstance(_uiSoundPlayer).AsSingle();
     }
 
     private void BindCoroutineRunner()

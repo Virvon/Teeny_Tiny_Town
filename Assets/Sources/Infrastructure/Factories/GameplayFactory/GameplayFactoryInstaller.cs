@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Gameplay.Cameras;
+﻿using Assets.Sources.Audio;
+using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Gameplay.World;
 using Assets.Sources.Services.AssetManagement;
 using Cysharp.Threading.Tasks;
@@ -28,6 +29,14 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             Container
                 .BindFactory<string, UniTask<GameplayCamera>, GameplayCamera.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<GameplayCamera>>();
+            
+            Container
+                .BindFactory<string, UniTask<UiSoundPlayer>, UiSoundPlayer.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<UiSoundPlayer>>();
+            
+            Container
+                .BindFactory<string, UniTask<WorldWalletSoundPlayer>, WorldWalletSoundPlayer.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<WorldWalletSoundPlayer>>();
         }
     }
 }

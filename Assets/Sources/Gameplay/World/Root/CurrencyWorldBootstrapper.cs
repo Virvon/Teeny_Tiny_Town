@@ -3,6 +3,7 @@ using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
+using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Sandbox.ActionHandler;
 using Assets.Sources.Services.PersistentProgress;
@@ -13,6 +14,8 @@ namespace Assets.Sources.Gameplay.World.Root
 {
     public class CurrencyWorldBootstrapper : WorldBootstrapper
     {
+        private readonly IGameplayFactory _gameplayFactory;
+
         public CurrencyWorldBootstrapper(
             IWorldChanger worldChanger,
             IWorldFactory worldFactory,
@@ -22,7 +25,8 @@ namespace Assets.Sources.Gameplay.World.Root
             ActionHandlerStateMachine actionHandlerStateMachine,
             ActionHandlerStatesFactory actionHandlerStatesFactory,
             NextBuildingForPlacingCreator nextBuildingForPlacingCreator,
-            IPersistentProgressService persistentProgressService)
+            IPersistentProgressService persistentProgressService,
+            IGameplayFactory gameplayFactory)
             : base(
                   worldChanger,
                   worldFactory,
@@ -34,6 +38,13 @@ namespace Assets.Sources.Gameplay.World.Root
                   nextBuildingForPlacingCreator,
                   persistentProgressService)
         {
+            _gameplayFactory = gameplayFactory;
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            _gameplayFactory.CreateWorldWalletSoundPlayer();
         }
 
         protected override void RegisterStates(bool needRegisterWaitinState)

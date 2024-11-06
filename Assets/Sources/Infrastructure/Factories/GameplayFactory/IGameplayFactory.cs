@@ -9,7 +9,9 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
     {
         UniTask<GameplayCamera> CreateCamera();
         UniTask<World> CreateEducationWorld(Vector3 position, Transform parent);
+        UniTask CreateUiSoundPlayer();
         UniTask<World> CreateWorld(string id, Vector3 position, Transform parent);
         UniTask<WorldsList> CreateWorldsList();
+        UniTask CreateWorldWalletSoundPlayer();
     }
 }

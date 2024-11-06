@@ -4,7 +4,7 @@ using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.Windows;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
-using Assets.Sources.Sandbox.ActionHandler;
+using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.UI.Windows.World.Panels.Store;
 using UnityEngine;
 
@@ -18,6 +18,7 @@ namespace Assets.Sources.Gameplay.World.Root
 
             Container.Bind<GainBuyer>().AsSingle();
             Container.Bind<UnlimitedQuantityGainBuyer>().AsSingle();
+            GameplayFactoryInstaller.Install(Container);
         }
 
         protected override void BindAcitonHandlerSwitcher()

@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using System;
+using UnityEngine;
+using Zenject;
 
 namespace Assets.Sources.Audio
 {
@@ -8,5 +11,9 @@ namespace Assets.Sources.Audio
 
         public void Play() =>
             _auidoSource.Play();
+
+        public class Factory : PlaceholderFactory<string, UniTask<UiSoundPlayer>>
+        {
+        }
     }
 }
