@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Data.World;
+﻿using Agava.YandexGames;
+using Assets.Sources.Data.World;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,9 +33,18 @@ namespace Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses
 
         private void OnButtonClicked()
         {
+#if !UNITY_EDITOR && UNITY_WEBGL
+            InterstitialAd.Show(onCloseCallback: (_) =>
+            {
+                _worldData.BulldozerItems.AddItems(_buldozerItemsCount);
+                _worldData.ReplaceItems.AddItems(_replaceItemsCount);
+                Destroy(gameObject);
+            });
+#else
             _worldData.BulldozerItems.AddItems(_buldozerItemsCount);
             _worldData.ReplaceItems.AddItems(_replaceItemsCount);
             Destroy(gameObject);
+#endif
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using Agava.YandexGames;
+using DG.Tweening;
+using System;
 using Zenject;
 
 namespace Assets.Sources.UI.Windows.Start

@@ -51,7 +51,6 @@ namespace Assets.Sources.Gameplay.World
 
         public async UniTask CreateCurrentWorld()
         {
-                Debug.Log(_persistentProgressService != null);
             if (_persistentProgressService.Progress.IsEducationCompleted)
                 _currentWorld = await _gameplayFactory.CreateWorld(_persistentProgressService.Progress.LastPlayedWorldDataId, _currentWorldPosition, transform);
             else

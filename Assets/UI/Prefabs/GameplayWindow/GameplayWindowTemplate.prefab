@@ -388,6 +388,7 @@ GameObject:
   - component: {fileID: 281327952940727750}
   - component: {fileID: 5717148991186284797}
   - component: {fileID: 472123923315464285}
+  - component: {fileID: 2701762835029356463}
   m_Layer: 0
   m_Name: TasksButton
   m_TagString: Untagged
@@ -591,6 +592,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2701762835029356463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098470559525449424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc606ad5815d39e45bb16ef56a1054aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 472123923315464285}
 --- !u!1 &2279470538670683065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,6 +1562,7 @@ GameObject:
   - component: {fileID: 5827227469756716339}
   - component: {fileID: 5189332268256721586}
   - component: {fileID: 7217601167320551130}
+  - component: {fileID: 1396384005397090678}
   m_Layer: 5
   m_Name: RemoveBuildingButton
   m_TagString: Untagged
@@ -1763,6 +1778,19 @@ MonoBehaviour:
   _icon: {fileID: 3113714093686796364}
   _background: {fileID: 5827227469756716339}
   _countValue: {fileID: 2508279588684685636}
+--- !u!114 &1396384005397090678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4140580790646581525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc606ad5815d39e45bb16ef56a1054aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 6127096288505009436}
 --- !u!1 &4418084228387423626
 GameObject:
   m_ObjectHideFlags: 0
@@ -2753,6 +2781,7 @@ GameObject:
   - component: {fileID: 3897062314394762482}
   - component: {fileID: 4749334695132539504}
   - component: {fileID: 4360870510165705107}
+  - component: {fileID: 7901511012934780350}
   m_Layer: 5
   m_Name: UndoButton
   m_TagString: Untagged
@@ -2953,6 +2982,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Keyboard>/1
+--- !u!114 &7901511012934780350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6733808098710822367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc606ad5815d39e45bb16ef56a1054aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 3897062314394762482}
 --- !u!1 &6925314766058879650
 GameObject:
   m_ObjectHideFlags: 0
@@ -3540,6 +3582,7 @@ GameObject:
   - component: {fileID: 5046477800206916016}
   - component: {fileID: 5852334004874124502}
   - component: {fileID: 1024547030427861948}
+  - component: {fileID: 8613025216729891122}
   m_Layer: 5
   m_Name: ReplaceBuildingButton
   m_TagString: Untagged
@@ -3755,6 +3798,19 @@ MonoBehaviour:
   _icon: {fileID: 7492691869194861862}
   _background: {fileID: 5046477800206916016}
   _countValue: {fileID: 1967043950991728307}
+--- !u!114 &8613025216729891122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7667896580661697751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc606ad5815d39e45bb16ef56a1054aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 3787683365170284165}
 --- !u!1 &8235969153599805481
 GameObject:
   m_ObjectHideFlags: 0

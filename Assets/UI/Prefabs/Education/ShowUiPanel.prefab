@@ -34,6 +34,7 @@ RectTransform:
   - {fileID: 1484882533876137950}
   - {fileID: 696564189316304678}
   m_Father: {fileID: 1930155963200874886}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -145,7 +146,6 @@ MonoBehaviour:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     m_CornerGradientColors:
@@ -185,6 +185,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3621859816016924370}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -296,7 +297,6 @@ MonoBehaviour:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     m_CornerGradientColors:
@@ -336,6 +336,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3621859816016924370}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.54347825}
   m_AnchorMax: {x: 1, y: 1}
@@ -372,8 +373,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0418\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u044C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ad758e33b7f890e44bfa5a1e9883de07, type: 2}
-  m_sharedMaterial: {fileID: -266863878020646813, guid: ad758e33b7f890e44bfa5a1e9883de07, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2eedb4289849b46499469e677827a6b7, type: 2}
+  m_sharedMaterial: {fileID: 3364055129580579509, guid: 2eedb4289849b46499469e677827a6b7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -470,6 +471,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3621859816016924370}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.54347825}
@@ -509,8 +511,8 @@ MonoBehaviour:
     \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u044C
     \u0435\u0435 \u0432 \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u044C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ad758e33b7f890e44bfa5a1e9883de07, type: 2}
-  m_sharedMaterial: {fileID: -266863878020646813, guid: ad758e33b7f890e44bfa5a1e9883de07, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1c9f8f405ebd784d92254f92751ceae, type: 2}
+  m_sharedMaterial: {fileID: 2518197120715433314, guid: d1c9f8f405ebd784d92254f92751ceae, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -608,6 +610,7 @@ RectTransform:
   m_Children:
   - {fileID: 3621859816016924370}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

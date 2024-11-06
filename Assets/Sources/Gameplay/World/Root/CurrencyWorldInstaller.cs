@@ -39,11 +39,6 @@ namespace Assets.Sources.Gameplay.World.Root
         {
             WorldData worldData = PersistentProgressService.Progress.GetWorldData(WorldDataId);
 
-            Debug.Log(worldData.Id);
-            Debug.Log(worldData is WorldData);
-            Debug.Log(worldData is ExpandingWorldData);
-            Debug.Log(worldData is CurrencyWorldData);
-
             if (worldData is not CurrencyWorldData)
                 Debug.LogError(nameof(WorldDataId) + " is not " + typeof(CurrencyWorldData));
 

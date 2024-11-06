@@ -12,7 +12,7 @@ namespace Assets.Sources.Collection
             Container.BindInterfacesAndSelfTo<CollectionBootstrapper>().AsSingle().NonLazy();
             UiFactoryInstaller.Install(Container);
             WorldFactoryInstaller.Install(Container);
-            Container.BindInterfacesTo<SandboxRotation>().AsSingle();
+            Container.BindInterfacesTo<CollectionRotation>().AsSingle();
         }
     }
 }

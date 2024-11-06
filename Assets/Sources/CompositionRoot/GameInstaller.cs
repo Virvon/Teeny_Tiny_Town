@@ -1,3 +1,4 @@
+using Assets.Sources.Audio;
 using Assets.Sources.Infrastructure.GameStateMachine;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.CoroutineRunner;
@@ -6,10 +7,13 @@ using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.SceneManagment;
 using Assets.Sources.Services.StaticDataService;
+using UnityEngine;
 using Zenject;
 
 public class GameInstaller : MonoInstaller, ICoroutineRunner
 {
+    [SerializeField] UiSoundPlayer _uiSoundPlayer;
+
     public override void InstallBindings()
     {
         BindSceneLoader();
@@ -20,6 +24,12 @@ public class GameInstaller : MonoInstaller, ICoroutineRunner
         BindSaveLoadService();
         BindPersistentProgressService();
         BindCoroutineRunner();
+        BindUiSoundPlayer();
+    }
+
+    private void BindUiSoundPlayer()
+    {
+        Container.BindInstance(_uiSoundPlayer).AsSingle();
     }
 
     private void BindCoroutineRunner()
