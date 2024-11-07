@@ -30,36 +30,33 @@ namespace Assets.Sources.UI.Windows.World.Panels
 
             foreach (QuestData questData in _persistentPorgressService.Progress.Quests)
                 await CreateQuestPanel(questData.Id);
+
+            _persistentPorgressService.Progress.QuestChanged += OnQuestChanged;
         }
 
         private void OnDestroy()
         {
             foreach (QuestPanel questPanel in _questPanels)
                 questPanel.Clicked -= OnQuestPanelClicked;
+
+            _persistentPorgressService.Progress.QuestChanged -= OnQuestChanged;
         }
 
-        private async void OnQuestPanelClicked(QuestPanel questPanel)
+        private void OnQuestPanelClicked(QuestPanel questPanel)
         {
             QuestConfig questConfig = _staticDataService.QuestsConfig.GetQuest(questPanel.Id);
 
             _persistentPorgressService.Progress.Wallet.Give(questConfig.Reward);
 
-            List<QuestData> questDatas = _persistentPorgressService.Progress.Quests;
-            questDatas.Remove(questDatas.First(questData => questData.Id == questPanel.Id));
+            //List<QuestData> questDatas = _persistentPorgressService.Progress.Quests;
+            //questDatas.Remove(questDatas.First(questData => questData.Id == questPanel.Id));
 
-            _questPanels.Remove(questPanel);
-            questPanel.Clicked -= OnQuestPanelClicked;
-            Destroy(questPanel.gameObject);
+            
 
-            await CreateQuest();
-        }
-
-        private async UniTask CreateQuest()
-        {
             bool isUniqueQuest = false;
             string questId = string.Empty;
 
-            while(isUniqueQuest == false)
+            while (isUniqueQuest == false)
             {
                 QuestConfig[] questConfigs = _staticDataService.QuestsConfig.Configs;
                 questId = questConfigs[Random.Range(0, questConfigs.Length + 1)].Id;
@@ -68,8 +65,19 @@ namespace Assets.Sources.UI.Windows.World.Panels
                     isUniqueQuest = true;
             }
 
-            _persistentPorgressService.Progress.Quests.Add(new QuestData(questId));
-            await CreateQuestPanel(questId);
+            //_persistentPorgressService.Progress.Quests.Add(new QuestData(questId));
+            _persistentPorgressService.Progress.ChangeQuest(questPanel.Id, new QuestData(questId));
+        }
+
+        private async void OnQuestChanged(string changedQuestId, string newQuestId)
+        {
+            QuestPanel questPanel = _questPanels.First(panel => panel.Id == changedQuestId);
+
+            _questPanels.Remove(questPanel);
+            questPanel.Clicked -= OnQuestPanelClicked;
+            Destroy(questPanel.gameObject);
+
+            await CreateQuestPanel(newQuestId);
         }
 
         private async UniTask CreateQuestPanel(string id)

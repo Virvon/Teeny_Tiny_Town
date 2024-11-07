@@ -1,5 +1,6 @@
 using Assets.Sources.Audio;
 using Assets.Sources.Infrastructure.GameStateMachine;
+using Assets.Sources.Services.ActivityTracking;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.CoroutineRunner;
 using Assets.Sources.Services.Input;
@@ -30,6 +31,12 @@ namespace Assets.Sources.CompositionRoot
             BindCoroutineRunner();
             BindAudioMixer();
             BindLoadingCurtainInstaller();
+            BindActivityTraker();
+        }
+
+        private void BindActivityTraker()
+        {
+            Container.BindInterfacesAndSelfTo<ActivityTraker>().AsSingle().NonLazy();
         }
 
         private void BindLoadingCurtainInstaller()

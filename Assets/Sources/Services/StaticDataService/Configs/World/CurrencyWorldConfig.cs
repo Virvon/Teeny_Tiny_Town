@@ -10,11 +10,13 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
     [CreateAssetMenu(fileName = "CurrencyWorldConfig", menuName = "StaticData/WorldConfig/Create new currency world config", order = 51)]
     public class CurrencyWorldConfig : WorldConfig
     {
+        protected const uint StartWorldWalletValue = 200;
+
         public BuildingType[] StartStoreList;
         public GainStoreItemType[] AvailableGainStoreItems;
 
         public override WorldData GetWorldData(uint[] goals, IStaticDataService staticDataService) =>
-            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, StartStoreList, goals, GetGainStoreItemsList(staticDataService), IsUnlockedOnStart);
+            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, StartStoreList, goals, GetGainStoreItemsList(staticDataService), IsUnlockedOnStart, StartWorldWalletValue);
 
         protected GainStoreItemData[] GetGainStoreItemsList(IStaticDataService staticDataService)
         {

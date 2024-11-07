@@ -19,6 +19,8 @@ namespace Assets.Sources.Gameplay.GameplayMover
         private readonly IInputService _inputService;
         private readonly IPersistentProgressService _persistentProgressService;
 
+        private bool _isUndoStarted;
+
         public GameplayMover(
             IWorldChanger worldChanger,
             IInputService inputService,
@@ -31,6 +33,8 @@ namespace Assets.Sources.Gameplay.GameplayMover
             WorldData = worldData;
             _persistentProgressService = persistentProgressService;
             NextBuildingForPlacingCreator = nextBuildingForPlacingCreator;
+
+            _isUndoStarted = false;
 
             _inputService.UndoButtonPressed += TryUndoCommand;
         }
@@ -64,11 +68,15 @@ namespace Assets.Sources.Gameplay.GameplayMover
 
         public async void TryUndoCommand()
         {
-            if (LastCommand == null)
+            if (LastCommand == null || _isUndoStarted)
                 return;
+
+            _isUndoStarted = true;
 
             await LastCommand.Undo();
             LastCommand = null;
+
+            _isUndoStarted = false;
         }
 
         protected void ExecuteCommand(Command command)

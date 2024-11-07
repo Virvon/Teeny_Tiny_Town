@@ -50,17 +50,9 @@ namespace Assets.Sources.UI
             Window window = _windows[typeof(TWindow)];
 
             if (_currentWindow == window)
-            {
-                _currentWindow.Hide(callback: () =>
-                {
-                    Remove<TWindow>(window);
-                    _currentWindow = null;
-                });
-            }
-            else
-            {
-                Remove<TWindow>(window);
-            }
+                _currentWindow = null;
+
+            Remove<TWindow>(window);
         }
 
         public void HideCurrentWindow()

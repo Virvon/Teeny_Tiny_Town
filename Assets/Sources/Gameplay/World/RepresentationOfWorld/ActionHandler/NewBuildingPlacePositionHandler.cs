@@ -18,6 +18,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         private TileRepresentation _handlePressedMoveStartTile;
         private bool _isBuildingPressed;
         private TileRepresentation _lastSelectedTile;
+        private bool _canPlaced;
 
         public NewBuildingPlacePositionHandler(
             SelectFrame selectFrame,
@@ -31,6 +32,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             _worldRepresentationChanger = worldRepresentationChanger;
             _markersVisibility = markersVisibility;
             _buildingMarker = buildingMarker;
+
+            _canPlaced = true;
 
             _worldRepresentationChanger.GameplayMoved += StartPlacing;
         }
@@ -73,20 +76,27 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             SelectFrame.Select(startTile);
             _markersVisibility.SetBuildingShowed(true);
             _markersVisibility.SetSelectFrameShowed(true);
+            _canPlaced = true;
         }
 
         public override void OnHandleMoved(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out TileRepresentation tile)
-                && tile.IsEmpty
-                && CheckBuildingAndTileCompatibility(_buildingMarker.BuildingType, tile.Type))
-            {
-                SelectFrame.Select(tile);
-                _markersVisibility.SetSelectFrameShowed(true);
-                _lastSelectedTile = tile;
+            if (_canPlaced == false)
+                return;
 
-                if (_isBuildingPressed == false)
-                    _buildingMarker.Mark(tile);
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile))
+            {
+                //Debug.Log(tile != null);
+
+                if(tile.IsEmpty && CheckBuildingAndTileCompatibility(_buildingMarker.BuildingType, tile.Type))
+                {
+                    SelectFrame.Select(tile);
+                    _markersVisibility.SetSelectFrameShowed(true);
+                    _lastSelectedTile = tile;
+
+                    if (_isBuildingPressed == false)
+                        _buildingMarker.Mark(tile);
+                }
             }
             else if (_isBuildingPressed)
             {
@@ -109,6 +119,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override void OnPressed(Vector2 handlePosition)
         {
+            if (_canPlaced == false)
+                return;
+
             if (CheckTileIntersection(handlePosition, out TileRepresentation tile)
                 && tile.IsEmpty
                 && CheckBuildingAndTileCompatibility(_buildingMarker.BuildingType, tile.Type))
@@ -117,6 +130,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
                 _markersVisibility.SetSelectFrameShowed(false);
 
                 _lastSelectedTile = null;
+                _canPlaced = false;
 
                 GameplayMover.PlaceNewBuilding(tile.GridPosition, _buildingMarker.BuildingType);
             }
@@ -135,12 +149,18 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override void OnHandlePressedMovePerformed(Vector2 handlePosition)
         {
+            if (_canPlaced == false)
+                return;
+
             if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile == _handlePressedMoveStartTile)
                 _isBuildingPressed = true;
         }
 
         public override void OnHandlePressedMoveStarted(Vector2 handlePosition)
         {
+            if (_canPlaced == false)
+                return;
+
             if (CheckTileIntersection(handlePosition, out TileRepresentation tile))
                 _handlePressedMoveStartTile = tile;
         }

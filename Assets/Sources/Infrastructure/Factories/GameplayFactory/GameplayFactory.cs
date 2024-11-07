@@ -8,6 +8,7 @@ using Assets.Sources.Services.StaticDataService.Configs.World;
 using UnityEngine.AddressableAssets;
 using Assets.Sources.Audio;
 using Assets.Sources.VisualTheme;
+using Assets.Sources.Gameplay.Birds;
 
 namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
 {
@@ -21,6 +22,7 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
         private readonly UiSoundPlayer.Factory _uiSoundPlayerFactory;
         private readonly WorldWalletSoundPlayer.Factory _worldWalletSoundPlayerFactory;
         private readonly GameplayPlane.Factory _gameplayPlaneFactory;
+        private readonly Bird.Factory _birdFactory;
 
         public GameplayFactory(
             DiContainer container,
@@ -30,7 +32,8 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             IStaticDataService staticDataService,
             UiSoundPlayer.Factory uiSoundPlayerFactory,
             WorldWalletSoundPlayer.Factory worldWalletSoundPlayerFactory,
-            GameplayPlane.Factory gameplayPlaneFactory)
+            GameplayPlane.Factory gameplayPlaneFactory,
+            Bird.Factory birdFactory)
         {
             _container = container;
             _worldsListFactory = worldsListFactory;
@@ -40,7 +43,11 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             _uiSoundPlayerFactory = uiSoundPlayerFactory;
             _worldWalletSoundPlayerFactory = worldWalletSoundPlayerFactory;
             _gameplayPlaneFactory = gameplayPlaneFactory;
+            _birdFactory = birdFactory;
         }
+
+        public async UniTask CreateBird() =>
+            await _birdFactory.Create(GameplayFactoryAssets.Bird);
 
         public async UniTask CreatePlane() =>
             await _gameplayPlaneFactory.Create(GameplayFactoryAssets.GameplayPlane);

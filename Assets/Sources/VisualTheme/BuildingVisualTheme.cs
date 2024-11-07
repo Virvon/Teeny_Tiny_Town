@@ -10,15 +10,14 @@ namespace Assets.Sources.VisualTheme
 
         float _nightValue;
 
-        private void Start()
-        {
+        private void Start() =>
             _nightLightning.SetActive(PersistentProgressService.Progress.SettingsData.IsDarkTheme);
-        }
 
         protected override void ChangeTheme()
         {
-            //ThemeChanger = _nightLightning.GetInstanceID
-            DOTween.To(() => _nightValue, value => _nightValue = value, PersistentProgressService.Progress.SettingsData.IsDarkTheme ? 1 : 0, AnimationsConfig.ThemeChangingDuration).OnComplete(() =>
+            ThemeChanger?.Kill();
+
+            ThemeChanger = DOTween.To(() => _nightValue, value => _nightValue = value, PersistentProgressService.Progress.SettingsData.IsDarkTheme ? 1 : 0, AnimationsConfig.ThemeChangingDuration).OnComplete(() =>
             {
                 _nightLightning.SetActive(_nightValue == 1);
             });

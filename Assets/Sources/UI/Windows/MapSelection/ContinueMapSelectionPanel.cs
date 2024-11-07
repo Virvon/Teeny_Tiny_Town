@@ -10,24 +10,19 @@ using Zenject;
 
 namespace Assets.Sources.UI.Windows.MapSelection
 {
-    public class UnlockedMapPanel : MapSelectionPanel
+    public class ContinueMapSelectionPanel : MapSelectionPanel
     {
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _restartButton;
-        [SerializeField] private CanvasGroup _restartButtonCanvasGroup;
 
         private GameplayStateMachine _gameplayStateMachine;
         private WorldsList _worldsList;
-        private IPersistentProgressService _persistentProgressService;
 
         [Inject]
-        private void Construct(GameplayStateMachine gameplayStateMachine, WorldsList worldsList, IPersistentProgressService persistentProgressService)
+        private void Construct(GameplayStateMachine gameplayStateMachine, WorldsList worldsList)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _worldsList = worldsList;
-            _persistentProgressService = persistentProgressService;
-
-            ChangeRestartButtonVisibility();
 
             _continueButton.onClick.AddListener(OnContinueButtonClicked);
             _restartButton.onClick.AddListener(OnRestartButtonClicked);
@@ -37,28 +32,6 @@ namespace Assets.Sources.UI.Windows.MapSelection
         {
             _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
             _restartButton.onClick.RemoveListener(OnRestartButtonClicked);
-        }
-
-        public override void Open()
-        {
-            base.Open();
-            ChangeRestartButtonVisibility();
-        }
-
-        private void ChangeRestartButtonVisibility()
-        {
-            if (_persistentProgressService.Progress.GetWorldData(_persistentProgressService.Progress.LastPlayedWorldDataId).IsChangingStarted)
-            {
-                _restartButtonCanvasGroup.alpha = 1;
-                _restartButtonCanvasGroup.blocksRaycasts = true;
-                _restartButtonCanvasGroup.interactable = true;
-            }
-            else
-            {
-                _restartButtonCanvasGroup.alpha = 0;
-                _restartButtonCanvasGroup.blocksRaycasts = false;
-                _restartButtonCanvasGroup.interactable = false;
-            }
         }
 
         private async void OnRestartButtonClicked()

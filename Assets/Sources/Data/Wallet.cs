@@ -7,6 +7,9 @@ namespace Assets.Sources.Data
     {
         public uint Value;
 
+        public Wallet(uint startValue) =>
+            Value = startValue;
+
         public event Action<uint> ValueChanged;
 
         public void Give(uint value)

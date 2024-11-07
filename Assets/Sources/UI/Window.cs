@@ -13,6 +13,8 @@ namespace Assets.Sources.UI
     {
         [SerializeField] private CanvasGroup _canvasGroup;
 
+        Tween _fader;
+
         [Inject]
         private void Construct(IStaticDataService staticDataService)
         {
@@ -20,6 +22,9 @@ namespace Assets.Sources.UI
         }
 
         protected AnimationsConfig AnimationsConfig { get; private set; }
+
+        private void OnDestroy() =>
+            _fader?.Kill();
 
         public virtual void Open()
         {
@@ -49,8 +54,12 @@ namespace Assets.Sources.UI
         public void Destroy() =>
            Destroy(gameObject);
 
-        private void Fade(int targetValue, TweenCallback callback) =>
-            _canvasGroup.DOFade(targetValue, AnimationsConfig.WindowOpeningStateDuration).onComplete += callback;
+        private void Fade(int targetValue, TweenCallback callback)
+        {
+            _fader?.Kill();
+            _fader = _canvasGroup.DOFade(targetValue, AnimationsConfig.WindowOpeningStateDuration);
+            _fader.onComplete += callback;
+        }
 
         public class Factory : PlaceholderFactory<AssetReferenceGameObject, UniTask<Window>>
         {

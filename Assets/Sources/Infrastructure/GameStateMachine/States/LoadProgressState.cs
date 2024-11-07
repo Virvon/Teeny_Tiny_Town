@@ -15,6 +15,8 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {
     public class LoadProgressState : IState
     {
+        private const uint StarGamplayWalletValue = 100;
+
         private readonly IPersistentProgressService _persistentProgressService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly GameStateMachine _gameStateMachine;
@@ -53,9 +55,8 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
                 _staticDataService.WorldsConfig.AvailableMovesCount,
                 _staticDataService.SandboxConfig.Size,
                 _staticDataService.GetAllBuildings(),
-                _staticDataService.WorldsConfig.EducationWorldId);
-
-            progress.Wallet.Value = 100;
+                _staticDataService.WorldsConfig.EducationWorldId,
+                StarGamplayWalletValue);
 
             return progress;
         }
@@ -71,9 +72,6 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
                 WorldConfig worldConfig = worldConfigs[i];
 
                 worldDatas[i] = worldConfig.GetWorldData(_staticDataService.WorldsConfig.Goals, _staticDataService);
-
-                if (worldDatas[i] is CurrencyWorldData currencyWolrdData)
-                    currencyWolrdData.WorldWallet.Value = 10000000;
             }
 
             return worldDatas;

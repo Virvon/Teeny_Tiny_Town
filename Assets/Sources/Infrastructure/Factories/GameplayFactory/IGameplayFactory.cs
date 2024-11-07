@@ -7,6 +7,7 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
 {
     public interface IGameplayFactory
     {
+        UniTask CreateBird();
         UniTask<GameplayCamera> CreateCamera(Vector3 position);
         UniTask<World> CreateEducationWorld(Vector3 position, Transform parent);
         UniTask CreatePlane();

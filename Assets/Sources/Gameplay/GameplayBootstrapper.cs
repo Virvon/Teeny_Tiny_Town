@@ -47,6 +47,7 @@ namespace Assets.Sources.Gameplay
             await _gameplayFactory.CreateUiSoundPlayer();
             await _gameplayFactory.CreateCamera(new Vector3(56.2f, 78f, -56.2f));
             WorldsList worldsList = await _gameplayFactory.CreateWorldsList();
+            await _gameplayFactory.CreateBird();
 
             RegisterGameplayStates();
 

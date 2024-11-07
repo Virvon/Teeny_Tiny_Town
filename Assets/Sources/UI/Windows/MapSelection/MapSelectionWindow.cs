@@ -18,8 +18,9 @@ namespace Assets.Sources.UI.Windows.MapSelection
         [SerializeField] private Button _nextMapButton;
         [SerializeField] private Button _previousMapButton;
         [SerializeField] private Button _hideButton;
-        [SerializeField] private MapSelectionPanel _unlockedMapPanel;
+        [SerializeField] private MapSelectionPanel _startPanel;
         [SerializeField] private MapSelectionPanel _lcockedMapPanel;
+        [SerializeField] private MapSelectionPanel _continuePanel;
         [SerializeField] private TMP_Text _sizeValue;
         [SerializeField] private TMP_Text _name;
 
@@ -72,12 +73,23 @@ namespace Assets.Sources.UI.Windows.MapSelection
 
             if(worldData.IsUnlocked)
             {
-                _unlockedMapPanel.Open();
+                if(worldData.IsChangingStarted)
+                {
+                    _startPanel.Hide();
+                    _continuePanel.Open();
+                }
+                else
+                {
+                    _startPanel.Open();
+                    _continuePanel.Hide();
+                }
+
                 _lcockedMapPanel.Hide();
             }
             else
             {
-                _unlockedMapPanel.Hide();
+                _startPanel.Hide();
+                _continuePanel.Hide();
                 _lcockedMapPanel.Open();
             }
         }

@@ -472,7 +472,7 @@ namespace Assets.Sources.Services.Input
                 {
                     ""name"": ""modifier"",
                     ""id"": ""70a69ae4-c640-42f0-8be6-46e13aaa3898"",
-                    ""path"": ""<Touchscreen>/touch1/press"",
+                    ""path"": ""<Touchscreen>/touch0/press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -483,7 +483,7 @@ namespace Assets.Sources.Services.Input
                 {
                     ""name"": ""binding"",
                     ""id"": ""8c732685-922f-4b60-a609-72862c914d19"",
-                    ""path"": ""<Touchscreen>/delta"",
+                    ""path"": ""<Touchscreen>/touch1/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

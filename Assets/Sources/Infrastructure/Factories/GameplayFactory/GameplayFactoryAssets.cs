@@ -7,5 +7,6 @@
         public const string UiSoundPlayer = "UiSoundPlayer";
         public const string WorldWalletSoundPlayer = "WorldWalletSoundPlayer";
         public const string GameplayPlane = "GameplayPlane";
+        public const string Bird = "Bird";
     }
 }

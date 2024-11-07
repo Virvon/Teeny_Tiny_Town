@@ -122,7 +122,7 @@ namespace Assets.Sources.Data.World
         public void UpdateAvailableBuildingForCreation(IReadOnlyList<BuildingType> availableBuildingsForCreation) =>
             AvailableBuildingsForCreation = availableBuildingsForCreation.Intersect(AvailableBuildingsForCreation).ToList();
 
-        public void Update(TileData[] tiles, BuildingType nextBuildingTypeForCreation, List<BuildingType> availableBuildingsForCreation)
+        public virtual void Update(TileData[] tiles, BuildingType nextBuildingTypeForCreation, List<BuildingType> availableBuildingsForCreation)
         {
             UpdateTileDatas(tiles);
             NextBuildingTypeForCreation = nextBuildingTypeForCreation;
@@ -130,6 +130,9 @@ namespace Assets.Sources.Data.World
 
             NextBuildingForCreationBuildsCount = 0;
             Inventory = new BuildingType[InventorySize];
+
+            BulldozerItems.SetItemsCount(0);
+            ReplaceItems.SetItemsCount(0);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Assets.Sources.Data.World.Currency
         public uint BuyingCount;
         public uint RemainingCount;
         public bool IsLimited;
+        public uint StartRemainingCount;
 
         public GainStoreItemData(GainStoreItemType type)
         {
@@ -25,6 +26,7 @@ namespace Assets.Sources.Data.World.Currency
             RemainingCount = startCount;
 
             IsLimited = true;
+            StartRemainingCount = startCount;
         }
 
         public event Action BuyingCountChanged;
@@ -33,6 +35,14 @@ namespace Assets.Sources.Data.World.Currency
         {
             RemainingCount = RemainingCount < count ? 0 : RemainingCount - count;
             BuyingCount += count;
+            BuyingCountChanged?.Invoke();
+        }
+
+        public void Clear()
+        {
+            BuyingCount = 0;
+            RemainingCount = StartRemainingCount;
+
             BuyingCountChanged?.Invoke();
         }
     }

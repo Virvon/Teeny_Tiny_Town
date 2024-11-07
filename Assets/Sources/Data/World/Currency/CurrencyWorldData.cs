@@ -12,6 +12,9 @@ namespace Assets.Sources.Data.World.Currency
         public WorldMovesCounterData MovesCounter;
         public WorldStore WorldStore;
 
+        public uint StartWorldWalletValue;
+        public BuildingType[] StartBuildingsStoreList;
+
         public CurrencyWorldData(
             string id,
             TileData[] tiles,
@@ -21,12 +24,14 @@ namespace Assets.Sources.Data.World.Currency
             BuildingType[] startBuildingsStoreList,
             uint[] goals,
             GainStoreItemData[] gainsStoreList,
-            bool isUnlocked)
+            bool isUnlocked,
+            uint startWorldWalletValue)
             : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size, goals, isUnlocked)
         {
-            WorldWallet = new();
+            WorldWallet = new(startWorldWalletValue);
             MovesCounter = new();
             WorldStore = new(startBuildingsStoreList, gainsStoreList);
+            StartBuildingsStoreList = startBuildingsStoreList;
         }
 
         WorldWallet ICurrencyWorldData.WorldWallet => WorldWallet;
@@ -37,6 +42,15 @@ namespace Assets.Sources.Data.World.Currency
         {
             base.AddNextBuildingTypeForCreation(type);
             WorldStore.TryAddBuilding(type);
+        }
+
+        public override void Update(TileData[] tiles, BuildingType nextBuildingTypeForCreation, List<BuildingType> availableBuildingsForCreation)
+        {
+            base.Update(tiles, nextBuildingTypeForCreation, availableBuildingsForCreation);
+
+            WorldWallet.Clear();
+            MovesCounter.MovesCount = 0;
+            WorldStore.Clear(StartBuildingsStoreList);
         }
     }
 }

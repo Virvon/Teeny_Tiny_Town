@@ -24,6 +24,7 @@ namespace Assets.Sources.Data.World.Currency
         }
 
         public event Action<BuildingType> BuildingsStoreListUpdated;
+        public event Action Cleared;
 
         public void TryAddBuilding(BuildingType type)
         {
@@ -40,5 +41,18 @@ namespace Assets.Sources.Data.World.Currency
 
         public BuildingStoreItemData GetBuildingData(BuildingType type) =>
             BuildingsStoreList.First(data => data.Type == type);
+
+        public void Clear(BuildingType[] startBuildingsStoreList)
+        {
+            BuildingsStoreList.Clear();
+
+            foreach (BuildingType buildingType in startBuildingsStoreList)
+                TryAddBuilding(buildingType);
+
+            foreach (GainStoreItemData gainStoreItemData in GainStoreList)
+                gainStoreItemData.Clear();
+
+            Cleared?.Invoke();
+        }
     }
 }

@@ -5,6 +5,7 @@ using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -30,6 +31,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
             _storeItems = new();
 
             _worldData.WorldStore.BuildingsStoreListUpdated += OnBuildingsStoreListUpdated;
+            _worldData.WorldStore.Cleared += OnStoreCleared;
 
             foreach (BuildingStoreItemData data in _worldData.WorldStore.BuildingsStoreList)
                 await CreateStoreItem(data.Type);
@@ -38,8 +40,9 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
         private void OnDestroy()
         {
             _worldData.WorldStore.BuildingsStoreListUpdated -= OnBuildingsStoreListUpdated;
+            _worldData.WorldStore.Cleared -= OnStoreCleared;
 
-            foreach (var storeItem in _storeItems)
+            foreach (BuildingStoreItem storeItem in _storeItems)
                 storeItem.Buyed -= OnStoreItemBuyed;
         }
 
@@ -63,5 +66,19 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
 
         private async void OnBuildingsStoreListUpdated(BuildingType type) =>
             await CreateStoreItem(type);
+
+        private async void OnStoreCleared()
+        {
+            foreach(BuildingStoreItem storeItem in _storeItems)
+            {
+                storeItem.Buyed -= OnStoreItemBuyed;
+                Destroy(storeItem.gameObject);
+            }
+
+            _storeItems.Clear();
+
+            foreach (BuildingStoreItemData data in _worldData.WorldStore.BuildingsStoreList)
+                await CreateStoreItem(data.Type);
+        }
     }
 }

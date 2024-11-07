@@ -1,11 +1,22 @@
-﻿namespace Assets.Sources.UI.Windows.Start
+﻿using UnityEngine;
+using UnityEngine.Audio;
+
+namespace Assets.Sources.UI.Windows.Start
 {
     public class MusicOption : SettingsOption
     {
-        protected override void OnToggleValueChanged(bool value) =>
-            PersistentProgressService.Progress.SettingsData.ChangeMusicActive(value);
+        [SerializeField] private AudioMixer _mixer;
 
-        protected override bool SetUpToggle() =>
-            PersistentProgressService.Progress.SettingsData.IsMusicOn;
+        protected override void OnToggleValueChanged(bool value)
+        {
+            _mixer.SetFloat("MusicVolume", value ? 0 : -80);
+            PersistentProgressService.Progress.SettingsData.ChangeMusicActive(value);
+        }
+
+        protected override bool SetUpToggle()
+        {
+            _mixer.SetFloat("MusicVolume", PersistentProgressService.Progress.SettingsData.IsMusicOn ? 0 : -80);
+            return PersistentProgressService.Progress.SettingsData.IsMusicOn;
+        }
     }
 }

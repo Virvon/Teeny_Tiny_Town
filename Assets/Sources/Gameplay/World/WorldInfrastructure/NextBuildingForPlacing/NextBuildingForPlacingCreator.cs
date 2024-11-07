@@ -64,13 +64,21 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlaci
             MoveToNextBuilding();
         }
 
-        public void FindTileToPlacing(IReadOnlyList<Tile> tiles)
+        public bool CheckFreeTiles(IReadOnlyList<Tile> tiles)
         {
             if (tiles.Any(tile => tile.IsEmpty && tile.Type != TileType.WaterSurface) == false)
             {
                 NoMoreEmptyTiles?.Invoke();
-                return;
+                return false;
             }
+
+            return true;
+        }
+
+        public void FindTileToPlacing(IReadOnlyList<Tile> tiles)
+        {
+            if (CheckFreeTiles(tiles) == false)
+                return;
 
             bool isPositionFree = false;
 

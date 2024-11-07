@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Audio;
+using Assets.Sources.Gameplay.Birds;
 using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Gameplay.World;
 using Assets.Sources.Services.AssetManagement;
@@ -42,6 +43,10 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             Container
                 .BindFactory<string, UniTask<GameplayPlane>, GameplayPlane.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<GameplayPlane>>();
+            
+            Container
+                .BindFactory<string, UniTask<Bird>, Bird.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<Bird>>();
         }
     }
 }

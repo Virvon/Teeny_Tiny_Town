@@ -20,6 +20,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         }
 
         public override WorldData GetWorldData(uint[] goals, IStaticDataService staticDataService) =>
-            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), StartSize, StartStoreList, goals, GetGainStoreItemsList(staticDataService), IsUnlockedOnStart);
+            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), StartSize, StartStoreList, goals, GetGainStoreItemsList(staticDataService), IsUnlockedOnStart, StartWorldWalletValue);
     }
 }

@@ -32,11 +32,12 @@ namespace Assets.Sources.Data
             uint startRemainingMoveCount,
             Vector2Int sandboxSize,
             BuildingType[] allBuildings,
-            string startWorldId)
+            string startWorldId,
+            uint startGameplayWalletValue)
         {
             Quests = quests;
             StoreData = new();
-            Wallet = new();
+            Wallet = new(startGameplayWalletValue);
             GameplayMovesCounter = new(startRemainingMoveCount, StoreData);
             SandboxData = new(sandboxSize);
             SettingsData = new();
@@ -60,6 +61,8 @@ namespace Assets.Sources.Data
             }
         }
 
+        public event Action<string, string> QuestChanged;
+
         public QuestData GetQuest(string id) =>
             Quests.First(data => data.Id == id);
 
@@ -77,6 +80,14 @@ namespace Assets.Sources.Data
                 Debug.LogError(nameof(worldData) + " is not founded");
 
             return worldData;
+        }
+
+        public void ChangeQuest(string changedQuestId, QuestData newQuest)
+        {
+            Quests.Remove(Quests.First(questData => questData.Id == changedQuestId));
+            Quests.Add(newQuest);
+
+            QuestChanged?.Invoke(changedQuestId, newQuest.Id);
         }
     }
 }
