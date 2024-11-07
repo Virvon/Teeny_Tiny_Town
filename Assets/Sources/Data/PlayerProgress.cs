@@ -16,7 +16,6 @@ namespace Assets.Sources.Data
     { 
         public List<WorldData> WorldDatas;
         public List<CurrencyWorldData> CurrencyWorldDatas;
-        public List<ExpandingWorldData> ExpandingWorldDatas;
         public StoreData StoreData;
         public Wallet Wallet;
         public List<QuestData> Quests;
@@ -42,7 +41,7 @@ namespace Assets.Sources.Data
             SandboxData = new(sandboxSize);
             SettingsData = new();
             LastPlayedWorldDataId = startWorldId;
-            IsEducationCompleted = true;
+            IsEducationCompleted = false;
 
             BuildingDatas = new BuildingData[allBuildings.Length];
 
@@ -51,14 +50,11 @@ namespace Assets.Sources.Data
 
             WorldDatas = new();
             CurrencyWorldDatas = new();
-            ExpandingWorldDatas = new();
 
             foreach(WorldData worldData in worldDatas)
             {
                 if (worldData is CurrencyWorldData)
                     CurrencyWorldDatas.Add((CurrencyWorldData)worldData);
-                else if (worldData is ExpandingWorldData)
-                    ExpandingWorldDatas.Add((ExpandingWorldData)worldData);
                 else
                     WorldDatas.Add(worldData);
             }
@@ -76,9 +72,6 @@ namespace Assets.Sources.Data
 
             if(worldData == null)
                 worldData = CurrencyWorldDatas.FirstOrDefault(data => data.Id == id);
-
-            if(worldData == null)
-                worldData = ExpandingWorldDatas.FirstOrDefault(data => data.Id == id);
 
             if (worldData == null)
                 Debug.LogError(nameof(worldData) + " is not founded");

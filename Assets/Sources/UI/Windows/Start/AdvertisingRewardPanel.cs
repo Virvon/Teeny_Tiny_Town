@@ -3,6 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+#if !UNITY_EDITOR && UNITY_WEBGL
+using Agava.YandexGames;
+#endif
 
 namespace Assets.Sources.UI.Windows.Start
 {
@@ -35,6 +38,7 @@ namespace Assets.Sources.UI.Windows.Start
                 _persistnetProgressService.Progress.Wallet.Give(_reward);
             });
 #else
+
             _persistnetProgressService.Progress.Wallet.Give(_reward);
 #endif
         }

@@ -17,11 +17,11 @@ MonoBehaviour:
   TileConfigs:
   - Type: 0
     GridPosition: {x: 0, y: 0}
-    BuildingType: 0
+    BuildingType: 1
   - Type: 0
     GridPosition: {x: 0, y: 1}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 5
+  - Type: 2
     GridPosition: {x: 0, y: 2}
     BuildingType: 0
   - Type: 0
@@ -35,14 +35,14 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 0, y: 6}
-    BuildingType: 0
+    BuildingType: 2
   - Type: 0
     GridPosition: {x: 1, y: 0}
-    BuildingType: 0
+    BuildingType: 4
   - Type: 0
     GridPosition: {x: 1, y: 1}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 1, y: 2}
     BuildingType: 0
   - Type: 0
@@ -50,20 +50,20 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 1, y: 4}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 1
+  - Type: 2
     GridPosition: {x: 1, y: 5}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 1, y: 6}
-    BuildingType: 0
+    BuildingType: 3
   - Type: 0
     GridPosition: {x: 2, y: 0}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 2, y: 1}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 2, y: 2}
     BuildingType: 0
   - Type: 0
@@ -83,11 +83,11 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 3, y: 1}
-    BuildingType: 0
+    BuildingType: 10
   - Type: 0
     GridPosition: {x: 3, y: 2}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 3, y: 3}
     BuildingType: 0
   - Type: 0
@@ -95,13 +95,13 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 3, y: 5}
-    BuildingType: 0
+    BuildingType: 10
   - Type: 0
     GridPosition: {x: 3, y: 6}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 4, y: 0}
-    BuildingType: 0
+    BuildingType: 2
   - Type: 0
     GridPosition: {x: 4, y: 1}
     BuildingType: 0
@@ -110,8 +110,8 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 4, y: 3}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 3
+  - Type: 2
     GridPosition: {x: 4, y: 4}
     BuildingType: 0
   - Type: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   - Type: 0
     GridPosition: {x: 5, y: 0}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 5, y: 1}
     BuildingType: 0
   - Type: 0
@@ -132,12 +132,12 @@ MonoBehaviour:
   - Type: 0
     GridPosition: {x: 5, y: 3}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 5, y: 4}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 5, y: 5}
-    BuildingType: 0
+    BuildingType: 4
   - Type: 0
     GridPosition: {x: 5, y: 6}
     BuildingType: 0
@@ -149,11 +149,11 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 6, y: 2}
-    BuildingType: 0
+    BuildingType: 2
   - Type: 0
     GridPosition: {x: 6, y: 3}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 9
+  - Type: 2
     GridPosition: {x: 6, y: 4}
     BuildingType: 0
   - Type: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 6, y: 6}
-    BuildingType: 0
+    BuildingType: 9
   NextBuildingTypeForCreation: 3
   StartingAvailableBuildingTypes: 090000000a0000000100000002000000
   AssetReference:

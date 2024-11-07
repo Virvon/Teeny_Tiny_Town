@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7910544127407090387}
   - component: {fileID: 6697258544426720556}
   - component: {fileID: 5745400436503529495}
+  - component: {fileID: 1215775399090695606}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7331462140007026779}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,3 +99,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1215775399090695606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7331462140007026779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d9e56ce6742cb42975ee2b759e821d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 6697258544426720556}
+  _nightColor: {r: 0.20784314, g: 0.047058824, b: 0.14901961, a: 1}
+  _sunColor: {r: 0.8, g: 0.8862745, b: 0.78039217, a: 1}

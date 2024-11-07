@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da19e42d25602bf49b92c9f0e8cc8e79, type: 3}
   m_Name: WorldsConfig
   m_EditorClassIdentifier: 
-  DistanceBetweenWorlds: 35
+  DistanceBetweenWorlds: 100
   CurrentWorldPosition: {x: 0, y: 0, z: 0}
   Goals: d00700008813000010270000983a0000204e000050c30000a0860100400d0300
   AvailableMovesCount: 300

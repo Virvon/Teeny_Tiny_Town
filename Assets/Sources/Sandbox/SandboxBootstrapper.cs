@@ -41,6 +41,7 @@ namespace Assets.Sources.Sandbox
 
         public async void Initialize()
         {
+            await _gameplayFactory.CreatePlane();
             await _gameplayFactory.CreateUiSoundPlayer();
             SandboxWorld sandboxWorld = await _worldFactory.CreateSandboxWorld();
             WorldGenerator worldGenerator = await _worldFactory.CreateWorldGenerator(sandboxWorld.transform);

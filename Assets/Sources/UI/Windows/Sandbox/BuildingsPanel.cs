@@ -14,6 +14,7 @@ namespace Assets.Sources.UI.Windows.Sandbox
         private BuildingPositionHandler _buildingPositionHandler;
 
         private Dictionary<SandboxPanelElement, BuildingType> _elements;
+        private SandboxPanelElement _currentElement;
 
         [Inject]
         private async void Construct(
@@ -45,7 +46,11 @@ namespace Assets.Sources.UI.Windows.Sandbox
             }
 
             if (_elements.Count > 0)
+            {
                 _buildingPositionHandler.SetBuilding(_elements.Values.First());
+                _currentElement = _elements.Keys.First();
+                _currentElement.SetActive(true);
+            }
         }
 
         private void OnDestroy()
@@ -56,6 +61,9 @@ namespace Assets.Sources.UI.Windows.Sandbox
 
         private void OnElementClicked(SandboxPanelElement element)
         {
+            _currentElement.SetActive(false);
+            _currentElement = element;
+            _currentElement.SetActive(true);
             _buildingPositionHandler.SetBuilding(_elements[element]);
         }
     }

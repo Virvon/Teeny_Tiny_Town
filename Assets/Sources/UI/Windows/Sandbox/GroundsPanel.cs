@@ -14,6 +14,7 @@ namespace Assets.Sources.UI.Windows.Sandbox
         private GroundPositionHandler _groundPositionHaneler;
 
         private Dictionary<SandboxPanelElement, SandboxGroundType> _elements;
+        private SandboxPanelElement _currentElement;
 
         [Inject]
         private async void Construct(IUiFactory uiFactory, IStaticDataService staticDataService, GroundPositionHandler groundPositionHandler)
@@ -31,6 +32,9 @@ namespace Assets.Sources.UI.Windows.Sandbox
             }
 
             _groundPositionHaneler.SetGround(_elements.Values.First());
+            _currentElement = _elements.Keys.First();
+
+            _currentElement.SetActive(true);
         }
 
         private void OnDestroy()
@@ -39,7 +43,12 @@ namespace Assets.Sources.UI.Windows.Sandbox
                 sandboxPanelElement.Clicked -= OnElementClicked;
         }
 
-        private void OnElementClicked(SandboxPanelElement element) =>
+        private void OnElementClicked(SandboxPanelElement element)
+        {
+            _currentElement.SetActive(false);
+            _currentElement = element;
+            _currentElement.SetActive(true);
             _groundPositionHaneler.SetGround(_elements[element]);
+        }
     }
 }

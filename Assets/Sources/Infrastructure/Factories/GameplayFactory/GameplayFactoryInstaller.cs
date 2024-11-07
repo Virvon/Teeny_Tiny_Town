@@ -2,6 +2,7 @@
 using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Gameplay.World;
 using Assets.Sources.Services.AssetManagement;
+using Assets.Sources.VisualTheme;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -37,6 +38,10 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             Container
                 .BindFactory<string, UniTask<WorldWalletSoundPlayer>, WorldWalletSoundPlayer.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<WorldWalletSoundPlayer>>();
+            
+            Container
+                .BindFactory<string, UniTask<GameplayPlane>, GameplayPlane.Factory>()
+                .FromFactory<KeyPrefabFactoryAsync<GameplayPlane>>();
         }
     }
 }

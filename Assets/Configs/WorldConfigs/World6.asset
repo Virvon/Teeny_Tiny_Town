@@ -15,27 +15,27 @@ MonoBehaviour:
   Id: 13a497c8-9ca4-4542-b48d-f843c1c7c178
   Size: {x: 6, y: 6}
   TileConfigs:
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 0, y: 0}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 0, y: 1}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 2
+  - Type: 2
     GridPosition: {x: 0, y: 2}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 0, y: 3}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 0, y: 4}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 9
+  - Type: 2
     GridPosition: {x: 0, y: 5}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 1, y: 0}
-    BuildingType: 0
+    BuildingType: 10
   - Type: 0
     GridPosition: {x: 1, y: 1}
     BuildingType: 0
@@ -44,10 +44,10 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 1, y: 3}
-    BuildingType: 0
+    BuildingType: 9
   - Type: 0
     GridPosition: {x: 1, y: 4}
-    BuildingType: 0
+    BuildingType: 4
   - Type: 0
     GridPosition: {x: 1, y: 5}
     BuildingType: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 3, y: 1}
-    BuildingType: 0
+    BuildingType: 1
   - Type: 0
     GridPosition: {x: 3, y: 2}
     BuildingType: 0
@@ -83,44 +83,44 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 3, y: 4}
-    BuildingType: 0
+    BuildingType: 4
   - Type: 0
     GridPosition: {x: 3, y: 5}
-    BuildingType: 0
+    BuildingType: 2
   - Type: 0
     GridPosition: {x: 4, y: 0}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 4, y: 1}
-    BuildingType: 0
+    BuildingType: 1
   - Type: 0
     GridPosition: {x: 4, y: 2}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 4, y: 3}
-    BuildingType: 0
+    BuildingType: 3
   - Type: 0
     GridPosition: {x: 4, y: 4}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 4, y: 5}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 5, y: 0}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 5, y: 1}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 5, y: 2}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 5, y: 3}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 5, y: 4}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 5, y: 5}
     BuildingType: 0
   NextBuildingTypeForCreation: 3

@@ -1,4 +1,5 @@
 ﻿using Assets.Sources.Data.World;
+using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using System.Linq;
 using UnityEngine;
@@ -19,6 +20,6 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         }
 
         public override WorldData GetWorldData(uint[] goals, IStaticDataService staticDataService) =>
-            new ExpandingWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), StartSize, StartStoreList, goals, GetGainStoreItemsList(staticDataService), IsUnlockedOnStart);
+            new CurrencyWorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), StartSize, StartStoreList, goals, GetGainStoreItemsList(staticDataService), IsUnlockedOnStart);
     }
 }

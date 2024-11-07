@@ -7,6 +7,7 @@ using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using UnityEngine.AddressableAssets;
 using Assets.Sources.Audio;
+using Assets.Sources.VisualTheme;
 
 namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
 {
@@ -19,6 +20,7 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
         private readonly IStaticDataService _staticDataService;
         private readonly UiSoundPlayer.Factory _uiSoundPlayerFactory;
         private readonly WorldWalletSoundPlayer.Factory _worldWalletSoundPlayerFactory;
+        private readonly GameplayPlane.Factory _gameplayPlaneFactory;
 
         public GameplayFactory(
             DiContainer container,
@@ -27,7 +29,8 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             GameplayCamera.Factory gameplayCameraFactory,
             IStaticDataService staticDataService,
             UiSoundPlayer.Factory uiSoundPlayerFactory,
-            WorldWalletSoundPlayer.Factory worldWalletSoundPlayerFactory)
+            WorldWalletSoundPlayer.Factory worldWalletSoundPlayerFactory,
+            GameplayPlane.Factory gameplayPlaneFactory)
         {
             _container = container;
             _worldsListFactory = worldsListFactory;
@@ -36,7 +39,11 @@ namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
             _staticDataService = staticDataService;
             _uiSoundPlayerFactory = uiSoundPlayerFactory;
             _worldWalletSoundPlayerFactory = worldWalletSoundPlayerFactory;
+            _gameplayPlaneFactory = gameplayPlaneFactory;
         }
+
+        public async UniTask CreatePlane() =>
+            await _gameplayPlaneFactory.Create(GameplayFactoryAssets.GameplayPlane);
 
         public async UniTask CreateWorldWalletSoundPlayer() =>
             await _worldWalletSoundPlayerFactory.Create(GameplayFactoryAssets.WorldWalletSoundPlayer);

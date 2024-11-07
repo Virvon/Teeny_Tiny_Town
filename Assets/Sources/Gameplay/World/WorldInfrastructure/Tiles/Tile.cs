@@ -41,7 +41,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             await CreateGroundRepresentation(false);
 
             if(Building != null)
-                await Building.CreateRepresentation(TileRepresentation, true, true);
+                await Building.CreateRepresentation(TileRepresentation, false, false);
         }
 
         public virtual async UniTask UpdateBuilding(Building building, IBuildingsUpdatable buildingsUpdatable, bool isAnimate)

@@ -32,20 +32,20 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 0, y: 5}
-    BuildingType: 0
+    BuildingType: 3
   - Type: 0
     GridPosition: {x: 1, y: 0}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 2
+  - Type: 1
     GridPosition: {x: 1, y: 1}
     BuildingType: 0
-  - Type: 0
+  - Type: 1
     GridPosition: {x: 1, y: 2}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 3
+  - Type: 1
     GridPosition: {x: 1, y: 3}
     BuildingType: 0
-  - Type: 0
+  - Type: 1
     GridPosition: {x: 1, y: 4}
     BuildingType: 0
   - Type: 0
@@ -54,16 +54,16 @@ MonoBehaviour:
   - Type: 0
     GridPosition: {x: 2, y: 0}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 2, y: 1}
     BuildingType: 0
-  - Type: 0
+  - Type: 1
     GridPosition: {x: 2, y: 2}
     BuildingType: 0
-  - Type: 0
+  - Type: 1
     GridPosition: {x: 2, y: 3}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 2, y: 4}
     BuildingType: 0
   - Type: 0
@@ -71,17 +71,17 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 3, y: 0}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 4
+  - Type: 2
     GridPosition: {x: 3, y: 1}
     BuildingType: 0
-  - Type: 0
+  - Type: 1
     GridPosition: {x: 3, y: 2}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 10
+  - Type: 1
     GridPosition: {x: 3, y: 3}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 1
+  - Type: 2
     GridPosition: {x: 3, y: 4}
     BuildingType: 0
   - Type: 0
@@ -90,27 +90,27 @@ MonoBehaviour:
   - Type: 0
     GridPosition: {x: 4, y: 0}
     BuildingType: 0
-  - Type: 0
+  - Type: 1
     GridPosition: {x: 4, y: 1}
     BuildingType: 0
-  - Type: 0
+  - Type: 1
     GridPosition: {x: 4, y: 2}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 9
+  - Type: 1
     GridPosition: {x: 4, y: 3}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 9
+  - Type: 1
     GridPosition: {x: 4, y: 4}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 4, y: 5}
-    BuildingType: 0
+    BuildingType: 2
   - Type: 0
     GridPosition: {x: 5, y: 0}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 5, y: 1}
-    BuildingType: 0
+    BuildingType: 4
   - Type: 0
     GridPosition: {x: 5, y: 2}
     BuildingType: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 5, y: 5}
-    BuildingType: 0
+    BuildingType: 1
   NextBuildingTypeForCreation: 3
   StartingAvailableBuildingTypes: 090000000a0000000100000002000000
   AssetReference:
@@ -135,8 +135,8 @@ MonoBehaviour:
   MaxRewardVariantsCount: 3
   AvailableAdditionalBonuses: 000000000100000002000000
   IsUnlockedOnStart: 0
-  Cost: 200
-  Name: "\u0420\u0435\u0447\u043D\u043E\u0439 \u0433\u043E\u0440\u043E\u0434"
+  Cost: 300
+  Name: "\u0413\u043E\u0440\u044B"
   PeculiarityIconAssetReferences:
   - m_AssetGUID: d5ef8be1c4e660e44a10e9abc223991f
     m_SubObjectName: RiverIcon

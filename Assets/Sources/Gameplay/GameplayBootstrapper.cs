@@ -43,6 +43,7 @@ namespace Assets.Sources.Gameplay
 
         public async void Initialize()
         {
+            await _gameplayFactory.CreatePlane();
             await _gameplayFactory.CreateUiSoundPlayer();
             await _gameplayFactory.CreateCamera(new Vector3(56.2f, 78f, -56.2f));
             WorldsList worldsList = await _gameplayFactory.CreateWorldsList();

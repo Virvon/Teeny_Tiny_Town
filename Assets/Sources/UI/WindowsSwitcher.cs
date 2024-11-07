@@ -65,7 +65,7 @@ namespace Assets.Sources.UI
 
         public void HideCurrentWindow()
         {
-            if(_currentWindowHided)
+            if(_currentWindowHided || _currentWindow == null)
                 return;
 
             _currentWindowHided = true;

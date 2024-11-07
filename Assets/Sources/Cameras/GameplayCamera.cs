@@ -18,6 +18,8 @@ namespace Assets.Sources.Gameplay.Cameras
         private AnimationsConfig _animationsConfig;
         private IPersistentProgressService _persistentProgressService;
 
+        Tween _move;
+
         [Inject]
         private void Construct(IStaticDataService staticDataService, IPersistentProgressService persistentProgressService)
         {
@@ -33,11 +35,17 @@ namespace Assets.Sources.Gameplay.Cameras
 
         public Camera MainCamera => _mainCamera;
 
-        protected virtual void OnDestroy() =>
+        protected virtual void OnDestroy()
+        {
             _persistentProgressService.Progress.SettingsData.OrthographicChanged -= ChangeOrthographic;
+            _move?.Kill();
+        }
 
-        public void MoveTo(Vector3 position, TweenCallback callback = null) =>
-            transform.DOMove(position, _animationsConfig.CameraMoveDuration).onComplete += callback;
+        public void MoveTo(Vector3 position, TweenCallback callback = null)
+        {
+            _move = transform.DOMove(position, _animationsConfig.CameraMoveDuration);
+            _move.onComplete += callback;
+        }
 
         private void ChangeOrthographic() =>
             _mainCamera.orthographic = _persistentProgressService.Progress.SettingsData.IsOrthographicCamera;

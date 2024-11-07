@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using MPUIKIT;
 using System;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace Assets.Sources.UI.Windows.Sandbox
     {
         [SerializeField] private Image _icon;
         [SerializeField] private Button _button;
+        [SerializeField] private Color _activeBackgroundColor;
+        [SerializeField] private Color _defaultBackgroundColor;
+        [SerializeField] private MPImage _background;
 
         public event Action<SandboxPanelElement> Clicked;
 
@@ -19,6 +23,9 @@ namespace Assets.Sources.UI.Windows.Sandbox
 
         private void OnDisable() =>
             _button.onClick.RemoveListener(OnButtonClicked);
+
+        public void SetActive(bool value) =>
+            _background.color = value ? _activeBackgroundColor : _defaultBackgroundColor;
 
         public void Init(Sprite icon)
         {

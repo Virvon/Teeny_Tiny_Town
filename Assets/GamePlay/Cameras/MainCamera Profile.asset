@@ -15,31 +15,31 @@ MonoBehaviour:
   active: 1
   redOutRedIn:
     m_OverrideState: 1
-    m_Value: 18
+    m_Value: 0
   redOutGreenIn:
     m_OverrideState: 1
     m_Value: 0
   redOutBlueIn:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -60
   greenOutRedIn:
     m_OverrideState: 1
-    m_Value: -1
+    m_Value: -6
   greenOutGreenIn:
     m_OverrideState: 1
-    m_Value: 64
+    m_Value: 72
   greenOutBlueIn:
     m_OverrideState: 1
-    m_Value: 87
+    m_Value: 111
   blueOutRedIn:
     m_OverrideState: 1
     m_Value: 48
   blueOutGreenIn:
     m_OverrideState: 1
-    m_Value: 147
+    m_Value: 60
   blueOutBlueIn:
     m_OverrideState: 1
-    m_Value: 165
+    m_Value: 135
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

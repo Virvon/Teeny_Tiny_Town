@@ -55,7 +55,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
                 _staticDataService.GetAllBuildings(),
                 _staticDataService.WorldsConfig.EducationWorldId);
 
-            progress.Wallet.Value = 3000;
+            progress.Wallet.Value = 100;
 
             return progress;
         }
@@ -73,7 +73,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
                 worldDatas[i] = worldConfig.GetWorldData(_staticDataService.WorldsConfig.Goals, _staticDataService);
 
                 if (worldDatas[i] is CurrencyWorldData currencyWolrdData)
-                    currencyWolrdData.WorldWallet.Value = 3000;
+                    currencyWolrdData.WorldWallet.Value = 10000000;
             }
 
             return worldDatas;

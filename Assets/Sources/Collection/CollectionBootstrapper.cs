@@ -22,6 +22,7 @@ namespace Assets.Sources.Collection
 
         public async void Initialize()
         {
+            await _gameplayFactory.CreatePlane();
             await _gameplayFactory.CreateUiSoundPlayer();
             await _worldFactory.CreateCollectionItemCreator();
 

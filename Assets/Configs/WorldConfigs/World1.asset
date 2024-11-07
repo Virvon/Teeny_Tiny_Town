@@ -17,7 +17,7 @@ MonoBehaviour:
   TileConfigs:
   - Type: 0
     GridPosition: {x: 0, y: 0}
-    BuildingType: 0
+    BuildingType: 1
   - Type: 0
     GridPosition: {x: 0, y: 1}
     BuildingType: 0
@@ -29,10 +29,10 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 0, y: 4}
-    BuildingType: 0
+    BuildingType: 1
   - Type: 0
     GridPosition: {x: 1, y: 0}
-    BuildingType: 0
+    BuildingType: 9
   - Type: 0
     GridPosition: {x: 1, y: 1}
     BuildingType: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 2, y: 1}
-    BuildingType: 0
+    BuildingType: 9
   - Type: 0
     GridPosition: {x: 2, y: 2}
     BuildingType: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 2, y: 4}
-    BuildingType: 0
+    BuildingType: 2
   - Type: 0
     GridPosition: {x: 3, y: 0}
     BuildingType: 0
@@ -74,19 +74,19 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 3, y: 4}
-    BuildingType: 0
+    BuildingType: 1
   - Type: 0
     GridPosition: {x: 4, y: 0}
-    BuildingType: 0
+    BuildingType: 2
   - Type: 0
     GridPosition: {x: 4, y: 1}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 4, y: 2}
-    BuildingType: 0
+    BuildingType: 1
   - Type: 0
     GridPosition: {x: 4, y: 3}
-    BuildingType: 0
+    BuildingType: 4
   - Type: 0
     GridPosition: {x: 4, y: 4}
     BuildingType: 0
@@ -107,5 +107,5 @@ MonoBehaviour:
   PeculiarityIconAssetReferences: []
   NextWorldId: f6467933-c0ed-4bb8-bcde-1b89b8e6dba3
   PreviousWorldId: 3b94ce72-e5f6-455f-a983-81c1f802cc39
-  StartStoreList: 09000000010000000200000003000000
+  StartStoreList: 09000000010000000200000003000000060000000700000008000000
   AvailableGainStoreItems: 000000000100000002000000

@@ -15,45 +15,45 @@ MonoBehaviour:
   Id: 8c53d4ad-5ea5-49e1-a85c-e0bbf06971ad
   Size: {x: 5, y: 5}
   TileConfigs:
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 0, y: 0}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 0, y: 1}
-    BuildingType: 0
+    BuildingType: 4
   - Type: 0
     GridPosition: {x: 0, y: 2}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 0, y: 3}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 1
+  - Type: 2
     GridPosition: {x: 0, y: 4}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 1, y: 0}
-    BuildingType: 0
+    BuildingType: 10
   - Type: 0
     GridPosition: {x: 1, y: 1}
-    BuildingType: 0
+    BuildingType: 3
   - Type: 0
     GridPosition: {x: 1, y: 2}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 1, y: 3}
-    BuildingType: 0
+    BuildingType: 9
   - Type: 0
     GridPosition: {x: 1, y: 4}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 2, y: 0}
-    BuildingType: 0
+    BuildingType: 3
   - Type: 0
     GridPosition: {x: 2, y: 1}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 2, y: 2}
-    BuildingType: 0
+    BuildingType: 2
   - Type: 0
     GridPosition: {x: 2, y: 3}
     BuildingType: 0
@@ -71,23 +71,23 @@ MonoBehaviour:
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 3, y: 3}
-    BuildingType: 0
+    BuildingType: 4
   - Type: 0
     GridPosition: {x: 3, y: 4}
     BuildingType: 0
-  - Type: 0
+  - Type: 2
     GridPosition: {x: 4, y: 0}
     BuildingType: 0
   - Type: 0
     GridPosition: {x: 4, y: 1}
-    BuildingType: 0
+    BuildingType: 2
   - Type: 0
     GridPosition: {x: 4, y: 2}
-    BuildingType: 0
+    BuildingType: 9
   - Type: 0
     GridPosition: {x: 4, y: 3}
-    BuildingType: 0
-  - Type: 0
+    BuildingType: 1
+  - Type: 2
     GridPosition: {x: 4, y: 4}
     BuildingType: 0
   NextBuildingTypeForCreation: 3

@@ -2309,8 +2309,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u041F\u0430\u043A\u0435\u0442\u044B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2eedb4289849b46499469e677827a6b7, type: 2}
+  m_sharedMaterial: {fileID: 3364055129580579509, guid: 2eedb4289849b46499469e677827a6b7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7327,6 +7327,10 @@ PrefabInstance:
     - target: {fileID: 6109794221925421142, guid: 2f53868f22901a742ab3e14a9c0d3e6e, type: 3}
       propertyPath: m_Circle.m_Radius
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7603407236627888500, guid: 2f53868f22901a742ab3e14a9c0d3e6e, type: 3}
+      propertyPath: m_text
+      value: "\u041F\u0430\u043A\u0435\u0442 \u0443\u0441\u0438\u043B\u0435\u043D\u0438\u0439"
       objectReference: {fileID: 0}
     - target: {fileID: 8306008987925200804, guid: 2f53868f22901a742ab3e14a9c0d3e6e, type: 3}
       propertyPath: m_Sprite
