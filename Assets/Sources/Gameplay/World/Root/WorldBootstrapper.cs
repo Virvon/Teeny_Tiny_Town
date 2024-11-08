@@ -80,7 +80,7 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine.RegisterState(StatesFactory.Create<RewardState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<QuestsState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<SafeGameplayState>());
-            
+
             if (needRegisterWaitinState)
                 WorldStateMachine.RegisterState(StatesFactory.Create<WaitingState>());
         }

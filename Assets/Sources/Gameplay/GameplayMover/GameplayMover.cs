@@ -39,10 +39,10 @@ namespace Assets.Sources.Gameplay.GameplayMover
             _inputService.UndoButtonPressed += TryUndoCommand;
         }
 
+        protected Command LastCommand { get; private set; }
+
         public void Dispose() =>
             _inputService.UndoButtonPressed -= TryUndoCommand;
-
-        protected Command LastCommand { get; private set; }
 
         public void PlaceNewBuilding(Vector2Int gridPosition, BuildingType type) =>
             ExecuteCommand(new PlaceNewBuildingCommand(WorldChanger, gridPosition, WorldData, type, NextBuildingForPlacingCreator, _persistentProgressService));

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Sources.Data.World;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
-using Assets.Sources.Data.World;
 using Assets.Sources.Services.StaticDataService;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -22,10 +22,10 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlaci
             _staticDataService = staticDataService;
         }
 
-        public BuildingsForPlacingData BuildingsForPlacingData { get; private set; }
-
         public event Action<BuildingsForPlacingData> DataChanged;
         public event Action NoMoreEmptyTiles;
+
+        public BuildingsForPlacingData BuildingsForPlacingData { get; private set; }
 
         public void CreateData(IReadOnlyList<Tile> tiles)
         {

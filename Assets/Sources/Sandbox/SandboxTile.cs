@@ -58,7 +58,7 @@ namespace Assets.Sources.Sandbox
             if (needChangeRoadsInChain)
             {
                 foreach (SandboxTile adjacentTile in _adjacentTiles)
-                    await adjacentTile.ChangeRoadsInChain(new());
+                    await adjacentTile.ChangeRoadsInChain(new ());
             }
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using Assets.Sources.Data.World.Currency;
+﻿using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
@@ -23,6 +22,14 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
         private IStaticDataService _staticDataService;
         private AnimationsConfig _animationsConfig;
 
+
+        protected ICurrencyWorldData CurrencyWorldData { get; private set; }
+        protected GainStoreItemType Type { get; private set; }
+        protected abstract GainStoreItemData Data { get; }
+        protected GainBuyer GainBuyer { get; private set; }
+        protected uint Cost => _staticDataService.GetGainStoreItem(Type).GetCost(Data.BuyingCount + 1);
+        protected Button BuyButton => _buyButton;
+
         [Inject]
         private void Construct(ICurrencyWorldData currencyWorldData, IStaticDataService staticDataService, GainBuyer gainBuyer)
         {
@@ -34,13 +41,6 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
             CurrencyWorldData.WorldWallet.ValueChanged += ChangeCostValue;
             _buyButton.onClick.AddListener(OnBuyButtonClicked);
         }
-
-        protected ICurrencyWorldData CurrencyWorldData { get; private set; }
-        protected GainStoreItemType Type { get; private set; }
-        protected abstract GainStoreItemData Data { get; }
-        protected GainBuyer GainBuyer { get; private set; }
-        protected uint Cost => _staticDataService.GetGainStoreItem(Type).GetCost(Data.BuyingCount + 1);
-        protected Button BuyButton => _buyButton;
 
         private void OnDestroy()
         {

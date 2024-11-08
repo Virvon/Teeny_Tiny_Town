@@ -93,7 +93,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
                 {
                     _building = await _buildingCreator.Create(targetBuildingType);
 
-                    if(isAnimate)
+                    if (isAnimate)
                     {
                         _putBuildingAudioSource.Play();
                         await _building.AnimatePut(waitForCompletion);

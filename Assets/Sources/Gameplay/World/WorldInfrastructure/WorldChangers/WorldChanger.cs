@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Data;
-using Cysharp.Threading.Tasks;
-using Assets.Sources.Gameplay.World.RepresentationOfWorld;
-using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
-using Assets.Sources.Services.StaticDataService.Configs.World;
-using Assets.Sources.Services.StaticDataService.Configs.Building;
-using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
-using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
-using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Data.World;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
+using Assets.Sources.Services.PersistentProgress;
+using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.World;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
@@ -76,8 +76,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
         {
             TileData[] tileDatas = new TileData[WorldData.Tiles.Count];
 
-            for(int i = 0; i < WorldData.Tiles.Count; i++)
-                tileDatas[i] = new TileData (WorldData.Tiles[i].GridPosition, WorldData.Tiles[i].BuildingType);
+            for (int i = 0; i < WorldData.Tiles.Count; i++)
+                tileDatas[i] = new TileData(WorldData.Tiles[i].GridPosition, WorldData.Tiles[i].BuildingType);
 
             foreach (TileData tileData in tileDatas)
             {

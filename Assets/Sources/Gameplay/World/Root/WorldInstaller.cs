@@ -9,7 +9,6 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
-using Assets.Sources.Sandbox.ActionHandler;
 using Assets.Sources.Services.PersistentProgress;
 using UnityEngine;
 using Zenject;
@@ -23,15 +22,15 @@ namespace Assets.Sources.Gameplay.World.Root
 
         private WorldsList _worldsList;
 
+        protected string WorldDataId => _worldsList.CurrentWorldDataId ?? PersistentProgressService.Progress.LastPlayedWorldDataId;
+        protected IPersistentProgressService PersistentProgressService { get; private set; }
+
         [Inject]
         private void Construct(IPersistentProgressService persistentProgressService, WorldsList worldsList)
         {
             PersistentProgressService = persistentProgressService;
             _worldsList = worldsList;
         }
-
-        protected string WorldDataId => _worldsList.CurrentWorldDataId ?? PersistentProgressService.Progress.LastPlayedWorldDataId;
-        protected IPersistentProgressService PersistentProgressService { get; private set; }
 
         public override void InstallBindings()
         {

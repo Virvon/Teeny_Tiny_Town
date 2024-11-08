@@ -9,11 +9,11 @@ namespace Assets.Sources.UI.Windows.World.Panels.GainButtons
     {
         [SerializeField] private TMP_Text _countValue;
 
+        protected IWorldData WorldData { get; private set; }
+
         [Inject]
         private void Construct(IWorldData worldData) =>
             WorldData = worldData;
-
-        protected IWorldData WorldData { get; private set; }
 
         protected void ChangeCountValue(uint value) =>
             _countValue.text = value.ToString();

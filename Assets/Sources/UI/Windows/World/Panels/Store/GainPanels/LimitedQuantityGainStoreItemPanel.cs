@@ -19,11 +19,11 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
 
         private GainStoreItemData _data;
 
+        protected override GainStoreItemData Data => _data;
+
         [Inject]
         private void Construct(WorldStateMachine worldStateMachine) =>
             _worldStateMachine = worldStateMachine;
-
-        protected override GainStoreItemData Data => _data;
 
         public override void Init(GainStoreItemType type, Sprite icon)
         {
@@ -63,6 +63,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
                 BuyButton.interactable = false;
             }
         }
+
         private void SetActiveCanvasGroup(CanvasGroup canvasGroup, bool isActive)
         {
             canvasGroup.alpha = isActive ? 1 : 0;

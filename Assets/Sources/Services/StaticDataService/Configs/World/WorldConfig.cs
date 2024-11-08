@@ -29,10 +29,10 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public string NextWorldId;
         public string PreviousWorldId;
 
+        public TileData[] TilesDatas => TileConfigs.Select(tileConfig => new TileData(tileConfig.GridPosition, tileConfig.BuildingType)).ToArray();
+
         public TileType GetTileType(Vector2Int gridPosition) =>
             TileConfigs.First(tile => tile.GridPosition == gridPosition).Type;
-
-        public TileData[] TilesDatas => TileConfigs.Select(tileConfig => new TileData(tileConfig.GridPosition, tileConfig.BuildingType)).ToArray();
 
         private void OnValidate() =>
             CreateTileConfigs();

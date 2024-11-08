@@ -1,10 +1,8 @@
-﻿using Assets.Sources.Data.World;
+﻿using System.Collections.Generic;
 using Assets.Sources.Gameplay.World;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
-using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;

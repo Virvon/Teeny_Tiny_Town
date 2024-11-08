@@ -19,6 +19,8 @@ namespace Assets.Sources.Gameplay.Cameras
 
         private Tween _mover;
 
+        public Camera MainCamera => _mainCamera;
+
         [Inject]
         private void Construct(IStaticDataService staticDataService, IPersistentProgressService persistentProgressService)
         {
@@ -31,8 +33,6 @@ namespace Assets.Sources.Gameplay.Cameras
 
             _persistentProgressService.Progress.SettingsData.OrthographicChanged += ChangeOrthographic;
         }
-
-        public Camera MainCamera => _mainCamera;
 
         protected virtual void OnDestroy()
         {

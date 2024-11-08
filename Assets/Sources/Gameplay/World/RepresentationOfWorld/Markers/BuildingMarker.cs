@@ -17,6 +17,10 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
         private BuildingRepresentation _building;
         private bool _isHided;
 
+        public TileRepresentation MarkedTile { get; private set; }
+        public bool IsCreatedBuilding { get; private set; }
+        public BuildingType BuildingType => _building.Type;
+
         [Inject]
         private void Construct(IWorldFactory worldFactory, NextBuildingForPlacingCreator nextBuildingForPlacingCreator)
         {
@@ -28,10 +32,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
 
             _nextBuildingForPlacingCreator.DataChanged += OnNextBuildingForPlacingDataChanged;
         }
-
-        public TileRepresentation MarkedTile { get; private set; }
-        public bool IsCreatedBuilding { get; private set; }
-        public BuildingType BuildingType => _building.Type;
 
         private void OnDestroy() =>
             _nextBuildingForPlacingCreator.DataChanged -= OnNextBuildingForPlacingDataChanged;

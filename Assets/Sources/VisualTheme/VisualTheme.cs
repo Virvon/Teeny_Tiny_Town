@@ -11,6 +11,9 @@ namespace Assets.Sources.VisualTheme
     {
         protected Tween ThemeChanger;
 
+        protected IPersistentProgressService PersistentProgressService { get; private set; }
+        protected AnimationsConfig AnimationsConfig { get; private set; }
+
         [Inject]
         private void Construct(IPersistentProgressService persistentProgressService, IStaticDataService staticDataService)
         {
@@ -19,9 +22,6 @@ namespace Assets.Sources.VisualTheme
 
             PersistentProgressService.Progress.SettingsData.ThemeChanged += ChangeTheme;
         }
-
-        protected IPersistentProgressService PersistentProgressService { get; private set; }
-        protected AnimationsConfig AnimationsConfig { get; private set; }
 
         private void OnDestroy()
         {

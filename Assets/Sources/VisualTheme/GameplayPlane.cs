@@ -13,10 +13,10 @@ namespace Assets.Sources.VisualTheme
         [SerializeField] private Color _nightColor;
         [SerializeField] private Color _sunColor;
 
+        private Color Color => PersistentProgressService.Progress.SettingsData.IsDarkTheme ? _nightColor : _sunColor;
+
         private void Start() =>
             _renderer.material.SetColor(ColorValue, Color);
-
-        private Color Color => PersistentProgressService.Progress.SettingsData.IsDarkTheme ? _nightColor : _sunColor;
 
         protected override void ChangeTheme()
         {

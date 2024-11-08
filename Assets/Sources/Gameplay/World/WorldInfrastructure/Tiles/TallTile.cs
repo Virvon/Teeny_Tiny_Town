@@ -87,7 +87,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
                 if (GetBuildingsChainLength(countedTiles) >= MinTilesCountToMerge && await TryUpgradeBuilding())
                 {
                     List<TallTile> tilesForRemoveBuildings = countedTiles;
-                    List<UniTask> removeBuildingTask = new();
+                    List<UniTask> removeBuildingTask = new ();
 
                     tilesForRemoveBuildings.Remove(this);
 

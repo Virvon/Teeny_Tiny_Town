@@ -22,6 +22,12 @@ namespace Assets.Sources.Gameplay.World
         private Tween _rotation;
         private Tween _movement;
 
+        public event Action Entered;
+        public event Action Cleaned;
+
+        public float RotationDegrees { get; private set; }
+        public bool IsCreated { get; private set; }
+
         [Inject]
         private void Construct(IStaticDataService staticDataService)
         {
@@ -30,12 +36,6 @@ namespace Assets.Sources.Gameplay.World
             RotationDegrees = 0;
             IsCreated = false;
         }
-
-        public event Action Entered;
-        public event Action Cleaned;
-
-        public float RotationDegrees { get; private set; }
-        public bool IsCreated { get; private set; }
 
         private void Start() =>
             _startRotation = transform.rotation;

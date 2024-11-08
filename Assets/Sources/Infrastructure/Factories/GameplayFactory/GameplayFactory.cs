@@ -1,14 +1,14 @@
-﻿using Cysharp.Threading.Tasks;
-using UnityEngine;
-using Zenject;
-using Assets.Sources.Gameplay.World;
+﻿using Assets.Sources.Audio;
+using Assets.Sources.Gameplay.Birds;
 using Assets.Sources.Gameplay.Cameras;
+using Assets.Sources.Gameplay.World;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
-using UnityEngine.AddressableAssets;
-using Assets.Sources.Audio;
 using Assets.Sources.VisualTheme;
-using Assets.Sources.Gameplay.Birds;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using Zenject;
 
 namespace Assets.Sources.Infrastructure.Factories.GameplayFactory
 {

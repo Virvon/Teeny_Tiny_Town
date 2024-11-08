@@ -23,6 +23,8 @@ namespace Assets.Sources.UI.Windows.World
         private NextBuildingForPlacingCreator _nextBuildingForPlacingCreator;
         private GameplayStateMachine _gameplayStateMachine;
 
+        protected WorldStateMachine WorldStateMachine { get; private set; }
+
         [Inject]
         private async void Construct(
             WorldStateMachine worldStateMachine,
@@ -44,8 +46,6 @@ namespace Assets.Sources.UI.Windows.World
 
             Subscrube();
         }
-
-        protected WorldStateMachine WorldStateMachine { get; private set; }
 
         private void OnDestroy() =>
             Unsubscruby();

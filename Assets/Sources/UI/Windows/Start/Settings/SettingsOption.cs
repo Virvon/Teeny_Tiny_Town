@@ -9,6 +9,10 @@ namespace Assets.Sources.UI.Windows.Start
     {
         [SerializeField] private Toggle _toggle;
 
+        protected IPersistentProgressService PersistentProgressService { get; private set; }
+
+        protected Toggle Toggle => _toggle;
+
         [Inject]
         private void Construct(IPersistentProgressService persistentProgressService)
         {
@@ -18,10 +22,6 @@ namespace Assets.Sources.UI.Windows.Start
 
             _toggle.onValueChanged.AddListener(OnToggleValueChanged);
         }
-
-        protected Toggle Toggle => _toggle;
-
-        protected IPersistentProgressService PersistentProgressService { get; private set; }
 
         private void OnDestroy() =>
             _toggle.onValueChanged.RemoveListener(OnToggleValueChanged);

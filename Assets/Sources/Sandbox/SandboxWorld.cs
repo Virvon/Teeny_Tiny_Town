@@ -11,6 +11,8 @@ namespace Assets.Sources.Sandbox
 
         private IInputService _inputService;
 
+        public float Rotation { get; private set; }
+
         [Inject]
         private void Construct(IInputService inputService)
         {
@@ -20,8 +22,6 @@ namespace Assets.Sources.Sandbox
 
             _inputService.Rotated += OnRotated;
         }
-
-        public float Rotation { get; private set; }
 
         private void OnDestroy() =>
             _inputService.Rotated -= OnRotated;

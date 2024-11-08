@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Data;
-using Cysharp.Threading.Tasks;
-using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
-using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
+using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
 using Assets.Sources.Services.PersistentProgress;
+using Assets.Sources.Services.StaticDataService;
+using Cysharp.Threading.Tasks;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {

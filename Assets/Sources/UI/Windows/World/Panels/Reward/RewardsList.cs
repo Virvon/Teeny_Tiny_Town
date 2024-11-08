@@ -27,6 +27,8 @@ namespace Assets.Sources.UI.Windows.World.Panels.Reward
         private List<RewardPanel> _rewardPanels;
         private uint _gameplayWalletValueReward;
 
+        public event Action RewardChoosed;
+
         [Inject]
         private void Construct(RewardsCreator rewardsCreator, IUiFactory uiFactory, Rewarder rewarder, IPersistentProgressService persistentProgressService)
         {
@@ -35,14 +37,12 @@ namespace Assets.Sources.UI.Windows.World.Panels.Reward
             _rewarder = rewarder;
             _persistentProgressService = persistentProgressService;
 
-            _rewardPanels = new ();
+            _rewardPanels = new();
             _gameplayWalletValueReward = StartGameplayWalletValueReward;
 
             _rewardsCreator.RewardsCreated += OnRewardsCreated;
             _updateRewardsButton.onClick.AddListener(OnUpdateRewardsButtonClicked);
         }
-
-        public event Action RewardChoosed;
 
         private void OnDestroy()
         {

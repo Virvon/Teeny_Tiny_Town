@@ -26,6 +26,10 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
         private BuildingType _buildingType;
         private BuildingStoreItemData _data;
 
+        public event Action<BuildingType, uint> Buyed;
+
+        private uint Cost => _staticDataService.GetBuildingStoreItem(_buildingType).GetCost(_data.BuyingCount + 1);
+
         [Inject]
         private void Construct(ICurrencyWorldData currencyWorldData, IStaticDataService staticDataService)
         {
@@ -36,10 +40,6 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
             _buyButton.onClick.AddListener(OnBuyButtonClicked);
             _currencyWorldData.WorldWallet.ValueChanged += ChangeCostValue;
         }
-
-        public event Action<BuildingType, uint> Buyed;
-
-        private uint Cost => _staticDataService.GetBuildingStoreItem(_buildingType).GetCost(_data.BuyingCount + 1);
 
         private void OnDestroy()
         {

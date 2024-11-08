@@ -25,6 +25,10 @@ namespace Assets.Sources.Gameplay.World
         private World _currentWorld;
         private bool _isWorldChanged;
 
+        public event Action<string> CurrentWorldChanged;
+
+        public string CurrentWorldDataId { get; private set; }
+
         [Inject]
         private void Construct(IStaticDataService staticDataService, IGameplayFactory gameplayFactory, IPersistentProgressService persistentProgressService)
         {
@@ -40,10 +44,6 @@ namespace Assets.Sources.Gameplay.World
 
             _isWorldChanged = false;
         }
-
-        public event Action<string> CurrentWorldChanged;
-
-        public string CurrentWorldDataId { get; private set; }
 
         public void CleanCurrentWorld() =>
             _currentWorld.Clean();

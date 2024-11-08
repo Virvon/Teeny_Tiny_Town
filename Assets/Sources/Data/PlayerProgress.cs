@@ -45,7 +45,7 @@ namespace Assets.Sources.Data
             BuildingDatas = new BuildingData[allBuildings.Length];
 
             for (int i = 0; i < allBuildings.Length; i++)
-                BuildingDatas[i] = new BuildingData (allBuildings[i]);
+                BuildingDatas[i] = new BuildingData(allBuildings[i]);
 
             WorldDatas = new ();
             CurrencyWorldDatas = new ();

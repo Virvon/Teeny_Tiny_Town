@@ -1,8 +1,8 @@
-﻿using Assets.Sources.Services.PersistentProgress;
+﻿using System;
+using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.GameplayStore;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

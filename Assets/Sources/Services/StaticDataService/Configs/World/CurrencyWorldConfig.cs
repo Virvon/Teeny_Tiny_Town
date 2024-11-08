@@ -1,8 +1,8 @@
-﻿using Assets.Sources.Data.World;
+﻿using System.Linq;
+using Assets.Sources.Data.World;
 using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
-using System.Linq;
 using UnityEngine;
 
 namespace Assets.Sources.Services.StaticDataService.Configs.World

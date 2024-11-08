@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 using Assets.Sources.Services.AssetManagement;
+using Assets.Sources.Services.CoroutineRunner;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService;
-using Assets.Sources.Services.CoroutineRunner;
 using Assets.Sources.UI.LoadingCurtain;
 using Cysharp.Threading.Tasks;
 #if !UNITY_WEBGL || UNITY_EDITOR

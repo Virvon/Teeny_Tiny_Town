@@ -26,6 +26,8 @@ namespace Assets.Sources.Gameplay.Inventory
         private IAssetProvider _assetProvider;
         private IWorldData _worldData;
 
+        private BuildingType BuildingType => _worldData.Inventory[_serialNumber];
+
         [Inject]
         private async void Construct(
             ActionHandlerStateMachine actionHandlerStateMachine,
@@ -46,8 +48,6 @@ namespace Assets.Sources.Gameplay.Inventory
 
             _button.onClick.AddListener(OnButtonClicked);
         }
-
-        private BuildingType BuildingType => _worldData.Inventory[_serialNumber];
 
         private void OnDestroy() =>
             _button.onClick.RemoveListener(OnButtonClicked);

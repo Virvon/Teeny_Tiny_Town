@@ -29,6 +29,10 @@ namespace Assets.Sources.Collection
         private Vector3 _previousItemPosition;
         private bool _canChangeItems;
 
+        public event Action<BuildingData> ItemChanged;
+
+        public int CollectionItemIndex { get; private set; }
+
         [Inject]
         private void Construct(
             IPersistentProgressService persistentProgressService,
@@ -45,10 +49,6 @@ namespace Assets.Sources.Collection
             _previousItemPosition = new Vector3(transform.position.x - _distanceBetweenItems, transform.position.y, transform.position.z - _distanceBetweenItems);
             _canChangeItems = true;
         }
-
-        public event Action<BuildingData> ItemChanged;
-
-        public int CollectionItemIndex { get; private set; }
 
         private async void Start() =>
             _currentTile = await CreateItem(transform.position);

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Data;
+using Assets.Sources.Data.World;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.StateMachine;
@@ -8,7 +9,6 @@ using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using UnityEngine.InputSystem.Utilities;
-using Assets.Sources.Data.World;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {

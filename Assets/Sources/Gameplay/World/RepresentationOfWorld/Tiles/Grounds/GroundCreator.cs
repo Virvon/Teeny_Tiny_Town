@@ -15,14 +15,14 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds
         private IWorldFactory _worldFactory;
         private AnimationsConfig _animationsConfig;
 
+        public Ground Ground { get; private set; }
+
         [Inject]
         private void Construct(IWorldFactory worldFactory, IStaticDataService staticDataService)
         {
             _worldFactory = worldFactory;
             _animationsConfig = staticDataService.AnimationsConfig;
         }
-
-        public Ground Ground { get; private set; }
 
         public async UniTask Create(TileType tileType)
         {

@@ -29,16 +29,16 @@ namespace Assets.Sources.UI.Windows.World.Panels
         private QuestData _data;
         private QuestConfig _config;
 
+        public event Action<QuestPanel> Clicked;
+
+        public string Id { get; private set; }
+
         [Inject]
         private void Construct(IPersistentProgressService persistentProgressService, IStaticDataService staticDataService)
         {
             _persistentProgressService = persistentProgressService;
             _staticDataService = staticDataService;
         }
-
-        public event Action<QuestPanel> Clicked;
-
-        public string Id { get; private set; }
 
         private void OnDestroy()
         {

@@ -20,17 +20,17 @@ namespace Assets.Sources.UI.Windows.World.Panels.Reward
         private IStaticDataService _staticDataService;
         private IWorldData _worldData;
 
+        public RewardType Type { get; private set; }
+        public uint RewardCount { get; private set; }
+
+        public event Action<RewardPanel> Clicked;
+
         [Inject]
         private void Construct(IStaticDataService staticDataService, IWorldData worldData)
         {
             _staticDataService = staticDataService;
             _worldData = worldData;
         }
-
-        public RewardType Type { get; private set; }
-        public uint RewardCount { get; private set; }
-
-        public event Action<RewardPanel> Clicked;
 
         private void OnEnable() =>
             _button.onClick.AddListener(OnButtonClicked);

@@ -11,6 +11,10 @@ namespace Assets.Sources.UI.Windows.Education
     {
         [SerializeField] private Button _continueButton;
 
+        public IInputService InputService { get; private set; }
+        public ActionHandlerStateMachine ActionHandlerStateMachine { get; private set; }
+        public MarkersVisibility MarkersVisibility { get; private set; }
+
         [Inject]
         private void Construct(IInputService inputService, ActionHandlerStateMachine actionHandlerStateMachine, MarkersVisibility markersVisibility)
         {
@@ -20,10 +24,6 @@ namespace Assets.Sources.UI.Windows.Education
 
             _continueButton.onClick.AddListener(OnHandled);
         }
-
-        public IInputService InputService { get; private set; }
-        public ActionHandlerStateMachine ActionHandlerStateMachine { get; private set; }
-        public MarkersVisibility MarkersVisibility { get; private set; }
 
         private void OnDestroy() =>
             _continueButton.onClick.RemoveListener(OnHandled);

@@ -15,11 +15,11 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
         private Sequence _sequence;
         private Vector3 _startPosition;
 
+        public BuildingType Type { get; private set; }
+
         [Inject]
         private void Construct(IStaticDataService staticDataservice) =>
             _animationsConfig = staticDataservice.AnimationsConfig;
-
-        public BuildingType Type { get; private set; }
 
         private void OnDestroy() =>
             TryKillSequence();

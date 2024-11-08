@@ -7,13 +7,13 @@ namespace Assets.Sources.UI
 {
     public abstract class Panel : MonoBehaviour
     {
+        protected AnimationsConfig AnimationsConfig { get; private set; }
+
         [Inject]
         private void Construct(IStaticDataService staticDataService)
         {
             AnimationsConfig = staticDataService.AnimationsConfig;
         }
-
-        protected AnimationsConfig AnimationsConfig { get; private set; }
 
         public abstract void Open();
         public virtual void Hide()

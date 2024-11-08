@@ -15,7 +15,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Reward
             if (worldData is ICurrencyWorldData currencyWorldData)
             {
                 uint reward = (uint)(Random.Range(MinCount, MaxCount + 1) * currencyWorldData.WorldWallet.Value * Multiplier);
-                reward = reward < MinReward? MinReward : reward;
+                reward = reward < MinReward ? MinReward : reward;
 
                 return reward;
             }

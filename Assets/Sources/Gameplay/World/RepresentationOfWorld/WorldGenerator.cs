@@ -18,15 +18,15 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 
         private List<TileRepresentation> _tiles;
 
+        public float CellSize => _cellSize;
+
         [Inject]
         private void Construct(IWorldFactory worldFactory)
         {
             _worldFactory = worldFactory;
 
-            _tiles = new ();
+            _tiles = new();
         }
-
-        public float CellSize => _cellSize;
 
         public TileRepresentation GetTile(Vector2Int gridPosition) =>
             _tiles.First(tile => tile.GridPosition == gridPosition);

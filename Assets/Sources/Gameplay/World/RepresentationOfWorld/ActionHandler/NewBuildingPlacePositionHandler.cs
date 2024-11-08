@@ -1,8 +1,8 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
@@ -53,7 +53,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             }
 
             _markersVisibility.SetBuildingShowed(true);
-            
+
             return default;
         }
 
