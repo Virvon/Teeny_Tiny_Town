@@ -1,10 +1,8 @@
-﻿using Assets.Sources.Gameplay.Cameras;
-using Assets.Sources.Gameplay.StateMachine;
+﻿using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.StateMachine.States;
 using Assets.Sources.Infrastructure.GameStateMachine;
 using Assets.Sources.Infrastructure.GameStateMachine.States;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

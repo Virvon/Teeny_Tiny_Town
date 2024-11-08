@@ -1,10 +1,10 @@
-﻿using Assets.Sources.Data.World.Currency;
+﻿using System;
+using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
 using Assets.Sources.Utils;
 using Cysharp.Threading.Tasks;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -70,7 +70,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
             _costValue.text = DigitUtils.CutDigit(Cost);
             _costValue.color = worldWalletValue >= Cost ? _animationsConfig.PurchasePermittingColor : _animationsConfig.ProhibitingPurchaseColor;
         }
-            
+
         protected abstract void OnBuyButtonClicked();
 
         private void OnBuyingCountChanged() =>

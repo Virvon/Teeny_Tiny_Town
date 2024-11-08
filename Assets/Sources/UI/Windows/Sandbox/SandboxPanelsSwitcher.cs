@@ -1,9 +1,6 @@
-﻿using Assets.Sources.Sandbox.ActionHandler;
-using DG.Tweening;
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Assets.Sources.UI.Windows.Sandbox
 {
@@ -75,11 +72,13 @@ namespace Assets.Sources.UI.Windows.Sandbox
                 _currentPanel.Hide(callback: () =>
                 {
                     _currentPanel = null;
-                    callback?.Invoke();   
+                    callback?.Invoke();
                 });
             }
             else
+            {
                 callback?.Invoke();
+            }
         }
 
         private void OpenPanel(SandboxPanel targetPanel)

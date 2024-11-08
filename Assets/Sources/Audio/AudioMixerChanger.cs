@@ -1,5 +1,5 @@
-﻿using Assets.Sources.Services.PersistentProgress;
-using System;
+﻿using System;
+using Assets.Sources.Services.PersistentProgress;
 using UnityEngine.Audio;
 
 namespace Assets.Sources.Audio

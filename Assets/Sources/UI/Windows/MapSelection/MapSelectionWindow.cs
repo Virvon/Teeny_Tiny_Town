@@ -45,13 +45,12 @@ namespace Assets.Sources.UI.Windows.MapSelection
             _previousMapButton.onClick.AddListener(OnPreviousMapButtonClicked);
             _hideButton.onClick.AddListener(OnHideButtonClicked);
             _worldsList.CurrentWorldChanged += ChangeCurrentWorldInfo;
-
         }
 
         private void OnDestroy()
         {
             _nextMapButton.onClick.RemoveListener(OnNextMapButtonClicked);
-            _previousMapButton.onClick.RemoveListener(OnPreviousMapButtonClicked);          
+            _previousMapButton.onClick.RemoveListener(OnPreviousMapButtonClicked);
             _hideButton.onClick.RemoveListener(OnHideButtonClicked);
             _worldsList.CurrentWorldChanged -= ChangeCurrentWorldInfo;
         }
@@ -71,9 +70,9 @@ namespace Assets.Sources.UI.Windows.MapSelection
             _sizeValue.text = $"{size.x}x{size.y}";
             _name.text = worldConfig.Name;
 
-            if(worldData.IsUnlocked)
+            if (worldData.IsUnlocked)
             {
-                if(worldData.IsChangingStarted)
+                if (worldData.IsChangingStarted)
                 {
                     _startPanel.Hide();
                     _continuePanel.Open();

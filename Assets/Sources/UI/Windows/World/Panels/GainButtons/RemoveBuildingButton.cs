@@ -1,5 +1,4 @@
 ﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
-using System;
 using Zenject;
 
 namespace Assets.Sources.UI.Windows.World.Panels.GainButtons

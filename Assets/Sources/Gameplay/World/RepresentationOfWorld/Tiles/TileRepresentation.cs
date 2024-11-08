@@ -52,15 +52,15 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
         public void LowerBuilding()
         {
-            if(_building != null)
+            if (_building != null)
                 PlaceBuildingToBuildingPoint(_building);
         }
 
         public void DestroyBuilding(bool needSound)
         {
-            if(_building != null)
+            if (_building != null)
             {
-                if(needSound)
+                if (needSound)
                     _destroyBuildinAudioSource.Play();
                 _building.Destroy();
                 _building = null;
@@ -91,8 +91,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles
 
                 if (targetBuildingType != BuildingType.Undefined)
                 {
-                    _building = await _buildingCreator.Create(targetBuildingType);  
-                    
+                    _building = await _buildingCreator.Create(targetBuildingType);
+
                     if(isAnimate)
                     {
                         _putBuildingAudioSource.Play();

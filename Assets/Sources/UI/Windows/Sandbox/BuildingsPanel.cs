@@ -1,10 +1,10 @@
-﻿using Assets.Sources.Infrastructure.Factories.UiFactory;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Sandbox.ActionHandler;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
-using System.Collections.Generic;
-using System.Linq;
 using Zenject;
 
 namespace Assets.Sources.UI.Windows.Sandbox
@@ -25,7 +25,7 @@ namespace Assets.Sources.UI.Windows.Sandbox
         {
             _buildingPositionHandler = buildingPositionHandler;
 
-            _elements = new();
+            _elements = new ();
 
             foreach (Data.BuildingData buildingData in persistentProgressService.Progress.BuildingDatas)
             {

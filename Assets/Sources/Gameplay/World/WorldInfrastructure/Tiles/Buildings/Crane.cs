@@ -1,7 +1,7 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+﻿using System.Collections.Generic;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
@@ -34,19 +34,19 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 
         private BuildingType GetNewType()
         {
-            HashSet<BuildingType> aroundBuildingTypes = new();
+            HashSet<BuildingType> aroundBuildingTypes = new ();
             _selfTile = _tileGetable.GetTile(_gridPosition) as TallTile;
             BuildingType newType = BuildingType.Undefined;
 
             foreach (Tile tile in _selfTile.AdjacentTiles)
             {
-                if(tile.BuildingType != BuildingType.Undefined)
+                if (tile.BuildingType != BuildingType.Undefined)
                     aroundBuildingTypes.Add(tile.BuildingType);
             }
 
-            foreach(BuildingType type in aroundBuildingTypes)
+            foreach (BuildingType type in aroundBuildingTypes)
             {
-                int chainLength = _selfTile.GetBuildingsChainLength(new(), type);
+                int chainLength = _selfTile.GetBuildingsChainLength(new (), type);
 
                 if (chainLength >= MinTilesCountToMerge && (int)type > (int)newType)
                     newType = type;

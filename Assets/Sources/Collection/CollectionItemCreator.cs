@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Data;
+﻿using System;
+using Assets.Sources.Data;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
@@ -9,8 +10,6 @@ using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
-using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -105,7 +104,7 @@ namespace Assets.Sources.Collection
             else
                 await tile.GroundCreator.Create(_staticDataService.GetGroundType(buildingType), RoadType.NonEmpty, GroundRotation.Degrees0, false);
 
-            if(data.IsUnlocked)
+            if (data.IsUnlocked)
                 await tile.TryChangeBuilding<BuildingRepresentation>(buildingType, false, false);
 
             return tile;

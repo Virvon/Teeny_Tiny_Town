@@ -45,7 +45,7 @@ namespace Assets.Sources.UI.Windows.World.Panels
 
         private void OnGoalAchieved()
         {
-            if(_pointsData.IsGoalsOvered == false)
+            if (_pointsData.IsGoalsOvered == false)
                 _goalValue.text = GetGoalValue();
         }
 
@@ -59,12 +59,12 @@ namespace Assets.Sources.UI.Windows.World.Panels
         }
 
         private string GetProgressValue() =>
-            $"{(int)((float)_pointsData.pointsCount / _pointsData.Goal * 100f)}%";
+            $"{(int)((float)_pointsData.PointsCount / _pointsData.Goal * 100f)}%";
 
         private string GetGoalValue() =>
             $"Цель {_pointsData.Goal} очков";
 
         private float GetFill() =>
-            (float)_pointsData.pointsCount / _pointsData.Goal;
+            (float)_pointsData.PointsCount / _pointsData.Goal;
     }
 }

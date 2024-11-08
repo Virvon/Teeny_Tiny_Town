@@ -86,7 +86,7 @@ namespace Assets.Sources.Infrastructure.Factories.WorldFactory
 
         public async UniTask<Ground> CreateGround(TileType tileType, Vector3 position, Transform parent)
         {
-            return await _groundFactory.Create(_staticDataService.GetGround(tileType).AssetReference, position, _worldRotation.RotationDegrees, parent);
+            return await _groundFactory.Create(_staticDataService.GetDefaultGround(tileType).AssetReference, position, _worldRotation.RotationDegrees, parent);
         }
 
         public async UniTask<Ground> CreateGround(GroundType groundType, RoadType roadType, Vector3 position, GroundRotation rotation, Transform parent)

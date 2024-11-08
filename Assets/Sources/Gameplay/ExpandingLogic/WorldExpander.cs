@@ -1,9 +1,9 @@
-﻿using Assets.Sources.Data.World;
+﻿using System;
+using Assets.Sources.Data.World;
 using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
-using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.ExpandingLogic

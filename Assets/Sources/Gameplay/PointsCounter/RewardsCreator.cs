@@ -1,10 +1,10 @@
-﻿using Assets.Sources.Data.World;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Assets.Sources.Data.World;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
 using Assets.Sources.Services.StaticDataService.Configs.World;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -25,7 +25,7 @@ namespace Assets.Sources.Gameplay.PointsCounter
 
         public void CreateRewards()
         {
-            List<RewardType> rewards = new();
+            List<RewardType> rewards = new ();
             RewardType[] availableRewards = _staticDataService.GetWorld<WorldConfig>(_worldData.Id).AvailableRewards;
 
             int rewardVariansCount = GetRewardVariantsCount();

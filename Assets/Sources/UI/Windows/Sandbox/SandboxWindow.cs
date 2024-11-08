@@ -1,7 +1,6 @@
 ﻿using Assets.Sources.Infrastructure.GameStateMachine;
 using Assets.Sources.Infrastructure.GameStateMachine.States;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

@@ -1,9 +1,9 @@
-﻿using Assets.Sources.Gameplay.PointsCounter;
+﻿using System;
+using System.Collections.Generic;
+using Assets.Sources.Gameplay.PointsCounter;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,7 +35,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Reward
             _rewarder = rewarder;
             _persistentProgressService = persistentProgressService;
 
-            _rewardPanels = new();
+            _rewardPanels = new ();
             _gameplayWalletValueReward = StartGameplayWalletValueReward;
 
             _rewardsCreator.RewardsCreated += OnRewardsCreated;

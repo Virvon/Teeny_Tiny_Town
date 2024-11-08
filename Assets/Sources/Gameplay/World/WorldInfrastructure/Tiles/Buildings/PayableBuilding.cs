@@ -1,8 +1,8 @@
-﻿using Assets.Sources.Data.World;
+﻿using System;
+using Assets.Sources.Data.World;
 using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
-using System;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 {

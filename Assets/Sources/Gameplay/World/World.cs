@@ -1,9 +1,9 @@
-﻿using Assets.Sources.Services.StaticDataService;
+﻿using System;
+using System.Linq;
+using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;

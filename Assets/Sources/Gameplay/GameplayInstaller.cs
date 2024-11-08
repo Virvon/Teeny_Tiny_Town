@@ -32,7 +32,7 @@ namespace Assets.Sources.Gameplay
         private void BindWindowsSwitcher()
         {
             Container.BindInterfacesAndSelfTo<WindowsSwitcher>().AsSingle();
-        }      
+        }
 
         private void BindGameplayFactory()
         {

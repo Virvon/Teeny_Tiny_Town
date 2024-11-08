@@ -19,7 +19,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer
             _staticDataService = staticDataService;
             _uiFactory = uiFactory;
 
-            foreach(AdditionalBonusType additionalBonusType in _staticDataService.GetWorld<WorldConfig>(worldData.Id).AvailableAdditionalBonuses)
+            foreach (AdditionalBonusType additionalBonusType in _staticDataService.GetWorld<WorldConfig>(worldData.Id).AvailableAdditionalBonuses)
                 await _uiFactory.CreateAdditionBonusOfferItem(additionalBonusType, transform);
         }
     }

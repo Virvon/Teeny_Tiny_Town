@@ -22,7 +22,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         {
             GainStoreItemData[] datas = new GainStoreItemData[AvailableGainStoreItems.Length];
 
-            for(int i = 0; i < AvailableGainStoreItems.Length; i++)
+            for (int i = 0; i < AvailableGainStoreItems.Length; i++)
                 datas[i] = staticDataService.GetGainStoreItem(AvailableGainStoreItems[i]).GetData();
 
             return datas;

@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using Random = UnityEngine.Random;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
-using System;
-using System.Linq;
 using Assets.Sources.Services.StaticDataService.Configs.World;
-using UnityEngine;
 using Assets.Sources.Data.World;
 using Assets.Sources.Services.StaticDataService;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing
 {
@@ -29,7 +29,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlaci
 
         public void CreateData(IReadOnlyList<Tile> tiles)
         {
-            BuildingsForPlacingData = new(CreateBuildingType(), CreateBuildingType());
+            BuildingsForPlacingData = new (CreateBuildingType(), CreateBuildingType());
 
             FindTileToPlacing(tiles);
 
@@ -118,6 +118,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlaci
 
             Debug.LogError("Reward type not founded");
             return BuildingType.Bush;
-        }       
+        }
     }
 }

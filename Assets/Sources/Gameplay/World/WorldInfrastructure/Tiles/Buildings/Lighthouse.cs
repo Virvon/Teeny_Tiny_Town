@@ -1,10 +1,8 @@
-﻿using Assets.Sources.Data.World;
-using Assets.Sources.Data.World.Currency;
-using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
-using Assets.Sources.Services.StaticDataService.Configs.Building;
-using Cysharp.Threading.Tasks;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Assets.Sources.Data.World;
+using Assets.Sources.Data.World.Currency;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
@@ -16,7 +14,6 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
         private readonly ITileGetable _tileGetable;
         private readonly Vector2Int _gridPosition;
         private readonly List<Tile> _aroundTiles;
-
 
         public Lighthouse(
             BuildingType type,
@@ -39,16 +36,11 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
         public void Dispose() =>
             _currencyWorldData.MovesCounter.TimeToPaymentPayableBuildings -= OnTimeToPaymentPayableBuildings;
 
-        public override UniTask CreateRepresentation(TileRepresentation tileRepresentation, bool isAnimate, bool waitForCompletion)
-        {
-            return base.CreateRepresentation(tileRepresentation, isAnimate, waitForCompletion);
-        }
-
         private void OnTimeToPaymentPayableBuildings()
         {
             uint payment = 0;
 
-            foreach(Tile tile in _aroundTiles)
+            foreach (Tile tile in _aroundTiles)
             {
                 if (tile.Building is PayableBuilding payableBuilding)
                     payment += payableBuilding.Payment;
@@ -59,7 +51,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings
 
         private List<Tile> GetAroundTiles()
         {
-            List<Tile> tiles = new();
+            List<Tile> tiles = new ();
 
             foreach (int positionY in _tileGetable.GetLineNeighbors(_gridPosition.y))
             {

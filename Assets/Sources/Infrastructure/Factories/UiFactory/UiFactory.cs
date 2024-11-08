@@ -13,7 +13,6 @@ using Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer;
 using Assets.Sources.UI.Windows.World.Panels.Reward;
 using Assets.Sources.UI.Windows.World.Panels.Store;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;

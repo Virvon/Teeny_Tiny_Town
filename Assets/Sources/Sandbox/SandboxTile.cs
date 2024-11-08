@@ -1,4 +1,7 @@
-﻿using Assets.Sources.Data.Sandbox;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Assets.Sources.Data.Sandbox;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
@@ -7,9 +10,6 @@ using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Assets.Sources.Sandbox
@@ -30,9 +30,9 @@ namespace Assets.Sources.Sandbox
 
             GridPosition = _tileData.GridPosition;
 
-            _adjacentTiles = new();
+            _adjacentTiles = new ();
 
-            if(tileData.BuildingType != BuildingType.Undefined)
+            if (tileData.BuildingType != BuildingType.Undefined)
                 Building = new Building(_tileData.BuildingType);
         }
 
@@ -83,10 +83,10 @@ namespace Assets.Sources.Sandbox
                     await TileRepresentation.GroundCreator.Create(TileType.TallGround);
                     break;
                 case SandboxGroundType.SoilRoad:
-                    await ChangeRoadsInChain(new());
+                    await ChangeRoadsInChain(new ());
                     break;
                 case SandboxGroundType.AsphaltRoad:
-                    await ChangeRoadsInChain(new());
+                    await ChangeRoadsInChain(new ());
                     break;
             }
         }
@@ -118,8 +118,8 @@ namespace Assets.Sources.Sandbox
 
             await SetUpBuilding(building);
 
-            if(SandboxGroundType == SandboxGroundType.AsphaltRoad || SandboxGroundType == SandboxGroundType.SoilRoad)
-                await ChangeRoadsInChain(new());
+            if (SandboxGroundType == SandboxGroundType.AsphaltRoad || SandboxGroundType == SandboxGroundType.SoilRoad)
+                await ChangeRoadsInChain(new ());
 
             if (_tileData.GroundType != SandboxGroundType.TallGround && building.Type != BuildingType.Lighthouse)
             {
@@ -129,7 +129,7 @@ namespace Assets.Sources.Sandbox
 
                 _tileData.GroundType = SandboxGroundType.Soil;
             }
-            else if(building.Type == BuildingType.Lighthouse)
+            else if (building.Type == BuildingType.Lighthouse)
             {
                 await TileRepresentation.GroundCreator.Create(TileType.WaterSurface);
 
@@ -204,16 +204,14 @@ namespace Assets.Sources.Sandbox
 
         protected virtual async UniTask CreateGroundRepresentation()
         {
-            if(_tileData.GroundType == SandboxGroundType.AsphaltRoad || _tileData.GroundType == SandboxGroundType.SoilRoad)
+            if (_tileData.GroundType == SandboxGroundType.AsphaltRoad || _tileData.GroundType == SandboxGroundType.SoilRoad)
                 await TryValidateRoad(_adjacentTiles, IsEmpty, GridPosition);
             else
                 await TileRepresentation.GroundCreator.Create(GetTileType());
         }
 
-        protected virtual async UniTask SetUpBuilding(Building building)
-        {
+        protected virtual async UniTask SetUpBuilding(Building building) =>
             await CreateBuildingRepresentation(building);
-        }
 
         protected virtual UniTask Clean()
         {

@@ -1,10 +1,9 @@
-﻿using Assets.Sources.Infrastructure.Factories.UiFactory;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Sandbox.ActionHandler;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.UI.Windows.Sandbox
@@ -21,7 +20,7 @@ namespace Assets.Sources.UI.Windows.Sandbox
         {
             _groundPositionHaneler = groundPositionHandler;
 
-            _elements = new();
+            _elements = new ();
 
             foreach (SandboxGroundConfig groundConfig in staticDataService.SandboxConfig.Grounds)
             {

@@ -1,5 +1,5 @@
-﻿using DG.Tweening;
-using System;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Assets.Sources.UI.Windows.Education

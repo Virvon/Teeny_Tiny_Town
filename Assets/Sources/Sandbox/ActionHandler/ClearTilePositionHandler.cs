@@ -1,9 +1,8 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
+﻿using System;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Cysharp.Threading.Tasks;
-using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Sources.Sandbox.ActionHandler
@@ -12,14 +11,12 @@ namespace Assets.Sources.Sandbox.ActionHandler
     {
         private readonly SandboxChanger _sandboxChanger;
 
-        bool _isPressed;
-        public TileRepresentation _clearedTile;
+        private bool _isPressed;
+        private TileRepresentation _clearedTile;
 
         public ClearTilePositionHandler(SelectFrame selectFrame, LayerMask layerMask, SandboxChanger sandboxChanger)
-            : base(selectFrame, layerMask)
-        {
+            : base(selectFrame, layerMask) =>
             _sandboxChanger = sandboxChanger;
-        }
 
         public event Action Entered;
         public event Action Exited;

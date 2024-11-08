@@ -50,7 +50,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
 
         private Vector3 GetCenter(Vector2Int size)
         {
-            return new(
+            return new (
                 (size.x * _worldGenerator.CellSize / 2f) - (_worldGenerator.CellSize / 2f),
                 transform.position.y,
                 (size.y * _worldGenerator.CellSize / 2f) - (_worldGenerator.CellSize / 2f));

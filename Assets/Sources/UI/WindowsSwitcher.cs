@@ -1,8 +1,8 @@
-﻿using Assets.Sources.Infrastructure.Factories.UiFactory;
+﻿using System;
+using System.Collections.Generic;
+using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.StaticDataService.Configs.Windows;
 using Cysharp.Threading.Tasks;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Sources.UI
@@ -16,7 +16,7 @@ namespace Assets.Sources.UI
 
         public WindowsSwitcher()
         {
-            _windows = new();
+            _windows = new ();
 
             _currentWindowHided = false;
         }
@@ -26,7 +26,7 @@ namespace Assets.Sources.UI
         {
             Window window = await uiFactory.CreateWindow(windowType);
 
-            if(window is not TWindow)
+            if (window is not TWindow)
                 Debug.LogError($"{nameof(window)} is not {typeof(TWindow)}");
 
             _windows.Add(typeof(TWindow), window);
@@ -57,7 +57,7 @@ namespace Assets.Sources.UI
 
         public void HideCurrentWindow()
         {
-            if(_currentWindowHided || _currentWindow == null)
+            if (_currentWindowHided || _currentWindow == null)
                 return;
 
             _currentWindowHided = true;
@@ -65,7 +65,8 @@ namespace Assets.Sources.UI
             _currentWindow.Hide(callback: () => _currentWindowHided = false);
         }
 
-        private void Remove<TWindow>(Window window) where TWindow : Window
+        private void Remove<TWindow>(Window window)
+            where TWindow : Window
         {
             window.Destroy();
             _windows.Remove(typeof(TWindow));

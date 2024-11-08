@@ -93,8 +93,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers
                     Debug.LogWarning("The building's position has shifted");
                 }
 
-                //_building.Blink();
-
                 if (_isHided)
                     _building.gameObject.SetActive(false);
 

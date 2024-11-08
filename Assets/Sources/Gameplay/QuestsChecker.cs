@@ -1,10 +1,10 @@
-﻿using Assets.Sources.Data.World;
+﻿using System;
+using Assets.Sources.Data.World;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Quests;
-using System;
 
 namespace Assets.Sources.Gameplay
 {
@@ -38,7 +38,7 @@ namespace Assets.Sources.Gameplay
 
         private void OnBuildingPlaced(BuildingType type)
         {
-            foreach(Data.QuestData questData in _persistentProgressService.Progress.Quests)
+            foreach (Data.QuestData questData in _persistentProgressService.Progress.Quests)
             {
                 QuestConfig questConfig = _staticDataService.QuestsConfig.GetQuest(questData.Id);
 

@@ -8,7 +8,7 @@ namespace Assets.Sources.VisualTheme
     {
         [SerializeField] private GameObject _nightLightning;
 
-        float _nightValue;
+        private float _nightValue;
 
         private void Start() =>
             _nightLightning.SetActive(PersistentProgressService.Progress.SettingsData.IsDarkTheme);

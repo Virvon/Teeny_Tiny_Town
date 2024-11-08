@@ -1,12 +1,12 @@
-﻿using Assets.Sources.Data.World.Currency;
+﻿using System;
+using System.Collections.Generic;
+using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -28,7 +28,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
             _gameplayMover = gameplayMover;
             _worldStateMachine = worldStateMachine;
 
-            _storeItems = new();
+            _storeItems = new ();
 
             _worldData.WorldStore.BuildingsStoreListUpdated += OnBuildingsStoreListUpdated;
             _worldData.WorldStore.Cleared += OnStoreCleared;
@@ -69,7 +69,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
 
         private async void OnStoreCleared()
         {
-            foreach(BuildingStoreItem storeItem in _storeItems)
+            foreach (BuildingStoreItem storeItem in _storeItems)
             {
                 storeItem.Buyed -= OnStoreItemBuyed;
                 Destroy(storeItem.gameObject);

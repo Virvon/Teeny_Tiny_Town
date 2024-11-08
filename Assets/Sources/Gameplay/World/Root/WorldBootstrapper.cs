@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld;
+﻿using System;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
@@ -8,8 +9,6 @@ using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
-using System;
-using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.Gameplay.World.Root
@@ -82,7 +81,7 @@ namespace Assets.Sources.Gameplay.World.Root
             WorldStateMachine.RegisterState(StatesFactory.Create<QuestsState>());
             WorldStateMachine.RegisterState(StatesFactory.Create<SafeGameplayState>());
             
-            if(needRegisterWaitinState)
+            if (needRegisterWaitinState)
                 WorldStateMachine.RegisterState(StatesFactory.Create<WaitingState>());
         }
 
@@ -95,7 +94,5 @@ namespace Assets.Sources.Gameplay.World.Root
             _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<RemovedBuildingPositionHandler>());
             _actionHandlerStateMachine.RegisterState(_actionHandlerStatesFactory.CreateHandlerState<ReplacedBuildingPositionHandler>());
         }
-
-        
     }
 }

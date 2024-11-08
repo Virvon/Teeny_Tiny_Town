@@ -243,7 +243,7 @@ MonoBehaviour:
         NormalizedGridPositions:
         - {x: -1, y: 0}
         - {x: 0, y: 1}
-  TestGroundConfigs:
+  DefaultGroundConfigs:
   - TileType: 0
     AssetReference:
       m_AssetGUID: 5d91f09438cd0c74082f55df2e00b431
@@ -255,7 +255,7 @@ MonoBehaviour:
       m_AssetGUID: 9e24376929297ad409e939487e92ad5d
       m_SubObjectName: 
       m_SubObjectType: 
-      m_EditorAssetChanged: 0
+      m_EditorAssetChanged: 1
   - TileType: 2
     AssetReference:
       m_AssetGUID: 0970e0266b2f7ad458caa875c97d0c22

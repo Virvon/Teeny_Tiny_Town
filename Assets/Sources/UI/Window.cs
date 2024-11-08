@@ -2,9 +2,8 @@
 using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine;
 using Zenject;
 
 namespace Assets.Sources.UI
@@ -13,7 +12,7 @@ namespace Assets.Sources.UI
     {
         [SerializeField] private CanvasGroup _canvasGroup;
 
-        Tween _fader;
+        private Tween _fader;
 
         [Inject]
         private void Construct(IStaticDataService staticDataService)
@@ -42,7 +41,6 @@ namespace Assets.Sources.UI
 
             Fade(0, callback);
         }
-
 
         public void HideImmediately()
         {

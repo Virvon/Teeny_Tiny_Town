@@ -1,6 +1,6 @@
-﻿using Assets.Sources.Services.Input;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Assets.Sources.Services.Input;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
@@ -16,7 +16,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             _inputService = inputService;
 
-            _states = new();
+            _states = new ();
             _isActive = false;
 
             _inputService.HandleMoved += OnHandleMoved;
@@ -35,14 +35,16 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
             _inputService.HandlePressedMovePerformed -= OnHandlePressedMovePerformed;
         }
 
-        public void Enter<TState>() where TState : ActionHandlerState
+        public void Enter<TState>()
+            where TState : ActionHandlerState
         {
             CurrentState?.Exit();
             CurrentState = _states[typeof(TState)];
             CurrentState?.Enter();
         }
 
-        public void RegisterState<TState>(TState handlerState) where TState : ActionHandlerState =>
+        public void RegisterState<TState>(TState handlerState)
+            where TState : ActionHandlerState =>
             _states.Add(typeof(TState), handlerState);
 
         public void SetActive(bool value)
@@ -72,6 +74,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
         {
             if (CurrentState != null && _isActive)
                 CurrentState.OnHandlePressedMoveStarted(handlePosition);
-        }        
+        }
     }
 }

@@ -45,13 +45,13 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
             }
         }
 
-        protected override void ChangeCostValue(uint WorldWalletValue)
+        protected override void ChangeCostValue(uint worldWalletValue)
         {
             _remainCountValue.text = _data.RemainingCount.ToString();
 
             if (_data.RemainingCount != 0)
             {
-                base.ChangeCostValue(WorldWalletValue);                
+                base.ChangeCostValue(worldWalletValue);
                 SetActiveCanvasGroup(_buyButtonCanvasGroup, true);
                 SetActiveCanvasGroup(_endedItemsInfogCanvasGroup, false);
                 BuyButton.interactable = true;

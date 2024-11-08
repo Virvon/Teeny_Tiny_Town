@@ -1,9 +1,7 @@
 ﻿using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.StateMachine.States;
 using Assets.Sources.Gameplay.World;
-using Assets.Sources.Services.PersistentProgress;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

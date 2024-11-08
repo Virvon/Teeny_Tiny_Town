@@ -11,7 +11,7 @@ namespace Assets.Sources.Services.StateMachine
         private IExitableState _currentState;
 
         public StateMachine() =>
-            _states = new();
+            _states = new ();
 
         public async UniTask Enter<TState>()
             where TState : class, IState

@@ -16,7 +16,6 @@ using Assets.Sources.Data.World;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 {
-
     public class WorldChanger : IWorldChanger, IBuildingsUpdatable, ICenterChangeable, IDisposable
     {
         protected readonly IWorldData WorldData;
@@ -47,7 +46,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
         public void Dispose()
         {
-            if(_tiles != null)
+            if (_tiles != null)
             {
                 foreach (Tile tile in _tiles)
                     tile.DisposeBuilding();
@@ -78,7 +77,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
             TileData[] tileDatas = new TileData[WorldData.Tiles.Count];
 
             for(int i = 0; i < WorldData.Tiles.Count; i++)
-                tileDatas[i] = new TileData(WorldData.Tiles[i].GridPosition, WorldData.Tiles[i].BuildingType);
+                tileDatas[i] = new TileData (WorldData.Tiles[i].GridPosition, WorldData.Tiles[i].BuildingType);
 
             foreach (TileData tileData in tileDatas)
             {
@@ -89,7 +88,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
                 await tile.CleanAll(isAnimate);
             }
-            
+
             tileDatas = tileDatas.Reverse().ToArray();
 
             foreach (TileData tileData in tileDatas)
@@ -108,8 +107,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
         public async UniTask ReplaceBuilding(Vector2Int fromBuildingGridPosition, BuildingType fromBuildingType, Vector2Int toBuildingGridPosition, BuildingType toBuildingType)
         {
-            List<UniTask> tasks = new();
-
+            List<UniTask> tasks = new ();
 
             Tile fromTile = GetTile(fromBuildingGridPosition);
             tasks.Add(fromTile.PutBuilding(GetBuilding(toBuildingType, fromBuildingGridPosition)));
@@ -195,8 +193,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
         protected async UniTask Fill(ITileRepresentationCreatable tileRepresentationCreatable)
         {
-            List<RoadTile> roadTiles = new();
-            List<TallTile> tallTiles = new();
+            List<RoadTile> roadTiles = new ();
+            List<TallTile> tallTiles = new ();
 
             _tiles = CreateTiles(roadTiles, tallTiles);
 
@@ -211,7 +209,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
         protected virtual List<Tile> CreateTiles(List<RoadTile> roadTiles, List<TallTile> tallTiles)
         {
-            List<Tile> tiles = new();
+            List<Tile> tiles = new ();
 
             foreach (TileData tileData in WorldData.Tiles)
             {
@@ -236,7 +234,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
             switch (tileType)
             {
                 case TileType.RoadGround:
-                    RoadTile roadTile = new(
+                    RoadTile roadTile = new (
                         tileData,
                         tileType,
                         StaticDataService,
@@ -249,7 +247,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
 
                     return roadTile;
                 case TileType.TallGround:
-                    TallTile tallTile = new(
+                    TallTile tallTile = new (
                         tileData,
                         tileType,
                         StaticDataService,

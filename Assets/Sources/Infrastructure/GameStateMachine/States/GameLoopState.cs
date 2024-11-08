@@ -23,7 +23,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
         {
             uint availableMovesCount = _staticDataService.WorldsConfig.AvailableMovesCount;
 
-            if(_persistentProgressService.Progress.GameplayMovesCounter.RemainingMovesCount > availableMovesCount)
+            if (_persistentProgressService.Progress.GameplayMovesCounter.RemainingMovesCount > availableMovesCount)
                 _persistentProgressService.Progress.GameplayMovesCounter.SetCount(availableMovesCount);
 
             _sceneLoader.Load(InfrastructureAssetPath.GameplayScene);
@@ -31,10 +31,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
             return default;
         }
 
-        public UniTask Exit()
-        {
-            
-            return default;
-        }
+        public UniTask Exit() =>
+            default;
     }
 }

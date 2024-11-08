@@ -1,7 +1,7 @@
-﻿using Assets.Sources.Services.StaticDataService;
+﻿using System.Collections.Generic;
+using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Data;
 using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Data.World.Currency;
@@ -47,7 +47,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
             if (_isExpanded == false)
                 return base.CreateTiles(roadTiles, tallTiles);
 
-            List<Tile> tiles = new();
+            List<Tile> tiles = new ();
 
             foreach (TileData tileData in WorldData.Tiles)
             {

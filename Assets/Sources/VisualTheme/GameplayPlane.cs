@@ -30,4 +30,3 @@ namespace Assets.Sources.VisualTheme
         }
     }
 }
- 

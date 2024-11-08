@@ -1,9 +1,8 @@
-﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
-using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
+using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
 
 namespace Assets.Sources.Data.World.Currency
 {
@@ -17,7 +16,7 @@ namespace Assets.Sources.Data.World.Currency
         {
             GainStoreList = gainsStoreList;
 
-            BuildingsStoreList = new();
+            BuildingsStoreList = new ();
 
             foreach (BuildingType buildingType in startBuildingStoreList)
                 TryAddBuilding(buildingType);

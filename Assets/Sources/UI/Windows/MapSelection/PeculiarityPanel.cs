@@ -28,7 +28,7 @@ namespace Assets.Sources.UI.Windows.MapSelection
             _uiFactory = uiFactory;
             _worldsList = worldsList;
 
-            _icons = new();
+            _icons = new ();
 
             ChangeIcons(_worldsList.CurrentWorldDataId);
 

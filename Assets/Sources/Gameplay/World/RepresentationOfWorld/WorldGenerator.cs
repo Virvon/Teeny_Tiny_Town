@@ -1,10 +1,10 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Infrastructure.Factories.WorldFactory;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -14,7 +14,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
     {
         [SerializeField] private float _cellSize;
 
-        private IWorldFactory _worldFactory;        
+        private IWorldFactory _worldFactory;
 
         private List<TileRepresentation> _tiles;
 
@@ -22,8 +22,8 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld
         private void Construct(IWorldFactory worldFactory)
         {
             _worldFactory = worldFactory;
-            
-            _tiles = new();
+
+            _tiles = new ();
         }
 
         public float CellSize => _cellSize;

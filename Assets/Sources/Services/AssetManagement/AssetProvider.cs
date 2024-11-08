@@ -12,7 +12,7 @@ namespace Assets.Sources.Services.AssetManagement
         private readonly Dictionary<string, AsyncOperationHandle> _assetRequest;
 
         public AssetProvider() =>
-            _assetRequest = new();
+            _assetRequest = new ();
 
         public async UniTask InitializeAsync()
         {
@@ -83,7 +83,7 @@ namespace Assets.Sources.Services.AssetManagement
         public async UniTask<TAsset[]> LoadAll<TAsset>(List<string> keys)
             where TAsset : class
         {
-            List<UniTask<TAsset>> tasks = new(keys.Count);
+            List<UniTask<TAsset>> tasks = new (keys.Count);
 
             foreach (string key in keys)
                 tasks.Add(Load<TAsset>(key));

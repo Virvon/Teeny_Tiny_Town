@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Gameplay.StateMachine;
+﻿using System;
+using Assets.Sources.Gameplay.StateMachine;
 using Assets.Sources.Gameplay.StateMachine.States;
 using Assets.Sources.Gameplay.World.StateMachine;
 using Assets.Sources.Gameplay.World.StateMachine.States;
@@ -6,7 +7,6 @@ using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.PersistentProgress;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -71,6 +71,6 @@ namespace Assets.Sources.UI.Windows.World
             WorldStateMachine.Enter<ExitWorldState, Action>(() => _gameplayStateMachine.Enter<MapSelectionState>().Forget()).Forget();
 
         private void OnNoMoreEmptyTiles() =>
-            WorldStateMachine.Enter<SafeGameplayState>().Forget(); 
+            WorldStateMachine.Enter<SafeGameplayState>().Forget();
     }
 }

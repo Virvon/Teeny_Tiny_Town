@@ -10,7 +10,6 @@ using Assets.Sources.UI.Windows.World.Panels;
 using Assets.Sources.UI.Windows.World.Panels.Reward;
 using Assets.Sources.UI.Windows.World.Panels.Store;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

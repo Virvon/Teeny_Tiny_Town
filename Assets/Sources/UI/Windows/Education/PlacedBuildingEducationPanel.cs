@@ -3,8 +3,6 @@ using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Services.Input;
 using DG.Tweening;
-using System;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Assets.Sources.UI.Windows.Education

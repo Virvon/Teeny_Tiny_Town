@@ -19,7 +19,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
             _currencyWorldData = currencyWorldData;
             _staticDataService = staticDataService;
 
-            foreach(GainStoreItemType gainType in _staticDataService.GetWorld<CurrencyWorldConfig>(_currencyWorldData.Id).AvailableGainStoreItems)
+            foreach (GainStoreItemType gainType in _staticDataService.GetWorld<CurrencyWorldConfig>(_currencyWorldData.Id).AvailableGainStoreItems)
                 await uiFactory.CreateGainStoreItemPanel(gainType, transform);
         }
     }

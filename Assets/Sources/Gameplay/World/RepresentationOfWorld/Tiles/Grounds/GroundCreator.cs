@@ -39,7 +39,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Grounds
 
             Ground = await _worldFactory.CreateGround(groundType, roadType, _groundPoint.position, rotation, transform);
 
-            if(isAnimate)
+            if (isAnimate)
                 await UniTask.WaitForSeconds(_animationsConfig.TileUpdatingDuration);
         }
     }

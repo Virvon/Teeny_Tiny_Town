@@ -8,7 +8,7 @@ namespace Assets.Sources.Data.World
         public uint[] Goals;
 
         public uint Goal;
-        public uint pointsCount;
+        public uint PointsCount;
 
         public bool IsGoalsOvered;
 
@@ -17,7 +17,7 @@ namespace Assets.Sources.Data.World
             Goals = goals;
 
             Goal = Goals[0];
-            pointsCount = 0;
+            PointsCount = 0;
             IsGoalsOvered = false;
         }
 
@@ -30,11 +30,11 @@ namespace Assets.Sources.Data.World
             if (IsGoalsOvered)
                 return;
 
-            pointsCount += count;
+            PointsCount += count;
 
-            if (pointsCount >= Goal)
+            if (PointsCount >= Goal)
             {
-                pointsCount = pointsCount - Goal;
+                PointsCount = PointsCount - Goal;
 
                 int currentGoalIndex = Array.IndexOf(Goals, Goal);
 
@@ -52,20 +52,6 @@ namespace Assets.Sources.Data.World
             }
 
             Scorred?.Invoke();
-
-            //if(Scored >= Goal)
-            //{
-            //    Scored = Goal - Scored;
-
-            //    int currentGoalIndex = Array.IndexOf(Goals, Goal);
-
-            //    if (currentGoalIndex >= Goals.Length - 1)
-            //        GoalsOvered?.Invoke();
-            //    else
-            //        Goal = Goals[currentGoalIndex + 1];
-
-            //    GoalScored?.Invoke();
-            //}
         }
     }
 }

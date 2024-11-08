@@ -7,7 +7,6 @@ using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
 using Assets.Sources.UI.Windows.World.Panels.Store;
 using Cysharp.Threading.Tasks;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

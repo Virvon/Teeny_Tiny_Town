@@ -1,5 +1,5 @@
-﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
-using System;
+﻿using System;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 
 namespace Assets.Sources.Data.World.Currency
 {
@@ -15,7 +15,6 @@ namespace Assets.Sources.Data.World.Currency
 
             BuyingCount = 0;
         }
-
 
         public event Action BuyingCountChanged;
 

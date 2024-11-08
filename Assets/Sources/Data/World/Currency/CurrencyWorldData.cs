@@ -1,6 +1,6 @@
-﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using UnityEngine;
 
 namespace Assets.Sources.Data.World.Currency
@@ -28,9 +28,9 @@ namespace Assets.Sources.Data.World.Currency
             uint startWorldWalletValue)
             : base(id, tiles, nextBuildingTypeForCreation, availableBuildingForCreation, size, goals, isUnlocked)
         {
-            WorldWallet = new(startWorldWalletValue);
-            MovesCounter = new();
-            WorldStore = new(startBuildingsStoreList, gainsStoreList);
+            WorldWallet = new (startWorldWalletValue);
+            MovesCounter = new ();
+            WorldStore = new (startBuildingsStoreList, gainsStoreList);
             StartBuildingsStoreList = startBuildingsStoreList;
         }
 

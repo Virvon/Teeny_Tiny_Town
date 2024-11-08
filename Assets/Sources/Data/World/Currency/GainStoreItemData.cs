@@ -1,5 +1,5 @@
-﻿using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
-using System;
+﻿using System;
+using Assets.Sources.Services.StaticDataService.Configs.WorldStore;
 
 namespace Assets.Sources.Data.World.Currency
 {

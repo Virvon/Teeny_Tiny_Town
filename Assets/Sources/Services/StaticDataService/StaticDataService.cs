@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StaticDataService.Configs;
@@ -24,13 +23,13 @@ namespace Assets.Sources.Services.StaticDataService
         private Dictionary<GroundType, Dictionary<RoadType, RoadConfig>> _groundConfigs;
         private Dictionary<WindowType, WindowConfig> _windowConfigs;
         private Dictionary<BuildingType, BuildingStoreItemConfig> _worldStoreItemConfigs;
-        private Dictionary<TileType, TestGroundConfig> _testGroundConfigs;
         private Dictionary<BuildingType, GroundType> _roadGrounds;
         private Dictionary<string, WorldConfig> _worldConfigs;
         private Dictionary<RewardType, RewardConfig> _rewardConfigs;
         private Dictionary<GameplayStoreItemType, StoreItemConfig> _gameplayStoreItemConfigs;
         private Dictionary<AdditionalBonusType, AdditionalBonusConfig> _additionalBonusConfigs;
         private Dictionary<GainStoreItemType, GainStoreItemConfig> _gainStoreItemConfigs;
+        private Dictionary<TileType, GroundDefaultSurfaceConfig> _defaultGroundConfigs;
 
         public StaticDataService(IAssetProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
@@ -68,6 +67,9 @@ namespace Assets.Sources.Services.StaticDataService
             await UniTask.WhenAll(tasks);
         }
 
+        public GroundDefaultSurfaceConfig GetDefaultGround(TileType tileType) =>
+            _defaultGroundConfigs.TryGetValue(tileType, out GroundDefaultSurfaceConfig config) ? config : null;
+
         public BuildingType[] GetAllBuildings() =>
             _buildingConfigs.Keys.OrderBy(type => (int)type).ToArray();
 
@@ -89,9 +91,6 @@ namespace Assets.Sources.Services.StaticDataService
 
         public GroundType GetGroundType(BuildingType buildingType) =>
             _roadGrounds.TryGetValue(buildingType, out GroundType type) ? type : default;
-
-        public TestGroundConfig GetGround(TileType tileType) =>
-            _testGroundConfigs.TryGetValue(tileType, out TestGroundConfig config) ? config : null;
 
         public BuildingStoreItemConfig GetBuildingStoreItem(BuildingType buildingType) =>
             _worldStoreItemConfigs.TryGetValue(buildingType, out BuildingStoreItemConfig config) ? config : null;
@@ -130,7 +129,6 @@ namespace Assets.Sources.Services.StaticDataService
 
             _additionalBonusConfigs = configs.ToDictionary(value => value.Type, value => value);
         }
-
 
         private async UniTask LoadQuestsConfig()
         {
@@ -211,7 +209,7 @@ namespace Assets.Sources.Services.StaticDataService
 
             GroundsConfig = groundsConfigs.First();
             _groundConfigs = GroundsConfig.GroundConfigs.ToDictionary(value => value.Type, value => value.RoadConfigs.ToDictionary(value => value.Type, value => value));
-            _testGroundConfigs = GroundsConfig.TestGroundConfigs.ToDictionary(value => value.TileType, value => value);
+            _defaultGroundConfigs = GroundsConfig.DefaultGroundConfigs.ToDictionary(value => value.TileType, value => value);
         }
 
         private async UniTask LoadBuildingConfigs()

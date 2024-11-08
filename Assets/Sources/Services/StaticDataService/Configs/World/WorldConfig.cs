@@ -1,9 +1,9 @@
-﻿using Assets.Sources.Data;
+﻿using System.Linq;
+using Assets.Sources.Data;
 using Assets.Sources.Data.World;
 using Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.Reward;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -37,14 +37,14 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         private void OnValidate() =>
             CreateTileConfigs();
 
-        public virtual WorldData GetWorldData(uint[] goals, IStaticDataService staticDataService) => 
+        public virtual WorldData GetWorldData(uint[] goals, IStaticDataService staticDataService) =>
             new WorldData(Id, TilesDatas, NextBuildingTypeForCreation, StartingAvailableBuildingTypes.ToList(), Size, goals, IsUnlockedOnStart);
 
         private void CreateTileConfigs()
         {
             TileConfig[] newTileConfigs = new TileConfig[Size.x * Size.y];
 
-            if(TileConfigs == null)
+            if (TileConfigs == null)
             {
                 int i = 0;
 
@@ -67,7 +67,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
                 {
                     for (int z = 0; z < Size.y; z++)
                     {
-                        if(i >= TileConfigs.Length)
+                        if (i >= TileConfigs.Length)
                         {
                             newTileConfigs[i] = new TileConfig(new Vector2Int(x, z));
                         }

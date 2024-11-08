@@ -1,10 +1,9 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
+﻿using System;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Sources.Sandbox.ActionHandler

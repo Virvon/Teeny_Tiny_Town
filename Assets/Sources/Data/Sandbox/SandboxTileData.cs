@@ -1,7 +1,6 @@
-﻿using Assets.Sources.Services.StaticDataService.Configs;
+﻿using System;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
-using System;
 using UnityEngine;
 
 namespace Assets.Sources.Data.Sandbox

@@ -28,7 +28,7 @@ namespace Assets.Sources.Gameplay.StateMachine.States
 
         public async UniTask Enter()
         {
-            if(_persistentProgressService.Progress.IsEducationCompleted)
+            if (_persistentProgressService.Progress.IsEducationCompleted)
             {
                 await _assetProvider.WarmupAssetsByLable(AssetLabels.Gameplay);
                 await _windowsSwitcher.Switch<StartWindow>();
@@ -40,9 +40,7 @@ namespace Assets.Sources.Gameplay.StateMachine.States
             }
         }
 
-        public UniTask Exit()
-        {
-            return default;
-        }
+        public UniTask Exit() =>
+            default;
     }
 }

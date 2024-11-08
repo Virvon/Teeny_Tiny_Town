@@ -1,9 +1,9 @@
-﻿using Cysharp.Threading.Tasks;
-using UnityEngine;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
-using System;
+using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 {
@@ -46,7 +46,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override UniTask Enter()
         {
-            if(_lastSelectedTile != null)
+            if (_lastSelectedTile != null)
             {
                 SelectFrame.Select(_lastSelectedTile);
                 _markersVisibility.SetSelectFrameShowed(true);
@@ -54,7 +54,6 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
             _markersVisibility.SetBuildingShowed(true);
             
-
             return default;
         }
 
@@ -86,9 +85,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
             if (CheckTileIntersection(handlePosition, out TileRepresentation tile))
             {
-                //Debug.Log(tile != null);
-
-                if(tile.IsEmpty && CheckBuildingAndTileCompatibility(_buildingMarker.BuildingType, tile.Type))
+                if (tile.IsEmpty && CheckBuildingAndTileCompatibility(_buildingMarker.BuildingType, tile.Type))
                 {
                     SelectFrame.Select(tile);
                     _markersVisibility.SetSelectFrameShowed(true);

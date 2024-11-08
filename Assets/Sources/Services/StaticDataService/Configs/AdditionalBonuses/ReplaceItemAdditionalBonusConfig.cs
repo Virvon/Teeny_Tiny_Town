@@ -8,7 +8,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses
     {
         public override AdditionalBonusType Type => AdditionalBonusType.ReplaceItem;
 
-        public override void Anwenden(IWorldData worldData) =>
+        public override void ApplyBonus(IWorldData worldData) =>
             worldData.ReplaceItems.AddItems(Count);
     }
 }

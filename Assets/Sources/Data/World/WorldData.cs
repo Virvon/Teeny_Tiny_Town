@@ -1,8 +1,8 @@
-﻿using Assets.Sources.Services.StaticDataService;
-using Assets.Sources.Services.StaticDataService.Configs.Building;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Sources.Services.StaticDataService;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 
@@ -44,45 +44,53 @@ namespace Assets.Sources.Data.World
 
             NextBuildingForCreationBuildsCount = 0;
             IsChangingStarted = false;
-            PointsData = new(goals);
-            BulldozerItems = new();
-            ReplaceItems = new();
+            PointsData = new (goals);
+            BulldozerItems = new ();
+            ReplaceItems = new ();
             Inventory = new BuildingType[InventorySize];
         }
 
         public event Action<BuildingType> BuildingUpgraded;
 
         string IWorldData.Id => Id;
+
         BuildingType IWorldData.NextBuildingTypeForCreation
         {
             get => NextBuildingTypeForCreation;
             set => NextBuildingTypeForCreation = value;
         }
+
         uint IWorldData.NextBuildingForCreationBuildsCount
         {
             get => NextBuildingForCreationBuildsCount;
             set => NextBuildingForCreationBuildsCount = value;
         }
+
         ReadOnlyArray<TileData> IWorldData.Tiles => Tiles;
         IReadOnlyList<BuildingType> IWorldData.AvailableBuildingsForCreation => AvailableBuildingsForCreation;
+
         bool IWorldData.IsChangingStarted
         {
             get => IsChangingStarted;
             set => IsChangingStarted = value;
         }
+
         Vector2Int IWorldData.Size
         {
             get => Size;
             set => Size = value;
         }
+
         PointsData IWorldData.PointsData => PointsData;
         UpgradeData IWorldData.BulldozerItems => BulldozerItems;
         UpgradeData IWorldData.ReplaceItems => ReplaceItems;
+
         bool IWorldData.IsUnlocked
         {
             get => IsUnlocked;
             set => IsUnlocked = value;
         }
+
         BuildingType[] IWorldData.Inventory => Inventory;
 
         public void TryAddBuildingTypeForCreation(BuildingType createdBuilding, uint requiredCreatedBuildingsToAddNext, IStaticDataService staticDataService)

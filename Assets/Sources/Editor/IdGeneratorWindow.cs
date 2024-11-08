@@ -4,26 +4,23 @@ using UnityEngine;
 
 namespace Assets.Sources.Editor
 {
-    public partial class WorldConfigEditor
+    public class IdGeneratorWindow : EditorWindow
     {
-        class IdGeneratorWindow : EditorWindow
+        private string _id;
+
+        [MenuItem("Window/ID generator")]
+        public static void ShowWindow()
         {
-            private string _id;
+            GetWindow(typeof(IdGeneratorWindow));
+        }
 
-            [MenuItem("Window/ID generator")]
-            public static void ShowWindow()
+        public void OnGUI()
+        {
+            EditorGUILayout.TextField("ID", _id);
+
+            if (GUILayout.Button("Generate ID"))
             {
-                GetWindow(typeof(IdGeneratorWindow));
-            }
-
-            void OnGUI()
-            {
-                EditorGUILayout.TextField("ID", _id);
-
-                if (GUILayout.Button("Generate ID"))
-                {
-                    _id = Guid.NewGuid().ToString();
-                }
+                _id = Guid.NewGuid().ToString();
             }
         }
     }

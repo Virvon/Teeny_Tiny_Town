@@ -1,9 +1,9 @@
-﻿using Assets.Sources.Services.Input;
+﻿using System;
+using Assets.Sources.Services.Input;
 using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.SceneManagment;
 using Assets.Sources.Services.StateMachine;
 using Cysharp.Threading.Tasks;
-using System;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {

@@ -1,17 +1,16 @@
-﻿using Assets.Sources.Data.World;
+﻿using System;
+using Assets.Sources.Data.World;
 using Assets.Sources.Gameplay.Cameras;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.NextBuildingForPlacing;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
-using Assets.Sources.Sandbox.ActionHandler;
 using Assets.Sources.Services.Input;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.UI;
 using Assets.Sources.UI.Windows.World;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.StateMachine.States
@@ -60,7 +59,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
             Debug.Log("destruct world changing state");
 
             _worldData.PointsData.GoalAchieved -= OnGoalAchived;
-            _persistentProgressService.Progress.GameplayMovesCounter.MovesOvered -= OnMovesOvered;                
+            _persistentProgressService.Progress.GameplayMovesCounter.MovesOvered -= OnMovesOvered;
         }
 
         public UniTask Enter()
@@ -72,7 +71,7 @@ namespace Assets.Sources.Gameplay.World.StateMachine.States
 
             _camera.MoveTo(new Vector3(55.1f, 78.8f, -55.1f), callback: async () =>
             {
-                if(_nextBuildingForPlacingCreator.CheckFreeTiles(_worldChanger.Tiles))
+                if (_nextBuildingForPlacingCreator.CheckFreeTiles(_worldChanger.Tiles))
                 {
                     _actionHandlerStateMachine.SetActive(true);
                     _inputService.SetEnabled(true);

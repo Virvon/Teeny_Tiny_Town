@@ -1,11 +1,11 @@
-﻿using Assets.Sources.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Assets.Sources.Data;
 using Assets.Sources.Infrastructure.Factories.UiFactory;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Quests;
 using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -26,7 +26,7 @@ namespace Assets.Sources.UI.Windows.World.Panels
             _uiFactory = uiFactory;
             _staticDataService = staticDataService;
 
-            _questPanels = new();
+            _questPanels = new ();
 
             foreach (QuestData questData in _persistentPorgressService.Progress.Quests)
                 await CreateQuestPanel(questData.Id);
@@ -48,11 +48,6 @@ namespace Assets.Sources.UI.Windows.World.Panels
 
             _persistentPorgressService.Progress.Wallet.Give(questConfig.Reward);
 
-            //List<QuestData> questDatas = _persistentPorgressService.Progress.Quests;
-            //questDatas.Remove(questDatas.First(questData => questData.Id == questPanel.Id));
-
-            
-
             bool isUniqueQuest = false;
             string questId = string.Empty;
 
@@ -65,7 +60,6 @@ namespace Assets.Sources.UI.Windows.World.Panels
                     isUniqueQuest = true;
             }
 
-            //_persistentPorgressService.Progress.Quests.Add(new QuestData(questId));
             _persistentPorgressService.Progress.ChangeQuest(questPanel.Id, new QuestData(questId));
         }
 

@@ -29,7 +29,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 
         public void StopShaking()
         {
-            if(TryKillSequence())
+            if (TryKillSequence())
                 transform.position = _startPosition;
         }
 
@@ -45,7 +45,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
             TryKillSequence();
 
             _startPosition = transform.position;
-            
+
             _sequence = DOTween
                 .Sequence()
                 .Append(transform.DOMove(_startPosition + _animationsConfig.BuildingShakeOffset, _animationsConfig.BuildingShakeTweenDuration).SetEase(_animationsConfig.BuildingShakeCurve))

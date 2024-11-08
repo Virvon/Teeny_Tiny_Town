@@ -9,9 +9,9 @@ namespace Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses
     {
         public override AdditionalBonusType Type => AdditionalBonusType.WorldWalletValue;
 
-        public override void Anwenden(IWorldData worldData)
+        public override void ApplyBonus(IWorldData worldData)
         {
-            if(worldData is ICurrencyWorldData currencyWorldData)
+            if (worldData is ICurrencyWorldData currencyWorldData)
                 currencyWorldData.WorldWallet.Give(Count);
             else
                 Debug.LogError($"{nameof(worldData)} is not {typeof(ICurrencyWorldData)}");

@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Assets.Sources.Data.World
 {
-
     [Serializable]
     public class WorldWallet : Wallet
     {

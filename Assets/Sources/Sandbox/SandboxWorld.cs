@@ -35,6 +35,5 @@ namespace Assets.Sources.Sandbox
         public class Factory : PlaceholderFactory<string, UniTask<SandboxWorld>>
         {
         }
-        
     }
 }

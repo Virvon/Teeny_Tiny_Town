@@ -10,7 +10,7 @@ namespace Assets.Sources.UI.Windows.Start.Store
 {
     public class GainsGameplayStoreItem : MonoBehaviour
     {
-        const uint ItemsCount = 2;
+        private const uint ItemsCount = 2;
 
         [SerializeField] private uint _cost;
         [SerializeField] private Button _buyButton;
@@ -35,7 +35,7 @@ namespace Assets.Sources.UI.Windows.Start.Store
 
         private void OnBuyButtonClicked()
         {
-            if(_persistentProgressServcie.Progress.Wallet.TryGet(_cost))
+            if (_persistentProgressServcie.Progress.Wallet.TryGet(_cost))
             {
                 WorldData worldData = _persistentProgressServcie.Progress.GetWorldData(_persistentProgressServcie.Progress.LastPlayedWorldDataId);
 

@@ -8,7 +8,7 @@ namespace Assets.Sources.VisualTheme
     {
         [SerializeField] private ParticleSystem _effect;
 
-        float _nightValue;
+        private float _nightValue;
 
         private void Start() =>
             SetActive(PersistentProgressService.Progress.SettingsData.IsDarkTheme);

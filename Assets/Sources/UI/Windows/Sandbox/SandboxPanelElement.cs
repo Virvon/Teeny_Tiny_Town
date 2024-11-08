@@ -1,7 +1,6 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using MPUIKIT;
-using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

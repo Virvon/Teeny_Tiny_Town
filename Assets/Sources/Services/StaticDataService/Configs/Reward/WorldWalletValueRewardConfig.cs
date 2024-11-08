@@ -18,7 +18,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Reward
                 reward = reward < MinReward? MinReward : reward;
 
                 return reward;
-            }    
+            }
             else
             {
                 Debug.LogError($"{nameof(worldData)} is not {typeof(ICurrencyWorldData)}");

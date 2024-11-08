@@ -1,6 +1,6 @@
-﻿using Assets.Sources.Services.PersistentProgress;
+﻿using System.Linq;
+using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.UI.Windows.World;
-using System.Linq;
 using UnityEngine;
 using Zenject;
 

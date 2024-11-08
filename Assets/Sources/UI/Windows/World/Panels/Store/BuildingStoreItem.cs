@@ -1,10 +1,10 @@
-﻿using Assets.Sources.Data.World.Currency;
+﻿using System;
+using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Utils;
 using Cysharp.Threading.Tasks;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -25,7 +25,6 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
 
         private BuildingType _buildingType;
         private BuildingStoreItemData _data;
-
 
         [Inject]
         private void Construct(ICurrencyWorldData currencyWorldData, IStaticDataService staticDataService)
@@ -56,7 +55,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.Store
             ChangeCostValue(_currencyWorldData.WorldWallet.Value);
 
             _data.BuyingCountChanged += OnBuyingCountChanged;
-            
+
             _icon.sprite = icon;
             _icon.SetNativeSize();
         }

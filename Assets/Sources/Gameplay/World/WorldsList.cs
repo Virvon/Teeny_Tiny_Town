@@ -1,12 +1,11 @@
-﻿using Assets.Sources.Data.World;
+﻿using System;
+using System.Linq;
 using Assets.Sources.Infrastructure.Factories.GameplayFactory;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
-using System.Linq;
 using UnityEngine;
 using Zenject;
 

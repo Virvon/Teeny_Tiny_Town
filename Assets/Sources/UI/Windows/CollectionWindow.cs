@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Collection;
+﻿using System.Linq;
+using Assets.Sources.Collection;
 using Assets.Sources.Data;
 using Assets.Sources.Infrastructure.GameStateMachine;
 using Assets.Sources.Infrastructure.GameStateMachine.States;
@@ -6,8 +7,6 @@ using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Cysharp.Threading.Tasks;
-using System;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,8 +16,8 @@ namespace Assets.Sources.UI.Windows
 {
     public class CollectionWindow : Window
     {
-        const string LockedName = "???";
-        const string LockedTitle = "??? ??? ???";
+        private const string LockedName = "???";
+        private const string LockedTitle = "??? ??? ???";
 
         [SerializeField] private Button _showNextItemButton;
         [SerializeField] private Button _showPreviousItemButton;
@@ -78,7 +77,7 @@ namespace Assets.Sources.UI.Windows
             BuildingConfig buildingConfig = _staticDataService.GetBuilding<BuildingConfig>(buildingData.Type);
 
             _placedBuildingsQuantityValue.text = buildingData.Count.ToString();
-            _placedBuildingsQuantityPanel.alpha = buildingData.IsUnlocked? 1 : 0;
+            _placedBuildingsQuantityPanel.alpha = buildingData.IsUnlocked ? 1 : 0;
 
             _buildingName.text = buildingData.IsUnlocked ? buildingConfig.Name : LockedName;
             _buildingTitle.text = buildingData.IsUnlocked ? buildingConfig.Title : LockedTitle;

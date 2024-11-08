@@ -1,8 +1,8 @@
-﻿using Assets.Sources.Gameplay.GameplayMover;
+﻿using System;
+using Assets.Sources.Gameplay.GameplayMover;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Markers;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
@@ -41,9 +41,9 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler
 
         public override void OnHandleMoved(Vector2 handlePosition)
         {
-            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty == false )
+            if (CheckTileIntersection(handlePosition, out TileRepresentation tile) && tile.IsEmpty == false)
             {
-                if(_selectedTile != tile)
+                if (_selectedTile != tile)
                 {
                     SelectFrame.Select(tile);
                     _markersVisibility.SetSelectFrameShowed(true);

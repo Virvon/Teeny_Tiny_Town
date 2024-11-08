@@ -11,7 +11,6 @@ namespace Assets.Sources.UI.Windows.Education
     {
         [SerializeField] private Button _continueButton;
 
-
         [Inject]
         private void Construct(IInputService inputService, ActionHandlerStateMachine actionHandlerStateMachine, MarkersVisibility markersVisibility)
         {

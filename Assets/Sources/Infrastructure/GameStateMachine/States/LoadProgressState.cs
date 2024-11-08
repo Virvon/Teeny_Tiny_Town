@@ -1,14 +1,13 @@
-﻿using Assets.Sources.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Assets.Sources.Data;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.SaveLoadProgress;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
 using UnityEngine.InputSystem.Utilities;
-using System.Linq;
-using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Data.World;
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
@@ -46,7 +45,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
 
         private PlayerProgress CreateNewProgress()
         {
-            List<QuestData> startQuests = new();
+            List<QuestData> startQuests = new ();
             startQuests.AddRange(_staticDataService.QuestsConfig.StartQuestsId.Select(id => new QuestData(id)));
 
             PlayerProgress progress = new PlayerProgress(
@@ -67,7 +66,7 @@ namespace Assets.Sources.Infrastructure.GameStateMachine.States
 
             WorldData[] worldDatas = new WorldData[worldConfigs.Count];
 
-            for(int i = 0; i < worldConfigs.Count; i++)
+            for (int i = 0; i < worldConfigs.Count; i++)
             {
                 WorldConfig worldConfig = worldConfigs[i];
 

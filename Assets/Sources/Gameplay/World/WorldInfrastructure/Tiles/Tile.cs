@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Data;
+﻿using System;
+using Assets.Sources.Data;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
@@ -7,7 +8,6 @@ using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
@@ -40,7 +40,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             TileRepresentation = await tileRepresentationCreatable.Create(GridPosition, Type);
             await CreateGroundRepresentation(false);
 
-            if(Building != null)
+            if (Building != null)
                 await Building.CreateRepresentation(TileRepresentation, false, false);
         }
 
@@ -71,7 +71,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         public virtual async UniTask CleanAll(bool isAnimate)
         {
-            if(IsEmpty == false)
+            if (IsEmpty == false)
             {
                 if (isAnimate)
                     await TileRepresentation.AnimateDestroyBuilding();

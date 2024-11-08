@@ -1,5 +1,5 @@
-﻿using Assets.Sources.Services.StaticDataService.Configs.Building;
-using System;
+﻿using System;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using UnityEngine;
 
 namespace Assets.Sources.Data

@@ -66,7 +66,7 @@ namespace Assets.Sources.Gameplay
             _gameplayStateMachine.RegisterState(_statesFactory.Create<GameStartState>());
             _gameplayStateMachine.RegisterState(_statesFactory.Create<MapSelectionState>());
             _gameplayStateMachine.RegisterState(_statesFactory.Create<ShowQuestsState>());
-        }  
+        }
 
         private async UniTask RegisterWindows()
         {

@@ -45,7 +45,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<AssetReferenceGameObject, Transform, UniTask<AdditionalBonusOfferItem>, AdditionalBonusOfferItem.Factory>()
                 .FromFactory<ReferencePrefabFactoryAsync<AdditionalBonusOfferItem>>();
-            
+
             Container
                 .BindFactory<AssetReferenceGameObject, Transform, UniTask<GainStoreItemPanel>, GainStoreItemPanel.Factory>()
                 .FromFactory<ReferencePrefabFactoryAsync<GainStoreItemPanel>>();
@@ -53,7 +53,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<string, Transform, UniTask<SandboxPanelElement>, SandboxPanelElement.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<SandboxPanelElement>>();
-            
+
             Container
                 .BindFactory<string, Transform, UniTask<RotationPanel>, RotationPanel.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<RotationPanel>>();
@@ -61,7 +61,7 @@ namespace Assets.Sources.Infrastructure.Factories.UiFactory
             Container
                 .BindFactory<string, UniTask<Blur>, Blur.BlurFactory>()
                 .FromFactory<KeyPrefabFactoryAsync<Blur>>();
-            
+
             Container
                 .BindFactory<string, Transform, UniTask<PeculiarityIconPanel>, PeculiarityIconPanel.Factory>()
                 .FromFactory<KeyPrefabFactoryAsync<PeculiarityIconPanel>>();

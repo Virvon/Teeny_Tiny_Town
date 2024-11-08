@@ -16,25 +16,28 @@ namespace Assets.Sources.Gameplay.World.Root
         {
             base.InstallBindings();
 
-            Container.Bind<GainBuyer>().AsSingle();
-            Container.Bind<UnlimitedQuantityGainBuyer>().AsSingle();
+            BindGainBuyer();
+            BindUnlimitedQuantityGainBuyer();
+            BindGameplayFactory();
+        }
+
+        private void BindGameplayFactory() =>
             GameplayFactoryInstaller.Install(Container);
-        }
 
-        protected override void BindAcitonHandlerSwitcher()
-        {
+        private void BindUnlimitedQuantityGainBuyer() =>
+            Container.Bind<UnlimitedQuantityGainBuyer>().AsSingle();
+
+        private void BindGainBuyer() =>
+            Container.Bind<GainBuyer>().AsSingle();
+
+        protected override void BindAcitonHandlerSwitcher() =>
             Container.BindInterfacesTo<CurrencyWorldActionHandlerSwitcher>().AsSingle();
-        }
 
-        protected override void BindWorldWindows()
-        {
+        protected override void BindWorldWindows() =>
             Container.BindInterfacesTo<CurrencyWorldWindows>().AsSingle();
-        }
 
-        protected override void BindWorldBootstrapper()
-        {
+        protected override void BindWorldBootstrapper() =>
             Container.BindInterfacesAndSelfTo<CurrencyWorldBootstrapper>().AsSingle().NonLazy();
-        }
 
         protected override void BindWorldData()
         {
@@ -46,15 +49,10 @@ namespace Assets.Sources.Gameplay.World.Root
             Container.BindInterfacesTo<CurrencyWorldData>().FromInstance(worldData as CurrencyWorldData).AsSingle();
         }
 
-        protected override void BindGameplayMover()
-        {
+        protected override void BindGameplayMover() =>
             Container.BindInterfacesTo<CurrencyGameplayMover>().AsSingle();
-        }
 
-        protected override void BindWorldChanger()
-        {
+        protected override void BindWorldChanger() =>
             Container.BindInterfacesTo<CurrencyWorldChanger>().AsSingle();
-        }
     }
-
 }

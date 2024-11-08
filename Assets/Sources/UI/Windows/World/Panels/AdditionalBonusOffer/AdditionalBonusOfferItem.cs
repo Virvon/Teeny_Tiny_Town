@@ -3,7 +3,6 @@ using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.AdditionalBonuses;
 using Cysharp.Threading.Tasks;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -43,7 +42,7 @@ namespace Assets.Sources.UI.Windows.World.Panels.AdditionalBonusOffer
         {
             if (_persistentProgressService.Progress.Wallet.TryGet(_cost))
             {
-                _staticDataService.GetAdditionalBonus(_type).Anwenden(_worldData);
+                _staticDataService.GetAdditionalBonus(_type).ApplyBonus(_worldData);
                 Destroy(gameObject);
             }
         }

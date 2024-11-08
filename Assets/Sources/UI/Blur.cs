@@ -1,7 +1,7 @@
-﻿using Assets.Sources.Gameplay.Cameras;
+﻿using System;
+using Assets.Sources.Gameplay.Cameras;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -35,7 +35,7 @@ namespace Assets.Sources.UI
         {
             base.Hide(callback);
             ChangeBlured(MinBlur);
-        } 
+        }
 
         private void ChangeBlured(float targetValue) =>
             _blur.material.DOFloat(targetValue, BlurMaterial, AnimationsConfig.WindowOpeningStateDuration);

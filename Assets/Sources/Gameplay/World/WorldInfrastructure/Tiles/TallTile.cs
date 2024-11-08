@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Data;
+﻿using System.Collections.Generic;
+using Assets.Sources.Data;
 using Assets.Sources.Data.World;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
 using Assets.Sources.Services.PersistentProgress;
@@ -6,8 +7,6 @@ using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 {
@@ -35,15 +34,13 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             _buildingGibable = buildingGibable;
             _persistentProgressService = persistentProgressService;
 
-            _adjacentTiles = new();
+            _adjacentTiles = new ();
         }
 
         public IReadOnlyList<TallTile> AdjacentTiles => _adjacentTiles;
 
-        public void AddAdjacentTile(TallTile adjacentTile)
-        {
+        public void AddAdjacentTile(TallTile adjacentTile) =>
             _adjacentTiles.Add(adjacentTile);
-        }
 
         protected override async UniTask SetUpBuilding(Building building)
         {
@@ -59,7 +56,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
             foreach (TallTile tile in _adjacentTiles)
             {
-                if(targetBuildingType == default)
+                if (targetBuildingType == default)
                 {
                     if (BuildingType == tile.BuildingType && countedTiles.Contains(tile) == false)
                         chainLength += tile.GetBuildingsChainLength(countedTiles);
@@ -85,7 +82,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
             while (chainCheakCompleted == false)
             {
-                List<TallTile> countedTiles = new();
+                List<TallTile> countedTiles = new ();
 
                 if (GetBuildingsChainLength(countedTiles) >= MinTilesCountToMerge && await TryUpgradeBuilding())
                 {
@@ -99,7 +96,7 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
                     await UniTask.WhenAll(removeBuildingTask);
 
-                    _worldData.TryAddBuildingTypeForCreation(BuildingType, StaticDataService.AvailableForConstructionBuildingsConfig.requiredCreatedBuildingsToAddNext, StaticDataService);
+                    _worldData.TryAddBuildingTypeForCreation(BuildingType, StaticDataService.AvailableForConstructionBuildingsConfig.RequiredCreatedBuildingsToAddNext, StaticDataService);
                 }
                 else
                 {
@@ -110,11 +107,11 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 
         protected IReadOnlyList<TAdjacentTile> GetAdjacentTiles<TAdjacentTile>()
         {
-            List<TAdjacentTile> adjacentTiles = new();
+            List<TAdjacentTile> adjacentTiles = new ();
 
-            foreach(TallTile tile in _adjacentTiles)
+            foreach (TallTile tile in _adjacentTiles)
             {
-                if(tile is TAdjacentTile adjacentTile)
+                if (tile is TAdjacentTile adjacentTile)
                     adjacentTiles.Add(adjacentTile);
             }
 
@@ -135,4 +132,3 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
         }
     }
 }
-

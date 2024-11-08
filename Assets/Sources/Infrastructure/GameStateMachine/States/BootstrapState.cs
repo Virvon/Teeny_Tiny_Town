@@ -1,13 +1,14 @@
-﻿using Assets.Sources.Services.AssetManagement;
+﻿using System;
+using System.Collections;
+using Assets.Sources.Services.AssetManagement;
 using Assets.Sources.Services.StateMachine;
 using Assets.Sources.Services.StaticDataService;
-using Cysharp.Threading.Tasks;
-using System.Collections;
-using Agava.YandexGames;
-using System;
 using Assets.Sources.Services.CoroutineRunner;
-using UnityEngine.InputSystem.EnhancedTouch;
 using Assets.Sources.UI.LoadingCurtain;
+using Cysharp.Threading.Tasks;
+#if !UNITY_WEBGL || UNITY_EDITOR
+using Agava.YandexGames;
+#endif
 
 namespace Assets.Sources.Infrastructure.GameStateMachine.States
 {

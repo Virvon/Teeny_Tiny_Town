@@ -75,7 +75,7 @@ namespace Assets.Sources.Gameplay.Inventory
 
         private async UniTask ChangeIcon()
         {
-            if(BuildingType == BuildingType.Undefined)
+            if (BuildingType == BuildingType.Undefined)
             {
                 _iconCanvasGroup.alpha = 0;
 

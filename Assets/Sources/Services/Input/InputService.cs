@@ -14,7 +14,7 @@ namespace Assets.Sources.Services.Input
 
         public InputService()
         {
-            _inputActionsSheme = new();
+            _inputActionsSheme = new ();
 
             _inputActionsSheme.GameplayInput.HandlePressedMove.started += OnHandlePressedMoveStarted;
             _inputActionsSheme.GameplayInput.HandlePressedMove.performed += OnHandlePressedMovePerformed;

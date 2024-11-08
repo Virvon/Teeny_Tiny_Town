@@ -1,10 +1,10 @@
-﻿using Assets.Sources.Data;
+﻿using System;
+using Assets.Sources.Data;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.Quests;
 using Cysharp.Threading.Tasks;
 using MPUIKIT;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

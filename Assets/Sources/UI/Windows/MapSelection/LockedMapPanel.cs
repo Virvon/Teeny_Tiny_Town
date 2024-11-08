@@ -52,7 +52,7 @@ namespace Assets.Sources.UI.Windows.MapSelection
 
         private void OnBuyButtonClicked()
         {
-            if(_persistentProgressService.Progress.Wallet.TryGet(_currentWorldCost))
+            if (_persistentProgressService.Progress.Wallet.TryGet(_currentWorldCost))
             {
                 _persistentProgressService.Progress.GetWorldData(_worldsList.CurrentWorldDataId).IsUnlocked = true;
                 _mapSelectionWindow.ChangeCurrentWorldInfo(_worldsList.CurrentWorldDataId);

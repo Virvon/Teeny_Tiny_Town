@@ -1,19 +1,17 @@
-﻿using Assets.Sources.Data.Sandbox;
-using Assets.Sources.Data.World;
-using Assets.Sources.Data.World.Currency;
-using Assets.Sources.Services.StaticDataService;
-using Assets.Sources.Services.StaticDataService.Configs.Building;
-using Assets.Sources.Services.StaticDataService.Configs.World;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Sources.Data.Sandbox;
+using Assets.Sources.Data.World;
+using Assets.Sources.Data.World.Currency;
+using Assets.Sources.Services.StaticDataService.Configs.Building;
 using UnityEngine;
 
 namespace Assets.Sources.Data
 {
     [Serializable]
     public class PlayerProgress
-    { 
+    {
         public List<WorldData> WorldDatas;
         public List<CurrencyWorldData> CurrencyWorldDatas;
         public StoreData StoreData;
@@ -36,23 +34,23 @@ namespace Assets.Sources.Data
             uint startGameplayWalletValue)
         {
             Quests = quests;
-            StoreData = new();
-            Wallet = new(startGameplayWalletValue);
-            GameplayMovesCounter = new(startRemainingMoveCount, StoreData);
-            SandboxData = new(sandboxSize);
-            SettingsData = new();
+            StoreData = new ();
+            Wallet = new (startGameplayWalletValue);
+            GameplayMovesCounter = new (startRemainingMoveCount, StoreData);
+            SandboxData = new (sandboxSize);
+            SettingsData = new ();
             LastPlayedWorldDataId = startWorldId;
             IsEducationCompleted = false;
 
             BuildingDatas = new BuildingData[allBuildings.Length];
 
-            for(int i = 0; i < allBuildings.Length; i++)
-                BuildingDatas[i] = new BuildingData(allBuildings[i]);
+            for (int i = 0; i < allBuildings.Length; i++)
+                BuildingDatas[i] = new BuildingData (allBuildings[i]);
 
-            WorldDatas = new();
-            CurrencyWorldDatas = new();
+            WorldDatas = new ();
+            CurrencyWorldDatas = new ();
 
-            foreach(WorldData worldData in worldDatas)
+            foreach (WorldData worldData in worldDatas)
             {
                 if (worldData is CurrencyWorldData)
                     CurrencyWorldDatas.Add((CurrencyWorldData)worldData);
@@ -73,7 +71,7 @@ namespace Assets.Sources.Data
         {
             WorldData worldData = WorldDatas.FirstOrDefault(data => data.Id == id);
 
-            if(worldData == null)
+            if (worldData == null)
                 worldData = CurrencyWorldDatas.FirstOrDefault(data => data.Id == id);
 
             if (worldData == null)

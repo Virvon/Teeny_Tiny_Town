@@ -5,7 +5,7 @@ namespace Assets.Sources.UI.Windows.Start
 {
     public class SoundsOption : SettingsOption
     {
-        [SerializeField] AudioMixer _mixer;
+        [SerializeField] private AudioMixer _mixer;
 
         protected override void OnToggleValueChanged(bool value)
         {

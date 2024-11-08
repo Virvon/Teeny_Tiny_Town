@@ -30,7 +30,6 @@ namespace Assets.Sources.Services.StaticDataService
         UniTask InitializeAsync();
         WindowConfig GetWindow(WindowType type);
         BuildingStoreItemConfig GetBuildingStoreItem(BuildingType buildingType);
-        TestGroundConfig GetGround(TileType tileType);
         GroundType GetGroundType(BuildingType buildingType);
         TWorldConfig GetWorld<TWorldConfig>(string id)
             where TWorldConfig : WorldConfig;
@@ -39,5 +38,6 @@ namespace Assets.Sources.Services.StaticDataService
         AdditionalBonusConfig GetAdditionalBonus(AdditionalBonusType type);
         GainStoreItemConfig GetGainStoreItem(GainStoreItemType type);
         BuildingType[] GetAllBuildings();
+        GroundDefaultSurfaceConfig GetDefaultGround(TileType tileType);
     }
 }

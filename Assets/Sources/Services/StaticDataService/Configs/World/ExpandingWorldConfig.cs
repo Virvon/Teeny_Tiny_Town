@@ -1,7 +1,7 @@
-﻿using Assets.Sources.Data.World;
+﻿using System.Linq;
+using Assets.Sources.Data.World;
 using Assets.Sources.Data.World.Currency;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
-using System.Linq;
 using UnityEngine;
 
 namespace Assets.Sources.Services.StaticDataService.Configs.World
@@ -15,7 +15,7 @@ namespace Assets.Sources.Services.StaticDataService.Configs.World
         public bool ContainsExpand(BuildingType type, out ExpandConfig expandConfig)
         {
             expandConfig = ExpandConfigs.FirstOrDefault(config => config.BuidldingType == type);
-            
+
             return expandConfig != null;
         }
 

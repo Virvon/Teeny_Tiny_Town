@@ -1,5 +1,4 @@
 ﻿using Assets.Sources.Services.PersistentProgress;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

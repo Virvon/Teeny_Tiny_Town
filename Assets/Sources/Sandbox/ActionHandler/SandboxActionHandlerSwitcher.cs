@@ -1,7 +1,6 @@
-﻿using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
+﻿using System;
+using Assets.Sources.Gameplay.World.RepresentationOfWorld.ActionHandler;
 using Assets.Sources.Services.Input;
-using System;
-using UnityEngine;
 
 namespace Assets.Sources.Sandbox.ActionHandler
 {
@@ -37,7 +36,7 @@ namespace Assets.Sources.Sandbox.ActionHandler
 
         private void OnGroundsButtonPressed()
         {
-            if(_handlerStateMachine.CurrentState is not GroundPositionHandler)
+            if (_handlerStateMachine.CurrentState is not GroundPositionHandler)
                 _handlerStateMachine.Enter<GroundPositionHandler>();
             else
                 EnterToDefaultState();

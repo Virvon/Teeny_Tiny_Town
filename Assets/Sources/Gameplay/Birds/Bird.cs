@@ -26,7 +26,7 @@ namespace Assets.Sources.Gameplay.Birds
         {
             Vector3 lookDirection = (point - transform.position).normalized;
 
-            if(lookDirection != Vector3.zero)
+            if (lookDirection != Vector3.zero)
                 transform.rotation = Quaternion.LookRotation(lookDirection);
 
             _mover?.Kill();
@@ -39,7 +39,6 @@ namespace Assets.Sources.Gameplay.Birds
 
         private Vector3 GetPoint() =>
             _points[Random.Range(0, _points.Length)];
-
 
         public class Factory : PlaceholderFactory<string, UniTask<Bird>>
         {

@@ -29,7 +29,7 @@ namespace Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles.Buildings
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(_gameplayMover != null)
+            if (_gameplayMover != null)
                 _gameplayMover.OpenChest(_gridPosition, _reward);
         }
     }

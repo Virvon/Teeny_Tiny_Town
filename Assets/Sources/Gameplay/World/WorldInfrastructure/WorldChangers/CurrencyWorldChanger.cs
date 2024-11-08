@@ -12,15 +12,13 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers
     {
         private readonly ICurrencyWorldData _currencyWorldData;
 
-        public CurrencyWorldChanger
-            (IStaticDataService staticDataService,
+        public CurrencyWorldChanger(
+            IStaticDataService staticDataService,
             ICurrencyWorldData worldData,
             NextBuildingForPlacingCreator nextBuildingForPlacingCreator,
             IPersistentProgressService persistentProgressService)
-            : base(staticDataService, worldData, nextBuildingForPlacingCreator, persistentProgressService)
-        {
+            : base(staticDataService, worldData, nextBuildingForPlacingCreator, persistentProgressService) =>
             _currencyWorldData = worldData;
-        }
 
         public override Building GetBuilding(BuildingType type, Vector2Int gridPosition)
         {

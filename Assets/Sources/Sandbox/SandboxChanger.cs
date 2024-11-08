@@ -1,18 +1,16 @@
-﻿using System.Collections.Generic;
-using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Data.Sandbox;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld;
-using Cysharp.Threading.Tasks;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.WorldChangers;
-using System;
-using UnityEngine;
 using Assets.Sources.Services.StaticDataService.Configs.World;
-using System.Linq;
-using System.Threading.Tasks;
 using Assets.Sources.Services.StaticDataService.Configs.Building;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Sources.Sandbox
 {
@@ -36,7 +34,7 @@ namespace Assets.Sources.Sandbox
 
         public void Dispose()
         {
-            if(_tiles != null)
+            if (_tiles != null)
             {
                 foreach (SandboxTile tile in _tiles)
                     tile.DisposeBuilding();
@@ -126,7 +124,7 @@ namespace Assets.Sources.Sandbox
 
         private List<SandboxTile> CreateTiles()
         {
-            List<SandboxTile> tiles = new();
+            List<SandboxTile> tiles = new ();
 
             foreach (SandboxTileData tileData in _persistentProgressService.Progress.SandboxData.Tiles)
                 tiles.Add(new SandboxTile(tileData, _staticDataService));

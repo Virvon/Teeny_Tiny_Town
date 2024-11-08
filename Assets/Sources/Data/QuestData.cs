@@ -29,7 +29,7 @@ namespace Assets.Sources.Data
 
             Progressed?.Invoke();
 
-            if(Progress >= targetCount)
+            if (Progress >= targetCount)
             {
                 IsCompleted = true;
                 Completed?.Invoke();

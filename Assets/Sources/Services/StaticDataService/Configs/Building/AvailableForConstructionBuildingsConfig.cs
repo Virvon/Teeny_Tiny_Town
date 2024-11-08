@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Sources.Services.StaticDataService.Configs.Building
 {
     [CreateAssetMenu(fileName = "AvailableForConstructionBuildingsConfig", menuName = "StaticData/Create new available for construction buildings config", order = 51)]
     public class AvailableForConstructionBuildingsConfig : ScriptableObject
     {
-        public uint requiredCreatedBuildingsToAddNext;
+        public uint RequiredCreatedBuildingsToAddNext;
         public uint AvailableUpgradeBrach;
-        
+
         public BuildingUpgradeBranch[] Branches;
 
         private void OnValidate()
@@ -38,5 +37,5 @@ namespace Assets.Sources.Services.StaticDataService.Configs.Building
 
             return false;
         }
-    } 
+    }
 }

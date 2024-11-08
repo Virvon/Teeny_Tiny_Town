@@ -1,4 +1,5 @@
-﻿using Assets.Sources.Data;
+﻿using System.Collections.Generic;
+using Assets.Sources.Data;
 using Assets.Sources.Data.World;
 using Assets.Sources.Gameplay.World.RepresentationOfWorld.Tiles;
 using Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles.Buildings;
@@ -7,8 +8,6 @@ using Assets.Sources.Services.PersistentProgress;
 using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs.World;
 using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
 {
@@ -20,14 +19,15 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             TileData tileData,
             TileType type,
             IStaticDataService staticDataService,
-            Building building, IWorldData worldData,
+            Building building,
+            IWorldData worldData,
             IBuildingGivable buildingGivable,
             IPersistentProgressService persistentProgressService)
             : base(tileData, type, staticDataService, building, worldData, buildingGivable, persistentProgressService)
         {
-            Ground = new(StaticDataService, StaticDataService.GetGroundType(BuildingType));
+            Ground = new (StaticDataService, StaticDataService.GetGroundType(BuildingType));
 
-            _aroundTiles = new();
+            _aroundTiles = new ();
         }
 
         public Ground Ground { get; private set; }
@@ -86,9 +86,9 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
         private async UniTask ValidateTilesInChain(bool isWaitedForRoadCreation)
         {
             if (Ground.TryUpdate(BuildingType))
-                ChangeGroundsInChain(new(), true);
+                ChangeGroundsInChain(new (), true);
 
-            await ChangeRoadsInChain(new(), isWaitedForRoadCreation);
+            await ChangeRoadsInChain(new (), isWaitedForRoadCreation);
         }
 
         public override async UniTask CleanAll(bool isAnimate)
@@ -115,9 +115,8 @@ namespace Assets.Sources.Gameplay.World.WorldInfrastructure.Tiles
             await base.Clean();
 
             Ground.SetEmpty(_aroundTiles);
-            ChangeGroundsInChain(new(), true);
-            await ChangeRoadsInChain(new(), false);
+            ChangeGroundsInChain(new (), true);
+            await ChangeRoadsInChain(new (), false);
         }
     }
 }
-

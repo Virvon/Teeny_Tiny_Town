@@ -1,6 +1,6 @@
-﻿using Assets.Sources.Services.StaticDataService.Configs;
+﻿using System;
+using Assets.Sources.Services.StaticDataService.Configs;
 using DG.Tweening;
-using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 

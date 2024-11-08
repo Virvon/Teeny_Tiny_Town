@@ -3,7 +3,6 @@ using Assets.Sources.Services.StaticDataService;
 using Assets.Sources.Services.StaticDataService.Configs;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -18,7 +17,7 @@ namespace Assets.Sources.Gameplay.Cameras
         private AnimationsConfig _animationsConfig;
         private IPersistentProgressService _persistentProgressService;
 
-        Tween _move;
+        private Tween _mover;
 
         [Inject]
         private void Construct(IStaticDataService staticDataService, IPersistentProgressService persistentProgressService)
@@ -38,13 +37,13 @@ namespace Assets.Sources.Gameplay.Cameras
         protected virtual void OnDestroy()
         {
             _persistentProgressService.Progress.SettingsData.OrthographicChanged -= ChangeOrthographic;
-            _move?.Kill();
+            _mover?.Kill();
         }
 
         public void MoveTo(Vector3 position, TweenCallback callback = null)
         {
-            _move = transform.DOMove(position, _animationsConfig.CameraMoveDuration);
-            _move.onComplete += callback;
+            _mover = transform.DOMove(position, _animationsConfig.CameraMoveDuration);
+            _mover.onComplete += callback;
         }
 
         private void ChangeOrthographic() =>
