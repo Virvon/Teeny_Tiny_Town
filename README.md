@@ -16,5 +16,4 @@
 - Universal render pipeline
 
 ## Контакты
-- Даниил
 - [Telegram](https://t.me/Virvon)
