@@ -9,7 +9,7 @@
 
 [Попробуйте игру в черновике на яндекс игры](https://yandex.ru/games/app/385474?draft=true&lang=ru)
 
-## Технологический стэк
+## Технологический стек
 - Zenject
 - Addressables
 - Dotween
