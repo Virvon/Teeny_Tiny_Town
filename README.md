@@ -12,6 +12,7 @@
 ## Технологический стек
 - Zenject
 - Addressables
+- UniTask
 - Dotween
 - Universal render pipeline
 
